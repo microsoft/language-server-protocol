@@ -22,7 +22,7 @@ field needs to be terminated with '\r\n' as well. Currently the following header
 
 ### Content Part
 
-Contains the actual content of the message. The content part of a messages uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notitications.
+Contains the actual content of the message. The content part of a messages uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications.
 
 
 ### Example:
