@@ -39,6 +39,111 @@ Content-Length: ...\r\n
 	}
 }
 ```
+### Base Protocol JSON strcutures
+
+The following TypeScript definitions describe the JSON-RPC protocol as implemented by VSCode:
+
+#### Abstract Message
+
+A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the jsonrpc version.
+
+```typescript
+interface Message {
+	jsonrpc: string;
+}
+```
+#### RequestMessage 
+
+A request message to decribe a request between the client and the server. Every processed request must send a response back to the sender of the request.
+
+```typescript
+interface RequestMessage extends Message {
+
+	/**
+	 * The request id.
+	 */
+	id: number | string;
+
+	/**
+	 * The method to be invoked.
+	 */
+	method: string;
+
+	/**
+	 * The method's params.
+	 */
+	params?: any
+}
+```
+
+#### Response Message
+
+Response Message send as a result of a request. 
+
+```typescript
+interface ResponseMessage extends Message {
+	/**
+	 * The request id.
+	 */
+	id: number | string;
+
+	/**
+	 * The result of a request. This can be omitted in
+	 * the case of an error.
+	 */
+	result?: any;
+
+	/**
+	 * The error object in case a request fails.
+	 */
+	error?: ResponseError<any>;
+}
+
+interface ResponseError<D> {
+	/**
+	 * A number indicating the error type that occured.
+	 */
+	code: number;
+
+	/**
+	 * A string providing a short decription of the error.
+	 */
+	message: string;
+
+	/**
+	 * A Primitive or Structured value that contains additional
+	 * information about the error. Can be omitted.
+	 */
+	data?: D;
+}
+
+export namespace ErrorCodes {
+	export const ParseError: number = -32700;
+	export const InvalidRequest: number = -32600;
+	export const MethodNotFound: number = -32601;
+	export const InvalidParams: number = -32602;
+	export const InternalError: number = -32603;
+	export const serverErrorStart: number = -32099
+	export const serverErrorEnd: number = -32000;
+}
+```
+#### Notification Message
+
+A notification message. A processed notification message must not send a response back. They work like events.
+
+```typescript
+interface NotificationMessage extends Message {
+	/**
+	 * The method to be invoked.
+	 */
+	method: string;
+
+	/**
+	 * The notification's params.
+	 */
+	params?: any
+}
+```
 
 ## Language Server Protocol
 
@@ -209,5 +314,200 @@ interface TextDocumentPosition extends TextDocumentIdentifier {
 	 * The position inside the text document.
 	 */
 	position: Position;
+}
+```
+
+### Actual Protocol
+
+This section documents the actual language server protocol. It uses the following format:
+
+* a header describing the request
+* a _Request_ section describing the format of the request send. The method is a string identifying the request the params are documented using a TypeScript interface
+* a _Response_ section describing the format of the response. The result item descibes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they arn't listed here.
+
+#### Initialize Request
+
+The initialize request is send as the first request from the client to the server. 
+
+_Request_
+* method: 'initialize'
+* params: 
+```typescript
+interface InitializeParams {
+	/**
+	 * The process Id of the parent process that started
+	 * the server.
+	 */
+	processId: number;
+
+	/**
+	 * The rootPath of the workspace. Is null
+	 * if no folder is open.
+	 */
+	rootPath: string;
+
+	/**
+	 * The capabilities provided by the client (editor)
+	 */
+	capabilities: ClientCapabilities;
+}
+```
+
+_Response_
+* result:
+```typescript
+export InitializeResult {
+	/**
+	 * The capabilities the language server provides.
+	 */
+	capabilities: ServerCapabilities;
+}
+```
+* error.data:
+```typescript
+interface InitializeError {
+	/**
+	 * Indicates whether the client should retry to send the
+	 * initilize request after showing the message provided
+	 * in the ResponseError.
+	 */
+	retry: boolean;
+}
+```
+
+The server can signal the following capabilities:
+
+```typescript
+/**
+ * Defines how the host (editor) should sync document changes to the language server.
+ */
+export enum TextDocumentSyncKind {
+	/**
+	 * Documents should not be synced at all.
+	 */
+	None = 0,
+
+	/**
+	 * Documents are synced by always sending the full content of the document.
+	 */
+	Full = 1,
+
+	/**
+	 * Documents are synced by sending the full content on open. After that only incremental 
+	 * updates to the document are send.
+	 */
+	Incremental = 2
+}
+
+/**
+ * Completion options.
+ */
+export interface CompletionOptions {
+	/**
+	 * The server provides support to resolve additional information for a completion item.
+	 */
+	resolveProvider?: boolean;
+
+	/**
+	 * The characters that trigger completion automatically.
+	 */
+	triggerCharacters?: string[];
+}
+
+/**
+ * Signature help options.
+ */
+export interface SignatureHelpOptions {
+	/**
+	 * The characters that trigger signature help automatically.
+	 */
+	triggerCharacters?: string[];
+}
+
+/**
+ * Code Lens options.
+ */
+export interface CodeLensOptions {
+	/**
+	 * Code lens has a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}
+
+/**
+ * Format document on type options
+ */
+export interface DocumentOnTypeFormattingOptions {
+	/**
+	 * A character on which formatting should be triggered, like `}`.
+	 */
+	firstTriggerCharacter: string;
+	/**
+	 * More trigger characters.
+	 */
+	moreTriggerCharacter?: string[]
+}
+
+interface ServerCapabilities {
+	/**
+	 * Defines how text documents are synced.
+	 */
+	textDocumentSync?: number;
+	/**
+	 * The server provides hover support.
+	 */
+	hoverProvider?: boolean;
+	/**
+	 * The server provides completion support.
+	 */
+	completionProvider?: CompletionOptions;
+	/**
+	 * The server provides signature help support.
+	 */
+	signatureHelpProvider?: SignatureHelpOptions;
+	/**
+	 * The server provides goto definition support.
+	 */
+	definitionProvider?: boolean;
+	/**
+	 * The server provides find references support.
+	 */
+	referencesProvider?: boolean;
+	/**
+	 * The server provides document highlight support.
+	 */
+	documentHighlightProvider?: boolean;
+	/**
+	 * The server provides document symbol support.
+	 */
+	documentSymbolProvider?: boolean;
+	/**
+	 * The server provides workspace symbol support.
+	 */
+	workspaceSymbolProvider?: boolean;
+	/**
+	 * The server provides code actions.
+	 */
+	codeActionProvider?: boolean;
+	/**
+	 * The server provides code lens.
+	 */
+	codeLensProvider?: CodeLensOptions;
+	/**
+	 * The server provides document formatting.
+	 */
+	documentFormattingProvider?: boolean;
+	/**
+	 * The server provides document range formatting.
+	 */
+	documentRangeFormattingProvider?: boolean;
+	/**
+	 * The server provides document formatting on typing.
+	 */
+	documentOnTypeFormattingProvider?: DocumentOnTypeFormattingOptions;
+	/**
+	 * The server provides rename support.
+	 */
+	renameProvider?: boolean
 }
 ```
