@@ -381,7 +381,7 @@ The server can signal the following capabilities:
 /**
  * Defines how the host (editor) should sync document changes to the language server.
  */
-export enum TextDocumentSyncKind {
+enum TextDocumentSyncKind {
 	/**
 	 * Documents should not be synced at all.
 	 */
@@ -402,7 +402,7 @@ export enum TextDocumentSyncKind {
 /**
  * Completion options.
  */
-export interface CompletionOptions {
+interface CompletionOptions {
 	/**
 	 * The server provides support to resolve additional information for a completion item.
 	 */
@@ -417,7 +417,7 @@ export interface CompletionOptions {
 /**
  * Signature help options.
  */
-export interface SignatureHelpOptions {
+interface SignatureHelpOptions {
 	/**
 	 * The characters that trigger signature help automatically.
 	 */
@@ -427,7 +427,7 @@ export interface SignatureHelpOptions {
 /**
  * Code Lens options.
  */
-export interface CodeLensOptions {
+interface CodeLensOptions {
 	/**
 	 * Code lens has a resolve provider as well.
 	 */
@@ -437,7 +437,7 @@ export interface CodeLensOptions {
 /**
  * Format document on type options
  */
-export interface DocumentOnTypeFormattingOptions {
+interface DocumentOnTypeFormattingOptions {
 	/**
 	 * A character on which formatting should be triggered, like `}`.
 	 */
@@ -554,7 +554,7 @@ interface ShowMessageParams {
 ```
 Where the type is defined as follows:
 ```typescript
-export enum MessageType {
+enum MessageType {
 	/**
 	 * An error message.
 	 */
@@ -633,7 +633,7 @@ interface DidOpenTextDocumentParams extends TextDocumentIdentifier {
 The document change notification is sent from the client to the server to signal changes to a text document.
 
 _Notification_:
-* method: 'textDocument/didOpen'
+* method: 'textDocument/didChange'
 * params:
 ```typescript
 interface DidChangeTextDocumentParams extends TextDocumentIdentifier {
@@ -645,7 +645,7 @@ interface DidChangeTextDocumentParams extends TextDocumentIdentifier {
  * An event describing a change to a text document. If range and rangeLength are omitted
  * the new text is considered to be the full content of the document.
  */
-export interface TextDocumentContentChangeEvent {
+interface TextDocumentContentChangeEvent {
 	/**
 	 * The range of the document that changed.
 	 */
@@ -670,4 +670,74 @@ The document close notification is sent from the client to the server when the d
 _Notification_:
 * method: 'textDocument/didClose'
 * param: `TextDocumentIdentifier`
-``` 
+
+#### DidChangeWatchedFiles Notification
+
+The watched files notification is sent from the client to the server when the client detects changes to file watched by the lanaguage client.
+
+_Notification_:
+* method: 'workspace/didChangeWatchedFiles'
+* params:
+```typescript
+interface DidChangeWatchedFilesParams {
+	/**
+	 * The actual file events.
+	 */
+	changes: FileEvent[];
+}
+```
+Where FileEvents are described as follows:
+```typescript
+/**
+ * The file event type
+ */
+enum FileChangeType {
+	/**
+	 * The file got created.
+	 */
+	Created = 1,
+	/**
+	 * The file got changed.
+	 */
+	Changed = 2,
+	/**
+	 * The file got deleted.
+	 */
+	Deleted = 3
+}
+
+/**
+ * An event describing a file change.
+ */
+interface FileEvent {
+	/**
+	 * The file's uri.
+	 */
+	uri: string;
+	/**
+	 * The change type.
+	 */
+	type: number;
+}
+```
+
+#### PublishDiagnostics Notification
+
+Diagnostics notification are sent from the server to the client to signal results of validation runs.
+
+_Notification_
+* method: 'textDocument/publishDiagnostics'
+* params:
+```typescript
+interface PublishDiagnosticsParams {
+	/**
+	 * The URI for which diagnostic information is reported.
+	 */
+	uri: string;
+
+	/**
+	 * An array of diagnostic information items.
+	 */
+	diagnostics: Diagnostic[];
+}
+```
