@@ -532,7 +532,71 @@ _Notification_
 * method: 'exit'
 * params: undefined
 
-#### Configuration did Change Notification
+#### ShowMessage Notification
+
+The show message notification is sent from a server to a client to ask the client to display a particular message in the user interface.
+
+_Notification_:
+* method: 'window/showMessage'
+* params:
+```typescript
+interface ShowMessageParams {
+	/**
+	 * The message type. See {@link MessageType}
+	 */
+	type: number;
+
+	/**
+	 * The actual message
+	 */
+	message: string;
+}
+```
+Where the type is defined as follows:
+```typescript
+export enum MessageType {
+	/**
+	 * An error message.
+	 */
+	Error = 1,
+	/**
+	 * A warning message.
+	 */
+	Warning = 2,
+	/**
+	 * An information message.
+	 */
+	Info = 3,
+	/**
+	 * A log message.
+	 */
+	Log = 4
+}
+```
+
+#### ShowMessage Notification
+
+The log message notification is send from the server to the client to ask the client to log a particular message.
+
+_Notification_:
+* method: 'window/logMessage'
+* params:
+```typescript
+interface LogMessageParams {
+	/**
+	 * The message type. See {@link MessageType}
+	 */
+	type: number;
+
+	/**
+	 * The actual message
+	 */
+	message: string;
+}
+```
+Where type is defined as above.
+
+#### DidChangeConfiguration Notification
 
 A notification send from the client to the server to signal the change of configuration settings.
 
@@ -547,3 +611,63 @@ interface DidChangeConfigurationParams {
 	settings: any;
 }
 ```
+
+#### DidOpenTextDocument Notification
+
+The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri.
+
+_Notification_:
+* method: 'textDocument/didOpen'
+* params:
+```typescript
+interface DidOpenTextDocumentParams extends TextDocumentIdentifier {
+	/**
+	 * The content of the opened text document.
+	 */
+	text: string;
+}
+```
+
+#### DidChangeTextDocument Notification
+
+The document change notification is sent from the client to the server to signal changes to a text document.
+
+_Notification_:
+* method: 'textDocument/didOpen'
+* params:
+```typescript
+interface DidChangeTextDocumentParams extends TextDocumentIdentifier {
+	contentChanges: TextDocumentContentChangeEvent[];
+}
+```
+```typescript
+/**
+ * An event describing a change to a text document. If range and rangeLength are omitted
+ * the new text is considered to be the full content of the document.
+ */
+export interface TextDocumentContentChangeEvent {
+	/**
+	 * The range of the document that changed.
+	 */
+	range?: Range;
+
+	/**
+	 * The length of the range that got replaced.
+	 */
+	rangeLength?: number;
+
+	/**
+	 * The new text of the document.
+	 */
+	text: string;
+}
+```
+
+#### DidCloseTextDocument Notification
+
+The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk).
+
+_Notification_:
+* method: 'textDocument/didClose'
+* param: `TextDocumentIdentifier`
+``` 
