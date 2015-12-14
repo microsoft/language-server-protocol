@@ -386,12 +386,10 @@ enum TextDocumentSyncKind {
 	 * Documents should not be synced at all.
 	 */
 	None = 0,
-
 	/**
 	 * Documents are synced by always sending the full content of the document.
 	 */
 	Full = 1,
-
 	/**
 	 * Documents are synced by sending the full content on open. After that only incremental 
 	 * updates to the document are send.
@@ -741,3 +739,135 @@ interface PublishDiagnosticsParams {
 	diagnostics: Diagnostic[];
 }
 ```
+
+#### Completion Request
+
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing complete completion items is expensive servers can additional provide a handler for the resolve completion item request. This request is send when a completion item is selected in the user interface.
+
+_Request_
+* method: 'textDocument/completion'
+* params: `TextDocumentPosition`
+
+_Response_
+* result: `CompletionItem[]`
+```typescript
+interface CompletionItem {
+	/**
+	 * The label of this completion item. By default
+	 * also the text that is inserted when selecting
+	 * this completion.
+	 */
+	label: string;
+	/**
+	 * The kind of this completion item. Based of the kind
+	 * an icon is chosen by the editor.
+	 */
+	kind?: number;
+	/**
+	 * A human-readable string with additional information
+	 * about this item, like type or symbol information.
+	 */
+	detail?: string;
+	/**
+	 * A human-readable string that represents a doc-comment.
+	 */
+	documentation?: string;
+	/**
+	 * A string that shoud be used when comparing this item
+	 * with other items. When `falsy` the [label](#CompletionItem.label)
+	 * is used.
+	 */
+	sortText?: string;
+	/**
+	 * A string that should be used when filtering a set of
+	 * completion items. When `falsy` the [label](#CompletionItem.label)
+	 * is used.
+	 */
+	filterText?: string;
+	/**
+	 * A string that should be inserted a document when selecting
+	 * this completion. When `falsy` the [label](#CompletionItem.label)
+	 * is used.
+	 */
+	insertText?: string;
+	/**
+	 * An [edit](#TextEdit) which is applied to a document when selecting
+	 * this completion. When an edit is provided the value of
+	 * [insertText](#CompletionItem.insertText) is ignored.
+	 */
+	textEdit?: TextEdit;
+	/**
+	 * An data entry field that is preserved on a completion item between
+	 * a [CompletionRequest](#CompletionRequest) and a [CompletionResolveRequest]
+	 * (#CompletionResolveRequest)
+	 */
+	data?: any
+}
+```
+Where `CompletionItemKind` is defined as follows:
+```typescript
+/**
+ * The kind of a completion entry.
+ */
+enum CompletionItemKind {
+	Text = 1,
+	Method = 2,
+	Function = 3,
+	Constructor = 4,
+	Field = 5,
+	Variable = 6,
+	Class = 7,
+	Interface = 8,
+	Module = 9,
+	Property = 10,
+	Unit = 11,
+	Value = 12,
+	Enum = 13,
+	Keyword = 14,
+	Snippet = 15,
+	Color = 16,
+	File = 17,
+	Reference = 18
+}
+```
+* error: code and message set in case an exception happens during the completion request.
+
+#### Completion Item Resolve Request
+
+The request is sent from the client to the server to resolve additional information for a given completion item.
+
+_Request_
+* method: 'completionItem/resolve'
+* param: `CompletionItem`
+
+_Response_
+* result: `CompletionItem`
+* error: code and message set in case an exception happens during the completion resolve request.
+
+#### Hover
+
+The hover request is sent from the client to the server to request hover information at a given text document position.
+
+_Request_
+* method: 'textDocument/hover'
+* param: `TextDocumentPosition`
+
+_Response_
+* result:
+```typescript
+interface Hover {
+	/**
+	 * The hover's content
+	 */
+	contents: MarkedString | MarkedString[];
+	/**
+	 * An optional range
+	 */
+	range?: Range;
+}
+```
+Where `MarkedString` is defined as follows:
+```typescript
+type MarkedString = string | { language: string; value: string };
+```
+* error: code and message set in case an exception happens during the hover request.
