@@ -19,10 +19,11 @@ field needs to be terminated with '\r\n' as well. Currently the following header
 | Content-Length   | number      | The length of the content part |
 | Content-Type     | string      | The mime typ of the content part. Defaults to application/vscode-jsonrpc; charset=utf8 |
 
+The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
 ### Content Part
 
-Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications.
+Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf8'. Due to the limitation of Node.js only the following encodings are supported right now: 'ascii', 'base64', 'binary', 'hex', 'utf8', 'utf16le'. 
 
 
 ### Example:
