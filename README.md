@@ -1375,6 +1375,5 @@ export interface RenameParams {
 ```
 
 _Response_
-* result:
 * result: [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
