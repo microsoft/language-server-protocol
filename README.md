@@ -1194,7 +1194,7 @@ _Request_
 * param: [`TextDocumentIdentifier`](#textdocumentidentifier)
 
 _Response_
-* result `CodeLens[]` defined as follows:
+* result: `CodeLens[]` defined as follows:
 ```typescript
 /**
  * A code lens represents a command that should be shown along with
@@ -1278,24 +1278,103 @@ interface FormattingOptions {
 ```
 
 _Response_
-* result: [`TextEdit[]`](#textedit)
+* result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
+#### Document Range Formatting
 
+The document range formatting request is sent from the client to the server to format a given range in a document.
+
+_Request_
+* method: 'textDocument/rangeFormatting',
+* param: `DocumentRangeFormattingParams` defined as follows
 ```typescript
-```
-```typescript
-```
-```typescript
-```
-```typescript
-```
-```typescript
-```
-```typescript
-```
-```typescript
-```
-```typescript
+interface DocumentRangeFormattingParams {
+	/**
+	 * The document to format.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The range to format
+	 */
+	range: Range;
+
+	/**
+	 * The format options
+	 */
+	options: FormattingOptions;
+}
 ```
 
+_Response_
+* result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
+* error: code and message set in case an exception happens during the range formatting request.
+
+#### Document on Type Formatting
+
+The document on type formatting request is sent from the client to the server to format parts of the document during typing.
+
+_Request_
+* method: 'textDocument/onTypeFormatting'
+* param: `DocumentOnTypeFormattingParams` defined as follows
+```typescript
+interface DocumentOnTypeFormattingParams {
+	/**
+	 * The document to format.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The position at which this request was send.
+	 */
+	position: Position;
+
+	/**
+	 * The character that has been typed.
+	 */
+	ch: string;
+	
+	/**
+	 * The format options.
+	 */
+	options: FormattingOptions;
+}
+```
+
+_Response_
+* result: [`TextEdit[]`](#textedit) describing the modification to the document.
+* error: code and message set in case an exception happens during the range formatting request.
+
+#### Rename
+
+The rename request is sent from the client to the server to do a workspace wide rename of a symbol.
+
+_Request_
+* method: 'textDocument/rename'
+* param: `RenameParams` defined as follows
+```typescript
+export interface RenameParams {
+	/**
+	 * The document to format.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The position at which this request was send.
+	 */
+	position: Position;
+
+	/**
+	 * The new name of the symbol. If the given name is not valid the
+	 * request must return a [ResponseError](#ResponseError) with an
+	 * appropriate message set.
+	 */
+	newName: string;
+}
+```
+
+_Response_
+* result:
+* result: [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
+* error: code and message set in case an exception happens during the rename request.
