@@ -789,32 +789,28 @@ interface CompletionItem {
 	documentation?: string;
 	/**
 	 * A string that shoud be used when comparing this item
-	 * with other items. When `falsy` the [label](#CompletionItem.label)
-	 * is used.
+	 * with other items. When `falsy` the label is used.
 	 */
 	sortText?: string;
 	/**
 	 * A string that should be used when filtering a set of
-	 * completion items. When `falsy` the [label](#CompletionItem.label)
-	 * is used.
+	 * completion items. When `falsy` the label is used.
 	 */
 	filterText?: string;
 	/**
 	 * A string that should be inserted a document when selecting
-	 * this completion. When `falsy` the [label](#CompletionItem.label)
-	 * is used.
+	 * this completion. When `falsy` the label is used.
 	 */
 	insertText?: string;
 	/**
-	 * An [edit](#TextEdit) which is applied to a document when selecting
+	 * An edit which is applied to a document when selecting
 	 * this completion. When an edit is provided the value of
-	 * [insertText](#CompletionItem.insertText) is ignored.
+	 * insertText is ignored.
 	 */
 	textEdit?: TextEdit;
 	/**
 	 * An data entry field that is preserved on a completion item between
-	 * a [CompletionRequest](#CompletionRequest) and a [CompletionResolveRequest]
-	 * (#CompletionResolveRequest)
+	 * a completion and a completion resolve request.
 	 */
 	data?: any
 }
@@ -954,7 +950,7 @@ interface SignatureInformation {
  * Represents a parameter of a callable-signature. A parameter can
  * have a label and a doc-comment.
  */
-export interface ParameterInformation {
+interface ParameterInformation {
 	/**
 	 * The label of this signature. Will be shown in
 	 * the UI.
@@ -1020,14 +1016,14 @@ _Response_
  * special attention. Usually a document highlight is visualized by changing
  * the background color of its range.
  */
-export interface DocumentHighlight {
+interface DocumentHighlight {
 	/**
 	 * The range this highlight applies to.
 	 */
 	range: Range;
 
 	/**
-	 * The highlight kind, default is [text](#DocumentHighlightKind.Text).
+	 * The highlight kind, default is DocumentHighlightKind.Text.
 	 */
 	kind?: number;
 }
@@ -1036,7 +1032,7 @@ export interface DocumentHighlight {
 /**
  * A document highlight kind.
  */
-export enum DocumentHighlightKind {
+enum DocumentHighlightKind {
 	/**
 	 * A textual occurrance.
 	 */
@@ -1071,7 +1067,7 @@ _Response_
  * Represents information about programming constructs like variables, classes,
  * interfaces etc.
  */
-export interface SymbolInformation {
+interface SymbolInformation {
 	/**
 	 * The name of this symbol.
 	 */
@@ -1120,3 +1116,186 @@ export enum SymbolKind {
 }
 ```
 * error: code and message set in case an exception happens during the document symbol request.
+
+#### Workspace Symbols
+
+The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
+
+_Request_
+* method: 'workspace/symbol'
+* param: `WorkspaceSymbolParams` defined as follows:
+```typescript
+/**
+ * The parameters of a Workspace Symbol Request.
+ */
+interface WorkspaceSymbolParams {
+	/**
+	 * A non-empty query string
+	 */
+	query: string;
+}
+```
+
+_Response_
+* result: `SymbolInformation[]` as defined above.
+* error: code and message set in case an exception happens during the workspace symbol request.
+
+#### Code Action
+
+The code action request is sent from the client to the server to compute commands for a given text document and range. The request is trigger when the user moves the cursor into an problem marker in the editor or presses the lightbulb associated with a marker.
+
+_Request_
+* method: 'textDocument/codeAction'
+* param: `CodeActionParams` defined as follows:
+```typescript
+/**
+ * Params for the CodeActionRequest
+ */
+interface CodeActionParams {
+	/**
+	 * The document in which the command was invoked.
+	 */
+	textDocument: TextDocumentIdentifier;
+	
+	/**
+	 * The range for which the command was invoked.
+	 */
+	range: Range;
+	
+	/**
+	 * Context carrying additional information.
+	 */
+	context: CodeActionContext;
+}
+```
+```typescript
+/**
+ * Contains additional diagnostic information about the context in which
+ * a code action is run.
+ */
+interface CodeActionContext {
+	/**
+	 * An array of diagnostics.
+	 */
+	diagnostics: Diagnostic[];
+}
+```
+
+_Response_
+* result: [`Command[]`](#command) defined as follows:
+* error: code and message set in case an exception happens during the code action request.
+
+#### Code Lens
+
+The code lens request is sent from the client to the server to compute code lenses for a given text document.
+
+_Request_
+* method: 'textDocument/codeLens'
+* param: [`TextDocumentIdentifier`](#textdocumentidentifier)
+
+_Response_
+* result `CodeLens[]` defined as follows:
+```typescript
+/**
+ * A code lens represents a command that should be shown along with
+ * source text, like the number of references, a way to run tests, etc.
+ *
+ * A code lens is _unresolved_ when no command is associated to it. For performance
+ * reasons the creation of a code lens and resolving should be done to two stages.
+ */
+export interface CodeLens {
+	/**
+	 * The range in which this code lens is valid. Should only span a single line.
+	 */
+	range: Range;
+
+	/**
+	 * The command this code lens represents.
+	 */
+	command?: Command;
+	
+	/**
+	 * An data entry field that is preserved on a code lens item between
+	 * a code lens and a code lens resolve request.
+	 */
+	data?: any
+}
+```
+* error: code and message set in case an exception happens during the code lens request.
+
+#### Code Lens Resolve
+
+The code lens resolve request is sent from the clien to the server to resolve the command for a given code lens item.
+
+_Request_
+* method: 'codeLens/resolve'
+* param: `CodeLens`
+
+_Response_
+* result: `CodeLens`
+* error: code and message set in case an exception happens during the code lens resolve request.
+
+#### Document Formatting
+
+The document formatting resquest is sent from the server to the client to format a whole document.
+
+_Request_
+* method: 'textDocument/formatting'
+* param: `DocumentFormattingParams` defined as follows
+```typescript
+interface DocumentFormattingParams {
+	/**
+	 * The document to format.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The format options
+	 */
+	options: FormattingOptions;
+}
+```
+```typescript
+/**
+ * Value-object describing what options formatting should use.
+ */
+interface FormattingOptions {
+	/**
+	 * Size of a tab in spaces.
+	 */
+	tabSize: number;
+
+	/**
+	 * Prefer spaces over tabs.
+	 */
+	insertSpaces: boolean;
+
+	/**
+	 * Signature for further properties.
+	 */
+	[key: string]: boolean | number | string;
+}
+```
+
+_Response_
+* result: [`TextEdit[]`](#textedit)
+* error: code and message set in case an exception happens during the formatting request.
+
+
+```typescript
+```
+```typescript
+```
+```typescript
+```
+```typescript
+```
+```typescript
+```
+```typescript
+```
+```typescript
+```
+```typescript
+```
+
