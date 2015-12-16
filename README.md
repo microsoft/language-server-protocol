@@ -761,7 +761,7 @@ The Completion request is sent from the client to the server to compute completi
 
 _Request_
 * method: 'textDocument/completion'
-* params: `TextDocumentPosition`
+* params: [`TextDocumentPosition`](#textdocumentposition)
 
 _Response_
 * result: `CompletionItem[]`
@@ -865,16 +865,20 @@ The hover request is sent from the client to the server to request hover informa
 
 _Request_
 * method: 'textDocument/hover'
-* param: `TextDocumentPosition`
+* param: [`TextDocumentPosition`](#textdocumentposition)
 
 _Response_
 * result: `Hover` defined as follows:
 ```typescript
+/**
+ * The result of a hove request.
+ */
 interface Hover {
 	/**
 	 * The hover's content
 	 */
 	contents: MarkedString | MarkedString[];
+	
 	/**
 	 * An optional range
 	 */
@@ -893,7 +897,7 @@ The signature help request is sent from the client to the server to request sign
 
 _Request_
 * method: 'textDocument/signatureHelp'
-* param: `TextDocumentPosition`
+* param: [`TextDocumentPosition`](#textdocumentposition)
 
 _Response_
 * result: `SignatureHelp` defined as follows:
@@ -977,3 +981,142 @@ _Request_
 _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[]
 * error: code and message set in case an exception happens during the definition request.
+
+#### Find References
+
+The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
+
+_Request_
+* method: 'textDocument/references'
+* param: `ReferenceParams` defined as follows:
+```typescript
+interface ReferenceParams extends TextDocumentPosition {
+	context: ReferenceContext
+}
+```
+```typescript
+interface ReferenceContext {
+	/**
+	 * Include the declaration of the current symbol.
+	 */
+	includeDeclaration: boolean;
+}
+```
+* error: code and message set in case an exception happens during the reference request.
+
+#### Document Highlights
+
+The document highlight request is sent from the client to the server to to resolve a document highlights for a given text document position.
+
+_Request_
+* method: 'textDocument/documentHighlight'
+* param: [`TextDocumentPosition`](#textdocumentposition)
+
+_Response_
+* result: `DocumentHighlight` defined as follows:
+```typescript
+/**
+ * A document highlight is a range inside a text document which deserves
+ * special attention. Usually a document highlight is visualized by changing
+ * the background color of its range.
+ */
+export interface DocumentHighlight {
+	/**
+	 * The range this highlight applies to.
+	 */
+	range: Range;
+
+	/**
+	 * The highlight kind, default is [text](#DocumentHighlightKind.Text).
+	 */
+	kind?: number;
+}
+```
+```typescript
+/**
+ * A document highlight kind.
+ */
+export enum DocumentHighlightKind {
+	/**
+	 * A textual occurrance.
+	 */
+	Text = 1,
+
+	/**
+	 * Read-access of a symbol, like reading a variable.
+	 */
+	Read = 2,
+
+	/**
+	 * Write-access of a symbol, like writing to a variable.
+	 */
+	Write = 3
+}
+```
+* error: code and message set in case an exception happens during the document highlight request.
+
+
+#### Document Symbols
+
+The document symbol request is sent from the client to the server to list all symbols found in a given text document.
+
+_Request_
+* method: 'textDocument/documentSymbol'
+* param: [`TextDocumentIdentifier`](#textdocumentidentifier)
+
+_Response_
+* result: `SymbolInformation`[] defined as follows:
+```typescript
+/**
+ * Represents information about programming constructs like variables, classes,
+ * interfaces etc.
+ */
+export interface SymbolInformation {
+	/**
+	 * The name of this symbol.
+	 */
+	name: string;
+
+	/**
+	 * The kind of this symbol.
+	 */
+	kind: number;
+
+	/**
+	 * The location of this symbol.
+	 */
+	location: Location;
+
+	/**
+	 * The name of the symbol containing this symbol.
+	 */
+	containerName?: string;
+}
+```
+Where the `kind` is defined like this:
+```typescript
+/**
+ * A symbol kind.
+ */
+export enum SymbolKind {
+	File = 1,
+	Module = 2,
+	Namespace = 3,
+	Package = 4,
+	Class = 5,
+	Method = 6,
+	Property = 7,
+	Field = 8,
+	Constructor = 9,
+	Enum = 10,
+	Interface = 11,
+	Function = 12,
+	Variable = 13,
+	Constant = 14,
+	String = 15,
+	Number = 16,
+	Boolean = 17,
+	Array = 18,
+}
+```
+* error: code and message set in case an exception happens during the document symbol request.
