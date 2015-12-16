@@ -972,8 +972,8 @@ The goto definition request is sent from the client to the server to to resolve 
 
 _Request_
 * method: 'textDocument/definition'
-* param: [`TextDocumentPosition`](#textDocumentPosition)
+* param: [`TextDocumentPosition`](#textdocumentposition)
 
 _Response_:
-* result: `Location` | `Location[]`
+* result: [`Location`](#location) | [`Location`](#location)[]
 * error: code and message set in case an exception happens during the definition request.
