@@ -186,6 +186,16 @@ interface Range {
 }
 ```
 
+#### Location
+
+Represents a location inside a resource, such as a line inside a text file.
+```typescript
+interface Location {
+	uri: string;
+	range: Range;
+}
+```
+
 #### Diagnostic
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
@@ -332,7 +342,7 @@ The initialize request is sent as the first request from the client to the serve
 
 _Request_
 * method: 'initialize'
-* params: 
+* params: `InitializeParams` defined as follows:
 ```typescript
 interface InitializeParams {
 	/**
@@ -355,7 +365,7 @@ interface InitializeParams {
 ```
 
 _Response_
-* result:
+* result: `InitializeResult` defined as follows:
 ```typescript
 export InitializeResult {
 	/**
@@ -375,9 +385,7 @@ interface InitializeError {
 	retry: boolean;
 }
 ```
-
 The server can signal the following capabilities:
-
 ```typescript
 /**
  * Defines how the host (editor) should sync document changes to the language server.
@@ -397,7 +405,8 @@ enum TextDocumentSyncKind {
 	 */
 	Incremental = 2
 }
-
+```
+```typescript
 /**
  * Completion options.
  */
@@ -412,7 +421,8 @@ interface CompletionOptions {
 	 */
 	triggerCharacters?: string[];
 }
-
+```
+```typescript
 /**
  * Signature help options.
  */
@@ -422,7 +432,8 @@ interface SignatureHelpOptions {
 	 */
 	triggerCharacters?: string[];
 }
-
+```
+```typescript
 /**
  * Code Lens options.
  */
@@ -432,7 +443,8 @@ interface CodeLensOptions {
 	 */
 	resolveProvider?: boolean;
 }
-
+```
+```typescript
 /**
  * Format document on type options
  */
@@ -446,7 +458,8 @@ interface DocumentOnTypeFormattingOptions {
 	 */
 	moreTriggerCharacter?: string[]
 }
-
+```
+```typescript
 interface ServerCapabilities {
 	/**
 	 * Defines how text documents are synced.
@@ -537,7 +550,7 @@ The show message notification is sent from a server to a client to ask the clien
 
 _Notification_:
 * method: 'window/showMessage'
-* params:
+* params: `ShowMessageParams` defined as follows:
 ```typescript
 interface ShowMessageParams {
 	/**
@@ -579,7 +592,7 @@ The log message notification is send from the server to the client to ask the cl
 
 _Notification_:
 * method: 'window/logMessage'
-* params:
+* params: `LogMessageParams` defined as follows:
 ```typescript
 interface LogMessageParams {
 	/**
@@ -601,7 +614,7 @@ A notification send from the client to the server to signal the change of config
 
 _Notification_:
 * method: 'workspace/didChangeConfiguration',
-* params:
+* params: `DidChangeConfigurationParams` defined as follows:
 ```typescript
 interface DidChangeConfigurationParams {
 	/**
@@ -617,7 +630,7 @@ The document open notification is sent from the client to the server to signal n
 
 _Notification_:
 * method: 'textDocument/didOpen'
-* params:
+* params: `DidOpenTextDocumentParams` defined as follows:
 ```typescript
 interface DidOpenTextDocumentParams extends TextDocumentIdentifier {
 	/**
@@ -633,7 +646,7 @@ The document change notification is sent from the client to the server to signal
 
 _Notification_:
 * method: 'textDocument/didChange'
-* params:
+* params: `DidChangeTextDocumentParams` defined as follows:
 ```typescript
 interface DidChangeTextDocumentParams extends TextDocumentIdentifier {
 	contentChanges: TextDocumentContentChangeEvent[];
@@ -676,7 +689,7 @@ The watched files notification is sent from the client to the server when the cl
 
 _Notification_:
 * method: 'workspace/didChangeWatchedFiles'
-* params:
+* params: `DidChangeWatchedFilesParams` defined as follows:
 ```typescript
 interface DidChangeWatchedFilesParams {
 	/**
@@ -704,7 +717,8 @@ enum FileChangeType {
 	 */
 	Deleted = 3
 }
-
+```
+```typescript
 /**
  * An event describing a file change.
  */
@@ -726,7 +740,7 @@ Diagnostics notification are sent from the server to the client to signal result
 
 _Notification_
 * method: 'textDocument/publishDiagnostics'
-* params:
+* params: `PublishDiagnosticsParams` defined as follows:
 ```typescript
 interface PublishDiagnosticsParams {
 	/**
@@ -854,7 +868,7 @@ _Request_
 * param: `TextDocumentPosition`
 
 _Response_
-* result:
+* result: `Hover` defined as follows:
 ```typescript
 interface Hover {
 	/**
@@ -872,3 +886,94 @@ Where `MarkedString` is defined as follows:
 type MarkedString = string | { language: string; value: string };
 ```
 * error: code and message set in case an exception happens during the hover request.
+
+#### Signature Help
+
+The signature help request is sent from the client to the server to request signature information at a given cursor position.
+
+_Request_
+* method: 'textDocument/signatureHelp'
+* param: `TextDocumentPosition`
+
+_Response_
+* result: `SignatureHelp` defined as follows:
+```typescript
+/**
+ * Signature help represents the signature of something
+ * callable. There can be multiple signature but only one
+ * active and only one active parameter.
+ */
+interface SignatureHelp {
+	/**
+	 * One or more signatures.
+	 */
+	signatures: SignatureInformation[];
+	
+	/**
+	 * The active signature.
+	 */
+	activeSignature?: number;
+	
+	/**
+	 * The active parameter of the active signature.
+	 */
+	activeParameter?: number;
+}
+```
+```typescript
+/**
+ * Represents the signature of something callable. A signature
+ * can have a label, like a function-name, a doc-comment, and
+ * a set of parameters.
+ */
+interface SignatureInformation {
+	/**
+	 * The label of this signature. Will be shown in
+	 * the UI.
+	 */
+	label: string;
+	
+	/**
+	 * The human-readable doc-comment of this signature. Will be shown
+	 * in the UI but can be omitted.
+	 */
+	documentation?: string;
+	
+	/**
+	 * The parameters of this signature.
+	 */
+	parameters?: ParameterInformation[];
+}
+```
+```typescript
+/**
+ * Represents a parameter of a callable-signature. A parameter can
+ * have a label and a doc-comment.
+ */
+export interface ParameterInformation {
+	/**
+	 * The label of this signature. Will be shown in
+	 * the UI.
+	 */
+	label: string;
+	
+	/**
+	 * The human-readable doc-comment of this signature. Will be shown
+	 * in the UI but can be omitted.
+	 */
+	documentation?: string;
+}
+```
+* error: code and message set in case an exception happens during the signature help request.
+
+#### Goto Definition
+
+The goto definition request is sent from the client to the server to to resolve the defintion location of a symbol at a given text document position.
+
+_Request_
+* method: 'textDocument/definition'
+* param: [`TextDocumentPosition`](#textDocumentPosition)
+
+_Response_:
+* result: `Location` | `Location[]`
+* error: code and message set in case an exception happens during the definition request.
