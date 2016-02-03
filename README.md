@@ -219,6 +219,12 @@ interface Diagnostic {
 	code?: number | string;
 
 	/**
+	 * A human-readable string describing the source of this
+	 * diagnostic, e.g. 'typescript' or 'super lint'.
+	 */
+	source?: string;
+
+	/**
 	 * The diagnostic's message.
 	 */
 	message: string;
