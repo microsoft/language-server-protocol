@@ -40,7 +40,7 @@ Content-Length: ...\r\n
 	}
 }
 ```
-### Base Protocol JSON strcutures
+### Base Protocol JSON structures
 
 The following TypeScript definitions describe the JSON-RPC protocol as implemented by VSCode:
 
