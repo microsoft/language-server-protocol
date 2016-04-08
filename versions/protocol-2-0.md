@@ -2,9 +2,11 @@
 
 This document descibes 2.0 version of the client server protocol. The major changes to the 1.0 version are:
 
-- allignmnet of the protocol with the VSCode exension API. As a result the properties of a request param object conform to parameters in the API. So for example if the VSCode extension API takes a text document has the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
+- alignment of the protocol with the VSCode exension API. As a result the properties of a request param object conform to parameters in the API. So for example if the VSCode extension API takes a text document has the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
 - consistent support for language identifiers. This means that the language ID is passed to the server via the open notification. Further references to the text document don't transfer this informaiton anymore.
 - support for version numbers on documents. The initial version number is send to the server via the open notification. Document change notification do carry information about VSCode's version number as well.
+- Support for request cancellation
+- Interface naming: using consinstent names without I prefix.
 
 ## Base Protocol
 
@@ -147,6 +149,22 @@ interface NotificationMessage extends Message {
 	params?: any
 }
 ```
+
+#### Cancellation Support
+
+The base protocol now offers support for request cancellation. To cancel a request a notification message with the following properties is sent:
+ 
+_Notification_:
+* method: '$/cancelRequest'
+* params: `CancelParams` defined as follows:
+```typescript
+interface CancelParams {
+	/**
+	 * The request id to cancel.
+	 */
+	id: number | string;
+}
+
 
 ## Language Server Protocol
 
