@@ -779,6 +779,21 @@ export interface DidCloseTextDocumentParams {
 }
 ```
 
+#### DidSaveTextDocument Notification
+
+>**New:** The document save notification is sent from the client to the server when the document for saved in the clinet.
+
+* method: 'textDocument/didSave'
+* param: `DidSaveTextDocumentParams` defined as follows:
+```typescript
+export interface DidSaveTextDocumentParams {
+	/**
+	 * The document that was closed.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+```
+
 #### DidChangeWatchedFiles Notification
 
 The watched files notification is sent from the client to the server when the client detects changes to file watched by the lanaguage client.
