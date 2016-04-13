@@ -1,7 +1,14 @@
-# VSCode Client / Server Language Protocol
+# VSCode Client / Server Language Protocol Version 2.0
 
-Defines the client server protocol used by VSCode to talk to out of process language servers. 
-The repository contains a VSCode protocol definition so that other can implement the protocol in language like C#, C++, Java or Python.
+This document descibes 2.0 version of the client server protocol. The major changes to the 1.0 version are:
+
+- alignment of the protocol with the VSCode exension API. As a result the properties of a request param object conform to parameters in the API. So for example if the VSCode extension API takes a text document has the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
+- consistent support for language identifiers. This means that the language ID is passed to the server via the open notification. Further references to the text document don't transfer this informaiton anymore.
+- support for version numbers on documents. The initial version number is send to the server via the open notification. Document change notification do carry information about VSCode's version number as well.
+- Support for request cancellation
+- Interface naming: using consinstent names without I prefix.
+
+The 1.x version of this document can be found [here](../versions/protocol-1-x.md)
 
 ## Base Protocol
 
@@ -144,6 +151,22 @@ interface NotificationMessage extends Message {
 	params?: any
 }
 ```
+
+#### Cancellation Support
+
+The base protocol now offers support for request cancellation. To cancel a request a notification message with the following properties is sent:
+ 
+_Notification_:
+* method: '$/cancelRequest'
+* params: `CancelParams` defined as follows:
+```typescript
+interface CancelParams {
+	/**
+	 * The request id to cancel.
+	 */
+	id: number | string;
+}
+
 
 ## Language Server Protocol
 
@@ -320,12 +343,61 @@ interface TextDocumentIdentifier {
 }
 ```
 
-#### TextDocumentPosition
+#### TextDocumentItem
 
-Identifies a position in a text document.
+>**New:** an item to transfer a text document from the client to the server.
 
 ```typescript
-interface TextDocumentPosition extends TextDocumentIdentifier {
+export interface TextDocumentItem {
+	/**
+	 * The text document's uri.
+	 */
+	uri: string;
+
+	/**
+	 * The text document's language identifier
+	 */
+	languageId: string;
+
+	/**
+	 * The version number of this document (it will strictly increase after each
+	 * change, including undo/redo).
+	 */
+	version: number;
+
+	/**
+	 * The content of the opened  text document.
+	 */
+	text: string;
+}
+```
+
+#### VersionedTextDocumentIdentifier
+
+>**New:** An identifier to denote a specific version of a text document.
+
+```typescript
+export interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
+	/**
+	 * The version number of this document.
+	 */
+	version: number;
+}
+```
+
+#### TextDocumentPositionParams
+
+>**Changed**: was `TextDocumentPosition` in 1.0 with inlined parameters
+
+A parameter literal used in requests to pass a text document and a position inside that document.
+
+```typescript
+export interface TextDocumentPositionParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
 	/**
 	 * The position inside the text document.
 	 */
@@ -639,21 +711,31 @@ _Notification_:
 ```typescript
 interface DidOpenTextDocumentParams extends TextDocumentIdentifier {
 	/**
-	 * The content of the opened text document.
+	 * The document that was opened.
 	 */
-	text: string;
+	textDocument: TextDocumentItem;
 }
 ```
 
 #### DidChangeTextDocument Notification
 
-The document change notification is sent from the client to the server to signal changes to a text document.
+>**Changed**: The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
 
 _Notification_:
 * method: 'textDocument/didChange'
 * params: `DidChangeTextDocumentParams` defined as follows:
 ```typescript
-interface DidChangeTextDocumentParams extends TextDocumentIdentifier {
+export interface DidChangeTextDocumentParams {
+	/**
+	 * The document that did change. The version number points
+	 * to the version after all provided content changes have
+	 * been applied.
+	 */
+	textDocument: VersionedTextDocumentIdentifier;
+
+	/**
+	 * The actual content changes.
+	 */
 	contentChanges: TextDocumentContentChangeEvent[];
 }
 ```
@@ -684,9 +766,18 @@ interface TextDocumentContentChangeEvent {
 
 The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk).
 
+>**Changed**: in 2.0 the params are of type `DidCloseTextDocumentParams` which contains a reference to a text document.
 _Notification_:
 * method: 'textDocument/didClose'
-* param: `TextDocumentIdentifier`
+* param: `DidCloseTextDocumentParams` defined as follows:
+```typescript
+export interface DidCloseTextDocumentParams {
+	/**
+	 * The document that was closed.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+```
 
 #### DidChangeWatchedFiles Notification
 
@@ -764,9 +855,11 @@ interface PublishDiagnosticsParams {
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing complete completion items is expensive servers can additional provide a handler for the resolve completion item request. This request is send when a completion item is selected in the user interface.
 
+>**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+
 _Request_
 * method: 'textDocument/completion'
-* params: [`TextDocumentPosition`](#textdocumentposition)
+* params: [`TextDocumentPositionParams`](#textdocumentposition)
 
 _Response_
 * result: `CompletionItem[]`
@@ -864,9 +957,11 @@ _Response_
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
+>**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+
 _Request_
 * method: 'textDocument/hover'
-* param: [`TextDocumentPosition`](#textdocumentposition)
+* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
 * result: `Hover` defined as follows:
@@ -896,9 +991,11 @@ type MarkedString = string | { language: string; value: string };
 
 The signature help request is sent from the client to the server to request signature information at a given cursor position.
 
+>**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+
 _Request_
 * method: 'textDocument/signatureHelp'
-* param: [`TextDocumentPosition`](#textdocumentposition)
+* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
 * result: `SignatureHelp` defined as follows:
@@ -975,9 +1072,11 @@ interface ParameterInformation {
 
 The goto definition request is sent from the client to the server to to resolve the defintion location of a symbol at a given text document position.
 
+>**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+
 _Request_
 * method: 'textDocument/definition'
-* param: [`TextDocumentPosition`](#textdocumentposition)
+* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[]
@@ -987,11 +1086,13 @@ _Response_:
 
 The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
 
+>**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+
 _Request_
 * method: 'textDocument/references'
 * param: `ReferenceParams` defined as follows:
 ```typescript
-interface ReferenceParams extends TextDocumentPosition {
+interface ReferenceParams extends TextDocumentPositionParams {
 	context: ReferenceContext
 }
 ```
@@ -1009,9 +1110,11 @@ interface ReferenceContext {
 
 The document highlight request is sent from the client to the server to to resolve a document highlights for a given text document position.
 
+>**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+
 _Request_
 * method: 'textDocument/documentHighlight'
-* param: [`TextDocumentPosition`](#textdocumentposition)
+* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
 * result: `DocumentHighlight` defined as follows:
@@ -1061,9 +1164,19 @@ enum DocumentHighlightKind {
 
 The document symbol request is sent from the client to the server to list all symbols found in a given text document.
 
+>**Changed:** in 2.0 the request uses `DocumentSymbolParams` instead of a single uri.
+
 _Request_
 * method: 'textDocument/documentSymbol'
-* param: [`TextDocumentIdentifier`](#textdocumentidentifier)
+* param: `DocumentSymbolParams` defined as follows:
+```typescript
+export interface DocumentSymbolParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+```
 
 _Response_
 * result: `SymbolInformation`[] defined as follows:
@@ -1194,9 +1307,19 @@ _Response_
 
 The code lens request is sent from the client to the server to compute code lenses for a given text document.
 
+>**Changed:** in 2.0 the request uses `CodeLensParams` instead of a single uri.
+
 _Request_
 * method: 'textDocument/codeLens'
-* param: [`TextDocumentIdentifier`](#textdocumentidentifier)
+* param: `CodeLensParams` defined as follows:
+```typescript
+export interface CodeLensParams {
+	/**
+	 * The document to request code lens for.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+```
 
 _Response_
 * result: `CodeLens[]` defined as follows:
