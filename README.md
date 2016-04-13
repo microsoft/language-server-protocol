@@ -1,6 +1,6 @@
-# VSCode Client / Server Language Protocol Version 2.0
+# VSCode Client / Server Language Protocol
 
-This document descibes 2.0 version of the client server protocol. Change are marked with a changes or new bar on the left hand side. Below a summary of the major changes compared to the 1.0 version:
+This document descibes version 2.0 of the client server protocol. Change are marked with a changes or new bar on the left hand side. Below a summary of the major changes compared to version 1.0:
 
 - alignment of the protocol with the VSCode exension API. As a result the properties of a request param object conform to parameters in the API. So for example if the VSCode extension API takes a text document has the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
 - consistent support for language identifiers. This means that the language ID is passed to the server via the open notification. Further references to the text document don't transfer this informaiton anymore.
