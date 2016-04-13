@@ -154,7 +154,7 @@ interface NotificationMessage extends Message {
 
 #### Cancellation Support
 
-The base protocol now offers support for request cancellation. To cancel a request a notification message with the following properties is sent:
+>**New:** The base protocol now offers support for request cancellation. To cancel a request a notification message with the following properties is sent:
  
 _Notification_:
 * method: '$/cancelRequest'
