@@ -665,8 +665,7 @@ enum MessageType {
 
 #### ShowMessage Request
 
-The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show
-message notification the request allows to pass actions and to wait for an answer from the client.
+>**New:** The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
 
 _Notification_:
 * method: 'window/showMessageRequest'
