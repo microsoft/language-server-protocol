@@ -1,6 +1,6 @@
 # VSCode Client / Server Language Protocol
 
-This document descibes version 2.0 of the client server protocol. Change are marked with a changes or new bar on the left hand side. Below a summary of the major changes compared to version 1.0:
+This document descibes version 2.x of the client server protocol. Change are marked with a changes or new bar on the left hand side. Below a summary of the major changes compared to version 1.0:
 
 - alignment of the protocol with the VSCode exension API. As a result the properties of a request param object conform to parameters in the API. So for example if the VSCode extension API takes a text document has the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
 - consistent support for language identifiers. This means that the language ID is passed to the server via the open notification. Further references to the text document don't transfer this informaiton anymore.
@@ -663,7 +663,43 @@ enum MessageType {
 }
 ```
 
-#### ShowMessage Notification
+#### ShowMessage Request
+
+The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show
+message notification the request allows to pass actions and to wait for an answer from the client.
+
+_Notification_:
+* method: 'window/showMessageRequest'
+* params: `ShowMessageRequestParams` defined as follows:
+```typescript
+export interface ShowMessageRequestParams {
+	/**
+	 * The message type. See {@link MessageType}
+	 */
+	type: number;
+
+	/**
+	 * The actual message
+	 */
+	message: string;
+
+	/**
+	 * The message action items to present.
+	 */
+	actions?: MessageActionItem[];
+}
+```
+Where the `MessageActionItem` is defined as follows:
+```typescript
+export interface MessageActionItem {
+	/**
+	 * A short title like 'Retry', 'Open Log' etc.
+	 */
+	title: string;
+}
+```
+
+#### LogMessage Notification
 
 The log message notification is send from the server to the client to ask the client to log a particular message.
 
