@@ -168,6 +168,8 @@ interface CancelParams {
 }
 ```
 
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a reponse back. In addition it allows for returning paritial results on cancel.
+
 ## Language Server Protocol
 
 The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This sections starts descibing basic JSON structures used in the protocol. The document uses TypeScript interfaces to describe these. Bases on the basic JSON structures the actual requests with their responses and the notifications are described.
@@ -665,7 +667,7 @@ enum MessageType {
 
 #### ShowMessage Request
 
->**New:** The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
+>**New:** he show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
 
 _Notification_:
 * method: 'window/showMessageRequest'
