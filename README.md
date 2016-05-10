@@ -442,6 +442,11 @@ interface InitializeParams {
 	capabilities: ClientCapabilities;
 }
 ```
+Where `ClientCapabilities` are currently empty:
+```typescript
+interface ClientCapabilities {
+}
+```
 
 _Response_
 * result: `InitializeResult` defined as follows:
