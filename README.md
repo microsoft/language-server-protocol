@@ -914,7 +914,24 @@ _Request_
 * params: [`TextDocumentPositionParams`](#textdocumentposition)
 
 _Response_
-* result: `CompletionItem[]`
+* result: `CompletionItem[] | CompletionList`
+```typescript
+/**
+ * Represents a collection of [completion items](#CompletionItem) to be presented
+ * in the editor.
+ */
+interface CompletionList {
+	/**
+	 * This list it not complete. Further typing should result in recomputing
+	 * this list.
+	 */
+	isIncomplete: boolean;
+	/**
+	 * The completion items.
+	 */
+	items: CompletionItem[];
+}
+```
 ```typescript
 interface CompletionItem {
 	/**
