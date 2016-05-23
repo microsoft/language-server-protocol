@@ -1,11 +1,11 @@
 # VSCode Client / Server Language Protocol
 
-This document descibes version 2.x of the client server protocol. Change are marked with a changes or new bar on the left hand side. Below a summary of the major changes compared to version 1.0:
+This document describes version 2.x of the client server protocol. Change are marked with a changes or new bar on the left hand side. Below is a summary of the major changes compared to version 1.0:
 
 - alignment of the protocol with the VSCode exension API. As a result the properties of a request param object conform to parameters in the API. So for example if the VSCode extension API takes a text document has the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
 - consistent support for language identifiers. This means that the language ID is passed to the server via the open notification. Further references to the text document don't transfer this informaiton anymore.
 - support for version numbers on documents. The initial version number is send to the server via the open notification. Document change notification do carry information about VSCode's version number as well.
-- Support for request cancellation
+- Support for request cancellation.
 - Interface naming: using consinstent names without I prefix.
 
 The 1.x version of this document can be found [here](https://github.com/Microsoft/vscode-languageserver-protocol/blob/master/versions/protocol-1-x.md)
@@ -17,7 +17,7 @@ separated by a '\r\n'.
 
 ### Header Part
 
-The header part consist of header fields. Header fields are separated from each other by '\r\n'. The last header
+The header part consists of header fields. Header fields are separated from each other by '\r\n'. The last header
 field needs to be terminated with '\r\n' as well. Currently the following header fields are supported:
 
 | Header File Name | Value Type  | Description |
@@ -172,7 +172,7 @@ A request that got canceled still needs to return from the server and send a res
 
 ## Language Server Protocol
 
-The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This sections starts descibing basic JSON structures used in the protocol. The document uses TypeScript interfaces to describe these. Bases on the basic JSON structures the actual requests with their responses and the notifications are described.
+The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces to describe these. Bases on the basic JSON structures the actual requests with their responses and the notifications are described.
 
 ### Basic JSON Structures
 
@@ -255,7 +255,7 @@ interface Diagnostic {
 }
 ```
 
-The protocol currently supports the following diagnostic severities
+The protocol currently supports the following diagnostic severities:
 
 ```typescript
 enum DiagnosticSeverity {
