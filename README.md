@@ -172,7 +172,7 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a reponse back. In addition it allows for returning paritial results on cancel.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a reponse back. In addition it allows for returning partial results on cancel.
 
 ## Language Server Protocol
 
