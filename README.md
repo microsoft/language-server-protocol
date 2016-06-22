@@ -17,7 +17,9 @@ separated by a '\r\n'.
 
 ### Header Part
 
-The header part consists of header fields. Each header field is terminated by '\r\n'. 
+The header part consists of header fields. Each header field is comprised of a name and a value,
+separated by `: ` (a colon and a space).
+Each header field is terminated by '\r\n'. 
 Considering the last header field and the overall header itself are each terminated with '\r\n',
 and that at least one header is mandatory, this means that two '\r\n' sequences always 
 immediately precede the content part of a message.
