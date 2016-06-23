@@ -10,6 +10,13 @@ This document describes version 2.x of the client server protocol. Change are ma
 
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md)
 
+## Contributing
+If you are interested in fixing issues like typos or contributing directly to the protocol specification either file an issue or provide a pull request
+containing the changes to this README.md. In case you want to extend the specification it is beneficial if the protocol changes got already implemented
+in a server. This helps understanding its use case.  
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
 ## Base Protocol
 
 The base protocol consists of a header and a content part (comparable to http). The header and content part are
