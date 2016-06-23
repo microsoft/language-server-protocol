@@ -3,7 +3,8 @@
 The Language Server protocol is used between a tool (the client) and a language smartness provider (the server) to integrate feature 
 like code complete, goto definition, and alike into the tool. The first version of the protocol is based on experiences we gained while
 integrating [OmniSharp](http://www.omnisharp.net/) and the [TypeScript Server](https://github.com/Microsoft/TypeScript/tree/master/src/server) into 
-[VS Code](https://code.visualstudio.com/).
+[VS Code](https://code.visualstudio.com/). Looks [here](https://github.com/Microsoft/language-server-protocol/wiki/Protocol-History) for a more detailed
+history of the protocol.
 
 ## Contributing
 If you are interested in fixing issues like typos or contributing directly to the protocol specification either file an issue or provide a pull request
