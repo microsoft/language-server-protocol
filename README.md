@@ -1,14 +1,14 @@
-# VSCode Client / Server Language Protocol
+# Client / Server Language Protocol
 
 This document describes version 2.x of the client server protocol. Change are marked with a changes or new bar on the left hand side. Below is a summary of the major changes compared to version 1.0:
 
-- alignment of the protocol with the VSCode exension API. As a result the properties of a request param object conform to parameters in the API. So for example if the VSCode extension API takes a text document has the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
+- consistent use of properties on request param objects. These properies are now structured like parameters in API's. So for example if an API takes a text document as the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
 - consistent support for language identifiers. This means that the language ID is passed to the server via the open notification. Further references to the text document don't transfer this informaiton anymore.
-- support for version numbers on documents. The initial version number is send to the server via the open notification. Document change notification do carry information about VSCode's version number as well.
+- support for version numbers on documents. The initial version number is send to the server via the open notification. Document change notification do carry information about version numbers as well.
 - Support for request cancellation.
 - Interface naming: using consinstent names without I prefix.
 
-The 1.x version of this document can be found [here](https://github.com/Microsoft/vscode-languageserver-protocol/blob/master/versions/protocol-1-x.md)
+The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md)
 
 ## Base Protocol
 
@@ -54,7 +54,7 @@ Content-Length: ...\r\n
 ```
 ### Base Protocol JSON structures
 
-The following TypeScript definitions describe the JSON-RPC protocol as implemented by VSCode:
+The following TypeScript definitions describe the base JSON-RPC protocol:
 
 #### Abstract Message
 
