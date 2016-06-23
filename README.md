@@ -733,6 +733,14 @@ interface LogMessageParams {
 ```
 Where type is defined as above.
 
+#### Telemetry Notification
+
+>**New:** The telemetry notification is send from the server to the client to ask the client to log a telemetry event.
+
+_Notification_:
+* method: 'telemetry/event'
+* params: 'any'
+
 #### DidChangeConfiguration Notification
 
 A notification send from the client to the server to signal the change of configuration settings.
