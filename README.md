@@ -15,7 +15,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 ## The Actual Protocol
 
-The latest version of the Language Server protocol can be found [here](protocol.md)
+The latest version of the Language Server protocol can be found [here](protocol.md).
 
 ## License
 [Creative Commons Attribution / MIT](LICENSE.txt)
