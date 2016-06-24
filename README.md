@@ -28,7 +28,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 ## The Language Server Protocol
 
-The file [here](protocol.md) specifies the language server protocol.
+The file [protocol.md](protocol.md) specifies the language server protocol.
 
 ## License
 [Creative Commons Attribution / MIT](LICENSE.txt)
