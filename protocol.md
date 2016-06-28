@@ -4,7 +4,7 @@ This document describes version 2.x of the language server protocol. Changes are
 
 - consistent use of properties on request param objects. These properies are now structured like parameters in API's. So for example if an API takes a text document as the first parameter the corresponding parameter literal in the JSON RPC protocol now has a property `textDocument`. 
 - consistent support for language identifiers. This means that the language ID is passed to the server via the open notification. Further references to the text document don't transfer this informaiton anymore.
-- support for version numbers on documents. The initial version number is send to the server via the open notification. Document change notification do carry information about version numbers as well.
+- support for version numbers on documents. The initial version number is sent to the server via the open notification. Document change notification do carry information about version numbers as well.
 - Support for request cancellation.
 - Interface naming: using consinstent names without I prefix.
 
@@ -91,7 +91,7 @@ interface RequestMessage extends Message {
 
 #### Response Message
 
-Response Message send as a result of a request. 
+Response Message sent as a result of a request.
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -174,7 +174,7 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a reponse back. In addition it allows for returning partial results on cancel.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel.
 
 ## Language Server Protocol
 
@@ -418,7 +418,7 @@ export interface TextDocumentPositionParams {
 This section documents the actual language server protocol. It uses the following format:
 
 * a header describing the request
-* a _Request_ section describing the format of the request send. The method is a string identifying the request the params are documented using a TypeScript interface
+* a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
 * a _Response_ section describing the format of the response. The result item descibes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they arn't listed here.
 
 #### Initialize Request
@@ -491,7 +491,7 @@ enum TextDocumentSyncKind {
 	Full = 1,
 	/**
 	 * Documents are synced by sending the full content on open. After that only incremental 
-	 * updates to the document are send.
+	 * updates to the document are sent.
 	 */
 	Incremental = 2
 }
@@ -678,7 +678,7 @@ enum MessageType {
 
 #### ShowMessage Request
 
->**New:** he show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
+>**New:** The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
 
 _Notification_:
 * method: 'window/showMessageRequest'
@@ -713,7 +713,7 @@ export interface MessageActionItem {
 
 #### LogMessage Notification
 
-The log message notification is send from the server to the client to ask the client to log a particular message.
+The log message notification is sent from the server to the client to ask the client to log a particular message.
 
 _Notification_:
 * method: 'window/logMessage'
@@ -735,7 +735,7 @@ Where type is defined as above.
 
 #### Telemetry Notification
 
->**New:** The telemetry notification is send from the server to the client to ask the client to log a telemetry event.
+>**New:** The telemetry notification is sent from the server to the client to ask the client to log a telemetry event.
 
 _Notification_:
 * method: 'telemetry/event'
@@ -743,7 +743,7 @@ _Notification_:
 
 #### DidChangeConfiguration Notification
 
-A notification send from the client to the server to signal the change of configuration settings.
+A notification sent from the client to the server to signal the change of configuration settings.
 
 _Notification_:
 * method: 'workspace/didChangeConfiguration',
@@ -823,6 +823,7 @@ interface TextDocumentContentChangeEvent {
 The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk).
 
 >**Changed**: in 2.0 the params are of type `DidCloseTextDocumentParams` which contains a reference to a text document.
+
 _Notification_:
 * method: 'textDocument/didClose'
 * param: `DidCloseTextDocumentParams` defined as follows:
@@ -837,7 +838,7 @@ export interface DidCloseTextDocumentParams {
 
 #### DidSaveTextDocument Notification
 
->**New:** The document save notification is sent from the client to the server when the document for saved in the clinet.
+>**New:** The document save notification is sent from the client to the server when the document for saved in the client.
 
 * method: 'textDocument/didSave'
 * param: `DidSaveTextDocumentParams` defined as follows:
@@ -852,7 +853,7 @@ export interface DidSaveTextDocumentParams {
 
 #### DidChangeWatchedFiles Notification
 
-The watched files notification is sent from the client to the server when the client detects changes to file watched by the lanaguage client.
+The watched files notification is sent from the client to the server when the client detects changes to file watched by the language client.
 
 _Notification_:
 * method: 'workspace/didChangeWatchedFiles'
@@ -924,9 +925,9 @@ interface PublishDiagnosticsParams {
 
 #### Completion Request
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing complete completion items is expensive servers can additional provide a handler for the resolve completion item request. This request is send when a completion item is selected in the user interface.
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request. This request is sent when a completion item is selected in the user interface.
 
->**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+>**Changed:** in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
 _Request_
 * method: 'textDocument/completion'
@@ -1045,7 +1046,7 @@ _Response_
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
->**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+>**Changed:** in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
 _Request_
 * method: 'textDocument/hover'
@@ -1079,7 +1080,7 @@ type MarkedString = string | { language: string; value: string };
 
 The signature help request is sent from the client to the server to request signature information at a given cursor position.
 
->**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+>**Changed:** in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
 _Request_
 * method: 'textDocument/signatureHelp'
@@ -1158,9 +1159,9 @@ interface ParameterInformation {
 
 #### Goto Definition
 
-The goto definition request is sent from the client to the server to to resolve the defintion location of a symbol at a given text document position.
+The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 
->**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+>**Changed:** in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
 _Request_
 * method: 'textDocument/definition'
@@ -1174,7 +1175,7 @@ _Response_:
 
 The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
 
->**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+>**Changed:** in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
 _Request_
 * method: 'textDocument/references'
@@ -1196,7 +1197,7 @@ interface ReferenceContext {
 
 #### Document Highlights
 
-The document highlight request is sent from the client to the server to to resolve a document highlights for a given text document position.
+The document highlight request is sent from the client to the server to resolve a document highlights for a given text document position.
 
 >**Changed:**: in 2.0 the requests uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
@@ -1348,7 +1349,7 @@ _Response_
 
 #### Code Action
 
-The code action request is sent from the client to the server to compute commands for a given text document and range. The request is trigger when the user moves the cursor into an problem marker in the editor or presses the lightbulb associated with a marker.
+The code action request is sent from the client to the server to compute commands for a given text document and range. The request is triggered when the user moves the cursor into an problem marker in the editor or presses the lightbulb associated with a marker.
 
 _Request_
 * method: 'textDocument/codeAction'
@@ -1542,7 +1543,7 @@ interface DocumentOnTypeFormattingParams {
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The position at which this request was send.
+	 * The position at which this request was sent.
 	 */
 	position: Position;
 
@@ -1577,7 +1578,7 @@ export interface RenameParams {
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The position at which this request was send.
+	 * The position at which this request was sent.
 	 */
 	position: Position;
 
