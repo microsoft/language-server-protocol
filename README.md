@@ -14,7 +14,7 @@ The Language server maintains the semantic information about a program implement
 * When the user requests to go to the definition of a symbol, then it sends a `definition` request to the server. The server responds with a uri of the document that holds the definition and the range inside the document. Based on this information the tool opens the corresponding document at the position where the symbol is defined.
 * When the user closes the document, the a `didClose` notification is sent, informing the language server that the truth of the file is now on the file system.
 
-The communication between the Editor/IDE host and the Language Server uses [JSON RPC](http://www.jsonrpc.org/). The protocol supports servers with different capabilities. The first request sent from the Editor/IDE to the language server informs the server about the supported language features.
+The communication between the Editor/IDE host and the Language Server uses [JSON RPC v2.0](http://www.jsonrpc.org/specification). The protocol supports servers with different capabilities. The first request sent from the Editor/IDE to the language server informs the server about the supported language features.
 
 The first version of the protocol is based on experiences we gained while
 integrating [OmniSharp](http://www.omnisharp.net/) and the [TypeScript Server](https://github.com/Microsoft/TypeScript/tree/master/src/server) into 
