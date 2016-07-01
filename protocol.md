@@ -29,7 +29,7 @@ Currently the following header fields are supported:
 | Header File Name | Value Type  | Description |
 |:-----------------|:------------|:------------|
 | Content-Length   | number      | The length of the content part in bytes. This header is required. |
-| Content-Type     | string      | The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf8 |
+| Content-Type     | string      | The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf-8 |
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
