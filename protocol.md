@@ -765,7 +765,7 @@ _Notification_:
 * method: 'textDocument/didOpen'
 * params: `DidOpenTextDocumentParams` defined as follows:
 ```typescript
-interface DidOpenTextDocumentParams extends TextDocumentIdentifier {
+interface DidOpenTextDocumentParams {
 	/**
 	 * The document that was opened.
 	 */
