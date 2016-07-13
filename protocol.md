@@ -1193,6 +1193,8 @@ interface ReferenceContext {
 	includeDeclaration: boolean;
 }
 ```
+_Response_:
+* result: [`Location`](#location)[]
 * error: code and message set in case an exception happens during the reference request.
 
 #### Document Highlights
