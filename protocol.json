@@ -1,0 +1,701 @@
+{
+    "type": "object",
+    "properties": {
+        "range": {
+            "$ref": "#/definitions/Range"
+        },
+        "position": {
+            "$ref": "#/definitions/Position"
+        },
+        "location": {
+            "$ref": "#/definitions/Location"
+        },
+        "diagnostic": {
+            "$ref": "#/definitions/Diagnostic"
+        },
+        "DiagnosticSeverity": {
+            "$ref": "#/definitions/DiagnosticSeverity"
+        },
+        "command": {
+            "$ref": "#/definitions/Command"
+        },
+        "textEdit": {
+            "$ref": "#/definitions/TextEdit"
+        },
+        "workspaceEdit": {
+            "$ref": "#/definitions/WorkspaceEdit"
+        },
+        "workspaceChange": {
+            "$ref": "#/definitions/WorkspaceChange"
+        },
+        "textEditChange": {
+            "$ref": "#/definitions/TextEditChange"
+        },
+        "textDocumentIdentifier": {
+            "$ref": "#/definitions/TextDocumentIdentifier"
+        },
+        "completionItemKind": {
+            "$ref": "#/definitions/CompletionItemKind"
+        },
+        "completionItem": {
+            "$ref": "#/definitions/CompletionItem"
+        },
+        "completionList": {
+            "$ref": "#/definitions/CompletionList"
+        },
+        "hover": {
+            "$ref": "#/definitions/Hover"
+        },
+        "markedString": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "language": {
+                            "type": "string"
+                        },
+                        "value": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "language",
+                        "value"
+                    ]
+                }
+            ]
+        },
+        "signatureHelp": {
+            "$ref": "#/definitions/SignatureHelp"
+        },
+        "signatureInformation": {
+            "$ref": "#/definitions/SignatureInformation"
+        },
+        "parameterInformation": {
+            "$ref": "#/definitions/ParameterInformation"
+        },
+        "definition": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/Location",
+                    "description": "Represents a location inside a resource, such as a line\n\ninside a text file.\n\nThe Location namespace provides helper functions to work with\n\n[Location](#Location) literals."
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Location",
+                        "description": "Represents a location inside a resource, such as a line\n\ninside a text file.\n\nThe Location namespace provides helper functions to work with\n\n[Location](#Location) literals."
+                    }
+                }
+            ]
+        },
+        "codeActionContext": {
+            "$ref": "#/definitions/CodeActionContext"
+        },
+        "documentHighlight": {
+            "$ref": "#/definitions/DocumentHighlight"
+        },
+        "documentHighlightKind": {
+            "$ref": "#/definitions/DocumentHighlightKind"
+        },
+        "symbolInformation": {
+            "$ref": "#/definitions/SymbolInformation"
+        },
+        "symbolKind": {
+            "$ref": "#/definitions/SymbolKind"
+        },
+        "codeLens": {
+            "$ref": "#/definitions/CodeLens"
+        },
+        "formattingOptions": {
+            "$ref": "#/definitions/FormattingOptions"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "range",
+        "position",
+        "location",
+        "diagnostic",
+        "DiagnosticSeverity",
+        "command",
+        "textEdit",
+        "workspaceEdit",
+        "workspaceChange",
+        "textEditChange",
+        "textDocumentIdentifier",
+        "completionItemKind",
+        "completionItem",
+        "completionList",
+        "hover",
+        "markedString",
+        "signatureHelp",
+        "signatureInformation",
+        "parameterInformation",
+        "definition",
+        "codeActionContext",
+        "documentHighlight",
+        "documentHighlightKind",
+        "symbolInformation",
+        "symbolKind",
+        "codeLens",
+        "formattingOptions"
+    ],
+    "definitions": {
+        "Range": {
+            "type": "object",
+            "properties": {
+                "start": {
+                    "$ref": "#/definitions/Position",
+                    "description": "The range's start position"
+                },
+                "end": {
+                    "$ref": "#/definitions/Position",
+                    "description": "The range's end position"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "start",
+                "end"
+            ]
+        },
+        "Position": {
+            "description": "Position in a text document expressed as zero-based line and character offset.\n\nThe Position namespace provides helper functions to work with\n\n[Position](#Position) literals.",
+            "type": "object",
+            "properties": {
+                "line": {
+                    "description": "Line position in a document (zero-based).",
+                    "type": "integer"
+                },
+                "character": {
+                    "description": "Character offset on a line in a document (zero-based).",
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "line",
+                "character"
+            ]
+        },
+        "Location": {
+            "type": "object",
+            "properties": {
+                "uri": {
+                    "type": "string"
+                },
+                "range": {
+                    "$ref": "#/definitions/Range"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "uri",
+                "range"
+            ]
+        },
+        "Diagnostic": {
+            "type": "object",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range",
+                    "description": "The range at which the message applies"
+                },
+                "severity": {
+                    "description": "The diagnostic's severity. Can be omitted. If omitted it is up to the\n\nclient to interpret diagnostics as error, warning, info or hint.",
+                    "type": "integer"
+                },
+                "code": {
+                    "description": "The diagnostic's code. Can be omitted.",
+                    "oneOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "source": {
+                    "description": "A human-readable string describing the source of this\n\ndiagnostic, e.g. 'typescript' or 'super lint'.",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "The diagnostic's message.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "range",
+                "message"
+            ]
+        },
+        "DiagnosticSeverity": {
+            "type": "string"
+        },
+        "Command": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "Title of the command, like `save`.",
+                    "type": "string"
+                },
+                "command": {
+                    "description": "The identifier of the actual command handler.",
+                    "type": "string"
+                },
+                "arguments": {
+                    "description": "Arguments that the command handler should be\n\ninvoked with.",
+                    "type": "array",
+                    "items": {}
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "title",
+                "command"
+            ]
+        },
+        "TextEdit": {
+            "type": "object",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range",
+                    "description": "The range of the text document to be manipulated. To insert\n\ntext into a document create a range where start === end."
+                },
+                "newText": {
+                    "description": "The string to be inserted. For delete operations use an\n\nempty string.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "range",
+                "newText"
+            ]
+        },
+        "WorkspaceEdit": {
+            "type": "object",
+            "properties": {
+                "changes": {
+                    "description": "Holds changes to existing resources.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/TextEdit",
+                            "description": "A text edit applicable to a text document.\n\nThe TextEdit namespace provides helper function to create replace,\n\ninsert and delete edits more easily."
+                        }
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "changes"
+            ]
+        },
+        "WorkspaceChange": {
+            "type": "object",
+            "properties": {
+                "workspaceEdit": {},
+                "textEditChanges": {},
+                "edit": {
+                    "$ref": "#/definitions/WorkspaceEdit",
+                    "description": "Returns the underlying [WorkspaceEdit](#WorkspaceEdit) literal\n\nuse to be returned from a workspace edit operation like rename."
+                },
+                "getTextEditChange": {
+                    "description": "Returns the [TextEditChange](#TextEditChange) to manage text edits\n\nfor resources.",
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "workspaceEdit",
+                "textEditChanges",
+                "edit",
+                "getTextEditChange"
+            ]
+        },
+        "TextEditChange": {
+            "type": "object",
+            "properties": {
+                "all": {
+                    "description": "Gets all text edits for this change.",
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                },
+                "clear": {
+                    "description": "Clears the edits for this change.",
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                },
+                "insert": {
+                    "description": "Insert the given text at the given position.",
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                },
+                "replace": {
+                    "description": "Replace the given range with given text for the given resource.",
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                },
+                "delete": {
+                    "description": "Delete the text at the given range.",
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "all",
+                "clear",
+                "insert",
+                "replace",
+                "delete"
+            ]
+        },
+        "TextDocumentIdentifier": {
+            "type": "object",
+            "properties": {
+                "uri": {
+                    "description": "The text document's uri.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "uri"
+            ]
+        },
+        "CompletionItemKind": {
+            "type": "string"
+        },
+        "CompletionItem": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "description": "The label of this completion item. By default\n\nalso the text that is inserted when selecting\n\nthis completion.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The kind of this completion item. Based of the kind\n\nan icon is chosen by the editor.",
+                    "type": "integer"
+                },
+                "detail": {
+                    "description": "A human-readable string with additional information\n\nabout this item, like type or symbol information.",
+                    "type": "string"
+                },
+                "documentation": {
+                    "description": "A human-readable string that represents a doc-comment.",
+                    "type": "string"
+                },
+                "sortText": {
+                    "description": "A string that shoud be used when comparing this item\n\nwith other items. When `falsy` the [label](#CompletionItem.label)\n\nis used.",
+                    "type": "string"
+                },
+                "filterText": {
+                    "description": "A string that should be used when filtering a set of\n\ncompletion items. When `falsy` the [label](#CompletionItem.label)\n\nis used.",
+                    "type": "string"
+                },
+                "insertText": {
+                    "description": "A string that should be inserted a document when selecting\n\nthis completion. When `falsy` the [label](#CompletionItem.label)\n\nis used.",
+                    "type": "string"
+                },
+                "textEdit": {
+                    "$ref": "#/definitions/TextEdit",
+                    "description": "An [edit](#TextEdit) which is applied to a document when selecting\n\nthis completion. When an edit is provided the value of\n\n[insertText](#CompletionItem.insertText) is ignored."
+                },
+                "additionalTextEdits": {
+                    "description": "An optional array of additional [text edits](#TextEdit) that are applied when\n\nselecting this completion. Edits must not overlap with the main [edit](#CompletionItem.textEdit)\n\nnor with themselves.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TextEdit",
+                        "description": "A text edit applicable to a text document.\n\nThe TextEdit namespace provides helper function to create replace,\n\ninsert and delete edits more easily."
+                    }
+                },
+                "command": {
+                    "$ref": "#/definitions/Command",
+                    "description": "An optional [command](#Command) that is executed *after* inserting this completion. *Note* that\n\nadditional modifications to the current document should be described with the\n\n[additionalTextEdits](#CompletionItem.additionalTextEdits)-property."
+                },
+                "data": {
+                    "description": "An data entry field that is preserved on a completion item between\n\na [CompletionRequest](#CompletionRequest) and a [CompletionResolveRequest]\n\n(#CompletionResolveRequest)"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "label"
+            ]
+        },
+        "CompletionList": {
+            "type": "object",
+            "properties": {
+                "isIncomplete": {
+                    "description": "This list it not complete. Further typing should result in recomputing\n\nthis list.",
+                    "type": "boolean"
+                },
+                "items": {
+                    "description": "The completion items.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CompletionItem",
+                        "description": "A completion item represents a text snippet that is\n\nproposed to complete text that is being typed.\n\nThe CompletionItem namespace provides functions to deal with\n\ncompletion items."
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "isIncomplete",
+                "items"
+            ]
+        },
+        "Hover": {
+            "type": "object",
+            "properties": {
+                "contents": {
+                    "description": "The hover's content",
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "language": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                                "language",
+                                "value"
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "language": {
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "additionalProperties": false,
+                                        "required": [
+                                            "language",
+                                            "value"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "range": {
+                    "$ref": "#/definitions/Range",
+                    "description": "An optional range"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "contents"
+            ]
+        },
+        "SignatureHelp": {
+            "type": "object",
+            "properties": {
+                "signatures": {
+                    "description": "One or more signatures.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SignatureInformation",
+                        "description": "Represents the signature of something callable. A signature\n\ncan have a label, like a function-name, a doc-comment, and\n\na set of parameters.\n\nThe SignatureInformation namespace provides helper functions to work with\n\n[SignatureInformation](#SignatureInformation) literals."
+                    }
+                },
+                "activeSignature": {
+                    "description": "The active signature.",
+                    "type": "integer"
+                },
+                "activeParameter": {
+                    "description": "The active parameter of the active signature.",
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "signatures"
+            ]
+        },
+        "SignatureInformation": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "description": "The label of this signature. Will be shown in\n\nthe UI.",
+                    "type": "string"
+                },
+                "documentation": {
+                    "description": "The human-readable doc-comment of this signature. Will be shown\n\nin the UI but can be omitted.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "description": "The parameters of this signature.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ParameterInformation",
+                        "description": "Represents a parameter of a callable-signature. A parameter can\n\nhave a label and a doc-comment.\n\nThe ParameterInformation namespace provides helper functions to work with\n\n[ParameterInformation](#ParameterInformation) literals."
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "label"
+            ]
+        },
+        "ParameterInformation": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "description": "The label of this signature. Will be shown in\n\nthe UI.",
+                    "type": "string"
+                },
+                "documentation": {
+                    "description": "The human-readable doc-comment of this signature. Will be shown\n\nin the UI but can be omitted.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "label"
+            ]
+        },
+        "CodeActionContext": {
+            "type": "object",
+            "properties": {
+                "diagnostics": {
+                    "description": "An array of diagnostics.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Diagnostic",
+                        "description": "Represents a diagnostic, such as a compiler error or warning. Diagnostic objects\n\nare only valid in the scope of a resource.\n\nThe Diagnostic namespace provides helper functions to work with\n\n[Diagnostic](#Diagnostic) literals."
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "diagnostics"
+            ]
+        },
+        "DocumentHighlight": {
+            "type": "object",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range",
+                    "description": "The range this highlight applies to."
+                },
+                "kind": {
+                    "description": "The highlight kind, default is [text](#DocumentHighlightKind.Text).",
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "range"
+            ]
+        },
+        "DocumentHighlightKind": {
+            "type": "string"
+        },
+        "SymbolInformation": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of this symbol.",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The kind of this symbol.",
+                    "type": "integer"
+                },
+                "location": {
+                    "$ref": "#/definitions/Location",
+                    "description": "The location of this symbol."
+                },
+                "containerName": {
+                    "description": "The name of the symbol containing this symbol.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name",
+                "kind",
+                "location"
+            ]
+        },
+        "SymbolKind": {
+            "type": "string"
+        },
+        "CodeLens": {
+            "type": "object",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range",
+                    "description": "The range in which this code lens is valid. Should only span a single line."
+                },
+                "command": {
+                    "$ref": "#/definitions/Command",
+                    "description": "The command this code lens represents."
+                },
+                "data": {
+                    "description": "An data entry field that is preserved on a code lens item between\n\na [CodeLensRequest](#CodeLensRequest) and a [CodeLensResolveRequest]\n\n(#CodeLensResolveRequest)"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "range"
+            ]
+        },
+        "FormattingOptions": {
+            "type": "object",
+            "properties": {
+                "tabSize": {
+                    "description": "Size of a tab in spaces.",
+                    "type": "integer"
+                },
+                "insertSpaces": {
+                    "description": "Prefer spaces over tabs.",
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "tabSize",
+                "insertSpaces"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}
