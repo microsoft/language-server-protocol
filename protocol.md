@@ -353,7 +353,7 @@ interface TextDocumentIdentifier {
 
 #### TextDocumentItem
 
->**New:** an item to transfer a text document from the client to the server.
+>**New:** An item to transfer a text document from the client to the server.
 
 ```typescript
 export interface TextDocumentItem {
@@ -395,7 +395,7 @@ export interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier 
 
 #### TextDocumentPositionParams
 
->**Changed**: was `TextDocumentPosition` in 1.0 with inlined parameters
+>**Changed:** Was `TextDocumentPosition` in 1.0 with inlined parameters
 
 A parameter literal used in requests to pass a text document and a position inside that document.
 
@@ -775,7 +775,7 @@ interface DidOpenTextDocumentParams {
 
 #### DidChangeTextDocument Notification
 
->**Changed**: The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
+>**Changed:** The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
 
 _Notification_:
 * method: 'textDocument/didChange'
@@ -822,7 +822,7 @@ interface TextDocumentContentChangeEvent {
 
 The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk).
 
->**Changed**: in 2.0 the params are of type `DidCloseTextDocumentParams` which contains a reference to a text document.
+>**Changed:** In 2.0 the params are of type `DidCloseTextDocumentParams` which contains a reference to a text document.
 
 _Notification_:
 * method: 'textDocument/didClose'
@@ -1046,7 +1046,7 @@ _Response_
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
->**Changed:** in 2.0 the request uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
+>**Changed:** In 2.0 the request uses `TextDocumentPositionParams` with a proper `textDocument` and `position` property. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
 _Request_
 * method: 'textDocument/hover'
