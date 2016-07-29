@@ -1042,7 +1042,7 @@ _Response_
 * result: `CompletionItem`
 * error: code and message set in case an exception happens during the completion resolve request.
 
-#### Hover
+#### Hover Request
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
@@ -1076,7 +1076,7 @@ type MarkedString = string | { language: string; value: string };
 ```
 * error: code and message set in case an exception happens during the hover request.
 
-#### Signature Help
+#### Signature Help Request
 
 The signature help request is sent from the client to the server to request signature information at a given cursor position.
 
@@ -1157,7 +1157,7 @@ interface ParameterInformation {
 ```
 * error: code and message set in case an exception happens during the signature help request.
 
-#### Goto Definition
+#### Goto Definition Request
 
 The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 
@@ -1171,7 +1171,7 @@ _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[]
 * error: code and message set in case an exception happens during the definition request.
 
-#### Find References
+#### Find References Request
 
 The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
 
@@ -1197,7 +1197,7 @@ _Response_:
 * result: [`Location`](#location)[]
 * error: code and message set in case an exception happens during the reference request.
 
-#### Document Highlights
+#### Document Highlights Request
 
 The document highlight request is sent from the client to the server to resolve a document highlights for a given text document position.
 
@@ -1251,7 +1251,7 @@ enum DocumentHighlightKind {
 * error: code and message set in case an exception happens during the document highlight request.
 
 
-#### Document Symbols
+#### Document Symbols Request
 
 The document symbol request is sent from the client to the server to list all symbols found in a given text document.
 
@@ -1326,7 +1326,7 @@ export enum SymbolKind {
 ```
 * error: code and message set in case an exception happens during the document symbol request.
 
-#### Workspace Symbols
+#### Workspace Symbols Request
 
 The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
 
@@ -1349,7 +1349,7 @@ _Response_
 * result: `SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
-#### Code Action
+#### Code Action Request
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. The request is triggered when the user moves the cursor into a problem marker in the editor or presses the lightbulb associated with a marker.
 
@@ -1394,7 +1394,7 @@ _Response_
 * result: [`Command[]`](#command) defined as follows:
 * error: code and message set in case an exception happens during the code action request.
 
-#### Code Lens
+#### Code Lens Request
 
 The code lens request is sent from the client to the server to compute code lenses for a given text document.
 
@@ -1442,7 +1442,7 @@ export interface CodeLens {
 ```
 * error: code and message set in case an exception happens during the code lens request.
 
-#### Code Lens Resolve
+#### Code Lens Resolve Request
 
 The code lens resolve request is sent from the client to the server to resolve the command for a given code lens item.
 
@@ -1454,7 +1454,7 @@ _Response_
 * result: `CodeLens`
 * error: code and message set in case an exception happens during the code lens resolve request.
 
-#### Document Formatting
+#### Document Formatting Request
 
 The document formatting request is sent from the server to the client to format a whole document.
 
@@ -1500,7 +1500,7 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
-#### Document Range Formatting
+#### Document Range Formatting Request
 
 The document range formatting request is sent from the client to the server to format a given range in a document.
 
@@ -1530,7 +1530,7 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
-#### Document on Type Formatting
+#### Document on Type Formatting Request
 
 The document on type formatting request is sent from the client to the server to format parts of the document during typing.
 
@@ -1565,7 +1565,7 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
-#### Rename
+#### Rename Request
 
 The rename request is sent from the client to the server to perform a workspace-wide rename of a symbol.
 
