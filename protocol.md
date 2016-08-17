@@ -931,7 +931,7 @@ The Completion request is sent from the client to the server to compute completi
 
 _Request_
 * method: 'textDocument/completion'
-* params: [`TextDocumentPositionParams`](#textdocumentposition)
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
 * result: `CompletionItem[] | CompletionList`
