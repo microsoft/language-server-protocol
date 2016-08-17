@@ -67,7 +67,7 @@ interface Message {
 ```
 #### RequestMessage 
 
-A request message to decribe a request between the client and the server. Every processed request must send a response back to the sender of the request.
+A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
 ```typescript
 interface RequestMessage extends Message {
