@@ -1200,6 +1200,8 @@ _Response_:
 #### Document Highlights Request
 
 The document highlight request is sent from the client to the server to resolve a document highlights for a given text document position.
+For programming languages this usually highlights all references. However we kept 'textDocument/documentHighlight' and 'textDocument/references' 
+separate requests since the first one is allowed to be more fuzzy.
 
 >**Changed:** In 2.0 the request uses `TextDocumentPositionParams` with proper `textDocument` and `position` properties. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
@@ -1208,12 +1210,13 @@ _Request_
 * param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
-* result: `DocumentHighlight` defined as follows:
+* result: [`DocumentHighlight`] defined as follows:
 ```typescript
 /**
  * A document highlight is a range inside a text document which deserves
  * special attention. Usually a document highlight is visualized by changing
  * the background color of its range.
+ * 
  */
 interface DocumentHighlight {
 	/**
