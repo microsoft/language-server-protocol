@@ -1211,7 +1211,7 @@ _Request_
 * param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
-* result: [`DocumentHighlight`] defined as follows:
+* result: `DocumentHighlight`[] defined as follows:
 ```typescript
 /**
  * A document highlight is a range inside a text document which deserves
