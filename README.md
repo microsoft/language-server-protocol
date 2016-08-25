@@ -7,12 +7,12 @@ like auto complete, goto definition, find all references and alike into the tool
 
 ![Interaction diagram](images/interaction-diagram.png)
 
-The Language server maintains the semantic information about a program implemented in a particular language. 
-* When the user opens a document in the tool then it notifies the language server that the document did open and that the truth of the document is now maintained by the tool in an memory buffer. 
-* When the user edits the document the server is notified about the changes and the semantic information of program is updated by the language server.
-* As the user makes changes the language server analyses the document and notifies the tool with the errors and warnings (diagnostics) that are found,
-* When the user requests to go to the definition of a symbol, then it sends a `definition` request to the server. The server responds with a uri of the document that holds the definition and the range inside the document. Based on this information the tool opens the corresponding document at the position where the symbol is defined.
-* When the user closes the document, the a `didClose` notification is sent, informing the language server that the truth of the file is now on the file system.
+The language server maintains semantic information about a program implemented in a particular language. 
+* When the user opens a document in the tool, it notifies the language server that the document was opened and that the truth of the document is now maintained by the tool in a memory buffer. 
+* When the user edits the document, the server is notified of the changes and updates the program's semantic information.
+* As the user makes changes the language server analyses the document and notifies the tool with any errors and warnings (diagnostics) that it finds.
+* When the user requests to go to the definition of a symbol, the client sends a `definition` request to the server. The server responds with the URI of the document and a range inside that document. Based on this information the tool opens the corresponding document at the position where the symbol is defined.
+* When the user closes the document, a `didClose` notification is sent, informing the language server that the truth of the file is now on the file system.
 
 The communication between the Editor/IDE host and the Language Server uses [JSON RPC v2.0](http://www.jsonrpc.org/specification). The protocol supports servers with different capabilities. The first request sent from the Editor/IDE to the language server informs the server about the supported language features.
 
