@@ -186,7 +186,7 @@ The protocol currently assumes that one server serves one tool. There is current
 
 #### Position
 
-Position in a text document expressed as zero-based line and character offset.
+Position in a text document expressed as zero-based line and character offset. A position is between two characters like an 'insert' cursor in a editor.
 
 ```typescript
 interface Position {
@@ -203,7 +203,8 @@ interface Position {
 ```
 #### Range
 
-A range in a text document expressed as (zero-based) start and end positions.
+A range in a text document expressed as (zero-based) start and end positions. A range is comparable to a selection in an editor. Therefore the end position is exclusive.
+
 ```typescript
 interface Range {
 	/**
