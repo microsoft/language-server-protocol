@@ -333,7 +333,7 @@ interface TextEdit {
 A workspace edit represents changes to many resources managed in the workspace.
 
  ```typescript
-export interface WorkspaceEdit {
+interface WorkspaceEdit {
 	/**
 	 * Holds changes to existing resources.
 	 */
@@ -358,7 +358,7 @@ interface TextDocumentIdentifier {
 >**New:** An item to transfer a text document from the client to the server.
 
 ```typescript
-export interface TextDocumentItem {
+interface TextDocumentItem {
 	/**
 	 * The text document's URI.
 	 */
@@ -387,7 +387,7 @@ export interface TextDocumentItem {
 >**New:** An identifier to denote a specific version of a text document.
 
 ```typescript
-export interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
+interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	/**
 	 * The version number of this document.
 	 */
@@ -402,7 +402,7 @@ export interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier 
 A parameter literal used in requests to pass a text document and a position inside that document.
 
 ```typescript
-export interface TextDocumentPositionParams {
+interface TextDocumentPositionParams {
 	/**
 	 * The text document.
 	 */
@@ -459,7 +459,7 @@ interface ClientCapabilities {
 _Response_
 * result: `InitializeResult` defined as follows:
 ```typescript
-export InitializeResult {
+interface InitializeResult {
 	/**
 	 * The capabilities the language server provides.
 	 */
@@ -686,7 +686,7 @@ _Notification_:
 * method: 'window/showMessageRequest'
 * params: `ShowMessageRequestParams` defined as follows:
 ```typescript
-export interface ShowMessageRequestParams {
+interface ShowMessageRequestParams {
 	/**
 	 * The message type. See {@link MessageType}
 	 */
@@ -705,7 +705,7 @@ export interface ShowMessageRequestParams {
 ```
 Where the `MessageActionItem` is defined as follows:
 ```typescript
-export interface MessageActionItem {
+interface MessageActionItem {
 	/**
 	 * A short title like 'Retry', 'Open Log' etc.
 	 */
@@ -783,7 +783,7 @@ _Notification_:
 * method: 'textDocument/didChange'
 * params: `DidChangeTextDocumentParams` defined as follows:
 ```typescript
-export interface DidChangeTextDocumentParams {
+interface DidChangeTextDocumentParams {
 	/**
 	 * The document that did change. The version number points
 	 * to the version after all provided content changes have
@@ -828,9 +828,9 @@ The document close notification is sent from the client to the server when the d
 
 _Notification_:
 * method: 'textDocument/didClose'
-* param: `DidCloseTextDocumentParams` defined as follows:
+* params: `DidCloseTextDocumentParams` defined as follows:
 ```typescript
-export interface DidCloseTextDocumentParams {
+interface DidCloseTextDocumentParams {
 	/**
 	 * The document that was closed.
 	 */
@@ -843,9 +843,9 @@ export interface DidCloseTextDocumentParams {
 >**New:** The document save notification is sent from the client to the server when the document was saved in the client.
 
 * method: 'textDocument/didSave'
-* param: `DidSaveTextDocumentParams` defined as follows:
+* params: `DidSaveTextDocumentParams` defined as follows:
 ```typescript
-export interface DidSaveTextDocumentParams {
+interface DidSaveTextDocumentParams {
 	/**
 	 * The document that was saved.
 	 */
@@ -1038,7 +1038,7 @@ The request is sent from the client to the server to resolve additional informat
 
 _Request_
 * method: 'completionItem/resolve'
-* param: `CompletionItem`
+* params: `CompletionItem`
 
 _Response_
 * result: `CompletionItem`
@@ -1052,7 +1052,7 @@ The hover request is sent from the client to the server to request hover informa
 
 _Request_
 * method: 'textDocument/hover'
-* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
 * result: `Hover` defined as follows:
@@ -1086,7 +1086,7 @@ The signature help request is sent from the client to the server to request sign
 
 _Request_
 * method: 'textDocument/signatureHelp'
-* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
 * result: `SignatureHelp` defined as follows:
@@ -1167,7 +1167,7 @@ The goto definition request is sent from the client to the server to resolve the
 
 _Request_
 * method: 'textDocument/definition'
-* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[]
@@ -1181,7 +1181,7 @@ The references request is sent from the client to the server to resolve project-
 
 _Request_
 * method: 'textDocument/references'
-* param: `ReferenceParams` defined as follows:
+* params: `ReferenceParams` defined as follows:
 ```typescript
 interface ReferenceParams extends TextDocumentPositionParams {
 	context: ReferenceContext
@@ -1210,7 +1210,7 @@ of `Read` or `Write` whereas fuzzy or textual matches use `Text`as the kind.
 
 _Request_
 * method: 'textDocument/documentHighlight'
-* param: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_
 * result: `DocumentHighlight`[] defined as follows:
@@ -1265,9 +1265,9 @@ The document symbol request is sent from the client to the server to list all sy
 
 _Request_
 * method: 'textDocument/documentSymbol'
-* param: `DocumentSymbolParams` defined as follows:
+* params: `DocumentSymbolParams` defined as follows:
 ```typescript
-export interface DocumentSymbolParams {
+interface DocumentSymbolParams {
 	/**
 	 * The text document.
 	 */
@@ -1338,7 +1338,7 @@ The workspace symbol request is sent from the client to the server to list proje
 
 _Request_
 * method: 'workspace/symbol'
-* param: `WorkspaceSymbolParams` defined as follows:
+* params: `WorkspaceSymbolParams` defined as follows:
 ```typescript
 /**
  * The parameters of a Workspace Symbol Request.
@@ -1361,7 +1361,7 @@ The code action request is sent from the client to the server to compute command
 
 _Request_
 * method: 'textDocument/codeAction'
-* param: `CodeActionParams` defined as follows:
+* params: `CodeActionParams` defined as follows:
 ```typescript
 /**
  * Params for the CodeActionRequest
@@ -1408,9 +1408,9 @@ The code lens request is sent from the client to the server to compute code lens
 
 _Request_
 * method: 'textDocument/codeLens'
-* param: `CodeLensParams` defined as follows:
+* params: `CodeLensParams` defined as follows:
 ```typescript
-export interface CodeLensParams {
+interface CodeLensParams {
 	/**
 	 * The document to request code lens for.
 	 */
@@ -1428,7 +1428,7 @@ _Response_
  * A code lens is _unresolved_ when no command is associated to it. For performance
  * reasons the creation of a code lens and resolving should be done in two stages.
  */
-export interface CodeLens {
+interface CodeLens {
 	/**
 	 * The range in which this code lens is valid. Should only span a single line.
 	 */
@@ -1454,7 +1454,7 @@ The code lens resolve request is sent from the client to the server to resolve t
 
 _Request_
 * method: 'codeLens/resolve'
-* param: `CodeLens`
+* params: `CodeLens`
 
 _Response_
 * result: `CodeLens`
@@ -1466,7 +1466,7 @@ The document formatting request is sent from the server to the client to format 
 
 _Request_
 * method: 'textDocument/formatting'
-* param: `DocumentFormattingParams` defined as follows
+* params: `DocumentFormattingParams` defined as follows
 ```typescript
 interface DocumentFormattingParams {
 	/**
@@ -1512,7 +1512,7 @@ The document range formatting request is sent from the client to the server to f
 
 _Request_
 * method: 'textDocument/rangeFormatting',
-* param: `DocumentRangeFormattingParams` defined as follows
+* params: `DocumentRangeFormattingParams` defined as follows
 ```typescript
 interface DocumentRangeFormattingParams {
 	/**
@@ -1542,7 +1542,7 @@ The document on type formatting request is sent from the client to the server to
 
 _Request_
 * method: 'textDocument/onTypeFormatting'
-* param: `DocumentOnTypeFormattingParams` defined as follows
+* params: `DocumentOnTypeFormattingParams` defined as follows
 ```typescript
 interface DocumentOnTypeFormattingParams {
 	/**
@@ -1577,9 +1577,9 @@ The rename request is sent from the client to the server to perform a workspace-
 
 _Request_
 * method: 'textDocument/rename'
-* param: `RenameParams` defined as follows
+* params: `RenameParams` defined as follows
 ```typescript
-export interface RenameParams {
+interface RenameParams {
 	/**
 	 * The document to format.
 	 */
