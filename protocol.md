@@ -446,6 +446,11 @@ interface InitializeParams {
 	rootPath: string;
 
 	/**
+	 * User provided initialization options.
+	 */
+	initializationOptions?: any;
+
+	/**
 	 * The capabilities provided by the client (editor)
 	 */
 	capabilities: ClientCapabilities;
