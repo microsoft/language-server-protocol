@@ -289,7 +289,7 @@ enum DiagnosticSeverity {
 
 #### Command
 
-Represents a reference to a command. Provides a title which will be used to represent a command in the UI and, optionally, an array of arguments which will be passed to the command handler function when invoked.
+Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identitifed using a string identifier and the protocol currently doesn't specify a set of well known commands. So executing a command requires some tool extension code.
 
 ```typescript
 interface Command {
@@ -683,9 +683,14 @@ enum MessageType {
 
 >**New:** The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
 
-_Notification_:
+_Request_:
 * method: 'window/showMessageRequest'
 * params: `ShowMessageRequestParams` defined as follows:
+
+_Response_:
+* result: the selected `MessageActionItem`
+* error: code and message set in case an exception happens during showing a message.
+
 ```typescript
 interface ShowMessageRequestParams {
 	/**
