@@ -1069,7 +1069,7 @@ _Response_
 * result: `Hover` defined as follows:
 ```typescript
 /**
- * The result of a hove request.
+ * The result of a hover request.
  */
 interface Hover {
 	/**
@@ -1078,13 +1078,24 @@ interface Hover {
 	contents: MarkedString | MarkedString[];
 	
 	/**
-	 * An optional range
+	 * An optional range is a range inside a text document 
+	 * that is used to visualize a hover, e.g. by changing the background color.
 	 */
 	range?: Range;
 }
 ```
 Where `MarkedString` is defined as follows:
 ```typescript
+/**
+ * The marked string is rendered:
+ * - as markdown if it is represented as a string
+ * - as code block of the given langauge if it is represented as a pair of a language and a value
+ *
+ * The pair of a language and a value is an equivalent to markdown:
+ * ```${language}
+ * ${value}
+ * ```
+ */
 type MarkedString = string | { language: string; value: string };
 ```
 * error: code and message set in case an exception happens during the hover request.
