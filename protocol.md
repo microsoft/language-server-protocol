@@ -435,15 +435,18 @@ _Request_
 interface InitializeParams {
 	/**
 	 * The process Id of the parent process that started
-	 * the server.
+	 * the server. Is null if the process has not been started by another process.
+	 * If the parent process is not alive then the server should exit its process 
+	 * with `success` code 0 if the shutdown request has been received before; 
+	 * otherwise with `error` code 1.
 	 */
-	processId: number;
+	processId?: number;
 
 	/**
 	 * The rootPath of the workspace. Is null
 	 * if no folder is open.
 	 */
-	rootPath: string;
+	rootPath?: string;
 
 	/**
 	 * User provided initialization options.
