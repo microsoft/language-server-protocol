@@ -436,9 +436,7 @@ interface InitializeParams {
 	/**
 	 * The process Id of the parent process that started
 	 * the server. Is null if the process has not been started by another process.
-	 * If the parent process is not alive then the server should exit its process 
-	 * with `success` code 0 if the shutdown request has been received before; 
-	 * otherwise with `error` code 1.
+	 * If the parent process is not alive then the server should exit (see exit notification) its process.
 	 */
 	processId?: number;
 
@@ -640,6 +638,7 @@ _Response_
 #### Exit Notification
 
 A notification to ask the server to exit its process.
+The server should exit with `success` code 0 if the shutdown request has been received before; otherwise with `error` code 1.
 
 _Notification_
 * method: 'exit'
