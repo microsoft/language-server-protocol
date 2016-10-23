@@ -422,7 +422,7 @@ This section documents the actual language server protocol. It uses the followin
 
 * a header describing the request
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
-* a _Response_ section describing the format of the response. The result item descibes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they arn't listed here.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
 #### Initialize Request
 
