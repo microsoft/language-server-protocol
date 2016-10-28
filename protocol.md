@@ -1181,13 +1181,13 @@ interface SignatureInformation {
  */
 interface ParameterInformation {
 	/**
-	 * The label of this signature. Will be shown in
+	 * The label of this parameter. Will be shown in
 	 * the UI.
 	 */
 	label: string;
 	
 	/**
-	 * The human-readable doc-comment of this signature. Will be shown
+	 * The human-readable doc-comment of this parameter. Will be shown
 	 * in the UI but can be omitted.
 	 */
 	documentation?: string;
