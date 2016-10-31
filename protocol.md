@@ -329,6 +329,8 @@ interface TextEdit {
 }
 ```
 
+If n `TextEdit`s are applied to a text document all text edits describe changes to the initial document version. Execution wise text edits should applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
+
 #### WorkspaceEdit
 
 A workspace edit represents changes to many resources managed in the workspace.
