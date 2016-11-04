@@ -583,6 +583,10 @@ interface ServerCapabilities {
 	 */
 	definitionProvider?: boolean;
 	/**
+	 * The server provides get symbol support.
+	 */
+	symbolProvider?: boolean;
+	/**
 	 * The server provides find references support.
 	 */
 	referencesProvider?: boolean;
@@ -1209,6 +1213,18 @@ _Request_
 
 _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[]
+* error: code and message set in case an exception happens during the definition request.
+
+#### Get Symbol Request
+
+The get symbol request is sent from the client to the server to resolve the definition location and symbol information for a given text document position.
+
+_Request_
+* method: 'textDocument/symbol'
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+
+_Response_:
+* result: `SymbolInformation` | `SymbolInformation`[]
 * error: code and message set in case an exception happens during the definition request.
 
 #### Find References Request
