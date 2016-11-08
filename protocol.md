@@ -1199,7 +1199,7 @@ interface ParameterInformation {
 
 #### Goto Definition Request
 
-The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
+The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position. The location is the entire range of the definition, e.g. the entire range of a function starting from its signature to the final closing code bracket.
 
 >**Changed:** In 2.0 the request uses `TextDocumentPositionParams` with proper `textDocument` and `position` properties. In 1.0 the uri of the referenced text document was inlined into the params object. 
 
