@@ -54,7 +54,7 @@ Content-Length: ...\r\n
 ```
 ### Base Protocol JSON structures
 
-The following TypeScript definitions describe the base JSON-RPC protocol:
+The following TypeScript definitions describe the base [JSON-RPC protocol](http://www.jsonrpc.org/specification):
 
 #### Abstract Message
 
