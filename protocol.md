@@ -10,6 +10,51 @@ This document describes version 2.x of the language server protocol. Changes are
 
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
 
+## Messages overview
+
+General
+
+* :leftwards_arrow_with_hook: [initialize](#initialize) 
+* :leftwards_arrow_with_hook: [shutdown](#shutdown) 
+* :arrow_right: [exit](#exit) 
+* :arrow_right: [$/cancelRequest](#cancelRequest)
+
+Window
+
+* :arrow_left: [window/showMessage](#window_showMessage) 
+* :arrow_right_hook: [window/showMessageRequest](#window_showMessageRequest) 
+* :arrow_left: [window/logMessage](#window_logMessage) 
+* :arrow_left: [telemetry/event](#telemetry_event) 
+
+Workspace
+
+* :arrow_right: [workspace/didChangeConfiguration](#workspace_didChangeConfiguration) 
+* :arrow_right: [workspace/didChangeWatchedFiles](#workspace_didChangeWatchedFiles) 
+* :leftwards_arrow_with_hook: [workspace/symbol](#workspace_symbol) 
+
+Document
+
+* :arrow_left: [textDocument/publishDiagnostics](#textDocument_publishDiagnostics) 
+* :arrow_right: [textDocument/didChange](#textDocument_didChange)  
+* :arrow_right: [textDocument/didClose](#textDocument_didClose) 
+* :arrow_right: [textDocument/didOpen](#textDocument_didOpen) 
+* :arrow_right: [textDocument/didSave](#textDocument_didSave) 
+* :leftwards_arrow_with_hook: [textDocument/completion](#textDocument_completion) 
+* :leftwards_arrow_with_hook: [completionItem/resolve](#completionItem_resolve) 
+* :leftwards_arrow_with_hook: [textDocument/hover](#textDocument_hover) 
+* :leftwards_arrow_with_hook: [textDocument/signatureHelp](#textDocument_signatureHelp) 
+* :leftwards_arrow_with_hook: [textDocument/references](#textDocument_references) 
+* :leftwards_arrow_with_hook: [textDocument/documentHighlight](#textDocument_documentHighlight) 
+* :leftwards_arrow_with_hook: [textDocument/documentSymbol](#textDocument_documentSymbol) 
+* :leftwards_arrow_with_hook: [textDocument/formatting](#textDocument_formatting) 
+* :leftwards_arrow_with_hook: [textDocument/rangeFormatting](#textDocument_rangeFormatting) 
+* :leftwards_arrow_with_hook: [textDocument/onTypeFormatting](#textDocument_onTypeFormatting) 
+* :leftwards_arrow_with_hook: [textDocument/definition](#textDocument_definition) 
+* :leftwards_arrow_with_hook: [textDocument/codeAction](#textDocument_codeAction) 
+* :leftwards_arrow_with_hook: [textDocument/codeLens](#textDocument_codeLens) 
+* :leftwards_arrow_with_hook: [codeLens/resolve](#codeLens_resolve) 
+* :leftwards_arrow_with_hook: [textDocument/rename](#textDocument_rename) 
+
 ## Base Protocol
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
@@ -1640,49 +1685,4 @@ interface RenameParams {
 _Response_
 * result: [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
-
-### Message overview
-
-General
-
-* :leftwards_arrow_with_hook: [initialize](#initialize) 
-* :leftwards_arrow_with_hook: [shutdown](#shutdown) 
-* :arrow_right: [exit](#exit) 
-* :arrow_right: [$/cancelRequest](#cancelRequest)
-
-Window
-
-* :arrow_left: [window/showMessage](#window_showMessage) 
-* :arrow_right_hook: [window/showMessageRequest](#window_showMessageRequest) 
-* :arrow_left: [window/logMessage](#window_logMessage) 
-* :arrow_left: [telemetry/event](#telemetry_event) 
-
-Workspace
-
-* :arrow_right: [workspace/didChangeConfiguration](#workspace_didChangeConfiguration) 
-* :arrow_right: [workspace/didChangeWatchedFiles](#workspace_didChangeWatchedFiles) 
-* :leftwards_arrow_with_hook: [workspace/symbol](#workspace_symbol) 
-
-Document
-
-* :arrow_left: [textDocument/publishDiagnostics](#textDocument_publishDiagnostics) 
-* :arrow_right: [textDocument/didChange](#textDocument_didChange)  
-* :arrow_right: [textDocument/didClose](#textDocument_didClose) 
-* :arrow_right: [textDocument/didOpen](#textDocument_didOpen) 
-* :arrow_right: [textDocument/didSave](#textDocument_didSave) 
-* :leftwards_arrow_with_hook: [textDocument/completion](#textDocument_completion) 
-* :leftwards_arrow_with_hook: [completionItem/resolve](#completionItem_resolve) 
-* :leftwards_arrow_with_hook: [textDocument/hover](#textDocument_hover) 
-* :leftwards_arrow_with_hook: [textDocument/signatureHelp](#textDocument_signatureHelp) 
-* :leftwards_arrow_with_hook: [textDocument/references](#textDocument_references) 
-* :leftwards_arrow_with_hook: [textDocument/documentHighlight](#textDocument_documentHighlight) 
-* :leftwards_arrow_with_hook: [textDocument/documentSymbol](#textDocument_documentSymbol) 
-* :leftwards_arrow_with_hook: [textDocument/formatting](#textDocument_formatting) 
-* :leftwards_arrow_with_hook: [textDocument/rangeFormatting](#textDocument_rangeFormatting) 
-* :leftwards_arrow_with_hook: [textDocument/onTypeFormatting](#textDocument_onTypeFormatting) 
-* :leftwards_arrow_with_hook: [textDocument/definition](#textDocument_definition) 
-* :leftwards_arrow_with_hook: [textDocument/codeAction](#textDocument_codeAction) 
-* :leftwards_arrow_with_hook: [textDocument/codeLens](#textDocument_codeLens) 
-* :leftwards_arrow_with_hook: [codeLens/resolve](#codeLens_resolve) 
-* :leftwards_arrow_with_hook: [textDocument/rename](#textDocument_rename) 
 
