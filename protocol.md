@@ -940,6 +940,73 @@ interface PublishDiagnosticsParams {
 }
 ```
 
+#### UpdateColoring Notification
+
+Coloring notifications are sent from the server to the client to update coloring information. This is mainly intended for semantic coloring and is usually triggered after a change event for an open document was changed and processed. It always contains all coloring information that should be put on top of the configuration based coloring on the client side.
+
+_Notification_
+* method: 'textDocument/updateColoring'
+* params: `UpdateColoringParams` defined as follows:
+```typescript
+interface UpdateColoringParams {
+	/**
+	 * The URI for which coloring information is updated.
+	 */
+	uri: string;
+
+	/**
+	 * An array of ColoringInformation items.
+	 */
+	coloringInformation: ColoringInformation[];
+}
+
+interface ColoringInformation {
+	/**
+	 * The range that should be highlighted on the client-side.
+	 */
+	range: Range;
+
+	/**
+	 * A list of highlighting style identifiers, that should be applied on
+	 * the range. Several styles could be merged on the client-side by 
+	 * applying all styles on the range. 
+	 */
+	ids: int[];
+}
+
+enum ColoringStyle {
+	
+	Identifier     = 1,
+	Entity         = 2,
+	Constructor    = 3,
+	Operators      = 4,
+	Tag            = 5,
+	Namespace      = 6,
+	Keyword        = 7,
+	Info_token     = 8,
+	Type           = 9,
+	String         = 10,
+	Warn_token     = 11,
+	Predefined     = 12,
+	String_escape  = 13,
+	Error_token    = 14,
+	Invalid        = 15,
+	Comment        = 16,
+	Debug_token    = 17,
+	Comment_doc    = 18,
+	Regexp         = 19,
+	Constant       = 20,
+	Attribute      = 21,
+	
+	// modifiers
+	Modifier_public = 22,
+	Modifier_private = 23,
+	Modifier_protected = 24,
+	Modifier_static = 25,
+	Modifier_final = 26
+}
+```
+
 #### Completion Request
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typically use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in.
