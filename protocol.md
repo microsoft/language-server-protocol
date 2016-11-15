@@ -957,7 +957,7 @@ interface UpdateColoringParams {
 	/**
 	 * An array of ColoringInformation items.
 	 */
-	diagnostics: ColoringInformation[];
+	coloringInformation: ColoringInformation[];
 }
 
 interface ColoringInformation {
@@ -1002,8 +1002,8 @@ enum ColoringStyle {
 	Modifier_public = 22,
 	Modifier_private = 23,
 	Modifier_protected = 24,
-	Modifier_static = 22,
-	Modifier_final = 22
+	Modifier_static = 25,
+	Modifier_final = 26
 }
 ```
 
