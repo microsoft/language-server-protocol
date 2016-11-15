@@ -944,6 +944,8 @@ interface PublishDiagnosticsParams {
 
 Coloring notifications are sent from the server to the client to update coloring information. This is mainly intended for semantic coloring and is usually triggered after a change event for an open document was changed and processed. It always contains all coloring information that should be put on top of the configuration based coloring on the client side.
 
+_Notification_
+* method: 'textDocument/updateColoring'
 * params: `UpdateColoringParams` defined as follows:
 ```typescript
 interface UpdateColoringParams {
