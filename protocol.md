@@ -971,7 +971,39 @@ interface ColoringInformation {
 	 * the range. Several styles could be merged on the client-side by 
 	 * applying all styles on the range. 
 	 */
-	ids: string[];
+	ids: int[];
+}
+
+enum ColoringStyle {
+	
+	Identifier     = 1,
+	Entity         = 2,
+	Constructor    = 3,
+	Operators      = 4,
+	Tag            = 5,
+	Namespace      = 6,
+	Keyword        = 7,
+	Info_token     = 8,
+	Type           = 9,
+	String         = 10,
+	Warn_token     = 11,
+	Predefined     = 12,
+	String_escape  = 13,
+	Error_token    = 14,
+	Invalid        = 15,
+	Comment        = 16,
+	Debug_token    = 17,
+	Comment_doc    = 18,
+	Regexp         = 19,
+	Constant       = 20,
+	Attribute      = 21,
+	
+	// modifiers
+	Modifier_public = 22,
+	Modifier_private = 23,
+	Modifier_protected = 24,
+	Modifier_static = 22,
+	Modifier_final = 22
 }
 ```
 
