@@ -24,13 +24,13 @@ interface ClientCapabilities {
   /* ... all fields from the base ClientCapabilities ... */
 
   /**
-   * The client provides support for workspace/files.
+   * The client provides support for workspace/xfiles.
    */
-  filesProvider?: boolean;
+  xfilesProvider?: boolean;
   /**
-   * The client provides support for textDocument/content.
+   * The client provides support for textDocument/xcontent.
    */
-  contentProvider?: boolean;
+  xcontentProvider?: boolean;
 }
 ```
 
@@ -39,7 +39,7 @@ interface ClientCapabilities {
 The content request is sent from the server to the client to request the current content of any text document. This allows language servers to operate without accessing the file system directly.
 
 _Request_:
-* method: 'textDocument/content'
+* method: 'textDocument/xcontent'
 * params: `ContentParams` defined as follows:
 
 ```typescript
@@ -62,7 +62,7 @@ The files request is sent from the server to the client to request a list of all
 A language server can use the result to index files by filtering and doing a content request for each text document of interest.
 
 _Request_:
-* method: 'workspace/files'
+* method: 'workspace/xfiles'
 * params: `FilesParams` defined as follows:
 
 ```typescript
@@ -88,7 +88,7 @@ Relative (`rootPath` is `file:///some/project`):
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "method": "workspace/files"
+  "method": "workspace/xfiles"
 }
 ```
 
@@ -111,7 +111,7 @@ Absolute:
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "method": "workspace/files",
+  "method": "workspace/xfiles",
   "params": {
     "base": "file:///usr/local/go"
   }
@@ -136,7 +136,7 @@ Absolute:
 
 * The protocol uses URIs, not file paths, to be consistent with the rest of LSP.
 * Matching the `base` parameter relative to the `rootPath` permits the server to request files outside the workspace even if the workspace is on a remote host and/or uses an arbitrary protocol.
-* Usage of `TextDocumentIdentifier` in `workspace/files` allows to easily extend the result with more properties in the future without breaking backward compatibility.
+* Usage of `TextDocumentIdentifier` in `workspace/xfiles` allows to easily extend the result with more properties in the future without breaking backward compatibility.
 
 
 ## Known issues
