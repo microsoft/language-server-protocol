@@ -10,6 +10,51 @@ This document describes version 2.x of the language server protocol. Changes are
 
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
 
+## Messages overview
+
+General
+
+* :leftwards_arrow_with_hook: [initialize](#initialize) 
+* :leftwards_arrow_with_hook: [shutdown](#shutdown) 
+* :arrow_right: [exit](#exit) 
+* :arrow_right: [$/cancelRequest](#cancelRequest)
+
+Window
+
+* :arrow_left: [window/showMessage](#window_showMessage) 
+* :arrow_right_hook: [window/showMessageRequest](#window_showMessageRequest) 
+* :arrow_left: [window/logMessage](#window_logMessage) 
+* :arrow_left: [telemetry/event](#telemetry_event) 
+
+Workspace
+
+* :arrow_right: [workspace/didChangeConfiguration](#workspace_didChangeConfiguration) 
+* :arrow_right: [workspace/didChangeWatchedFiles](#workspace_didChangeWatchedFiles) 
+* :leftwards_arrow_with_hook: [workspace/symbol](#workspace_symbol) 
+
+Document
+
+* :arrow_left: [textDocument/publishDiagnostics](#textDocument_publishDiagnostics) 
+* :arrow_right: [textDocument/didChange](#textDocument_didChange)  
+* :arrow_right: [textDocument/didClose](#textDocument_didClose) 
+* :arrow_right: [textDocument/didOpen](#textDocument_didOpen) 
+* :arrow_right: [textDocument/didSave](#textDocument_didSave) 
+* :leftwards_arrow_with_hook: [textDocument/completion](#textDocument_completion) 
+* :leftwards_arrow_with_hook: [completionItem/resolve](#completionItem_resolve) 
+* :leftwards_arrow_with_hook: [textDocument/hover](#textDocument_hover) 
+* :leftwards_arrow_with_hook: [textDocument/signatureHelp](#textDocument_signatureHelp) 
+* :leftwards_arrow_with_hook: [textDocument/references](#textDocument_references) 
+* :leftwards_arrow_with_hook: [textDocument/documentHighlight](#textDocument_documentHighlight) 
+* :leftwards_arrow_with_hook: [textDocument/documentSymbol](#textDocument_documentSymbol) 
+* :leftwards_arrow_with_hook: [textDocument/formatting](#textDocument_formatting) 
+* :leftwards_arrow_with_hook: [textDocument/rangeFormatting](#textDocument_rangeFormatting) 
+* :leftwards_arrow_with_hook: [textDocument/onTypeFormatting](#textDocument_onTypeFormatting) 
+* :leftwards_arrow_with_hook: [textDocument/definition](#textDocument_definition) 
+* :leftwards_arrow_with_hook: [textDocument/codeAction](#textDocument_codeAction) 
+* :leftwards_arrow_with_hook: [textDocument/codeLens](#textDocument_codeLens) 
+* :leftwards_arrow_with_hook: [codeLens/resolve](#codeLens_resolve) 
+* :leftwards_arrow_with_hook: [textDocument/rename](#textDocument_rename) 
+
 ## Base Protocol
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
@@ -158,7 +203,7 @@ interface NotificationMessage extends Message {
 }
 ```
 
-#### Cancellation Support
+#### <a name="cancelRequest"></a> Cancellation Support
 
 >**New:** The base protocol now offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
  
@@ -426,7 +471,7 @@ This section documents the actual language server protocol. It uses the followin
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
 * a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
-#### Initialize Request
+#### <a name="initialize"></a>Initialize Request
 
 The initialize request is sent as the first request from the client to the server. 
 
@@ -625,7 +670,7 @@ interface ServerCapabilities {
 }
 ```
 
-#### Shutdown Request
+#### <a name="shutdown"></a>Shutdown Request
 
 The shutdown request is sent from the client to the server. It asks the server to shut down, but to not exit (otherwise the response might not be delivered correctly to the client). There is a separate exit notification that asks the server to exit.
 
@@ -637,7 +682,7 @@ _Response_
 * result: undefined
 * error: code and message set in case an exception happens during shutdown request.
 
-#### Exit Notification
+#### <a name="exit"></a>Exit Notification
 
 A notification to ask the server to exit its process.
 The server should exit with `success` code 0 if the shutdown request has been received before; otherwise with `error` code 1.
@@ -646,7 +691,7 @@ _Notification_
 * method: 'exit'
 * params: undefined
 
-#### ShowMessage Notification
+#### <a name="window_showMessage"></a>ShowMessage Notification
 
 The show message notification is sent from a server to a client to ask the client to display a particular message in the user interface.
 
@@ -688,7 +733,7 @@ enum MessageType {
 }
 ```
 
-#### ShowMessage Request
+#### <a name="window_showMessageRequest"></a>ShowMessage Request
 
 >**New:** The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
 
@@ -728,7 +773,7 @@ interface MessageActionItem {
 }
 ```
 
-#### LogMessage Notification
+#### <a name="window_logMessage"></a>LogMessage Notification
 
 The log message notification is sent from the server to the client to ask the client to log a particular message.
 
@@ -750,7 +795,7 @@ interface LogMessageParams {
 ```
 Where type is defined as above.
 
-#### Telemetry Notification
+#### <a name="telemetry_event"></a>Telemetry Notification
 
 >**New:** The telemetry notification is sent from the server to the client to ask the client to log a telemetry event.
 
@@ -758,7 +803,7 @@ _Notification_:
 * method: 'telemetry/event'
 * params: 'any'
 
-#### DidChangeConfiguration Notification
+#### <a name="workspace_didChangeConfiguration"></a>DidChangeConfiguration Notification
 
 A notification sent from the client to the server to signal the change of configuration settings.
 
@@ -774,7 +819,7 @@ interface DidChangeConfigurationParams {
 }
 ```
 
-#### DidOpenTextDocument Notification
+#### <a name="textDocument_didOpen"></a>DidOpenTextDocument Notification
 
 The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri.
 
@@ -790,7 +835,7 @@ interface DidOpenTextDocumentParams {
 }
 ```
 
-#### DidChangeTextDocument Notification
+#### <a name="textDocument_didChange"></a>DidChangeTextDocument Notification
 
 >**Changed:** The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
 
@@ -835,7 +880,7 @@ interface TextDocumentContentChangeEvent {
 }
 ```
 
-#### DidCloseTextDocument Notification
+#### <a name="textDocument_didClose"></a>DidCloseTextDocument Notification
 
 The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk).
 
@@ -853,7 +898,7 @@ interface DidCloseTextDocumentParams {
 }
 ```
 
-#### DidSaveTextDocument Notification
+#### <a name="textDocument_didSave"></a>DidSaveTextDocument Notification
 
 >**New:** The document save notification is sent from the client to the server when the document was saved in the client.
 
@@ -868,7 +913,7 @@ interface DidSaveTextDocumentParams {
 }
 ```
 
-#### DidChangeWatchedFiles Notification
+#### <a name="workspace_didChangeWatchedFiles"></a>DidChangeWatchedFiles Notification
 
 The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client.
 
@@ -919,7 +964,7 @@ interface FileEvent {
 }
 ```
 
-#### PublishDiagnostics Notification
+#### <a name="textDocument_publishDiagnostics"></a>PublishDiagnostics Notification
 
 Diagnostics notification are sent from the server to the client to signal results of validation runs.
 
@@ -940,7 +985,7 @@ interface PublishDiagnosticsParams {
 }
 ```
 
-#### Completion Request
+#### <a name="textDocument_completion"></a>Completion Request
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typically use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in.
 
@@ -1059,7 +1104,7 @@ enum CompletionItemKind {
 ```
 * error: code and message set in case an exception happens during the completion request.
 
-#### Completion Item Resolve Request
+#### <a name="completionItem_resolve"></a>Completion Item Resolve Request
 
 The request is sent from the client to the server to resolve additional information for a given completion item.
 
@@ -1071,7 +1116,7 @@ _Response_
 * result: `CompletionItem`
 * error: code and message set in case an exception happens during the completion resolve request.
 
-#### Hover Request
+#### <a name="textDocument_hover"></a>Hover Request
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
@@ -1116,7 +1161,7 @@ type MarkedString = string | { language: string; value: string };
 ```
 * error: code and message set in case an exception happens during the hover request.
 
-#### Signature Help Request
+#### <a name="textDocument_signatureHelp"></a>Signature Help Request
 
 The signature help request is sent from the client to the server to request signature information at a given cursor position.
 
@@ -1197,7 +1242,7 @@ interface ParameterInformation {
 ```
 * error: code and message set in case an exception happens during the signature help request.
 
-#### Goto Definition Request
+#### <a name="textDocument_definition"></a>Goto Definition Request
 
 The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 
@@ -1211,7 +1256,7 @@ _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[]
 * error: code and message set in case an exception happens during the definition request.
 
-#### Find References Request
+#### <a name="textDocument_references"></a>Find References Request
 
 The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
 
@@ -1237,7 +1282,7 @@ _Response_:
 * result: [`Location`](#location)[]
 * error: code and message set in case an exception happens during the reference request.
 
-#### Document Highlights Request
+#### <a name="textDocument_documentHighlight"></a>Document Highlights Request
 
 The document highlight request is sent from the client to the server to resolve a document highlights for a given text document position.
 For programming languages this usually highlights all references to the symbol scoped to this file. However we kept 'textDocument/documentHighlight' 
@@ -1295,7 +1340,7 @@ enum DocumentHighlightKind {
 * error: code and message set in case an exception happens during the document highlight request.
 
 
-#### Document Symbols Request
+#### <a name="textDocument_documentSymbol"></a>Document Symbols Request
 
 The document symbol request is sent from the client to the server to list all symbols found in a given text document.
 
@@ -1370,7 +1415,7 @@ export enum SymbolKind {
 ```
 * error: code and message set in case an exception happens during the document symbol request.
 
-#### Workspace Symbols Request
+#### <a name="workspace_symbol"></a>Workspace Symbols Request
 
 The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
 
@@ -1393,7 +1438,7 @@ _Response_
 * result: `SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
-#### Code Action Request
+#### <a name="textDocument_codeAction"></a>Code Action Request
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. The request is triggered when the user moves the cursor into a problem marker in the editor or presses the lightbulb associated with a marker.
 
@@ -1438,7 +1483,7 @@ _Response_
 * result: [`Command[]`](#command) defined as follows:
 * error: code and message set in case an exception happens during the code action request.
 
-#### Code Lens Request
+#### <a name="textDocument_codeLens"></a>Code Lens Request
 
 The code lens request is sent from the client to the server to compute code lenses for a given text document.
 
@@ -1486,7 +1531,7 @@ interface CodeLens {
 ```
 * error: code and message set in case an exception happens during the code lens request.
 
-#### Code Lens Resolve Request
+#### <a name="codeLens_resolve"></a>Code Lens Resolve Request
 
 The code lens resolve request is sent from the client to the server to resolve the command for a given code lens item.
 
@@ -1498,7 +1543,7 @@ _Response_
 * result: `CodeLens`
 * error: code and message set in case an exception happens during the code lens resolve request.
 
-#### Document Formatting Request
+#### <a name="textDocument_formatting"></a>Document Formatting Request
 
 The document formatting request is sent from the server to the client to format a whole document.
 
@@ -1544,7 +1589,7 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
-#### Document Range Formatting Request
+#### <a name="textDocument_rangeFormatting"></a>Document Range Formatting Request
 
 The document range formatting request is sent from the client to the server to format a given range in a document.
 
@@ -1574,7 +1619,7 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
-#### Document on Type Formatting Request
+#### <a name="textDocument_onTypeFormatting"></a>Document on Type Formatting Request
 
 The document on type formatting request is sent from the client to the server to format parts of the document during typing.
 
@@ -1609,7 +1654,7 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
-#### Rename Request
+#### <a name="textDocument_rename"></a>Rename Request
 
 The rename request is sent from the client to the server to perform a workspace-wide rename of a symbol.
 
@@ -1640,3 +1685,4 @@ interface RenameParams {
 _Response_
 * result: [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
+
