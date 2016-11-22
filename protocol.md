@@ -231,10 +231,13 @@ interface Location {
 
 #### Preview Location
 
-Represents a location inside a resource, such as a line inside a text file.
+Represents a location inside a resource, such as a line inside a text file, and an optional preview.
 ```typescript
 interface LocationPreview extends Location {
-	contents: string;
+	/**
+	 * A preview of the text around the location.
+	 */
+	contents?: string;
 }
 ```
 
@@ -1240,14 +1243,10 @@ interface ReferenceContext {
 	 * Include the declaration of the current symbol.
 	 */
 	includeDeclaration: boolean;
-	/**
-	 * Include preview of line where reference occurs.
-	 */
-	includePreview: boolean;
 }
 ```
 _Response_:
-* result: [`Location`](#location)[] | [`LocationPreview`](#location-preview)[]
+* result: [`LocationPreview`](#location-preview)[]
 * error: code and message set in case an exception happens during the reference request.
 
 #### Document Highlights Request
