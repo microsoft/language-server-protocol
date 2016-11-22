@@ -53,6 +53,8 @@ Document
 * :leftwards_arrow_with_hook: [textDocument/codeAction](#textDocument_codeAction) 
 * :leftwards_arrow_with_hook: [textDocument/codeLens](#textDocument_codeLens) 
 * :leftwards_arrow_with_hook: [codeLens/resolve](#codeLens_resolve) 
+* :leftwards_arrow_with_hook: [textDocument/documentLink](#textDocument_documentLink) 
+* :leftwards_arrow_with_hook: [documentLink/resolve](#documentLink_resolve) 
 * :leftwards_arrow_with_hook: [textDocument/rename](#textDocument_rename) 
 
 ## Base Protocol
@@ -1542,6 +1544,54 @@ _Request_
 _Response_
 * result: `CodeLens`
 * error: code and message set in case an exception happens during the code lens resolve request.
+
+#### <a name="textDocument_documentLink"></a>Document Link Request
+
+The document links request is sent from the client to the server to request the location of links in a document.
+
+_Request_
+* method: 'textDocument/documentLink'
+* params: `DocumentLinkParams`, defined as follows
+```typescript
+interface DocumentLinkParams {
+	/**
+	 * The document to provide document links for.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+```
+
+_Response_
+* result: An array of `DocumentLink`, or `null` or `undefined`.
+```
+/**
+ * A document link is a range in a text document that links to an internal or external resource, like another
+ * text document or a web site.
+ */
+interface DocumentLink {
+	/**
+	 * The range this link applies to.
+	 */
+	range: Range;
+	/**
+	 * The uri this link points to.
+	 */
+	target: string;
+}
+```
+* error: code and message set in case an exception happens during the document link request.
+
+#### <a name="documentLink_resolve"></a>Document Link Resolve Request
+
+The document link resolve request is sent from the client to the server to resolve the target of a given document link.
+
+_Request_
+* method: 'documentLink/resolve'
+* params: `DocumentLink`
+
+_Response_
+* result: `DocumentLink`
+* error: code and message set in case an exception happens during the document link resolve request.
 
 #### <a name="textDocument_formatting"></a>Document Formatting Request
 
