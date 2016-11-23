@@ -1101,7 +1101,8 @@ enum CompletionItemKind {
 	Snippet = 15,
 	Color = 16,
 	File = 17,
-	Reference = 18
+	Reference = 18,
+	Annotation = 19
 }
 ```
 * error: code and message set in case an exception happens during the completion request.
