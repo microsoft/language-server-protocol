@@ -183,8 +183,9 @@ export namespace ErrorCodes {
 	export const MethodNotFound: number = -32601;
 	export const InvalidParams: number = -32602;
 	export const InternalError: number = -32603;
-	export const serverErrorStart: number = -32099
+	export const serverErrorStart: number = -32099;
 	export const serverErrorEnd: number = -32000;
+	export const serverNotInitialized: number = -32001;
 }
 ```
 #### Notification Message
@@ -492,7 +493,10 @@ This section documents the actual language server protocol. It uses the followin
 
 #### <a name="initialize"></a>Initialize Request
 
-The initialize request is sent as the first request from the client to the server. 
+The initialize request is sent as the first request from the client to the server. If the server receives request or notification before the `initialize` request it should act as follows:
+
+* for a request the respond should be errored with `code: -32001`. The message can be picked by the server. 
+* notifications should be dropped.
 
 _Request_
 * method: 'initialize'
