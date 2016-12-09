@@ -1584,7 +1584,7 @@ interface DocumentLinkParams {
 
 _Response_
 * result: An array of `DocumentLink`, or `null` or `undefined`.
-```
+```typescript
 /**
  * A document link is a range in a text document that links to an internal or external resource, like another
  * text document or a web site.
@@ -1597,7 +1597,7 @@ interface DocumentLink {
 	/**
 	 * The uri this link points to.
 	 */
-	target: string;
+	target?: string;
 }
 ```
 * error: code and message set in case an exception happens during the document link request.
