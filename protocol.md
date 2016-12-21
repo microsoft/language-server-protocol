@@ -4,6 +4,9 @@
 
 This document describes version 3.0 of the language server protocol. Changes are marked with a change or new bar on the left hand side. Below is a summary of the major changes compared to version 2.x:
 
+* Support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request. Especially the support for the `textDocument/willSaveWaitUntil` request required some additions to the protocol. The major reason is that the `textDocument/willSaveWaitUntil` request is very time critical and it might block the save of files in the tool until it response has arrived at the tool. To support this in an optimal fashion the protocol now supports to register and unregister capabilities dynamically and not only statically during server initialization. 
+* The client now announces capabilities as well. This will allow servers to react to different clients (e.g. VS Code, Vim, Eclipse) which support different versions of the protocol. For the protocol we decided to go with so called feature flags instead of protocol version since versions needs to be mapped to features anyways.
+
 The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
 
@@ -12,23 +15,29 @@ The 1.x version of this document can be found [here](https://github.com/Microsof
 General
 
 * :leftwards_arrow_with_hook: [initialize](#initialize)
-* :arrow_right: [initialized](#initialized)
+* **New** :arrow_right: [initialized](#initialized)
 * :leftwards_arrow_with_hook: [shutdown](#shutdown)
 * :arrow_right: [exit](#exit)
 * :arrow_right: [$/cancelRequest](#cancelRequest)
 
 Window
 
-* :arrow_left: [window/showMessage](#window_showMessage) 
-* :arrow_right_hook: [window/showMessageRequest](#window_showMessageRequest) 
-* :arrow_left: [window/logMessage](#window_logMessage) 
-* :arrow_left: [telemetry/event](#telemetry_event) 
+* :arrow_left: [window/showMessage](#window_showMessage)
+* :arrow_right_hook: [window/showMessageRequest](#window_showMessageRequest)
+* :arrow_left: [window/logMessage](#window_logMessage)
+* :arrow_left: [telemetry/event](#telemetry_event)
+
+>**New** Client
+* :rightwards_arrow_with_hook: [client/registerCapability](#client_registerCapability)
+* :rightwards_arrow_with_hook: [client/unregisterCapability](#client_unregisterCapability)
 
 Workspace
 
-* :arrow_right: [workspace/didChangeConfiguration](#workspace_didChangeConfiguration) 
-* :arrow_right: [workspace/didChangeWatchedFiles](#workspace_didChangeWatchedFiles) 
-* :leftwards_arrow_with_hook: [workspace/symbol](#workspace_symbol) 
+* :arrow_right: [workspace/didChangeConfiguration](#workspace_didChangeConfiguration)
+* :arrow_right: [workspace/didChangeWatchedFiles](#workspace_didChangeWatchedFiles)
+* :leftwards_arrow_with_hook: [workspace/symbol](#workspace_symbol)
+* >**New** :leftwards_arrow_with_hook: [workspace/executeCommand](#workspace_executeCommand)
+* >**New** :rightwards_arrow_with_hook: [workspace/applyEdit](#workspace_applyEdit)
 
 Document
 
@@ -36,8 +45,8 @@ Document
 * :arrow_right: [textDocument/didOpen](#textDocument_didOpen)
 * :arrow_right: [textDocument/didChange](#textDocument_didChange)
 * :arrow_right: [textDocument/willSave](#textDocument_willSave)
-* :leftwards_arrow_with_hook: [textDocument/willSaveWaitUntil](#textDocument_willSaveWaitUntil)
-* :arrow_right: [textDocument/didSave](#textDocument_didSave)
+* **New** :leftwards_arrow_with_hook: [textDocument/willSaveWaitUntil](#textDocument_willSaveWaitUntil)
+* **New** :arrow_right: [textDocument/didSave](#textDocument_didSave)
 * :arrow_right: [textDocument/didClose](#textDocument_didClose)
 * :leftwards_arrow_with_hook: [textDocument/completion](#textDocument_completion)
 * :leftwards_arrow_with_hook: [completionItem/resolve](#completionItem_resolve)
@@ -484,9 +493,9 @@ interface TextDocumentPositionParams {
 }
 ```
 
-#### DocumentFilter
+> #### New: DocumentFilter
 
->**New:** A document filter denotes a document through properties like `language`, `schema` or `pattern`. Examples are a filter that applies to TypeScript files on disk or a filter the applies to JSON files with name package.json:
+A document filter denotes a document through properties like `language`, `schema` or `pattern`. Examples are a filter that applies to TypeScript files on disk or a filter the applies to JSON files with name package.json:
 ```typescript
 { language: 'typescript', scheme: 'file' }
 { language: 'json', pattern: '**/package.json' }
@@ -525,6 +534,7 @@ This section documents the actual language server protocol. It uses the followin
 * a header describing the request
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
 * a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* a _Registration Options_ section decribing the registration option if the request or notification supports dynamic capability registration.
 
 #### <a name="initialize"></a>Initialize Request
 
@@ -535,19 +545,12 @@ The initialize request is sent as the first request from the client to the serve
 
 >**Updated**: During the `intialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
 
->**New**: the `InitializeParams` contain a `protocolVersion` property denoting the protocol version the client speaks.
-
 _Request_
 * method: 'initialize'
 * params: `InitializeParams` defined as follows:
 
 ```typescript
 interface InitializeParams {
-	/**
-	 * The protocol version the client speaks.
-	 */
-	protocolVersion: string;
-
 	/**
 	 * The process Id of the parent process that started
 	 * the server. Is null if the process has not been started by another process.
@@ -578,6 +581,16 @@ interface InitializeParams {
 }
 ```
 Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilites` are defined as follows:
+
+>**New**: `DynamicRegistrationCapabilites` define capabilities the editor / tool provides for dynamic feature registration.
+
+```typescript
+/**
+ * Dynamic registration specific client capabilities
+ */
+export interface DynamicRegistrationCapabilites {
+}
+```
 
 >**New**: `WorkspaceClientCapabilites` define capabilities the editor / tool provides on the workspace:
 
@@ -612,15 +625,29 @@ export interface TextDocumentClientCapabilities {
 	 * be applied to the document before it is saved.
 	 */
 	willSaveWaitUntilRequest?: boolean;
+
+	/**
+	 * The client supports the following `CompletionItem` specific
+	 * capabilities.
+	 */
+	completionItem?: {
+		/**
+		 * Client supports the new range property in favour of the
+		 * deprecated `textEdit` property.
+		 */
+		rangeProperty?: boolean;
+	}
 }
 ```
+
+> **New**: `ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development.
 
 ```typescript
 interface ClientCapabilities {
 	/**
 	 * The client supports dynamic feature registration.
 	 */
-	dynamicRegistration?: boolean;
+	dynamicRegistration?: DynamicRegistrationCapabilites;
 
 	/**
 	 * Workspace specific client capabilities.
@@ -842,9 +869,9 @@ interface ServerCapabilities {
 }
 ```
 
-#### <a name="initialized"></a>Initialized Notification
+>#### New: <a name="initialized"></a>Initialized Notification
 
->**New:** The initialized notification is sent from the client to the server after the client is fully initialized and is able to listen to arbritary requests and notifications sent from the server.
+The initialized notification is sent from the client to the server after the client is fully initialized and is able to listen to arbritary requests and notifications sent from the server.
 
 _Notification_
 * method: 'initialized'
@@ -990,6 +1017,130 @@ _Notification_:
 * method: 'telemetry/event'
 * params: 'any'
 
+> #### New: <a name="client_registerCapability"></a>Register Capability
+
+The `client/registerCapability` request is sent from the server to the client to register for a new capability on the client side. Not all clients need to support dynamic capability registration. A client opts in via the `ClientCapabilities.dynamicRegistration` property.
+
+_Request_:
+* method: 'client/registerCapability'
+* params: `RegistrationParams`
+
+Where `RegistrationParams` are defined as follows:
+
+```typescript
+/**
+ * General paramters to to regsiter for a capability.
+ */
+export interface Registration {
+	/**
+	 * The id used to register the request. The id can be used to deregister
+	 * the request again.
+	 */
+	id: string;
+
+	/**
+	 * The method / capability to register for.
+	 */
+	method: string;
+
+	/**
+	 * Options necessary for the registration.
+	 */
+	registerOptions?: any;
+}
+
+export interface RegistrationParams {
+	registrations: Registration[];
+}
+```
+
+Since most of the registration options require to specify a document selector there is a base interface that can be used.
+
+```typescript
+export interface TextDocumentOptions {
+	/**
+	 * A document selector to identify the scope of the registration. If set to null
+	 * the document selector provided on the client side will be used.
+	 */
+	documentSelector: DocumentSelector | null;
+}
+```
+
+An example JSON RPC message to register dynamically for the `textDocument/willSaveWaitUntil` feature on the client side is as follows (only details shown):
+
+```json
+{
+	"method": "client/registerFeature",
+	"params": {
+		"registrations": [
+			{
+				"id": "79eee87c-c409-4664-8102-e03263673f6f",
+				"method": "textDocument/willSaveWaitUntil",
+				"registerOptions": {
+					"documentSelector": [
+						{ "language": "javascript" }
+					]
+				}
+			}
+		]
+	}
+}
+```
+
+This message is sent from the server to the client and after the client has successfully executed the request further `textDocument/willSaveWaitUntil` requests for JavaScript text documents are sent from the client to the server.
+
+_Response_:
+* result: void.
+* error: code and message set in case an exception happens during the request.
+
+> #### New: <a name="client_unregisterFeature"></a>Unregister Capability
+
+The `client/unregisterCapability` request is sent from the server to the client to unregister a previously register capability.
+
+_Request_:
+* method: 'client/unregisterCapability'
+* params: `UnregistrationParams`
+
+Where `UnregistrationParams` are defined as follows:
+
+```typescript
+/**
+ * General parameters to unregister a capability.
+ */
+export interface Unregistration {
+	/**
+	 * The id used to unregister the request or notification. Usually an id
+	 * provided during the register request.
+	 */
+	id: string;
+
+	/**
+	 * The method / capability to unregister for.
+	 */
+	method: string;
+}
+
+export interface UnregistrationParams {
+	unregisterations: Unregistration[];
+}
+```
+
+An example JSON RPC message to unregister the above registered `textDocument/willSaveWaitUntil` feature looks like this:
+
+```json
+{
+	"method": "client/unregisterCapability",
+	"params": {
+		"unregisterations": [
+			{
+				"id": "79eee87c-c409-4664-8102-e03263673f6f",
+				"method": "textDocument/willSaveWaitUntil"
+			}
+		]
+	}
+}
+```
+
 #### <a name="workspace_didChangeConfiguration"></a>DidChangeConfiguration Notification
 
 A notification sent from the client to the server to signal the change of configuration settings.
@@ -1023,6 +1174,8 @@ interface DidOpenTextDocumentParams {
 	textDocument: TextDocumentItem;
 }
 ```
+
+_Registration Options_: `TextDocumentOptions`
 
 #### <a name="textDocument_didChange"></a>DidChangeTextDocument Notification
 
@@ -1069,7 +1222,23 @@ interface TextDocumentContentChangeEvent {
 }
 ```
 
-#### <a name="textDocument_willSave"></a>WillSaveTextDocument Notification
+_Registration Options_: `TextDocumentChangeOptions` defined as follows:
+
+```typescript
+/**
+ * Descibe options to be used when registered for text document change events.
+ */
+export interface TextDocumentChangeOptions extends TextDocumentOptions {
+	/**
+	 * How documents are synced to the server. See TextDocumentSyncKind.Full 
+	 * and TextDocumentSyncKindIncremental.
+	 */
+	syncKind: number;
+}
+```
+
+
+> #### New: <a name="textDocument_willSave"></a>WillSaveTextDocument Notification
 
 The document will save notification is sent from the client to the server before the document is actually saved.
 
@@ -1116,7 +1285,10 @@ export namespace TextDocumentSaveReason {
 }
 ```
 
-#### <a name="textDocument_willSaveWaitUntil"></a>WillSaveWaitUntilTextDocument Request
+_Registration Options_: `TextDocumentOptions`
+
+
+> #### New: <a name="textDocument_willSaveWaitUntil"></a>WillSaveWaitUntilTextDocument Request
 
 The document will save request is sent from the client to the server before the document is actually saved. The request can return an array of TextEdits which will be applied to the text document before it is saved. Please note that clients might drop results if computing the text edits took too long or if a server constantly fails on this request. This is done to keep the save fast and reliable.
 
@@ -1128,12 +1300,15 @@ _Response_:
 * result: `TextEdit[]`
 * error: code and message set in case an exception happens during the `willSaveWaitUntil` request.
 
+_Registration Options_: `TextDocumentOptions`
+
 #### <a name="textDocument_didSave"></a>DidSaveTextDocument Notification
 
 The document save notification is sent from the client to the server when the document was saved in the client.
 
 * method: 'textDocument/didSave'
 * params: `DidSaveTextDocumentParams` defined as follows:
+
 ```typescript
 interface DidSaveTextDocumentParams {
 	/**
@@ -1146,6 +1321,17 @@ interface DidSaveTextDocumentParams {
 	 * when the save notifcation was requested.
 	 */
 	text?: string;
+}
+```
+
+_Registration Options_: `TextDocumentSaveOptions` defined as follows:
+
+```typescript
+export interface TextDocumentSaveOptions extends TextDocumentOptions {
+	/**
+	 * The client is supposed to include the content on save.
+	 */
+	includeText?: boolean;
 }
 ```
 
@@ -1165,6 +1351,8 @@ interface DidCloseTextDocumentParams {
 	textDocument: TextDocumentIdentifier;
 }
 ```
+
+_Registration Options_: `TextDocumentOptions`
 
 #### <a name="workspace_didChangeWatchedFiles"></a>DidChangeWatchedFiles Notification
 
@@ -1354,6 +1542,23 @@ export namespace CompletionItemKind {
 ```
 * error: code and message set in case an exception happens during the completion request.
 
+_Registration Options_: `CompletionOptions` options defined as follows:
+
+```typescript
+export interface CompletionOptions extends TextDocumentOptions {
+	/**
+	 * The characters that trigger completion automatically.
+	 */
+	triggerCharacters?: string[];
+
+	/**
+	 * The server provides support to resolve additional
+	 * information for a completion item.
+	 */
+	resolveProvider?: boolean;
+}
+```
+
 #### <a name="completionItem_resolve"></a>Completion Item Resolve Request
 
 The request is sent from the client to the server to resolve additional information for a given completion item.
@@ -1412,6 +1617,8 @@ type MarkedString = string | { language: string; value: string };
 ```
 
 * error: code and message set in case an exception happens during the hover request.
+
+_Registration Options_: `TextDocumentOptions`
 
 #### <a name="textDocument_signatureHelp"></a>Signature Help Request
 
@@ -1492,6 +1699,18 @@ interface ParameterInformation {
 
 * error: code and message set in case an exception happens during the signature help request.
 
+_Registration Options_: `SignatureHelpOptions` defined as follows:
+
+```typescript
+export interface SignatureHelpOptions extends TextDocumentOptions {
+	/**
+	 * The characters that trigger signature help
+	 * automatically.
+	 */
+	triggerCharacters?: string[];
+}
+```
+
 #### <a name="textDocument_definition"></a>Goto Definition Request
 
 The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
@@ -1503,6 +1722,8 @@ _Request_
 _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[]
 * error: code and message set in case an exception happens during the definition request.
+
+_Registration Options_: `TextDocumentOptions`
 
 #### <a name="textDocument_references"></a>Find References Request
 
@@ -1527,6 +1748,8 @@ interface ReferenceContext {
 _Response_:
 * result: [`Location`](#location)[]
 * error: code and message set in case an exception happens during the reference request.
+
+_Registration Options_: `TextDocumentOptions`
 
 #### <a name="textDocument_documentHighlight"></a>Document Highlights Request
 
@@ -1584,6 +1807,7 @@ export namespace DocumentHighlightKind {
 
 * error: code and message set in case an exception happens during the document highlight request.
 
+_Registration Options_: `TextDocumentOptions`
 
 #### <a name="textDocument_documentSymbol"></a>Document Symbols Request
 
@@ -1657,6 +1881,8 @@ export namespace SymbolKind {
 
 * error: code and message set in case an exception happens during the document symbol request.
 
+_Registration Options_: `TextDocumentOptions`
+
 #### <a name="workspace_symbol"></a>Workspace Symbols Request
 
 The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
@@ -1679,6 +1905,8 @@ interface WorkspaceSymbolParams {
 _Response_
 * result: `SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
+
+_Registration Options_: void
 
 #### <a name="textDocument_codeAction"></a>Code Action Request
 
@@ -1707,8 +1935,7 @@ interface CodeActionParams {
 	 */
 	context: CodeActionContext;
 }
-```
-```typescript
+
 /**
  * Contains additional diagnostic information about the context in which
  * a code action is run.
@@ -1725,6 +1952,8 @@ _Response_
 * result: [`Command[]`](#command) defined as follows:
 * error: code and message set in case an exception happens during the code action request.
 
+_Registration Options_: `TextDocumentOptions`
+
 #### <a name="textDocument_codeLens"></a>Code Lens Request
 
 The code lens request is sent from the client to the server to compute code lenses for a given text document.
@@ -1732,6 +1961,7 @@ The code lens request is sent from the client to the server to compute code lens
 _Request_
 * method: 'textDocument/codeLens'
 * params: `CodeLensParams` defined as follows:
+
 ```typescript
 interface CodeLensParams {
 	/**
@@ -1743,6 +1973,7 @@ interface CodeLensParams {
 
 _Response_
 * result: `CodeLens[]` defined as follows:
+
 ```typescript
 /**
  * A code lens represents a command that should be shown along with
@@ -1770,6 +2001,17 @@ interface CodeLens {
 }
 ```
 * error: code and message set in case an exception happens during the code lens request.
+
+_Registration Options_: `CodeLensOptions` defined as follows:
+
+```typescript
+export interface CodeLensOptions extends TextDocumentOptions {
+	/**
+	 * Code lens has a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}
+```
 
 #### <a name="codeLens_resolve"></a>Code Lens Resolve Request
 
@@ -1801,7 +2043,8 @@ interface DocumentLinkParams {
 
 _Response_
 * result: An array of `DocumentLink`, or `null` or `undefined`.
-```
+
+```typescript
 /**
  * A document link is a range in a text document that links to an internal or external resource, like another
  * text document or a web site.
@@ -1818,6 +2061,17 @@ interface DocumentLink {
 }
 ```
 * error: code and message set in case an exception happens during the document link request.
+
+_Registration Options_: `DocumentLinkOptions` defined as follows:
+
+```typescript
+export interface DocumentLinkOptions extends TextDocumentOptions {
+	/**
+	 * Document links have a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}
+```
 
 #### <a name="documentLink_resolve"></a>Document Link Resolve Request
 
@@ -1850,8 +2104,7 @@ interface DocumentFormattingParams {
 	 */
 	options: FormattingOptions;
 }
-```
-```typescript
+
 /**
  * Value-object describing what options formatting should use.
  */
@@ -1877,13 +2130,16 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
+_Registration Options_: `TextDocumentOptions`
+
 #### <a name="textDocument_rangeFormatting"></a>Document Range Formatting Request
 
 The document range formatting request is sent from the client to the server to format a given range in a document.
 
 _Request_
 * method: 'textDocument/rangeFormatting',
-* params: `DocumentRangeFormattingParams` defined as follows
+* params: `DocumentRangeFormattingParams` defined as follows:
+
 ```typescript
 interface DocumentRangeFormattingParams {
 	/**
@@ -1907,13 +2163,16 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
+_Registration Options_: `TextDocumentOptions`
+
 #### <a name="textDocument_onTypeFormatting"></a>Document on Type Formatting Request
 
 The document on type formatting request is sent from the client to the server to format parts of the document during typing.
 
 _Request_
 * method: 'textDocument/onTypeFormatting'
-* params: `DocumentOnTypeFormattingParams` defined as follows
+* params: `DocumentOnTypeFormattingParams` defined as follows:
+
 ```typescript
 interface DocumentOnTypeFormattingParams {
 	/**
@@ -1942,6 +2201,20 @@ _Response_
 * result: [`TextEdit[]`](#textedit) describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
+_Registration Options_: `DocumentOnTypeFormattingOptions` defined as follows:
+
+```typescript
+export interface DocumentOnTypeFormattingOptions extends TextDocumentOptions {
+	/**
+	 * A character on which formatting should be triggered, like `}`.
+	 */
+	firstTriggerCharacter: string;
+	/**
+	 * More trigger characters.
+	 */
+	moreTriggerCharacter?: string[]
+}
+```
 #### <a name="textDocument_rename"></a>Rename Request
 
 The rename request is sent from the client to the server to perform a workspace-wide rename of a symbol.
@@ -1974,3 +2247,4 @@ _Response_
 * result: [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
 
+_Registration Options_: `TextDocumentOptions`
