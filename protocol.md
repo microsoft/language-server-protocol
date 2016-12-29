@@ -547,6 +547,10 @@ Responses for requests should be sent in the same order as the requests appear o
 
 How the server internally processes the requests is up to the server implementation. If the server decides to execute them in parallel and this produces correct result the server is free to do so. The server is also allowed to reorder requests and notification if the reordering doesn't affect correctness. 
 
+#### Server lifetime
+
+The current protocol specification defines that the lifetime of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process vise) and when to shutdown a server.
+
 #### <a name="initialize"></a>Initialize Request
 
 The initialize request is sent as the first request from the client to the server. If the server receives request or notification before the `initialize` request it should act as follows:
