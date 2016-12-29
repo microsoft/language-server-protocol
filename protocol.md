@@ -1,7 +1,5 @@
 # Language Server Protocol 
 
-# Language Server Protocol 
-
 This document describes version 3.0 of the language server protocol. Major goals of the 3.0 version are:
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
