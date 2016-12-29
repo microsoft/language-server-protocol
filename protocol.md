@@ -2,10 +2,16 @@
 
 # Language Server Protocol 
 
-This document describes version 3.0 of the language server protocol. Changes are marked with a change or new bar on the left hand side. Below is a summary of the major changes compared to version 2.x:
+This document describes version 3.0 of the language server protocol. Major goals of the 3.0 version are:
 
-* Support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request. Especially the support for the `textDocument/willSaveWaitUntil` request required some additions to the protocol. The major reason is that the `textDocument/willSaveWaitUntil` request is very time critical and it might block the save of files in the tool until it response has arrived at the tool. To support this in an optimal fashion the protocol now supports to register and unregister capabilities dynamically and not only statically during server initialization. 
-* The client now announces capabilities as well. This will allow servers to react to different clients (e.g. VS Code, Vim, Eclipse) which support different versions of the protocol. For the protocol we decided to go with so called feature flags instead of protocol version since versions needs to be mapped to features anyways.
+- add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
+- add support to expieriment with new features. The new `ClientCapabilities.experimential` section together with feature flags allow servers to provide experimental feature without 
+- servers can more dynamically react to client features. Capabilites can now be register and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
+- add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
+- add support for `textDocument/documentLink` request.
+- add feature flag to indicate if the client support the new `range`property on `CompletionItem`.
+
+An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node). The version is currently available at the next tag to allow for feedback. Plan is to release final 3.0 early 2017.
 
 The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
@@ -582,16 +588,6 @@ interface InitializeParams {
 ```
 Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilites` are defined as follows:
 
->**New**: `DynamicRegistrationCapabilites` define capabilities the editor / tool provides for dynamic feature registration.
-
-```typescript
-/**
- * Dynamic registration specific client capabilities
- */
-export interface DynamicRegistrationCapabilites {
-}
-```
-
 >**New**: `WorkspaceClientCapabilites` define capabilities the editor / tool provides on the workspace:
 
 ```typescript
@@ -604,6 +600,46 @@ export interface WorkspaceClientCapabilites {
 	 * to the workspace.
 	 */
 	applyEdit?: boolean;
+
+	/**
+	 * Capabilities specific to the `workspace/didChangeConfiguration` notification.
+	 */
+	didChangeConfiguration?: {
+		/**
+		 * Did change configuration notification supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `workspace/didChangeWatchedFiles` notification.
+	 */
+	didChangeWatchedFiles?: {
+		/**
+		 * Did change watched files notification supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `workspace/symbol` request.
+	 */
+	symbol?: {
+		/**
+		 * Symbol request supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `workspace/executeCommand` request.
+	 */
+	executeCommand?: {
+		/**
+		 * Execute command supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
 }
 ```
 
@@ -614,29 +650,182 @@ export interface WorkspaceClientCapabilites {
  * Text document specific client capabilities.
  */
 export interface TextDocumentClientCapabilities {
-	/**
-	 * The client supports sending will save notifications.
-	 */
-	willSaveNotification?: boolean;
 
-	/**
-	 * The client supports sending a will save request and
-	 * waits for a response providing text edits which will
-	 * be applied to the document before it is saved.
-	 */
-	willSaveWaitUntilRequest?: boolean;
-
-	/**
-	 * The client supports the following `CompletionItem` specific
-	 * capabilities.
-	 */
-	completionItem?: {
+	synchronization?: {
 		/**
-		 * Client supports the new range property in favour of the
-		 * deprecated `textEdit` property.
+		 * Whether text document synchronization supports dynamic registration.
 		 */
-		rangeProperty?: boolean;
+		dynamicRegistration?: boolean;
+
+		/**
+		 * The client supports sending will save notifications.
+		 */
+		willSave?: boolean;
+
+		/**
+		 * The client supports sending a will save request and
+		 * waits for a response providing text edits which will
+		 * be applied to the document before it is saved.
+		 */
+		willSaveWaitUntil?: boolean;
+
+		/**
+		 * The client supports did save notifications.
+		 */
+		didSave?: boolean;
 	}
+
+	/**
+	 * Capabilities specific to the `textDocument/completion`
+	 */
+	completion?: {
+		/**
+		 * Whether completion supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+
+		/**
+		 * The client supports the following `CompletionItem` specific
+		 * capabilities.
+		 */
+		completionItem?: {
+			/**
+			 * Client supports the new range property in favour of the
+			 * deprecated `textEdit` property.
+			 */
+			rangeProperty?: boolean;
+		}
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/hover`
+	 */
+	hover?: {
+		/**
+		 * Whether hover supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/signatureHelp`
+	 */
+	signatureHelp?: {
+		/**
+		 * Whether signature help supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/references`
+	 */
+	references?: {
+		/**
+		 * Whether references supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/documentHighlight`
+	 */
+	documentHighlight?: {
+		/**
+		 * Whether document highlight supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/documentSymbol`
+	 */
+	documentSymbol?: {
+		/**
+		 * Whether document symbol supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/formatting`
+	 */
+	formatting?: {
+		/**
+		 * Whether formatting supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/rangeFormatting`
+	 */
+	rangeFormatting?: {
+		/**
+		 * Whether range formatting supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/onTypeFormatting`
+	 */
+	onTypeFormatting?: {
+		/**
+		 * Whether on type formatting supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/definition`
+	 */
+	definition?: {
+		/**
+		 * Whether definition supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/codeAction`
+	 */
+	codeAction?: {
+		/**
+		 * Whether code action supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/codeLens`
+	 */
+	codeLens?: {
+		/**
+		 * Whether code lens supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/documentLink`
+	 */
+	documentLink?: {
+		/**
+		 * Whether document link supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/rename`
+	 */
+	rename?: {
+		/**
+		 * Whether rename supports dynamic registration.
+		 */
+		dynamicRegistration?: boolean;
+	};
 }
 ```
 
@@ -644,11 +833,6 @@ export interface TextDocumentClientCapabilities {
 
 ```typescript
 interface ClientCapabilities {
-	/**
-	 * The client supports dynamic feature registration.
-	 */
-	dynamicRegistration?: DynamicRegistrationCapabilites;
-
 	/**
 	 * Workspace specific client capabilities.
 	 */
