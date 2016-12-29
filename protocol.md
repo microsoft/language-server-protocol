@@ -8,6 +8,7 @@ This document describes version 3.0 of the language server protocol. Major goals
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
 - add feature flag to indicate if the client support the new `range`property on `CompletionItem`.
+- add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
 
 An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node). The version is currently available at the next tag to allow for feedback. Plan is to release final 3.0 early 2017.
 
@@ -540,6 +541,12 @@ This section documents the actual language server protocol. It uses the followin
 * a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section decribing the registration option if the request or notification supports dynamic capability registration.
 
+#### Request, Notification and response ordering
+
+Responses for requests should be sent in the same order as the requests appear on the server or client side. So for example if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it should first return the response for the `textDocument/completion` and then the reponse for `textDocument/signatureHelp`.
+
+How the server internally processes the requests is up to the server implementation. If the server decides to execute them in parallel and this produces correct result the server is free to do so. The server is also allowed to reorder requests and notification if the reordering doesn't affect correctness. 
+
 #### <a name="initialize"></a>Initialize Request
 
 The initialize request is sent as the first request from the client to the server. If the server receives request or notification before the `initialize` request it should act as follows:
@@ -565,8 +572,16 @@ interface InitializeParams {
 	/**
 	 * The rootPath of the workspace. Is null
 	 * if no folder is open.
+	 *
+	 * @deprecated in favour of rootUri.
 	 */
 	rootPath: string | null;
+
+	/**
+	 * The rootUri of the workspace. Is null if no
+	 * folder is open.
+	 */
+	rootUri: string | null;
 
 	/**
 	 * User provided initialization options.
