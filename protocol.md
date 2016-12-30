@@ -264,6 +264,14 @@ scheme     authority       path        query   fragment
 We also maintain a node module to parse a string into `scheme`, `authority`, `path`, `query`, and `fragment` URI components. The GitHub repository is [https://github.com/Microsoft/vscode-uri](https://github.com/Microsoft/vscode-uri) the npm module is [https://www.npmjs.com/package/vscode-uri](https://www.npmjs.com/package/vscode-uri).
 
 
+#### Text Documents
+
+The current protocol is talored for textual documents which content can be represented as a string. There is currently no support for binary documents. Positions inside a document (see Position definition below) are expressed as a zero-based line and character offset. To ensure that both client and server split the string into the same line representation the protocol specs the following end of line sequences: '\n', '\r\n' and '\r'.
+
+```typescript
+export const EOL: string[] = ['\n', '\r\n', '\r'];
+```
+
 #### Position
 
 Position in a text document expressed as zero-based line and character offset. A position is between two characters like an 'insert' cursor in a editor.
@@ -711,6 +719,12 @@ export interface TextDocumentClientCapabilities {
 			 * deprecated `textEdit` property.
 			 */
 			rangeProperty?: boolean;
+
+			/**
+			 * Client supports the new `TypedString` for the insertText
+			 * property. This adds supports for snippet strings.
+			 */
+			typedString?: boolean;
 		}
 	};
 
@@ -1841,14 +1855,17 @@ Where `MarkedString` is defined as follows:
 
 ```typescript
 /**
- * The marked string is rendered:
- * - as markdown if it is represented as a string
- * - as code block of the given langauge if it is represented as a pair of a language and a value
+ * MarkedString can be used to render human readable text. It is either a markdown string
+ * or a code-block that provides a language and a code snippet. The language identifier
+ * is sematically equal to the optional language identifier in fenced code blocks in GitHub
+ * issues. See https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting
  *
  * The pair of a language and a value is an equivalent to markdown:
  * ```${language}
  * ${value}
  * ```
+ *
+ * Note that markdown strings will be sanitized - that means html will be escaped.
  */
 type MarkedString = string | { language: string; value: string };
 ```
