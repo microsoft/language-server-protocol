@@ -566,7 +566,7 @@ The initialize request is sent as the first request from the client to the serve
 * for a request the respond should be errored with `code: -32002`. The message can be picked by the server. 
 * notifications should be dropped.
 
->**Updated**: During the `intialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
+>**Updated**: During the `initialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
 
 _Request_:
 * method: 'initialize'
