@@ -39,7 +39,7 @@ interface WorkspaceReferencesParams {
     /**
      * Metadata about the symbol that is being searched for.
      */
-    query: SymbolDescriptor;
+    query: Partial<SymbolDescriptor>;
 
     /**
      * An optional list of files to restrict the search to.
