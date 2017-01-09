@@ -1822,7 +1822,7 @@ export namespace CompletionItemKind {
 	export const Snippet = 15;
 	export const Color = 16;
 	export const File = 17;
-	export const Reference = 1;
+	export const Reference = 18;
 }
 ```
 * error: code and message set in case an exception happens during the completion request.
