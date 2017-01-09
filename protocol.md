@@ -1804,7 +1804,7 @@ interface CompletionItem {
 /**
  * The kind of a completion entry.
  */
-export namespace CompletionItemKind {
+namespace CompletionItemKind {
 	export const Text = 1;
 	export const Method = 2;
 	export const Function = 3;
