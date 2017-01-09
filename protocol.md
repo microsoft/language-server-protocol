@@ -3,11 +3,11 @@
 This document describes version 3.0 of the language server protocol. Major goals of the 3.0 version are:
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
-- add support to expieriment with new features. The new `ClientCapabilities.experimential` section together with feature flags allow servers to provide experimental feature without 
+- add support to experiment with new features. The new `ClientCapabilities.experimential` section together with feature flags allow servers to provide experimental feature without 
 - servers can more dynamically react to client features. Capabilites can now be register and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
-- add feature flag to indicate if the client support the new `range`property on `CompletionItem`.
+- add feature flag to indicate if the client support the new `range` property on `CompletionItem`.
 - add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
 
 An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node). The version is currently available at the next tag to allow for feedback. Plan is to release final 3.0 early 2017.
@@ -600,7 +600,7 @@ The initialize request is sent as the first request from the client to the serve
 * for a request the respond should be errored with `code: -32002`. The message can be picked by the server. 
 * notifications should be dropped.
 
->**Updated**: During the `intialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
+>**Updated**: During the `initialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
 
 _Request_:
 * method: 'initialize'
@@ -2077,7 +2077,7 @@ interface DocumentHighlight {
  */
 export namespace DocumentHighlightKind {
 	/**
-	 * A textual occurrance.
+	 * A textual occurrence.
 	 */
 	export const Text = 1;
 
