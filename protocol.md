@@ -3,7 +3,7 @@
 This document describes version 3.0 of the language server protocol. Major goals of the 3.0 version are:
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
-- add support to experiment with new features. The new `ClientCapabilities.experimential` section together with feature flags allow servers to provide experimental feature without 
+- add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental features.
 - servers can more dynamically react to client features. Capabilites can now be register and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
@@ -41,8 +41,8 @@ Workspace
 * :arrow_right: [workspace/didChangeConfiguration](#workspace_didChangeConfiguration)
 * :arrow_right: [workspace/didChangeWatchedFiles](#workspace_didChangeWatchedFiles)
 * :leftwards_arrow_with_hook: [workspace/symbol](#workspace_symbol)
-* >**New** :leftwards_arrow_with_hook: [workspace/executeCommand](#workspace_executeCommand)
-* >**New** :arrow_right_hook: [workspace/applyEdit](#workspace_applyEdit)
+* **New** :leftwards_arrow_with_hook: [workspace/executeCommand](#workspace_executeCommand)
+* **New** :arrow_right_hook: [workspace/applyEdit](#workspace_applyEdit)
 
 Document
 
@@ -2537,7 +2537,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="#workspace_executeCommand"></a>Execute a command
+#### <a name="workspace_executeCommand"></a>Execute a command
 
 The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases
 the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
@@ -2581,7 +2581,7 @@ export interface ExecuteCommandRegistrationOptions {
 }
 ```
 
-#### <a name="#workspace_ApplyEdit"></a>Applies a WorkspaceEdit
+#### <a name="workspace_applyEdit"></a>Applies a WorkspaceEdit
 
 The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side. 
 
