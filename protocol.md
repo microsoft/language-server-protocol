@@ -317,6 +317,40 @@ interface Location {
 }
 ```
 
+#### TypedString
+
+Represents a string that can either be a plain string value or a string that is interpreted as a snippet.
+
+```typescript
+namespace StringType {
+	/**
+	 * The strings is a normal string and will be inserted as is.
+	 */
+	export const Normal = 1;
+	/**
+	 * A snippet string is a template which allows to insert text
+	 * and to control the editor cursor when insertion happens.
+	 *
+	 * A snippet can define tab stops and placeholders with `$1`, `$2`
+	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+	 * the end of the snippet. Placeholders with equal identifiers are linked,
+	 * that is typing in one will update others too.
+	*/
+	export const Snippet = 2;
+}
+
+interface TypedString {
+	/**
+	 * The string type.
+	 */
+	type: number;
+	/**
+	 * The string value.
+	 */
+	value: string;
+}
+```
+
 #### Diagnostic
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
@@ -355,7 +389,7 @@ interface Diagnostic {
 The protocol currently supports the following diagnostic severities:
 
 ```typescript
-export namespace DiagnosticSeverity {
+namespace DiagnosticSeverity {
 	/**
 	 * Reports an error.
 	 */
@@ -1741,7 +1775,7 @@ interface CompletionItem {
 	 * A string that should be inserted a document when selecting
 	 * this completion. When `falsy` the label is used.
 	 */
-	insertText?: string;
+	insertText?: string | TypedString;
 	/**
 	 * An edit which is applied to a document when selecting
 	 * this completion. When an edit is provided the value of
