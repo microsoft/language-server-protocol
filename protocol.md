@@ -317,40 +317,6 @@ interface Location {
 }
 ```
 
-#### TypedString
-
-Represents a string that can either be a plain string value or a string that is interpreted as a snippet.
-
-```typescript
-namespace StringType {
-	/**
-	 * The strings is a normal string and will be inserted as is.
-	 */
-	export const Normal = 1;
-	/**
-	 * A snippet string is a template which allows to insert text
-	 * and to control the editor cursor when insertion happens.
-	 *
-	 * A snippet can define tab stops and placeholders with `$1`, `$2`
-	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
-	 * the end of the snippet. Placeholders with equal identifiers are linked,
-	 * that is typing in one will update others too.
-	*/
-	export const Snippet = 2;
-}
-
-interface TypedString {
-	/**
-	 * The string type.
-	 */
-	type: number;
-	/**
-	 * The string value.
-	 */
-	value: string;
-}
-```
-
 #### Diagnostic
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
@@ -749,16 +715,14 @@ export interface TextDocumentClientCapabilities {
 		 */
 		completionItem?: {
 			/**
-			 * Client supports the new range property in favour of the
-			 * deprecated `textEdit` property.
+			 * Client supports snippets as insert text.
+			 *
+			 * A snippet can define tab stops and placeholders with `$1`, `$2`
+			 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+			 * the end of the snippet. Placeholders with equal identifiers are linked,
+			 * that is typing in one will update others too.
 			 */
-			rangeProperty?: boolean;
-
-			/**
-			 * Client supports the new `TypedString` for the insertText
-			 * property. This adds supports for snippet strings.
-			 */
-			typedString?: boolean;
+			snippetSupport?: boolean;
 		}
 	};
 
@@ -1744,6 +1708,31 @@ interface CompletionList {
 	items: CompletionItem[];
 }
 
+/**
+ * Defines whether the insert text in a completion item should be interpreted as
+ * plain text or a snippet.
+ */
+namespace InsertTextFormat {
+	/**
+	 * The primary text to be inserted is treated as a plain string.
+	 */
+	export const PlainText = 1;
+
+	/**
+	 * The primary text to be inserted is treated as a snippet.
+	 *
+	 * A snippet can define tab stops and placeholders with `$1`, `$2`
+	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+	 * the end of the snippet. Placeholders with equal identifiers are linked,
+	 * that is typing in one will update others too.
+	 *
+	 * See also: https://github.com/Microsoft/vscode/blob/master/src/vs/editor/contrib/snippet/common/snippet.md
+	 */
+	export const Snippet = 2;
+}
+
+type InsertTextFormat = 1 | 2;
+
 interface CompletionItem {
 	/**
 	 * The label of this completion item. By default
@@ -1779,19 +1768,13 @@ interface CompletionItem {
 	 * A string that should be inserted a document when selecting
 	 * this completion. When `falsy` the label is used.
 	 */
-	insertText?: string | TypedString;
+	insertText?: string;
 	/**
-	 * A range of text that should be replaced by this completion item.
-	 *
-	 * Defaults to a range from the start of the current word to the current position.
-	 *
-	 * *Note:* The range must be a single line range and it must contain the position at which completion
-	 * has been requested.
+	 * The format of the insert text. The format applies to both the `insertText` property
+	 * and the `newText` property of a provided `textEdit`.
 	 */
-	range?: Range;
+	insertTextFormat?: InsertTextFormat;
 	/**
-	 * @deprecated in favour of `insertText` and `range`.
-	 *
 	 * An edit which is applied to a document when selecting this completion. When an edit is provided the value of
 	 * `insertText` and `range` is ignored.
 	 *
