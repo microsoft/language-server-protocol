@@ -1346,7 +1346,7 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
-> #### New: <a name="client_unregisterFeature"></a>Unregister Capability
+> #### New: <a name="client_unregisterCapability"></a>Unregister Capability
 
 The `client/unregisterCapability` request is sent from the server to the client to unregister a previously register capability.
 
@@ -2537,7 +2537,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="#workspace_executeCommand"></a>Execute a command
+#### <a name="workspace_executeCommand"></a>Execute a command
 
 The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases
 the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
@@ -2581,12 +2581,12 @@ export interface ExecuteCommandRegistrationOptions {
 }
 ```
 
-#### <a name="#workspace_ApplyEdit"></a>Applies a WorkspaceEdit
+#### <a name="workspace_ApplyEdit"></a>Applies a WorkspaceEdit
 
 The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side. 
 
 _Request_:
-* method: `workspace/applyEdit`
+* method: 'workspace/applyEdit'
 * params: `ApplyWorkspaceEditParams` defined as follows:
 
 ```typescript
