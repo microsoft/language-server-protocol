@@ -10,7 +10,7 @@ This document describes version 3.0 of the language server protocol. Major goals
 - add feature flag to indicate if the client support the new `range` property on `CompletionItem`.
 - add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
 
-An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node). The version is currently available at the next tag to allow for feedback. Plan is to release final 3.0 early 2017.
+An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
