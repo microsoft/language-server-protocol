@@ -1,9 +1,9 @@
-# Language Server Protocol 
+# Language Server Protocol
 
 This document describes version 3.0 of the language server protocol. Major goals of the 3.0 version are:
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
-- add support to experiment with new features. The new `ClientCapabilities.experimential` section together with feature flags allow servers to provide experimental feature without 
+- add support to experiment with new features. The new `ClientCapabilities.experimential` section together with feature flags allow servers to provide experimental feature without
 - servers can more dynamically react to client features. Capabilites can now be register and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
@@ -80,9 +80,9 @@ separated by a '\r\n'.
 
 The header part consists of header fields. Each header field is comprised of a name and a value,
 separated by ': ' (a colon and a space).
-Each header field is terminated by '\r\n'. 
+Each header field is terminated by '\r\n'.
 Considering the last header field and the overall header itself are each terminated with '\r\n',
-and that at least one header is mandatory, this means that two '\r\n' sequences always 
+and that at least one header is mandatory, this means that two '\r\n' sequences always
 immediately precede the content part of a message.
 
 Currently the following header fields are supported:
@@ -96,7 +96,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 ### Content Part
 
-Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf8', which is the only encoding supported right now. 
+Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf8', which is the only encoding supported right now.
 
 
 ### Example:
@@ -107,7 +107,7 @@ Content-Length: ...\r\n
 {
 	"jsonrpc": "2.0",
 	"id": 1,
-	"method": "textDocument/didOpen", 
+	"method": "textDocument/didOpen",
 	"params": {
 		...
 	}
@@ -126,7 +126,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### RequestMessage 
+#### RequestMessage
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -224,7 +224,7 @@ interface NotificationMessage extends Message {
 #### <a name="cancelRequest"></a> Cancellation Support
 
 The base protocol offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
- 
+
 _Notification_:
 * method: '$/cancelRequest'
 * params: `CancelParams` defined as follows:
@@ -263,6 +263,11 @@ scheme     authority       path        query   fragment
 
 We also maintain a node module to parse a string into `scheme`, `authority`, `path`, `query`, and `fragment` URI components. The GitHub repository is [https://github.com/Microsoft/vscode-uri](https://github.com/Microsoft/vscode-uri) the npm module is [https://www.npmjs.com/package/vscode-uri](https://www.npmjs.com/package/vscode-uri).
 
+Many of the interfaces contain fields that correspond to the URI of a document. For clarity, the type of such a field is declared as a `DocumentUri`. Over the wire, it will still be transferred as a string, but this guarantees that the contents of that string can be parsed as a valid URI.
+
+```typescript
+type DocumentUri = string;
+```
 
 #### Text Documents
 
@@ -312,7 +317,7 @@ interface Range {
 Represents a location inside a resource, such as a line inside a text file.
 ```typescript
 interface Location {
-	uri: string;
+	uri: DocumentUri;
 	range: Range;
 }
 ```
@@ -428,7 +433,7 @@ interface WorkspaceEdit {
 	/**
 	 * Holds changes to existing resources.
 	 */
-	changes: { [uri: string]: TextEdit[]; };
+	changes: { [uri: DocumentUri]: TextEdit[]; };
 }
 ```
 
@@ -440,7 +445,7 @@ interface TextDocumentIdentifier {
 	/**
 	 * The text document's URI.
 	 */
-	uri: string;
+	uri: DocumentUri;
 }
 ```
 
@@ -453,7 +458,7 @@ interface TextDocumentItem {
 	/**
 	 * The text document's URI.
 	 */
-	uri: string;
+	uri: DocumentUri;
 
 	/**
 	 * The text document's language identifier.
@@ -553,7 +558,7 @@ This section documents the actual language server protocol. It uses the followin
 
 Responses for requests should be sent in the same order as the requests appear on the server or client side. So for example if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it should first return the response for the `textDocument/completion` and then the reponse for `textDocument/signatureHelp`.
 
-How the server internally processes the requests is up to the server implementation. If the server decides to execute them in parallel and this produces correct result the server is free to do so. The server is also allowed to reorder requests and notification if the reordering doesn't affect correctness. 
+How the server internally processes the requests is up to the server implementation. If the server decides to execute them in parallel and this produces correct result the server is free to do so. The server is also allowed to reorder requests and notification if the reordering doesn't affect correctness.
 
 #### Server lifetime
 
@@ -595,7 +600,7 @@ interface InitializeParams {
 	 * The rootUri of the workspace. Is null if no
 	 * folder is open.
 	 */
-	rootUri: string | null;
+	rootUri: DocumentUri | null;
 
 	/**
 	 * User provided initialization options.
@@ -610,7 +615,7 @@ interface InitializeParams {
 	/**
 	 * The initial trace setting. If omitted trace is disabled ('off').
 	 */
-	trace?: 'off' | 'messages' | 'verbose';	
+	trace?: 'off' | 'messages' | 'verbose';
 }
 ```
 Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilites` are defined as follows:
@@ -1487,7 +1492,7 @@ _Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follo
  */
 export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
-	 * How documents are synced to the server. See TextDocumentSyncKind.Full 
+	 * How documents are synced to the server. See TextDocumentSyncKind.Full
 	 * and TextDocumentSyncKindIncremental.
 	 */
 	syncKind: number;
@@ -1637,7 +1642,7 @@ interface FileEvent {
 	/**
 	 * The file's URI.
 	 */
-	uri: string;
+	uri: DocumentUri;
 	/**
 	 * The change type.
 	 */
@@ -1676,7 +1681,7 @@ interface PublishDiagnosticsParams {
 	/**
 	 * The URI for which diagnostic information is reported.
 	 */
-	uri: string;
+	uri: DocumentUri;
 
 	/**
 	 * An array of diagnostic information items.
@@ -1880,9 +1885,9 @@ interface Hover {
 	 * The hover's content
 	 */
 	contents: MarkedString | MarkedString[];
-	
+
 	/**
-	 * An optional range is a range inside a text document 
+	 * An optional range is a range inside a text document
 	 * that is used to visualize a hover, e.g. by changing the background color.
 	 */
 	range?: Range;
@@ -1934,12 +1939,12 @@ interface SignatureHelp {
 	 * One or more signatures.
 	 */
 	signatures: SignatureInformation[];
-	
+
 	/**
 	 * The active signature.
 	 */
 	activeSignature?: number;
-	
+
 	/**
 	 * The active parameter of the active signature.
 	 */
@@ -1957,13 +1962,13 @@ interface SignatureInformation {
 	 * the UI.
 	 */
 	label: string;
-	
+
 	/**
 	 * The human-readable doc-comment of this signature. Will be shown
 	 * in the UI but can be omitted.
 	 */
 	documentation?: string;
-	
+
 	/**
 	 * The parameters of this signature.
 	 */
@@ -1980,7 +1985,7 @@ interface ParameterInformation {
 	 * the UI.
 	 */
 	label: string;
-	
+
 	/**
 	 * The human-readable doc-comment of this parameter. Will be shown
 	 * in the UI but can be omitted.
@@ -2046,7 +2051,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 #### <a name="textDocument_documentHighlight"></a>Document Highlights Request
 
 The document highlight request is sent from the client to the server to resolve a document highlights for a given text document position.
-For programming languages this usually highlights all references to the symbol scoped to this file. However we kept 'textDocument/documentHighlight' 
+For programming languages this usually highlights all references to the symbol scoped to this file. However we kept 'textDocument/documentHighlight'
 and 'textDocument/references' separate requests since the first one is allowed to be more fuzzy. Symbol matches usually have a `DocumentHighlightKind`
 of `Read` or `Write` whereas fuzzy or textual matches use `Text`as the kind.
 
@@ -2062,7 +2067,7 @@ _Response_:
  * A document highlight is a range inside a text document which deserves
  * special attention. Usually a document highlight is visualized by changing
  * the background color of its range.
- * 
+ *
  */
 interface DocumentHighlight {
 	/**
@@ -2216,12 +2221,12 @@ interface CodeActionParams {
 	 * The document in which the command was invoked.
 	 */
 	textDocument: TextDocumentIdentifier;
-	
+
 	/**
 	 * The range for which the command was invoked.
 	 */
 	range: Range;
-	
+
 	/**
 	 * Context carrying additional information.
 	 */
@@ -2284,7 +2289,7 @@ interface CodeLens {
 	 * The command this code lens represents.
 	 */
 	command?: Command;
-	
+
 	/**
 	 * A data entry field that is preserved on a code lens item between
 	 * a code lens and a code lens resolve request.
@@ -2349,7 +2354,7 @@ interface DocumentLink {
 	/**
 	 * The uri this link points to.
 	 */
-	target: string;
+	target: DocumentUri;
 }
 ```
 * error: code and message set in case an exception happens during the document link request.
@@ -2481,7 +2486,7 @@ interface DocumentOnTypeFormattingParams {
 	 * The character that has been typed.
 	 */
 	ch: string;
-	
+
 	/**
 	 * The format options.
 	 */
@@ -2587,7 +2592,7 @@ export interface ExecuteCommandRegistrationOptions {
 
 #### <a name="#workspace_ApplyEdit"></a>Applies a WorkspaceEdit
 
-The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side. 
+The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
 
 _Request_:
 * method: `workspace/applyEdit`
