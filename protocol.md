@@ -7,7 +7,6 @@ This document describes version 3.0 of the language server protocol. Major goals
 - servers can more dynamically react to client features. Capabilites can now be register and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
-- add feature flag to indicate if the client support the new `range` property on `CompletionItem`.
 - add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
 
 An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
@@ -1785,7 +1784,7 @@ interface CompletionItem {
 	insertTextFormat?: InsertTextFormat;
 	/**
 	 * An edit which is applied to a document when selecting this completion. When an edit is provided the value of
-	 * `insertText` and `range` is ignored.
+	 * `insertText` is ignored.
 	 *
 	 * *Note:* The range of the edit must be a single line range and it must contain the position at which completion
 	 * has been requested.
