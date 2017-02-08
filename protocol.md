@@ -593,11 +593,12 @@ interface InitializeParams {
 	 *
 	 * @deprecated in favour of rootUri.
 	 */
-	rootPath: string | null;
+	rootPath?: string | null;
 
 	/**
 	 * The rootUri of the workspace. Is null if no
-	 * folder is open.
+	 * folder is open. If both `rootPath` and `rootUri` are set
+	 * `rootUri` wins.
 	 */
 	rootUri: DocumentUri | null;
 
