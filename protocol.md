@@ -23,6 +23,7 @@ General
 * :leftwards_arrow_with_hook: [shutdown](#shutdown)
 * :arrow_right: [exit](#exit)
 * :arrow_right: [$/cancelRequest](#cancelRequest)
+* :arrow_left: [$/partialResult](#partialResult)
 
 Window
 
@@ -237,6 +238,37 @@ interface CancelParams {
 ```
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel.
+
+#### <a name="partialResult"></a> Streaming Support
+
+When a language server or client is able to provide partial information before having the final result,
+it can send `$/partialResult` notifications to return parts of the result.
+
+_Notification_:
+* method: '$/partialResult'
+* params: `PartialResultParams` defined as follows:
+```typescript
+interface PartialResultParams {
+	/**
+	 * The request id to provide parts of the result for
+	 */
+	id: number | string;
+
+	/**
+	 * A JSON Patch that represents updates to the partial result as specified in RFC6902
+	 * https://tools.ietf.org/html/rfc6902
+	 */
+	path: JSONPatch;
+}
+```
+
+The receiver can listen for partial result notifications with the request ID and use the provided JSON patches to build up a result.
+The JSON Patch can contain every possible
+It is free to do whatever it wants with the partial result.
+The object is indicated as complete by the final response to the request, which should still contain the final result for BC.
+The result is _not_ required to conform to the result interface while still being built.
+For example, a language server might first return an array of several `Location`s with just the URI set and then fill out the ranges with patches.
+Applying every patch should result in the same result as send in the final response.
 
 ## Language Server Protocol
 
