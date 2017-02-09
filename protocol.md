@@ -2339,7 +2339,7 @@ interface DocumentLinkParams {
 ```
 
 _Response_:
-* result: An array of `DocumentLink`, or `null` or `undefined`.
+* result: An array of `DocumentLink`, or `null`.
 
 ```typescript
 /**
@@ -2352,9 +2352,10 @@ interface DocumentLink {
 	 */
 	range: Range;
 	/**
-	 * The uri this link points to.
+	 * The uri this link points to. If missing the text document used in the request
+	 * is the `target`.
 	 */
-	target: DocumentUri;
+	target?: DocumentUri;
 }
 ```
 * error: code and message set in case an exception happens during the document link request.
