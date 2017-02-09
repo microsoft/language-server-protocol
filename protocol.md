@@ -2352,8 +2352,7 @@ interface DocumentLink {
 	 */
 	range: Range;
 	/**
-	 * The uri this link points to. If missing the text document used in the request
-	 * is the `target`.
+	 * The uri this link points to. If missing a resolve request is sent later.
 	 */
 	target?: DocumentUri;
 }
