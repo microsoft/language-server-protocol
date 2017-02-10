@@ -243,6 +243,7 @@ A request that got canceled still needs to return from the server and send a res
 
 When a language server or client is able to provide partial information before having the final result,
 it can send `$/partialResult` notifications to return parts of the result.
+Support for this method is indicated by the `streaming` capability in both `ClientCapabilities` and `ServerCapabilities`.
 
 _Notification_:
 * method: '$/partialResult'
@@ -258,17 +259,16 @@ interface PartialResultParams {
 	 * A JSON Patch that represents updates to the partial result as specified in RFC6902
 	 * https://tools.ietf.org/html/rfc6902
 	 */
-	path: JSONPatch;
+	patch: JSONPatch;
 }
 ```
 
 The receiver can listen for partial result notifications with the request ID and use the provided JSON patches to build up a result.
-The JSON Patch can contain every possible
-It is free to do whatever it wants with the partial result.
-The object is indicated as complete by the final response to the request, which should still contain the final result for BC.
 The result is _not_ required to conform to the result interface while still being built.
 For example, a language server might first return an array of several `Location`s with just the URI set and then fill out the ranges with patches.
-Applying every patch should result in the same result as send in the final response.
+The result is indicated as complete by the final response to the request, which can contain just `null` as value for `result` if the client expressed support for streaming through `ClientCapabilities`.
+The same applies for requests sent from the server to the client (see `ServerCapabilities`).
+A result built by applying all patches sent through `$/partialResult` should eventually yield in the exact same result as a non-streamed response result.
 
 ## Language Server Protocol
 
@@ -902,6 +902,13 @@ export interface TextDocumentClientCapabilities {
 ```typescript
 interface ClientCapabilities {
 	/**
+	 * The client supports $/partialResult notifications.
+	 * If true, the server is allowed to let the result in the final response be null
+	 * and only send the result through $/partialResult
+	 */
+	streaming?: boolean;
+
+	/**
 	 * Workspace specific client capabilities.
 	 */
 	workspace?: WorkspaceClientCapabilites;
@@ -1087,6 +1094,12 @@ export interface TextDocumentSyncOptions {
 }
 
 interface ServerCapabilities {
+	/**
+	 * The server supports $/partialResult notifications.
+	 * If true, the client is allowed to let the result in the final response be null
+	 * and only send the result through $/partialResult
+	 */
+	streaming?: boolean;
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure defining each notification or
 	 * for backwards compatibility the TextDocumentSyncKind number.
