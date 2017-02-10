@@ -902,9 +902,8 @@ export interface TextDocumentClientCapabilities {
 ```typescript
 interface ClientCapabilities {
 	/**
-	 * The client supports $/partialResult notifications.
-	 * If true, the server is allowed to let the result in the final response be null
-	 * and only send the result through $/partialResult
+	 * The client supports receiving the result solely through $/partialResult notifications for requests from the client to the server.
+	 * If true, the server is allowed to let the result in the final response be null.
 	 */
 	streaming?: boolean;
 
@@ -1095,9 +1094,8 @@ export interface TextDocumentSyncOptions {
 
 interface ServerCapabilities {
 	/**
-	 * The server supports $/partialResult notifications.
-	 * If true, the client is allowed to let the result in the final response be null
-	 * and only send the result through $/partialResult
+	 * The server supports receiving results solely through $/partialResult notifications for requests from the server to the client.
+	 * If true, the client is allowed to let the result in the final response be null.
 	 */
 	streaming?: boolean;
 	/**
