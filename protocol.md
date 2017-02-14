@@ -903,7 +903,7 @@ export interface TextDocumentClientCapabilities {
 interface ClientCapabilities {
 	/**
 	 * The client supports receiving the result solely through $/partialResult notifications for requests from the client to the server.
-	 * If true, the server is allowed to let the result in the final response be null.
+	 * If true, the server should send all data through $/partialResult and send null as the result in the final response.
 	 */
 	streaming?: boolean;
 
@@ -1095,7 +1095,7 @@ export interface TextDocumentSyncOptions {
 interface ServerCapabilities {
 	/**
 	 * The server supports receiving results solely through $/partialResult notifications for requests from the server to the client.
-	 * If true, the client is allowed to let the result in the final response be null.
+	 * If true, the client should send all data through $/partialResult and send null as the result in the final response.
 	 */
 	streaming?: boolean;
 	/**
