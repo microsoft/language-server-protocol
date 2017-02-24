@@ -265,7 +265,7 @@ interface PartialResultParams {
 
 The receiver can listen for partial result notifications with the request ID and use the provided JSON patches to build up a result.
 The result is _not_ required to conform to the result interface while still being built.
-For example, a language server might first return an array of several `Location`s with just the URI set and then fill out the ranges with patches.
+For example, a language server might first return an array of several `SymbolInformation`s with just the name and kind set and then fill out the locations with patches.
 The result is indicated as complete by the final response to the request, which, assuming the client expressed support for streaming through `ClientCapabilities`, does not contain any data itself (`result` must be `null`).
 The same applies for requests sent from the server to the client (see `ServerCapabilities`).
 A result built by applying all patches sent through `$/partialResult` should eventually yield in the exact same result as a non-streamed response result.
