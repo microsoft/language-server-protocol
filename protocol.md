@@ -266,7 +266,8 @@ interface PartialResultParams {
 The receiver can listen for partial result notifications with the request ID and use the provided JSON patches to build up a result.
 The result is _not_ required to conform to the result interface while still being built.
 For example, a language server might first return an array of several `SymbolInformation`s with just the name and kind set and then fill out the locations with patches.
-The result is indicated as complete by the final response to the request, which, assuming the client expressed support for streaming through `ClientCapabilities`, does not contain any data itself (`result` must be `null`).
+The result is indicated as complete by the final response to the request.
+If a server sent at least one partial result notification for a request, the client has to ignore the result of the final response (e.g. it can be `null`).
 The same applies for requests sent from the server to the client (see `ServerCapabilities`).
 A result built by applying all patches sent through `$/partialResult` should eventually yield in the exact same result as a non-streamed response result.
 
@@ -903,7 +904,6 @@ export interface TextDocumentClientCapabilities {
 interface ClientCapabilities {
 	/**
 	 * The client supports receiving the result solely through $/partialResult notifications for requests from the client to the server.
-	 * If true, the server should send all data through $/partialResult and send null as the result in the final response.
 	 */
 	streaming?: boolean;
 
@@ -1095,7 +1095,6 @@ export interface TextDocumentSyncOptions {
 interface ServerCapabilities {
 	/**
 	 * The server supports receiving results solely through $/partialResult notifications for requests from the server to the client.
-	 * If true, the client should send all data through $/partialResult and send null as the result in the final response.
 	 */
 	streaming?: boolean;
 	/**
