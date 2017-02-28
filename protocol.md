@@ -18,7 +18,8 @@ The 1.x version of this document can be found [here](https://github.com/Microsof
 
 ### 02/28/2017
 
-Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
+* Make the `WorkspaceEdit` changes backwards compatible.
+* Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
 
 ## Messages overview
 
@@ -449,14 +450,21 @@ export interface TextDocumentEdit {
 
 #### WorkspaceEdit
 
-> **Breaking** A workspace edit represents changes to many resources managed in the workspace. A workspace edit now consists of an array of `TextDocumentEdit`s each describing a change to a single text document. 
+> **Changed** A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If documentChanges are present they are preferred over `changes` if the client can handle versioned document edits.
 
 ```typescript
-interface WorkspaceEdit {
+export interface WorkspaceEdit {
 	/**
 	 * Holds changes to existing resources.
 	 */
-	changes: TextDocumentEdit[];
+	changes?: { [uri: string]: TextEdit[]; };
+
+	/**
+	 * An array of `TextDocumentEdit`s to express changes to specific a specific
+	 * version of a text document. Whether a client supports versioned document
+	 * edits is expressed via `WorkspaceClientCapabilites.versionedWorkspaceEdit`.
+	 */
+	documentChanges?: TextDocumentEdit[];
 }
 ```
 
