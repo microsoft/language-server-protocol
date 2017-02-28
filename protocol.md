@@ -14,6 +14,12 @@ An implementation for node of the 3.0 version of the protocol can be found [here
 The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
 
+## Change Log
+
+### 02/28/2017
+
+Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
+
 ## Messages overview
 
 General
@@ -423,16 +429,34 @@ interface TextEdit {
 
 If n `TextEdit`s are applied to a text document all text edits describe changes to the initial document version. Execution wise text edits should applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
 
+>#### New: TextDocumentEdit
+
+Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied.
+
+```typescript
+export interface TextDocumentEdit {
+	/**
+	 * The text document to change.
+	 */
+	textDocument: VersionedTextDocumentIdentifier;
+
+	/**
+	 * The edits to be applied.
+	 */
+	edits: TextEdit[];
+}
+```
+
 #### WorkspaceEdit
 
-A workspace edit represents changes to many resources managed in the workspace.
+> **Breaking** A workspace edit represents changes to many resources managed in the workspace. A workspace edit now consists of an array of `TextDocumentEdit`s each describing a change to a single text document. 
 
- ```typescript
+```typescript
 interface WorkspaceEdit {
 	/**
 	 * Holds changes to existing resources.
 	 */
-	changes: { [uri: DocumentUri]: TextEdit[]; };
+	changes: TextDocumentEdit[];
 }
 ```
 
