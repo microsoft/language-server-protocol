@@ -666,6 +666,16 @@ export interface WorkspaceClientCapabilites {
 	applyEdit?: boolean;
 
 	/**
+	 * Capabilities specific to `WorkspaceEdit`s
+	 */
+	workspaceEdit?: {
+		/**
+		 * The client supports versioned document changes in `WorkspaceEdit`s
+		 */
+		documentChanges?: boolean;
+	};
+
+	/**
 	 * Capabilities specific to the `workspace/didChangeConfiguration` notification.
 	 */
 	didChangeConfiguration?: {
