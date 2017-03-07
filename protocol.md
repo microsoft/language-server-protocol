@@ -664,8 +664,8 @@ Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClien
  */
 export interface WorkspaceClientCapabilites {
 	/**
-	 * The client supports applying batch edits
-	 * to the workspace.
+	 * The client supports applying batch edits to the workspace by supporting
+	 * the request 'workspace/applyEdit'
 	 */
 	applyEdit?: boolean;
 
@@ -911,7 +911,9 @@ export interface TextDocumentClientCapabilities {
 }
 ```
 
-> **New**: `ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability.
+> **New**: `ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
+
+Client capabilities got introduced with the version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients can't not opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. ope, changed and close notifications).
 
 ```typescript
 interface ClientCapabilities {
