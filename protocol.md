@@ -165,7 +165,7 @@ interface ResponseMessage extends Message {
 	/**
 	 * The request id.
 	 */
-	id: number | string;
+	id: number | string | null;
 
 	/**
 	 * The result of a request. This can be omitted in
