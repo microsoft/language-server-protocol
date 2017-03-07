@@ -1183,7 +1183,7 @@ The initialized notification is sent from the client to the server after the cli
 
 _Notification_:
 * method: 'initialized'
-* params: undefined
+* params: void
 
 #### <a name="shutdown"></a>Shutdown Request
 
@@ -1191,10 +1191,10 @@ The shutdown request is sent from the client to the server. It asks the server t
 
 _Request_:
 * method: 'shutdown'
-* params: undefined
+* params: void
 
 _Response_:
-* result: undefined
+* result: null
 * error: code and message set in case an exception happens during shutdown request.
 
 #### <a name="exit"></a>Exit Notification
@@ -1204,7 +1204,7 @@ The server should exit with `success` code 0 if the shutdown request has been re
 
 _Notification_:
 * method: 'exit'
-* params: undefined
+* params: void
 
 #### <a name="window_showMessage"></a>ShowMessage Notification
 
