@@ -1526,7 +1526,7 @@ interface TextDocumentContentChangeEvent {
 	rangeLength?: number;
 
 	/**
-	 * The new text of the document.
+	 * The new text of the range/document.
 	 */
 	text: string;
 }
