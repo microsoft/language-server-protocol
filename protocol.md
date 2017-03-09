@@ -158,7 +158,7 @@ interface RequestMessage extends Message {
 
 #### Response Message
 
-Response Message sent as a result of a request.
+Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request. 
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -198,6 +198,7 @@ interface ResponseError<D> {
 }
 
 export namespace ErrorCodes {
+	// Defined by JSON RPC
 	export const ParseError: number = -32700;
 	export const InvalidRequest: number = -32600;
 	export const MethodNotFound: number = -32601;
@@ -207,6 +208,9 @@ export namespace ErrorCodes {
 	export const serverErrorEnd: number = -32000;
 	export const ServerNotInitialized: number = -32002;
 	export const UnknownErrorCode: number = -32001;
+
+	// Defined by the protocol.
+	export const RequestCancelled: number = -32800;
 }
 ```
 #### Notification Message
@@ -247,7 +251,7 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the requests returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
 ## Language Server Protocol
 
