@@ -1489,7 +1489,7 @@ interface DidOpenTextDocumentParams {
 }
 ```
 
-_Registration Options_: `TextDocumentRegistrationsOptions`
+_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a name="textDocument_didChange"></a>DidChangeTextDocument Notification
 
