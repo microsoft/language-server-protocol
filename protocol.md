@@ -1,19 +1,25 @@
-# Language Server Protocol 
+# Language Server Protocol
 
 This document describes version 3.0 of the language server protocol. Major goals of the 3.0 version are:
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
 - add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental features.
-- servers can more dynamically react to client features. Capabilites can now be register and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
+- servers can more dynamically react to client features. Capabilites can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
-- add feature flag to indicate if the client support the new `range` property on `CompletionItem`.
 - add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
 
-An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node). The version is currently available at the next tag to allow for feedback. Plan is to release final 3.0 early 2017.
+An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
+
+## Change Log
+
+### 02/28/2017
+
+* Make the `WorkspaceEdit` changes backwards compatible.
+* Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
 
 ## Messages overview
 
@@ -80,9 +86,9 @@ separated by a '\r\n'.
 
 The header part consists of header fields. Each header field is comprised of a name and a value,
 separated by ': ' (a colon and a space).
-Each header field is terminated by '\r\n'. 
+Each header field is terminated by '\r\n'.
 Considering the last header field and the overall header itself are each terminated with '\r\n',
-and that at least one header is mandatory, this means that two '\r\n' sequences always 
+and that at least one header is mandatory, this means that two '\r\n' sequences always
 immediately precede the content part of a message.
 
 Currently the following header fields are supported:
@@ -96,7 +102,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 ### Content Part
 
-Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf8', which is the only encoding supported right now. 
+Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf8', which is the only encoding supported right now.
 
 
 ### Example:
@@ -107,7 +113,7 @@ Content-Length: ...\r\n
 {
 	"jsonrpc": "2.0",
 	"id": 1,
-	"method": "textDocument/didOpen", 
+	"method": "textDocument/didOpen",
 	"params": {
 		...
 	}
@@ -126,7 +132,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### RequestMessage 
+#### RequestMessage
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -152,14 +158,14 @@ interface RequestMessage extends Message {
 
 #### Response Message
 
-Response Message sent as a result of a request.
+Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request. 
 
 ```typescript
 interface ResponseMessage extends Message {
 	/**
 	 * The request id.
 	 */
-	id: number | string;
+	id: number | string | null;
 
 	/**
 	 * The result of a request. This can be omitted in
@@ -192,6 +198,7 @@ interface ResponseError<D> {
 }
 
 export namespace ErrorCodes {
+	// Defined by JSON RPC
 	export const ParseError: number = -32700;
 	export const InvalidRequest: number = -32600;
 	export const MethodNotFound: number = -32601;
@@ -201,6 +208,9 @@ export namespace ErrorCodes {
 	export const serverErrorEnd: number = -32000;
 	export const ServerNotInitialized: number = -32002;
 	export const UnknownErrorCode: number = -32001;
+
+	// Defined by the protocol.
+	export const RequestCancelled: number = -32800;
 }
 ```
 #### Notification Message
@@ -221,10 +231,14 @@ interface NotificationMessage extends Message {
 }
 ```
 
+#### $ Notifications and Requests
+
+Notification and requests ids starting with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest'. If a server or client receives notifications or requests starting with '$/' it is free to ignore them if they are unknown. 
+
 #### <a name="cancelRequest"></a> Cancellation Support
 
 The base protocol offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
- 
+
 _Notification_:
 * method: '$/cancelRequest'
 * params: `CancelParams` defined as follows:
@@ -237,7 +251,7 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the requests returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
 ## Language Server Protocol
 
@@ -263,6 +277,11 @@ scheme     authority       path        query   fragment
 
 We also maintain a node module to parse a string into `scheme`, `authority`, `path`, `query`, and `fragment` URI components. The GitHub repository is [https://github.com/Microsoft/vscode-uri](https://github.com/Microsoft/vscode-uri) the npm module is [https://www.npmjs.com/package/vscode-uri](https://www.npmjs.com/package/vscode-uri).
 
+Many of the interfaces contain fields that correspond to the URI of a document. For clarity, the type of such a field is declared as a `DocumentUri`. Over the wire, it will still be transferred as a string, but this guarantees that the contents of that string can be parsed as a valid URI.
+
+```typescript
+type DocumentUri = string;
+```
 
 #### Text Documents
 
@@ -312,42 +331,8 @@ interface Range {
 Represents a location inside a resource, such as a line inside a text file.
 ```typescript
 interface Location {
-	uri: string;
+	uri: DocumentUri;
 	range: Range;
-}
-```
-
-#### TypedString
-
-Represents a string that can either be a plain string value or a string that is interpreted as a snippet.
-
-```typescript
-namespace StringType {
-	/**
-	 * The strings is a normal string and will be inserted as is.
-	 */
-	export const Normal = 1;
-	/**
-	 * A snippet string is a template which allows to insert text
-	 * and to control the editor cursor when insertion happens.
-	 *
-	 * A snippet can define tab stops and placeholders with `$1`, `$2`
-	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
-	 * the end of the snippet. Placeholders with equal identifiers are linked,
-	 * that is typing in one will update others too.
-	*/
-	export const Snippet = 2;
-}
-
-interface TypedString {
-	/**
-	 * The string type.
-	 */
-	type: number;
-	/**
-	 * The string value.
-	 */
-	value: string;
 }
 ```
 
@@ -453,16 +438,41 @@ interface TextEdit {
 
 If n `TextEdit`s are applied to a text document all text edits describe changes to the initial document version. Execution wise text edits should applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
 
+>#### New: TextDocumentEdit
+
+Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied.
+
+```typescript
+export interface TextDocumentEdit {
+	/**
+	 * The text document to change.
+	 */
+	textDocument: VersionedTextDocumentIdentifier;
+
+	/**
+	 * The edits to be applied.
+	 */
+	edits: TextEdit[];
+}
+```
+
 #### WorkspaceEdit
 
-A workspace edit represents changes to many resources managed in the workspace.
+> **Changed** A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If documentChanges are present they are preferred over `changes` if the client can handle versioned document edits.
 
- ```typescript
-interface WorkspaceEdit {
+```typescript
+export interface WorkspaceEdit {
 	/**
 	 * Holds changes to existing resources.
 	 */
-	changes: { [uri: string]: TextEdit[]; };
+	changes?: { [uri: string]: TextEdit[]; };
+
+	/**
+	 * An array of `TextDocumentEdit`s to express changes to specific a specific
+	 * version of a text document. Whether a client supports versioned document
+	 * edits is expressed via `WorkspaceClientCapabilites.versionedWorkspaceEdit`.
+	 */
+	documentChanges?: TextDocumentEdit[];
 }
 ```
 
@@ -474,7 +484,7 @@ interface TextDocumentIdentifier {
 	/**
 	 * The text document's URI.
 	 */
-	uri: string;
+	uri: DocumentUri;
 }
 ```
 
@@ -487,7 +497,7 @@ interface TextDocumentItem {
 	/**
 	 * The text document's URI.
 	 */
-	uri: string;
+	uri: DocumentUri;
 
 	/**
 	 * The text document's language identifier.
@@ -587,7 +597,7 @@ This section documents the actual language server protocol. It uses the followin
 
 Responses for requests should be sent in the same order as the requests appear on the server or client side. So for example if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it should first return the response for the `textDocument/completion` and then the reponse for `textDocument/signatureHelp`.
 
-How the server internally processes the requests is up to the server implementation. If the server decides to execute them in parallel and this produces correct result the server is free to do so. The server is also allowed to reorder requests and notification if the reordering doesn't affect correctness. 
+How the server internally processes the requests is up to the server implementation. If the server decides to execute them in parallel and this produces correct result the server is free to do so. The server is also allowed to reorder requests and notification if the reordering doesn't affect correctness.
 
 #### Server lifetime
 
@@ -597,8 +607,10 @@ The current protocol specification defines that the lifetime of a server is mana
 
 The initialize request is sent as the first request from the client to the server. If the server receives request or notification before the `initialize` request it should act as follows:
 
-* for a request the respond should be errored with `code: -32002`. The message can be picked by the server. 
-* notifications should be dropped.
+* for a request the respond should be errored with `code: -32002`. The message can be picked by the server.
+* notifications should be dropped, except for the exit notification. This will allow the exit a server without an initialize request.
+
+Until the server has responded to the `initialize` request with an `InitializeResult` the client must not sent any additional requests or notifications to the server. 
 
 >**Updated**: During the `initialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
 
@@ -621,13 +633,14 @@ interface InitializeParams {
 	 *
 	 * @deprecated in favour of rootUri.
 	 */
-	rootPath: string | null;
+	rootPath?: string | null;
 
 	/**
 	 * The rootUri of the workspace. Is null if no
-	 * folder is open.
+	 * folder is open. If both `rootPath` and `rootUri` are set
+	 * `rootUri` wins.
 	 */
-	rootUri: string | null;
+	rootUri: DocumentUri | null;
 
 	/**
 	 * User provided initialization options.
@@ -642,7 +655,7 @@ interface InitializeParams {
 	/**
 	 * The initial trace setting. If omitted trace is disabled ('off').
 	 */
-	trace?: 'off' | 'messages' | 'verbose';	
+	trace?: 'off' | 'messages' | 'verbose';
 }
 ```
 Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilites` are defined as follows:
@@ -655,10 +668,20 @@ Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClien
  */
 export interface WorkspaceClientCapabilites {
 	/**
-	 * The client supports applying batch edits
-	 * to the workspace.
+	 * The client supports applying batch edits to the workspace by supporting
+	 * the request 'workspace/applyEdit'
 	 */
 	applyEdit?: boolean;
+
+	/**
+	 * Capabilities specific to `WorkspaceEdit`s
+	 */
+	workspaceEdit?: {
+		/**
+		 * The client supports versioned document changes in `WorkspaceEdit`s
+		 */
+		documentChanges?: boolean;
+	};
 
 	/**
 	 * Capabilities specific to the `workspace/didChangeConfiguration` notification.
@@ -749,16 +772,14 @@ export interface TextDocumentClientCapabilities {
 		 */
 		completionItem?: {
 			/**
-			 * Client supports the new range property in favour of the
-			 * deprecated `textEdit` property.
+			 * Client supports snippets as insert text.
+			 *
+			 * A snippet can define tab stops and placeholders with `$1`, `$2`
+			 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+			 * the end of the snippet. Placeholders with equal identifiers are linked,
+			 * that is typing in one will update others too.
 			 */
-			rangeProperty?: boolean;
-
-			/**
-			 * Client supports the new `TypedString` for the insertText
-			 * property. This adds supports for snippet strings.
-			 */
-			typedString?: boolean;
+			snippetSupport?: boolean;
 		}
 	};
 
@@ -894,7 +915,9 @@ export interface TextDocumentClientCapabilities {
 }
 ```
 
-> **New**: `ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development.
+> **New**: `ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
+
+Client capabilities got introduced with the version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
 ```typescript
 interface ClientCapabilities {
@@ -933,6 +956,8 @@ interface InitializeResult {
 export namespace InitializeError {
 	/**
 	 * If the protocol version provided by the client can't be handled by the server.
+	 * @deprecated This initialize error got replaced by client capabilities. There is
+	 * no version handshake in version 3.0x
 	 */
 	export const unknownProtocolVersion: number = 1;
 }
@@ -1151,6 +1176,10 @@ interface ServerCapabilities {
 	 * The server provides execute command support.
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
+	/**
+	 * Experimental server capabilities.
+	 */
+	experimental?: any;
 }
 ```
 
@@ -1160,7 +1189,7 @@ The initialized notification is sent from the client to the server after the cli
 
 _Notification_:
 * method: 'initialized'
-* params: undefined
+* params: void
 
 #### <a name="shutdown"></a>Shutdown Request
 
@@ -1168,10 +1197,10 @@ The shutdown request is sent from the client to the server. It asks the server t
 
 _Request_:
 * method: 'shutdown'
-* params: undefined
+* params: void
 
 _Response_:
-* result: undefined
+* result: null
 * error: code and message set in case an exception happens during shutdown request.
 
 #### <a name="exit"></a>Exit Notification
@@ -1181,7 +1210,7 @@ The server should exit with `success` code 0 if the shutdown request has been re
 
 _Notification_:
 * method: 'exit'
-* params: undefined
+* params: void
 
 #### <a name="window_showMessage"></a>ShowMessage Notification
 
@@ -1378,7 +1407,7 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
-> #### New: <a name="client_unregisterFeature"></a>Unregister Capability
+> #### New: <a name="client_unregisterCapability"></a>Unregister Capability
 
 The `client/unregisterCapability` request is sent from the server to the client to unregister a previously register capability.
 
@@ -1501,7 +1530,7 @@ interface TextDocumentContentChangeEvent {
 	rangeLength?: number;
 
 	/**
-	 * The new text of the document.
+	 * The new text of the range/document.
 	 */
 	text: string;
 }
@@ -1515,7 +1544,7 @@ _Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follo
  */
 export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
-	 * How documents are synced to the server. See TextDocumentSyncKind.Full 
+	 * How documents are synced to the server. See TextDocumentSyncKind.Full
 	 * and TextDocumentSyncKindIncremental.
 	 */
 	syncKind: number;
@@ -1665,7 +1694,7 @@ interface FileEvent {
 	/**
 	 * The file's URI.
 	 */
-	uri: string;
+	uri: DocumentUri;
 	/**
 	 * The change type.
 	 */
@@ -1704,7 +1733,7 @@ interface PublishDiagnosticsParams {
 	/**
 	 * The URI for which diagnostic information is reported.
 	 */
-	uri: string;
+	uri: DocumentUri;
 
 	/**
 	 * An array of diagnostic information items.
@@ -1739,6 +1768,31 @@ interface CompletionList {
 	 */
 	items: CompletionItem[];
 }
+
+/**
+ * Defines whether the insert text in a completion item should be interpreted as
+ * plain text or a snippet.
+ */
+namespace InsertTextFormat {
+	/**
+	 * The primary text to be inserted is treated as a plain string.
+	 */
+	export const PlainText = 1;
+
+	/**
+	 * The primary text to be inserted is treated as a snippet.
+	 *
+	 * A snippet can define tab stops and placeholders with `$1`, `$2`
+	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+	 * the end of the snippet. Placeholders with equal identifiers are linked,
+	 * that is typing in one will update others too.
+	 *
+	 * See also: https://github.com/Microsoft/vscode/blob/master/src/vs/editor/contrib/snippet/common/snippet.md
+	 */
+	export const Snippet = 2;
+}
+
+type InsertTextFormat = 1 | 2;
 
 interface CompletionItem {
 	/**
@@ -1775,11 +1829,18 @@ interface CompletionItem {
 	 * A string that should be inserted a document when selecting
 	 * this completion. When `falsy` the label is used.
 	 */
-	insertText?: string | TypedString;
+	insertText?: string;
 	/**
-	 * An edit which is applied to a document when selecting
-	 * this completion. When an edit is provided the value of
-	 * insertText is ignored.
+	 * The format of the insert text. The format applies to both the `insertText` property
+	 * and the `newText` property of a provided `textEdit`.
+	 */
+	insertTextFormat?: InsertTextFormat;
+	/**
+	 * An edit which is applied to a document when selecting this completion. When an edit is provided the value of
+	 * `insertText` is ignored.
+	 *
+	 * *Note:* The range of the edit must be a single line range and it must contain the position at which completion
+	 * has been requested.
 	 */
 	textEdit?: TextEdit;
 	/**
@@ -1876,9 +1937,9 @@ interface Hover {
 	 * The hover's content
 	 */
 	contents: MarkedString | MarkedString[];
-	
+
 	/**
-	 * An optional range is a range inside a text document 
+	 * An optional range is a range inside a text document
 	 * that is used to visualize a hover, e.g. by changing the background color.
 	 */
 	range?: Range;
@@ -1930,12 +1991,12 @@ interface SignatureHelp {
 	 * One or more signatures.
 	 */
 	signatures: SignatureInformation[];
-	
+
 	/**
 	 * The active signature.
 	 */
 	activeSignature?: number;
-	
+
 	/**
 	 * The active parameter of the active signature.
 	 */
@@ -1953,13 +2014,13 @@ interface SignatureInformation {
 	 * the UI.
 	 */
 	label: string;
-	
+
 	/**
 	 * The human-readable doc-comment of this signature. Will be shown
 	 * in the UI but can be omitted.
 	 */
 	documentation?: string;
-	
+
 	/**
 	 * The parameters of this signature.
 	 */
@@ -1976,7 +2037,7 @@ interface ParameterInformation {
 	 * the UI.
 	 */
 	label: string;
-	
+
 	/**
 	 * The human-readable doc-comment of this parameter. Will be shown
 	 * in the UI but can be omitted.
@@ -2042,7 +2103,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 #### <a name="textDocument_documentHighlight"></a>Document Highlights Request
 
 The document highlight request is sent from the client to the server to resolve a document highlights for a given text document position.
-For programming languages this usually highlights all references to the symbol scoped to this file. However we kept 'textDocument/documentHighlight' 
+For programming languages this usually highlights all references to the symbol scoped to this file. However we kept 'textDocument/documentHighlight'
 and 'textDocument/references' separate requests since the first one is allowed to be more fuzzy. Symbol matches usually have a `DocumentHighlightKind`
 of `Read` or `Write` whereas fuzzy or textual matches use `Text`as the kind.
 
@@ -2058,7 +2119,7 @@ _Response_:
  * A document highlight is a range inside a text document which deserves
  * special attention. Usually a document highlight is visualized by changing
  * the background color of its range.
- * 
+ *
  */
 interface DocumentHighlight {
 	/**
@@ -2212,12 +2273,12 @@ interface CodeActionParams {
 	 * The document in which the command was invoked.
 	 */
 	textDocument: TextDocumentIdentifier;
-	
+
 	/**
 	 * The range for which the command was invoked.
 	 */
 	range: Range;
-	
+
 	/**
 	 * Context carrying additional information.
 	 */
@@ -2280,7 +2341,7 @@ interface CodeLens {
 	 * The command this code lens represents.
 	 */
 	command?: Command;
-	
+
 	/**
 	 * A data entry field that is preserved on a code lens item between
 	 * a code lens and a code lens resolve request.
@@ -2330,7 +2391,7 @@ interface DocumentLinkParams {
 ```
 
 _Response_:
-* result: An array of `DocumentLink`, or `null` or `undefined`.
+* result: An array of `DocumentLink`, or `null`.
 
 ```typescript
 /**
@@ -2343,9 +2404,9 @@ interface DocumentLink {
 	 */
 	range: Range;
 	/**
-	 * The uri this link points to.
+	 * The uri this link points to. If missing a resolve request is sent later.
 	 */
-	target: string;
+	target?: DocumentUri;
 }
 ```
 * error: code and message set in case an exception happens during the document link request.
@@ -2477,7 +2538,7 @@ interface DocumentOnTypeFormattingParams {
 	 * The character that has been typed.
 	 */
 	ch: string;
-	
+
 	/**
 	 * The format options.
 	 */
@@ -2583,10 +2644,10 @@ export interface ExecuteCommandRegistrationOptions {
 
 #### <a name="workspace_applyEdit"></a>Applies a WorkspaceEdit
 
-The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side. 
+The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
 
 _Request_:
-* method: `workspace/applyEdit`
+* method: 'workspace/applyEdit'
 * params: `ApplyWorkspaceEditParams` defined as follows:
 
 ```typescript
