@@ -436,7 +436,7 @@ interface TextEdit {
 }
 ```
 
-If n `TextEdit`s are applied to a text document all text edits describe changes to the initial document version. Execution wise text edits should applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
+If multiple `TextEdit`s are applied to a text document, all text edits describe changes made to the initial document version. Execution wise text edits should applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
 
 >#### New: TextDocumentEdit
 
@@ -578,7 +578,6 @@ export interface DocumentFilter {
 ```
 
 A document selector is the combination of one or many document filters.
-
 
 ```typescript
 export type DocumentSelector = DocumentFilter[];
