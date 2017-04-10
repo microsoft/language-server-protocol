@@ -1993,12 +1993,21 @@ interface SignatureHelp {
 	signatures: SignatureInformation[];
 
 	/**
-	 * The active signature.
+	 * The active signature. If omitted the value defaults to zero.
+	 * Whenever possible implementors should make an active decision
+	 * about the active signature and shouldn't default this to zero.
+	 * In future version of the protocol this property might become
+	 * mandantory to better express this.
 	 */
 	activeSignature?: number;
 
 	/**
-	 * The active parameter of the active signature.
+	 * The active parameter of the active signature. If omitted the 
+	 * value defaults to zero. Whenever possible implementors should 
+	 * make an active decision about the active parameter and shouldn't 
+	 * default this to zero.
+	 * In future version of the protocol this property might become
+	 * mandantory to better express this.
 	 */
 	activeParameter?: number;
 }
