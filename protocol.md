@@ -96,13 +96,13 @@ Currently the following header fields are supported:
 | Header Field Name | Value Type  | Description |
 |:------------------|:------------|:------------|
 | Content-Length    | number      | The length of the content part in bytes. This header is required. |
-| Content-Type      | string      | The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf8 |
+| Content-Type      | string      | The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf-8 |
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
 ### Content Part
 
-Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf8', which is the only encoding supported right now.
+Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf-8', which is the only encoding supported right now.
 
 
 ### Example:
