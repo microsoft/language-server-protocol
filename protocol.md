@@ -102,7 +102,8 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 ### Content Part
 
-Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to 'utf-8', which is the only encoding supported right now.
+Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. 
+> **Changed** Prior version of the protocol used the string constant `utf8` which is not a correct encoding according constant (see [here](http://www.iana.org/assignments/character-sets/character-sets.xhtml)). For backwards compatibility a client or server should treat the string `utf8` as `utf-8`.
 
 
 ### Example:
