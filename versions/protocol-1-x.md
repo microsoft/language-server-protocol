@@ -591,7 +591,7 @@ enum MessageType {
 }
 ```
 
-#### ShowMessage Notification
+#### LogMessage Notification
 
 The log message notification is send from the server to the client to ask the client to log a particular message.
 
