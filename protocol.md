@@ -2272,7 +2272,7 @@ _Registration Options_: void
 
 #### <a name="textDocument_codeAction"></a>Code Action Request
 
-The code action request is sent from the client to the server to compute commands for a given text document and range. The request is triggered when the user moves the cursor into a problem marker in the editor or presses the lightbulb associated with a marker.
+The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code.
 
 _Request_:
 * method: 'textDocument/codeAction'
