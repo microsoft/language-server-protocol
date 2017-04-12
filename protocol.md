@@ -1186,7 +1186,7 @@ interface ServerCapabilities {
 
 >#### New: <a name="initialized"></a>Initialized Notification
 
-The initialized notification is sent from the client to the server after the client is fully initialized and is able to listen to arbritary requests and notifications sent from the server.
+The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification for example to dynamically register capabilities.
 
 _Notification_:
 * method: 'initialized'
