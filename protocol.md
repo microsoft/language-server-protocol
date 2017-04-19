@@ -771,6 +771,15 @@ export interface TextDocumentClientCapabilities {
 		 */
 		completionItem?: {
 			/**
+			 * Client supports automatic indentation of multi-line insert text.
+			 *
+			 * A client that supports this provides the option for a multi-line insert text
+			 * (either snippet or plaintext) to have the indentation of all lines from the second
+			 * line onwards be adjusted relative the first line.
+			 */
+			relativeIndentationSupport?: boolean;
+
+			/**
 			 * Client supports snippets as insert text.
 			 *
 			 * A snippet can define tab stops and placeholders with `$1`, `$2`
@@ -1835,6 +1844,27 @@ interface CompletionItem {
 	 * and the `newText` property of a provided `textEdit`.
 	 */
 	insertTextFormat?: InsertTextFormat;
+	/**
+	 * Whether automatic relative indentation fixes are applied to a multi-line insert text.
+	 * This option applies to both the `insertText` property and the `newText` property
+	 * of a provided `textEdit`.
+	 *
+	 * Relative indentation fixes are applied as follows:
+	 *
+	 * If the insert text contains no line breaks, no fixes are applied.
+	 *
+	 * Otherwise, define the reference line as the line in document where the insert text
+	 * is being applied.
+	 *
+	 * The reference indent is determined by taking all the whitespace
+	 * characters from the front of the reference line upto either the first non-whitespace
+	 * character; or the start position where the insert text is being applied. Whichever
+	 * of these two yields the shortest string is taken as the reference indent.
+	 *
+	 * To adjust indentation, the reference indent is then inserted into the insert text right
+	 * after every line break.
+	 */
+	relativeIndent?: boolean
 	/**
 	 * An edit which is applied to a document when selecting this completion. When an edit is provided the value of
 	 * `insertText` is ignored.
