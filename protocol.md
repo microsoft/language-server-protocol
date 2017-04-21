@@ -1189,7 +1189,12 @@ The initialized notification is sent from the client to the server after the cli
 
 _Notification_:
 * method: 'initialized'
-* params: void
+* params: `InitializedParams` defined as follows:
+
+```typescript
+interface InitializedParams {
+}
+```
 
 #### <a name="shutdown"></a>Shutdown Request
 
