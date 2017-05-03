@@ -1343,7 +1343,7 @@ Where `RegistrationParams` are defined as follows:
 
 ```typescript
 /**
- * General paramters to regsiter for a capability.
+ * General paramters to register for a capability.
  */
 export interface Registration {
 	/**
