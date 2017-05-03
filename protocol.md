@@ -1409,7 +1409,7 @@ _Response_:
 
 > #### New: <a name="client_unregisterCapability"></a>Unregister Capability
 
-The `client/unregisterCapability` request is sent from the server to the client to unregister a previously register capability.
+The `client/unregisterCapability` request is sent from the server to the client to unregister a previously registered capability.
 
 _Request_:
 * method: 'client/unregisterCapability'
