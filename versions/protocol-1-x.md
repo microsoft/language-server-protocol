@@ -1,7 +1,7 @@
 # VSCode Client / Server Language Protocol
 
-This document descibes the 1.x version of the client server protocol. It defines the client server protocol used by VSCode to talk to out of process language servers. 
-The repository contains a VSCode protocol definition so that other can implement the protocol in language like C#, C++, Java or Python.
+This document descibes the 1.x version of the client server protocol. It defines the client server protocol used by VSCode to talk to process language servers. 
+The repository contains a VSCode protocol definition so that others can implement the protocol in languages like C#, C++, Java, Python or Elixir.
 
 ## Base Protocol
 
@@ -10,13 +10,13 @@ separated by a '\r\n'.
 
 ### Header Part
 
-The header part consist of header fields. Header fields are separated from each other by '\r\n'. The last header
+The header part consists of header fields. Header fields are separated from each other by '\r\n'. The last header
 field needs to be terminated with '\r\n' as well. Currently the following header fields are supported:
 
 | Header File Name | Value Type  | Description |
 |:-----------------|:------------|:------------|
 | Content-Length   | number      | The length of the content part |
-| Content-Type     | string      | The mime typ of the content part. Defaults to application/vscode-jsonrpc; charset=utf8 |
+| Content-Type     | string      | The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf8 |
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
@@ -54,7 +54,7 @@ interface Message {
 ```
 #### RequestMessage 
 
-A request message to decribe a request between the client and the server. Every processed request must send a response back to the sender of the request.
+A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
 ```typescript
 interface RequestMessage extends Message {
@@ -78,7 +78,7 @@ interface RequestMessage extends Message {
 
 #### Response Message
 
-Response Message send as a result of a request. 
+Response Message sent as a result of a request. 
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -147,7 +147,7 @@ interface NotificationMessage extends Message {
 
 ## Language Server Protocol
 
-The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This sections starts descibing basic JSON structures used in the protocol. The document uses TypeScript interfaces to describe these. Bases on the basic JSON structures the actual requests with their responses and the notifications are described.
+The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing basic JSON structures used in the protocol. The document uses TypeScript interfaces to describe these. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
 
 ### Basic JSON Structures
 
@@ -338,8 +338,8 @@ interface TextDocumentPosition extends TextDocumentIdentifier {
 This section documents the actual language server protocol. It uses the following format:
 
 * a header describing the request
-* a _Request_ section describing the format of the request send. The method is a string identifying the request the params are documented using a TypeScript interface
-* a _Response_ section describing the format of the response. The result item descibes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they arn't listed here.
+* a _Request_ section describing the format of the request send. The method is a string identifying the request and the params are documented using a TypeScript interface
+* a _Response_ section describing the format of the response. The result item descibes the returned data in the case of a success. The error.data describes the returned data in the case of an error. Please remember that in the case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. The cases where the server can decide on these values freely are not listed here.
 
 #### Initialize Request
 
@@ -384,7 +384,7 @@ export InitializeResult {
 interface InitializeError {
 	/**
 	 * Indicates whether the client should retry to send the
-	 * initilize request after showing the message provided
+	 * initialize request after showing the message provided
 	 * in the ResponseError.
 	 */
 	retry: boolean;
@@ -593,7 +593,7 @@ enum MessageType {
 
 #### LogMessage Notification
 
-The log message notification is send from the server to the client to ask the client to log a particular message.
+The log message notification is sent from the server to the client to ask the client to log a particular message.
 
 _Notification_:
 * method: 'window/logMessage'
@@ -615,7 +615,7 @@ Where type is defined as above.
 
 #### DidChangeConfiguration Notification
 
-A notification send from the client to the server to signal the change of configuration settings.
+A notification sent from the client to the server to signal the change of configuration settings.
 
 _Notification_:
 * method: 'workspace/didChangeConfiguration',
@@ -741,7 +741,7 @@ interface FileEvent {
 
 #### PublishDiagnostics Notification
 
-Diagnostics notification are sent from the server to the client to signal results of validation runs.
+The diagnostics notification is sent from the server to the client to signal results of validation runs.
 
 _Notification_
 * method: 'textDocument/publishDiagnostics'
@@ -762,7 +762,7 @@ interface PublishDiagnosticsParams {
 
 #### Completion Request
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing complete completion items is expensive servers can additional provide a handler for the resolve completion item request. This request is send when a completion item is selected in the user interface.
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing complete completion items is expensive, servers can additionally provide a handler for the resolve completion item request. This request is sent when a completion item is selected in the user interface.
 
 _Request_
 * method: 'textDocument/completion'
@@ -973,7 +973,7 @@ interface ParameterInformation {
 
 #### Goto Definition
 
-The goto definition request is sent from the client to the server to to resolve the defintion location of a symbol at a given text document position.
+The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 
 _Request_
 * method: 'textDocument/definition'
@@ -1007,7 +1007,7 @@ interface ReferenceContext {
 
 #### Document Highlights
 
-The document highlight request is sent from the client to the server to to resolve a document highlights for a given text document position.
+The document highlight request is sent from the client to the server to resolve the document highlights for a given text document position.
 
 _Request_
 * method: 'textDocument/documentHighlight'
