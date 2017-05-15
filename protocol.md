@@ -36,6 +36,7 @@ Window
 * :arrow_left: [window/showMessage](#window_showMessage)
 * :arrow_right_hook: [window/showMessageRequest](#window_showMessageRequest)
 * :arrow_left: [window/logMessage](#window_logMessage)
+* **New** :arrow_left: [window/progress](#window_progress)
 * :arrow_left: [telemetry/event](#telemetry_event)
 
 >**New** Client
@@ -611,7 +612,7 @@ The initialize request is sent as the first request from the client to the serve
 
 Until the server has responded to the `initialize` request with an `InitializeResult` the client must not sent any additional requests or notifications to the server. 
 
->**Updated**: During the `initialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
+>**Updated**: During the `initialize` request the server is allowed to sent the notifications `window/showMessage`, `window/logMessage`, `window/progress` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
 
 _Request_:
 * method: 'initialize'
@@ -1322,6 +1323,47 @@ interface LogMessageParams {
 ```
 
 Where type is defined as above.
+
+#### <a name="window_progress"></a>Progress Notification
+
+The progress notification is sent from the server to the client to ask the client to indicate progress.
+
+_Notification_:
+* method: 'window/progress'
+* params: `ProgressParams` defined as follows:
+
+```typescript
+interface ProgressParams {
+  /**
+   * A unique identifier to associate multiple progress notifications with the same progress.
+   */
+  id: string;
+
+  /**
+   * The title of the progress.
+   * This should be the same for all ProgressParams with the same id.
+   */
+  title: string;
+
+  /**
+   * Optional progress message to display.
+   * If unset, the previous progress message (if any) is still valid.
+   */
+  message?: string;
+
+  /**
+   * Optional progress percentage to display.
+   * If unset, the previous progress percentage (if any) is still valid.
+   */
+  percentage?: number;
+
+  /**
+   * Set to true on the final progress update.
+   * No more progress notifications with the same ID should be sent.
+   */
+  done?: boolean;
+}
+```
 
 #### <a name="telemetry_event"></a>Telemetry Notification
 
