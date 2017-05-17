@@ -505,7 +505,7 @@ interface TextDocumentItem {
 	languageId: string;
 
 	/**
-	 * The version number of this document (it will strictly increase after each
+	 * The version number of this document (it will increase after each
 	 * change, including undo/redo).
 	 */
 	version: number;
