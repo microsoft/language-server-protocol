@@ -468,9 +468,10 @@ export interface WorkspaceEdit {
 	changes?: { [uri: string]: TextEdit[]; };
 
 	/**
-	 * An array of `TextDocumentEdit`s to express changes to specific a specific
-	 * version of a text document. Whether a client supports versioned document
-	 * edits is expressed via `WorkspaceClientCapabilites.versionedWorkspaceEdit`.
+	 * An array of `TextDocumentEdit`s to express changes to n different text documents
+	 * where each text document edit addresses a specific version of a text document. 
+	 * Whether a client supports versioned document edits is expressed via 
+	 * `WorkspaceClientCapabilites.versionedWorkspaceEdit`.
 	 */
 	documentChanges?: TextDocumentEdit[];
 }
