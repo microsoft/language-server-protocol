@@ -285,7 +285,7 @@ type DocumentUri = string;
 
 #### Text Documents
 
-The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A positions inside a document (see Position definition below) is expressed as a zero-based line and character offset. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
+The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
 ```typescript
 export const EOL: string[] = ['\n', '\r\n', '\r'];
