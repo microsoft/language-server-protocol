@@ -4,7 +4,7 @@ This document describes version 3.0 of the language server protocol. Major goals
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
 - add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediatelly.
-- servers can more dynamically react to client features. Capabilites can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
+- servers can more dynamically react to client features. Capabilities can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
 - add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
@@ -471,7 +471,7 @@ export interface WorkspaceEdit {
 	 * An array of `TextDocumentEdit`s to express changes to n different text documents
 	 * where each text document edit addresses a specific version of a text document. 
 	 * Whether a client supports versioned document edits is expressed via 
-	 * `WorkspaceClientCapabilites.workspaceEdit.documentChanges`.
+	 * `WorkspaceClientCapabilities.workspaceEdit.documentChanges`.
 	 */
 	documentChanges?: TextDocumentEdit[];
 }
@@ -658,15 +658,15 @@ interface InitializeParams {
 	trace?: 'off' | 'messages' | 'verbose';
 }
 ```
-Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilites` are defined as follows:
+Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilities` are defined as follows:
 
->**New**: `WorkspaceClientCapabilites` define capabilities the editor / tool provides on the workspace:
+>**New**: `WorkspaceClientCapabilities` define capabilities the editor / tool provides on the workspace:
 
 ```typescript
 /**
  * Workspace specific client capabilities.
  */
-export interface WorkspaceClientCapabilites {
+export interface WorkspaceClientCapabilities {
 	/**
 	 * The client supports applying batch edits to the workspace by supporting
 	 * the request 'workspace/applyEdit'
@@ -924,7 +924,7 @@ interface ClientCapabilities {
 	/**
 	 * Workspace specific client capabilities.
 	 */
-	workspace?: WorkspaceClientCapabilites;
+	workspace?: WorkspaceClientCapabilities;
 
 	/**
 	 * Text document specific client capabilities.
