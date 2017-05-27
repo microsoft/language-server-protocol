@@ -394,6 +394,24 @@ namespace DiagnosticSeverity {
 }
 ```
 
+#### ComplexDiagnostic
+
+Represents a complex diagnostic, such as a compiler complex error or warning. ComplexDiagnostic objects are only valid in the scope of a resource.
+
+```typescript
+interface ComplexDiagnostic {
+	/**
+	 * A valuable diagnostic
+	 */
+	mainDiagnostic: Diagnostic;
+
+	/**
+	 * An array of helpful, but less valuable diagnostics
+	 */
+	slaveDiagnostics: Diagnostic[];
+}
+```
+
 #### Command
 
 Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identified by a string identifier. The protocol currently doesn't specify a set of well-known commands. So executing a command requires some tool extension code.
@@ -1740,6 +1758,11 @@ interface PublishDiagnosticsParams {
 	 * An array of diagnostic information items.
 	 */
 	diagnostics: Diagnostic[];
+
+	/**
+	 * An array of complex diagnostic information items.
+	 */
+	complexDiagnostics: Diagnostic[];
 }
 ```
 
