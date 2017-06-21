@@ -1089,7 +1089,7 @@ export interface TextDocumentSyncOptions {
 	 */
 	openClose?: boolean;
 	/**
-	 * Change notificatins are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
 	 * and TextDocumentSyncKindIncremental.
 	 */
 	change?: number;
@@ -2587,7 +2587,7 @@ _Request_:
 ```typescript
 interface RenameParams {
 	/**
-	 * The document to format.
+	 * The document to rename.
 	 */
 	textDocument: TextDocumentIdentifier;
 
