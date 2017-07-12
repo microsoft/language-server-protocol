@@ -601,7 +601,7 @@ How the server internally processes the requests is up to the server implementat
 
 #### Server lifetime
 
-The current protocol specification defines that the lifetime of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process vise) and when to shutdown a server.
+The current protocol specification defines that the lifetime of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
 #### <a name="initialize"></a>Initialize Request
 
