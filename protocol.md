@@ -4,7 +4,7 @@ This document describes version 3.0 of the language server protocol. Major goals
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
 - add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediatelly.
-- servers can more dynamically react to client features. Capabilites can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
+- servers can more dynamically react to client features. Capabilities can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
 - add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
@@ -285,7 +285,7 @@ type DocumentUri = string;
 
 #### Text Documents
 
-The current protocol is talored for textual documents which content can be represented as a string. There is currently no support for binary documents. Positions inside a document (see Position definition below) are expressed as a zero-based line and character offset. To ensure that both client and server split the string into the same line representation the protocol specs the following end of line sequences: '\n', '\r\n' and '\r'.
+The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
 ```typescript
 export const EOL: string[] = ['\n', '\r\n', '\r'];
@@ -293,7 +293,7 @@ export const EOL: string[] = ['\n', '\r\n', '\r'];
 
 #### Position
 
-Position in a text document expressed as zero-based line and character offset. A position is between two characters like an 'insert' cursor in a editor.
+Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in a editor.
 
 ```typescript
 interface Position {
@@ -396,7 +396,7 @@ namespace DiagnosticSeverity {
 
 #### Command
 
-Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identitifed using a string identifier and the protocol currently doesn't specify a set of well known commands. So executing a command requires some tool extension code.
+Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identified by a string identifier. The protocol currently doesn't specify a set of well-known commands. So executing a command requires some tool extension code.
 
 ```typescript
 interface Command {
@@ -436,7 +436,7 @@ interface TextEdit {
 }
 ```
 
-If multiple `TextEdit`s are applied to a text document, all text edits describe changes made to the initial document version. Execution wise text edits should applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
+If multiple `TextEdit`s are applied to a text document, all text edits describe changes made to the initial document version. Execution-wise text edits should be applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
 
 >#### New: TextDocumentEdit
 
@@ -458,7 +458,7 @@ export interface TextDocumentEdit {
 
 #### WorkspaceEdit
 
-> **Changed** A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If documentChanges are present they are preferred over `changes` if the client can handle versioned document edits.
+> **Changed** A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChange`s are present, the latter are preferred over `changes`.
 
 ```typescript
 export interface WorkspaceEdit {
@@ -468,9 +468,10 @@ export interface WorkspaceEdit {
 	changes?: { [uri: string]: TextEdit[]; };
 
 	/**
-	 * An array of `TextDocumentEdit`s to express changes to specific a specific
-	 * version of a text document. Whether a client supports versioned document
-	 * edits is expressed via `WorkspaceClientCapabilites.versionedWorkspaceEdit`.
+	 * An array of `TextDocumentEdit`s to express changes to n different text documents
+	 * where each text document edit addresses a specific version of a text document. 
+	 * Whether a client supports versioned document edits is expressed via 
+	 * `WorkspaceClientCapabilities.workspaceEdit.documentChanges`.
 	 */
 	documentChanges?: TextDocumentEdit[];
 }
@@ -505,7 +506,7 @@ interface TextDocumentItem {
 	languageId: string;
 
 	/**
-	 * The version number of this document (it will strictly increase after each
+	 * The version number of this document (it will increase after each
 	 * change, including undo/redo).
 	 */
 	version: number;
@@ -532,7 +533,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 
 #### TextDocumentPositionParams
 
-Was `TextDocumentPosition` in 1.0 with inlined parameters
+Was `TextDocumentPosition` in 1.0 with inlined parameters.
 
 A parameter literal used in requests to pass a text document and a position inside that document.
 
@@ -552,7 +553,7 @@ interface TextDocumentPositionParams {
 
 > #### New: DocumentFilter
 
-A document filter denotes a document through properties like `language`, `schema` or `pattern`. Examples are a filter that applies to TypeScript files on disk or a filter the applies to JSON files with name package.json:
+A document filter denotes a document through properties like `language`, `schema` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter the applies to JSON files with name `package.json`:
 ```typescript
 { language: 'typescript', scheme: 'file' }
 { language: 'json', pattern: '**/package.json' }
@@ -577,7 +578,7 @@ export interface DocumentFilter {
 }
 ```
 
-A document selector is the combination of one or many document filters.
+A document selector is the combination of one or more document filters.
 
 ```typescript
 export type DocumentSelector = DocumentFilter[];
@@ -657,15 +658,15 @@ interface InitializeParams {
 	trace?: 'off' | 'messages' | 'verbose';
 }
 ```
-Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilites` are defined as follows:
+Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilities` are defined as follows:
 
->**New**: `WorkspaceClientCapabilites` define capabilities the editor / tool provides on the workspace:
+>**New**: `WorkspaceClientCapabilities` define capabilities the editor / tool provides on the workspace:
 
 ```typescript
 /**
  * Workspace specific client capabilities.
  */
-export interface WorkspaceClientCapabilites {
+export interface WorkspaceClientCapabilities {
 	/**
 	 * The client supports applying batch edits to the workspace by supporting
 	 * the request 'workspace/applyEdit'
@@ -923,7 +924,7 @@ interface ClientCapabilities {
 	/**
 	 * Workspace specific client capabilities.
 	 */
-	workspace?: WorkspaceClientCapabilites;
+	workspace?: WorkspaceClientCapabilities;
 
 	/**
 	 * Text document specific client capabilities.
@@ -1343,7 +1344,7 @@ Where `RegistrationParams` are defined as follows:
 
 ```typescript
 /**
- * General paramters to to regsiter for a capability.
+ * General paramters to register for a capability.
  */
 export interface Registration {
 	/**
@@ -1409,7 +1410,7 @@ _Response_:
 
 > #### New: <a name="client_unregisterCapability"></a>Unregister Capability
 
-The `client/unregisterCapability` request is sent from the server to the client to unregister a previously register capability.
+The `client/unregisterCapability` request is sent from the server to the client to unregister a previously registered capability.
 
 _Request_:
 * method: 'client/unregisterCapability'
@@ -1744,7 +1745,7 @@ interface PublishDiagnosticsParams {
 
 #### <a name="textDocument_completion"></a>Completion Request
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typically use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in.
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in.
 
 _Request_:
 * method: 'textDocument/completion'

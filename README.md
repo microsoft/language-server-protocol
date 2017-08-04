@@ -1,6 +1,6 @@
 # Language Server Protocol
 
-> **Note:** A blog covering the background and mechanics of the protocol has been added to the [Visual Studio Code](https://code.visualstudio.com/blogs/2016/06/27/common-language-protocol) site.  Additionally today [Red Hat](http://developers.redhat.com/blog/2016/06/27/a-common-interface-for-building-developer-tools/), [Eclipse Che](http://che.eclipse.org/eclipse-che-now-strategic-platform-red-hat/) and [others](https://github.com/Microsoft/language-server-protocol/wiki/Protocol-Implementations) announced support for the protocol.
+> **Note:** A blog covering the background and mechanics of the protocol has been added to the [Visual Studio Code](https://code.visualstudio.com/blogs/2016/06/27/common-language-protocol) site.
 
 The Language Server protocol is used between a tool (the client) and a language smartness provider (the server) to integrate features 
 like auto complete, goto definition, find all references and alike into the tool. The following diagram illustrates the communication between a tool and the language server.
