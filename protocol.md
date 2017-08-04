@@ -1496,6 +1496,8 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
 
+Similarly to `TextEdit`, if multiple `contentChange`s are applied to a text document, all text edits describe changes made to the initial document version. Execution-wise text edits should be applied from the bottom to the top of the text document. Overlapping text edits are not supported.
+
 _Notification_:
 * method: 'textDocument/didChange'
 * params: `DidChangeTextDocumentParams` defined as follows:
