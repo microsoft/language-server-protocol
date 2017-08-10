@@ -1827,8 +1827,11 @@ interface CompletionItem {
 	 */
 	filterText?: string;
 	/**
-	 * A string that should be inserted a document when selecting
+	 * A string that should be inserted into a document when selecting
 	 * this completion. When `falsy` the label is used.
+	 * 
+	 * The string might contain line breaks, in which case it is the client's responsibility to prepend new lines with 
+	 * the current indentation.
 	 */
 	insertText?: string;
 	/**
