@@ -1845,7 +1845,7 @@ interface CompletionItem {
 	 */
 	insertTextFormat?: InsertTextFormat;
 	/**
-	 * Whether automatic relative indentation fixes are applied to a multi-line insert text.
+	 * Determines whether automatic relative indentation fixes are applied to a multi-line insert text.
 	 * This option applies to both the `insertText` property and the `newText` property
 	 * of a provided `textEdit`.
 	 *
@@ -1864,7 +1864,7 @@ interface CompletionItem {
 	 * To adjust indentation, the reference indent is then inserted into the insert text right
 	 * after every line break.
 	 */
-	relativeIndent?: boolean
+	disableRelativeIndent?: boolean
 	/**
 	 * An edit which is applied to a document when selecting this completion. When an edit is provided the value of
 	 * `insertText` is ignored.
