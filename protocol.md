@@ -1517,7 +1517,8 @@ interface DidChangeTextDocumentParams {
 
 /**
  * An event describing a change to a text document. If range and rangeLength are omitted
- * the new text is considered to be the full content of the document.
+ * the new text is considered to be the full content of the document, and this change
+ * must be the only element of `contentChanges`.
  */
 interface TextDocumentContentChangeEvent {
 	/**
