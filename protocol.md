@@ -1510,7 +1510,9 @@ interface DidChangeTextDocumentParams {
 	textDocument: VersionedTextDocumentIdentifier;
 
 	/**
-	 * The actual content changes.
+	 * The actual content changes. The content changes descibe single state changes
+	 * to the document. So if there are two content changes c1 and c2 for a document 
+	 * in state S10 then c1 move the document to S11 and c2 to S12.
 	 */
 	contentChanges: TextDocumentContentChangeEvent[];
 }
