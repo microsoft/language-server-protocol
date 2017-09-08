@@ -440,7 +440,7 @@ If multiple `TextEdit`s are applied to a text document, all text edits describe 
 
 >#### New: TextDocumentEdit
 
-Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied.
+Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array or do any kind of ordering. However the edits must be non overlapping.
 
 ```typescript
 export interface TextDocumentEdit {
