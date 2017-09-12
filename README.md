@@ -21,10 +21,9 @@ integrating [OmniSharp](http://www.omnisharp.net/) and the [TypeScript Server](h
 [VS Code](https://code.visualstudio.com/). See the [history](https://github.com/Microsoft/language-server-protocol/wiki/Protocol-History) section for a brief history on how the protocol evolved.
 
 ## Contributing
-If you are interested in fixing issues like typos or contributing directly to the protocol specification you can either file an issue or provide a pull request
-containing the changes to the `protocol.md` file. 
+If you are interested in fixing issues like typos you can either file an issue or provide a pull request containing the changes to the `protocol.md` file. 
 
-When proposing an extension to the specification, then please refer to an implementation of the proposed changes in a language server. This will help us in understanding the particular use case.
+When proposing an extension to the specification, then please refer to the [How to Contribute to the Language Server Protocol](contributing.md) document.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
