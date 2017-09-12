@@ -21,7 +21,51 @@ Version 3.4.0 of VS Code's client and server library now have support to propose
 
 For a protocol extension the following files have to be created where ${name} is the name of the proposed extension:
 
-* **protocol.${name}.proposed.ts**: contains the TypeScript definitions of the protocol extension. Below is an example of a protocol extension that adds workspace folder support to the protocol (file name `protocol.workspaceFolders.proposed.ts`).
+* **protocol/${name}.proposed.ts**: contains the TypeScript definitions of the protocol extension. 
+* **protocol/${name}.proposed.md** a markdown file containing the actual documentation of the proposed protocol. As said above the document must follow the style of the actual [protocol specification](https://github.com/Microsoft/vscode-languageserver-node/blob/master\protocol\src\protocol.ts). The markdown must document:
+
+  * the extension to the initialize parameters sent to the server.
+  * the extensions to the client and server capabilities.
+  * the actual requests and notifications. 
+* **client/${name}.proposed.ts**: this file contains the actual implementation of the proposed protocol for the `vscode-languageclient`. Since version 3.4.0 the client supports implementing protocol in so called features that can be registered with a client. A static feature is responsible for:
+    * filling in the initalize properties (`fillInitializeParams` method)
+	* filling in the client capabilities (`fillClientCapabilities` method) 
+	* initalizing the feature (`initialize` method)
+
+	The client also supports adding dynamic features. A dynamic feature supports capability registration requests sent from the server to the clients. See [`client/registerCapability`](https://github.com/Microsoft/language-server-protocol/blob/master/protocol.md#client_registerCapability) and [`client/unregisterCapability`](https://github.com/Microsoft/language-server-protocol/blob/master/protocol.md#client_unregisterCapability) in the protocol.
+* **server/${name}.proposed.ts**: the file contains the actual implementation of the proposed protocol for the `vscode-languageserver` node module. 
+
+If you want to 'publish' the protocol extension as a pull request against the [repository](https://github.com/Microsoft/vscode-languageserver-node) the above files need to be added to the following directories:
+
+* `protocol/${name}.proposed.ts` and `protocol/${name}.proposed.md` files got into the `protocol\src` folder. 
+* the `client/${name}.proposed.ts` file goes into the `client\src` folder. 
+* the `server/${name}.proposed.ts` file goes into the `server\src` folder. 
+
+Please also ensure that you re-export the proposed API from the `client\src\main.ts` and the `server\src\main.ts`. Corresponding stubs can be found at the end of these files.
+
+Users who want to make use of new proposed protocols needs to create the a client and register the proposed protocol with it in the following way:
+
+```ts
+let client = new LanguageClient('...', serverOptions, clientOptions);
+client.registerProposedFeatures();
+```
+
+For the server a user needs to pass the feature implementation to the `createConnection` call. An example looks like this:
+
+```ts
+import { ..., ProposedFeatures } from 'vscode-languageserver';
+
+let connection = createConnection(ProposedFeatures.all);
+```
+
+If you decide to publish the protocol extension in its own repository it must contain that above files with it defined name and format. The repository also needs documentation on how to instanciate the client and server features.
+
+## A Sample Protocol Extension
+
+This section contains an example of a protocol extension that adds workspace folder support.
+
+
+### File _protocol/workspaceFolders.proposed.ts_
 
 ```ts
 /* --------------------------------------------------------------------------------------------
@@ -112,13 +156,7 @@ export interface WorkspaceFoldersChangeEvent {
 }
 ```
 
-* **protocol.${name}.proposed.md** a markdown file containing the actual documentation of the proposed protocol. As said above the document must follow the style of the actual [protocol specification](https://github.com/Microsoft/vscode-languageserver-node/blob/master\protocol\src\protocol.ts). The markdown must document:
-
-  * the extension to the initialize parameters sent to the server.
-  * the extensions to the client and server capabilities.
-  * the actual requests and notifications. 
-  
-  The markdown for the above protocol extension looks like this:
+### File _protocol/workspaceFolders.proposed.md_
 
 ```
 #### Workspace Folders
@@ -218,14 +256,7 @@ export interface WorkspaceFoldersChangeEvent {
 \`\`\`
 ```
 
-* **client.${name}.proposed.ts**: this file contains the actual implementation of the proposed protocol for the `vscode-languageclient`. Since version 3.4.0 the client supports implementing protocol in so called features that can be registered with a client. A static feature is responsible for:
-    * filling in the initalize properties (`fillInitializeParams` method)
-	* filling in the client capabilities (`fillClientCapabilities` method) 
-	* initalizing the feature (`initialize` method)
-
-	The client also supports adding dynamic features. A dynamic feature supports capability registration requests sent from the server to the clients. See [`client/registerCapability`](https://github.com/Microsoft/language-server-protocol/blob/master/protocol.md#client_registerCapability) and [`client/unregisterCapability`](https://github.com/Microsoft/language-server-protocol/blob/master/protocol.md#client_unregisterCapability) in the protocol.
-
-	Since the server can register for workspace folder change notification on the client side the corresponding feature us implemented as a `DynamicFeature`:
+### File _client/workspaceFolders.proposed.ts_
 
 ```ts
 export interface WorkspaceFolderMiddleware {
@@ -335,7 +366,7 @@ export class WorkspaceFoldersFeature implements DynamicFeature<undefined> {
 }
 ```
 
-* **server.${name}.proposed.ts**: the file contains the actual implementation of the proposed protocol for the `vscode-languageserver` node module. The implemention of the workspace folders feature looks like this:
+### File _server/workspaceFolders.proposed.ts_
 
 ```ts
 export interface WorkspaceFoldersProposed {
@@ -371,26 +402,3 @@ export const WorkspaceFoldersFeature: WorkspaceFeature<WorkspaceFoldersProposed>
 	}
 };	
 ```
-
-If you want to 'publish' the protocol extension as a pull request against the [repository](https://github.com/Microsoft/vscode-languageserver-node) the above files need to be added to the following directories:
-
-* `protocol.${name}.proposed.ts` and `protocol.${name}.proposed.md` files got into the `protocol\src` folder. 
-* the `client.${name}.proposed.ts` file goes into the `client\src` folder. 
-* the `server.${name}.proposed.ts` file goes into the `server\src` folder. 
-
-Please also ensure that you re-export the proposed API from the `client\src\main.ts` and the `server\src\main.ts`. Corresponding stubs can be found at the end of these files.
-
-Users who want to make use of new proposed protocols needs to create the a client and register the proposed protocol with it in the following way:
-
-```ts
-let client = new LanguageClient('...', serverOptions, clientOptions);
-client.registerFeatures(ProposedProtocol(client));
-```
-
-For the server a user needs to pass the feature implementation to the `createConnection` call. An example looks like this:
-
-```ts
-let connection = createConnection(ProposedProtocol);
-```
-
-If you decide to publish the protocol extension in its own repository it must contain that above files with it defined name and format. The repository also needs documentation on how to instanciate the client and server features.
