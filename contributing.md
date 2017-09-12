@@ -79,14 +79,14 @@ import {
 	CancellationToken
 } from 'vscode-jsonrpc';
 
-export interface ProposedWorkspaceFoldersInitializeParams {
+export interface WorkspaceFoldersInitializeParams {
 	/**
 	 * The actual configured workspace folders.
 	 */
 	workspaceFolders: WorkspaceFolder[] | null;
 }
 
-export interface ProposedWorkspaceFoldersClientCapabilities {
+export interface WorkspaceFoldersClientCapabilities {
 	/**
 	 * The workspace client capabilities
 	 */
