@@ -16,6 +16,10 @@ The 1.x version of this document can be found [here](https://github.com/Microsof
 
 ## Change Log
 
+### 09/26/2017
+
+* Added optional `commitCharacters` property to the `CompletionItem`
+
 ### 02/28/2017
 
 * Make the `WorkspaceEdit` changes backwards compatible.
@@ -1852,6 +1856,12 @@ interface CompletionItem {
 	 * nor with themselves.
 	 */
 	additionalTextEdits?: TextEdit[];
+	/**
+	 * An optional set of characters that when pressed while this completion is active will accept it first and
+	 * then type that character. *Note* that all commit characters should have `length=1` and that superfluous
+	 * characters will be ignored.
+	 */
+	commitCharacters?: string[];
 	/**
 	 * An optional command that is executed *after* inserting this completion. *Note* that
 	 * additional modifications to the current document should be described with the
