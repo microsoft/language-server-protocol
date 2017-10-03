@@ -33,7 +33,7 @@ General
 * **New** :arrow_right: [initialized](#initialized)
 * :leftwards_arrow_with_hook: [shutdown](#shutdown)
 * :arrow_right: [exit](#exit)
-* :arrow_right: [$/cancelRequest](#cancelRequest)
+* :arrow_right: :arrow_left: [$/cancelRequest](#cancelRequest)
 
 Window
 
