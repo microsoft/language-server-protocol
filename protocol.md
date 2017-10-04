@@ -340,6 +340,18 @@ interface Location {
 }
 ```
 
+#### Preview Location
+
+Represents a location inside a resource, such as a line inside a text file, and an optional preview.
+```typescript
+interface LocationPreview extends Location {
+	/**
+	 * A preview of the text around the location.
+	 */
+	contents?: string;
+}
+```
+
 #### Diagnostic
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
@@ -2127,7 +2139,7 @@ interface ReferenceContext {
 }
 ```
 _Response_:
-* result: [`Location`](#location)[]
+* result: [`LocationPreview`](#location-preview)[]
 * error: code and message set in case an exception happens during the reference request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
