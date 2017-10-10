@@ -2479,7 +2479,7 @@ _Response_:
 
 #### <a name="textDocument_formatting"></a>Document Formatting Request
 
-The document formatting request is sent from the server to the client to format a whole document.
+The document formatting request is sent from the client to the server to format a whole document.
 
 _Request_:
 * method: 'textDocument/formatting'
