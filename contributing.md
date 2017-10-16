@@ -2,8 +2,8 @@
 
 Contributing to the language server protocol by proposing extensions to it requires several contributions to be made:
 
-- as the [protocol](https://github.com/Microsoft/vscode-languageserver-node/blob/master\protocol\src\protocol.ts) itself request and notification additions need to be defined using [TypeScript](https://www.typescriptlang.org/).
-- a document describing the protocol extension must be written using [GitHub flavored Markdown](https://guides.github.com/features/mastering-markdown/). The document must follow the style of the [protocol](https://github.com/Microsoft/vscode-languageserver-node/blob/master\protocol\src\protocol.ts) document.
+- as the [protocol](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.ts) itself request and notification additions need to be defined using [TypeScript](https://www.typescriptlang.org/).
+- a document describing the protocol extension must be written using [GitHub flavored Markdown](https://guides.github.com/features/mastering-markdown/). The document must follow the style of the [protocol](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.ts) document.
 - a reference implementation of the protocol must be provided for the [VSCode language client library](https://www.npmjs.com/package/vscode-languageclient). A reference implemenation for the [VS Code language server library](https://www.npmjs.com/package/vscode-languageserver) is optional.
 
 The actual contributation can happen in two ways:
@@ -22,7 +22,7 @@ Version 3.4.0 of VS Code's client and server library now have support to propose
 For a protocol extension the following files have to be created where ${name} is the name of the proposed extension:
 
 * **protocol/${name}.proposed.ts**: contains the TypeScript definitions of the protocol extension. 
-* **protocol/${name}.proposed.md** a markdown file containing the actual documentation of the proposed protocol. As said above the document must follow the style of the actual [protocol specification](https://github.com/Microsoft/vscode-languageserver-node/blob/master\protocol\src\protocol.ts). The markdown must document:
+* **protocol/${name}.proposed.md** a markdown file containing the actual documentation of the proposed protocol. As said above the document must follow the style of the actual [protocol specification](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.ts). The markdown must document:
 
   * the extension to the initialize parameters sent to the server.
   * the extensions to the client and server capabilities.
@@ -37,7 +37,7 @@ For a protocol extension the following files have to be created where ${name} is
 
 If you want to 'publish' the protocol extension as a pull request against the [repository](https://github.com/Microsoft/vscode-languageserver-node) the above files need to be added to the following directories:
 
-* `protocol/${name}.proposed.ts` and `protocol/${name}.proposed.md` files got into the `protocol\src` folder. 
+* `protocol/${name}.proposed.ts` and `protocol/${name}.proposed.md` files go into the `protocol\src` folder, additionally prefixed with `protocol.` as follows: `protocol.${name}.proposed.{md,ts}`. 
 * the `client/${name}.proposed.ts` file goes into the `client\src` folder. 
 * the `server/${name}.proposed.ts` file goes into the `server\src` folder. 
 
