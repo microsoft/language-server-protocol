@@ -2300,6 +2300,80 @@ _Response_:
 
 _Registration Options_: void
 
+
+#### <a name="workspace_executeCommand"></a>Execute a command
+
+The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases
+the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
+sent from the server to the client.
+
+_Request:_
+* method: 'workspace/executeCommand'
+* params: `ExecuteCommandParams` defined as follows:
+
+```typescript
+export interface ExecuteCommandParams {
+
+	/**
+	 * The identifier of the actual command handler.
+	 */
+	command: string;
+	/**
+	 * Arguments that the command should be invoked with.
+	 */
+	arguments?: any[];
+}
+```
+
+The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
+
+_Response_:
+* result: any
+* error: code and message set in case an exception happens during the request.
+
+_Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
+
+```typescript
+/**
+ * Execute command registration options.
+ */
+export interface ExecuteCommandRegistrationOptions {
+	/**
+	 * The commands to be executed on the server
+	 */
+	commands: string[]
+}
+```
+
+#### <a name="workspace_applyEdit"></a>Applies a WorkspaceEdit
+
+The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
+
+_Request_:
+* method: 'workspace/applyEdit'
+* params: `ApplyWorkspaceEditParams` defined as follows:
+
+```typescript
+export interface ApplyWorkspaceEditParams {
+	/**
+	 * The edits to apply.
+	 */
+	edit: WorkspaceEdit;
+}
+```
+
+_Response_:
+* result: `ApplyWorkspaceEditResponse` defined as follows:
+```typescript
+export interface ApplyWorkspaceEditResponse {
+	/**
+	 * Indicates whether the edit was applied or not.
+	 */
+	applied: boolean;
+}
+```
+* error: code and message set in case an exception happens during the request.
+
 #### <a name="textDocument_codeAction"></a>Code Action Request
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code.
@@ -2640,76 +2714,3 @@ _Response_:
 * error: code and message set in case an exception happens during the rename request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
-
-#### <a name="workspace_executeCommand"></a>Execute a command
-
-The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases
-the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
-sent from the server to the client.
-
-_Request:_
-* method: 'workspace/executeCommand'
-* params: `ExecuteCommandParams` defined as follows:
-
-```typescript
-export interface ExecuteCommandParams {
-
-	/**
-	 * The identifier of the actual command handler.
-	 */
-	command: string;
-	/**
-	 * Arguments that the command should be invoked with.
-	 */
-	arguments?: any[];
-}
-```
-
-The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
-
-_Response_:
-* result: any
-* error: code and message set in case an exception happens during the request.
-
-_Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
-
-```typescript
-/**
- * Execute command registration options.
- */
-export interface ExecuteCommandRegistrationOptions {
-	/**
-	 * The commands to be executed on the server
-	 */
-	commands: string[]
-}
-```
-
-#### <a name="workspace_applyEdit"></a>Applies a WorkspaceEdit
-
-The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
-
-_Request_:
-* method: 'workspace/applyEdit'
-* params: `ApplyWorkspaceEditParams` defined as follows:
-
-```typescript
-export interface ApplyWorkspaceEditParams {
-	/**
-	 * The edits to apply.
-	 */
-	edit: WorkspaceEdit;
-}
-```
-
-_Response_:
-* result: `ApplyWorkspaceEditResponse` defined as follows:
-```typescript
-export interface ApplyWorkspaceEditResponse {
-	/**
-	 * Indicates whether the edit was applied or not.
-	 */
-	applied: boolean;
-}
-```
-* error: code and message set in case an exception happens during the request.
