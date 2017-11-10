@@ -1459,6 +1459,9 @@ An example JSON RPC message to unregister the above registered `textDocument/wil
 	}
 }
 ```
+_Response_:
+* result: void.
+* error: code and message set in case an exception happens during the request.
 
 #### <a name="workspace_didChangeConfiguration"></a>DidChangeConfiguration Notification
 
