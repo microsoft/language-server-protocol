@@ -1480,6 +1480,161 @@ interface DidChangeConfigurationParams {
 }
 ```
 
+
+#### <a name="workspace_didChangeWatchedFiles"></a>DidChangeWatchedFiles Notification
+
+The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client.
+
+_Notification_:
+* method: 'workspace/didChangeWatchedFiles'
+* params: `DidChangeWatchedFilesParams` defined as follows:
+```typescript
+interface DidChangeWatchedFilesParams {
+	/**
+	 * The actual file events.
+	 */
+	changes: FileEvent[];
+}
+```
+
+Where FileEvents are described as follows:
+
+```typescript
+/**
+ * An event describing a file change.
+ */
+interface FileEvent {
+	/**
+	 * The file's URI.
+	 */
+	uri: DocumentUri;
+	/**
+	 * The change type.
+	 */
+	type: number;
+}
+
+/**
+ * The file event type.
+ */
+export namespace FileChangeType {
+	/**
+	 * The file got created.
+	 */
+	export const Created = 1;
+	/**
+	 * The file got changed.
+	 */
+	export const Changed = 2;
+	/**
+	 * The file got deleted.
+	 */
+	export const Deleted = 3;
+}
+```
+
+
+#### <a name="workspace_symbol"></a>Workspace Symbols Request
+
+The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
+
+_Request_:
+* method: 'workspace/symbol'
+* params: `WorkspaceSymbolParams` defined as follows:
+```typescript
+/**
+ * The parameters of a Workspace Symbol Request.
+ */
+interface WorkspaceSymbolParams {
+	/**
+	 * A non-empty query string
+	 */
+	query: string;
+}
+```
+
+_Response_:
+* result: `SymbolInformation[]` as defined above.
+* error: code and message set in case an exception happens during the workspace symbol request.
+
+_Registration Options_: void
+
+
+#### <a name="workspace_executeCommand"></a>Execute a command
+
+The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases
+the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
+sent from the server to the client.
+
+_Request:_
+* method: 'workspace/executeCommand'
+* params: `ExecuteCommandParams` defined as follows:
+
+```typescript
+export interface ExecuteCommandParams {
+
+	/**
+	 * The identifier of the actual command handler.
+	 */
+	command: string;
+	/**
+	 * Arguments that the command should be invoked with.
+	 */
+	arguments?: any[];
+}
+```
+
+The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
+
+_Response_:
+* result: `null` | `any`
+* error: code and message set in case an exception happens during the request.
+
+_Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
+
+```typescript
+/**
+ * Execute command registration options.
+ */
+export interface ExecuteCommandRegistrationOptions {
+	/**
+	 * The commands to be executed on the server
+	 */
+	commands: string[]
+}
+```
+
+
+#### <a name="workspace_applyEdit"></a>Applies a WorkspaceEdit
+
+The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
+
+_Request_:
+* method: 'workspace/applyEdit'
+* params: `ApplyWorkspaceEditParams` defined as follows:
+
+```typescript
+export interface ApplyWorkspaceEditParams {
+	/**
+	 * The edits to apply.
+	 */
+	edit: WorkspaceEdit;
+}
+```
+
+_Response_:
+* result: `ApplyWorkspaceEditResponse` defined as follows:
+```typescript
+export interface ApplyWorkspaceEditResponse {
+	/**
+	 * Indicates whether the edit was applied or not.
+	 */
+	applied: boolean;
+}
+```
+* error: code and message set in case an exception happens during the request.
+
+
 #### <a name="textDocument_didOpen"></a>DidOpenTextDocument Notification
 
 The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count is one. 
@@ -1498,6 +1653,7 @@ interface DidOpenTextDocumentParams {
 ```
 
 _Registration Options_: `TextDocumentRegistrationOptions`
+
 
 #### <a name="textDocument_didChange"></a>DidChangeTextDocument Notification
 
@@ -1678,57 +1834,6 @@ interface DidCloseTextDocumentParams {
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="workspace_didChangeWatchedFiles"></a>DidChangeWatchedFiles Notification
-
-The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client.
-
-_Notification_:
-* method: 'workspace/didChangeWatchedFiles'
-* params: `DidChangeWatchedFilesParams` defined as follows:
-```typescript
-interface DidChangeWatchedFilesParams {
-	/**
-	 * The actual file events.
-	 */
-	changes: FileEvent[];
-}
-```
-
-Where FileEvents are described as follows:
-
-```typescript
-/**
- * An event describing a file change.
- */
-interface FileEvent {
-	/**
-	 * The file's URI.
-	 */
-	uri: DocumentUri;
-	/**
-	 * The change type.
-	 */
-	type: number;
-}
-
-/**
- * The file event type.
- */
-export namespace FileChangeType {
-	/**
-	 * The file got created.
-	 */
-	export const Created = 1;
-	/**
-	 * The file got changed.
-	 */
-	export const Changed = 2;
-	/**
-	 * The file got deleted.
-	 */
-	export const Deleted = 3;
-}
-```
 
 #### <a name="textDocument_publishDiagnostics"></a>PublishDiagnostics Notification
 
@@ -2278,31 +2383,6 @@ export namespace SymbolKind {
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="workspace_symbol"></a>Workspace Symbols Request
-
-The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
-
-_Request_:
-* method: 'workspace/symbol'
-* params: `WorkspaceSymbolParams` defined as follows:
-```typescript
-/**
- * The parameters of a Workspace Symbol Request.
- */
-interface WorkspaceSymbolParams {
-	/**
-	 * A non-empty query string
-	 */
-	query: string;
-}
-```
-
-_Response_:
-* result: `SymbolInformation[]` as defined above.
-* error: code and message set in case an exception happens during the workspace symbol request.
-
-_Registration Options_: void
-
 #### <a name="textDocument_codeAction"></a>Code Action Request
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code.
@@ -2643,76 +2723,3 @@ _Response_:
 * error: code and message set in case an exception happens during the rename request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
-
-#### <a name="workspace_executeCommand"></a>Execute a command
-
-The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases
-the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
-sent from the server to the client.
-
-_Request:_
-* method: 'workspace/executeCommand'
-* params: `ExecuteCommandParams` defined as follows:
-
-```typescript
-export interface ExecuteCommandParams {
-
-	/**
-	 * The identifier of the actual command handler.
-	 */
-	command: string;
-	/**
-	 * Arguments that the command should be invoked with.
-	 */
-	arguments?: any[];
-}
-```
-
-The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
-
-_Response_:
-* result: `null` | `any`
-* error: code and message set in case an exception happens during the request.
-
-_Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
-
-```typescript
-/**
- * Execute command registration options.
- */
-export interface ExecuteCommandRegistrationOptions {
-	/**
-	 * The commands to be executed on the server
-	 */
-	commands: string[]
-}
-```
-
-#### <a name="workspace_applyEdit"></a>Applies a WorkspaceEdit
-
-The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
-
-_Request_:
-* method: 'workspace/applyEdit'
-* params: `ApplyWorkspaceEditParams` defined as follows:
-
-```typescript
-export interface ApplyWorkspaceEditParams {
-	/**
-	 * The edits to apply.
-	 */
-	edit: WorkspaceEdit;
-}
-```
-
-_Response_:
-* result: `ApplyWorkspaceEditResponse` defined as follows:
-```typescript
-export interface ApplyWorkspaceEditResponse {
-	/**
-	 * Indicates whether the edit was applied or not.
-	 */
-	applied: boolean;
-}
-```
-* error: code and message set in case an exception happens during the request.
