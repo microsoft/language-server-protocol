@@ -1271,7 +1271,7 @@ _Request_:
 * params: `ShowMessageRequestParams` defined as follows:
 
 _Response_:
-* result: the selected `MessageActionItem`
+* result: the selected `MessageActionItem` | `null` if none got selected.
 * error: code and message set in case an exception happens during showing a message.
 
 ```typescript
@@ -1949,7 +1949,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `Hover` defined as follows:
+* result: `null` | `Hover` defined as follows:
 
 ```typescript
 /**
@@ -2001,7 +2001,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `SignatureHelp` defined as follows:
+* result: `null` | `SignatureHelp` defined as follows:
 
 ```typescript
 /**
@@ -2639,7 +2639,7 @@ interface RenameParams {
 ```
 
 _Response_:
-* result: [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
+* result: `null` | [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2671,7 +2671,7 @@ export interface ExecuteCommandParams {
 The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
 
 _Response_:
-* result: any
+* result: `null` | `any`
 * error: code and message set in case an exception happens during the request.
 
 _Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
