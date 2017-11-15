@@ -797,7 +797,18 @@ export interface TextDocumentClientCapabilities {
 			 * that is typing in one will update others too.
 			 */
 			snippetSupport?: boolean;
+
+			/**
+			 * Client supports commit characters on a completion item.
+			 */
+			commitCharactersSupport?: boolean			
 		}
+
+		/**
+		 * The client supports to send additional context information for a
+		 * `textDocument/completion` requestion.
+		 */
+		contextSupport?: boolean;		
 	};
 
 	/**
@@ -1883,7 +1894,51 @@ The Completion request is sent from the client to the server to compute completi
 
 _Request_:
 * method: 'textDocument/completion'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `CompletionParams` defined as follows:
+
+```typescript
+export interface CompletionParams extends TextDocumentPositionParams {
+
+	/**
+	 * The completion context. This is only available it the client specifies
+	 * to send this using `ClientCapabilities.textDocument.completion.contextSupport === true`
+	 */
+	context?: CompletionContext;
+}
+
+/**
+ * How a completion was triggered
+ */
+export namespace CompletionTriggerKind {
+	/**
+	 * Completion was triggered by invoking it manuall or using API.
+	 */
+	export const Invoked: 1 = 1;
+
+	/**
+	 * Completion was triggered by a trigger character.
+	 */
+	export const TriggerCharacter: 2 = 2;
+}
+export type CompletionTriggerKind = 1 | 2;
+
+
+/**
+ * Contains additional information about the context in which a completion request is triggered.
+ */
+export interface CompletionContext {
+	/**
+	 * How the completion was triggered.
+	 */
+	triggerKind: CompletionTriggerKind;
+
+	/**
+	 * The trigger character (a single character) that has trigger code complete.
+	 * Is undefined if `triggerKind !== CompletionTriggerKind.TriggerCharacter`
+	 */
+	triggerCharacter?: string;
+}
+```
 
 _Response_:
 * result: `CompletionItem[] | CompletionList`
