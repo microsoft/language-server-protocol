@@ -291,6 +291,8 @@ type DocumentUri = string;
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
+Positions are line end character agnostic. So you can not specify  a position that denotes `\r|\n` or `\n|` where `|` represents the character offset.
+
 ```typescript
 export const EOL: string[] = ['\n', '\r\n', '\r'];
 ```
@@ -307,14 +309,25 @@ interface Position {
 	line: number;
 
 	/**
-	 * Character offset on a line in a document (zero-based).
+	 * Character offset on a line in a document (zero-based). Assuming that the line is
+	 * represented as a string, the `character` value represents the gap between the
+	 * `character` and `character + 1`.
+	 *
+	 * If the character value is greater than the line length it defaults back to the
+	 * line length.
 	 */
 	character: number;
 }
 ```
 #### Range
 
-A range in a text document expressed as (zero-based) start and end positions. A range is comparable to a selection in an editor. Therefore the end position is exclusive.
+A range in a text document expressed as (zero-based) start and end positions. A range is comparable to a selection in an editor. Therefore the end position is exclusive. If you want to specify a range that contains a line including the line ending character(s) then use an end position denoting the start of the next line. For example:
+```typescript
+{
+    start: { line: 5, character: 23 }
+    end : { line 6, character : 0 }
+}
+```
 
 ```typescript
 interface Range {
