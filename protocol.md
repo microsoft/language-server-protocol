@@ -1892,6 +1892,8 @@ interface PublishDiagnosticsParams {
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in.
 
+Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is documented [here](./snippetSyntax.md)
+
 _Request_:
 * method: 'textDocument/completion'
 * params: `CompletionParams` defined as follows:
@@ -1976,8 +1978,6 @@ namespace InsertTextFormat {
 	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
 	 * the end of the snippet. Placeholders with equal identifiers are linked,
 	 * that is typing in one will update others too.
-	 *
-	 * See also: https://github.com/Microsoft/vscode/blob/master/src/vs/editor/contrib/snippet/common/snippet.md
 	 */
 	export const Snippet = 2;
 }
