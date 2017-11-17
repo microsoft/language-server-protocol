@@ -960,6 +960,11 @@ interface ClientCapabilities {
 	textDocument?: TextDocumentClientCapabilities;
 
 	/**
+	 * Client supports the `client/registerCapability` request from server.
+	 */
+	dynamicRegistration?: Boolean;
+
+	/**
 	 * Experimental client capabilities.
 	 */
 	experimental?: any;
