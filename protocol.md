@@ -1507,7 +1507,15 @@ interface DidChangeConfigurationParams {
 
 #### <a name="workspace_didChangeWatchedFiles"></a>DidChangeWatchedFiles Notification
 
-The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client.
+The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client. It is recommended that servers register for these file events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
+
+Servers are allowed to run there own file watching mechansim and not rely on clients to provide file events. However this is not recommended due to the following reasons:
+
+- to our experience getting file watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
+- file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare timestamps (as for example some node modules do)
+- a client usually starts more than one server. If every server runs its own file watching is can become a CPU or memory problem.
+- in general there are more server than client implementations. So this problem is better solved on the client side.  
+
 
 _Notification_:
 * method: 'workspace/didChangeWatchedFiles'
@@ -1557,6 +1565,50 @@ export namespace FileChangeType {
 }
 ```
 
+_Registration Options_: `DidChangeWatchedFilesRegistrationOptions` defined as follows
+
+```typescript
+/**
+ * Descibe options to be used when registered for text document change events.
+ */
+export interface DidChangeWatchedFilesRegistrationOptions {
+	/**
+	 * The watchers to register.
+	 */
+	watchers: FileSystemWatcher[];
+}
+
+export interface FileSystemWatcher {
+	/**
+	 * The  glob pattern to watch
+	 */
+	globPattern: string;
+
+	/**
+	 * The kind of events of interest. If omitted it defaults
+	 * to WatchKind.Create | WatchKind.Change | WatchKind.Delete
+	 * which is 7.
+	 */
+	kind?: number;
+}
+
+export namespace WatchKind {
+	/**
+	 * Interested in create events.
+	 */
+	export const Create = 1;
+
+	/**
+	 * Interested in change events
+	 */
+	export const Change = 2;
+
+	/**
+	 * Interested in delete events
+	 */
+	export const Delete = 4;
+}
+```
 
 #### <a name="workspace_symbol"></a>Workspace Symbols Request
 
