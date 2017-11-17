@@ -37,7 +37,7 @@ For a protocol extension the following files have to be created where ${name} is
 
 If you want to 'publish' the protocol extension as a pull request against the [repository](https://github.com/Microsoft/vscode-languageserver-node) the above files need to be added to the following directories:
 
-* `protocol/${name}.proposed.ts` and `protocol/${name}.proposed.md` files got into the `protocol\src` folder. 
+* `protocol/${name}.proposed.ts` and `protocol/${name}.proposed.md` files go into the `protocol\src` folder, additionally prefixed with `protocol.` as follows: `protocol.${name}.proposed.{md,ts}`. 
 * the `client/${name}.proposed.ts` file goes into the `client/src` folder. 
 * the `server/${name}.proposed.ts` file goes into the `server/src` folder. 
 
