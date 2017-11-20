@@ -1965,12 +1965,14 @@ export interface CompletionParams extends TextDocumentPositionParams {
  */
 export namespace CompletionTriggerKind {
 	/**
-	 * Completion was triggered by invoking it manuall or using API.
+	 * Completion was triggered by typing an identifier (24x7 code
+	 * complete), manual invocation (e.g Ctrl+Space) or via API.
 	 */
 	export const Invoked: 1 = 1;
 
 	/**
-	 * Completion was triggered by a trigger character.
+	 * Completion was triggered by a trigger character specified by
+	 * the `triggerCharacters` properties of the `CompletionRegistrationOptions`.
 	 */
 	export const TriggerCharacter: 2 = 2;
 }
@@ -2141,7 +2143,14 @@ _Registration Options_: `CompletionRegistrationOptions` options defined as follo
 ```typescript
 export interface CompletionRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
-	 * The characters that trigger completion automatically.
+	 * Most tools trigger completion request automatically without explicitly requesting
+	 * it using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
+	 * starts to type an identifier. For example if the user types `c` in a JavaScript file
+	 * code complete will automatically pop up present `console` besides others as a 
+	 * completion item. Characters that make up identifiers don't need to be listed here.
+	 *
+	 * If code complete should automatically be trigger on characters not being valid inside
+	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`. 
 	 */
 	triggerCharacters?: string[];
 
