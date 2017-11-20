@@ -629,7 +629,7 @@ The initialize request is sent as the first request from the client to the serve
 
 Until the server has responded to the `initialize` request with an `InitializeResult`, the client must not send any additional requests or notifications to the server. 
 
->**Updated**: During the `initialize` request the server is allowed to send the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
+>**Updated**: During the `initialize` request the server is allowed to send the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.  The `initialize` request may only be sent once.
 
 _Request_:
 * method: 'initialize'
@@ -1214,7 +1214,7 @@ interface ServerCapabilities {
 
 >#### New: <a name="initialized"></a>Initialized Notification
 
-The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification for example to dynamically register capabilities.
+The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification for example to dynamically register capabilities. The `initialized` notification may only be sent once. 
 
 _Notification_:
 * method: 'initialized'
