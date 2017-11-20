@@ -1630,7 +1630,7 @@ interface WorkspaceSymbolParams {
 ```
 
 _Response_:
-* result: `SymbolInformation[]` as defined above.
+* result: `null` | `SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
 _Registration Options_: void
@@ -1853,7 +1853,7 @@ _Request_:
 * params: `WillSaveTextDocumentParams`
 
 _Response_:
-* result: `TextEdit[]`
+* result: `null` | `TextEdit[]`
 * error: code and message set in case an exception happens during the `willSaveWaitUntil` request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -1995,7 +1995,7 @@ export interface CompletionContext {
 ```
 
 _Response_:
-* result: `CompletionItem[] | CompletionList`
+* result: `null` | `CompletionItem[] | CompletionList`
 ```typescript
 /**
  * Represents a collection of [completion items](#CompletionItem) to be presented
@@ -2355,7 +2355,7 @@ interface ReferenceContext {
 }
 ```
 _Response_:
-* result: [`Location`](#location)[]
+* result: [`Location`](#location)[] | `null`
 * error: code and message set in case an exception happens during the reference request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2372,7 +2372,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `DocumentHighlight`[] defined as follows:
+* result: `null` | `DocumentHighlight`[] defined as follows:
 
 ```typescript
 /**
@@ -2435,7 +2435,7 @@ interface DocumentSymbolParams {
 ```
 
 _Response_:
-* result: `SymbolInformation`[] defined as follows:
+* result: `null` | `SymbolInformation`[] defined as follows:
 ```typescript
 /**
  * Represents information about programming constructs like variables, classes,
@@ -2544,7 +2544,7 @@ interface CodeActionContext {
 ```
 
 _Response_:
-* result: [`Command[]`](#command) defined as follows:
+* result: `null` | [`Command[]`](#command) defined as follows:
 * error: code and message set in case an exception happens during the code action request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2567,7 +2567,7 @@ interface CodeLensParams {
 ```
 
 _Response_:
-* result: `CodeLens[]` defined as follows:
+* result: `null` | `CodeLens[]` defined as follows:
 
 ```typescript
 /**
@@ -2722,7 +2722,7 @@ interface FormattingOptions {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
+* result: `null` | [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2755,7 +2755,7 @@ interface DocumentRangeFormattingParams {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
+* result: `null` | [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2793,7 +2793,7 @@ interface DocumentOnTypeFormattingParams {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) describing the modification to the document.
+* result: `null` | [`TextEdit[]`](#textedit) describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
 _Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
