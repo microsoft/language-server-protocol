@@ -622,10 +622,10 @@ The current protocol specification defines that the lifetime of a server is mana
 
 #### <a name="initialize"></a>Initialize Request
 
-The initialize request is sent as the first request from the client to the server. If the server receives request or notification before the `initialize` request it should act as follows:
+The initialize request is sent as the first request from the client to the server. If the server receives a request or notification before the `initialize` request it should act as follows:
 
-* For a request the response should be errored with `code: -32002`. The message can be picked by the server.
-* Notifications should be dropped, except for the exit notification. This will allow the exit a server without an initialize request.
+* For a request the response should be an error with `code: -32002`. The message can be picked by the server.
+* Notifications should be dropped, except for the exit notification. This will allow the exit of a server without an initialize request.
 
 Until the server has responded to the `initialize` request with an `InitializeResult`, the client must not send any additional requests or notifications to the server. 
 
@@ -945,7 +945,7 @@ export interface TextDocumentClientCapabilities {
 
 > **New**: `ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
 
-Client capabilities got introduced with the version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
+Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
 ```typescript
 interface ClientCapabilities {
