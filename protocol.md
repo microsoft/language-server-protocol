@@ -2820,7 +2820,7 @@ _Request_:
 ```typescript
 interface RenameParams {
 	/**
-	 * The document to format.
+	 * The document to rename.
 	 */
 	textDocument: TextDocumentIdentifier;
 
