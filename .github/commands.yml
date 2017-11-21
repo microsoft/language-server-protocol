@@ -1,0 +1,30 @@
+{
+    perform: true,
+    commands: [
+        {
+            type: 'label',
+            name: '*question',
+            action: 'close',
+            comment: "This issue has been closed because it represents a question. Questions are better addressed on [StackOverflow](https://stackoverflow.com/questions/tagged/language-server-protocol).\n\nHappy Coding!"
+        },
+        {
+            type: 'label',
+            name: '*out-of-scope',
+            action: 'close',
+            comment: "This feature request will not be considered in the next 6-12 months and has been closed to keep the number of issues we have to maintain manageable.\n\nThanks for your understanding and happy coding!"
+        },
+        {
+            type: 'comment',
+            name: 'duplicate',
+            action: 'updateLabels',
+            addLabel: '*duplicate'
+        },
+        {
+            type: 'label',
+            name: '*duplicate',
+            allowTriggerByBot: true,
+            action: 'close',
+            comment: "This issue has been closed because it is already tracked by another issue. See also our [GitHub issues](https://github.com/Microsoft/language-server-protocol/issues) to search for existing issues and our [issue reporting](https://aka.ms/vscodeissuereporting) guidelines.\n\nHappy Coding!"
+        },
+    ]
+}
