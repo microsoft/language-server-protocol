@@ -2081,9 +2081,9 @@ interface CompletionItem {
 	 * this completion. When `falsy` the label is used.
 	 * 
 	 * The `insertText` is subject to interpretation by the client side.
-	 * Some tools might not take the string litteraly. For example
+	 * Some tools might not take the string literally. For example
 	 * VS Code when code complete is requested in this example `con<cursor position>`
-	 * and a completion item with and `insertText` of `console` is provided it
+	 * and a completion item with an `insertText` of `console` is provided it
 	 * will only insert `sole`. Therefore it is recommended to use `textEdit` instead
 	 * since it avoids additional client side interpretation.
 	 *
