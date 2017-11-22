@@ -1513,7 +1513,7 @@ Servers are allowed to run there own file watching mechansim and not rely on cli
 
 - to our experience getting file watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
 - file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare timestamps (as for example some node modules do)
-- a client usually starts more than one server. If every server runs its own file watching is can become a CPU or memory problem.
+- a client usually starts more than one server. If every server runs its own file watching it can become a CPU or memory problem.
 - in general there are more server than client implementations. So this problem is better solved on the client side.  
 
 
