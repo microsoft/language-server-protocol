@@ -1997,7 +1997,7 @@ export interface CompletionContext {
 ```
 
 _Response_:
-* result: `null` | `CompletionItem[] | CompletionList`
+* result: `null` | `CompletionItem[] | CompletionList`. If a `CompletionItem[]` is provided it is interpreted to be complete. So it is the same as `{ isIncomplete: false, items }`
 ```typescript
 /**
  * Represents a collection of [completion items](#CompletionItem) to be presented
@@ -2009,6 +2009,7 @@ interface CompletionList {
 	 * this list.
 	 */
 	isIncomplete: boolean;
+
 	/**
 	 * The completion items.
 	 */
@@ -2045,40 +2046,57 @@ interface CompletionItem {
 	 * this completion.
 	 */
 	label: string;
+
 	/**
 	 * The kind of this completion item. Based of the kind
 	 * an icon is chosen by the editor.
 	 */
 	kind?: number;
+
 	/**
 	 * A human-readable string with additional information
 	 * about this item, like type or symbol information.
 	 */
 	detail?: string;
+
 	/**
 	 * A human-readable string that represents a doc-comment.
 	 */
 	documentation?: string;
+
 	/**
 	 * A string that shoud be used when comparing this item
 	 * with other items. When `falsy` the label is used.
 	 */
 	sortText?: string;
+
 	/**
 	 * A string that should be used when filtering a set of
 	 * completion items. When `falsy` the label is used.
 	 */
 	filterText?: string;
+
 	/**
-	 * A string that should be inserted a document when selecting
+	 * A string that should be inserted into a document when selecting
 	 * this completion. When `falsy` the label is used.
+	 * 
+	 * The `insertText` is subject to interpretation by the client side.
+	 * Some tools might not take the string litteraly. For example
+	 * VS Code when code complete is requested in this example `con<cursor position>`
+	 * and a completion item with and `insertText` of `console` is provided it
+	 * will only insert `sole`. Therefore it is recommended to use `textEdit` instead
+	 * since it avoids additional client side interpretation.
+	 *
+	 * @deprecated Use textEdit instead.
 	 */
 	insertText?: string;
+
 	/**
 	 * The format of the insert text. The format applies to both the `insertText` property
 	 * and the `newText` property of a provided `textEdit`.
 	 */
 	insertTextFormat?: InsertTextFormat;
+
 	/**
 	 * An edit which is applied to a document when selecting this completion. When an edit is provided the value of
 	 * `insertText` is ignored.
@@ -2087,24 +2105,28 @@ interface CompletionItem {
 	 * has been requested.
 	 */
 	textEdit?: TextEdit;
+
 	/**
 	 * An optional array of additional text edits that are applied when
 	 * selecting this completion. Edits must not overlap with the main edit
 	 * nor with themselves.
 	 */
 	additionalTextEdits?: TextEdit[];
+
 	/**
 	 * An optional set of characters that when pressed while this completion is active will accept it first and
 	 * then type that character. *Note* that all commit characters should have `length=1` and that superfluous
 	 * characters will be ignored.
 	 */
 	commitCharacters?: string[];
+
 	/**
 	 * An optional command that is executed *after* inserting this completion. *Note* that
 	 * additional modifications to the current document should be described with the
 	 * additionalTextEdits-property.
 	 */
 	command?: Command;
+
 	/**
 	 * An data entry field that is preserved on a completion item between
 	 * a completion and a completion resolve request.
