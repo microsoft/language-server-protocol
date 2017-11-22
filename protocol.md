@@ -1692,6 +1692,13 @@ _Request_:
 ```typescript
 export interface ApplyWorkspaceEditParams {
 	/**
+	 * An optional label of the workspace edit. This label is
+	 * presented in the user interface for example on an undo
+	 * stack to undo the workspace edit.
+	 */
+	label?: string;
+
+	/**
 	 * The edits to apply.
 	 */
 	edit: WorkspaceEdit;
