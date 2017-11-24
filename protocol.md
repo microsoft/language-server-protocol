@@ -1,6 +1,6 @@
 # Language Server Protocol
 
-This document describes version 3.0 of the language server protocol. Major goals of the 3.0 version are:
+This document describes version 3.x of the language server protocol. Major goals of the 3.x version are:
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
 - add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediatelly.
@@ -16,6 +16,11 @@ The 1.x version of this document can be found [here](https://github.com/Microsof
 
 ## Change Log
 
+### 11/24/2017
+
+* Added support for `CompletionContext`
+* Added support for `MarkupContent`
+
 ### 09/26/2017
 
 * Added optional `commitCharacters` property to the `CompletionItem`
@@ -30,7 +35,7 @@ The 1.x version of this document can be found [here](https://github.com/Microsof
 General
 
 * :leftwards_arrow_with_hook: [initialize](#initialize)
-* **New** :arrow_right: [initialized](#initialized)
+* :arrow_right: [initialized](#initialized)
 * :leftwards_arrow_with_hook: [shutdown](#shutdown)
 * :arrow_right: [exit](#exit)
 * :arrow_right: :arrow_left: [$/cancelRequest](#cancelRequest)
@@ -42,7 +47,7 @@ Window
 * :arrow_left: [window/logMessage](#window_logMessage)
 * :arrow_left: [telemetry/event](#telemetry_event)
 
->**New** Client
+Client
 * :arrow_right_hook: [client/registerCapability](#client_registerCapability)
 * :arrow_right_hook: [client/unregisterCapability](#client_unregisterCapability)
 
@@ -51,8 +56,8 @@ Workspace
 * :arrow_right: [workspace/didChangeConfiguration](#workspace_didChangeConfiguration)
 * :arrow_right: [workspace/didChangeWatchedFiles](#workspace_didChangeWatchedFiles)
 * :leftwards_arrow_with_hook: [workspace/symbol](#workspace_symbol)
-* **New** :leftwards_arrow_with_hook: [workspace/executeCommand](#workspace_executeCommand)
-* **New** :arrow_right_hook: [workspace/applyEdit](#workspace_applyEdit)
+* :leftwards_arrow_with_hook: [workspace/executeCommand](#workspace_executeCommand)
+* :arrow_right_hook: [workspace/applyEdit](#workspace_applyEdit)
 
 Document
 
@@ -60,8 +65,8 @@ Document
 * :arrow_right: [textDocument/didOpen](#textDocument_didOpen)
 * :arrow_right: [textDocument/didChange](#textDocument_didChange)
 * :arrow_right: [textDocument/willSave](#textDocument_willSave)
-* **New** :leftwards_arrow_with_hook: [textDocument/willSaveWaitUntil](#textDocument_willSaveWaitUntil)
-* **New** :arrow_right: [textDocument/didSave](#textDocument_didSave)
+* :leftwards_arrow_with_hook: [textDocument/willSaveWaitUntil](#textDocument_willSaveWaitUntil)
+* :arrow_right: [textDocument/didSave](#textDocument_didSave)
 * :arrow_right: [textDocument/didClose](#textDocument_didClose)
 * :leftwards_arrow_with_hook: [textDocument/completion](#textDocument_completion)
 * :leftwards_arrow_with_hook: [completionItem/resolve](#completionItem_resolve)
@@ -107,7 +112,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 ### Content Part
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. 
-> **Changed** Prior version of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml)). For backwards compatibility it is highly recommended that a client and a server treats the string `utf8` as `utf-8`.
+Prior version of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml)). For backwards compatibility it is highly recommended that a client and a server treats the string `utf8` as `utf-8`.
 
 ### Example:
 
@@ -455,7 +460,7 @@ interface TextEdit {
 
 If multiple `TextEdit`s are applied to a text document, all text edits describe changes made to the initial document version. Execution-wise text edits should be applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
 
->#### New: TextDocumentEdit
+#### TextDocumentEdit
 
 Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array or do any kind of ordering. However the edits must be non overlapping.
 
@@ -475,7 +480,7 @@ export interface TextDocumentEdit {
 
 #### WorkspaceEdit
 
-> **Changed** A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChange`s are present, the latter are preferred over `changes`.
+A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChange`s are present, the latter are preferred over `changes`.
 
 ```typescript
 export interface WorkspaceEdit {
@@ -568,7 +573,7 @@ interface TextDocumentPositionParams {
 }
 ```
 
-> #### New: DocumentFilter
+#### DocumentFilter
 
 A document filter denotes a document through properties like `language`, `schema` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter the applies to JSON files with name `package.json`:
 ```typescript
@@ -601,6 +606,68 @@ A document selector is the combination of one or more document filters.
 export type DocumentSelector = DocumentFilter[];
 ```
 
+> #### New: MarkupContent
+
+ A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`.
+
+```typescript
+/**
+ * Describes the content type that a client supports in various
+ * result literals like `Hover`, `ParameterInfo` or `CompletionItem`.
+ *
+ * Please note that `MarkupKinds` must not start with a `$`. This kinds
+ * are reserved for internal usage.
+ */
+export namespace MarkupKind {
+	/**
+	 * Plain text is supported as a content format
+	 */
+	export const PlainText: 'plaintext' = 'plaintext';
+
+	/**
+	 * Markdown is supported as a content format
+	 */
+	export const Markdown: 'markdown' = 'markdown';
+}
+export type MarkupKind = 'plaintext' | 'markdown';
+
+/**
+ * A `MarkupContent` literal represents a string value which content is interpreted base on its
+ * kind flag. Currently the protocol supports `plaintext` and `markdown` as markup kinds.
+ *
+ * If the kind is `markdown` then the value can contain fenced code blocks like in GitHub issues.
+ * See https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting
+ *
+ * Here is an example how such a string can be constructed using JavaScript / TypeScript:
+ * ```ts
+ * let markdown: MarkdownContent = {
+ *  kind: MarkupKind.Markdown,
+ *	value: [
+ *		'# Header',
+ *		'Some text',
+ *		'```typescript',
+ *		'someCode();',
+ *		'```'
+ *	].join('\n')
+ * };
+ * ```
+ *
+ * *Please Note* that clients might sanitize the return markdown. A client could decide to
+ * remove HTML from the markdown to avoid script execution.
+ */
+export interface MarkupContent {
+	/**
+	 * The type of the Markup
+	 */
+	kind: MarkupKind;
+
+	/**
+	 * The content itself
+	 */
+	value: string;
+}
+```
+
 ### Actual Protocol
 
 This section documents the actual language server protocol. It uses the following format:
@@ -629,7 +696,7 @@ The initialize request is sent as the first request from the client to the serve
 
 Until the server has responded to the `initialize` request with an `InitializeResult`, the client must not send any additional requests or notifications to the server. 
 
->**Updated**: During the `initialize` request the server is allowed to send the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.  The `initialize` request may only be sent once.
+During the `initialize` request the server is allowed to send the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.  The `initialize` request may only be sent once.
 
 _Request_:
 * method: 'initialize'
@@ -677,7 +744,7 @@ interface InitializeParams {
 ```
 Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilities` are defined as follows:
 
->**New**: `WorkspaceClientCapabilities` define capabilities the editor / tool provides on the workspace:
+##### `WorkspaceClientCapabilities` define capabilities the editor / tool provides on the workspace:
 
 ```typescript
 /**
@@ -742,7 +809,7 @@ export interface WorkspaceClientCapabilities {
 }
 ```
 
->**New**: `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
+##### `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
 
 ```typescript
 /**
@@ -802,6 +869,12 @@ export interface TextDocumentClientCapabilities {
 			 * Client supports commit characters on a completion item.
 			 */
 			commitCharactersSupport?: boolean			
+
+			/**
+			 * Client supports the follow content formats for the documentation
+			 * property. The order describes the preferred format of the client.
+			 */
+			documentationFormat?: MarkupKind[];
 		}
 
 		/**
@@ -819,6 +892,12 @@ export interface TextDocumentClientCapabilities {
 		 * Whether hover supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
+
+		/**
+		 * Client supports the follow content formats for the content
+		 * property. The order describes the preferred format of the client.
+		 */
+		contentFormat?: MarkupKind[];
 	};
 
 	/**
@@ -829,6 +908,18 @@ export interface TextDocumentClientCapabilities {
 		 * Whether signature help supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
+
+		/**
+		 * The client supports the following `SignatureInformation`
+		 * specific properties.
+		 */
+		signatureInformation?: {
+			/**
+			 * Client supports the follow content formats for the documentation
+			 * property. The order describes the preferred format of the client.
+			 */
+			documentationFormat?: MarkupKind[];
+		};
 	};
 
 	/**
@@ -943,7 +1034,7 @@ export interface TextDocumentClientCapabilities {
 }
 ```
 
-> **New**: `ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
+`ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
@@ -1212,7 +1303,7 @@ interface ServerCapabilities {
 }
 ```
 
->#### New: <a name="initialized"></a>Initialized Notification
+#### <a name="initialized"></a>Initialized Notification
 
 The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification for example to dynamically register capabilities. The `initialized` notification may only be sent once. 
 
@@ -1360,7 +1451,7 @@ _Notification_:
 * method: 'telemetry/event'
 * params: 'any'
 
-> #### New: <a name="client_registerCapability"></a>Register Capability
+#### <a name="client_registerCapability"></a>Register Capability
 
 The `client/registerCapability` request is sent from the server to the client to register for a new capability on the client side. Not all clients need to support dynamic capability registration. A client opts in via the `dynamicRegistration` property on the specific client capabilities. A client can even provide dynamic registration for capability A but not for capability B (see `TextDocumentClientCapabilities` as an example).
 
@@ -1436,7 +1527,7 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
-> #### New: <a name="client_unregisterCapability"></a>Unregister Capability
+#### <a name="client_unregisterCapability"></a>Unregister Capability
 
 The `client/unregisterCapability` request is sent from the server to the client to unregister a previously registered capability.
 
@@ -1801,7 +1892,7 @@ export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegis
 ```
 
 
-> #### New: <a name="textDocument_willSave"></a>WillSaveTextDocument Notification
+#### <a name="textDocument_willSave"></a>WillSaveTextDocument Notification
 
 The document will save notification is sent from the client to the server before the document is actually saved.
 
@@ -1851,7 +1942,7 @@ export namespace TextDocumentSaveReason {
 _Registration Options_: `TextDocumentRegistrationOptions`
 
 
-> #### New: <a name="textDocument_willSaveWaitUntil"></a>WillSaveWaitUntilTextDocument Request
+#### <a name="textDocument_willSaveWaitUntil"></a>WillSaveWaitUntilTextDocument Request
 
 The document will save request is sent from the client to the server before the document is actually saved. The request can return an array of TextEdits which will be applied to the text document before it is saved. Please note that clients might drop results if computing the text edits took too long or if a server constantly fails on this request. This is done to keep the save fast and reliable.
 
@@ -2069,7 +2160,7 @@ interface CompletionItem {
 	/**
 	 * A human-readable string that represents a doc-comment.
 	 */
-	documentation?: string;
+	documentation?: string | MarkupContent;
 
 	/**
 	 * A string that shoud be used when comparing this item
@@ -2222,7 +2313,7 @@ interface Hover {
 	/**
 	 * The hover's content
 	 */
-	contents: MarkedString | MarkedString[];
+	contents: MarkedString | MarkedString[] | MarkupContent;
 
 	/**
 	 * An optional range is a range inside a text document
@@ -2247,7 +2338,8 @@ Where `MarkedString` is defined as follows:
  * ```
  *
  * Note that markdown strings will be sanitized - that means html will be escaped.
- */
+* @deprecated use MarkupContent instead.
+*/
 type MarkedString = string | { language: string; value: string };
 ```
 
@@ -2317,7 +2409,7 @@ interface SignatureInformation {
 	 * The human-readable doc-comment of this signature. Will be shown
 	 * in the UI but can be omitted.
 	 */
-	documentation?: string;
+	documentation?: string | MarkupContent;
 
 	/**
 	 * The parameters of this signature.
@@ -2340,7 +2432,7 @@ interface ParameterInformation {
 	 * The human-readable doc-comment of this parameter. Will be shown
 	 * in the UI but can be omitted.
 	 */
-	documentation?: string;
+	documentation?: string | MarkupContent;
 }
 ```
 
