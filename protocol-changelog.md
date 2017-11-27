@@ -1,5 +1,9 @@
 # Protocol Change Log
 
+## 11/27/2017
+
+* [extensible completion item and symbol kinds](https://github.com/Microsoft/language-server-protocol/issues/129)
+
 ## 11/24/2017
 
 * Added support for `CompletionContext`

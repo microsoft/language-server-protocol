@@ -772,6 +772,23 @@ export interface WorkspaceClientCapabilities {
 		 * Symbol request supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
+
+		/**
+		 * Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
+		 */
+		symbolKind?: {
+			/**
+			 * The symbol kind values the client supports. When this
+			 * property exists the client also guarantees that it will
+			 * handle values outside its set gracefully and falls back
+			 * to a default value when unknown.
+			 *
+			 * If this property is not present the client only supports
+			 * the symbol kinds from `File` to `Array` as defined in
+			 * the initial version of the protocol.
+			 */
+			valueSet?: SymbolKind[];
+		}
 	};
 
 	/**
@@ -854,6 +871,20 @@ export interface TextDocumentClientCapabilities {
 			documentationFormat?: MarkupKind[];
 		}
 
+		completionItemKind?: {
+			/**
+			 * The completion item kind values the client supports. When this
+			 * property exists the client also guarantees that it will
+			 * handle values outside its set gracefully and falls back
+			 * to a default value when unknown.
+			 *
+			 * If this property is not present the client only supports
+			 * the completion items kinds from `Text` to `Reference` as defined in
+			 * the initial version of the protocol.
+			 */
+			valueSet?: CompletionItemKind[];
+		},
+
 		/**
 		 * The client supports to send additional context information for a
 		 * `textDocument/completion` requestion.
@@ -927,6 +958,23 @@ export interface TextDocumentClientCapabilities {
 		 * Whether document symbol supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
+
+		/**
+		 * Specific capabilities for the `SymbolKind`.
+		 */
+		symbolKind?: {
+			/**
+			 * The symbol kind values the client supports. When this
+			 * property exists the client also guarantees that it will
+			 * handle values outside its set gracefully and falls back
+			 * to a default value when unknown.
+			 *
+			 * If this property is not present the client only supports
+			 * the symbol kinds from `File` to `Array` as defined in
+			 * the initial version of the protocol.
+			 */
+			valueSet?: SymbolKind[];
+		}
 	};
 
 	/**
@@ -2231,6 +2279,13 @@ namespace CompletionItemKind {
 	export const Color = 16;
 	export const File = 17;
 	export const Reference = 18;
+	export const Folder: 19 = 19;
+	export const EnumMember: 20 = 20;
+	export const Constant: 21 = 21;
+	export const Struct: 22 = 22;
+	export const Event: 23 = 23;
+	export const Operator: 24 = 24;
+	export const TypeParameter: 25 = 25;
 }
 ```
 * error: code and message set in case an exception happens during the completion request.
@@ -2603,6 +2658,14 @@ export namespace SymbolKind {
 	export const Number = 16;
 	export const Boolean = 17;
 	export const Array = 18;
+	export const Object: 19 = 19;
+	export const Key: 20 = 20;
+	export const Null: 21 = 21;
+	export const EnumMember: 22 = 22;
+	export const Struct: 23 = 23;
+	export const Event: 24 = 24;
+	export const Operator: 25 = 25;
+	export const TypeParameter: 26 = 26;
 }
 ```
 
