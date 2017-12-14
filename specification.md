@@ -1,6 +1,6 @@
 ---
 title: Specification
-layout: singlePage
+layout: specification
 sectionid: specification
 toc: true
 ---

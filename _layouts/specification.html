@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <h1>{{ page.title }}</h1>
+            <div id="markdown-content-container">{{ content }}</div>
+        </div>
+        <div class="col-md-2">
+			<ul>
+				{% for toc-l1 in site.data.specification-toc %}
+				<li>{{ toc-l1.title }}</li>
+				<ul>
+					{% for toc-l2 in toc-l1.children %}
+					  <li>{{ toc-l2.title }}</li>
+					  <ul>
+						{% for toc-l3 in toc-l2.children %}
+						  <li>{{ toc-l3.title }}</li>
+						{% endfor %}					  
+					  </ul>
+					{% endfor %}
+				</ul>
+				{% endfor %}
+			</ul>
+        </div>
+    </div>
+</div>
