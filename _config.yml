@@ -16,8 +16,6 @@ gems:
   - github-pages
   - jemoji
 
-plugins:
-  - jekyll-toc
 
 exclude:
   - Gemfile
