@@ -31,15 +31,15 @@ layout: default
             <h1 class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></h1>
             <a href='{{ "/howItWorks" | prepend: site.baseurl }}'><h3 class="text-center">How the Protocol Works</h3></a>
             <p>
-                The protocol defines format of the messages sent using JSON-RPC between development tool and the language server.
+                The protocol defines the format of the messages sent using JSON-RPC between development tool and the language server.
             </p>
         </div>
         <div class="col-lg-4">
             <h1 class="text-center"><i class="fas fa-code-branch" aria-hidden="true"></i></h1>
             {% assign sorted = site.implementors | sort: 'index' %}
-            <a href = "{{ sorted.first.url | prepend: site.baseurl }}"><h3 class="text-center">Supporters</h3></a>
+            <a href = "{{ sorted.first.url | prepend: site.baseurl }}"><h3 class="text-center">Implementations</h3></a>
             <p>
-                The LSP has been implemented for many languages and many development tools integrate these language servers. To simplify the implementation and integration of LSP there are different libraries/SDKs provided.
+                The LSP has been implemented for many languages and many development tools integrate these language servers. To simplify the implementation and integration of LSP there are different libraries/SDKs available.
             </p>
         </div>
         <div class="col-lg-4">
