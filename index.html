@@ -6,7 +6,7 @@ layout: default
     <div class="container">
         <h1>Language Server Protocol</h1>
         <p>
-            The Language Server protocol is used between a tool (the client) and a language smartness provider (the server) to integrate features like auto complete, goto definition, find all references and alike into the tool.
+            The Language Server Protocol (LSP) defines the protocol used between an editor or IDE to talk to a language server that provides language features like auto complete, goto definition, find all references.
         </p>
     </div>
 </div>
@@ -18,7 +18,8 @@ layout: default
         <div class="col-lg-12">
             <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
             <blockquote>
-              <p>Supporting rich editing features like code auto-completions or "Go to Definition" for a programming language in an editor or IDE is traditionally very challenging and time consuming. Usually it requires writing a domain model (a scanner, a parser, a type checker, a builder and more) in the programming language of the editor or IDE. Things would be a lot easier if a development tool could reuse existing libraries. However, these libraries are usually implemented in the programming language itself (for example, good C/C++ domain models are implemented in C/C++). Integrating a C/C++ library into an editor written in TypeScript is technically possible but hard to do. Alternatively, we can run the library in its own process and use inter-process communication to talk to it. The messages sent back and forth form a protocol. The language server protocol (LSP) is the product of standardizing the messages exchanged between a development tool and a language server process.</p>
+              <p>Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself. This requires to implement the smartness for a language multiple times and this in different languages. It is not possible to share this language smartness across tools. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocl between the development tool and the this server to support a particular language. When each language server provides a different protocol then the tool integrator has to integrate support for each language differently. The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!
+              </p>
             </blockquote>
         </div>
     </div>
@@ -28,24 +29,24 @@ layout: default
     <div class="row">
         <div class="col-lg-4">
             <h1 class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></h1>
-            <a href='{{ "/howItWorks" | prepend: site.baseurl }}'><h3 class="text-center">How the LSP Works</h3></a>
+            <a href='{{ "/howItWorks" | prepend: site.baseurl }}'><h3 class="text-center">How the Protocol Works</h3></a>
             <p>
-                A language server runs in its own process and tools like VS Code communicate with the server using the language protocol over JSON-RPC.
+                The protocol defines format of the messages sent using JSON-RPC between development tool and the language server.
             </p>
         </div>
         <div class="col-lg-4">
             <h1 class="text-center"><i class="fas fa-code-branch" aria-hidden="true"></i></h1>
             {% assign sorted = site.implementors | sort: 'index' %}
-            <a href = "{{ sorted.first.url | prepend: site.baseurl }}"><h3 class="text-center">Implementors</h3></a>
+            <a href = "{{ sorted.first.url | prepend: site.baseurl }}"><h3 class="text-center">Supporters</h3></a>
             <p>
-                There are three different kinds of LSP implementors: server providing editing features for programming language, tool integrations and LSP SDKs.
+                The LSP has been implemented for many languages and many development tools integrate these language servers. To simplify the implementation and integration of LSP there are different libraries/SDKs provided.
             </p>
         </div>
         <div class="col-lg-4">
             <h1 class="text-center"><i class="far fa-clock" aria-hidden="true"></i></h1>
             <a href='{{ "/specification" | prepend: site.baseurl }}'><h3 class="text-center">Specification</h3></a>
             <p>
-                Version 3.0 of the protocol has been around for some time. Our current focus is to stabilize and clarify the specification. 
+                The lastet version of the protocol specification is version 3.0. 
             </p>
         </div>
     </div>
