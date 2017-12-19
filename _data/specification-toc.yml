@@ -84,7 +84,6 @@
       anchor: textDocument_documentLink
     - title: resolve
       anchor: documentLink_resolve
-
     - title: formatting
       anchor: textDocument_formatting
     - title: rangeFormatting
