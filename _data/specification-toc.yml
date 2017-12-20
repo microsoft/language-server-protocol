@@ -1,0 +1,95 @@
+- title: Message Overview
+  children:
+  - title: General
+    children:
+    - title: initialize
+      anchor: initialize
+    - title: initalized
+      anchor: initialized
+    - title: shutdown
+      anchor: shutdown
+    - title: exit
+      anchor: exit
+    - title: $/cancelRequest
+      anchor: cancelRequest
+  - title: Window
+    children:
+    - title: showMessage
+      anchor: window_showMessage
+    - title: showMessageRequest
+      anchor: window_showMessageRequest
+    - title: logMessage
+      anchor: window_logMessage
+  - title: Telemetry
+    children:
+    - title: event
+      anchor: telemetry_event
+  - title: Client
+    children:
+    - title: registerCapability
+      anchor: client_registerCapability
+    - title: unregisterCapability
+      anchor: client_unregisterCapability
+  - title: Workspace
+    children: 
+    - title: didChangeConfiguration
+      anchor: workspace_didChangeConfiguration
+    - title: didChangeWatchedFiles
+      anchor: workspace_didChangeWatchedFiles
+    - title: symbol
+      anchor: workspace_symbol
+    - title: executeCommand
+      anchor: workspace_executeCommand
+    - title: applyEdit
+      anchor: workspace_applyEdit
+  - title: Text Document
+    children:
+    - title: didOpen
+      anchor: textDocument_didOpen
+    - title: didChange
+      anchor: textDocument_didChange
+    - title: willSave
+      anchor: textDocument_willSave
+    - title: willSaveWaitUntil
+      anchor: textDocument_willSaveWaitUntil
+    - title: didSave
+      anchor: textDocument_didSave
+    - title: didClose
+      anchor: textDocument_didClose
+    - title: publishDiagnostics
+      anchor: textDocument_publishDiagnostics
+    - title: completion
+      anchor: textDocument_completion
+    - title: resolve
+      anchor: completionItem_resolve
+    - title: hover
+      anchor: textDocument_hover
+    - title: signatureHelp
+      anchor: textDocument_signatureHelp
+    - title: definition
+      anchor: textDocument_definition
+    - title: references
+      anchor: textDocument_references
+    - title: documentHighlight
+      anchor: textDocument_documentHighlight
+    - title: documentSymbol
+      anchor: textDocument_documentSymbol
+    - title: codeAction
+      anchor: textDocument_codeAction
+    - title: codeLens
+      anchor: textDocument_codeLens
+    - title: resolve
+      anchor: codeLens_resolve
+    - title: documentLink
+      anchor: textDocument_documentLink
+    - title: resolve
+      anchor: documentLink_resolve
+    - title: formatting
+      anchor: textDocument_formatting
+    - title: rangeFormatting
+      anchor: textDocument_rangeFormatting
+    - title: onTypeFormatting
+      anchor: textDocument_onTypeFormatting
+    - title: rename
+      anchor: textDocument_rename
+

@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+            <div id="markdown-content-container">{{ content }}</div>
+        </div>
+        <div class="col-sm-2">
+            <div class="sticky-top" style="top: 4rem">
+                {% for toc-l1 in site.data.specification-toc %}
+                <div class="card">
+                    <div class="card-header toc-title">
+                        {{ toc-l1.title }}
+                    </div>
+                    <ul class="nav toc flex-column">
+                        {% for toc-l2 in toc-l1.children %}
+                        <li class="nav-item">
+                            <h6 class="toc-h1">{{ toc-l2.title }}</h6>
+                            <ul class="nav flex-column" style="padding-left: 0.5rem">
+                                {% for toc-l3 in toc-l2.children %}
+                                <li class="nav-item">
+                                    <a class="nav-link toc-link" href="#{{ toc-l3.anchor }}">
+                                        {{ toc-l3.title }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
