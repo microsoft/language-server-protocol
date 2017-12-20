@@ -13,8 +13,7 @@ layout: default
 
 
 <div class="container">
-
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col-lg-6">
             <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
             <blockquote>
@@ -23,24 +22,39 @@ layout: default
             </blockquote>
         </div>
         <div class="col-lg-6">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <img src="img/vscode-code-complete.png" class="img-fluid rounded"/>
+            <div id="carouselOne" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <img src="img/vscode-code-complete.png" class="img-fluid rounded"/>
+                            </div>
+                            <div class="col-lg-4">
+                                <p class="text-left"><i>CSS code complete in VS Code powered by the CSS LSP Server</i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row align-items-center">
+                            <div class="col-lg-4">
+                                <p class="text-left"><i>CSS code complete in Atom powered by the CSS LSP Server</i></p>
+                            </div>
+                            <div class="col-lg-8">
+                                <img src="img/atom-code-complete.png" class="img-fluid rounded"/>
+                            </div>                
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <img src="img/vs-rust-code-complete.png" class="img-fluid rounded"/>
+                            </div>                
+                            <div class="col-lg-4">
+                                <p class="text-left"><i>Rust code complete in Visual Studio powered by the Rust LSP Server</i></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <p class="text-left"><i>CSS code complete in VS Code powered by the CSS LSP Server</i></p>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <p></p>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-lg-4">
-                    <p class="text-left"><i>CSS code complete in Atom powered by the CSS LSP Server</i></p>
-                </div>
-                <div class="col-lg-8">
-                    <img src="img/atom-code-complete.png" class="img-fluid rounded"/>
-                </div>                
             </div>
         </div>
     </div>
