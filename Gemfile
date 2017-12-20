@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby RUBY_VERSION
 
-gem "jekyll", "3.4.3"
+gem "jekyll", "3.6.2"
 
 # to use GitHub Pages
 # gem "github-pages", group: :jekyll_plugins
@@ -10,6 +10,7 @@ gem "jekyll", "3.4.3"
 group :jekyll_plugins do
    gem "jemoji"
    gem "github-pages"
+   gem "jekyll-remote-theme"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
