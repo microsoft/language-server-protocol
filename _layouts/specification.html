@@ -17,27 +17,24 @@ layout: default
                         {{ toc-l1.title }}
                     </div>
                     <div id="outlineAccordion" data-children=".item">
+                        {% for toc-l2 in toc-l1.children %}
                         <div class="item">
-                            
+                            <a class="nav-link toc-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ toc-l2.anchor }}" aria-expanded="true" aria-controls="exampleAccordion1">
+                                {{ toc-l2.title }}
+                            </a>
+                            <div id="{{ toc-l2.anchor }}" class="collapse {% if toc-l2.anchor=='general' %}show{% endif%}" role="tabpanel">
+                                <ul class="nav toc flex-column" style="padding-left: 0.5rem">
+                                    {% for toc-l3 in toc-l2.children %}
+                                    <li class="nav-item">
+                                        <a class="nav-link toc-link" href="#{{ toc-l3.anchor }}">
+                                            {{ toc-l3.title }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                        <ul class="nav toc flex-column">
-                            {% for toc-l2 in toc-l1.children %}
-                            <li class="nav-item item">
-                                <h6 class="toc-h1"><a class="nav-link toc-link" style="padding-left: 0rem" data-toggle="collapse" data-parent="outlineAccordion" href="#{{ toc-l2.anchor }}">{{ toc-l2.title }}</a></h6>
-                                <div class="collapse {% if toc-l2.anchor=='general' %}show{% endif%}" id="{{ toc-l2.anchor }}">
-                                    <ul class="nav flex-column" style="padding-left: 0.5rem">
-                                        {% for toc-l3 in toc-l2.children %}
-                                        <li class="nav-item">
-                                            <a class="nav-link toc-link" href="#{{ toc-l3.anchor }}">
-                                                {{ toc-l3.title }}
-                                            </a>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                        {% endfor %}
                     </div>
                 </div>
                 {% endfor %}
@@ -45,5 +42,3 @@ layout: default
         </div>
     </div>
 </div>
-
-
