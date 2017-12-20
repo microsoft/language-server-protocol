@@ -6,7 +6,8 @@ author: Microsoft
 index: 2
 ---
 
-** Please ** make a Pull Request against ??? to add your implementation.
+*If you are missing a development tool please create a pull request in GitHub gainst this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/tools.md)*
+
 
 | Editor/IDE | Maintainer | Repository |
 |------|--------|----------|

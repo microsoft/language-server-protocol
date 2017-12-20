@@ -15,12 +15,33 @@ layout: default
 <div class="container">
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
             <blockquote>
-              <p>Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself. This requires to implement the smartness for a language multiple times and this in different languages. It is not possible to share this language smartness across tools. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocl between the development tool and the this server to support a particular language. When each language server provides a different protocol then the tool integrator has to integrate support for each language differently. The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!
+              <p>Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself. This requires to implement the smartness for a language multiple times. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocol to talk to this server. If each language server speaks a different protocol then the  integration of each server into each tool is custom. The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!
               </p>
             </blockquote>
+        </div>
+        <div class="col-lg-6">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <img src="img/vscode-code-complete.png" class="img-fluid rounded"/>
+                </div>
+                <div class="col-lg-4">
+                    <p class="text-left"><i>CSS code complete in VS Code powered by the CSS LSP Server</i></p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <p></p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    <p class="text-left"><i>CSS code complete in Atom powered by the CSS LSP Server</i></p>
+                </div>
+                <div class="col-lg-8">
+                    <img src="img/atom-code-complete.png" class="img-fluid rounded"/>
+                </div>                
+            </div>
         </div>
     </div>
 

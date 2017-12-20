@@ -14,7 +14,7 @@
                     <a class="nav-link" href='{{ "/howItWorks" | prepend: site.baseurl }}'>How it Works</a>
                 </li>
                 <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementors</a>
+                    <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
                 </li>
                 <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>

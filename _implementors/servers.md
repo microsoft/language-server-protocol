@@ -8,7 +8,7 @@ index: 1
 
 The language servers are listed in chronological order of appearance.
 
-** Please ** make a Pull Request against ??? to add your implementation.
+*If you are missing a server please create a pull request in GitHub gainst this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/servers.md)*
 
 | Language | Maintainer | Repository |
 |------|--------|----------|
