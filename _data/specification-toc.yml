@@ -1,6 +1,7 @@
 - title: Message Overview
   children:
   - title: General
+    anchor: general
     children:
     - title: initialize
       anchor: initialize
@@ -13,6 +14,7 @@
     - title: $/cancelRequest
       anchor: cancelRequest
   - title: Window
+    anchor: window
     children:
     - title: showMessage
       anchor: window_showMessage
@@ -21,16 +23,19 @@
     - title: logMessage
       anchor: window_logMessage
   - title: Telemetry
+    anchor: telemetry
     children:
     - title: event
       anchor: telemetry_event
   - title: Client
+    anchor: client
     children:
     - title: registerCapability
       anchor: client_registerCapability
     - title: unregisterCapability
       anchor: client_unregisterCapability
   - title: Workspace
+    anchor: workspace
     children: 
     - title: didChangeConfiguration
       anchor: workspace_didChangeConfiguration
@@ -43,6 +48,7 @@
     - title: applyEdit
       anchor: workspace_applyEdit
   - title: Text Document
+    anchor: textDocument
     children:
     - title: didOpen
       anchor: textDocument_didOpen
