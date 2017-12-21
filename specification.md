@@ -11,7 +11,7 @@ This document describes version 3.x of the language server protocol. An implemen
 The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
 The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
 
-See the [change log](./protocol-changelog.md) for recent updates to the protocol.
+**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/specification.md)
 
 ## Base Protocol
 
