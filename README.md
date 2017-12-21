@@ -29,7 +29,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 ## The Language Server Protocol
 
-The file [protocol.md](protocol.md) specifies the language server protocol.
+The LSP specification is available as a separate [Web site](https://microsoft.github.io/language-server-protocol/specification)
 
 ## License
 [Creative Commons Attribution / MIT](License.txt)
