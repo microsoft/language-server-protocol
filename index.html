@@ -69,18 +69,18 @@ layout: default
             </p>
         </div>
         <div class="col-lg-4">
+            <h1 class="text-center"><i class="fas fa-book" aria-hidden="true"></i></h1>
+            <a href='{{ "/specification" | prepend: site.baseurl }}'><h3 class="text-center">Specification</h3></a>
+            <p>
+                The lastet version of the protocol specification is version 3.0. 
+            </p>
+        </div>
+        <div class="col-lg-4">
             <h1 class="text-center"><i class="fas fa-code-branch" aria-hidden="true"></i></h1>
             {% assign sorted = site.implementors | sort: 'index' %}
             <a href = "{{ sorted.first.url | prepend: site.baseurl }}"><h3 class="text-center">Implementations</h3></a>
             <p>
-                The LSP has been implemented for many languages and many development tools integrate these language servers. To simplify the implementation and integration of LSP there are different libraries/SDKs available.
-            </p>
-        </div>
-        <div class="col-lg-4">
-            <h1 class="text-center"><i class="far fa-clock" aria-hidden="true"></i></h1>
-            <a href='{{ "/specification" | prepend: site.baseurl }}'><h3 class="text-center">Specification</h3></a>
-            <p>
-                The lastet version of the protocol specification is version 3.0. 
+                The LSP has been implemented for many languages and many development tools integrategrating these language servers.
             </p>
         </div>
     </div>

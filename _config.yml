@@ -12,7 +12,7 @@ git_edit_address: https://github.com/Microsoft/language-server-protocol/blob/gh-
 markdown: kramdown
 highlighter: rouge
 
-gems:
+plugins:
   - github-pages
   - jemoji
 
