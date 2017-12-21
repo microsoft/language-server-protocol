@@ -1362,7 +1362,7 @@ _Request_:
 * params: `ShowMessageRequestParams` defined as follows:
 
 _Response_:
-* result: the selected `MessageActionItem` | `null` if none got selected.
+* result: the selected `MessageActionItem | null` if none got selected.
 * error: code and message set in case an exception happens during showing a message.
 
 ```typescript
@@ -1699,7 +1699,7 @@ interface WorkspaceSymbolParams {
 ```
 
 _Response_:
-* result: `null` | `SymbolInformation[]` as defined above.
+* result: `null | SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
 _Registration Options_: void
@@ -1732,7 +1732,7 @@ export interface ExecuteCommandParams {
 The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
 
 _Response_:
-* result: `null` | `any`
+* result: `null | any`
 * error: code and message set in case an exception happens during the request.
 
 _Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
@@ -1929,7 +1929,7 @@ _Request_:
 * params: `WillSaveTextDocumentParams`
 
 _Response_:
-* result: `null` | `TextEdit[]`
+* result: `null | TextEdit[]`
 * error: code and message set in case an exception happens during the `willSaveWaitUntil` request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2073,7 +2073,7 @@ export interface CompletionContext {
 ```
 
 _Response_:
-* result: `null` | `CompletionItem[] | CompletionList`. If a `CompletionItem[]` is provided it is interpreted to be complete. So it is the same as `{ isIncomplete: false, items }`
+* result: `null | CompletionItem[] | CompletionList`. If a `CompletionItem[]` is provided it is interpreted to be complete. So it is the same as `{ isIncomplete: false, items }`
 
 ```typescript
 /**
@@ -2289,7 +2289,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `null` | `Hover` defined as follows:
+* result: `null | Hover` defined as follows:
 
 ```typescript
 /**
@@ -2342,7 +2342,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `null` | `SignatureHelp` defined as follows:
+* result: `null | SignatureHelp` defined as follows:
 
 ```typescript
 /**
@@ -2488,7 +2488,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `null` | `DocumentHighlight`[] defined as follows:
+* result: `null | DocumentHighlight`[] defined as follows:
 
 ```typescript
 /**
@@ -2552,7 +2552,7 @@ interface DocumentSymbolParams {
 ```
 
 _Response_:
-* result: `null` | `SymbolInformation`[] defined as follows:
+* result: `null | SymbolInformation`[] defined as follows:
 
 ```typescript
 /**
@@ -2694,7 +2694,7 @@ interface CodeLensParams {
 ```
 
 _Response_:
-* result: `null` | `CodeLens[]` defined as follows:
+* result: `null | CodeLens[]` defined as follows:
 
 ```typescript
 /**
