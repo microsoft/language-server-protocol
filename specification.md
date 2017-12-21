@@ -1633,7 +1633,7 @@ interface DidChangeConfigurationParams {
 
 The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client. It is recommended that servers register for these file events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
 
-Servers are allowed to run there own file watching mechansim and not rely on clients to provide file events. However this is not recommended due to the following reasons:
+Servers are allowed to run their own file watching mechansim and not rely on clients to provide file events. However this is not recommended due to the following reasons:
 
 - to our experience getting file watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
 - file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare timestamps (as for example some node modules do)
