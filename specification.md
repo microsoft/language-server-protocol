@@ -660,7 +660,7 @@ This section documents the actual language server protocol. It uses the followin
 * a header describing the request
 * a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
 * a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
-* a _Registration Options_ section decribing the registration option if the request or notification supports dynamic capability registration.
+* a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
 #### Request, Notification and response ordering
 
@@ -895,7 +895,7 @@ export interface TextDocumentClientCapabilities {
 
 		/**
 		 * The client supports to send additional context information for a
-		 * `textDocument/completion` requestion.
+		 * `textDocument/completion` request.
 		 */
 		contextSupport?: boolean;		
 	};
@@ -1067,7 +1067,7 @@ export interface TextDocumentClientCapabilities {
 }
 ```
 
-`ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimential capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
+`ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
@@ -1638,10 +1638,10 @@ interface DidChangeConfigurationParams {
 
 The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client. It is recommended that servers register for these file events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
 
-Servers are allowed to run their own file watching mechansim and not rely on clients to provide file events. However this is not recommended due to the following reasons:
+Servers are allowed to run their own file watching mechanism and not rely on clients to provide file events. However this is not recommended due to the following reasons:
 
 - to our experience getting file watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
-- file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare timestamps (as for example some node modules do)
+- file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare time stamps (as for example some node modules do)
 - a client usually starts more than one server. If every server runs its own file watching it can become a CPU or memory problem.
 - in general there are more server than client implementations. So this problem is better solved on the client side.  
 
@@ -1699,7 +1699,7 @@ _Registration Options_: `DidChangeWatchedFilesRegistrationOptions` defined as fo
 
 ```typescript
 /**
- * Descibe options to be used when registered for text document change events.
+ * Describe options to be used when registered for text document change events.
  */
 export interface DidChangeWatchedFilesRegistrationOptions {
 	/**
@@ -1887,7 +1887,7 @@ interface DidChangeTextDocumentParams {
 	textDocument: VersionedTextDocumentIdentifier;
 
 	/**
-	 * The actual content changes. The content changes descibe single state changes
+	 * The actual content changes. The content changes describe single state changes
 	 * to the document. So if there are two content changes c1 and c2 for a document 
 	 * in state S10 then c1 move the document to S11 and c2 to S12.
 	 */
@@ -1920,7 +1920,7 @@ _Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follo
 
 ```typescript
 /**
- * Descibe options to be used when registered for text document change events.
+ * Describe options to be used when registered for text document change events.
  */
 export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
@@ -2012,7 +2012,7 @@ interface DidSaveTextDocumentParams {
 
 	/**
 	 * Optional the content when saved. Depends on the includeText value
-	 * when the save notifcation was requested.
+	 * when the save notification was requested.
 	 */
 	text?: string;
 }
@@ -2031,7 +2031,7 @@ export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistr
 
 #### <a name="textDocument_didClose" class="anchor"></a>DidCloseTextDocument Notification (:arrow_right:)
 
-The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notifaction to be sent.
+The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent.
 
 _Notification_:
 * method: 'textDocument/didClose'
@@ -2080,7 +2080,7 @@ interface PublishDiagnosticsParams {
 
 #### <a name="textDocument_completion" class="anchor"></a>Completion Request (:leftwards_arrow_with_hook:)
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in. The request can delay the computation od the `detail` and `documentation` properties. However, properties that are needed for the inital sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` request and must not be changed during resolve.
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in. The request can delay the computation od the `detail` and `documentation` properties. However, properties that are needed for the initial sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` request and must not be changed during resolve.
 
 Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is documented [here](./snippetSyntax.md)
 
@@ -2204,7 +2204,7 @@ interface CompletionItem {
 	documentation?: string | MarkupContent;
 
 	/**
-	 * A string that shoud be used when comparing this item
+	 * A string that should be used when comparing this item
 	 * with other items. When `falsy` the label is used.
 	 */
 	sortText?: string;
@@ -2377,7 +2377,7 @@ Where `MarkedString` is defined as follows:
 /**
  * MarkedString can be used to render human readable text. It is either a markdown string
  * or a code-block that provides a language and a code snippet. The language identifier
- * is sematically equal to the optional language identifier in fenced code blocks in GitHub
+ * is semantically equal to the optional language identifier in fenced code blocks in GitHub
  * issues. See https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting
  *
  * The pair of a language and a value is an equivalent to markdown:
@@ -2425,7 +2425,7 @@ interface SignatureHelp {
 	 * make an active decision about the active signature and shouldn't 
 	 * rely on a default value.
 	 * In future version of the protocol this property might become
-	 * mandantory to better express this.
+	 * mandatory to better express this.
 	 */
 	activeSignature?: number;
 
@@ -2435,7 +2435,7 @@ interface SignatureHelp {
 	 * defaults to 0 if the active signature has parameters. If 
 	 * the active signature has no parameters it is ignored. 
 	 * In future version of the protocol this property might become
-	 * mandantory to better express the active parameter if the
+	 * mandatory to better express the active parameter if the
 	 * active signature does have any.
 	 */
 	activeParameter?: number;
@@ -2598,7 +2598,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a name="textDocument_documentSymbol" class="anchor"></a>Document Symbols Request (:leftwards_arrow_with_hook:)
 
-The document symbol request is sent from the client to the server to return a flat list of all symbols found in a given text document. Neither the document's location range nor the documents container name should be used to reinfer a hierarchy.
+The document symbol request is sent from the client to the server to return a flat list of all symbols found in a given text document. Neither the document's location range nor the documents container name should be used to infer a hierarchy.
 
 _Request_:
 * method: 'textDocument/documentSymbol'
@@ -2636,7 +2636,7 @@ interface SymbolInformation {
 	 * The location of this symbol. The location's range is used by a tool
 	 * to reveal the location in the editor. If the symbol is selected in the
 	 * tool the range's start information is used to position the cursor. So
-	 * the range usually spwans more then the actual symbol's name and does
+	 * the range usually spawns more then the actual symbol's name and does
 	 * normally include thinks like visibility modifiers.
 	 *
 	 * The range doesn't have to denote a node range in the sense of a abstract
@@ -2647,7 +2647,7 @@ interface SymbolInformation {
 
 	/**
 	 * The name of the symbol containing this symbol. This information is for
-	 * user interface purposes (e.g. to render a qaulifier in the user interface
+	 * user interface purposes (e.g. to render a qualifier in the user interface
 	 * if necessary). It can't be used to re-infer a hierarchy for the document
 	 * symbols.
 	 */

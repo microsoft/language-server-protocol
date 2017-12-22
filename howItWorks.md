@@ -16,7 +16,7 @@ A language server runs as a separate process and development tools communicate w
 
 * **The user closes the document (file)**: A 'textDocument/didClose' notification is sent from the tool informing the language server that the document is now no longer in memory. The current contents is now up to date on the file system.
 
-This example illustrates how the protocol communicates with the language server at the level of document references (URIs) and document positions. These data types are programming language neutral and apply to all programming languages. The data types are not at the level of a programming language domain model which would usually provide abstract syntax trees and compiler symbols (for example, resolved types, namespaces, ...). The fact, that the data types are simple and programming language netrual simplifies the protocol significantly. It is much simpler to standardize a text document URI or a cursor position compared with standardizing an abstract syntax tree and compiler symbols across different programming languages.
+This example illustrates how the protocol communicates with the language server at the level of document references (URIs) and document positions. These data types are programming language neutral and apply to all programming languages. The data types are not at the level of a programming language domain model which would usually provide abstract syntax trees and compiler symbols (for example, resolved types, namespaces, ...). The fact, that the data types are simple and programming language neutral simplifies the protocol significantly. It is much simpler to standardize a text document URI or a cursor position compared with standardizing an abstract syntax tree and compiler symbols across different programming languages.
 
 Now let's look at the 'textDocument/definition' request in more detail. Below are the payloads that go between the development tool and the language server for the "Go to Definition" request in a C++ document.
 
@@ -75,4 +75,4 @@ To simplify the implementation of language servers and clients, there are librar
 
 - *Development tool SDKs* each development tool typically provides a library for integrating language servers. For example, for JavaScript/TypeScript there is a [language client npm module](https://www.npmjs.com/package/vscode-languageclient)
 
-- *Language Server SDKs* for the different implementation languages there is an SDK to implement a language server in a particular language. For example, to implementat a language server using Node.js there is [language server npm module](https://www.npmjs.com/package/vscode-languageserver).
+- *Language Server SDKs* for the different implementation languages there is an SDK to implement a language server in a particular language. For example, to implement a language server using Node.js there is [language server npm module](https://www.npmjs.com/package/vscode-languageserver).
