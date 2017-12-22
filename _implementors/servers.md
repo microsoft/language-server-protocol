@@ -18,7 +18,7 @@ The language servers are listed in chronological order of appearance.
 | JSON | MS | [vscode-json-languageservice](https://github.com/Microsoft/vscode-json-languageservice) |
 | CSS/LESS/SASS | MS | [vscode-css-languageservice](https://github.com/Microsoft/vscode-css-languageservice) |
 | HTML | MS | [vscode-html-languageservice](https://github.com/Microsoft/vscode-html-languageservice) |
-| [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext] (https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.xtend)|
+| [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext](https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.xtend)|
 | Crane PHP | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) |
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server) |
 | Haxe | [Dan Korostelev (@nadako)](https://github.com/nadako) | [VS Code Haxe extension](https://github.com/vshaxe/haxe-languageserver) |
