@@ -18,7 +18,7 @@ The language servers are listed in chronological order of appearance.
 | JSON | MS | [vscode-json-languageservice](https://github.com/Microsoft/vscode-json-languageservice) |
 | CSS/LESS/SASS | MS | [vscode-css-languageservice](https://github.com/Microsoft/vscode-css-languageservice) |
 | HTML | MS | [vscode-html-languageservice](https://github.com/Microsoft/vscode-html-languageservice) |
-| [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext] (https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.xtend)|
+| [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext](https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.xtend)|
 | Crane PHP | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) |
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server) |
 | Haxe | [Dan Korostelev (@nadako)](https://github.com/nadako) | [VS Code Haxe extension](https://github.com/vshaxe/haxe-languageserver) |
@@ -37,7 +37,7 @@ The language servers are listed in chronological order of appearance.
 | Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) |
 | [Isabelle](https://www.cl.cam.ac.uk/research/hvg/Isabelle/) | [Makarius Wenzel](https://github.com/makarius) | [sources](https://bitbucket.org/makarius/isabelle/src/09b872c58c32/src/Tools/VSCode) |
 | [GraphQL](http://graphql.org/) | GraphQL community | [Server in GraphQL](https://github.com/graphql/graphql-language-service) |
-[ javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) |
+| Javascript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) |
 | [ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [inteliphense](https://github.com/bmewburn/intelephense) |
 | [C++/clang](https://clang.llvm.org/extra/clangd.html)| [llvm-project](http://llvm.org/viewvc/llvm-project/) | [clangd](http://llvm.org/viewvc/llvm-project/clang-tools-extra/trunk/clangd/) |

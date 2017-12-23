@@ -11,7 +11,7 @@ index: 2
 
 | Editor/IDE | Maintainer | Repository |
 |------|--------|----------|
-| VS Code | MS | [vscode](https://code.visualstudio.com)  |
+| Visual Studio Code | MS | [vscode](https://code.visualstudio.com)  |
 | Eclipse Che | Eclipse,Codenvy/TypeFox | [Che](https://github.com/eclipse/che/issues/1287) |
 | Eclipse IDE | Eclipse,Red Hat | [Eclipse community](https://projects.eclipse.org/projects/technology.lsp4e/who), [Eclipse LSP4E](https://projects.eclipse.org/projects/technology.lsp4e) |
 | emacs | [Vibhav Pant](https://github.com/vibhavp) | [emacs language server client](https://github.com/emacs-lsp/lsp-mode/) |
@@ -21,6 +21,6 @@ index: 2
 |[Theia](https://github.com/theia-ide/theia)| [theia-ide](https://github.com/theia-ide) | [theia](https://github.com/theia-ide/theia) |
 |[neovim](https://neovim.io/)| [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
 |vim8 and neovim| [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
-|VS| [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
-|VS| Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
+|Visual Studio| [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
+|Visual Studio| Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 {: .table .table-bordered}
