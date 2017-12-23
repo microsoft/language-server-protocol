@@ -8,7 +8,7 @@ index: 1
 
 The language servers are listed in chronological order of appearance.
 
-*If you are missing a server please create a pull request in GitHub gainst this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/servers.md)*
+*If you are missing a server please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/servers.md)*
 
 | Language | Maintainer | Repository |
 |------|--------|----------|

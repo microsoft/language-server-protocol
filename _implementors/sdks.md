@@ -6,7 +6,7 @@ author: Microsoft
 index: 3
 ---
 
-*If you are missing a SDK please create a pull request in GitHub gainst this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/sdks.md)*
+*If you are missing a SDK please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/sdks.md)*
 
 | Language | Maintainer | Repository |
 |------|--------|----------|
