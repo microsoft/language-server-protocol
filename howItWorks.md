@@ -65,6 +65,8 @@ When a user is working with different languages, a development tool usually star
 
 <img src="./img/language-server.png" class="img-fluid" alt="language server protocol">
 
+## Capabilities
+
 Not every language server can support all features defined by the protocol. LSP therefore defines  'capabilities'. A capability defines a related group of language features. A development tools and the language server announce their supported feature set. As an example, a server announces that it can handle the 'textDocument/definition' request, but it might not handle the 'workspace/symbol' request. Similarly, development tools can announce that they are able to provide 'about to save' notifications before a document is saved, so that a server can compute textual edits to automatically format the edited document.
 
 **Notice** the actual integration of a language server into a particular tool is not defined by the language server protocol and is left to the tool implementors.
