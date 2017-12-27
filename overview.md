@@ -1,8 +1,17 @@
 ---
-title: How it Works
+title: Overview
 layout: singlePage
-sectionid: howItWorks
+sectionid: overview
 ---
+
+## What is the Language Server Protocol?
+Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself.
+
+This requires to implement the smartness for a language multiple times. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocol to talk to this server. If each language server speaks a different protocol then the  integration of each server into each tool is custom.
+
+The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!
+
+## How it works 
 
 A language server runs as a separate process and development tools communicate with the server using the language protocol over JSON-RPC. Below is an example for how a tool and a language server communicate during a routine editing session:
 
