@@ -2,35 +2,39 @@
 layout: default
 ---
 
-<div class="header-container jumbotron">
+<div class="header-container bg-primary jumbotron">
     <div class="container">
-        <h1>Language Server Protocol</h1>
-        <p>
+        <div class="intro">
+            <img src="{{site.baseurl}}/img/logo.svg" width="150"> 
+            <h1>Language Server Protocol</h1>
+        </div>
+        <p class="intro-text">
             The Language Server Protocol (LSP) defines the protocol used between an editor or IDE to talk to a language server that provides language features like auto complete, goto definition, find all references.
+
+            <a class="nav-link" href="{{ site.git_address }}">
+                    Contribute on GitHub
+            </a>
         </p>
     </div>
 </div>
 
 <div class="container">
     <div class="row align-items-center">
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
-            <blockquote>
-              <p>Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself. This requires to implement the smartness for a language multiple times. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocol to talk to this server. If each language server speaks a different protocol then the  integration of each server into each tool is custom. The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!
-              </p>
-            </blockquote>
+            
+            <p>Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself.</p>
+            <p>This requires to implement the smartness for a language multiple times. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocol to talk to this server. If each language server speaks a different protocol then the  integration of each server into each tool is custom.</p>
+            <p>The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!</p>
+            
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div id="carouselOne" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row align-items-center">
-                            <div class="col-lg-8">
                                 <img src="img/vscode-css-code-complete.png" class="img-fluid rounded"/>
-                            </div>
-                            <div class="col-lg-4">
                                 <p class="text-left"><i>CSS code complete in VS Code powered by the CSS LSP Server</i></p>
-                            </div>
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -80,10 +84,10 @@ layout: default
 
     <hr>
 
-    <div class="row">
+    <div class="row more-info">
         <div class="col-lg-4">
             <h1 class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></h1>
-            <a href='{{ "/howItWorks" | prepend: site.baseurl }}'><h3 class="text-center">How the Protocol Works</h3></a>
+            <a href='{{ "/overview" | prepend: site.baseurl }}'><h3 class="text-center">Overview</h3></a>
             <p>
                 The protocol defines the format of the messages sent using JSON-RPC between the development tool and the language server.
             </p>
