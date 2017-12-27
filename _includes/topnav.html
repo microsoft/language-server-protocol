@@ -12,7 +12,10 @@
                 <ul class="navbar-nav mr-auto navbar-right">
                         <li {% if page.sectionid=='howItWorks' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                             <a class="nav-link" href='{{ "/overview" | prepend: site.baseurl }}'>Overview</a>
-                        </li>                     
+                        </li>
+                        <li {% if page.sectionid=='history' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                            <a class="nav-link" href="{{ '/history' | prepend: site.baseurl }}">History</a>
+                        </li>                          
                         <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                             <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
                         </li>
