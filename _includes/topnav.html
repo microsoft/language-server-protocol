@@ -6,30 +6,27 @@
             {% endif %}
         </a>
 
-        <div class="navbar-right">
-            <div class="navbar-collapse collapse" id="navbarColor01">
-                {% assign sorted = site.implementors | sort: 'index' %}
-                <ul class="navbar-nav mr-auto navbar-right">
-                        <li {% if page.sectionid=='howItWorks' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                            <a class="nav-link" href='{{ "/overview" | prepend: site.baseurl }}'>Overview</a>
-                        </li>
-                        <li {% if page.sectionid=='history' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                            <a class="nav-link" href="{{ '/history' | prepend: site.baseurl }}">History</a>
-                        </li>                          
-                        <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                            <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
-                        </li>
-                        <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                            <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>
-                        </li>
-                    </ul>
-            </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>        
+
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
+            {% assign sorted = site.implementors | sort: 'index' %}
+            <ul class="navbar-nav ml-auto">
+                <li {% if page.sectionid=='howItWorks' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href='{{ "/overview" | prepend: site.baseurl }}'>Overview</a>
+                </li>
+                <li {% if page.sectionid=='history' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href="{{ '/history' | prepend: site.baseurl }}">History</a>
+                </li>                          
+                <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
+                </li>
+                <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>
+                </li>
+            </ul>
         </div>
-            
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>                
         
     </div>
 </header>
