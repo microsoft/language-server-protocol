@@ -19,7 +19,7 @@ index: 2
 |[MS Monaco Editor](https://github.com/Microsoft/monaco-editor)| [Typefox](https://github.com/TypeFox) | [monaco-languageclient](https://www.npmjs.com/package/monaco-languageclient) |
 |[Atom](https://atom.io/)| [Github](https://github.com/) | [atom-languageclient](https://atom.io/packages/atom-languageclient) |
 |[Theia](https://github.com/theia-ide/theia)| [theia-ide](https://github.com/theia-ide) | [theia](https://github.com/theia-ide/theia) |
-|[neovim](https://neovim.io/)| [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
+|vim8 and [neovim](https://neovim.io/)| [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
 |vim8 and neovim| [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
 |Visual Studio| [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
 |Visual Studio| Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
