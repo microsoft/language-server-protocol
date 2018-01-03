@@ -8,7 +8,7 @@ layout: default
 <div class="header-container bg-primary jumbotron">
     <div class="container">
         <div class="intro">
-            <img src="{{site.baseurl}}/img/logo.svg" width="150"> 
+            <img src="{{site.baseurl}}/img/logo.svg" width="150">
             <h1>Language Server Protocol</h1>
         </div>
         <p class="intro-text">
@@ -27,11 +27,11 @@ layout: default
     <div class="row align-items-center">
         <div class="col-lg-7">
             <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
-            
-            <p>Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself.</p>
-            <p>This requires to implement the smartness for a language multiple times. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocol to talk to this server. If each language server speaks a different protocol then the  integration of each server into each tool is custom.</p>
-            <p>The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!</p>
-            
+
+            <p>Implementing support for features like autocomplete, goto definition, or documentation on hover for a programming language is a significant effort. Traditionally this work must be repeated for each development tool, as each provides different APIs for implementing the same features.</p>
+            <p>The idea behind a Language Server is to provide the language-specific smarts inside a server that can communicate with development tooling inter-process communication through a protocol.</p>
+            <p>The idea behind the <i>Language Server Protocol</i> is to standardize this protocol for how tools and servers communicate, so that a single language server can talk to many different development tools, and a single tool can talk to many language servers.</p>
+            <p>This is a win for both langauge providers and tooling vendors!</p>
         </div>
         <div class="col-lg-5">
             <div id="carouselOne" class="carousel slide" data-ride="carousel">
@@ -49,7 +49,7 @@ layout: default
                             <div class="col-lg-12">
                                 <img src="img/atom-css-code-complete.png" class="img-fluid rounded"/>
                                 <p class="text-left"><i>CSS code complete in Atom powered by the CSS LSP Server</i></p>
-                            </div>                
+                            </div>
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -65,7 +65,7 @@ layout: default
                             <div class="col-lg-12">
                                 <img src="img/vscode-ps-hover.png" class="img-fluid rounded"/>
                                 <p class="text-left"><i>PowerShell Hover in VS Code powered by the PowerShell LSP Server</i></p>
-                            </div>                
+                            </div>
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -95,7 +95,7 @@ layout: default
             <h1 class="text-center"><i class="fas fa-book" aria-hidden="true"></i></h1>
             <a href='{{ "/specification" | prepend: site.baseurl }}'><h3 class="text-center">Specification</h3></a>
             <p>
-                The latest version of the protocol specification is version 3.0. 
+                The latest version of the protocol specification is version 3.0.
             </p>
         </div>
         <div class="col-lg-4">
