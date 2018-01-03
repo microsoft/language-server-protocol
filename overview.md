@@ -7,11 +7,11 @@ sectionid: overview
 ## What is the Language Server Protocol?
 Implementing support for features like autocomplete, goto definition, or documentation on hover for a programming language is a significant effort. Traditionally this work must be repeated for each development tool, as each provides different APIs for implementing the same features.
 
-The idea behind a Language Server is to provide the language-specific smarts inside a server that can communicate with development tooling inter-process communication through a protocol.
+The idea behind a <i>Language Server</i> is to provide the language-specific smarts inside a server that can communicate with development tooling over a protocol that enables inter-process communication.
 
-The idea behind the <i>Language Server Protocol</i> is to standardize this protocol for how tools and servers communicate, so that a single language server can talk to many different development tools, and a single tool can talk to many language servers.
+The idea behind the <i>Language Server Protocol (LSP)</i> is to standardize the protocol for how tools and servers communicate, so a single <i>Language Server</i> can be re-used in multiple development tools, and tools can support languages with minimal effort.
 
-This is a win for both langauge providers and tooling vendors.
+LSP is a win for both langauge providers and tooling vendors!
 
 ## How it works
 
