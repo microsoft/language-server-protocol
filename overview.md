@@ -74,7 +74,9 @@ When a user is working with different languages, a development tool usually star
 
 <img src="./img/language-server.png" class="img-fluid" alt="language server protocol">
 
-Not every language server can support all features defined by the protocol. LSP therefore defines  'capabilities'. A capability defines a related group of language features. A development tools and the language server announce their supported feature set. As an example, a server announces that it can handle the 'textDocument/definition' request, but it might not handle the 'workspace/symbol' request. Similarly, development tools can announce that they are able to provide 'about to save' notifications before a document is saved, so that a server can compute textual edits to automatically format the edited document.
+## Capabilities
+
+Not every language server can support all features defined by the protocol. LSP therefore provides  'capabilities'. A capability groups a set of language features. A development tool and the language server announce their supported features using capabilities. As an example, a server announces that it can handle the 'textDocument/definition' request, but it might not handle the 'workspace/symbol' request. Similarly, a development tool announces its ability to provide 'about to save' notifications before a document is saved, so that a server can compute textual edits to format the edited document before it is saved.
 
 **Notice** the actual integration of a language server into a particular tool is not defined by the language server protocol and is left to the tool implementors.
 
@@ -82,6 +84,6 @@ Not every language server can support all features defined by the protocol. LSP 
 
 To simplify the implementation of language servers and clients, there are libraries or SDKs:
 
-- *Development tool SDKs* each development tool typically provides a library for integrating language servers. For example, for JavaScript/TypeScript there is a [language client npm module](https://www.npmjs.com/package/vscode-languageclient)
+- *Development tool SDKs* each development tool typically provides a library for integrating language servers. For example, for JavaScript/TypeScript there is the [language client npm module](https://www.npmjs.com/package/vscode-languageclient)
 
-- *Language Server SDKs* for the different implementation languages there is an SDK to implement a language server in a particular language. For example, to implement a language server using Node.js there is [language server npm module](https://www.npmjs.com/package/vscode-languageserver).
+- *Language Server SDKs* for the different implementation languages there is an SDK to implement a language server in a particular language. For example, to implement a language server using Node.js there is the [language server npm module](https://www.npmjs.com/package/vscode-languageserver).
