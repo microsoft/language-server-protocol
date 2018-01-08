@@ -179,6 +179,7 @@ The base protocol offers support for request cancellation. To cancel a request, 
 _Notification_:
 * method: '$/cancelRequest'
 * params: `CancelParams` defined as follows:
+
 ```typescript
 interface CancelParams {
 	/**
