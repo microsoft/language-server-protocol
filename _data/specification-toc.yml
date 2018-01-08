@@ -72,7 +72,7 @@
     children:
     - title: completion
       anchor: textDocument_completion
-    - title: resolve
+    - title: completion resolve
       anchor: completionItem_resolve
     - title: hover
       anchor: textDocument_hover
@@ -90,11 +90,11 @@
       anchor: textDocument_codeAction
     - title: codeLens
       anchor: textDocument_codeLens
-    - title: resolve
+    - title: codeLens resolve
       anchor: codeLens_resolve
     - title: documentLink
       anchor: textDocument_documentLink
-    - title: resolve
+    - title: documentLink resolve
       anchor: documentLink_resolve
     - title: formatting
       anchor: textDocument_formatting
