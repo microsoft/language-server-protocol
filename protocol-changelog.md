@@ -1,20 +1,20 @@
 # Protocol Change Log
 
-## 11/27/2017
+## 3.4.0 (11/27/2017)
 
 * [extensible completion item and symbol kinds](https://github.com/Microsoft/language-server-protocol/issues/129)
 
-## 11/24/2017
+## 3.3.0 (11/24/2017)
 
 * Added support for `CompletionContext`
 * Added support for `MarkupContent`
 * Removed old New and Updated markers.
 
-## 09/26/2017
+## 3.2.0 (09/26/2017)
 
 * Added optional `commitCharacters` property to the `CompletionItem`
 
-## 02/28/2017
+## 3.1.0 (02/28/2017)
 
 * Make the `WorkspaceEdit` changes backwards compatible.
 * Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
