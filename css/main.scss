@@ -357,8 +357,10 @@ pre[class=highlight] {
 	}
 }
 
-.navbar-brand img {
-	width: 32px;
+.navbar-brand h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {

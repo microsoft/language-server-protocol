@@ -2,13 +2,13 @@
     <div class="container navbar-container">
         <a class="navbar-brand" href="{{ site.baseurl }}/">
             {% if page.sectionid != nil %}
-            <img src="{{site.baseurl}}/img/logo.svg"> 
+            <h1>LSP</h1>
             {% endif %}
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-        </button>        
+        </button>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
             {% assign sorted = site.implementors | sort: 'index' %}
@@ -18,7 +18,7 @@
                 </li>
                 <li {% if page.sectionid=='history' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href="{{ '/history' | prepend: site.baseurl }}">History</a>
-                </li>                          
+                </li>
                 <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
                 </li>
@@ -27,6 +27,6 @@
                 </li>
             </ul>
         </div>
-        
+
     </div>
 </header>
