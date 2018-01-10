@@ -355,6 +355,27 @@ pre[class=highlight] {
 		width: 100px;
 		float: right;
 	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	.message {
+		display: inline-block;
+		padding-right: 10px;
+	}
+
+	.links {
+		li {
+			display: inline-block;
+		}
+	}
+
+	iframe {
+		position: relative;
+		top: 5px;
+	}
 }
 
 .navbar-brand h1 {
