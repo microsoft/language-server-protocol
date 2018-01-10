@@ -1093,6 +1093,7 @@ interface ClientCapabilities {
 
 _Response_:
 * result: `InitializeResult` defined as follows:
+
 ```typescript
 interface InitializeResult {
 	/**
@@ -1102,6 +1103,7 @@ interface InitializeResult {
 }
 ```
 * error.code:
+
 ```typescript
 /**
  * Known error codes for an `InitializeError`;
@@ -1117,6 +1119,7 @@ export namespace InitializeError {
 ```
 
 * error.data:
+
 ```typescript
 interface InitializeError {
 	/**
