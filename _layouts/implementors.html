@@ -4,9 +4,8 @@ layout: default
 
 <div class="container">
     <div class="row single-page">
-        <div class="col-lg-3 col-xl-2 d-none d-lg-block">
-            <div class="card sticky-top" style="top: 40px">
-
+        <div class="col-lg-3 col-xl-2 d-none d-lg-block lsp-sidebar">
+            <div class="card">
                 <ul class="nav flex-column list-unstyled">
                     {% assign sorted = site.implementors | sort: 'index' %}
                     {% for post in sorted %}

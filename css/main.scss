@@ -18,10 +18,11 @@ body {
 }
 
 .header-container {
-  // background: url('../protocol.jpg');
-
   color: #fff;
-  margin-bottom: 80px;
+
+  @media (min-width: 576px) {
+  	margin-bottom: 80px;
+  }
 
   h1 {
 	margin-top: 15px;
@@ -347,13 +348,20 @@ pre[class=highlight] {
 }
 
 .footer {
-	padding: 50px 0;
+	padding: 15px 0;
 	color: #000;
 	background: #e9ecef;
 
+	@media (min-width: 576px) {
+		padding: 50px 0;
+	}
+
 	img {
 		width: 100px;
-		float: right;
+
+		@media (min-width: 576px) {
+			float: right;
+		}		
 	}
 
 	ul {
@@ -378,7 +386,7 @@ pre[class=highlight] {
 			padding-bottom: 10px;
 			
 			@media (min-width: 576px) {
-			display: inline-block;
+				display: inline-block;
 				padding: 0;
 			}
 		}
@@ -387,6 +395,23 @@ pre[class=highlight] {
 	iframe {
 		position: relative;
 		top: 5px;
+	}
+}
+
+@media (min-width: 768px) {
+	.lsp-navbar {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		z-index: 1071;
+	}
+
+	.lsp-sidebar {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 100px;
+		z-index: 1000;
+		height: calc(100vh - 100px);
 	}
 }
 
