@@ -47,8 +47,8 @@
       anchor: workspace_executeCommand
     - title: applyEdit
       anchor: workspace_applyEdit
-  - title: Text Document
-    anchor: textDocument
+  - title: Text Synchronization
+    anchor: textSynchronization
     children:
     - title: didOpen
       anchor: textDocument_didOpen
@@ -62,11 +62,17 @@
       anchor: textDocument_didSave
     - title: didClose
       anchor: textDocument_didClose
+  - title: Diagnostics
+    anchor: diagnostics
+    children:
     - title: publishDiagnostics
       anchor: textDocument_publishDiagnostics
+  - title: Language Features
+    anchor: languageFeatures
+    children:
     - title: completion
       anchor: textDocument_completion
-    - title: resolve
+    - title: completion resolve
       anchor: completionItem_resolve
     - title: hover
       anchor: textDocument_hover
@@ -84,11 +90,11 @@
       anchor: textDocument_codeAction
     - title: codeLens
       anchor: textDocument_codeLens
-    - title: resolve
+    - title: codeLens resolve
       anchor: codeLens_resolve
     - title: documentLink
       anchor: textDocument_documentLink
-    - title: resolve
+    - title: documentLink resolve
       anchor: documentLink_resolve
     - title: formatting
       anchor: textDocument_formatting
