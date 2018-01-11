@@ -20,6 +20,17 @@ layout: default
         </div>
 
         <div class="col-md-8">
+
+            <nav id="small-nav" class="docs-nav d-lg-none">
+                <h4>Topics</h4>
+                <select id="small-nav-dropdown">
+                    {% assign sorted = site.implementors | sort: 'index' %}
+                    {% for post in sorted %}
+                    <option value="{{ post.url | prepend: site.baseurl }}" {% if page.title==post.title %}selected{% endif %} >{{ post.shortTitle }}</option>
+                    {% endfor %}
+                </select>
+            </nav>
+
             <h1>Implementations</h1>
             <h2>{{ page.title }}</h2>
             <div  id="markdown-content-container">{{ content }}</div>
