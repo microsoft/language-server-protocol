@@ -33,7 +33,7 @@ Currently the following header fields are supported:
 |:------------------|:------------|:------------|
 | Content-Length    | number      | The length of the content part in bytes. This header is required. |
 | Content-Type      | string      | The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf-8 |
-{: .table .table-bordered}
+{: .table .table-bordered .table-responsive}
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
@@ -519,7 +519,7 @@ Visual Basic | `vb`
 XML | `xml`
 XSL | `xsl`
 YAML | `yaml`
-{: .table .table-bordered}
+{: .table .table-bordered .table-responsive}
 
 #### VersionedTextDocumentIdentifier
 

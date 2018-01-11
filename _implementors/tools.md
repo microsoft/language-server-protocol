@@ -23,4 +23,4 @@ index: 2
 |vim8 and neovim| [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
 |Visual Studio| [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
 |Visual Studio| Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
-{: .table .table-bordered}
+{: .table .table-bordered .table-responsive}
