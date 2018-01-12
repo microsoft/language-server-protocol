@@ -89,7 +89,7 @@ interface RequestMessage extends Message {
 	/**
 	 * The method's params.
 	 */
-	params?: Array<T> | object;
+	params?: Array<any> | object;
 }
 ```
 
@@ -164,7 +164,7 @@ interface NotificationMessage extends Message {
 	/**
 	 * The notification's params.
 	 */
-	params?: Array<T> | object;
+	params?: Array<any> | object;
 }
 ```
 
