@@ -1428,7 +1428,7 @@ _Request_:
 * params: `ShowMessageRequestParams` defined as follows:
 
 _Response_:
-* result: the selected `MessageActionItem | null` if none got selected.
+* result: the selected `MessageActionItem` \| `null` if none got selected.
 * error: code and message set in case an exception happens during showing a message.
 
 ```typescript
@@ -1765,7 +1765,7 @@ interface WorkspaceSymbolParams {
 ```
 
 _Response_:
-* result: `null | SymbolInformation[]` as defined above.
+* result: `SymbolInformation[]` \| `null` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
 _Registration Options_: void
@@ -1798,7 +1798,7 @@ export interface ExecuteCommandParams {
 The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
 
 _Response_:
-* result: `null | any`
+* result: `any` \| `null`
 * error: code and message set in case an exception happens during the request.
 
 _Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
@@ -1995,7 +1995,7 @@ _Request_:
 * params: `WillSaveTextDocumentParams`
 
 _Response_:
-* result: `null | TextEdit[]`
+* result:`TextEdit[]` \| `null`
 * error: code and message set in case an exception happens during the `willSaveWaitUntil` request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2139,7 +2139,7 @@ export interface CompletionContext {
 ```
 
 _Response_:
-* result: `null | CompletionItem[] | CompletionList`. If a `CompletionItem[]` is provided it is interpreted to be complete. So it is the same as `{ isIncomplete: false, items }`
+* result: `CompletionItem[]` \| `CompletionList` \| `null`. If a `CompletionItem[]` is provided it is interpreted to be complete. So it is the same as `{ isIncomplete: false, items }`
 
 ```typescript
 /**
@@ -2355,7 +2355,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `null | Hover` defined as follows:
+* result: `Hover` \| `null` defined as follows:
 
 ```typescript
 /**
@@ -2408,7 +2408,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `null | SignatureHelp` defined as follows:
+* result: `SignatureHelp` \| `null` defined as follows:
 
 ```typescript
 /**
@@ -2511,7 +2511,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) | [`Location`](#location)[] | `null`
+* result: [`Location`](#location) | [`Location`](#location)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2537,7 +2537,7 @@ interface ReferenceContext {
 }
 ```
 _Response_:
-* result: [`Location`](#location)[] | `null`
+* result: [`Location`](#location)[] \| `null`
 * error: code and message set in case an exception happens during the reference request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2554,7 +2554,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: `null | DocumentHighlight`[] defined as follows:
+* result: `DocumentHighlight[]` \| `null` defined as follows:
 
 ```typescript
 /**
@@ -2618,7 +2618,7 @@ interface DocumentSymbolParams {
 ```
 
 _Response_:
-* result: `null | SymbolInformation`[] defined as follows:
+* result: `SymbolInformation[]` \| `null` defined as follows:
 
 ```typescript
 /**
@@ -2737,7 +2737,7 @@ interface CodeActionContext {
 ```
 
 _Response_:
-* result: `null` | [`Command[]`](#command) defined as follows:
+* result: [`Command[]`](#command) \| `null` defined as follows:
 * error: code and message set in case an exception happens during the code action request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2760,7 +2760,7 @@ interface CodeLensParams {
 ```
 
 _Response_:
-* result: `null | CodeLens[]` defined as follows:
+* result: `CodeLens[]` \| `null` defined as follows:
 
 ```typescript
 /**
@@ -2830,7 +2830,7 @@ interface DocumentLinkParams {
 ```
 
 _Response_:
-* result: An array of `DocumentLink`, or `null`.
+* result: An array of `DocumentLink` \| `null`.
 
 ```typescript
 /**
@@ -2916,7 +2916,7 @@ interface FormattingOptions {
 ```
 
 _Response_:
-* result: `null` | [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
+* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2949,7 +2949,7 @@ interface DocumentRangeFormattingParams {
 ```
 
 _Response_:
-* result: `null` | [`TextEdit[]`](#textedit) describing the modification to the document to be formatted.
+* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2987,7 +2987,7 @@ interface DocumentOnTypeFormattingParams {
 ```
 
 _Response_:
-* result: `null` | [`TextEdit[]`](#textedit) describing the modification to the document.
+* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
 _Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
@@ -3034,7 +3034,7 @@ interface RenameParams {
 ```
 
 _Response_:
-* result: `null` | [`WorkspaceEdit`](#workspaceedit) describing the modification to the workspace.
+* result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
