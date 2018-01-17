@@ -19,4 +19,4 @@ index: 3
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
-{: .table .table-bordered}
+{: .table .table-bordered .table-responsive}

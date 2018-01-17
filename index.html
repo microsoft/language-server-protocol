@@ -2,73 +2,75 @@
 layout: default
 ---
 
-<div class="header-container jumbotron">
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<div class="header-container bg-primary jumbotron">
     <div class="container">
-        <h1>Language Server Protocol</h1>
-        <p>
+        <div class="intro">
+            <h1>Language Server Protocol</h1>
+        </div>
+        <p class="intro-text">
             The Language Server Protocol (LSP) defines the protocol used between an editor or IDE to talk to a language server that provides language features like auto complete, goto definition, find all references.
         </p>
+
+        <br />
+        <div class="intro-text">
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/Microsoft/language-server-protocol/subscription" data-size="large" aria-label="Watch Microsoft/language-server-protocol on GitHub">Watch</a>
+        </div>
     </div>
 </div>
 
 <div class="container">
     <div class="row align-items-center">
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
-            <blockquote>
-              <p>Implementing language support like auto complete, goto definition, or type hovering for a programming language for different development tools is a significant effort. Each development tool provides different APIs for language extenders. Moreover, an extension has to be implemented in the implementation language of the tool itself. This requires to implement the smartness for a language multiple times. The idea behind a <i>Language Server</i> is to provide the language smarts inside a server and using inter process communication and a protocol to talk to this server. If each language server speaks a different protocol then the  integration of each server into each tool is custom. The idea behind the <i>Language Server Protocol</i> is to standardize this protocol and therefore to simplify the integration of different language servers in a development tool. This is a win for both the language provider and the development tool provider!
-              </p>
-            </blockquote>
+
+            <p>Implementing support for features like autocomplete, goto definition, or documentation on hover for a programming language is a significant effort. Traditionally this work must be repeated for each development tool, as each provides different APIs for implementing the same features.</p>
+            <p>The idea behind a <i>Language Server</i> is to provide the language-specific smarts inside a server that can communicate with development tooling over a protocol that enables inter-process communication.</p>
+            <p>The idea behind the <i>Language Server Protocol (LSP)</i> is to standardize the protocol for how tools and servers communicate, so a single <i>Language Server</i> can be re-used in multiple development tools, and tools can support languages with minimal effort.</p>
+            <p>LSP is a win for both langauge providers and tooling vendors!</p>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div id="carouselOne" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row align-items-center">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <img src="img/vscode-css-code-complete.png" class="img-fluid rounded"/>
-                            </div>
-                            <div class="col-lg-4">
                                 <p class="text-left"><i>CSS code complete in VS Code powered by the CSS LSP Server</i></p>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row align-items-center">
-                            <div class="col-lg-4">
+                            <div class="col-lg-12">
+                                <img src="img/atom-css-code-complete.png" class="img-fluid rounded"/>
                                 <p class="text-left"><i>CSS code complete in Atom powered by the CSS LSP Server</i></p>
                             </div>
-                            <div class="col-lg-8">
-                                <img src="img/atom-css-code-complete.png" class="img-fluid rounded"/>
-                            </div>                
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row align-items-center">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <img src="img/eclipse-css-code-complete.png" class="img-fluid rounded"/>
-                            </div>
-                            <div class="col-lg-4">
                                 <p class="text-left"><i>CSS code complete in Eclipse IDE powered by the CSS LSP Server</i></p>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row align-items-center">
-                            <div class="col-lg-4">
+                            <div class="col-lg-12">
+                                <img src="img/vscode-ps-hover.png" class="img-fluid rounded"/>
                                 <p class="text-left"><i>PowerShell Hover in VS Code powered by the PowerShell LSP Server</i></p>
                             </div>
-                            <div class="col-lg-8">
-                                <img src="img/vscode-ps-hover.png" class="img-fluid rounded"/>
-                            </div>                
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row align-items-center">
                             <div class="col-lg-8">
                                 <img src="img/vs-rust-code-complete.png" class="img-fluid rounded"/>
-                            </div>                
-                            <div class="col-lg-4">
                                 <p class="text-left"><i>Rust code complete in Visual Studio powered by the Rust LSP Server</i></p>
                             </div>
                         </div>
@@ -80,10 +82,10 @@ layout: default
 
     <hr>
 
-    <div class="row">
+    <div class="row more-info">
         <div class="col-lg-4">
             <h1 class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></h1>
-            <a href='{{ "/howItWorks" | prepend: site.baseurl }}'><h3 class="text-center">How the Protocol Works</h3></a>
+            <a href='{{ "/overview" | prepend: site.baseurl }}'><h3 class="text-center">Overview</h3></a>
             <p>
                 The protocol defines the format of the messages sent using JSON-RPC between the development tool and the language server.
             </p>
@@ -92,7 +94,7 @@ layout: default
             <h1 class="text-center"><i class="fas fa-book" aria-hidden="true"></i></h1>
             <a href='{{ "/specification" | prepend: site.baseurl }}'><h3 class="text-center">Specification</h3></a>
             <p>
-                The latest version of the protocol specification is version 3.0. 
+                The latest version of the protocol specification is version 3.0.
             </p>
         </div>
         <div class="col-lg-4">

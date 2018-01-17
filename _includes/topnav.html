@@ -1,35 +1,29 @@
-<header class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<header class="navbar navbar-expand-lg navbar-dark bg-primary lsp-navbar">
     <div class="container navbar-container">
         <a class="navbar-brand" href="{{ site.baseurl }}/">
-            <!--span><img src="{{site.baseurl}}/img/logonav.png"></span -->{{ site.title }}
+            {% if page.sectionid != nil %}
+            <h1>LSP</h1>
+            {% endif %}
         </a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse" id="navbarColor01">
+
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
             {% assign sorted = site.implementors | sort: 'index' %}
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav ml-auto">
                 <li {% if page.sectionid=='howItWorks' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href='{{ "/howItWorks" | prepend: site.baseurl }}'>How it Works</a>
-                </li>
-                <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>
+                    <a class="nav-link" href='{{ "/overview" | prepend: site.baseurl }}'>Overview</a>
                 </li>
                 <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
                 </li>
-            </ul>
-        </div>
-        <div class="navbar-right">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ site.git_address }}">
-                        <i class="fab fa-github" aria-hidden="true"></i>
-                    </a>
+                <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>
                 </li>
             </ul>
         </div>
+
     </div>
 </header>
-<div id="filler" style="padding: 3px"></div>

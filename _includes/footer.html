@@ -1,8 +1,26 @@
 <footer class="footer">
     <div class="container">
-        <hr>
-        <p class="text-center">
-            {{ site.title }} {{ site.time | date: '%Y' }} | Site Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://getbootstrap.com/">Bootstrap</a>
-        </p>
+        <div class="row">
+            <div class="col-sm-7">
+                <ul class="links">
+                    <li>
+                        <span class="message">Hello from Seattle and Zürich.</span>
+                    </li>
+                    <li>
+                        <a class="github-button" href="https://github.com/Microsoft/language-server-protocol" data-icon="octicon-star" data-show-count="true" aria-label="Star Microsoft/language-server-protocol on GitHub">Star</a>
+                    </li>
+                    <li>
+                        <a class="github-button" href="https://github.com/Microsoft/language-server-protocol/subscription" aria-label="Watch Microsoft/language-server-protocol on GitHub">Watch</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-5">
+                <div class="copyright">
+                    <a id="footer-microsoft-link" class="logo" href="https://www.microsoft.com">
+                        <img src="{{site.baseurl}}/img/microsoft.svg" alt="Microsoft">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>

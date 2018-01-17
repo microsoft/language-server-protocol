@@ -1,4 +1,4 @@
---- 
+---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 @charset "utf-8";
@@ -9,16 +9,39 @@ html {
 }
 
 body {
-	/* we have a top fixed nav bar */
-	margin-top: 50px;
-	margin-bottom: 46px;
+	letter-spacing: .25px;
+	text-rendering: optimizeLegibility;
+}
+
+.single-page {
+	padding: 40px 0;
 }
 
 .header-container {
-  // background: url('../protocol.jpg');
-  background-size: cover;
-  background-position: center 36%;
-  margin-top: -37px;
+  color: #fff;
+
+  @media (min-width: 576px) {
+  	margin-bottom: 80px;
+  }
+
+  h1 {
+	margin-top: 15px;
+	font-weight: bold;
+  }
+
+  .intro {
+	  text-align: center;
+  }
+
+  .intro-text {
+	  margin: 0 auto;
+	  max-width: 450px;
+	  text-align: center;
+  }
+}
+
+h2 {
+	margin-bottom: 20px;
 }
 
 .toc {
@@ -36,7 +59,7 @@ body {
 }
 
 .toc-link {
-	padding: 0.125rem 0.5rem; 
+	padding: 0.125rem 0.5rem;
 	color: #707070
 }
 
@@ -314,4 +337,101 @@ pre[class=highlight] {
 
 .highlight .il {
 	color: #F5871F
+}
+
+.more-info {
+	padding: 100px 0;
+
+	p {
+		padding: 0;
+	}
+}
+
+.footer {
+	padding: 15px 0;
+	color: #000;
+	background: #e9ecef;
+
+	@media (min-width: 576px) {
+		padding: 50px 0;
+	}
+
+	img {
+		width: 100px;
+
+		@media (min-width: 576px) {
+			float: right;
+		}		
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	.message {
+		display: inline-block;
+		padding-right: 10px;
+	}
+
+	.links {
+		padding-bottom: 10px;
+
+		@media (min-width: 576px) {
+			padding: 0;
+		}
+
+		li {
+			list-style: none;
+			padding-bottom: 10px;
+			
+			@media (min-width: 576px) {
+				display: inline-block;
+				padding: 0;
+			}
+		}
+	}
+
+	iframe {
+		position: relative;
+		top: 5px;
+	}
+}
+
+@media (min-width: 768px) {
+	.lsp-navbar {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		z-index: 1071;
+	}
+
+	.lsp-sidebar {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 100px;
+		z-index: 1000;
+		height: calc(100vh - 100px);
+	}
+}
+
+.navbar-brand h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: rgba(255,255,255,0.5);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+	color: white;
+}
+
+.docs-nav {
+	h4 {
+		display: inline-block;
+		font-size: 14px;
+	}
 }

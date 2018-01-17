@@ -2,15 +2,10 @@
 layout: default
 ---
 
-<div style="height: 1rem">
-</div>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-xl-2 d-none d-lg-block">
-            <div class="card sticky-top" style="top: 4.5rem">
-                <div class="card-header">
-                    Implementations
-                </div>
+    <div class="row single-page">
+        <div class="col-lg-3 col-xl-2 d-none d-lg-block lsp-sidebar">
+            <div class="card">
                 <ul class="nav flex-column list-unstyled">
                     {% assign sorted = site.implementors | sort: 'index' %}
                     {% for post in sorted %}
@@ -25,7 +20,19 @@ layout: default
         </div>
 
         <div class="col-md-8">
-            <h1>{{ page.title }}</h1>
+
+            <nav id="small-nav" class="docs-nav d-lg-none">
+                <h4>Topics</h4>
+                <select id="small-nav-dropdown">
+                    {% assign sorted = site.implementors | sort: 'index' %}
+                    {% for post in sorted %}
+                    <option value="{{ post.url | prepend: site.baseurl }}" {% if page.title==post.title %}selected{% endif %} >{{ post.shortTitle }}</option>
+                    {% endfor %}
+                </select>
+            </nav>
+
+            <h1>Implementations</h1>
+            <h2>{{ page.title }}</h2>
             <div  id="markdown-content-container">{{ content }}</div>
         </div>
         <div class="col-lg-2 d-none d-xl-block">
