@@ -11,7 +11,7 @@ layout: default
             <h1>Language Server Protocol</h1>
         </div>
         <p class="intro-text">
-            The Language Server Protocol (LSP) defines the protocol used between an editor or IDE to talk to a language server that provides language features like auto complete, goto definition, find all references.
+            The Language Server Protocol (LSP) defines the protocol used between an editor or IDE and a language server that provides language features like auto complete, go to definition, find all references etc.
         </p>
 
         <br />
@@ -27,9 +27,9 @@ layout: default
         <div class="col-lg-7">
             <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
 
-            <p>Implementing support for features like autocomplete, goto definition, or documentation on hover for a programming language is a significant effort. Traditionally this work must be repeated for each development tool, as each provides different APIs for implementing the same features.</p>
-            <p>The idea behind a <i>Language Server</i> is to provide the language-specific smarts inside a server that can communicate with development tooling over a protocol that enables inter-process communication.</p>
-            <p>The idea behind the <i>Language Server Protocol (LSP)</i> is to standardize the protocol for how tools and servers communicate, so a single <i>Language Server</i> can be re-used in multiple development tools, and tools can support languages with minimal effort.</p>
+            <p>Adding features like auto complete, goto definition, or documentation on hover for a programming language takes significant effort. Traditionally this work had to be repeated for each development tool, as each tool provides different APIs for implementing the same feature.</p>
+            <p>A <i>Language Server</i> is meant to provide the language-specific smarts and communicate with development tools over a protocol that enables inter-process communication.</p>
+            <p>The idea behind the <i>Language Server Protocol (LSP)</i> is to standardize the protocol for how such servers and development tools communicate. This way, a single <i>Language Server</i> can be re-used in multiple development tools, which in turn can support multiple languages with minimal effort.</p>
             <p>LSP is a win for both langauge providers and tooling vendors!</p>
         </div>
         <div class="col-lg-5">
