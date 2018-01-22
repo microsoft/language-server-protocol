@@ -48,7 +48,7 @@ The language servers are listed in chronological order of appearance.
 | YAML (with JSON schemas)| [Adam Voss](https://github.com/adamvoss) | [vscode-yaml-languageservice](https://github.com/adamvoss/vscode-yaml-languageservice) |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) |
-| [Haskell](https://docs.docker.com/engine/reference/builder/)| [Alan Zimmerman](https://github.com/alanz) | [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine) |
+| Haskell| [Alan Zimmerman](https://github.com/alanz) | [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine) |
 | [MSBuild](https://github.com/Microsoft/msbuild) | [Adam Friedman](https://github.com/tintoy) | [msbuild-project-tools-vscode](https://github.com/tintoy/msbuild-project-tools-vscode) |
 | TypeScript|[TypeFox](typefox.io)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) |
 | Vue| [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) |
