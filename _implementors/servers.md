@@ -63,4 +63,5 @@ The language servers are listed in chronological order of appearance.
 | Gauge| [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) |
 | Ballerina | [BallerinaLang.org](https://ballerinalang.org/) | [Ballerina Language Server](https://github.com/ballerinalang/language-server) |
 | Dart | [Nate Bosch (@natebosch)](https://github.com/natebosch) | [Dart Language Server](https://github.com/natebosch/dart_language_server) |
+| Apache Camel | [Aurélien Pupier (@apupier)](https://github.com/apupier) and [Lars Heinemann](https://github.com/lhein) | [Apache Camel Language Server](https://github.com/lhein/camel-language-server) |
 {: .table .table-bordered .table-responsive}
