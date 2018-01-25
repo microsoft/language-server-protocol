@@ -11,7 +11,7 @@ The idea behind a <i>Language Server</i> is to provide the language-specific sma
 
 The idea behind the <i>Language Server Protocol (LSP)</i> is to standardize the protocol for how tools and servers communicate, so a single <i>Language Server</i> can be re-used in multiple development tools, and tools can support languages with minimal effort.
 
-LSP is a win for both langauge providers and tooling vendors!
+LSP is a win for both language providers and tooling vendors!
 
 ## How it works
 
