@@ -63,4 +63,5 @@ The language servers are listed in chronological order of appearance.
 | Gauge| [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) |
 | Ballerina | [BallerinaLang.org](https://ballerinalang.org/) | [Ballerina Language Server](https://github.com/ballerinalang/language-server) |
 | Dart | [Nate Bosch (@natebosch)](https://github.com/natebosch) | [Dart Language Server](https://github.com/natebosch/dart_language_server) |
+| XML | IBM | [XML Language Server](https://github.com/microclimate-devops/xml-language-server) |
 {: .table .table-bordered .table-responsive}
