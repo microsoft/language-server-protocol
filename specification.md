@@ -1842,6 +1842,7 @@ export interface ApplyWorkspaceEditParams {
 
 _Response_:
 * result: `ApplyWorkspaceEditResponse` defined as follows:
+
 ```typescript
 export interface ApplyWorkspaceEditResponse {
 	/**
@@ -2819,7 +2820,8 @@ The document links request is sent from the client to the server to request the 
 
 _Request_:
 * method: 'textDocument/documentLink'
-* params: `DocumentLinkParams`, defined as follows
+* params: `DocumentLinkParams`, defined as follows:
+
 ```typescript
 interface DocumentLinkParams {
 	/**
