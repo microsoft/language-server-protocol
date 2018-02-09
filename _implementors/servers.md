@@ -41,6 +41,7 @@ The language servers are listed in chronological order of appearance.
 | [ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [inteliphense](https://github.com/bmewburn/intelephense) |
 | [C++/clang](https://clang.llvm.org/extra/clangd.html)| [llvm-project](http://llvm.org/viewvc/llvm-project/) | [clangd](http://llvm.org/viewvc/llvm-project/clang-tools-extra/trunk/clangd/) |
+| C/C++/Objective-C | [Jacob Dufault](https://github.com/jacobdufault), [MaskRay](https://github.com/MaskRay), [topisani](https://github.com/topisani) | [cquery](https://github.com/jacobdufault/cquery) |
 | elixir| [Jake Becker](https://github.com/JakeBecker) | [elixir-ls](https://github.com/JakeBecker/elixir-ls) |
 | [ceylon](https://ceylon-lang.org/)| [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) |
 | [crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [scry](https://github.com/kofno/scry) |
