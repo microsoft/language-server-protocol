@@ -2603,7 +2603,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a name="textDocument_documentSymbol" class="anchor"></a>Document Symbols Request (:leftwards_arrow_with_hook:)
 
-The document symbol request is sent from the client to the server to return a flat list of all symbols found in a given text document. Neither the document's location range nor the documents container name should be used to infer a hierarchy.
+The document symbol request is sent from the client to the server to return a flat list of all symbols found in a given text document. Neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
 
 _Request_:
 * method: 'textDocument/documentSymbol'
@@ -2641,8 +2641,8 @@ interface SymbolInformation {
 	 * The location of this symbol. The location's range is used by a tool
 	 * to reveal the location in the editor. If the symbol is selected in the
 	 * tool the range's start information is used to position the cursor. So
-	 * the range usually spawns more then the actual symbol's name and does
-	 * normally include thinks like visibility modifiers.
+	 * the range usually spans more then the actual symbol's name and does
+	 * normally include things like visibility modifiers.
 	 *
 	 * The range doesn't have to denote a node range in the sense of a abstract
 	 * syntax tree. It can therefore not be used to re-construct a hierarchy of
