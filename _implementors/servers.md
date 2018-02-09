@@ -12,7 +12,6 @@ The language servers are listed in chronological order of appearance.
 
 | Language | Maintainer | Repository |
 |------|--------|----------|
-| Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) |
 | PowerShell | MS |  [VS Code PowerShell extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell) |
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [csharp-language-server-protocol](https://github.com/OmniSharp/omnisharp-node-client) |
@@ -52,7 +51,6 @@ The language servers are listed in chronological order of appearance.
 | Haskell| [Alan Zimmerman](https://github.com/alanz) | [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine) |
 | [MSBuild](https://github.com/Microsoft/msbuild) | [Adam Friedman](https://github.com/tintoy) | [msbuild-project-tools-vscode](https://github.com/tintoy/msbuild-project-tools-vscode) |
 | TypeScript|[TypeFox](typefox.io)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) |
-| Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) |
 | Vue| [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) |
 | [lua](http://www.lua.org/)| [Kyle McLamb](https://github.com/Alloyed) | [lua-lsp](https://github.com/Alloyed/lua-lsp) |
 | Ruby| [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [language_server-ruby](https://github.com/mtsmfm/language_server-ruby) |
@@ -66,4 +64,7 @@ The language servers are listed in chronological order of appearance.
 | Ballerina | [BallerinaLang.org](https://ballerinalang.org/) | [Ballerina Language Server](https://github.com/ballerinalang/language-server) |
 | Dart | [Nate Bosch (@natebosch)](https://github.com/natebosch) | [Dart Language Server](https://github.com/natebosch/dart_language_server) |
 | XML | IBM | [XML Language Server](https://github.com/microclimate-devops/xml-language-server) |
+| Apache Camel | [Aurélien Pupier (@apupier)](https://github.com/apupier) and [Lars Heinemann](https://github.com/lhein) | [Apache Camel Language Server](https://github.com/lhein/camel-language-server) |
+| Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) |
+| Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) |
 {: .table .table-bordered .table-responsive}
