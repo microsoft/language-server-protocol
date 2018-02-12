@@ -68,5 +68,6 @@ The language servers are listed in chronological order of appearance.
 | Apache Camel | [Aurélien Pupier (@apupier)](https://github.com/apupier) and [Lars Heinemann](https://github.com/lhein) | [Apache Camel Language Server](https://github.com/lhein/camel-language-server) |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) |
+| R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) |
 
 {: .table .table-bordered .table-responsive}
