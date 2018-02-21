@@ -14,7 +14,7 @@ The language servers are listed in chronological order of appearance.
 |------|--------|----------|
 | PowerShell | MS |  [VS Code PowerShell extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell) |
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) |
-| C# | [OmniSharp](http://www.omnisharp.net/) | [csharp-language-server-protocol](https://github.com/OmniSharp/omnisharp-node-client) |
+| C# | [OmniSharp](http://www.omnisharp.net/) | [csharp-language-server-protocol](https://github.com/OmniSharp/csharp-language-server-protocol) |
 | JSON | MS | [vscode-json-languageservice](https://github.com/Microsoft/vscode-json-languageservice) |
 | CSS/LESS/SASS | MS | [vscode-css-languageservice](https://github.com/Microsoft/vscode-css-languageservice) |
 | HTML | MS | [vscode-html-languageservice](https://github.com/Microsoft/vscode-html-languageservice) |
