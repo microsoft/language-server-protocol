@@ -36,9 +36,15 @@
       anchor: client_unregisterCapability
   - title: Workspace
     anchor: workspace
-    children: 
+    children:
+    - title: workspaceFolders
+      anchor: workspace_workspaceFolders
+    - title: didChangeWorkspaceFolders
+      anchor: workspace_didChangeWorkspaceFolders
     - title: didChangeConfiguration
       anchor: workspace_didChangeConfiguration
+    - title: configuration
+      anchor: workspace_configuration
     - title: didChangeWatchedFiles
       anchor: workspace_didChangeWatchedFiles
     - title: symbol
@@ -80,6 +86,10 @@
       anchor: textDocument_signatureHelp
     - title: definition
       anchor: textDocument_definition
+    - title: typeDefinition
+      anchor: textDocument_typeDefinition
+    - title: implementation
+      anchor: textDocument_implementation
     - title: references
       anchor: textDocument_references
     - title: documentHighlight
@@ -96,6 +106,10 @@
       anchor: textDocument_documentLink
     - title: documentLink resolve
       anchor: documentLink_resolve
+    - title: documentColor
+      anchor: textDocument_documentColor
+    - title: colorPresentation
+      anchor: textDocument_colorPresentation
     - title: formatting
       anchor: textDocument_formatting
     - title: rangeFormatting

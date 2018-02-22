@@ -39,7 +39,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 ### Content Part
 
-Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. 
+Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now.
 Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml)). For backwards compatibility it is highly recommended that a client and a server treats the string `utf8` as `utf-8`.
 
 ### Example:
@@ -95,7 +95,7 @@ interface RequestMessage extends Message {
 
 #### Response Message
 
-Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request. 
+Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -170,7 +170,7 @@ interface NotificationMessage extends Message {
 
 #### $ Notifications and Requests
 
-Notification and requests ids starting with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest'. If a server or client receives notifications or requests starting with '$/' it is free to ignore them if they are unknown. 
+Notification and requests ids starting with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest'. If a server or client receives notifications or requests starting with '$/' it is free to ignore them if they are unknown.
 
 #### <a name="cancelRequest" class="anchor"></a> Cancellation Support (:arrow_right: :arrow_left:)
 
@@ -387,7 +387,7 @@ interface TextEdit {
 }
 ```
 
-If multiple `TextEdit`s are applied to a text document, all text edits describe changes made to the initial document version. Execution-wise text edits should be applied from the bottom to the top of the text document. Overlapping text edits are not supported.  
+If multiple `TextEdit`s are applied to a text document, all text edits describe changes made to the initial document version. Execution-wise text edits should be applied from the bottom to the top of the text document. Overlapping text edits are not supported.
 
 #### TextDocumentEdit
 
@@ -420,8 +420,8 @@ export interface WorkspaceEdit {
 
 	/**
 	 * An array of `TextDocumentEdit`s to express changes to n different text documents
-	 * where each text document edit addresses a specific version of a text document. 
-	 * Whether a client supports versioned document edits is expressed via 
+	 * where each text document edit addresses a specific version of a text document.
+	 * Whether a client supports versioned document edits is expressed via
 	 * `WorkspaceClientCapabilities.workspaceEdit.documentChanges`.
 	 */
 	documentChanges?: TextDocumentEdit[];
@@ -532,7 +532,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	 * The version number of this document. If a versioned text document identifier
 	 * is sent from the server to the client and the file is not open in the editor
 	 * (the server has not received an open notification before) the server can send
-	 * `null` to indicate that the version is known and the content on disk is the 
+	 * `null` to indicate that the version is known and the content on disk is the
 	 * truth (as speced with document content ownership)
 	 */
 	version: number | null;
@@ -680,7 +680,7 @@ The initialize request is sent as the first request from the client to the serve
 * For a request the response should be an error with `code: -32002`. The message can be picked by the server.
 * Notifications should be dropped, except for the exit notification. This will allow the exit of a server without an initialize request.
 
-Until the server has responded to the `initialize` request with an `InitializeResult`, the client must not send any additional requests or notifications to the server. 
+Until the server has responded to the `initialize` request with an `InitializeResult`, the client must not send any additional requests or notifications to the server.
 
 During the `initialize` request the server is allowed to send the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.  The `initialize` request may only be sent once.
 
@@ -726,6 +726,16 @@ interface InitializeParams {
 	 * The initial trace setting. If omitted trace is disabled ('off').
 	 */
 	trace?: 'off' | 'messages' | 'verbose';
+
+	/**
+	 * The workspace folders configured in the client when the server starts.
+	 * This property is only available if the client supports workspace folders.
+	 * It can be `null` if the client supports workspace folders but none are
+	 * configured.
+	 *
+	 * Since 3.6.0
+	 */
+	workspaceFolders?: WorkspaceFolder[] | null;
 }
 ```
 Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilities` are defined as follows:
@@ -809,6 +819,20 @@ export interface WorkspaceClientCapabilities {
 		 */
 		dynamicRegistration?: boolean;
 	};
+
+	/**
+	 * The client has support for workspace folders.
+	 *
+	 * Since 3.6.0
+	 */
+	workspaceFolders?: boolean;
+
+	/**
+	 * The client supports `workspace/configuration` requests.
+	 *
+	 * Since 3.6.0
+	 */
+	configuration?: boolean;
 }
 ```
 
@@ -871,7 +895,7 @@ export interface TextDocumentClientCapabilities {
 			/**
 			 * Client supports commit characters on a completion item.
 			 */
-			commitCharactersSupport?: boolean			
+			commitCharactersSupport?: boolean
 
 			/**
 			 * Client supports the follow content formats for the documentation
@@ -898,7 +922,7 @@ export interface TextDocumentClientCapabilities {
 		 * The client supports to send additional context information for a
 		 * `textDocument/completion` request.
 		 */
-		contextSupport?: boolean;		
+		contextSupport?: boolean;
 	};
 
 	/**
@@ -1027,6 +1051,34 @@ export interface TextDocumentClientCapabilities {
 	};
 
 	/**
+	 * Capabilities specific to the `textDocument/typeDefinition`
+	 *
+	 * Since 3.6.0
+	 */
+	typeDefinition?: {
+		/**
+		 * Whether typeDefinition supports dynamic registration. If this is set to `true`
+		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+		 * return value for the corresponding server capability as well.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
+	 * Capabilities specific to the `textDocument/implementation`.
+	 *
+	 * Since 3.6.0
+	 */
+	implementation?: {
+		/**
+		 * Whether implementation supports dynamic registration. If this is set to `true`
+		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+		 * return value for the corresponding server capability as well.
+		 */
+		dynamicRegistration?: boolean;
+	};
+
+	/**
 	 * Capabilities specific to the `textDocument/codeAction`
 	 */
 	codeAction?: {
@@ -1055,6 +1107,21 @@ export interface TextDocumentClientCapabilities {
 		 */
 		dynamicRegistration?: boolean;
 	};
+
+	/**
+	 * Capabilities specific to the `textDocument/documentColor` and the
+	 * `textDocument/colorPresentation` request.
+	 *
+	 * Since 3.6.0
+	 */
+	colorProvider?: {
+		/**
+		 * Whether colorProvider supports dynamic registration. If this is set to `true`
+		 * the client supports the new `(ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+		 * return value for the corresponding server capability as well.
+		 */
+		dynamicRegistration?: boolean;
+	}
 
 	/**
 	 * Capabilities specific to the `textDocument/rename`
@@ -1239,6 +1306,12 @@ export interface SaveOptions {
 	includeText?: boolean;
 }
 
+/**
+ * Color provider Options
+ */
+export interface ColorProviderOptions {
+}
+
 export interface TextDocumentSyncOptions {
 	/**
 	 * Open and close notifications are sent to the server.
@@ -1263,6 +1336,17 @@ export interface TextDocumentSyncOptions {
 	save?: SaveOptions;
 }
 
+/**
+ * Static registration options to be returned in the initialize request.
+ */
+interface StaticRegistrationOptions {
+	/**
+	 * The id used to register the request. The id can be used to deregister
+	 * the request again. See also Registration#id.
+	 */
+	id?: string;
+}
+
 interface ServerCapabilities {
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure defining each notification or
@@ -1285,6 +1369,18 @@ interface ServerCapabilities {
 	 * The server provides goto definition support.
 	 */
 	definitionProvider?: boolean;
+	/**
+	 * The server provides Goto Type Definition support.
+	 *
+	 * Since 3.6.0
+	 */
+	typeDefinitionProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	/**
+	 * The server provides Goto Implementation support.
+	 *
+	 * Since 3.6.0
+	 */
+	implementationProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
 	/**
 	 * The server provides find references support.
 	 */
@@ -1330,9 +1426,41 @@ interface ServerCapabilities {
 	 */
 	documentLinkProvider?: DocumentLinkOptions;
 	/**
+	 * The server provides color provider support.
+	 *
+	 * Since 3.6.0
+	 */
+	colorProvider?: ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	/**
 	 * The server provides execute command support.
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
+	/**
+	 * Workspace specific server capabilities
+	 */
+	workspace?: {
+		/**
+		 * The server supports workspace folder.
+		 *
+		 * Since 3.6.0
+		 */
+		workspaceFolders?: {
+			/**
+			* The server has support for workspace folders
+			*/
+			supported?: boolean;
+			/**
+			* Whether the server wants to receive workspace folder
+			* change notifications.
+			*
+			* If a strings is provided the string is treated as a ID
+			* under which the notification is registed on the client
+			* side. The ID can be used to unregister for these events
+			* using the `client/unregisterCapability` request.
+			*/
+			changeNotifications?: string | boolean;
+		}
+	}
 	/**
 	 * Experimental server capabilities.
 	 */
@@ -1342,7 +1470,7 @@ interface ServerCapabilities {
 
 #### <a name="initialized" class="anchor"></a>Initialized Notification (:arrow_right:)
 
-The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification for example to dynamically register capabilities. The `initialized` notification may only be sent once. 
+The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification for example to dynamically register capabilities. The `initialized` notification may only be sent once.
 
 _Notification_:
 * method: 'initialized'
@@ -1620,6 +1748,80 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
+##### <a name="workspace_workspaceFolders" class="anchor"></a>Workspace folders request (:arrow_left:)
+
+> *Since version 3.6.0*
+
+Many tools support more than one root folder per workspace. Examples for this are VS Code's multi-root support, Atom's project folder support or Sublime's project support. If a client workspace consists of multiple roots then a server typically needs to know about this. The protocol up to know assumes one root folder which is announce to the server by the `rootUri` property of the `InitializeParams`. If the client supports workspace folders and announces them via the corrsponding `workspaceFolders` client capability the `InitializeParams` contain an additional property `workspaceFolders` with the configured workspace folders when the server starts.
+
+The `workspace/workspaceFolders` request is sent from the server to the client to fetch the current open list of workspace folders. Returns `null` in the response if only a single file is open in the tool. Returns an empty array if a workspace is open but no folders are configured.
+
+_Request_:
+
+* method: 'workspace/workspaceFolders'
+* params: none
+
+_Response_:
+
+* result: `WorkspaceFolder[] | null` defines as follows:
+
+```typescript
+export interface WorkspaceFolder {
+	/**
+	 * The associated URI for this workspace folder.
+	 */
+	uri: string;
+
+	/**
+	 * The name of the workspace folder. Defaults to the
+	 * uri's basename.
+	 */
+	name: string;
+}
+```
+* error: code and message set in case an exception happens during the 'workspace/workspaceFolders' request
+
+##### <a name="workspace_didChangeWorkspaceFolders" class="anchor"></a>DidChangeWorkspaceFolders Notification (:arrow_right:)
+
+> *Since version 3.6.0*
+
+The `workspace/didChangeWorkspaceFolders` notification is sent from the client to the server to inform the server about workspace folder configuration changes. The notification is sent by default if both _ServerCapabilities/workspace/workspaceFolders_ and _ClientCapabilities/workapce/workspaceFolders_ are true; or if the server has registered to receive this notification it first. To register for the `workspace/didChangeWorkspaceFolders` send a `client/registerCapability` request from the client to the server. The registration parameter must have a `registrations` item of the following form, where `id` is a unique id used to unregister the capability (the example uses a UUID):
+```ts
+{
+	id: "28c6150c-bd7b-11e7-abc4-cec278b6b50a",
+	method: "workspace/didChangeWorkspaceFolders"
+}
+```
+
+_Notification_:
+
+* method: 'workspace/didChangeWorkspaceFolders'
+* params: `DidChangeWorkspaceFoldersParams` defined as follows:
+
+```typescript
+export interface DidChangeWorkspaceFoldersParams {
+	/**
+	 * The actual workspace folder change event.
+	 */
+	event: WorkspaceFoldersChangeEvent;
+}
+
+/**
+ * The workspace folder change event.
+ */
+export interface WorkspaceFoldersChangeEvent {
+	/**
+	 * The array of added workspace folders
+	 */
+	added: WorkspaceFolder[];
+
+	/**
+	 * The array of the removed workspace folders
+	 */
+	removed: WorkspaceFolder[];
+}
+```
+
 #### <a name="workspace_didChangeConfiguration" class="anchor"></a>DidChangeConfiguration Notification (:arrow_right:)
 
 A notification sent from the client to the server to signal the change of configuration settings.
@@ -1637,6 +1839,40 @@ interface DidChangeConfigurationParams {
 }
 ```
 
+#### <a name="workspace_configuration" class="anchor"></a>Configuration Request (:arrow_left:)
+
+> *Since version 3.6.0*
+
+The `workspace/configuration` request is sent from the server to the client to fetch configuration settings from the client. The request can fetch n configuration settings in one roundtrip. The order of the returned configuration settings correspond to the order of the passed `ConfigurationItems` (e.g. the first item in the response is the result for the first configuration item in the params).
+
+A `ConfigurationItem` consist of the configuration section to ask for and an additional scope URI. The configuration section ask for is defined by the server and doesn't necessarily need to correspond to the configuration store used be the client. So a server might ask for a configuration `cpp.formatterOptions` but the client stores the configuration in a XML store layout differently. It is up to the client to do the necessary conversion. If a scope URI is provided the client should return the setting scoped to the provided resource. If the client for example uses [EditorConfig](http://editorconfig.org/) to manage its settings the configuration should be returned for the passed resource URI. If the client can't provide a configuration setting for a given scope then `null` need to be present in the returned array.
+
+_Request_:
+
+* method: 'workspace/configuration'
+* params: `ConfigurationParams` defined as follows
+
+```typescript
+export interface ConfigurationParams {
+	items: ConfigurationItem[];
+}
+
+export interface ConfigurationItem {
+	/**
+	 * The scope to get the configuration section for.
+	 */
+	scopeUri?: string;
+
+	/**
+	 * The configuration section asked for.
+	 */
+	section?: string;
+}
+```
+
+_Response_:
+* result: any[]
+* error: code and message set in case an exception happens during the 'workspace/configuration' request
 
 #### <a name="workspace_didChangeWatchedFiles" class="anchor"></a>DidChangeWatchedFiles Notification (:arrow_right:)
 
@@ -1647,7 +1883,7 @@ Servers are allowed to run their own file watching mechanism and not rely on cli
 - to our experience getting file watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
 - file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare time stamps (as for example some node modules do)
 - a client usually starts more than one server. If every server runs its own file watching it can become a CPU or memory problem.
-- in general there are more server than client implementations. So this problem is better solved on the client side.  
+- in general there are more server than client implementations. So this problem is better solved on the client side.
 
 
 _Notification_:
@@ -1856,7 +2092,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a name="textDocument_didOpen" class="anchor"></a>DidOpenTextDocument Notification (:arrow_right:)
 
-The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count is one. 
+The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count is one.
 
 _Notification_:
 * method: 'textDocument/didOpen'
@@ -1893,7 +2129,7 @@ interface DidChangeTextDocumentParams {
 
 	/**
 	 * The actual content changes. The content changes describe single state changes
-	 * to the document. So if there are two content changes c1 and c2 for a document 
+	 * to the document. So if there are two content changes c1 and c2 for a document
 	 * in state S10 then c1 move the document to S11 and c2 to S12.
 	 */
 	contentChanges: TextDocumentContentChangeEvent[];
@@ -2063,7 +2299,7 @@ Diagnostics are "owned" by the server so it is the server's responsibility to cl
 * if a language is single file only (for example HTML) then diagnostics are cleared by the server when the file is closed.
 * if a language has a project system (for example C#) diagnostics are not cleared when a file closes. When a project is opened all diagnostics for all files are recomputed (or read from a cache).
 
-When a file changes it is the server's responsibility to re-compute diagnostics and push them to the client. If the computed set is empty it has to push the empty array to clear former diagnostics. Newly pushed diagnostics always replace previously pushed diagnostics. There is no merging that happens on the client side. 
+When a file changes it is the server's responsibility to re-compute diagnostics and push them to the client. If the computed set is empty it has to push the empty array to clear former diagnostics. Newly pushed diagnostics always replace previously pushed diagnostics. There is no merging that happens on the client side.
 
 _Notification_:
 * method: 'textDocument/publishDiagnostics'
@@ -2223,7 +2459,7 @@ interface CompletionItem {
 	/**
 	 * A string that should be inserted into a document when selecting
 	 * this completion. When `falsy` the label is used.
-	 * 
+	 *
 	 * The `insertText` is subject to interpretation by the client side.
 	 * Some tools might not take the string literally. For example
 	 * VS Code when code complete is requested in this example `con<cursor position>`
@@ -2319,11 +2555,11 @@ export interface CompletionRegistrationOptions extends TextDocumentRegistrationO
 	 * Most tools trigger completion request automatically without explicitly requesting
 	 * it using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
 	 * starts to type an identifier. For example if the user types `c` in a JavaScript file
-	 * code complete will automatically pop up present `console` besides others as a 
+	 * code complete will automatically pop up present `console` besides others as a
 	 * completion item. Characters that make up identifiers don't need to be listed here.
 	 *
 	 * If code complete should automatically be trigger on characters not being valid inside
-	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`. 
+	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`.
 	 */
 	triggerCharacters?: string[];
 
@@ -2426,8 +2662,8 @@ interface SignatureHelp {
 	/**
 	 * The active signature. If omitted or the value lies outside the
 	 * range of `signatures` the value defaults to zero or is ignored if
-	 * `signatures.length === 0`. Whenever possible implementors should 
-	 * make an active decision about the active signature and shouldn't 
+	 * `signatures.length === 0`. Whenever possible implementors should
+	 * make an active decision about the active signature and shouldn't
 	 * rely on a default value.
 	 * In future version of the protocol this property might become
 	 * mandatory to better express this.
@@ -2436,9 +2672,9 @@ interface SignatureHelp {
 
 	/**
 	 * The active parameter of the active signature. If omitted or the value
-	 * lies outside the range of `signatures[activeSignature].parameters` 
-	 * defaults to 0 if the active signature has parameters. If 
-	 * the active signature has no parameters it is ignored. 
+	 * lies outside the range of `signatures[activeSignature].parameters`
+	 * defaults to 0 if the active signature has parameters. If
+	 * the active signature has no parameters it is ignored.
 	 * In future version of the protocol this property might become
 	 * mandatory to better express the active parameter if the
 	 * active signature does have any.
@@ -2513,6 +2749,38 @@ _Request_:
 
 _Response_:
 * result: [`Location`](#location) | [`Location`](#location)[] \| `null`
+* error: code and message set in case an exception happens during the definition request.
+
+_Registration Options_: `TextDocumentRegistrationOptions`
+
+#### <a name="textDocument_typeDefinition" class="anchor"></a>Goto Type Definition Request (:leftwards_arrow_with_hook:)
+
+> *Since version 3.6.0*
+
+The goto type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
+
+_Request_:
+* method: 'textDocument/typeDefinition'
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+
+_Response_:
+* result: [`Location`](#location) | [`Location`](#location)[] | `null`
+* error: code and message set in case an exception happens during the definition request.
+
+_Registration Options_: `TextDocumentRegistrationOptions`
+
+#### <a name="textDocument_implementation"></a>Goto Implementation Request (:leftwards_arrow_with_hook:)
+
+> *Since version 3.6.0*
+
+The goto implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
+
+_Request_:
+* method: 'textDocument/implementation'
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+
+_Response_:
+* result: [`Location`](#location) | [`Location`](#location)[] | `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2698,7 +2966,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a name="textDocument_codeAction" class="anchor"></a>Code Action Request (:leftwards_arrow_with_hook:)
 
-The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. When the command is selected the server should be contacted again (via the `workspace/executeCommand`) request to execute the command. 
+The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. When the command is selected the server should be contacted again (via the `workspace/executeCommand`) request to execute the command.
 
 _Request_:
 * method: 'textDocument/codeAction'
@@ -2874,6 +3142,134 @@ _Request_:
 _Response_:
 * result: `DocumentLink`
 * error: code and message set in case an exception happens during the document link resolve request.
+
+#### <a name="textDocument_documentColor" class="anchor"></a>Document Color Request (:leftwards_arrow_with_hook:)
+
+> *Since version 3.6.0*
+
+The document color request is sent from the client to the server to list all color refereces found in a given text document. Along with the range, a color value in RGB is returned.
+
+Clients can use the result to decorate color references in an editor. For example:
+- Color boxes showing the actual color next to the reference
+- Show a color picker when a color reference is edited
+
+_Request_:
+
+* method: 'textDocument/documentColor'
+* params: `DocumentColorParams` defined as follows
+
+```ts
+interface DocumentColorParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+```
+
+_Response_:
+* result: `ColorInformation[]` defined as follows:
+
+```typescript
+interface ColorInformation {
+	/**
+	 * The range in the document where this color appers.
+	 */
+	range: Range;
+
+	/**
+	 * The actual color value for this color range.
+	 */
+	color: Color;
+}
+
+/**
+ * Represents a color in RGBA space.
+ */
+interface Color {
+
+	/**
+	 * The red component of this color in the range [0-1].
+	 */
+	readonly red: number;
+
+	/**
+	 * The green component of this color in the range [0-1].
+	 */
+	readonly green: number;
+
+	/**
+	 * The blue component of this color in the range [0-1].
+	 */
+	readonly blue: number;
+
+	/**
+	 * The alpha component of this color in the range [0-1].
+	 */
+	readonly alpha: number;
+}
+```
+* error: code and message set in case an exception happens during the 'textDocument/documentColor' request
+
+#### <a name="textDocument_colorPresentation" class="anchor"></a>Color Presentation Request (:leftwards_arrow_with_hook:)
+
+> *Since version 3.6.0*
+
+The color presentation request is sent from the client to the server to obtain a list of presentations for a color value at a given location. Clients can use the result to
+- modify a color reference.
+- show in a color picker and let users pick one of the presentations
+
+
+_Request_:
+
+* method: 'textDocument/colorPresentation'
+* params: `DocumentColorParams` defined as follows
+
+```typescript
+interface ColorPresentationParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The color information to request presentations for.
+	 */
+	colorInfo: Color;
+
+	/**
+	 * The range where the color would be inserted. Serves as a context.
+	 */
+	range: Range;
+}
+```
+
+_Response_:
+* result: `ColorPresentation[]` defined as follows:
+
+```typescript
+interface ColorPresentation {
+	/**
+	 * The label of this color presentation. It will be shown on the color
+	 * picker header. By default this is also the text that is inserted when selecting
+	 * this color presentation.
+	 */
+	label: string;
+	/**
+	 * An [edit](#TextEdit) which is applied to a document when selecting
+	 * this presentation for the color.  When `falsy` the [label](#ColorPresentation.label)
+	 * is used.
+	 */
+	textEdit?: TextEdit;
+	/**
+	 * An optional array of additional [text edits](#TextEdit) that are applied when
+	 * selecting this color presentation. Edits must not overlap with the main [edit](#ColorPresentation.textEdit) nor with themselves.
+	 */
+	additionalTextEdits?: TextEdit[];
+}
+```
+
+* error: code and message set in case an exception happens during the 'textDocument/colorPresentation' request
 
 #### <a name="textDocument_formatting" class="anchor"></a>Document Formatting Request  (:leftwards_arrow_with_hook:)
 
