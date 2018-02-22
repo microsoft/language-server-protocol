@@ -1,5 +1,23 @@
 # Protocol Change Log
 
+## 3.6.0 (2/22/2018)
+
+Merge the proposed protocol for workspace folders, configuration, goto type definition, goto implementation and document color provider into the main branch of the specification. For details see:
+
+* [Get Workspace Folders](https://microsoft.github.io/language-server-protocol/specification#workspace_workspaceFolders)
+* [DidChangeWorkspaceFolders Notification](https://microsoft.github.io/language-server-protocol/specification#workspace_didChangeWorkspaceFolders)
+* [Get Configuration](https://microsoft.github.io/language-server-protocol/specification#workspace_configuration)
+* [Goto Type Definition](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)
+* [Goto Implementataion](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)
+* [Document Color](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentColor)
+* [Color Presentation](https://microsoft.github.io/language-server-protocol/specification#textDocument_colorPresentation)
+
+In addition we enhanced the `CompletionTriggerKind` with a new value `TriggerForIncompleteCompletions: 3 = 3` to signal the a completion request got trigger since the last result was incomplete.
+
+## 3.5.0
+
+Decided to skip this version to bring the protocol version number in sync the with npm module vscode-languageserver-protocol.
+
 ## 3.4.0 (11/27/2017)
 
 * [extensible completion item and symbol kinds](https://github.com/Microsoft/language-server-protocol/issues/129)
