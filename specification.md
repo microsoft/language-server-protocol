@@ -305,7 +305,7 @@ interface Diagnostic {
 	severity?: number;
 
 	/**
-	 * The diagnostic's code. Can be omitted.
+	 * The diagnostic's code, which might appear in the user interface.
 	 */
 	code?: number | string;
 
