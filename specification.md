@@ -387,7 +387,11 @@ interface TextEdit {
 }
 ```
 
-If multiple `TextEdit`s are applied to a text document, all text edits describe changes made to the initial document version. Execution-wise text edits should be applied from the bottom to the top of the text document. Overlapping text edits are not supported.
+#### TextEdit[]
+
+Complex text manipulations are described with an array of `TextEdit`'s, representing a single change to the document.
+
+All text edits ranges refer to positions in the original document. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position, for example multiple inserts, or an insert and a remove or replace edit. If multiple inserts have the same position, the order in the array defines which edit to apply first.
 
 #### TextDocumentEdit
 
