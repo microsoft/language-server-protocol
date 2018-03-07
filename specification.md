@@ -391,7 +391,7 @@ interface TextEdit {
 
 Complex text manipulations are described with an array of `TextEdit`'s, representing a single change to the document.
 
-All text edits ranges refer to positions in the original document. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position, for example multiple inserts, or an insert and a remove or replace edit. If multiple inserts have the same position, the order in the array defines which edit to apply first.
+All text edits ranges refer to positions in the original document. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position: multiple inserts, or any number of inserts followed by a single remove or replace edit. If multiple inserts have the same position, the order in the array defines the order in which the inserted strings appear in the resulting text.
 
 #### TextDocumentEdit
 
