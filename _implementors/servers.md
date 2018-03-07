@@ -16,6 +16,7 @@ The language servers are listed in chronological order of appearance.
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [csharp-language-server-protocol](https://github.com/OmniSharp/csharp-language-server-protocol) |
 | JSON | MS | [vscode-json-languageservice](https://github.com/Microsoft/vscode-json-languageservice) |
+| JSON | MS | [vscode-json-languageserver-bin](https://github.com/vscode-langservers/vscode-json-languageserver-bin) |
 | CSS/LESS/SASS | MS | [vscode-css-languageservice](https://github.com/Microsoft/vscode-css-languageservice) |
 | HTML | MS | [vscode-html-languageservice](https://github.com/Microsoft/vscode-html-languageservice) |
 | [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext](https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.xtend)|
