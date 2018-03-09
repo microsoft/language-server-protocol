@@ -1325,7 +1325,7 @@ export interface TextDocumentSyncOptions {
 	openClose?: boolean;
 	/**
 	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
-	 * and TextDocumentSyncKindIncremental.
+	 * and TextDocumentSyncKind.Incremental.
 	 */
 	change?: number;
 	/**
@@ -2172,7 +2172,7 @@ _Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follo
 export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
 	 * How documents are synced to the server. See TextDocumentSyncKind.Full
-	 * and TextDocumentSyncKindIncremental.
+	 * and TextDocumentSyncKind.Incremental.
 	 */
 	syncKind: number;
 }
