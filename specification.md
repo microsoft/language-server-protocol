@@ -2098,7 +2098,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a name="textDocument_didOpen" class="anchor"></a>DidOpenTextDocument Notification (:arrow_right:)
 
-The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one.
+The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed. 
 
 _Notification_:
 * method: 'textDocument/didOpen'
@@ -2278,7 +2278,7 @@ export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistr
 
 #### <a name="textDocument_didClose" class="anchor"></a>DidCloseTextDocument Notification (:arrow_right:)
 
-The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent.
+The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed. 
 
 _Notification_:
 * method: 'textDocument/didClose'
