@@ -6,7 +6,7 @@ author: Microsoft
 index: 1
 ---
 
-The language servers are listed in chronological order of appearance.
+The language servers are listed in alphabetical order.
 
 *If you are missing a server please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/servers.md)*
 
