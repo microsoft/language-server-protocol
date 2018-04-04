@@ -66,7 +66,7 @@ The language servers are listed in chronological order of appearance.
 | Dart | [Nate Bosch (@natebosch)](https://github.com/natebosch) | [Dart Language Server](https://github.com/natebosch/dart_language_server) |
 | C/C++/Objective-C | [Jacob Dufault](https://github.com/jacobdufault), [MaskRay](https://github.com/MaskRay), [topisani](https://github.com/topisani) | [cquery](https://github.com/jacobdufault/cquery) |
 | XML | IBM | [XML Language Server](https://github.com/microclimate-devops/xml-language-server) |
-| Apache Camel | [Aurélien Pupier (@apupier)](https://github.com/apupier) and [Lars Heinemann](https://github.com/lhein) | [Apache Camel Language Server](https://github.com/lhein/camel-language-server) |
+| Apache Camel | [Contributors](https://github.com/camel-tooling/camel-language-server/graphs/contributors) | [Apache Camel Language Server](https://github.com/camel-tooling/camel-language-server) |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) |
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) |
