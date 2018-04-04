@@ -6,8 +6,6 @@ author: Microsoft
 index: 1
 ---
 
-The language servers are listed in alphabetical order.
-
 *If you are missing a server please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/servers.md)*
 
 | Language | Maintainer | Repository |
@@ -42,6 +40,7 @@ The language servers are listed in alphabetical order.
 | JSON | MS | [vscode-json-languageservice](https://github.com/Microsoft/vscode-json-languageservice) |
 | Java (Eclipse)| Eclipse, [RedHat](http://developers.redhat.com/blog/2016/08/01/a-week-of-hacking-the-java-language-server/) |  [Eclipse JDT LS](https://github.com/eclipse/eclipse.jdt.ls/) |
 | Java | [@georgewfraser](https://github.com/georgewfraser) | [Java Compiler (javac) API-based Java support](https://github.com/georgewfraser/vscode-javac) |
+| Javascript Flow| [flowtype](https://github.com/flowtype/) | [flow-langauge-server](https://github.com/flowtype/flow-language-server) |
 | Javascript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) |
 | [Language Tool](https://languagetool.org/)| [Adam Voss](https://github.com/adamvoss) | [languagetool](https://github.com/adamvoss/languagetool-languageserver) |
@@ -72,5 +71,4 @@ The language servers are listed in alphabetical order.
 | YAML (with JSON schemas)| [Adam Voss](https://github.com/adamvoss) | [vscode-yaml-languageservice](https://github.com/adamvoss/vscode-yaml-languageservice) |
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |
-
 {: .table .table-bordered .table-responsive}
