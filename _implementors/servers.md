@@ -11,7 +11,7 @@ index: 1
 | Language | Maintainer | Repository |
 |------|--------|----------|
 | [API Elements](http://api-elements.readthedocs.io/en/latest/) | [Vincenzo Chianese(@XVincentX)](https://github.com/XVincentX) | [vscode-apielements](https://github.com/XVincentX/vscode-apielements) |
-| Apache Camel | [Aurélien Pupier (@apupier)](https://github.com/apupier) and [Lars Heinemann](https://github.com/lhein) | [Apache Camel Language Server](https://github.com/lhein/camel-language-server) |
+| Apache Camel | [Contributors](https://github.com/camel-tooling/camel-language-server/graphs/contributors) | [Apache Camel Language Server](https://github.com/camel-tooling/camel-language-server) |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) |
 | Ballerina | [BallerinaLang.org](https://ballerinalang.org/) | [Ballerina Language Server](https://github.com/ballerinalang/language-server) |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) |
