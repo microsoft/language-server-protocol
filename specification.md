@@ -1845,7 +1845,7 @@ interface DidChangeConfigurationParams {
 }
 ```
 
-#### <a name="workspace_configuration" class="anchor"></a>Configuration Request (:arrow_left:)
+#### <a name="workspace_configuration" class="anchor"></a>Configuration Request (:arrow_right_hook:)
 
 > *Since version 3.6.0*
 
