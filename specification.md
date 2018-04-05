@@ -293,6 +293,8 @@ interface Location {
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
+> New: `relatedInformation` property.
+
 ```typescript
 interface Diagnostic {
 	/**
@@ -321,6 +323,12 @@ interface Diagnostic {
 	 * The diagnostic's message.
 	 */
 	message: string;
+
+	/**
+	 * An array of related diagnostic information, e.g. when symbol-names within
+	 * a scope collide all definitions can be marked via this property.
+	 */
+	relatedInformation?: DiagnosticRelatedInformation[];
 }
 ```
 
@@ -344,6 +352,25 @@ namespace DiagnosticSeverity {
 	 * Reports a hint.
 	 */
 	export const Hint = 4;
+}
+```
+
+```typescript
+/**
+ * Represents a related message and source code location for a diagnostic. This should be
+ * used to point to code locations that cause or related to a diagnostics, e.g when duplicating
+ * a symbol in a scope.
+ */
+export interface DiagnosticRelatedInformation {
+	/**
+	 * The location of this related diagnostic information.
+	 */
+	location: Location;
+
+	/**
+	 * The message of this related diagnostic information.
+	 */
+	message: string;
 }
 ```
 
