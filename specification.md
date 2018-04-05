@@ -1165,6 +1165,16 @@ export interface TextDocumentClientCapabilities {
 		 */
 		dynamicRegistration?: boolean;
 	};
+
+	/**
+	 * Capabilities specific to `textDocument/publishDiagnostics`.
+	 */
+	publishDiagnostics?: {
+		/**
+		 * Whether the clients accepts diagnostics with related information.
+		 */
+		relatedInformation?: boolean;
+	};
 }
 ```
 
