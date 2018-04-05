@@ -1754,7 +1754,7 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
-##### <a name="workspace_workspaceFolders" class="anchor"></a>Workspace folders request (:arrow_left:)
+##### <a name="workspace_workspaceFolders" class="anchor"></a>Workspace folders request (:arrow_right_hook:)
 
 > *Since version 3.6.0*
 
