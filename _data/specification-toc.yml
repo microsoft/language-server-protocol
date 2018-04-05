@@ -118,4 +118,22 @@
       anchor: textDocument_onTypeFormatting
     - title: rename
       anchor: textDocument_rename
-
+  - title: Change Log
+    anchor: changeLog
+    children:
+    - title: 3.7.0
+      anchor: version_3_7_0
+    - title: 3.6.0
+      anchor: version_3_6_0
+    - title: 3.5.0
+      anchor: version_3_5_0
+    - title: 3.4.0
+      anchor: version_3_4_0
+    - title: 3.3.0
+      anchor: version_3_3_0
+    - title: 3.2.0
+      anchor: version_3_2_0
+    - title: 3.1.0
+      anchor: version_3_1_0
+    - title: 3.0
+      anchor: version_3_0_0
