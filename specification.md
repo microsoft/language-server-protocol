@@ -2796,7 +2796,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) | [`Location`](#location)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2812,7 +2812,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) | [`Location`](#location)[] | `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -2828,7 +2828,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) | [`Location`](#location)[] | `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
