@@ -2135,7 +2135,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a name="textDocument_didOpen" class="anchor"></a>DidOpenTextDocument Notification (:arrow_right:)
 
-The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed. 
+The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed.
 
 _Notification_:
 * method: 'textDocument/didOpen'
@@ -2315,7 +2315,7 @@ export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistr
 
 #### <a name="textDocument_didClose" class="anchor"></a>DidCloseTextDocument Notification (:arrow_right:)
 
-The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed. 
+The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed.
 
 _Notification_:
 * method: 'textDocument/didClose'
@@ -2365,8 +2365,6 @@ interface PublishDiagnosticsParams {
 #### <a name="textDocument_completion" class="anchor"></a>Completion Request (:leftwards_arrow_with_hook:)
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in. The request can delay the computation of the `detail` and `documentation` properties. However, properties that are needed for the initial sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` request and must not be changed during resolve.
-
-Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is documented [here](./snippetSyntax.md)
 
 _Request_:
 * method: 'textDocument/completion'
@@ -2617,6 +2615,88 @@ export interface CompletionRegistrationOptions extends TextDocumentRegistrationO
 	 */
 	resolveProvider?: boolean;
 }
+```
+
+Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is as follows:
+
+##### Snippet Syntax
+
+The `body` of a snippet can use special constructs to control cursors and the text being inserted. The following are supported features and their syntaxes:
+
+##### Tabstops
+
+With tabstops, you can make the editor cursor move inside a snippet. Use `$1`, `$2` to specify cursor locations. The number is the order in which tabstops will be visited, whereas `$0` denotes the final cursor position. Multiple tabstops are linked and updated in sync.
+
+##### Placeholders
+
+Placeholders are tabstops with values, like `${1:foo}`. The placeholder text will be inserted and selected such that it can be easily changed. Placeholders can be nested, like `${1:another ${2:placeholder}}`.
+
+##### Choice
+
+Placeholders can have choices as values. The syntax is a comma separated enumeration of values, enclosed with the pipe-character, for example `${1|one,two,three|}`. When the snippet is inserted and the placeholder selected, choices will prompt the user to pick one of the values.
+
+##### Variables
+
+With `$name` or `${name:default}` you can insert the value of a variable. When a variable isn’t set, its *default* or the empty string is inserted. When a variable is unknown (that is, its name isn’t defined) the name of the variable is inserted and it is transformed into a placeholder.
+
+The following variables can be used:
+
+* `TM_SELECTED_TEXT` The currently selected text or the empty string
+* `TM_CURRENT_LINE` The contents of the current line
+* `TM_CURRENT_WORD` The contents of the word under cursor or the empty string
+* `TM_LINE_INDEX` The zero-index based line number
+* `TM_LINE_NUMBER` The one-index based line number
+* `TM_FILENAME` The filename of the current document
+* `TM_FILENAME_BASE` The filename of the current document without its extensions
+* `TM_DIRECTORY` The directory of the current document
+* `TM_FILEPATH` The full file path of the current document
+
+##### Variable Transforms
+
+Transformations allow you to modify the value of a variable before it is inserted. The definition of a transformation consists of three parts:
+
+1. A regular expression that is matched against the value of a variable, or the empty string when the variable cannot be resolved.
+2. A "format string" that allows to reference matching groups from the regular expression. The format string allows for conditional inserts and simple modifications.
+3. Options that are passed to the regular expression.
+
+The following example inserts the name of the current file without its ending, so from `foo.txt` it makes `foo`.
+
+```
+${TM_FILENAME/(.*)\..+$/$1/}
+  |           |         | |
+  |           |         | |-> no options
+  |           |         |
+  |           |         |-> references the contents of the first
+  |           |             capture group
+  |           |
+  |           |-> regex to capture everything before
+  |               the final `.suffix`
+  |
+  |-> resolves to the filename
+```
+
+##### Grammar
+
+Below is the EBNF ([extended Backus-Naur form](https://en.wikipedia.org/wiki/Extended_Backus-Naur_form)) for snippets. With `\` (backslash), you can escape `$`, `}` and `\`. Within choice elements, the backslash also escapes comma and pipe characters.
+
+```
+any         ::= tabstop | placeholder | choice | variable | text
+tabstop     ::= '$' int | '${' int '}'
+placeholder ::= '${' int ':' any '}'
+choice      ::= '${' int '|' text (',' text)* '|}'
+variable    ::= '$' var | '${' var }'
+                | '${' var ':' any '}'
+                | '${' var '/' regex '/' (format | text)+ '/' options '}'
+format      ::= '$' int | '${' int '}'
+                | '${' int ':' '/upcase' | '/downcase' | '/capitalize' '}'
+                | '${' int ':+' if '}'
+                | '${' int ':?' if ':' else '}'
+                | '${' int ':-' else '}' | '${' int ':' else '}'
+regex       ::= JavaScript Regular Expression value (ctor-string)
+options     ::= JavaScript Regular Expression option (ctor-options)
+var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
+int         ::= [0-9]+
+text        ::= .*
 ```
 
 #### <a name="completionItem_resolve" class="anchor"></a>Completion Item Resolve Request (:leftwards_arrow_with_hook:)
