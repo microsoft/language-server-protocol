@@ -750,6 +750,12 @@ interface InitializeParams {
 	 */
 	initializationOptions?: any;
 
+	/*
+	 * Configuration settings in the client. These can be changed later by the
+	 * client by issuing a `workspace/didChangeConfiguration` notification.
+	 */
+	settings?: any;
+
 	/**
 	 * The capabilities provided by the client (editor or tool)
 	 */
