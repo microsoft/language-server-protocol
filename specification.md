@@ -1393,7 +1393,7 @@ interface StaticRegistrationOptions {
 interface ServerCapabilities {
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure defining each notification or
-	 * for backwards compatibility the TextDocumentSyncKind number.
+	 * for backwards compatibility the TextDocumentSyncKind number. If omitted it defaults to `TextDocumentSyncKind.None`.
 	 */
 	textDocumentSync?: TextDocumentSyncOptions | number;
 	/**
