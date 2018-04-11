@@ -1362,7 +1362,7 @@ export interface TextDocumentSyncOptions {
 	openClose?: boolean;
 	/**
 	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
-	 * and TextDocumentSyncKind.Incremental.
+	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
 	 */
 	change?: number;
 	/**
