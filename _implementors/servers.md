@@ -62,7 +62,7 @@ index: 1
 | Rust | [Jonathan Turner](https://github.com/jonathandturner) | [rustls](https://github.com/jonathandturner/rustls) |
 | SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) |
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) |
-| Scala | [scalameta](https://github.com/scalameta) | [Scala language server](https://github.com/scalameta/language-server) |
+| Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) |
 | Solidity | Kodebox | [Solidity language server](https://github.com/CodeChain-io/solidity-language-server) |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) |
 | TypeScript|[TypeFox](typefox.io)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) |
