@@ -69,7 +69,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### RequestMessage
+#### Request Message
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
