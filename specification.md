@@ -3244,6 +3244,11 @@ interface DocumentLink {
 	 * The uri this link points to. If missing a resolve request is sent later.
 	 */
 	target?: DocumentUri;
+	/**
+	 * A data entry field that is preserved on a document link between a
+	 * DocumentLinkRequest and a DocumentLinkResolveRequest.
+	 */
+	data?: any;
 }
 ```
 * error: code and message set in case an exception happens during the document link request.
