@@ -20,7 +20,7 @@ index: 1
 | [C++/clang](https://clang.llvm.org/extra/clangd.html)| [llvm-project](http://llvm.org/viewvc/llvm-project/) | [clangd](http://llvm.org/viewvc/llvm-project/clang-tools-extra/trunk/clangd/) |
 | C/C++/Objective-C | [Jacob Dufault](https://github.com/jacobdufault), [MaskRay](https://github.com/MaskRay), [topisani](https://github.com/topisani) | [cquery](https://github.com/jacobdufault/cquery) |
 | CSS/LESS/SASS | MS | [vscode-css-languageservice](https://github.com/Microsoft/vscode-css-languageservice) |
-| [Ceylon](https://ceylon-lang.org/)| [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) |
+| [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) |
 | [Clojure](https://clojure.org/)] | [Case Nelson](https://github.com/snoe) | [clojure-lsp](https://github.com/snoe/clojure-lsp) |
 | Crane PHP | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) |
 | [Crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [scry](https://github.com/kofno/scry) |
