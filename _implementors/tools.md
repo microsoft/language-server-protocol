@@ -23,5 +23,5 @@ index: 2
 |vim8 and neovim| [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
 |Visual Studio| [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
 |Visual Studio| Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
-| Oni | [@oni_vim](https://twitter.com/oni_vim) | (https://www.onivim.io/Features) |
+| Oni | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 {: .table .table-bordered .table-responsive}
