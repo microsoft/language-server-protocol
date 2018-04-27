@@ -41,7 +41,7 @@ index: 1
 | JSON | MS | [vscode-json-languageservice](https://github.com/Microsoft/vscode-json-languageservice) |
 | Java (Eclipse)| Eclipse, [RedHat](http://developers.redhat.com/blog/2016/08/01/a-week-of-hacking-the-java-language-server/) |  [Eclipse JDT LS](https://github.com/eclipse/eclipse.jdt.ls/) |
 | Java | [@georgewfraser](https://github.com/georgewfraser) | [Java Compiler (javac) API-based Java support](https://github.com/georgewfraser/vscode-javac) |
-| Javascript Flow| [flowtype](https://github.com/flowtype/) | [flow-langauge-server](https://github.com/flowtype/flow-language-server) |
+| Javascript Flow| [flowtype](https://github.com/flowtype/) | [flow-language-server](https://github.com/flowtype/flow-language-server) |
 | Javascript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) |
 | [Language Tool](https://languagetool.org/)| [Adam Voss](https://github.com/adamvoss) | [languagetool](https://github.com/adamvoss/languagetool-languageserver) |
