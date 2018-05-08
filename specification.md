@@ -935,6 +935,11 @@ export interface TextDocumentClientCapabilities {
 			 * property. The order describes the preferred format of the client.
 			 */
 			documentationFormat?: MarkupKind[];
+
+			/**
+			 * Client supports the deprecated property on a completion item.
+			 */
+			deprecatedSupport?: boolean;
 		}
 
 		completionItemKind?: {
@@ -2491,6 +2496,11 @@ interface CompletionItem {
 	documentation?: string | MarkupContent;
 
 	/**
+	 * Indicates if this item is deprecated.
+	 */
+	deprecated?: boolean;
+
+	/**
 	 * A string that should be used when comparing this item
 	 * with other items. When `falsy` the label is used.
 	 */
@@ -3032,6 +3042,11 @@ interface SymbolInformation {
 	 * The kind of this symbol.
 	 */
 	kind: number;
+
+	/**
+	 * Indicates if this symbol is deprecated.
+	 */
+	deprecated?: boolean;
 
 	/**
 	 * The location of this symbol. The location's range is used by a tool
