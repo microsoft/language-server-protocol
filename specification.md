@@ -2544,8 +2544,12 @@ interface CompletionItem {
 
 	/**
 	 * An optional array of additional text edits that are applied when
-	 * selecting this completion. Edits must not overlap with the main edit
-	 * nor with themselves.
+	 * selecting this completion. Edits must not overlap (including the same insert position)
+	 * with the main edit nor with themselves.
+	 *
+	 * Additional text edits should be used to change text unrelated to the current cursor position
+	 * (for example adding an import statement at the top of the file if the completion item will
+	 * insert an unqualified type).
 	 */
 	additionalTextEdits?: TextEdit[];
 
