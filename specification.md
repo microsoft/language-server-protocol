@@ -1478,7 +1478,7 @@ interface ServerCapabilities {
 	 *
 	 * Since 3.6.0
 	 */
-	colorProvider?: ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	colorProvider?: boolean | ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
 	/**
 	 * The server provides execute command support.
 	 */
@@ -3387,7 +3387,7 @@ interface ColorPresentationParams {
 	/**
 	 * The color information to request presentations for.
 	 */
-	colorInfo: Color;
+	color: Color;
 
 	/**
 	 * The range where the color would be inserted. Serves as a context.
@@ -3592,6 +3592,8 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 ### <a name="changeLog" class="anchor"></a>Change Log
 
 Below a change log of the last shipped version.
+* ColorServerCapabilities.colorProvider can also be a boolean
+* Corrected ColorPresentationParams.colorInfo to color (as in the d.ts and in implementations)
 
 #### <a name="version_3_7_0" class="anchor"></a>3.7.0 (4/5/2018)
 
