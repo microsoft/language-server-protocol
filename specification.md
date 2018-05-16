@@ -713,7 +713,7 @@ The initialize request is sent as the first request from the client to the serve
 * For a request the response should be an error with `code: -32002`. The message can be picked by the server.
 * Notifications should be dropped, except for the exit notification. This will allow the exit of a server without an initialize request.
 
-Until the server has responded to the `initialize` request with an `InitializeResult`, the client must not send any additional requests or notifications to the server. In addition the server is not allowed to send any requests or notications to the client until it has responded with an `InitializeResult`, with the exception that during the `initialize` request the server is allowed to send the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
+Until the server has responded to the `initialize` request with an `InitializeResult`, the client must not send any additional requests or notifications to the server. In addition the server is not allowed to send any requests or notifications to the client until it has responded with an `InitializeResult`, with the exception that during the `initialize` request the server is allowed to send the notifications `window/showMessage`, `window/logMessage` and `telemetry/event` as well as the `window/showMessageRequest` request to the client.
 
 The `initialize` request may only be sent once.
 
@@ -1502,7 +1502,7 @@ interface ServerCapabilities {
 			* change notifications.
 			*
 			* If a strings is provided the string is treated as a ID
-			* under which the notification is registed on the client
+			* under which the notification is registered on the client
 			* side. The ID can be used to unregister for these events
 			* using the `client/unregisterCapability` request.
 			*/
@@ -2140,7 +2140,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a name="textDocument_didOpen" class="anchor"></a>DidOpenTextDocument Notification (:arrow_right:)
 
-The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed.
+The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
 _Notification_:
 * method: 'textDocument/didOpen'
@@ -2320,7 +2320,7 @@ export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistr
 
 #### <a name="textDocument_didClose" class="anchor"></a>DidCloseTextDocument Notification (:arrow_right:)
 
-The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is indepenedent of whether a text document is open or closed.
+The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
 _Notification_:
 * method: 'textDocument/didClose'
@@ -3299,7 +3299,7 @@ _Response_:
 
 > *Since version 3.6.0*
 
-The document color request is sent from the client to the server to list all color refereces found in a given text document. Along with the range, a color value in RGB is returned.
+The document color request is sent from the client to the server to list all color references found in a given text document. Along with the range, a color value in RGB is returned.
 
 Clients can use the result to decorate color references in an editor. For example:
 - Color boxes showing the actual color next to the reference
@@ -3325,7 +3325,7 @@ _Response_:
 ```typescript
 interface ColorInformation {
 	/**
-	 * The range in the document where this color appers.
+	 * The range in the document where this color appears.
 	 */
 	range: Range;
 
@@ -3607,7 +3607,7 @@ Merge the proposed protocol for workspace folders, configuration, goto type defi
 * [DidChangeWorkspaceFolders Notification](https://microsoft.github.io/language-server-protocol/specification#workspace_didChangeWorkspaceFolders)
 * [Get Configuration](https://microsoft.github.io/language-server-protocol/specification#workspace_configuration)
 * [Goto Type Definition](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)
-* [Goto Implementataion](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)
+* [Goto Implementation](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)
 * [Document Color](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentColor)
 * [Color Presentation](https://microsoft.github.io/language-server-protocol/specification#textDocument_colorPresentation)
 
@@ -3639,7 +3639,7 @@ Decided to skip this version to bring the protocol version number in sync the wi
 #### <a name="version_3_0_0" class="anchor"></a>3.0 Version
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
-- add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediatelly.
+- add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediately.
 - servers can more dynamically react to client features. Capabilities can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
