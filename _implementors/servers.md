@@ -60,7 +60,7 @@ index: 1
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress |
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [language_server-ruby](https://github.com/mtsmfm/language_server-ruby) |
-| Rust | [Jonathan Turner](https://github.com/jonathandturner) | [rustls](https://github.com/jonathandturner/rustls) |
+| Rust | [Jonathan Turner](https://github.com/jonathandturner) | [Rust Language Server](https://github.com/rust-lang-nursery/rls) |
 | SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) |
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) |
