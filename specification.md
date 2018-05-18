@@ -1987,7 +1987,7 @@ _Registration Options_: `DidChangeWatchedFilesRegistrationOptions` defined as fo
 
 ```typescript
 /**
- * Describe options to be used when registered for text document change events.
+ * Describe options to be used when registering for text document change events.
  */
 export interface DidChangeWatchedFilesRegistrationOptions {
 	/**
@@ -2209,7 +2209,7 @@ _Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follo
 
 ```typescript
 /**
- * Describe options to be used when registered for text document change events.
+ * Describe options to be used when registering for text document change events.
  */
 export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
