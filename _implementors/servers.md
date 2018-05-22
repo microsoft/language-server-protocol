@@ -26,6 +26,7 @@ index: 1
 | [Crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [scry](https://github.com/kofno/scry) |
 | Dart | [Nate Bosch (@natebosch)](https://github.com/natebosch) | [Dart Language Server](https://github.com/natebosch/dart_language_server) |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) |
+| Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) |
 | Elixir| [Jake Becker](https://github.com/JakeBecker) | [elixir-ls](https://github.com/JakeBecker/elixir-ls) |
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) |
 | GLSL | [Sven-Hendrik Haase (@svenstaro)](https://github.com/svenstaro) | [glsl-language-server](https://github.com/svenstaro/glsl-language-server) |
