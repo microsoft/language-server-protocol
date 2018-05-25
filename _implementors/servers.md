@@ -19,7 +19,7 @@ index: 1
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) |
 | [C++/clang](https://clang.llvm.org/extra/clangd.html)| [llvm-project](http://llvm.org/viewvc/llvm-project/) | [clangd](http://llvm.org/viewvc/llvm-project/clang-tools-extra/trunk/clangd/) |
 | C/C++/Objective-C | [Jacob Dufault](https://github.com/jacobdufault), [MaskRay](https://github.com/MaskRay), [topisani](https://github.com/topisani) | [cquery](https://github.com/jacobdufault/cquery) |
-| CSS/LESS/SASS | MS | [vscode-css-languageservice](https://github.com/Microsoft/vscode-css-languageservice) |
+| CSS/LESS/SASS | MS | [vscode-css-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/css-language-features/server) |
 | [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) |
 | [Clojure](https://clojure.org/) | [Case Nelson](https://github.com/snoe) | [clojure-lsp](https://github.com/snoe/clojure-lsp) |
 | Crane PHP | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) |
@@ -34,12 +34,11 @@ index: 1
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) |
 | [GraphQL](http://graphql.org/) | GraphQL community | [Server in GraphQL](https://github.com/graphql/graphql-language-service) |
 | Groovy | [Palantir](https://github.com/palantir) | [groovy-language-server](https://github.com/palantir/groovy-language-server/) |
-| HTML | MS | [vscode-html-languageservice](https://github.com/Microsoft/vscode-html-languageservice) |
+| HTML | MS | [vscode-html-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/html-language-features/server) |
 | Haskell| [Alan Zimmerman](https://github.com/alanz) | [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine) |
 | Haxe | [Dan Korostelev (@nadako)](https://github.com/nadako) | [VS Code Haxe extension](https://github.com/vshaxe/haxe-languageserver) |
 | [Isabelle](https://www.cl.cam.ac.uk/research/hvg/Isabelle/) | [Makarius Wenzel](https://github.com/makarius) | [sources](https://bitbucket.org/makarius/isabelle/src/09b872c58c32/src/Tools/VSCode) |
-| JSON | MS | [vscode-json-languageserver-bin](https://github.com/vscode-langservers/vscode-json-languageserver-bin) Temporary until supported by VS Code itself |
-| JSON | MS | [vscode-json-languageservice](https://github.com/Microsoft/vscode-json-languageservice) |
+| JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) |
 | Java (Eclipse)| Eclipse, [RedHat](http://developers.redhat.com/blog/2016/08/01/a-week-of-hacking-the-java-language-server/) |  [Eclipse JDT LS](https://github.com/eclipse/eclipse.jdt.ls/) |
 | Java | [@georgewfraser](https://github.com/georgewfraser) | [Java Compiler (javac) API-based Java support](https://github.com/georgewfraser/vscode-javac) |
 | Javascript Flow| [flowtype](https://github.com/flowtype/) | [flow-language-server](https://github.com/flowtype/flow-language-server) |
