@@ -56,6 +56,7 @@ index: 1
 | Puppet| [Puppetlabs](https://github.com/jpogran) | [puppet language server](https://github.com/jpogran/puppet-vscode/tree/master/server) |
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) |
 | Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) |
+| Python | MS | [Python Tools for Visual Studio](https://github.com/Microsoft/PTVS)
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress |
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) |
