@@ -54,6 +54,7 @@ index: 1
 | PHPUnit | [Recca0120](https://github.com/recca0120) | [phpunit-language-server](https://github.com/recca0120/vscode-phpunit) |
 | [Polymer](https://www.polymer-project.org) | [Polymer Team](https://github.com/Polymer) | [polymer-editor-service](https://github.com/Polymer/polymer-editor-service) |
 | PowerShell | MS |  [VS Code PowerShell extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell) |
+| PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) |
 | Puppet| [Puppetlabs](https://github.com/jpogran) | [puppet language server](https://github.com/jpogran/puppet-vscode/tree/master/server) |
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) |
 | Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) |
