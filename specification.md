@@ -1124,6 +1124,28 @@ export interface TextDocumentClientCapabilities {
 		 * Whether code action supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
+		/**
+		 * The client support code action literals as a valid
+		 * response of the `textDocument/codeAction` request.
+		 *
+		 * Since 3.8.0
+		 */
+		codeActionLiteralSupport?: {
+			/**
+			 * The code action kind is support with the following value
+			 * set.
+			 */
+			codeActionKind: {
+
+				/**
+				 * The code action kind values the client supports. When this
+				 * property exists the client also guarantees that it will
+				 * handle values outside its set gracefully and falls back
+				 * to a default value when unknown.
+				 */
+				valueSet: CodeActionKind[];
+			};
+		};
 	};
 
 	/**
@@ -3115,6 +3137,13 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. When the command is selected the server should be contacted again (via the `workspace/executeCommand`) request to execute the command.
 
+> *Since version 3.8.0:* support for CodeAction litarals to enable the following scenarios:
+
+- the ability to directly return a workspace edit from e code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is imply a command and  the actual edit is only computed when needed.
+- the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action for example into corresponding menus (e.g. all refactor code actions into a refactor menu).
+
+Clients need to announce there support code action literals and code action kinds via the corresponding client capability `textDocument.codeAction.codeActionLiteralSupport`.
+
 _Request_:
 * method: 'textDocument/codeAction'
 * params: `CodeActionParams` defined as follows:
@@ -3141,6 +3170,82 @@ interface CodeActionParams {
 }
 
 /**
+ * The kind of a code action.
+ *
+ * Kinds are a hierarchical list of identifiers separated by `.`, e.g. `"refactor.extract.function"`.
+ *
+ * The set of kinds is open and client needs to announce the kinds it supports to the server during
+ * initialization.
+ */
+export type CodeActionKind = string;
+
+/**
+ * A set of predefined code action kinds
+ */
+export namespace CodeActionKind {
+	/**
+	 * Base kind for quickfix actions: 'quickfix'
+	 */
+	export const QuickFix: CodeActionKind = 'quickfix';
+
+	/**
+	 * Base kind for refactoring actions: 'refactor'
+	 */
+	export const Refactor: CodeActionKind = 'refactor';
+
+	/**
+	 * Base kind for refactoring extraction actions: 'refactor.extract'
+	 *
+	 * Example extract actions:
+	 *
+	 * - Extract method
+	 * - Extract function
+	 * - Extract variable
+	 * - Extract interface from class
+	 * - ...
+	 */
+	export const RefactorExtract: CodeActionKind = 'refactor.extract';
+
+	/**
+	 * Base kind for refactoring inline actions: 'refactor.inline'
+	 *
+	 * Example inline actions:
+	 *
+	 * - Inline function
+	 * - Inline variable
+	 * - Inline constant
+	 * - ...
+	 */
+	export const RefactorInline: CodeActionKind = 'refactor.inline';
+
+	/**
+	 * Base kind for refactoring rewrite actions: 'refactor.rewrite'
+	 *
+	 * Example rewrite actions:
+	 *
+	 * - Convert JavaScript function to class
+	 * - Add or remove parameter
+	 * - Encapsulate field
+	 * - Make method static
+	 * - Move method to base class
+	 * - ...
+	 */
+	export const RefactorRewrite: CodeActionKind = 'refactor.rewrite';
+
+	/**
+	 * Base kind for source actions: `source`
+	 *
+	 * Source code actions apply to the entire file.
+	 */
+	export const Source: CodeActionKind = 'source';
+
+	/**
+	 * Base kind for an organize imports source action: `source.organizeImports`
+	 */
+	export const SourceOrganizeImports: CodeActionKind = 'source.organizeImports';
+}
+
+/**
  * Contains additional diagnostic information about the context in which
  * a code action is run.
  */
@@ -3149,11 +3254,60 @@ interface CodeActionContext {
 	 * An array of diagnostics.
 	 */
 	diagnostics: Diagnostic[];
+
+	/**
+	 * Requested kind of actions to return.
+	 *
+	 * Actions not of this kind are filtered out by the client before being shown. So servers
+	 * can omit computing them.
+	 */
+	only?: CodeActionKind[];
 }
 ```
 
 _Response_:
-* result: [`Command[]`](#command) \| `null` defined as follows:
+* result: `(Command | CodeAction)[]` \| `null` where `CodeAction` is defined as follows:
+
+```typescript
+/**
+ * A code action represents a change that can be performed in code, e.g. to fix a problem or
+ * to refactor code.
+ *
+ * A CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is applied first, then the `command` is executed.
+ */
+export interface CodeAction {
+
+	/**
+	 * A short, human-readable, title for this code action.
+	 */
+	title: string;
+
+	/**
+	 * The kind of the code action.
+	 *
+	 * Used to filter code actions.
+	 */
+	kind?: CodeActionKind;
+
+	/**
+	 * The diagnostics that this code action resolves.
+	 */
+	diagnostics?: Diagnostic[];
+
+	/**
+	 * The workspace edit this code action performs.
+	 */
+	edit?: WorkspaceEdit;
+
+	/**
+	 * A command this code action executes. If a code action
+	 * provides an edit and a command, first the edit is
+	 * executed and then the command.
+	 */
+	command?: Command;
+}
+```
+
 * error: code and message set in case an exception happens during the code action request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -3591,7 +3745,9 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 ### <a name="changeLog" class="anchor"></a>Change Log
 
-Below a change log of the last shipped version.
+#### <a name="version_3_8_0" class="anchor"></a>3.8.0 (6/11/2018)
+
+* Added support for CodeAction literals to the `textDocument/codeAction` request.
 * ColorServerCapabilities.colorProvider can also be a boolean
 * Corrected ColorPresentationParams.colorInfo to color (as in the d.ts and in implementations)
 
