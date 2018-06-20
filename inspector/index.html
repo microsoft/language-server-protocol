@@ -1,0 +1,36 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <meta http-equiv=X-UA-Compatible content="IE=edge">
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <link rel=icon href=/language-server-protocol/inspector/favicon.ico>
+  <title>LSP Inspector</title>
+  <link as=style href=/language-server-protocol/inspector/css/app.0e62656f.css rel=preload>
+  <link as=script href=/language-server-protocol/inspector/js/app.695a9541.js rel=preload>
+  <link as=script href=/language-server-protocol/inspector/js/chunk-vendors.a8885d66.js rel=preload>
+  <link href=/language-server-protocol/inspector/css/app.0e62656f.css rel=stylesheet>
+
+  <link rel="stylesheet" href="{{ "/css/bootswatch/cosmo/bootstrap.min.css" | prepend: site.baseurl }}">
+  <link rel="stylesheet" href="{{ "/css/fontawesome-all.min.css" | prepend: site.baseurl }}">
+  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+  <link rel="shortcut icon" href="{{ "/img/favicon.png" | prepend: site.baseurl }}">
+</head>
+
+<body>
+
+  {% include topnav.html %}
+
+  <noscript>
+    <strong>We're sorry but LSP Inspector doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
+  <div id=app></div>
+  <script type=text/javascript src=/language-server-protocol/inspector/js/chunk-vendors.a8885d66.js></script>
+  <script type=text/javascript src=/language-server-protocol/inspector/js/app.695a9541.js></script>
+</body>
+
+</html>
