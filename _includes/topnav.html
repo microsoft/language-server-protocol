@@ -20,6 +20,9 @@
                 <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>
                 </li>
+                <li {% if page.sectionid=='inspector' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href='{{ "/inspector" | prepend: site.baseurl }}'>Inspector</a>
+                </li>
             </ul>
         </div>
 
