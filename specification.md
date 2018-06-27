@@ -2401,7 +2401,7 @@ _Request_:
 export interface CompletionParams extends TextDocumentPositionParams {
 
 	/**
-	 * The completion context. This is only available it the client specifies
+	 * The completion context. This is only available if the client specifies
 	 * to send this using `ClientCapabilities.textDocument.completion.contextSupport === true`
 	 */
 	context?: CompletionContext;
