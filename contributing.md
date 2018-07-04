@@ -2,6 +2,7 @@
 
 Contributing to the language server protocol by proposing extensions to it requires several contributions to be made:
 
+- propos the extension via an issue in this [repository](https://github.com/Microsoft/language-server-protocol). Try to get early feedback before spending to much effort implementing it.
 - as the [protocol](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.ts) itself request and notification additions need to be defined using [TypeScript](https://www.typescriptlang.org/).
 - a document describing the protocol extension must be written using [GitHub flavored Markdown](https://guides.github.com/features/mastering-markdown/). The document must follow the style of the [protocol](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.ts) document.
 - a reference implementation of the protocol must be provided for the [VSCode language client library](https://www.npmjs.com/package/vscode-languageclient). A reference implementation for the [VS Code language server library](https://www.npmjs.com/package/vscode-languageserver) is optional.
@@ -11,35 +12,33 @@ The actual contributation can happen in two ways:
 * either as a pull request against this GitHub [repository](https://github.com/Microsoft/vscode-languageserver-node)
 * or as a standalone GitHub repository. In this case the extension can even be published as a standalone npm module and used by developers on an opt-in basis.
 
-Proposed extensions need to be annouced via an issue in this [repository](https://github.com/Microsoft/language-server-protocol).
-
 ## How to create a protocol extension
 
 The following section describes in detail how a protocol extension is to be created.
 
-Version 3.4.0 of VS Code's client and server library now have support to propose additional protocol and to provide reference implementations without modifying the actual code. The protocol can be implemented in so called features and contributed to the language client and server. 
+Version 3.4.0 of VS Code's client and server library now have support to propose additional protocol and to provide reference implementations without modifying the actual code. The protocol can be implemented in so called features and contributed to the language client and server.
 
 For a protocol extension the following files have to be created where ${name} is the name of the proposed extension:
 
-* **protocol/${name}.proposed.ts**: contains the TypeScript definitions of the protocol extension. 
+* **protocol/${name}.proposed.ts**: contains the TypeScript definitions of the protocol extension.
 * **protocol/${name}.proposed.md** a markdown file containing the actual documentation of the proposed protocol. As said above the document must follow the style of the actual [protocol specification](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/protocol.ts). The markdown must document:
 
   * the extension to the initialize parameters sent to the server.
   * the extensions to the client and server capabilities.
-  * the actual requests and notifications. 
+  * the actual requests and notifications.
 * **client/${name}.proposed.ts**: this file contains the actual implementation of the proposed protocol for the `vscode-languageclient`. Since version 3.4.0 the client supports implementing protocol in so called features that can be registered with a client. A static feature is responsible for:
     * filling in the initalize properties (`fillInitializeParams` method)
-	* filling in the client capabilities (`fillClientCapabilities` method) 
+	* filling in the client capabilities (`fillClientCapabilities` method)
 	* initalizing the feature (`initialize` method)
 
 	The client also supports adding dynamic features. A dynamic feature supports capability registration requests sent from the server to the clients. See [`client/registerCapability`](https://github.com/Microsoft/language-server-protocol/blob/master/protocol.md#client_registerCapability) and [`client/unregisterCapability`](https://github.com/Microsoft/language-server-protocol/blob/master/protocol.md#client_unregisterCapability) in the protocol.
-* **server/${name}.proposed.ts**: the file contains the actual implementation of the proposed protocol for the `vscode-languageserver` node module. 
+* **server/${name}.proposed.ts**: the file contains the actual implementation of the proposed protocol for the `vscode-languageserver` node module.
 
 If you want to 'publish' the protocol extension as a pull request against the [repository](https://github.com/Microsoft/vscode-languageserver-node) the above files need to be added to the following directories:
 
-* `protocol/${name}.proposed.ts` and `protocol/${name}.proposed.md` files go into the `protocol\src` folder, additionally prefixed with `protocol.` as follows: `protocol.${name}.proposed.{md,ts}`. 
-* the `client/${name}.proposed.ts` file goes into the `client/src` folder. 
-* the `server/${name}.proposed.ts` file goes into the `server/src` folder. 
+* `protocol/${name}.proposed.ts` and `protocol/${name}.proposed.md` files go into the `protocol\src` folder, additionally prefixed with `protocol.` as follows: `protocol.${name}.proposed.{md,ts}`.
+* the `client/${name}.proposed.ts` file goes into the `client/src` folder.
+* the `server/${name}.proposed.ts` file goes into the `server/src` folder.
 
 Please also ensure that you re-export the proposed API from the `client/src/main.ts` and the `server/src/main.ts`. Corresponding stubs can be found at the end of these files.
 
@@ -400,5 +399,5 @@ export const WorkspaceFoldersFeature: WorkspaceFeature<WorkspaceFoldersProposed>
 			return this._onDidChangeWorkspaceFolders.event;
 		}
 	}
-};	
+};
 ```
