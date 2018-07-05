@@ -2535,6 +2535,13 @@ interface CompletionItem {
 	filterText?: string;
 
 	/**
+	 * Select this item when showing. *Note* that only one completion item can be selected and
+	 * that the editor decides which item that is. The rule is that the *first* item of those
+	 * that match best is selected.
+	 */
+	preselect?: boolean;
+
+	/**
 	 * A string that should be inserted into a document when selecting
 	 * this completion. When `falsy` the label is used.
 	 *
