@@ -3151,7 +3151,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. When the command is selected the server should be contacted again (via the `workspace/executeCommand`) request to execute the command.
 
-> *Since version 3.8.0:* support for CodeAction litarals to enable the following scenarios:
+> *Since version 3.8.0:* support for CodeAction literals to enable the following scenarios:
 
 - the ability to directly return a workspace edit from e code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is imply a command and  the actual edit is only computed when needed.
 - the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action for example into corresponding menus (e.g. all refactor code actions into a refactor menu).
