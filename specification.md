@@ -940,6 +940,11 @@ export interface TextDocumentClientCapabilities {
 			 * Client supports the deprecated property on a completion item.
 			 */
 			deprecatedSupport?: boolean;
+
+			/**
+			 * Client supports the preselect property on a completion item.
+			 */
+			preselectSupport?: boolean;
 		}
 
 		completionItemKind?: {
@@ -2523,6 +2528,15 @@ interface CompletionItem {
 	deprecated?: boolean;
 
 	/**
+	 * Select this item when showing.
+	 *
+	 * *Note* that only one completion item can be selected and that the
+	 * tool / client decides which item that is. The rule is that the *first*
+	 * item of those that match best is selected.
+	 */
+	preselect?: boolean;
+
+	/**
 	 * A string that should be used when comparing this item
 	 * with other items. When `falsy` the label is used.
 	 */
@@ -3744,6 +3758,10 @@ _Response_:
 _Registration Options_: `TextDocumentRegistrationOptions`
 
 ### <a name="changeLog" class="anchor"></a>Change Log
+
+#### <a name="version_3_9_0" class="anchor"></a>3.9.0 (7/10/2018)
+
+* Add support for `preselect` property in `CompletionItem`
 
 #### <a name="version_3_8_0" class="anchor"></a>3.8.0 (6/11/2018)
 
