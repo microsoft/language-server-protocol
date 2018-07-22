@@ -15,6 +15,7 @@ index: 2
 | Eclipse Che | Eclipse,Codenvy/TypeFox | [Che](https://github.com/eclipse/che/issues/1287) |
 | Eclipse IDE | Eclipse,Red Hat | [Eclipse community](https://projects.eclipse.org/projects/technology.lsp4e/who), [Eclipse LSP4E](https://projects.eclipse.org/projects/technology.lsp4e) |
 | emacs | [Vibhav Pant](https://github.com/vibhavp) | [emacs language server client](https://github.com/emacs-lsp/lsp-mode/) |
+| GNU Emacs | [João Távora](https://github.com/joaotavora) | [Eglot](https://github.com/joaotavora/eglot) |
 |[GNOME Builder](https://wiki.gnome.org/Apps/Builder)| [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/langserv) |
 |[MS Monaco Editor](https://github.com/Microsoft/monaco-editor)| [Typefox](https://github.com/TypeFox) | [monaco-languageclient](https://www.npmjs.com/package/monaco-languageclient) |
 |[Atom](https://atom.io/)| [GitHub](https://github.com/) | [atom-languageclient](https://www.npmjs.com/package/atom-languageclient) |
