@@ -3067,9 +3067,88 @@ interface DocumentSymbolParams {
 ```
 
 _Response_:
-* result: `SymbolInformation[]` \| `null` defined as follows:
+* result: `DocumentSymbol[]` \| `SymbolInformation[]` \| `null` defined as follows:
 
 ```typescript
+/**
+ * A symbol kind.
+ */
+export namespace SymbolKind {
+	export const File = 1;
+	export const Module = 2;
+	export const Namespace = 3;
+	export const Package = 4;
+	export const Class = 5;
+	export const Method = 6;
+	export const Property = 7;
+	export const Field = 8;
+	export const Constructor = 9;
+	export const Enum = 10;
+	export const Interface = 11;
+	export const Function = 12;
+	export const Variable = 13;
+	export const Constant = 14;
+	export const String = 15;
+	export const Number = 16;
+	export const Boolean = 17;
+	export const Array = 18;
+	export const Object = 19;
+	export const Key = 20;
+	export const Null = 21;
+	export const EnumMember = 22;
+	export const Struct = 23;
+	export const Event = 24;
+	export const Operator = 25;
+	export const TypeParameter = 26;
+}
+
+/**
+ * Represents programming constructs like variables, classes, interfaces etc. that appear in a document. Document symbols can be
+ * hierarchical and they have two ranges: one that encloses its definition and one that points to its most interesting range,
+ * e.g. the range of an identifier.
+ */
+export class DocumentSymbol {
+
+	/**
+	 * The name of this symbol.
+	 */
+	name: string;
+
+	/**
+	 * More detail for this symbol, e.g the signature of a function. If not provided the
+	 * name is used.
+	 */
+	detail?: string;
+
+	/**
+	 * The kind of this symbol.
+	 */
+	kind: SymbolKind;
+
+	/**
+	 * Indicates if this symbol is deprecated.
+	 */
+	deprecated?: boolean;
+
+	/**
+	 * The range enclosing this symbol not including leading/trailing whitespace but everything else
+	 * like comments. This information is typically used to determine if the the clients cursor is
+	 * inside the symbol to reveal in the symbol in the UI.
+	 */
+	range: Range;
+
+	/**
+	 * The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.
+	 * Must be contained by the the `range`.
+	 */
+	selectionRange: Range;
+
+	/**
+	 * Children of this symbol, e.g. properties of a class.
+	 */
+	children?: DocumentSymbol[];
+}
+
 /**
  * Represents information about programming constructs like variables, classes,
  * interfaces etc.
@@ -3112,37 +3191,6 @@ interface SymbolInformation {
 	containerName?: string;
 }
 
-/**
- * A symbol kind.
- */
-export namespace SymbolKind {
-	export const File = 1;
-	export const Module = 2;
-	export const Namespace = 3;
-	export const Package = 4;
-	export const Class = 5;
-	export const Method = 6;
-	export const Property = 7;
-	export const Field = 8;
-	export const Constructor = 9;
-	export const Enum = 10;
-	export const Interface = 11;
-	export const Function = 12;
-	export const Variable = 13;
-	export const Constant = 14;
-	export const String = 15;
-	export const Number = 16;
-	export const Boolean = 17;
-	export const Array = 18;
-	export const Object = 19;
-	export const Key = 20;
-	export const Null = 21;
-	export const EnumMember = 22;
-	export const Struct = 23;
-	export const Event = 24;
-	export const Operator = 25;
-	export const TypeParameter = 26;
-}
 ```
 
 * error: code and message set in case an exception happens during the document symbol request.
@@ -3760,6 +3808,10 @@ _Response_:
 _Registration Options_: `TextDocumentRegistrationOptions`
 
 ### <a name="changeLog" class="anchor"></a>Change Log
+
+#### <a name="version_3_10_0" class="anchor"></a>3.10.0 (7/23/2018)
+
+* Add support for hierarchical document symbols as a valid reponse to a `textDocument/documentSymbol` request.
 
 #### <a name="version_3_9_0" class="anchor"></a>3.9.0 (7/10/2018)
 
