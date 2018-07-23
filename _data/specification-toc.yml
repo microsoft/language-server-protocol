@@ -121,6 +121,8 @@
   - title: Change Log
     anchor: changeLog
     children:
+    - title: 3.10.0
+      anchor: version_3_10_0
     - title: 3.9.0
       anchor: version_3_9_0
     - title: 3.8.0
