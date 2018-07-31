@@ -101,7 +101,7 @@ interface ResponseMessage extends Message {
 
 interface ResponseError<D> {
 	/**
-	 * A number indicating the error type that occured.
+	 * A number indicating the error type that occurred.
 	 */
 	code: number;
 
@@ -1039,7 +1039,7 @@ interface DocumentHighlight {
  */
 enum DocumentHighlightKind {
 	/**
-	 * A textual occurrance.
+	 * A textual occurrence.
 	 */
 	Text = 1,
 
