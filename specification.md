@@ -1207,6 +1207,29 @@ export interface TextDocumentClientCapabilities {
 		 */
 		relatedInformation?: boolean;
 	};
+	/**
+	 * Capabilities specific to `textDocument/foldingRange` requests.
+	 * 
+	 * Since 3.10.0
+	 */
+	foldingRange?: {
+		/**
+		 * Whether implementation supports dynamic registration for folding range providers. If this is set to `true`
+		 * the client supports the new `(FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+		 * return value for the corresponding server capability as well.
+		 */
+		dynamicRegistration?: boolean;
+		/**
+		 * The maximum number of folding ranges that the client prefers to receive per document. The value serves as a
+		 * hint, servers are free to follow the limit.
+		 */
+		rangeLimit?: number;
+		/**
+		 * If set, the client signals that it only supports folding complete lines. If set, client will
+		 * ignore specified `startCharacter` and `endCharacter` properties in a FoldingRange.
+		 */
+		lineFoldingOnly?: boolean;
+	};
 }
 ```
 
@@ -1337,7 +1360,7 @@ export interface CodeLensOptions {
 }
 
 /**
- * Format document on type options
+ * Format document on type options.
  */
 export interface DocumentOnTypeFormattingOptions {
 	/**
@@ -1352,7 +1375,7 @@ export interface DocumentOnTypeFormattingOptions {
 }
 
 /**
- * Document link options
+ * Document link options.
  */
 export interface DocumentLinkOptions {
 	/**
@@ -1382,9 +1405,15 @@ export interface SaveOptions {
 }
 
 /**
- * Color provider Options
+ * Color provider options.
  */
 export interface ColorProviderOptions {
+}
+
+/**
+ * Folding range provider options.
+ */
+export interface FoldingRangeProviderOptions {
 }
 
 export interface TextDocumentSyncOptions {
@@ -1506,6 +1535,12 @@ interface ServerCapabilities {
 	 * Since 3.6.0
 	 */
 	colorProvider?: boolean | ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	/**
+	 * The server provides folding provider support.
+	 *
+	 * Since 3.10.0
+	 */
+	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);	
 	/**
 	 * The server provides execute command support.
 	 */
@@ -3807,11 +3842,90 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
+#### <a name="textDocument_foldingRange" class="anchor"></a>Folding Range Request (:leftwards_arrow_with_hook:)
+
+> *Since version 3.10.0*
+
+The folding range request is sent from the client to the server to return all folding ranges found in a given text document.
+
+_Request_:
+
+* method: 'textDocument/foldingRanges'
+* params: `FoldingRangeRequestParam` defined as follows
+
+```typescript
+export interface FoldingRangeRequestParam {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+
+```
+
+_Response_:
+* result: `FoldingRange[] | null` defined as follows:
+```ts
+
+/**
+ * Enum of known range kinds
+ */
+export enum FoldingRangeKind {
+	/**
+	 * Folding range for a comment
+	 */
+	Comment = 'comment',
+	/**
+	 * Folding range for a imports or includes
+	 */
+	Imports = 'imports',
+	/**
+	 * Folding range for a region (e.g. `#region`)
+	 */
+	Region = 'region'
+}
+
+/**
+ * Represents a folding range.
+ */
+export interface FoldingRange {
+
+	/**
+	 * The zero-based line number from where the folded range starts.
+	 */
+	startLine: number;
+
+	/**
+	 * The zero-based character offset from where the folded range starts. If not defined, defaults to the length of the start line.
+	 */
+	startCharacter?: number;
+
+	/**
+	 * The zero-based line number where the folded range ends.
+	 */
+	endLine: number;
+
+	/**
+	 * The zero-based character offset before the folded range ends. If not defined, defaults to the length of the end line.
+	 */
+	endCharacter?: number;
+
+	/**
+	 * Describes the kind of the folding range such as `comment' or 'region'. The kind
+	 * is used to categorize folding ranges and used by commands like 'Fold all comments'. See
+	 * [FoldingRangeKind](#FoldingRangeKind) for an enumeration of standardized kinds.
+	 */
+	kind?: string;
+}
+```
+* error: code and message set in case an exception happens during the 'textDocument/foldingRanges' request
+
 ### <a name="changeLog" class="anchor"></a>Change Log
 
 #### <a name="version_3_10_0" class="anchor"></a>3.10.0 (7/23/2018)
 
 * Add support for hierarchical document symbols as a valid reponse to a `textDocument/documentSymbol` request.
+* Add support for folding ranges as a valid reponse to a `textDocument/foldingRanges` request.
 
 #### <a name="version_3_9_0" class="anchor"></a>3.9.0 (7/10/2018)
 
