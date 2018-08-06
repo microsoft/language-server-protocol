@@ -22,6 +22,7 @@ index: 2
 |[Theia](https://github.com/theia-ide/theia)| [theia-ide](https://github.com/theia-ide) | [theia](https://github.com/theia-ide/theia) |
 |vim8 and [neovim](https://neovim.io/)| [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
 |vim8 and neovim| [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
+|vim8 and neovim| [Qiming Zhao](https://github.com/chemzqm) | [coc.nvim](https://github.com/neoclide/coc.nvim) |
 |Visual Studio| [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
 |Visual Studio| Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 | Oni | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
