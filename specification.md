@@ -1053,7 +1053,7 @@ export interface TextDocumentClientCapabilities {
 		}
 		
 		/**
-		 * Whether document symbol supports hierarchical `DocumentSymbol`s.
+		 * The client support hierarchical document symbols.
 		 */
 		hierarchicalDocumentSymbolSupport?: boolean;
 	};
