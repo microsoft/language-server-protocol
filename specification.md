@@ -3238,10 +3238,10 @@ The code action request is sent from the client to the server to compute command
 
 > *Since version 3.8.0:* support for CodeAction literals to enable the following scenarios:
 
-- the ability to directly return a workspace edit from e code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is imply a command and  the actual edit is only computed when needed.
+- the ability to directly return a workspace edit from the code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is simply a command and the actual edit is only computed when needed.
 - the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action for example into corresponding menus (e.g. all refactor code actions into a refactor menu).
 
-Clients need to announce there support code action literals and code action kinds via the corresponding client capability `textDocument.codeAction.codeActionLiteralSupport`.
+Clients need to announce their support for code action literals and code action kinds via the corresponding client capability `textDocument.codeAction.codeActionLiteralSupport`.
 
 _Request_:
 * method: 'textDocument/codeAction'
