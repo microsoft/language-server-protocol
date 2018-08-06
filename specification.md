@@ -1051,6 +1051,11 @@ export interface TextDocumentClientCapabilities {
 			 */
 			valueSet?: SymbolKind[];
 		}
+		
+		/**
+		 * Whether document symbol supports hierarchical `DocumentSymbol`s.
+		 */
+		hierarchicalDocumentSymbolSupport?: boolean;
 	};
 
 	/**
