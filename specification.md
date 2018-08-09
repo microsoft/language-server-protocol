@@ -3870,8 +3870,8 @@ export interface FoldingRangeRequestParam {
 
 _Response_:
 * result: `FoldingRange[] | null` defined as follows:
-```ts
 
+```typescript
 /**
  * Enum of known range kinds
  */
@@ -3923,6 +3923,7 @@ export interface FoldingRange {
 	kind?: string;
 }
 ```
+
 * error: code and message set in case an exception happens during the 'textDocument/foldingRanges' request
 
 ### <a name="changeLog" class="anchor"></a>Change Log
