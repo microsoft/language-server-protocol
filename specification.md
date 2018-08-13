@@ -3870,8 +3870,8 @@ export interface FoldingRangeRequestParam {
 
 _Response_:
 * result: `FoldingRange[] | null` defined as follows:
-```ts
 
+```typescript
 /**
  * Enum of known range kinds
  */
