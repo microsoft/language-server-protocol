@@ -1,6 +1,7 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
+
 @charset "utf-8";
 
 html {
@@ -25,8 +26,8 @@ body {
   }
 
   h1 {
-	margin-top: 15px;
-	font-weight: bold;
+		margin-top: 15px;
+		font-weight: bold;
   }
 
   .intro {
@@ -435,4 +436,27 @@ pre[class=highlight] {
 		display: inline-block;
 		font-size: 14px;
 	}
+}
+
+#markdown-content-container {
+	h2, h3, h4 {
+		position: relative;
+	}
+
+	.header-link {
+		position: absolute;
+		left: -32px;
+		top: 4px;
+		line-height: 27px;
+		font-size: 80%;
+		opacity: 0.4;
+		transition: opacity .2s ease-in-out;
+	}
+	.header-link:hover {
+		opacity: 1;
+	}
+
+	h2 .header-link { top: 6px; }
+	h3 .header-link { top: 4px; }
+	h4 .header-link { top: 2px; }
 }
