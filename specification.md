@@ -3855,7 +3855,7 @@ The folding range request is sent from the client to the server to return all fo
 
 _Request_:
 
-* method: 'textDocument/foldingRanges'
+* method: 'textDocument/foldingRange'
 * params: `FoldingRangeRequestParam` defined as follows
 
 ```typescript
@@ -3923,14 +3923,14 @@ export interface FoldingRange {
 	kind?: string;
 }
 ```
-* error: code and message set in case an exception happens during the 'textDocument/foldingRanges' request
+* error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
 ### <a name="changeLog" class="anchor"></a>Change Log
 
 #### <a name="version_3_10_0" class="anchor"></a>3.10.0 (7/23/2018)
 
 * Add support for hierarchical document symbols as a valid reponse to a `textDocument/documentSymbol` request.
-* Add support for folding ranges as a valid reponse to a `textDocument/foldingRanges` request.
+* Add support for folding ranges as a valid reponse to a `textDocument/foldingRange` request.
 
 #### <a name="version_3_9_0" class="anchor"></a>3.9.0 (7/10/2018)
 
