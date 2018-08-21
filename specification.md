@@ -1051,7 +1051,7 @@ export interface TextDocumentClientCapabilities {
 			 */
 			valueSet?: SymbolKind[];
 		}
-		
+
 		/**
 		 * The client support hierarchical document symbols.
 		 */
@@ -1214,7 +1214,7 @@ export interface TextDocumentClientCapabilities {
 	};
 	/**
 	 * Capabilities specific to `textDocument/foldingRange` requests.
-	 * 
+	 *
 	 * Since 3.10.0
 	 */
 	foldingRange?: {
@@ -1364,7 +1364,7 @@ export interface CodeActionOptions {
 	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, or the server
 	 * may list out every specific kind they provide.
 	 */
-	providedCodeActionKinds?: CodeActionKind[];
+	codeActionKinds?: CodeActionKind[];
 }
 
 /**
@@ -1558,7 +1558,7 @@ interface ServerCapabilities {
 	 *
 	 * Since 3.10.0
 	 */
-	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);	
+	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
 	/**
 	 * The server provides execute command support.
 	 */
@@ -3427,7 +3427,13 @@ export interface CodeAction {
 
 * error: code and message set in case an exception happens during the code action request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
+_Registration Options_: `CodeActionRegistrationOptions`  defined as follows:
+
+```typescript
+export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions, CodeActionOptions {
+}
+```
+
 
 #### <a name="textDocument_codeLens" class="anchor"></a>Code Lens Request (:leftwards_arrow_with_hook:)
 
@@ -3939,6 +3945,10 @@ export interface FoldingRange {
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
 ### <a name="changeLog" class="anchor"></a>Change Log
+
+#### <a name="version_3_11_0" class="anchor"></a>3.10.0 (8/21/2018)
+
+* Add support for CodeActionOptions to allow a server to provide a list of code action it supports.
 
 #### <a name="version_3_10_0" class="anchor"></a>3.10.0 (7/23/2018)
 
