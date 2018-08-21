@@ -3170,8 +3170,7 @@ export class DocumentSymbol {
 	name: string;
 
 	/**
-	 * More detail for this symbol, e.g the signature of a function. If not provided the
-	 * name is used.
+	 * More detail for this symbol, e.g the signature of a function.
 	 */
 	detail?: string;
 
