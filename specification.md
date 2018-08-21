@@ -1520,7 +1520,9 @@ interface ServerCapabilities {
 	 */
 	workspaceSymbolProvider?: boolean;
 	/**
-	 * The server provides code actions.
+	 * The server provides code actions. The `CodeActionOptions` return type is only
+	 * valid if the client signals code action literal support via the property
+	 * `textDocument.codeAction.codeActionLiteralSupport`.
 	 */
 	codeActionProvider?: boolean | CodeActionOptions;
 	/**
