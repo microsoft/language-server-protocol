@@ -1051,7 +1051,7 @@ export interface TextDocumentClientCapabilities {
 			 */
 			valueSet?: SymbolKind[];
 		}
-		
+
 		/**
 		 * The client support hierarchical document symbols.
 		 */
@@ -1214,7 +1214,7 @@ export interface TextDocumentClientCapabilities {
 	};
 	/**
 	 * Capabilities specific to `textDocument/foldingRange` requests.
-	 * 
+	 *
 	 * Since 3.10.0
 	 */
 	foldingRange?: {
@@ -1352,6 +1352,19 @@ export interface SignatureHelpOptions {
 	 * automatically.
 	 */
 	triggerCharacters?: string[];
+}
+
+/**
+ * Code Action options.
+ */
+export interface CodeActionOptions {
+	/**
+	 * CodeActionKinds that this server may return.
+	 *
+	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, or the server
+	 * may list out every specific kind they provide.
+	 */
+	codeActionKinds?: CodeActionKind[];
 }
 
 /**
@@ -1507,9 +1520,11 @@ interface ServerCapabilities {
 	 */
 	workspaceSymbolProvider?: boolean;
 	/**
-	 * The server provides code actions.
+	 * The server provides code actions. The `CodeActionOptions` return type is only
+	 * valid if the client signals code action literal support via the property
+	 * `textDocument.codeAction.codeActionLiteralSupport`.
 	 */
-	codeActionProvider?: boolean;
+	codeActionProvider?: boolean | CodeActionOptions;
 	/**
 	 * The server provides code lens.
 	 */
@@ -1545,7 +1560,7 @@ interface ServerCapabilities {
 	 *
 	 * Since 3.10.0
 	 */
-	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);	
+	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
 	/**
 	 * The server provides execute command support.
 	 */
@@ -3155,8 +3170,7 @@ export class DocumentSymbol {
 	name: string;
 
 	/**
-	 * More detail for this symbol, e.g the signature of a function. If not provided the
-	 * name is used.
+	 * More detail for this symbol, e.g the signature of a function.
 	 */
 	detail?: string;
 
@@ -3172,14 +3186,14 @@ export class DocumentSymbol {
 
 	/**
 	 * The range enclosing this symbol not including leading/trailing whitespace but everything else
-	 * like comments. This information is typically used to determine if the the clients cursor is
+	 * like comments. This information is typically used to determine if the clients cursor is
 	 * inside the symbol to reveal in the symbol in the UI.
 	 */
 	range: Range;
 
 	/**
 	 * The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.
-	 * Must be contained by the the `range`.
+	 * Must be contained by the `range`.
 	 */
 	selectionRange: Range;
 
@@ -3414,7 +3428,13 @@ export interface CodeAction {
 
 * error: code and message set in case an exception happens during the code action request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
+_Registration Options_: `CodeActionRegistrationOptions`  defined as follows:
+
+```typescript
+export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions, CodeActionOptions {
+}
+```
+
 
 #### <a name="textDocument_codeLens" class="anchor"></a>Code Lens Request (:leftwards_arrow_with_hook:)
 
@@ -3855,7 +3875,7 @@ The folding range request is sent from the client to the server to return all fo
 
 _Request_:
 
-* method: 'textDocument/foldingRanges'
+* method: 'textDocument/foldingRange'
 * params: `FoldingRangeRequestParam` defined as follows
 
 ```typescript
@@ -3928,10 +3948,14 @@ export interface FoldingRange {
 
 ### <a name="changeLog" class="anchor"></a>Change Log
 
+#### <a name="version_3_11_0" class="anchor"></a>3.10.0 (8/21/2018)
+
+* Add support for CodeActionOptions to allow a server to provide a list of code action it supports.
+
 #### <a name="version_3_10_0" class="anchor"></a>3.10.0 (7/23/2018)
 
 * Add support for hierarchical document symbols as a valid reponse to a `textDocument/documentSymbol` request.
-* Add support for folding ranges as a valid reponse to a `textDocument/foldingRanges` request.
+* Add support for folding ranges as a valid reponse to a `textDocument/foldingRange` request.
 
 #### <a name="version_3_9_0" class="anchor"></a>3.9.0 (7/10/2018)
 

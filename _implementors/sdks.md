@@ -17,6 +17,7 @@ index: 3
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server)|
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
+| Haskell | [Luke Lau](https://github.com/Bubba) | [lsp-test](https://github.com/Bubba/lsp-test)|
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
 {: .table .table-bordered .table-responsive}
