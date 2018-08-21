@@ -64,6 +64,7 @@ index: 1
 | Python | MS | [Python Tools for Visual Studio](https://github.com/Microsoft/PTVS)
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress |
+| ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server)
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [language_server-ruby](https://github.com/mtsmfm/language_server-ruby) |
 | Ruby | [Rafał Łasocha](https://github.com/swistak35) | [orbacle](https://github.com/swistak35/orbacle) |
