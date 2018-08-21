@@ -3943,7 +3943,8 @@ export interface FoldingRange {
 	kind?: string;
 }
 ```
-* error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
+
+* error: code and message set in case an exception happens during the 'textDocument/foldingRanges' request
 
 ### <a name="changeLog" class="anchor"></a>Change Log
 
