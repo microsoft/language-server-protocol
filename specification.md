@@ -3653,7 +3653,7 @@ The color presentation request is sent from the client to the server to obtain a
 _Request_:
 
 * method: 'textDocument/colorPresentation'
-* params: `DocumentColorParams` defined as follows
+* params: `ColorPresentationParams` defined as follows
 
 ```typescript
 interface ColorPresentationParams {
