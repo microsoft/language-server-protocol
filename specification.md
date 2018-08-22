@@ -3876,10 +3876,10 @@ The folding range request is sent from the client to the server to return all fo
 _Request_:
 
 * method: 'textDocument/foldingRange'
-* params: `FoldingRangeRequestParam` defined as follows
+* params: `FoldingRangeParams` defined as follows
 
 ```typescript
-export interface FoldingRangeRequestParam {
+export interface FoldingRangeParams {
 	/**
 	 * The text document.
 	 */
