@@ -1201,6 +1201,11 @@ export interface TextDocumentClientCapabilities {
 		 * Whether rename supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
+		/**
+		 * Client supports testing for validity of rename operations
+		 * before execution.
+		 */
+		prepareSupport?: boolean;
 	};
 
 	/**
@@ -1393,6 +1398,16 @@ export interface DocumentOnTypeFormattingOptions {
 }
 
 /**
+ * Rename options
+ */
+export interface RenameOptions {
+	/**
+	 * Renames should be checked and tested before being executed.
+	 */
+	prepareProvider?: boolean;
+}
+
+/**
  * Document link options.
  */
 export interface DocumentLinkOptions {
@@ -1542,9 +1557,11 @@ interface ServerCapabilities {
 	 */
 	documentOnTypeFormattingProvider?: DocumentOnTypeFormattingOptions;
 	/**
-	 * The server provides rename support.
+	 * The server provides rename support. RenameOptions may only be
+	 * specified if the client states that it supports
+	 * `prepareSupport` in its initial `initialize` request.
 	 */
-	renameProvider?: boolean;
+	renameProvider?: boolean | RenameOptions;
 	/**
 	 * The server provides document link support.
 	 */
@@ -3865,7 +3882,28 @@ _Response_:
 * result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
+_Registration Options_: `RenameRegistrationOptions` defined as follows:
+
+```typescript
+export interface RenameRegistrationOptions extends TextDocumentRegistrationOptions {
+	/**
+	 * Renames should be checked and tested for validity before being executed.
+	 */
+	prepareProvider?: boolean;
+}
+```
+
+#### <a name="textDocument_prepareRename" class="anchor"></a>Prepare Rename Request (:leftwards_arrow_with_hook:)
+
+The prepare rename request is sent from the client to the server to setup and test the validity of a rename operation at a given location.
+
+_Request_:
+* method: 'textDocument/prepareRename'
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+
+_Response_:
+* result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `null` is returned then it is deemed that a 'textDocument'rename' request is not valid at the given position.
+* error: code and message set in case an exception happens during the prepare rename request.
 
 #### <a name="textDocument_foldingRange" class="anchor"></a>Folding Range Request (:leftwards_arrow_with_hook:)
 

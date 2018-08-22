@@ -118,6 +118,8 @@
       anchor: textDocument_onTypeFormatting
     - title: rename
       anchor: textDocument_rename
+    - title: prepareRename
+      anchor: textDocument_prepareRename
     - title: foldingRange
       anchor: textDocument_foldingRange
   - title: Change Log
