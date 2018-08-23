@@ -3895,6 +3895,8 @@ export interface RenameRegistrationOptions extends TextDocumentRegistrationOptio
 
 #### <a name="textDocument_prepareRename" class="anchor"></a>Prepare Rename Request (:leftwards_arrow_with_hook:)
 
+> *Since version 3.12.0*
+
 The prepare rename request is sent from the client to the server to setup and test the validity of a rename operation at a given location.
 
 _Request_:
