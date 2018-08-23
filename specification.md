@@ -3988,11 +3988,11 @@ export interface FoldingRange {
 
 ### <a name="changeLog" class="anchor"></a>Change Log
 
-#### <a name="version_3_12_0" class="anchor"></a>3.10.0 (8/23/2018)
+#### <a name="version_3_12_0" class="anchor"></a>3.12.0 (8/23/2018)
 
 * Add support for `textDocument/prepareRename` request.
 
-#### <a name="version_3_11_0" class="anchor"></a>3.10.0 (8/21/2018)
+#### <a name="version_3_11_0" class="anchor"></a>3.11.0 (8/21/2018)
 
 * Add support for CodeActionOptions to allow a server to provide a list of code action it supports.
 
