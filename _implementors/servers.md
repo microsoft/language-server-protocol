@@ -31,6 +31,7 @@ index: 1
 | Elixir| [Jake Becker](https://github.com/JakeBecker) | [elixir-ls](https://github.com/JakeBecker/elixir-ls) |
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) |
+| Fortran | [Chris Hansen](https://github.com/hansec) | [fortran-language-server](https://github.com/hansec/fortran-language-server) |
 | GLSL | [Sven-Hendrik Haase (@svenstaro)](https://github.com/svenstaro) | [glsl-language-server](https://github.com/svenstaro/glsl-language-server) |
 | Gauge| [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) |
