@@ -530,7 +530,7 @@ export interface DeleteFileOptions {
 /**
  * Delete file operation
  */
-export interface DeleteFile extends ResourceOperation {
+export interface DeleteFile {
 	/**
 	 * A delete
 	 */
@@ -565,7 +565,7 @@ export interface WorkspaceEdit {
 	 *
 	 * Whether a client supports versioned document edits is expressed via
 	 * `workspace.workspaceEdit.documentChanges` client capability.
-     *
+	 *
 	 * If a client neither supports `documentChanges` nor `workspace.workspaceEdit.resourceOperations` then
 	 * only plain `TextEdit`s using the `changes` property are supported.
 	 */
