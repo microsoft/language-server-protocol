@@ -293,8 +293,6 @@ interface Location {
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
-> New: `relatedInformation` property.
-
 ```typescript
 interface Diagnostic {
 	/**
@@ -440,6 +438,114 @@ export interface TextDocumentEdit {
 }
 ```
 
+### File Resource changes
+
+> New in version 3.13:
+
+File resource changes allow servers to create, rename and delete files anf folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
+
+```typescript
+/**
+ * Options to create a file.
+ */
+export interface CreateFileOptions {
+	/**
+	 * Overwrite existing file. Overwrite wins over `ignoreIfExists`
+	 */
+	overwrite?: boolean;
+	/**
+	 * Ignore if exists.
+	 */
+	ignoreIfExists?: boolean;
+}
+
+/**
+ * Create file operation
+ */
+export interface CreateFile {
+	/**
+	 * A create
+	 */
+	kind: 'create';
+	/**
+	 * The resource to create.
+	 */
+	uri: string;
+	/**
+	 * Additional options
+	 */
+	options?: CreateFileOptions;
+}
+
+/**
+ * Rename file options
+ */
+export interface RenameFileOptions {
+	/**
+	 * Overwrite target if existing. Overwrite wins over `ignoreIfExists`
+	 */
+	overwrite?: boolean;
+	/**
+	 * Ignores if target exists.
+	 */
+	ignoreIfExists?: boolean;
+}
+
+/**
+ * Rename file operation
+ */
+export interface RenameFile {
+	/**
+	 * A rename
+	 */
+	kind: 'rename';
+	/**
+	 * The old (existing) location.
+	 */
+	oldUri: string;
+	/**
+	 * The new location.
+	 */
+	newUri: string;
+	/**
+	 * Rename options.
+	 */
+	options?: RenameFileOptions;
+}
+
+/**
+ * Delete file options
+ */
+export interface DeleteFileOptions {
+	/**
+	 * Delete the content recursively if a folder is denoted.
+	 */
+	recursive?: boolean;
+	/**
+	 * Ignore the operation if the file doesn't exist.
+	 */
+	ignoreIfNotExists?: boolean;
+}
+
+/**
+ * Delete file operation
+ */
+export interface DeleteFile extends ResourceOperation {
+	/**
+	 * A delete
+	 */
+	kind: 'delete';
+	/**
+	 * The file to delete.
+	 */
+	uri: string;
+	/**
+	 * Delete options.
+	 */
+	options?: DeleteFileOptions;
+}
+```
+
 #### WorkspaceEdit
 
 A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChange`s are present, the latter are preferred over `changes`.
@@ -452,12 +558,18 @@ export interface WorkspaceEdit {
 	changes?: { [uri: string]: TextEdit[]; };
 
 	/**
-	 * An array of `TextDocumentEdit`s to express changes to n different text documents
-	 * where each text document edit addresses a specific version of a text document.
+	 * Depending on the client capability `workspace.workspaceEdit.resourceOperations` document changes
+	 * are either an array of `TextDocumentEdit`s to express changes to n different text documents
+	 * where each text document edit addresses a specific version of a text document. Or it can contain
+	 * above `TextDocumentEdit`s mixed with create, rename and delete file / folder operations.
+	 *
 	 * Whether a client supports versioned document edits is expressed via
-	 * `WorkspaceClientCapabilities.workspaceEdit.documentChanges`.
+	 * `workspace.workspaceEdit.documentChanges` client capability.
+     *
+	 * If a client neither supports `documentChanges` nor `workspace.workspaceEdit.resourceOperations` then
+	 * only plain `TextEdit`s using the `changes` property are supported.
 	 */
-	documentChanges?: TextDocumentEdit[];
+	documentChanges?: (TextDocumentEdit[] | (TextDocumentEdit | CreateFile | RenameFile | DeleteFile)[]);
 }
 ```
 
@@ -628,7 +740,7 @@ A document selector is the combination of one or more document filters.
 export type DocumentSelector = DocumentFilter[];
 ```
 
-> #### New: MarkupContent
+#### MarkupContent
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`.
 
@@ -778,7 +890,64 @@ Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClien
 
 ##### `WorkspaceClientCapabilities` define capabilities the editor / tool provides on the workspace:
 
+> New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
+
 ```typescript
+
+/**
+ * The kind of resource operations supported by the client.
+ */
+export type ResourceOperationKind = 'create' | 'rename' | 'delete';
+
+export namespace ResourceOperationKind {
+
+	/**
+	 * Supports creating new files and folders.
+	 */
+	export const Create: ResourceOperationKind = 'create';
+
+	/**
+	 * Supports renaming existing files and folders.
+	 */
+	export const Rename: ResourceOperationKind = 'rename';
+
+	/**
+	 * Supports deleting existing files and folders.
+	 */
+	export const Delete: ResourceOperationKind = 'delete';
+}
+
+export type FailureHandlingKind = 'abort' | 'transactional' | 'undo' | 'textOnlyTransactional';
+
+export namespace FailureHandlingKind {
+
+	/**
+	 * Applying the workspace change is simply aborted if one of the changes provided
+	 * fails. All operations executed before the failing operation stay executed.
+	 */
+	export const Abort: FailureHandlingKind = 'abort';
+
+	/**
+	 * All operations are executed transactional. That means they either all
+	 * succeed or no changes at all are applied to the workspace.
+	 */
+	export const Transactional: FailureHandlingKind = 'transactional';
+
+
+	/**
+	 * If the workspace edit contains only textual file changes they are executed transactional.
+	 * If resource changes (create, rename or delete file) are part of the change the failure
+	 * handling startegy is abort.
+	 */
+	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
+
+	/**
+	 * The client tries to undo the operations already executed. But there is no
+	 * guaruntee that this is succeeding.
+	 */
+	export const Undo: FailureHandlingKind = 'undo';
+}
+
 /**
  * Workspace specific client capabilities.
  */
@@ -797,6 +966,18 @@ export interface WorkspaceClientCapabilities {
 		 * The client supports versioned document changes in `WorkspaceEdit`s
 		 */
 		documentChanges?: boolean;
+
+		/**
+		 * The resource operations the client supports. Clients should at least
+		 * support 'create', 'rename' and 'delete' files and folders.
+		 */
+		resourceOperations?: ResourceOperationKind[];
+
+		/**
+		 * The failure handling strategy of a client if applying the workspace edit
+		 * failes.
+		 */
+		failureHandling?: FailureHandlingKind;
 	};
 
 	/**
@@ -3990,6 +4171,10 @@ export interface FoldingRange {
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
 ### <a name="changeLog" class="anchor"></a>Change Log
+
+#### <a name="version_3_13_0" class="anchor"></a>3.13.0 (9/11/2018)
+
+* Add support for file and folder operations (create, rename, move) to workspace edits.
 
 #### <a name="version_3_12_0" class="anchor"></a>3.12.0 (8/23/2018)
 
