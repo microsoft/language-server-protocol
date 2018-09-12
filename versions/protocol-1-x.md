@@ -1,6 +1,6 @@
 # VSCode Client / Server Language Protocol
 
-This document descibes the 1.x version of the client server protocol. It defines the client server protocol used by VSCode to talk to process language servers. 
+This document describes the 1.x version of the client server protocol. It defines the client server protocol used by VSCode to talk to process language servers.
 The repository contains a VSCode protocol definition so that others can implement the protocol in languages like C#, C++, Java, Python or Elixir.
 
 ## Base Protocol
@@ -106,7 +106,7 @@ interface ResponseError<D> {
 	code: number;
 
 	/**
-	 * A string providing a short decription of the error.
+	 * A string providing a short description of the error.
 	 */
 	message: string;
 
@@ -339,7 +339,7 @@ This section documents the actual language server protocol. It uses the followin
 
 * a header describing the request
 * a _Request_ section describing the format of the request send. The method is a string identifying the request and the params are documented using a TypeScript interface
-* a _Response_ section describing the format of the response. The result item descibes the returned data in the case of a success. The error.data describes the returned data in the case of an error. Please remember that in the case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. The cases where the server can decide on these values freely are not listed here.
+* a _Response_ section describing the format of the response. The result item describes the returned data in the case of a success. The error.data describes the returned data in the case of an error. Please remember that in the case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. The cases where the server can decide on these values freely are not listed here.
 
 #### Initialize Request
 
@@ -690,7 +690,7 @@ _Notification_:
 
 #### DidChangeWatchedFiles Notification
 
-The watched files notification is sent from the client to the server when the client detects changes to file watched by the lanaguage client.
+The watched files notification is sent from the client to the server when the client detects changes to file watched by the language client.
 
 _Notification_:
 * method: 'workspace/didChangeWatchedFiles'
@@ -793,7 +793,7 @@ interface CompletionItem {
 	 */
 	documentation?: string;
 	/**
-	 * A string that shoud be used when comparing this item
+	 * A string that should be used when comparing this item
 	 * with other items. When `falsy` the label is used.
 	 */
 	sortText?: string;
@@ -872,7 +872,7 @@ _Response_
 * result: `Hover` defined as follows:
 ```typescript
 /**
- * The result of a hove request.
+ * The result of a hover request.
  */
 interface Hover {
 	/**

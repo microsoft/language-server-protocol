@@ -552,7 +552,7 @@ interface InitializeResult {
 interface InitializeError {
 	/**
 	 * Indicates whether the client should retry to send the
-	 * initilize request after showing the message provided
+	 * initialize request after showing the message provided
 	 * in the ResponseError.
 	 */
 	retry: boolean;
@@ -1064,7 +1064,7 @@ interface CompletionItem {
 	 */
 	documentation?: string;
 	/**
-	 * A string that shoud be used when comparing this item
+	 * A string that should be used when comparing this item
 	 * with other items. When `falsy` the label is used.
 	 */
 	sortText?: string;
