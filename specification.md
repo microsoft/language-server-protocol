@@ -3038,7 +3038,7 @@ interface Hover {
 	/**
 	 * The hover's content
 	 */
-	contents: MarkedString | MarkedString[] | MarkupContent;
+	contents: MarkedString | MarkedString[] | MarkupContent | MarkupContent[];
 
 	/**
 	 * An optional range is a range inside a text document
