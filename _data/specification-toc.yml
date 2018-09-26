@@ -5,7 +5,7 @@
     children:
     - title: initialize
       anchor: initialize
-    - title: initalized
+    - title: initialized
       anchor: initialized
     - title: shutdown
       anchor: shutdown
