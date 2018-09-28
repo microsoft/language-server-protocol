@@ -55,7 +55,7 @@ This is the response:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": "1",
+    "id": 1,
     "result": {
         "uri": "file:///p%3A/mseng/VSCode/Playgrounds/cpp/provide.cpp",
         "range": {
