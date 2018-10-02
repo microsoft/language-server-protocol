@@ -1531,6 +1531,11 @@ export interface CompletionOptions {
 	 * The characters that trigger completion automatically.
 	 */
 	triggerCharacters?: string[];
+
+	/**
+	 * The list of all possible completion commit characters
+	 */
+	potentialCommitCharacters?: string[];
 }
 /**
  * Signature help options.
