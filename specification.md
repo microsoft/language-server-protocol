@@ -172,7 +172,7 @@ interface NotificationMessage extends Message {
 
 Notification and requests whose methods start with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest'. If a server or client receives notifications or requests starting with '$/' it is free to ignore them if they are unknown.
 
-#### <a name="cancelRequest" class="anchor"></a> Cancellation Support (:arrow_right: :arrow_left:)
+#### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
 
 The base protocol offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
 
@@ -821,7 +821,7 @@ However, the server may decide to use a parallel execution strategy and may wish
 
 The current protocol specification defines that the lifetime of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
-#### <a name="initialize" class="anchor"></a>Initialize Request (:leftwards_arrow_with_hook:)
+#### <a href="#initialize" name="initialize" class="anchor">Initialize Request (:leftwards_arrow_with_hook:)</a>
 
 The initialize request is sent as the first request from the client to the server. If the server receives a request or notification before the `initialize` request it should act as follows:
 
@@ -1799,7 +1799,7 @@ interface ServerCapabilities {
 }
 ```
 
-#### <a name="initialized" class="anchor"></a>Initialized Notification (:arrow_right:)
+#### <a href="#initialized" name="initialized" class="anchor">Initialized Notification (:arrow_right:)</a>
 
 The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification for example to dynamically register capabilities. The `initialized` notification may only be sent once.
 
@@ -1812,7 +1812,7 @@ interface InitializedParams {
 }
 ```
 
-#### <a name="shutdown" class="anchor"></a>Shutdown Request (:leftwards_arrow_with_hook:)
+#### <a href="#shutdown" name="shutdown" class="anchor">Shutdown Request (:leftwards_arrow_with_hook:)</a>
 
 The shutdown request is sent from the client to the server. It asks the server to shut down, but to not exit (otherwise the response might not be delivered correctly to the client). There is a separate exit notification that asks the server to exit.
 
@@ -1824,7 +1824,7 @@ _Response_:
 * result: null
 * error: code and message set in case an exception happens during shutdown request.
 
-#### <a name="exit" class="anchor"></a>Exit Notification (:arrow_right:)
+#### <a href="#exit" name="exit" class="anchor">Exit Notification (:arrow_right:)</a>
 
 A notification to ask the server to exit its process.
 The server should exit with `success` code 0 if the shutdown request has been received before; otherwise with `error` code 1.
@@ -1833,7 +1833,7 @@ _Notification_:
 * method: 'exit'
 * params: void
 
-#### <a name="window_showMessage" class="anchor"></a>ShowMessage Notification (:arrow_left:)
+#### <a href="#window_showMessage" name="window_showMessage" class="anchor">ShowMessage Notification (:arrow_left:)</a>
 
 The show message notification is sent from a server to a client to ask the client to display a particular message in the user interface.
 
@@ -1878,7 +1878,7 @@ export namespace MessageType {
 }
 ```
 
-#### <a name="window_showMessageRequest" class="anchor"></a>ShowMessage Request (:arrow_right_hook:)
+#### <a href="#window_showMessageRequest" name="window_showMessageRequest" class="anchor">ShowMessage Request (:arrow_right_hook:)</a>
 
 The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
 
@@ -1920,7 +1920,7 @@ interface MessageActionItem {
 }
 ```
 
-#### <a name="window_logMessage" class="anchor"></a>LogMessage Notification (:arrow_left:)
+#### <a href="#window_logMessage" name="window_logMessage" class="anchor">LogMessage Notification (:arrow_left:)</a>
 
 The log message notification is sent from the server to the client to ask the client to log a particular message.
 
@@ -1944,7 +1944,7 @@ interface LogMessageParams {
 
 Where type is defined as above.
 
-#### <a name="telemetry_event" class="anchor"></a>Telemetry Notification (:arrow_left:)
+#### <a href="#telemetry_event" name="telemetry_event" class="anchor">Telemetry Notification (:arrow_left:)</a>
 
 The telemetry notification is sent from the server to the client to ask the client to log a telemetry event.
 
@@ -1952,7 +1952,7 @@ _Notification_:
 * method: 'telemetry/event'
 * params: 'any'
 
-#### <a name="client_registerCapability" class="anchor"></a>Register Capability (:arrow_right_hook:)
+#### <a href="#client_registerCapability" name="client_registerCapability" class="anchor">Register Capability (:arrow_right_hook:)</a>
 
 The `client/registerCapability` request is sent from the server to the client to register for a new capability on the client side. Not all clients need to support dynamic capability registration. A client opts in via the `dynamicRegistration` property on the specific client capabilities. A client can even provide dynamic registration for capability A but not for capability B (see `TextDocumentClientCapabilities` as an example).
 
@@ -2028,7 +2028,7 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
-#### <a name="client_unregisterCapability" class="anchor"></a>Unregister Capability (:arrow_right_hook:)
+#### <a href="#client_unregisterCapability" name="client_unregisterCapability" class="anchor">Unregister Capability (:arrow_right_hook:)</a>
 
 The `client/unregisterCapability` request is sent from the server to the client to unregister a previously registered capability.
 
@@ -2079,7 +2079,7 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
-##### <a name="workspace_workspaceFolders" class="anchor"></a>Workspace folders request (:arrow_right_hook:)
+##### <a href="#workspace_workspaceFolders" name="workspace_workspaceFolders" class="anchor">Workspace folders request (:arrow_right_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -2112,7 +2112,7 @@ export interface WorkspaceFolder {
 ```
 * error: code and message set in case an exception happens during the 'workspace/workspaceFolders' request
 
-##### <a name="workspace_didChangeWorkspaceFolders" class="anchor"></a>DidChangeWorkspaceFolders Notification (:arrow_right:)
+##### <a href="#workspace_didChangeWorkspaceFolders" name="workspace_didChangeWorkspaceFolders" class="anchor">DidChangeWorkspaceFolders Notification (:arrow_right:)</a>
 
 > *Since version 3.6.0*
 
@@ -2153,7 +2153,7 @@ export interface WorkspaceFoldersChangeEvent {
 }
 ```
 
-#### <a name="workspace_didChangeConfiguration" class="anchor"></a>DidChangeConfiguration Notification (:arrow_right:)
+#### <a href="#workspace_didChangeConfiguration" name="workspace_didChangeConfiguration" class="anchor">DidChangeConfiguration Notification (:arrow_right:)</a>
 
 A notification sent from the client to the server to signal the change of configuration settings.
 
@@ -2170,7 +2170,7 @@ interface DidChangeConfigurationParams {
 }
 ```
 
-#### <a name="workspace_configuration" class="anchor"></a>Configuration Request (:arrow_right_hook:)
+#### <a href="#workspace_configuration" name="workspace_configuration" class="anchor">Configuration Request (:arrow_right_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -2205,7 +2205,7 @@ _Response_:
 * result: any[]
 * error: code and message set in case an exception happens during the 'workspace/configuration' request
 
-#### <a name="workspace_didChangeWatchedFiles" class="anchor"></a>DidChangeWatchedFiles Notification (:arrow_right:)
+#### <a href="#workspace_didChangeWatchedFiles" name="workspace_didChangeWatchedFiles" class="anchor">DidChangeWatchedFiles Notification (:arrow_right:)</a>
 
 The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client. It is recommended that servers register for these file events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
 
@@ -2311,7 +2311,7 @@ export namespace WatchKind {
 }
 ```
 
-#### <a name="workspace_symbol" class="anchor"></a>Workspace Symbols Request (:leftwards_arrow_with_hook:)
+#### <a href="#workspace_symbol" name="workspace_symbol" class="anchor">Workspace Symbols Request (:leftwards_arrow_with_hook:)</a>
 
 The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
 
@@ -2338,7 +2338,7 @@ _Response_:
 _Registration Options_: void
 
 
-#### <a name="workspace_executeCommand" class="anchor"></a>Execute a command (:leftwards_arrow_with_hook:)
+#### <a href="#workspace_executeCommand" name="workspace_executeCommand" class="anchor">Execute a command (:leftwards_arrow_with_hook:)</a>
 
 The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases
 the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
@@ -2383,7 +2383,7 @@ export interface ExecuteCommandRegistrationOptions {
 ```
 
 
-#### <a name="workspace_applyEdit" class="anchor"></a>Applies a WorkspaceEdit (:arrow_right_hook:)
+#### <a href="#workspace_applyEdit" name="workspace_applyEdit" class="anchor">Applies a WorkspaceEdit (:arrow_right_hook:)</a>
 
 The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
 
@@ -2421,7 +2421,7 @@ export interface ApplyWorkspaceEditResponse {
 * error: code and message set in case an exception happens during the request.
 
 
-#### <a name="textDocument_didOpen" class="anchor"></a>DidOpenTextDocument Notification (:arrow_right:)
+#### <a href="#textDocument_didOpen" name="textDocument_didOpen" class="anchor">DidOpenTextDocument Notification (:arrow_right:)</a>
 
 The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
@@ -2443,7 +2443,7 @@ interface DidOpenTextDocumentParams {
 _Registration Options_: `TextDocumentRegistrationOptions`
 
 
-#### <a name="textDocument_didChange" class="anchor"></a>DidChangeTextDocument Notification (:arrow_right:)
+#### <a href="#textDocument_didChange" name="textDocument_didChange" class="anchor">DidChangeTextDocument Notification (:arrow_right:)</a>
 
 The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
 
@@ -2506,7 +2506,7 @@ export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegis
 ```
 
 
-#### <a name="textDocument_willSave" class="anchor"></a>WillSaveTextDocument Notification (:arrow_right:)
+#### <a href="#textDocument_willSave" name="textDocument_willSave" class="anchor">WillSaveTextDocument Notification (:arrow_right:)</a>
 
 The document will save notification is sent from the client to the server before the document is actually saved.
 
@@ -2556,7 +2556,7 @@ export namespace TextDocumentSaveReason {
 _Registration Options_: `TextDocumentRegistrationOptions`
 
 
-#### <a name="textDocument_willSaveWaitUntil" class="anchor"></a>WillSaveWaitUntilTextDocument Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_willSaveWaitUntil" name="textDocument_willSaveWaitUntil" class="anchor">WillSaveWaitUntilTextDocument Request (:leftwards_arrow_with_hook:)</a>
 
 The document will save request is sent from the client to the server before the document is actually saved. The request can return an array of TextEdits which will be applied to the text document before it is saved. Please note that clients might drop results if computing the text edits took too long or if a server constantly fails on this request. This is done to keep the save fast and reliable.
 
@@ -2570,7 +2570,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_didSave" class="anchor"></a>DidSaveTextDocument Notification (:arrow_right:)
+#### <a href="#textDocument_didSave" name="textDocument_didSave" class="anchor">DidSaveTextDocument Notification (:arrow_right:)</a>
 
 The document save notification is sent from the client to the server when the document was saved in the client.
 
@@ -2603,7 +2603,7 @@ export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistr
 }
 ```
 
-#### <a name="textDocument_didClose" class="anchor"></a>DidCloseTextDocument Notification (:arrow_right:)
+#### <a href="#textDocument_didClose" name="textDocument_didClose" class="anchor">DidCloseTextDocument Notification (:arrow_right:)</a>
 
 The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
@@ -2623,7 +2623,7 @@ interface DidCloseTextDocumentParams {
 _Registration Options_: `TextDocumentRegistrationOptions`
 
 
-#### <a name="textDocument_publishDiagnostics" class="anchor"></a>PublishDiagnostics Notification (:arrow_left:)
+#### <a href="#textDocument_publishDiagnostics" name="textDocument_publishDiagnostics" class="anchor">PublishDiagnostics Notification (:arrow_left:)</a>
 
 Diagnostics notification are sent from the server to the client to signal results of validation runs.
 
@@ -2652,7 +2652,7 @@ interface PublishDiagnosticsParams {
 }
 ```
 
-#### <a name="textDocument_completion" class="anchor"></a>Completion Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_completion" name="textDocument_completion" class="anchor">Completion Request (:leftwards_arrow_with_hook:)</a>
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in. The request can delay the computation of the `detail` and `documentation` properties. However, properties that are needed for the initial sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` request and must not be changed during resolve.
 
@@ -3007,7 +3007,7 @@ int         ::= [0-9]+
 text        ::= .*
 ```
 
-#### <a name="completionItem_resolve" class="anchor"></a>Completion Item Resolve Request (:leftwards_arrow_with_hook:)
+#### <a href="#completionItem_resolve" name="completionItem_resolve" class="anchor">Completion Item Resolve Request (:leftwards_arrow_with_hook:)</a>
 
 The request is sent from the client to the server to resolve additional information for a given completion item.
 
@@ -3019,7 +3019,7 @@ _Response_:
 * result: `CompletionItem`
 * error: code and message set in case an exception happens during the completion resolve request.
 
-#### <a name="textDocument_hover" class="anchor"></a>Hover Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_hover" name="textDocument_hover" class="anchor">Hover Request (:leftwards_arrow_with_hook:)</a>
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
@@ -3072,7 +3072,7 @@ type MarkedString = string | { language: string; value: string };
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_signatureHelp" class="anchor"></a>Signature Help Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_signatureHelp" name="textDocument_signatureHelp" class="anchor">Signature Help Request (:leftwards_arrow_with_hook:)</a>
 
 The signature help request is sent from the client to the server to request signature information at a given cursor position.
 
@@ -3175,7 +3175,7 @@ export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrati
 }
 ```
 
-#### <a name="textDocument_definition" class="anchor"></a>Goto Definition Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_definition" name="textDocument_definition" class="anchor">Goto Definition Request (:leftwards_arrow_with_hook:)</a>
 
 The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 
@@ -3189,7 +3189,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_typeDefinition" class="anchor"></a>Goto Type Definition Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_typeDefinition" name="textDocument_typeDefinition" class="anchor">Goto Type Definition Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -3205,7 +3205,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_implementation"></a>Goto Implementation Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_implementation" name="textDocument_implementation" class="anchor">Goto Implementation Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -3221,7 +3221,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_references" class="anchor"></a>Find References Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_references" name="textDocument_references" class="anchor">Find References Request (:leftwards_arrow_with_hook:)</a>
 
 The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
 
@@ -3247,7 +3247,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_documentHighlight" class="anchor"></a>Document Highlights Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_documentHighlight" name="textDocument_documentHighlight" class="anchor">Document Highlights Request (:leftwards_arrow_with_hook:)</a>
 
 The document highlight request is sent from the client to the server to resolve a document highlights for a given text document position.
 For programming languages this usually highlights all references to the symbol scoped to this file. However we kept 'textDocument/documentHighlight'
@@ -3305,7 +3305,7 @@ export namespace DocumentHighlightKind {
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_documentSymbol" class="anchor"></a>Document Symbols Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_documentSymbol" name="textDocument_documentSymbol" class="anchor">Document Symbols Request (:leftwards_arrow_with_hook:)</a>
 
 The document symbol request is sent from the client to the server to return a flat list of all symbols found in a given text document. Neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
 
@@ -3452,7 +3452,7 @@ interface SymbolInformation {
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_codeAction" class="anchor"></a>Code Action Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_codeAction" name="textDocument_codeAction" class="anchor">Code Action Request (:leftwards_arrow_with_hook:)</a>
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. When the command is selected the server should be contacted again (via the `workspace/executeCommand`) request to execute the command.
 
@@ -3637,7 +3637,7 @@ export interface CodeActionRegistrationOptions extends TextDocumentRegistrationO
 ```
 
 
-#### <a name="textDocument_codeLens" class="anchor"></a>Code Lens Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_codeLens" name="textDocument_codeLens" class="anchor">Code Lens Request (:leftwards_arrow_with_hook:)</a>
 
 The code lens request is sent from the client to the server to compute code lenses for a given text document.
 
@@ -3696,7 +3696,7 @@ export interface CodeLensRegistrationOptions extends TextDocumentRegistrationOpt
 }
 ```
 
-#### <a name="codeLens_resolve" class="anchor"></a>Code Lens Resolve Request (:leftwards_arrow_with_hook:)
+#### <a href="#codeLens_resolve" name="codeLens_resolve" class="anchor">Code Lens Resolve Request (:leftwards_arrow_with_hook:)</a>
 
 The code lens resolve request is sent from the client to the server to resolve the command for a given code lens item.
 
@@ -3708,7 +3708,7 @@ _Response_:
 * result: `CodeLens`
 * error: code and message set in case an exception happens during the code lens resolve request.
 
-#### <a name="textDocument_documentLink" class="anchor"></a>Document Link Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_documentLink" name="textDocument_documentLink" class="anchor">Document Link Request (:leftwards_arrow_with_hook:)</a>
 
 The document links request is sent from the client to the server to request the location of links in a document.
 
@@ -3762,7 +3762,7 @@ export interface DocumentLinkRegistrationOptions extends TextDocumentRegistratio
 }
 ```
 
-#### <a name="documentLink_resolve" class="anchor"></a>Document Link Resolve Request (:leftwards_arrow_with_hook:)
+#### <a href="#documentLink_resolve" name="documentLink_resolve" class="anchor">Document Link Resolve Request (:leftwards_arrow_with_hook:)</a>
 
 The document link resolve request is sent from the client to the server to resolve the target of a given document link.
 
@@ -3774,7 +3774,7 @@ _Response_:
 * result: `DocumentLink`
 * error: code and message set in case an exception happens during the document link resolve request.
 
-#### <a name="textDocument_documentColor" class="anchor"></a>Document Color Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_documentColor" name="textDocument_documentColor" class="anchor">Document Color Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -3842,7 +3842,7 @@ interface Color {
 ```
 * error: code and message set in case an exception happens during the 'textDocument/documentColor' request
 
-#### <a name="textDocument_colorPresentation" class="anchor"></a>Color Presentation Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_colorPresentation" name="textDocument_colorPresentation" class="anchor">Color Presentation Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -3902,7 +3902,7 @@ interface ColorPresentation {
 
 * error: code and message set in case an exception happens during the 'textDocument/colorPresentation' request
 
-#### <a name="textDocument_formatting" class="anchor"></a>Document Formatting Request  (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_formatting" name="textDocument_formatting" class="anchor">Document Formatting Request  (:leftwards_arrow_with_hook:)</a>
 
 The document formatting request is sent from the client to the server to format a whole document.
 
@@ -3950,7 +3950,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_rangeFormatting" class="anchor"></a>Document Range Formatting Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_rangeFormatting" name="textDocument_rangeFormatting" class="anchor">Document Range Formatting Request (:leftwards_arrow_with_hook:)</a>
 
 The document range formatting request is sent from the client to the server to format a given range in a document.
 
@@ -3983,7 +3983,7 @@ _Response_:
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-#### <a name="textDocument_onTypeFormatting" class="anchor"></a>Document on Type Formatting Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_onTypeFormatting" name="textDocument_onTypeFormatting" class="anchor">Document on Type Formatting Request (:leftwards_arrow_with_hook:)</a>
 
 The document on type formatting request is sent from the client to the server to format parts of the document during typing.
 
@@ -4033,7 +4033,7 @@ export interface DocumentOnTypeFormattingRegistrationOptions extends TextDocumen
 	moreTriggerCharacter?: string[]
 }
 ```
-#### <a name="textDocument_rename" class="anchor"></a>Rename Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_rename" name="textDocument_rename" class="anchor">Rename Request (:leftwards_arrow_with_hook:)</a>
 
 The rename request is sent from the client to the server to perform a workspace-wide rename of a symbol.
 
@@ -4077,7 +4077,7 @@ export interface RenameRegistrationOptions extends TextDocumentRegistrationOptio
 }
 ```
 
-#### <a name="textDocument_prepareRename" class="anchor"></a>Prepare Rename Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_prepareRename" name="textDocument_prepareRename" class="anchor">Prepare Rename Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.12.0*
 
@@ -4091,7 +4091,7 @@ _Response_:
 * result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `null` is returned then it is deemed that a 'textDocument'rename' request is not valid at the given position.
 * error: code and message set in case an exception happens during the prepare rename request.
 
-#### <a name="textDocument_foldingRange" class="anchor"></a>Folding Range Request (:leftwards_arrow_with_hook:)
+#### <a href="#textDocument_foldingRange" name="textDocument_foldingRange" class="anchor">Folding Range Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.10.0*
 
@@ -4170,40 +4170,40 @@ export interface FoldingRange {
 
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
-### <a name="changeLog" class="anchor"></a>Change Log
+### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
-#### <a name="version_3_13_0" class="anchor"></a>3.13.0 (9/11/2018)
+#### <a href="#version_3_13_0" name="version_3_13_0" class="anchor">3.13.0 (9/11/2018)</a>
 
 * Add support for file and folder operations (create, rename, move) to workspace edits.
 
-#### <a name="version_3_12_0" class="anchor"></a>3.12.0 (8/23/2018)
+#### <a href="#version_3_12_0" name="version_3_12_0" class="anchor">3.12.0 (8/23/2018)</a>
 
 * Add support for `textDocument/prepareRename` request.
 
-#### <a name="version_3_11_0" class="anchor"></a>3.11.0 (8/21/2018)
+#### <a href="#version_3_11_0" name="version_3_11_0" class="anchor">3.11.0 (8/21/2018)</a>
 
 * Add support for CodeActionOptions to allow a server to provide a list of code action it supports.
 
-#### <a name="version_3_10_0" class="anchor"></a>3.10.0 (7/23/2018)
+#### <a href="#version_3_10_0" name="version_3_10_0" class="anchor">3.10.0 (7/23/2018)</a>
 
 * Add support for hierarchical document symbols as a valid reponse to a `textDocument/documentSymbol` request.
 * Add support for folding ranges as a valid reponse to a `textDocument/foldingRange` request.
 
-#### <a name="version_3_9_0" class="anchor"></a>3.9.0 (7/10/2018)
+#### <a href="#version_3_9_0" name="version_3_9_0" class="anchor">3.9.0 (7/10/2018)</a>
 
 * Add support for `preselect` property in `CompletionItem`
 
-#### <a name="version_3_8_0" class="anchor"></a>3.8.0 (6/11/2018)
+#### <a href="#version_3_8_0" name="version_3_8_0" class="anchor">3.8.0 (6/11/2018)</a>
 
 * Added support for CodeAction literals to the `textDocument/codeAction` request.
 * ColorServerCapabilities.colorProvider can also be a boolean
 * Corrected ColorPresentationParams.colorInfo to color (as in the d.ts and in implementations)
 
-#### <a name="version_3_7_0" class="anchor"></a>3.7.0 (4/5/2018)
+#### <a href="#version_3_7_0" name="version_3_7_0" class="anchor">3.7.0 (4/5/2018)</a>
 
 * Added support for related information to Diagnostics.
 
-#### <a name="version_3_6_0" class="anchor"></a>3.6.0 (2/22/2018)
+#### <a href="#version_3_6_0" name="version_3_6_0" class="anchor">3.6.0 (2/22/2018)</a>
 
 Merge the proposed protocol for workspace folders, configuration, goto type definition, goto implementation and document color provider into the main branch of the specification. For details see:
 
@@ -4217,30 +4217,30 @@ Merge the proposed protocol for workspace folders, configuration, goto type defi
 
 In addition we enhanced the `CompletionTriggerKind` with a new value `TriggerForIncompleteCompletions: 3 = 3` to signal the a completion request got trigger since the last result was incomplete.
 
-#### <a name="version_3_5_0" class="anchor"></a>3.5.0
+#### <a href="#version_3_5_0" name="version_3_5_0" class="anchor">3.5.0</a>
 
 Decided to skip this version to bring the protocol version number in sync the with npm module vscode-languageserver-protocol.
 
-#### <a name="version_3_4_0" class="anchor"></a>3.4.0 (11/27/2017)
+#### <a href="#version_3_4_0" name="version_3_4_0" class="anchor">3.4.0 (11/27/2017)</a>
 
 * [extensible completion item and symbol kinds](https://github.com/Microsoft/language-server-protocol/issues/129)
 
-#### <a name="version_3_3_0" class="anchor"></a>3.3.0 (11/24/2017)
+#### <a href="version_3_3_0" name="version_3_3_0" class="anchor">3.3.0 (11/24/2017)</a>
 
 * Added support for `CompletionContext`
 * Added support for `MarkupContent`
 * Removed old New and Updated markers.
 
-#### <a name="version_3_2_0" class="anchor"></a>3.2.0 (09/26/2017)
+#### <a href="version_3_2_0" name="version_3_2_0" class="anchor">3.2.0 (09/26/2017)</a>
 
 * Added optional `commitCharacters` property to the `CompletionItem`
 
-#### <a name="version_3_1_0" class="anchor"></a>3.1.0 (02/28/2017)
+#### <a href="version_3_1_0" name="version_3_1_0" class="anchor">3.1.0 (02/28/2017)</a>
 
 * Make the `WorkspaceEdit` changes backwards compatible.
 * Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
 
-#### <a name="version_3_0_0" class="anchor"></a>3.0 Version
+#### <a href="#version_3_0_0" name="version_3_0_0" class="anchor">3.0 Version</a>
 
 - add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
 - add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediately.
