@@ -1,6 +1,6 @@
 # Language Server Protocol
 
-The Language Server Protocol is now available through its own [Web site](https://microsoft.github.io/language-server-protocol/). The Web site contains information about how the protocol [works](https://microsoft.github.io/language-server-protocol/overview) a better readable [specification](https://microsoft.github.io/language-server-protocol/specification) and documents about protocol [implementations](https://microsoft.github.io/language-server-protocol/implementors/servers/).
+The Language Server Protocol is now available through its own [website](https://microsoft.github.io/language-server-protocol/). The website contains information about how the protocol [works](https://microsoft.github.io/language-server-protocol/overview), a better readable [specification](https://microsoft.github.io/language-server-protocol/specification), and documents about protocol [implementations](https://microsoft.github.io/language-server-protocol/implementors/servers/).
 
 ## Contributing
 If you are interested in fixing issues like typos you can either file an issue or provide a pull request containing the changes to the [specification file](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/specification.md). 
