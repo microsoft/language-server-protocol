@@ -95,7 +95,7 @@ interface RequestMessage extends Message {
 
 #### Response Message
 
-Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
+A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -189,7 +189,7 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the requests returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
 ## Language Server Protocol
 
@@ -197,7 +197,7 @@ The language server protocol defines a set of JSON-RPC request, response and not
 
 In general, the language server protocol supports JSON-RPC messages, however the base protocol defined here uses a convention such that the parameters passed to request/notification messages should be of `object` type (if passed at all). However, this does not disallow using `Array` parameter types in custom messages.
 
-The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such a sharing would require additional protocol to either lock a document to support concurrent editing.
+The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such a sharing would require additional protocol e.g. to lock a document to support concurrent editing.
 
 ### Basic JSON Structures
 
@@ -442,7 +442,7 @@ export interface TextDocumentEdit {
 
 > New in version 3.13:
 
-File resource changes allow servers to create, rename and delete files anf folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
+File resource changes allow servers to create, rename and delete files and folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
 
 ```typescript
 /**
@@ -811,9 +811,9 @@ This section documents the actual language server protocol. It uses the followin
 * a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
-#### Request, Notification and response ordering
+#### Request, Notification and Response ordering
 
-Responses to requests should be sent in the roughly same order as the requests appear on the server or client side. So for example if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
+Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So for example if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
 
 However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as these each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since the executing the latter may affect the result of the former.
 
@@ -937,13 +937,13 @@ export namespace FailureHandlingKind {
 	/**
 	 * If the workspace edit contains only textual file changes they are executed transactional.
 	 * If resource changes (create, rename or delete file) are part of the change the failure
-	 * handling startegy is abort.
+	 * handling strategy is abort.
 	 */
 	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
 
 	/**
 	 * The client tries to undo the operations already executed. But there is no
-	 * guaruntee that this is succeeding.
+	 * guarantee that this is succeeding.
 	 */
 	export const Undo: FailureHandlingKind = 'undo';
 }
@@ -975,7 +975,7 @@ export interface WorkspaceClientCapabilities {
 
 		/**
 		 * The failure handling strategy of a client if applying the workspace edit
-		 * failes.
+		 * fails.
 		 */
 		failureHandling?: FailureHandlingKind;
 	};
@@ -1100,7 +1100,7 @@ export interface TextDocumentClientCapabilities {
 		 */
 		completionItem?: {
 			/**
-			 * Client supports snippets as insert text.
+			 * The client supports snippets as insert text.
 			 *
 			 * A snippet can define tab stops and placeholders with `$1`, `$2`
 			 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
@@ -1110,23 +1110,23 @@ export interface TextDocumentClientCapabilities {
 			snippetSupport?: boolean;
 
 			/**
-			 * Client supports commit characters on a completion item.
+			 * The client supports commit characters on a completion item.
 			 */
 			commitCharactersSupport?: boolean
 
 			/**
-			 * Client supports the follow content formats for the documentation
+			 * The client supports the following content formats for the documentation
 			 * property. The order describes the preferred format of the client.
 			 */
 			documentationFormat?: MarkupKind[];
 
 			/**
-			 * Client supports the deprecated property on a completion item.
+			 * The client supports the deprecated property on a completion item.
 			 */
 			deprecatedSupport?: boolean;
 
 			/**
-			 * Client supports the preselect property on a completion item.
+			 * The client supports the preselect property on a completion item.
 			 */
 			preselectSupport?: boolean;
 		}
@@ -1162,7 +1162,7 @@ export interface TextDocumentClientCapabilities {
 		dynamicRegistration?: boolean;
 
 		/**
-		 * Client supports the follow content formats for the content
+		 * The client supports the follow content formats for the content
 		 * property. The order describes the preferred format of the client.
 		 */
 		contentFormat?: MarkupKind[];
@@ -1183,7 +1183,7 @@ export interface TextDocumentClientCapabilities {
 		 */
 		signatureInformation?: {
 			/**
-			 * Client supports the follow content formats for the documentation
+			 * The client supports the follow content formats for the documentation
 			 * property. The order describes the preferred format of the client.
 			 */
 			documentationFormat?: MarkupKind[];
@@ -1237,7 +1237,7 @@ export interface TextDocumentClientCapabilities {
 		}
 
 		/**
-		 * The client support hierarchical document symbols.
+		 * The client supports hierarchical document symbols.
 		 */
 		hierarchicalDocumentSymbolSupport?: boolean;
 	};
@@ -1386,7 +1386,7 @@ export interface TextDocumentClientCapabilities {
 		 */
 		dynamicRegistration?: boolean;
 		/**
-		 * Client supports testing for validity of rename operations
+		 * The client supports testing for validity of rename operations
 		 * before execution.
 		 */
 		prepareSupport?: boolean;
@@ -1427,7 +1427,7 @@ export interface TextDocumentClientCapabilities {
 }
 ```
 
-`ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a property is missing that defines sub properties all sub properties should be interpreted as an absence of the capability.
+`ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
@@ -2083,7 +2083,7 @@ _Response_:
 
 > *Since version 3.6.0*
 
-Many tools support more than one root folder per workspace. Examples for this are VS Code's multi-root support, Atom's project folder support or Sublime's project support. If a client workspace consists of multiple roots then a server typically needs to know about this. The protocol up to now assumes one root folder which is announce to the server by the `rootUri` property of the `InitializeParams`. If the client supports workspace folders and announces them via the corrsponding `workspaceFolders` client capability the `InitializeParams` contain an additional property `workspaceFolders` with the configured workspace folders when the server starts.
+Many tools support more than one root folder per workspace. Examples for this are VS Code's multi-root support, Atom's project folder support or Sublime's project support. If a client workspace consists of multiple roots then a server typically needs to know about this. The protocol up to now assumes one root folder which is announced to the server by the `rootUri` property of the `InitializeParams`. If the client supports workspace folders and announces them via the corrsponding `workspaceFolders` client capability, the `InitializeParams` contain an additional property `workspaceFolders` with the configured workspace folders when the server starts.
 
 The `workspace/workspaceFolders` request is sent from the server to the client to fetch the current open list of workspace folders. Returns `null` in the response if only a single file is open in the tool. Returns an empty array if a workspace is open but no folders are configured.
 
@@ -2094,7 +2094,7 @@ _Request_:
 
 _Response_:
 
-* result: `WorkspaceFolder[] | null` defines as follows:
+* result: `WorkspaceFolder[] | null` defined as follows:
 
 ```typescript
 export interface WorkspaceFolder {
@@ -2174,9 +2174,9 @@ interface DidChangeConfigurationParams {
 
 > *Since version 3.6.0*
 
-The `workspace/configuration` request is sent from the server to the client to fetch configuration settings from the client. The request can fetch n configuration settings in one roundtrip. The order of the returned configuration settings correspond to the order of the passed `ConfigurationItems` (e.g. the first item in the response is the result for the first configuration item in the params).
+The `workspace/configuration` request is sent from the server to the client to fetch configuration settings from the client. The request can fetch several configuration settings in one roundtrip. The order of the returned configuration settings correspond to the order of the passed `ConfigurationItems` (e.g. the first item in the response is the result for the first configuration item in the params).
 
-A `ConfigurationItem` consist of the configuration section to ask for and an additional scope URI. The configuration section ask for is defined by the server and doesn't necessarily need to correspond to the configuration store used be the client. So a server might ask for a configuration `cpp.formatterOptions` but the client stores the configuration in a XML store layout differently. It is up to the client to do the necessary conversion. If a scope URI is provided the client should return the setting scoped to the provided resource. If the client for example uses [EditorConfig](http://editorconfig.org/) to manage its settings the configuration should be returned for the passed resource URI. If the client can't provide a configuration setting for a given scope then `null` need to be present in the returned array.
+A `ConfigurationItem` consists of the configuration section to ask for and an additional scope URI. The configuration section ask for is defined by the server and doesn't necessarily need to correspond to the configuration store used be the client. So a server might ask for a configuration `cpp.formatterOptions` but the client stores the configuration in a XML store layout differently. It is up to the client to do the necessary conversion. If a scope URI is provided the client should return the setting scoped to the provided resource. If the client for example uses [EditorConfig](http://editorconfig.org/) to manage its settings the configuration should be returned for the passed resource URI. If the client can't provide a configuration setting for a given scope then `null` need to be present in the returned array.
 
 _Request_:
 
@@ -4186,8 +4186,8 @@ export interface FoldingRange {
 
 #### <a href="#version_3_10_0" name="version_3_10_0" class="anchor">3.10.0 (7/23/2018)</a>
 
-* Add support for hierarchical document symbols as a valid reponse to a `textDocument/documentSymbol` request.
-* Add support for folding ranges as a valid reponse to a `textDocument/foldingRange` request.
+* Add support for hierarchical document symbols as a valid response to a `textDocument/documentSymbol` request.
+* Add support for folding ranges as a valid response to a `textDocument/foldingRange` request.
 
 #### <a href="#version_3_9_0" name="version_3_9_0" class="anchor">3.9.0 (7/10/2018)</a>
 
