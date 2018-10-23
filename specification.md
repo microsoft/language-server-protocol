@@ -4088,7 +4088,7 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `null` is returned then it is deemed that a 'textDocument'rename' request is not valid at the given position.
+* result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
 * error: code and message set in case an exception happens during the prepare rename request.
 
 #### <a href="#textDocument_foldingRange" name="textDocument_foldingRange" class="anchor">Folding Range Request (:leftwards_arrow_with_hook:)</a>
