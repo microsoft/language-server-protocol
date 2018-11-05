@@ -643,6 +643,7 @@ Less | `less`
 Lua | `lua`
 Makefile | `makefile`
 Markdown | `markdown`
+Nim | `nim`
 Objective-C | `objective-c`
 Objective-C++ | `objective-cpp`
 Perl | `perl` and `perl6`
