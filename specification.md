@@ -442,7 +442,7 @@ export interface TextDocumentEdit {
 
 > New in version 3.13:
 
-File resource changes allow servers to create, rename and delete files anf folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
+File resource changes allow servers to create, rename and delete files and folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
 
 ```typescript
 /**
