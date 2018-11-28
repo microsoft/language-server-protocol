@@ -4063,8 +4063,8 @@ interface RenameParams {
 ```
 
 _Response_:
-* result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace.
-* error: code and message set in case an exception happens during the rename request.
+* result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace. `null` should be treated the same was as [`WorkspaceEdit`](#workspaceedit) with no changes, and should only be returned when `newName` is the same as the old name (no change was required).
+* error: code and message set in case when rename could not be performed for any reason. Examples include: there is nothing at given `position` to rename (like a space), given symbol does not support renaming by the server or the code is invalid (e.g. does not compile).
 
 _Registration Options_: `RenameRegistrationOptions` defined as follows:
 
