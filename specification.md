@@ -655,6 +655,7 @@ Razor (cshtml) | `razor`
 Ruby | `ruby`
 Rust | `rust`
 Sass | `scss` (syntax using curly brackets), `sass` (indented syntax)
+Scala | `scala`
 ShaderLab | `shaderlab`
 Shell Script (Bash) | `shellscript`
 SQL | `sql`
