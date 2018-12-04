@@ -578,8 +578,7 @@ export interface HoverResult extends V {
 	label: 'hoverResult';
 
 	/**
-	 * The hover result. This is the normal LSP hover result with the
-	 * addition of allowing '${startRange}' as the range value.
+	 * The hover result. This is the normal LSP hover result.
 	 */
 	result: {
 		/**
@@ -588,9 +587,9 @@ export interface HoverResult extends V {
 		contents: lsp.MarkupContent | lsp.MarkedString | lsp.MarkedString[];
 
 		/**
-		 * The range or `${startRange}`
+		 * The optional range.
 		 */
-		range?: lsp.Range | '${startRange}';
+		range?: lsp.Range;
 	};
 }
 
