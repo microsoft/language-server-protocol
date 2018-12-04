@@ -791,6 +791,10 @@ These properties on the `project` vertex, if defined, should have this semantic:
 
 The project vertex may include additional properties where they are applicable and interesting for a given language.
 
+## Embedding content
+
+It can be valuable to embed the content of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `content` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
+
 ## Project exports and external imports
 
 One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **A** references a library **B**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional export results and external import results. An export result describes what a document exports so that it is possible to reference from other projects. It also describes what a project imports from an external library. Let's first look at the export case.
