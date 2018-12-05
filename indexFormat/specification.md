@@ -900,4 +900,4 @@ A TypeScript file using interfaces to define the emitted JSON structures is [her
 
 ## Open Questions
 
-While implementing this for TypeScript and npm we collected a list of [open questions](https://github.com/Microsoft/language-server-protocol/labels/lsif) in form of GitHub issues we are already aware of.
+While implementing this for TypeScript and npm we collected a list of [open questions](https://github.com/Microsoft/lsif-typescript/labels/discussion) in form of GitHub issues we are already aware of.
