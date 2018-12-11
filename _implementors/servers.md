@@ -78,6 +78,7 @@ index: 1
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) |
 | TypeScript|[TypeFox](typefox.io)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) |
+| VHDL | [Olof Kraigher](https://github.com/kraigher) | [vhdl_ls](https://github.com/kraigher/rust_hdl) |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) |
 | Vue| [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) |
 | WXML| [Qiming Zhao](https://github.com/chemzqm)| [wxml-languageserver](https://github.com/chemzqm/wxml-languageserver) |
