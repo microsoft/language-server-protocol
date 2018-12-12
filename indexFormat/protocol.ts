@@ -45,7 +45,7 @@ export type VertexLiterals =
 	'implementationResult';
 
 /**
- * Uri's are currently stored as strings.
+ * Uris are currently stored as strings.
  */
 export type Uri = string;
 
@@ -107,7 +107,7 @@ export interface DeclarationTag {
 }
 
 /**
- * The range respresents a definition
+ * The range represents a definition
  */
 export interface DefinitionTag {
 	/**
@@ -454,7 +454,7 @@ export interface RangeBasedDocumentSymbol {
 }
 
 /**
- * A vertext representing the document symbol result.
+ * A vertex representing the document symbol result.
  */
 export interface DocumentSymbolResult extends V {
 
@@ -511,11 +511,24 @@ export interface DocumentLinkResult extends V {
 	result: lsp.DocumentLink[];
 }
 
+/**
+ * The LSP defines the result of a `textDocument/definition` request as
+ * `Location | Location[]. In the SIP we allow to use range ids as well.
+ */
+export type DeclarationResultTypeSingle = RangeId | lsp.Location;
+export type DeclarationResultTypeMany = (RangeId | lsp.Location)[];
+export type DeclarationResultType = DeclarationResultTypeSingle | DeclarationResultTypeMany;
+
 export interface DeclarationResult extends V {
 	/**
 	 * The label property.
 	 */
 	label: 'declarationResult';
+
+	/**
+	 * The actual result.
+	 */
+	result: DeclarationResultType;
 }
 
 /**
@@ -580,17 +593,7 @@ export interface HoverResult extends V {
 	/**
 	 * The hover result. This is the normal LSP hover result.
 	 */
-	result: {
-		/**
-		 * The hover contents.
-		 */
-		contents: lsp.MarkupContent | lsp.MarkedString | lsp.MarkedString[];
-
-		/**
-		 * The optional range.
-		 */
-		range?: lsp.Range;
-	};
+	result: lsp.Hover;
 }
 
 /**
@@ -636,7 +639,7 @@ export interface ReferenceResult extends V {
 export type ImplementationResultId = Id;
 
 /**
- * A vertext representing an implementation result.
+ * A vertex representing an implementation result.
  */
 export interface ImplementationResult extends V {
 
@@ -701,8 +704,8 @@ export type EdgeLiterals =
 	'textDocument/implementation';
 
 /**
- * A common base type of all edge types. The type parameters `S` and `T` are for typeing and
- * documentation puspose only. An edge never holds a direct refenence to a vertex. They are
+ * A common base type of all edge types. The type parameters `S` and `T` are for typing and
+ * documentation purpose only. An edge never holds a direct reference to a vertex. They are
  * referenced by `Id`.
  */
 export interface E<S extends V, T extends V, K extends EdgeLiterals> extends Element {
@@ -768,7 +771,7 @@ export type $imports = E<Document, ExternalImportResult, 'imports'>;
 export type item = ItemEdge<ReferenceResult, Range> | ItemEdge<ReferenceResult, ReferenceResult> | ItemEdge<ExportResult, ExportItem> | ItemEdge<ExternalImportResult, ExternalImportItem>;
 
 /**
- * An edge representing a `textDocument/documentSymbol` releationship. The relationship exists between:
+ * An edge representing a `textDocument/documentSymbol` relationship. The relationship exists between:
  *
  * - `Document` -> `DocumentSymbolResult`
  */
@@ -782,9 +785,9 @@ export type textDocument_documentSymbol = E<Document, DocumentSymbolResult, 'tex
 export type textDocument_foldingRange = E<Document, FoldingRangeResult, 'textDocument/foldingRange'>;
 
 /**
- * An edge representing a `textDocument/foldingRange` relationship. The relationship exists between:
+ * An edge representing a `textDocument/documentLink` relationship. The relationship exists between:
  *
- * - `Document` -> `FoldingRangeResult`
+ * - `Document` -> `DocumentLinkResult`
  */
 export type textDocument_documentLink = E<Document, DocumentLinkResult, 'textDocument/documentLink'>;
 
@@ -846,7 +849,7 @@ export type textDocument_implementation = E<Range, ImplementationResult, 'textDo
 
 /**
  *
- * All avaible Edge types.
+ * All available Edge types.
  */
 export type Edge =
 	contains |
