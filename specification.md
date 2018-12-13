@@ -1188,6 +1188,17 @@ export interface TextDocumentClientCapabilities {
 			 * property. The order describes the preferred format of the client.
 			 */
 			documentationFormat?: MarkupKind[];
+
+			/**
+			 * Client capabilities specific to parameter information.
+			 */
+			parameterInformation?: {
+				/**
+				 * The client supports processing label offsets instead of a
+				 * simple label string.
+				 */
+				labelOffsetSupport?: boolean;
+			}
 		};
 	};
 
@@ -3148,6 +3159,16 @@ interface SignatureInformation {
  * have a label and a doc-comment.
  */
 interface ParameterInformation {
+
+	/**
+	 * The label of this parameter information.
+	 *
+	 * Either a string or an inclusive start and exclusive end offsets within its containing
+	 * signature label. (see SignatureInformation.label). *Note*: A label of type string must be
+	 * a substring of its containing signature label.
+	 */
+	label: string | [number, number];
+
 	/**
 	 * The label of this parameter. Will be shown in
 	 * the UI.
@@ -4172,6 +4193,12 @@ export interface FoldingRange {
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
+
+#### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
+
+* Add support for signature label offsets.
+* Add support for location links.
+* Add support for `textDocument/definition` request.
 
 #### <a href="#version_3_13_0" name="version_3_13_0" class="anchor">3.13.0 (9/11/2018)</a>
 
