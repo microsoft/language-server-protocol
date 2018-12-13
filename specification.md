@@ -289,7 +289,7 @@ interface Location {
 }
 ```
 
-### LocationLink
+#### LocationLink
 
 Represents a link between a source and a target location.
 
@@ -3266,14 +3266,14 @@ export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrati
 
 The goto declaration request is sent from the client to the server to resolve the declaration location of a symbol at a given text document position.
 
-The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.declaration.linkSupport`.
+The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.declaration.linkSupport`.
 
 _Request_:
 * method: 'textDocument/declaration'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \|`null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \|`null`
 * error: code and message set in case an exception happens during the declaration request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -3283,15 +3283,15 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 > *Since version 3.14.0*
 
 The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
-
-The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.definition.linkSupport`.
+`
+The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.definition.linkSupport`.
 
 _Request_:
 * method: 'textDocument/definition'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -3302,14 +3302,14 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The goto type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
 
-The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.typeDefinition.linkSupport`.
 
 _Request_:
 * method: 'textDocument/typeDefinition'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -3320,14 +3320,14 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The goto implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
 
-The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.implementation.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.implementation.typeDefinition.linkSupport`.
 
 _Request_:
 * method: 'textDocument/implementation'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
