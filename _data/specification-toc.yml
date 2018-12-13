@@ -84,6 +84,8 @@
       anchor: textDocument_hover
     - title: signatureHelp
       anchor: textDocument_signatureHelp
+    - title: declaration
+      anchor: textDocument_declaration
     - title: definition
       anchor: textDocument_definition
     - title: typeDefinition
@@ -125,6 +127,8 @@
   - title: Change Log
     anchor: changeLog
     children:
+    - title: 3.14.0
+      anchor: version_3_14_0
     - title: 3.13.0
       anchor: version_3_13_0
     - title: 3.12.0

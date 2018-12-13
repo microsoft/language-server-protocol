@@ -289,6 +289,38 @@ interface Location {
 }
 ```
 
+### LocationLink
+
+Represents a link between a source and a target location.
+
+```typescript
+interface LocationLink {
+
+	/**
+	 * Span of the origin of this link.
+	 *
+	 * Used as the underlined span for mouse interaction. Defaults to the word range at
+	 * the mouse position.
+	 */
+	originSelectionRange?: Range;
+
+	/**
+	 * The target resource identifier of this link.
+	 */
+	targetUri: string;
+
+	/**
+	 * The full target range of this link.
+	 */
+	targetRange: Range;
+
+	/**
+	 * The span of this link.
+	 */
+	targetSelectionRange?: Range;
+}
+```
+
 #### Diagnostic
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
@@ -1284,6 +1316,23 @@ export interface TextDocumentClientCapabilities {
 	};
 
 	/**
+		* Capabilities specific to the `textDocument/declaration`
+		*/
+	declaration?: {
+		/**
+		 * Whether declaration supports dynamic registration. If this is set to `true`
+		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+		 * return value for the corresponding server capability as well.
+		 */
+		dynamicRegistration?: boolean;
+
+		/**
+		 * The client supports additional metadata in the form of declaration links.
+		 */
+		linkSupport?: boolean;
+	};
+
+	/**
 	 * Capabilities specific to the `textDocument/definition`
 	 */
 	definition?: {
@@ -1291,6 +1340,11 @@ export interface TextDocumentClientCapabilities {
 		 * Whether definition supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
+
+		/**
+		 * The client supports additional metadata in the form of definition links.
+		 */
+		linkSupport?: boolean;
 	};
 
 	/**
@@ -1305,6 +1359,11 @@ export interface TextDocumentClientCapabilities {
 		 * return value for the corresponding server capability as well.
 		 */
 		dynamicRegistration?: boolean;
+
+		/**
+		 * The client supports additional metadata in the form of definition links.
+		 */
+		linkSupport?: boolean;
 	};
 
 	/**
@@ -1319,6 +1378,11 @@ export interface TextDocumentClientCapabilities {
 		 * return value for the corresponding server capability as well.
 		 */
 		dynamicRegistration?: boolean;
+
+		/**
+		 * The client supports additional metadata in the form of definition links.
+		 */
+		linkSupport?: boolean;
 	};
 
 	/**
@@ -3195,17 +3259,38 @@ export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrati
 	triggerCharacters?: string[];
 }
 ```
+#### <a href="#textDocument_declaration" name="textDocument_declaration" class="anchor">Goto Declaration Request (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.14.0*
+
+The goto declaration request is sent from the client to the server to resolve the declaration location of a symbol at a given text document position.
+
+The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.declaration.linkSupport`.
+
+_Request_:
+* method: 'textDocument/declaration'
+* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+
+_Response_:
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \|`null`
+* error: code and message set in case an exception happens during the declaration request.
+
+_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_definition" name="textDocument_definition" class="anchor">Goto Definition Request (:leftwards_arrow_with_hook:)</a>
 
+> *Since version 3.14.0*
+
 The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
+
+The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.definition.linkSupport`.
 
 _Request_:
 * method: 'textDocument/definition'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -3216,12 +3301,14 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The goto type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
 
+The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.typeDefinition.linkSupport`.
+
 _Request_:
 * method: 'textDocument/typeDefinition'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
@@ -3232,12 +3319,14 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The goto implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
 
+The result type [`LocationLink](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.implementation.typeDefinition.linkSupport`.
+
 _Request_:
 * method: 'textDocument/implementation'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink](#locationLink)[] \| `null`
 * error: code and message set in case an exception happens during the definition request.
 
 _Registration Options_: `TextDocumentRegistrationOptions`
