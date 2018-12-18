@@ -902,12 +902,7 @@ interface InitializeParams {
 	rootUri: DocumentUri | null;
 
 	/**
-	 * Client provided initialization options. Usually these are options
-	 * that could equally be command line options passed when starting
-	 * the server. This property shouldn't be used to pass any user
-	 * configuration to the server. If a user configuration is needed
-	 * the server should use `workspace/configuration` requests together
-	 * with dynamic registration to obtain them.
+	 * Client provided initialization options.
 	 */
 	initializationOptions?: any;
 
