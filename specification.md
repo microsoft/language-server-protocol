@@ -646,7 +646,7 @@ interface TextDocumentItem {
 }
 ```
 
-In the specification, each text document has a unique specific language identifier. The following table lists all currently defined language identifiers:
+Text documents have a language identifier to indentify a document on the server side when it handles more than one language to avoid reintereting the extension. If a document refers to one of the programming languages listed below it is recommended that clients use those ids.
 
 Language | Identifier
 -------- | ----------
