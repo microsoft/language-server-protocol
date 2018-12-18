@@ -659,6 +659,7 @@ C++ | `cpp`
 C# | `csharp`
 CSS | `css`
 Diff | `diff`
+Dart | `dart`
 Dockerfile | `dockerfile`
 F# | `fsharp`
 Git | `git-commit` and `git-rebase`
