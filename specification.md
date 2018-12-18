@@ -3471,7 +3471,8 @@ export namespace SymbolKind {
 export class DocumentSymbol {
 
 	/**
-	 * The name of this symbol.
+	 * The name of this symbol. Will be displayed in the user interface and therefore must not be
+	 * an empty string or a string only consisting of white spaces.
 	 */
 	name: string;
 
