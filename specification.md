@@ -902,7 +902,7 @@ interface InitializeParams {
 	rootUri: DocumentUri | null;
 
 	/**
-	 * Client provided initialization options.
+	 * User provided initialization options.
 	 */
 	initializationOptions?: any;
 
