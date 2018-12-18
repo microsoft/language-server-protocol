@@ -647,7 +647,7 @@ interface TextDocumentItem {
 }
 ```
 
-Text documents have a language identifier to indentify a document on the server side when it handles more than one language to avoid reintereting the extension. If a document refers to one of the programming languages listed below it is recommended that clients use those ids.
+Text documents have a language identifier to indentify a document on the server side when it handles more than one language to avoid re-interpreting the file extension. If a document refers to one of the programming languages listed below it is recommended that clients use those ids.
 
 Language | Identifier
 -------- | ----------
