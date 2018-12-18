@@ -2419,7 +2419,7 @@ export interface ApplyWorkspaceEditResponse {
 	applied: boolean;
 	
 	/**
-	 * A optional textual description for why the edit was not applied.
+	 * An optional textual description for why the edit was not applied.
 	 * This may be used may be used by the server for diagnostic
 	 * logging or to provide a suitable error for a request that
 	 * triggered the edit.
