@@ -354,6 +354,11 @@ interface Diagnostic {
 	 * The diagnostic's message.
 	 */
 	message: string;
+	
+	/**
+	 * Additional metadata about the diagnostic.
+	 */
+	tags?: DiagnosticTag[];
 
 	/**
 	 * An array of related diagnostic information, e.g. when symbol-names within
@@ -363,7 +368,7 @@ interface Diagnostic {
 }
 ```
 
-The protocol currently supports the following diagnostic severities:
+The protocol currently supports the following diagnostic severities and diagnostic tags:
 
 ```typescript
 namespace DiagnosticSeverity {
@@ -383,6 +388,19 @@ namespace DiagnosticSeverity {
 	 * Reports a hint.
 	 */
 	export const Hint = 4;
+}
+```
+
+```typescript
+export namespace DiagnosticTag {
+
+	/**
+	 * Unused or unnecessary code.
+	 *
+	 * Clients are allowed to render diagnostics with this tag faded out instead of having
+	 * an error squiggle.
+	 */
+	export const Unnecessary: 1 =1;
 }
 ```
 
