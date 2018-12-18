@@ -3234,12 +3234,6 @@ interface ParameterInformation {
 	label: string | [number, number];
 
 	/**
-	 * The label of this parameter. Will be shown in
-	 * the UI.
-	 */
-	label: string;
-
-	/**
 	 * The human-readable doc-comment of this parameter. Will be shown
 	 * in the UI but can be omitted.
 	 */
