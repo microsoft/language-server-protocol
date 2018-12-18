@@ -1535,7 +1535,7 @@ export interface CompletionOptions {
 	/**
 	 * The list of all possible completion commit characters
 	 */
-	potentialCommitCharacters?: string[];
+	allCommitCharacters?: string[];
 }
 /**
  * Signature help options.
