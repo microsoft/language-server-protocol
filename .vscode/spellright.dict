@@ -13,3 +13,5 @@ TextDocumentPositionParams
 sectionid
 vscode
 vscode-jsonrpc
+vscode-languageserver-protocol
+boolean

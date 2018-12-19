@@ -171,7 +171,7 @@ interface NotificationMessage extends Message {
 
 #### $ Notifications and Requests
 
-Notification and requests whose methods start with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest'. If a server or client receives notifications or requests starting with '$/' it is free to ignore them if they are unknown.
+Notification and requests whose methods start with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest' notification. If a server or client receives notifications starting with '$/' it is free to ignore the notification. If a server or client receives a requests starting with '$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
 #### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
 
@@ -4339,7 +4339,7 @@ export interface FoldingRange {
 
 * Added support for CodeAction literals to the `textDocument/codeAction` request.
 * ColorServerCapabilities.colorProvider can also be a boolean
-* Corrected ColorPresentationParams.colorInfo to color (as in the d.ts and in implementations)
+* Corrected ColorPresentationParams.colorInfo to color (as in the `d.ts` and in implementations)
 
 #### <a href="#version_3_7_0" name="version_3_7_0" class="anchor">3.7.0 (4/5/2018)</a>
 
@@ -4352,8 +4352,8 @@ Merge the proposed protocol for workspace folders, configuration, go to type def
 * [Get Workspace Folders](https://microsoft.github.io/language-server-protocol/specification#workspace_workspaceFolders)
 * [DidChangeWorkspaceFolders Notification](https://microsoft.github.io/language-server-protocol/specification#workspace_didChangeWorkspaceFolders)
 * [Get Configuration](https://microsoft.github.io/language-server-protocol/specification#workspace_configuration)
-* [Goto Type Definition](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)
-* [Goto Implementation](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)
+* [Go to Type Definition](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)
+* [Go to Implementation](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)
 * [Document Color](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentColor)
 * [Color Presentation](https://microsoft.github.io/language-server-protocol/specification#textDocument_colorPresentation)
 
