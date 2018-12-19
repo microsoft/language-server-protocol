@@ -63,7 +63,7 @@ The following TypeScript definitions describe the base [JSON-RPC protocol](http:
 
 #### Abstract Message
 
-A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the jsonrpc version.
+A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
 
 ```typescript
 interface Message {
@@ -647,7 +647,7 @@ interface TextDocumentItem {
 }
 ```
 
-Text documents have a language identifier to indentify a document on the server side when it handles more than one language to avoid re-interpreting the file extension. If a document refers to one of the programming languages listed below it is recommended that clients use those ids.
+Text documents have a language identifier to identify a document on the server side when it handles more than one language to avoid re-interpreting the file extension. If a document refers to one of the programming languages listed below it is recommended that clients use those ids.
 
 Language | Identifier
 -------- | ----------
@@ -816,7 +816,7 @@ export type MarkupKind = 'plaintext' | 'markdown';
  * See https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting
  *
  * Here is an example how such a string can be constructed using JavaScript / TypeScript:
- * ```ts
+ * ```typescript
  * let markdown: MarkdownContent = {
  *  kind: MarkupKind.Markdown,
  *	value: [
@@ -851,7 +851,7 @@ This section documents the actual language server protocol. It uses the followin
 
 * a header describing the request
 * a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
-* a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
 #### Request, Notification and Response ordering
@@ -2179,7 +2179,7 @@ _Response_:
 
 > *Since version 3.6.0*
 
-Many tools support more than one root folder per workspace. Examples for this are VS Code's multi-root support, Atom's project folder support or Sublime's project support. If a client workspace consists of multiple roots then a server typically needs to know about this. The protocol up to now assumes one root folder which is announced to the server by the `rootUri` property of the `InitializeParams`. If the client supports workspace folders and announces them via the corrsponding `workspaceFolders` client capability, the `InitializeParams` contain an additional property `workspaceFolders` with the configured workspace folders when the server starts.
+Many tools support more than one root folder per workspace. Examples for this are VS Code's multi-root support, Atom's project folder support or Sublime's project support. If a client workspace consists of multiple roots then a server typically needs to know about this. The protocol up to now assumes one root folder which is announced to the server by the `rootUri` property of the `InitializeParams`. If the client supports workspace folders and announces them via the corresponding `workspaceFolders` client capability, the `InitializeParams` contain an additional property `workspaceFolders` with the configured workspace folders when the server starts.
 
 The `workspace/workspaceFolders` request is sent from the server to the client to fetch the current open list of workspace folders. Returns `null` in the response if only a single file is open in the tool. Returns an empty array if a workspace is open but no folders are configured.
 
@@ -2527,7 +2527,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a href="#textDocument_didOpen" name="textDocument_didOpen" class="anchor">DidOpenTextDocument Notification (:arrow_right:)</a>
 
-The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
+The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's Uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
 The `DidOpenTextDocumentParams` contain the language id the document is associated with. If the language Id of a document changes, the client needs to send a `textDocument/didClose` to the server followed by a `textDocument/didOpen` with the new language id if the server handles the new language id as well.
 
@@ -2709,7 +2709,7 @@ export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistr
 
 #### <a href="#textDocument_didClose" name="textDocument_didClose" class="anchor">DidCloseTextDocument Notification (:arrow_right:)</a>
 
-The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's uri points to (e.g. if the document's uri is a file uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
+The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's Uri points to (e.g. if the document's Uri is a file Uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
 _Notification_:
 * method: 'textDocument/didClose'
@@ -2758,7 +2758,7 @@ interface PublishDiagnosticsParams {
 
 #### <a href="#textDocument_completion" name="textDocument_completion" class="anchor">Completion Request (:leftwards_arrow_with_hook:)</a>
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a param. The returned completion item should have the documentation property filled in. The request can delay the computation of the `detail` and `documentation` properties. However, properties that are needed for the initial sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` response and must not be changed during resolve.
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. The request can delay the computation of the `detail` and `documentation` properties. However, properties that are needed for the initial sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` response and must not be changed during resolve.
 
 _Request_:
 * method: 'textDocument/completion'
@@ -3035,13 +3035,13 @@ Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet 
 
 The `body` of a snippet can use special constructs to control cursors and the text being inserted. The following are supported features and their syntaxes:
 
-##### Tabstops
+##### Tab stops
 
-With tabstops, you can make the editor cursor move inside a snippet. Use `$1`, `$2` to specify cursor locations. The number is the order in which tabstops will be visited, whereas `$0` denotes the final cursor position. Multiple tabstops are linked and updated in sync.
+With tab stops, you can make the editor cursor move inside a snippet. Use `$1`, `$2` to specify cursor locations. The number is the order in which tab stops will be visited, whereas `$0` denotes the final cursor position. Multiple tab stops are linked and updated in sync.
 
 ##### Placeholders
 
-Placeholders are tabstops with values, like `${1:foo}`. The placeholder text will be inserted and selected such that it can be easily changed. Placeholders can be nested, like `${1:another ${2:placeholder}}`.
+Placeholders are tab stops with values, like `${1:foo}`. The placeholder text will be inserted and selected such that it can be easily changed. Placeholders can be nested, like `${1:another ${2:placeholder}}`.
 
 ##### Choice
 
@@ -3286,7 +3286,7 @@ export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrati
 
 > *Since version 3.14.0*
 
-The goto declaration request is sent from the client to the server to resolve the declaration location of a symbol at a given text document position.
+The go to declaration request is sent from the client to the server to resolve the declaration location of a symbol at a given text document position.
 
 The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.declaration.linkSupport`.
 
@@ -3304,7 +3304,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 > *Since version 3.14.0*
 
-The goto definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
+The go to definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 `
 The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.definition.linkSupport`.
 
@@ -3322,7 +3322,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 > *Since version 3.6.0*
 
-The goto type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
+The go to type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
 
 The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.typeDefinition.linkSupport`.
 
@@ -3340,7 +3340,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 > *Since version 3.6.0*
 
-The goto implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
+The go to implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
 
 The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.implementation.typeDefinition.linkSupport`.
 
@@ -4347,7 +4347,7 @@ export interface FoldingRange {
 
 #### <a href="#version_3_6_0" name="version_3_6_0" class="anchor">3.6.0 (2/22/2018)</a>
 
-Merge the proposed protocol for workspace folders, configuration, goto type definition, goto implementation and document color provider into the main branch of the specification. For details see:
+Merge the proposed protocol for workspace folders, configuration, go to type definition, go to implementation and document color provider into the main branch of the specification. For details see:
 
 * [Get Workspace Folders](https://microsoft.github.io/language-server-protocol/specification#workspace_workspaceFolders)
 * [DidChangeWorkspaceFolders Notification](https://microsoft.github.io/language-server-protocol/specification#workspace_didChangeWorkspaceFolders)
@@ -4389,4 +4389,4 @@ Decided to skip this version to bring the protocol version number in sync the wi
 - servers can more dynamically react to client features. Capabilities can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This for example allows servers to react to settings or configuration changes without a restart.
 - add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
 - add support for `textDocument/documentLink` request.
-- add a `rootUri` property to the initializeParams in favour of the `rootPath` property.
+- add a `rootUri` property to the initializeParams in favor of the `rootPath` property.
