@@ -3256,8 +3256,9 @@ interface ParameterInformation {
 	 * The label of this parameter information.
 	 *
 	 * Either a string or an inclusive start and exclusive end offsets within its containing
-	 * signature label. (see SignatureInformation.label). *Note*: A label of type string must be
-	 * a substring of its containing signature label.
+	 * signature label. (see SignatureInformation.label). *Note*: a label of type string should
+	 * be a substring of its containing signature label. Its intended use case is to highlight
+	 * the parameter label part in the `SignatureInformation.label`.
 	 */
 	label: string | [number, number];
 
