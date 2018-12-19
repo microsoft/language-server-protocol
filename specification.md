@@ -4313,7 +4313,7 @@ export interface FoldingRange {
 Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
 - if a client sends a request to the server and the client state changes in a way that the result will be invalid it should cancel the server request and ignore the result. If necessary it can resend the request to receive an up to date result.
-- if a server detects a state change that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can then resend the request if appropriate.
+- if a server detects a state change that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if appropriate.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
