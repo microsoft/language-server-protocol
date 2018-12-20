@@ -1039,7 +1039,9 @@ export interface WorkspaceClientCapabilities {
 	 */
 	didChangeWatchedFiles?: {
 		/**
-		 * Did change watched files notification supports dynamic registration.
+		 * Did change watched files notification supports dynamic registration. Please note
+		 * that the current protocol doesn't support static configuration for file changes
+		 * from the server side.
 		 */
 		dynamicRegistration?: boolean;
 	};
