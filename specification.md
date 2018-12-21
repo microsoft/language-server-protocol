@@ -4325,7 +4325,7 @@ Language servers usually run in a separate process and client communicate with t
 
 * Add support for signature label offsets.
 * Add support for location links.
-* Add support for `textDocument/definition` request.
+* Add support for `textDocument/declaration` request.
 
 #### <a href="#version_3_13_0" name="version_3_13_0" class="anchor">3.13.0 (9/11/2018)</a>
 
