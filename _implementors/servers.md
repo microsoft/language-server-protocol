@@ -76,7 +76,9 @@ index: 1
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) |
 | Solidity | Kodebox | [Solidity language server](https://github.com/CodeChain-io/solidity-language-server) |
+| SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) |
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) |
+| Turtle | [Stardog Union](https://github.com/stardog-union) | [Turtle Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server) |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) |
 | TypeScript|[TypeFox](typefox.io)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) |
 | VHDL | [Olof Kraigher](https://github.com/kraigher) | [vhdl_ls](https://github.com/kraigher/rust_hdl) |
