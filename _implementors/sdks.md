@@ -15,6 +15,7 @@ index: 3
 | Java | Eclipse, TypeFox |  [Eclipse LSP4J](https://github.com/eclipse/lsp4j) |
 | Haxe | @nadako | [language-server-protocol-haxe](https://github.com/vshaxe/language-server-protocol-haxe)|
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server)|
+| Python | [Open Law Library](http://www.openlawlib.org/) | [pygls](https://github.com/openlawlibrary/pygls)|
 | Python | [Yeger](https://github.com/yeger00) | [pylspclient](https://github.com/yeger00/pylspclient)|
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
