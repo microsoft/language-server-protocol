@@ -17,6 +17,7 @@ index: 2
 | GNU Emacs | [João Távora](https://github.com/joaotavora) | [Eglot](https://github.com/joaotavora/eglot) |
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/langserv) |
 | [MS Monaco Editor](https://github.com/Microsoft/monaco-editor) | [TypeFox](https://github.com/TypeFox) | [monaco-languageclient](https://www.npmjs.com/package/monaco-languageclient) |
+| [Acme](https://en.wikipedia.org/wiki/Acme_(text_editor)) | [Fazlul Shahriar](https://github.com/fhs) | [acme-lsp](https://github.com/fhs/acme-lsp) |
 | [Atom](https://atom.io/) | [GitHub](https://github.com/) | [atom-languageclient](https://www.npmjs.com/package/atom-languageclient) |
 | [Theia](https://github.com/theia-ide/theia) | [theia-ide](https://github.com/theia-ide) | [theia](https://github.com/theia-ide/theia) |
 | vim8 and [neovim](https://neovim.io/) | [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
