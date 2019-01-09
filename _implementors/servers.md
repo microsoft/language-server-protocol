@@ -71,6 +71,7 @@ index: 1
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [language_server-ruby](https://github.com/mtsmfm/language_server-ruby) |
 | Ruby | [Rafał Łasocha](https://github.com/swistak35) | [orbacle](https://github.com/swistak35/orbacle) |
+| [Ruby](https://www.ruby-lang.org/en/) | [Kurt Werle](https://github.com/kwerle/) | [ruby_language_server](https://github.com/kwerle/ruby_language_server) |
 | Rust | [Jonathan Turner](https://github.com/jonathandturner) | [Rust Language Server](https://github.com/rust-lang-nursery/rls) |
 | SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) |
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) |
