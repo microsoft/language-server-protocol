@@ -22,4 +22,5 @@ index: 3
 | Haskell | [Luke Lau](https://github.com/Bubba) | [lsp-test](https://github.com/Bubba/lsp-test)|
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
+| Objective-C | [Christopher Atlan](https://twitter.com/catlan) | [LSPKit](https://github.com/catlan/LSPKit)|
 {: .table .table-bordered .table-responsive}
