@@ -2206,8 +2206,8 @@ export interface WorkspaceFolder {
 	uri: string;
 
 	/**
-	 * The name of the workspace folder. Defaults to the
-	 * uri's basename.
+	 * The name of the workspace folder. Used to refer to this
+	 * workspace folder in the user interface.
 	 */
 	name: string;
 }
@@ -2372,7 +2372,7 @@ _Registration Options_: `DidChangeWatchedFilesRegistrationOptions` defined as fo
 
 ```typescript
 /**
- * Describe options to be used when registering for text document change events.
+ * Describe options to be used when registering for file system change events.
  */
 export interface DidChangeWatchedFilesRegistrationOptions {
 	/**
