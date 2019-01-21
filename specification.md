@@ -106,10 +106,10 @@ interface ResponseMessage extends Message {
 	id: number | string | null;
 
 	/**
-	 * The result of a request. This can be omitted in
-	 * the case of an error.
+	 * The result of a request. This member is REQUIRED on success.
+	 * This member MUST NOT exist if there was an error invoking the method.
 	 */
-	result?: any;
+	result?: string | number | boolean | object;
 
 	/**
 	 * The error object in case a request fails.
