@@ -51,6 +51,13 @@ defaults:
     layout: implementors
     sectionid: implementors
 
+- scope:
+    path: _overviews
+    type: overviews
+  values:
+    layout: overviews
+    sectionid: overviews
+
 collections:
   docs:
     permalink: /:collection/:path/
@@ -61,4 +68,6 @@ collections:
   implementors:
     permalink: /:collection/:path/
     output: true
-  
+  overviews:
+    permalink: /:collection/:path/
+    output: true

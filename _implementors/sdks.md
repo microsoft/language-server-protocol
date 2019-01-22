@@ -1,9 +1,10 @@
 ---
-layout: implementors
 title:  "SDKs for the LSP"
 shortTitle: "SDKs"
 author: Microsoft
 index: 3
+layout: implementors
+sectionid: implementors
 ---
 
 *If you are missing a SDK please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/sdks.md)*

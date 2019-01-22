@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<div class="container">
+    <div class="row single-page">
+        <div class="col-lg-2 d-none d-lg-block lsp-sidebar">
+            <div class="card">
+                <ul class="nav flex-column list-unstyled">
+                    {% assign sorted = site.overviews | sort: 'index' %}
+                    {% for post in sorted %}
+                    <li {% if page.title==post.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                        <a class="nav-link" href="{{ post.url | prepend: site.baseurl }}">
+                            {{ post.shortTitle }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-lg-8">
+            <nav id="small-nav" class="docs-nav d-lg-none">
+                <h4>Topics</h4>
+                <select id="small-nav-dropdown">
+                    {% assign sorted = site.overviews | sort: 'index' %}
+                    {% for post in sorted %}
+                    <option value="{{ post.url | prepend: site.baseurl }}" {% if page.title==post.title %}selected{% endif %} >{{ post.shortTitle }}</option>
+                    {% endfor %}
+                </select>
+            </nav>
+
+            <h1>{{ page.title }}</h1>
+            <br>
+            <div  id="markdown-content-container">{{ content }}</div>
+        </div>
+
+        <div class="col-lg-2 d-none d-xl-block">
+
+        </div>
+    </div>
+</div>

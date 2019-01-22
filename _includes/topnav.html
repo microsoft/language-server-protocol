@@ -9,13 +9,14 @@
         </button>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
-            {% assign sorted = site.implementors | sort: 'index' %}
+            {% assign overviews = site.overviews | sort: 'index' %}
+            {% assign implementors = site.implementors | sort: 'index' %}
             <ul class="navbar-nav ml-auto">
-                <li {% if page.sectionid=='howItWorks' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href='{{ "/overview" | prepend: site.baseurl }}'>Overview</a>
+                <li {% if page.sectionid=='overviews' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href="{{ overviews.first.url | prepend: site.baseurl }}">Overview</a>
                 </li>
                 <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
+                    <a class="nav-link" href="{{ implementors.first.url | prepend: site.baseurl }}">Implementations</a>
                 </li>
                 <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>

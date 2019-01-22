@@ -1,9 +1,10 @@
 ---
-layout: implementors
 title:  "Tools supporting the LSP"
 shortTitle: "Supporting Tools"
 author: Microsoft
 index: 2
+layout: implementors
+sectionid: implementors
 ---
 
 *If you are missing a development tool please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/tools.md)*

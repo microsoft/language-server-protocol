@@ -1,9 +1,10 @@
 ---
-layout: implementors
 title:  "Language Servers"
 shortTitle: "Language Servers"
 author: Microsoft
 index: 1
+layout: implementors
+sectionid: implementors
 ---
 
 *If you are missing a server please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/servers.md)*
