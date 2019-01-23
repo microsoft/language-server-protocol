@@ -5,7 +5,7 @@ sectionid: specification
 toc: true
 ---
 # Language Server Protocol Specification
-
+<br>
 This document describes version 3.x of the language server protocol. An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
