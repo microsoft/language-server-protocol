@@ -63,7 +63,7 @@ Assume there is a file `/Users/dirkb/sample.ts` and we want to store the folding
 
 The corresponding graph looks like this:
 
-<img src="./img/hoverResult.png" class="img-fluid" alt="language server protocol">
+<img src="./img/hoverResult.png" class="img-fluid" alt="hover result">
 
 For requests that take a position as an additional input, we need to store the position as well. Usually LSP requests return the same result for positions that point to the same word / identifier in a document. Take the following TypeScript example:
 
@@ -99,8 +99,9 @@ How this works in detail is documented in the [LSIF specification](https://githu
 
 ## How to get started
 
-If you want to get started with LSIF you can have a look at the following two repositories:
+If you want to get started with LSIF you can have a look at the following resources:
 
+- The actual [LSIF specification](https://github.com/Microsoft/language-server-protocol/blob/master/indexFormat/specification.md)
 - [Index for TypeScript](https://github.com/Microsoft/lsif-typescript): provides an index for TypeScript. The corresponding readme has steps how to use it.
 - [VS Code extension for LSIF](https://github.com/Microsoft/vscode-lsif-extension): an extension for VS Code to provide language comprehension feature from a LSIF JSON dump.
 
