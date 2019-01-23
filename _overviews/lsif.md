@@ -36,21 +36,21 @@ request('file:///Users/dirkb/sample/test.ts', 'textDocument/foldingRange') -> Fo
 request('file:///Users/dirkb/sample/test.ts', { line: 10, character: 17 }, 'textDocument/hover') -> Hover;
 ```
 
-So the LSIF needs to emit for document:
+So the LSIF needs to emit for documents:
 - the request method
 - the LSP results for the [document, method] tuple.
 
-And for every range in a document that can provide an LSP request result
+And for every range in a document that can provide a LSP request result:
 - the request method
 - the range information
 - the LSP result for the [document, range, method] tuple.
 
-Besides these domain requirements we think that the following technical once are important as well:
+Besides these domain requirements we believe that the following technical once are important as well:
 
 - it should be possible to emit data as soon as it is available to allow streaming rather than large memory requirements. For example, emitting data for a document should be done for each file as parsing progresses.
 - it should be easy to add additional requests later on.
 
-We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are documents, ranges or request results. This data could then be stored as JSON or read into a database.
+We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are documents, ranges or request results. This data could then be stored as JSON or read into a database. Please note that this doesn't imply the use of a graph database. For a prove of concept we stored the index in a SQL database.
 
 Assume there is a file `/Users/dirkb/sample.ts` and we want to store the folding range information with it then the indexer emits two vertices: one representing the document with its URI `file:///Users/dirkb/sample.ts` and the other representing the folding result. In addition, an edge would be emitted representing the `textDocument/foldingRange` request.
 
@@ -60,6 +60,10 @@ Assume there is a file `/Users/dirkb/sample.ts` and we want to store the folding
 { id: 2, type: "vertex", label: "foldingRangeResult", result: [ { ... }, { ... }, ... ] }
 { id: 3, type: "edge", label: "textDocument/foldingRange", outV: 1, inV: 2 }
 ```
+
+The corresponding graph looks like this:
+
+<img src="./img/hoverResult.png" class="img-fluid" alt="language server protocol">
 
 For requests that take a position as an additional input, we need to store the position as well. Usually LSP requests return the same result for positions that point to the same word / identifier in a document. Take the following TypeScript example:
 
