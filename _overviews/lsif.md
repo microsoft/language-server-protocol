@@ -13,7 +13,7 @@ The Language Server Protocol provides an easy way to implement feature like auto
 There are plenty of tasks in every programmers daily coding live where having code comprehension support is enough. Typical examples are:
 
 - browsing an existing version of a code in a repository (e.g. on GitHub) without requiring to clone and check it out locally.
-- browsing a pull request without being limited to the changed files or being forced to check the pull request out locally. This feature got demoed on [Connect(); 2018](https://news.microsoft.com/connect-2018/) and is powered by LSIF. The [blog post](https://code.visualstudio.com/blogs/2018/12/04/rich-navigation) contains the demo.
+- browsing a pull request without being limited to the changed files or being forced to check out the pull request locally. This feature got demoed on [Connect(); 2018](https://news.microsoft.com/connect-2018/) and is powered by LSIF. The [blog post](https://code.visualstudio.com/blogs/2018/12/04/rich-navigation) contains the demo.
 - browsing dependencies of a project. Let me explain this in more detail: consider the case where a TypeScript project depends on a npm library that is also written in TypeScript. The npm module is usually only bundling the JavaScript code which even might be minified. It would be helpful if my programming tool allowed me to browse and comprehend the TypeScript source code in place without cloning it locally.
 
 Browsing the source code of project dependencies is supported in programming languages where their library concept supports attaching source code (like Java or C#). However in most cases the tools treat these attached sources as normal source code and spend CPU and memory to provide the necessary comprehension features.
