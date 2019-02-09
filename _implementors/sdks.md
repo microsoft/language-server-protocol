@@ -23,4 +23,5 @@ index: 3
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
 | Objective-C | [Christopher Atlan](https://twitter.com/catlan) | [LSPKit](https://github.com/catlan/LSPKit)|
+| Swift | [Chime](https://twitter.com/chimehq) | [SwiftLSPClient](https://github.com/chimehq/SwiftLSPClient)|
 {: .table .table-bordered .table-responsive}
