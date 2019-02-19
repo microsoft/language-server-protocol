@@ -890,6 +890,26 @@ Piping this information through the npm tool will generate the following informa
 
 which made the moniker specific to the npm `mobx` package.
 
+## Meta Data Vertex
+
+To support versioning the LSIF defines a meta data vertex as follows:
+
+```typescript
+export interface MetaData {
+
+	/**
+	 * The label property.
+	 */
+	label: 'metaData';
+
+	/**
+	 * The version of the LSIF format using semver notation. See https://semver.org/
+	 */
+	version: string;
+}
+```
+
+
 ## The TypeScript and NPM tools
 
 We have implemented a TypeScript indexer and a npm moniker linker. We plan to open source these tools in the next couple of days and will announce them via a GitHub issue in this repository.

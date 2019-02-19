@@ -265,7 +265,7 @@ export interface MetaData extends V {
 	label: VertexLabels.metaData;
 
 	/**
-	 * The dump version
+	 * The version of the LSIF format using semver notation. See https://semver.org/
 	 */
 	version: string;
 
