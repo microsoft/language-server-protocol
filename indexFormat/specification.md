@@ -279,7 +279,7 @@ The relevant JSON output looks like this:
 
 ```typescript
 // The bar declaration
-{ id: 4, type: "vertex", label: "resultSet", key:"bar" }
+{ id: 4, type: "vertex", label: "resultSet" }
 
 // The reference result
 { id: 5, type: "vertex", label: "referenceResult"}
@@ -352,7 +352,7 @@ The output looks like this:
 
 ```typescript
 // The declaration of I#foo
-{ id: 15, type: "vertex", label: "resultSet", key: "I.foo" }
+{ id: 15, type: "vertex", label: "resultSet" }
 // The shared reference result
 { id: 16, type: "vertex", label: "referenceResult" }
 { id: 17, type: "edge", label: "textDocument/references", outV: 15, inV: 16 }
@@ -361,14 +361,14 @@ The output looks like this:
 { id: 21, type: "edge", label: "item", property: "definition", outV: 16, inV: 18 }
 
 // The declaration of A#foo. Observe it reuses the reference result with id 16
-{ id: 41, type: "vertex", label: "resultSet", key: "A.foo" }
+{ id: 41, type: "vertex", label: "resultSet" }
 { id: 42, type: "edge", label: "textDocument/references", outV: 41, inV: 16 }
 { id: 43, type: "vertex", label: "range", start: { line: 5, character: 2 }, end: { line: 5, character: 5 } }
 { id: 45, type: "edge", label: "refersTo", outV: 43, inV: 41 }
 { id: 46, type: "edge", label: "item", property: "definition", outV: 16, inV: 43 }
 
 // The declaration of B#foo. Observe it reuses the reference result with id id 16
-{ id: 66, type: "vertex", label: "resultSet", key: "B.foo" }
+{ id: 66, type: "vertex", label: "resultSet" }
 { id: 67, type: "edge", label: "textDocument/references", outV: 66, inV: 16 }
 { id: 68, type: "vertex", label: "range", start: { line: 10, character: 2 }, end: { line: 10, character: 5 } }
 { id: 70, type: "edge", label: "refersTo", outV: 68, inV: 66 }
@@ -417,17 +417,17 @@ In the above example, there will be three reference results
 ```typescript
 
 // Declaration of I#foo
-{ id: 15, type: "vertex", label: "resultSet", key:"I.foo" }
+{ id: 15, type: "vertex", label: "resultSet" }
 { id: 16, type: "vertex", label: "referenceResult" }
 { id: 17, type: "edge", label: "textDocument/references", outV: 15, inV: 16 }
 
 // Declaration of II#foo
-{ id: 37, type: "vertex", label: "resultSet", key:"II.foo "}
+{ id: 37, type: "vertex", label: "resultSet" }
 { id: 38, type: "vertex", label: "referenceResult"}
 { id: 39, type: "edge", label: "textDocument/references", outV: 37, inV: 38 }
 
 // Declaration of B#foo
-{ id: 67, type: "vertex", label: "resultSet", key:"B.foo" }
+{ id: 67, type: "vertex", label: "resultSet" }
 // The combined reference result
 { id: 68, type: "vertex", label: "referenceResult", referenceResults: [ 16,38 ] }
 // Link the reference result to the result set of B#foo
@@ -501,7 +501,7 @@ The relevant emitted vertices and edges looks like this:
 
 ```typescript
 // The declaration of i
-{ id: 26, type: "vertex", label: "resultSet", key: "i"}
+{ id: 26, type: "vertex", label: "resultSet" }
 // The type definition result
 { id: 37, type: "vertex", label: "typeDefinitionResult", result: 7 }
 // Hook the result to the declaration
@@ -679,7 +679,7 @@ Will look like this:
 
 ```typescript
 { id: 2, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
-{ id: 4, type: "vertex", label: "resultSet", key: "hello" }
+{ id: 4, type: "vertex", label: "resultSet" }
 { id: 7, type: "vertex", label: "range",
   start: { line: 0, character: 9 }, end: { line: 0, character: 14 },
   tag: { type: "definition", text: "hello", kind: 12, fullRange: { start: { line: 0, character: 0 }, end: { line: 1, character: 1 }}}
