@@ -585,7 +585,7 @@ export interface DeleteFile {
 
 #### WorkspaceEdit
 
-A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChange`s are present, the latter are preferred over `changes`.
+A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChanges` are present, the latter are preferred over `changes`.
 
 ```typescript
 export interface WorkspaceEdit {
