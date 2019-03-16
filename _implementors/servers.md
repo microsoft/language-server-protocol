@@ -30,6 +30,7 @@ index: 1
 | [D](https://dlang.org) | [Laurent Tréguier](https://github.com/LaurentTreguier) | [D Language Server](https://github.com/d-language-server/dls) | D |
 | Dart | [Nate Bosch (@natebosch)](https://github.com/natebosch) | [Dart Language Server](https://github.com/natebosch/dart_language_server) | Dart |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) | TypeScript |
+| [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
 | Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) | Erlang |
 | Elixir| [Jake Becker](https://github.com/JakeBecker) | [elixir-ls](https://github.com/JakeBecker/elixir-ls) | Elixir |
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
