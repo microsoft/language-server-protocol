@@ -2973,7 +2973,7 @@ interface CompletionItem {
 	command?: Command;
 
 	/**
-	 * An data entry field that is preserved on a completion item between
+	 * A data entry field that is preserved on a completion item between
 	 * a completion and a completion resolve request.
 	 */
 	data?: any
