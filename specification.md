@@ -237,7 +237,7 @@ export const EOL: string[] = ['\n', '\r\n', '\r'];
 
 #### Position
 
-Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in a editor.
+Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in a editor. Special values like for example `-1` to denote the end of a line are not supported.
 
 ```typescript
 interface Position {
