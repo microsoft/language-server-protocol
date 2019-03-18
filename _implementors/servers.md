@@ -28,6 +28,7 @@ index: 1
 | [Crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [scry](https://github.com/kofno/scry) | Crystal |
 | [D](https://dlang.org) | [Jan Jurzitza](https://github.com/WebFreak001) | [serve-d](https://github.com/Pure-D/serve-d) | D |
 | [D](https://dlang.org) | [Laurent Tréguier](https://github.com/LaurentTreguier) | [D Language Server](https://github.com/d-language-server/dls) | D |
+| Dart | [Danny Tuppeny (@DanTup)](https://github.com/DanTup) | [Dart SDK](https://github.com/dart-lang/sdk) | Dart |
 | Dart | [Nate Bosch (@natebosch)](https://github.com/natebosch) | [Dart Language Server](https://github.com/natebosch/dart_language_server) | Dart |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) | TypeScript |
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
