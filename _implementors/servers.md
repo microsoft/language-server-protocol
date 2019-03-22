@@ -75,6 +75,7 @@ index: 1
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
+| Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) | Ruby |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [language_server-ruby](https://github.com/mtsmfm/language_server-ruby) | Ruby |
 | Ruby | [Rafał Łasocha](https://github.com/swistak35) | [orbacle](https://github.com/swistak35/orbacle) | Ruby |
