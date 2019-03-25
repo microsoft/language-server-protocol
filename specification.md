@@ -1866,6 +1866,12 @@ interface ServerCapabilities {
 	 */
 	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
 	/**
+	 * The server provides go to declaration support.
+	 *
+	 * Since 3.14.0
+	 */
+	declarationProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	/**
 	 * The server provides execute command support.
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
