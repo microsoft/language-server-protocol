@@ -30,4 +30,5 @@ index: 2
 | Oni | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 | [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
 | [Sublime Text](https://www.sublimetext.com/) | [Tom van Ommeren](https://github.com/tomv564) | [lsp](https://github.com/tomv564/LSP) |
+| [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
 {: .table .table-bordered .table-responsive}
