@@ -1923,7 +1923,7 @@ interface InitializedParams {
 
 #### <a href="#shutdown" name="shutdown" class="anchor">Shutdown Request (:leftwards_arrow_with_hook:)</a>
 
-The shutdown request is sent from the client to the server. It asks the server to shut down, but to not exit (otherwise the response might not be delivered correctly to the client). There is a separate exit notification that asks the server to exit.
+The shutdown request is sent from the client to the server. It asks the server to shut down, but to not exit (otherwise the response might not be delivered correctly to the client). There is a separate exit notification that asks the server to exit. Clients must not sent any notifications other than `exit` or requests to a server to which they have sent a shutdown requests. If a server receives requests after a shutdown request those requests should be errored with `InvalidRequest`.
 
 _Request_:
 * method: 'shutdown'
