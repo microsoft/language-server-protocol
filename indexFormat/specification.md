@@ -795,7 +795,7 @@ It can be valuable to embed the content of a document or project file into the d
 
 ## Project exports and external imports
 
-One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **A** references a library **B**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional export results and external import results. An export result describes what a document exports so that it is possible to reference from other projects. It also describes what a project imports from an external library. Let's first look at the export case.
+One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **A** references a library **B**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional monikers which can be linked to ranges using a corresponding edge. The monikers can be used to describe what a project exports and what it imports. Let's first look at the export case.
 
 Consider the following TypeScript file called `index.ts`:
 
@@ -818,17 +818,17 @@ export class Emitter {
 { id: 8, type: "vertex", label: "range", start:{ line: 0, character: 16 }, end: { line: 0, character: 20 }, tag: { type: "definition", text: "func", kind: 12, fullRange: { start: { line: 0, character: 0 }, end: { line: 1, character: 1 } } } }
 { id: 19, type: "vertex", label: "range", start:{ line: 3, character: 13 }, end: { line: 3, character: 20 }, tag: { type: "definition", text: "Emitter", kind: 5, fullRange: { start: { line: 3, character: 0 }, end: { line: 9, character: 1 } } } }
 { id: 40, type: "vertex", label: "range", start:{ line: 7, character: 8 }, end: { line: 7, character: 12 }, tag: { type: "definition", text: "emit", kind: 6, fullRange: { start: { line: 7, character: 1 }, end: { line: 8, character: 2 } } } }
-{ id: 53, type: "vertex", label: "exportResult", result: [
-  { moniker: "func", rangeIds: [8] },
-  { moniker: "Emitter", rangeIds: [19] },
-  { moniker: "Emitter.emit", rangeIds:[40] }
-]}
-{ id: 54, type: "edge", label: "exports", outV: 3, inV: 53 }
+{ id: 48, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:func" }
+{ id: 49, type: "edge", label: "moniker", outV: 8, inV: 48 }
+{ id: 50, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter" }
+{ id: 51, type: "edge", label: "moniker", outV: 19, inV: 50 }
+{ id: 58, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit" }
+{ id: 59, type: "edge", label: "moniker", outV: 40, inV: 58 }
 ```
 
-This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is relative to the document. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. Its content is up to the programming language and is not part of the LSIF specification.
+This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has two properties: a `scheme` to indicate how the `identifiers` is to be interpreted. And the `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 
-Also note that the `doEmit` method is not part of the export result since the method is private.
+Also note that the `doEmit` method has no moniker associated since the method is private.
 
 How these exported elements are visible in other projects in most programming languages depends on how many files are packaged into a library or program. In TypeScript, the standard package manager is npm.
 
@@ -845,23 +845,17 @@ Consider that the following `package.json` file exists:
 }
 ```
 
-The export result with that information can then be transformed to:
+These monikers can be translated into monikers that are `npm` dependent. They will look like this then:
 
 ```typescript
-{ id: 53, type: "vertex", label: "exportResult", result: [
-  { moniker: "npm:lsif-ts-sample:func", rangeIds: [8] },
-  { moniker: "npm:lsif-ts-sample:Emitter", rangeIds: [19] },
-  { moniker: "npm:lsif-ts-sample:Emitter.emit", rangeIds:[40] }
-]}
+{ id: 48, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func" }
+{ id: 50, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter" }
+{ id: 58, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.emit" }
 ```
-
-which makes the monikers npm dependent and they contain the npm package name.
 
 For the LSIF, we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
 
-To do this transformation correctly, the npm tools needs to know about the `outDir` and `rootDir` of the TypeScript compiler. The index format therefore allows storing this additional data with the project data in a generic `data` slot.
-
-Reporting importing external symbols is done using the same approach. The LSIF defines an external import result. Consider the following typescript example:
+Reporting importing external symbols is done using the same approach. The LSIF emits monikers of kind `import`. Consider the following typescript example:
 
 ```typescript
 import * as mobx from 'mobx';
@@ -872,23 +866,24 @@ let map: mobx.ObservableMap = new mobx.ObservableMap();
 where `mobx` is the [npm mobx package](https://www.npmjs.com/package/mobx). Running the tsc index tools produces:
 
 ```typescript
-{ id: 76, type: "vertex", label: "document", uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/types/observablemap.d.ts", languageId: "typescript" }
-{ id: 77, type: "vertex", label: "externalImportResult" }
-{ id: 61, type: "edge", label: "imports", outV: 59, inV: 60 }
-{ id: 80, type: "vertex", label: "range", start: { line: 30, character: 21 }, end: { line: 30, character: 34 }, tag: { type: "definition", text: "ObservableMap", kind: 5, fullRange: {start: { line: 30, character:0 }, end: { line: 81, character:1 } } } }
-{ id: 88, type: "vertex", label: "externalImportItem", moniker: "ObservableMap", rangeIds:[80] }
-{ id: 89, type: "edge", label: "item", outV: 77, inV: 88 }
+{ id: 8, type: "vertex", label: "document", uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/mobx.d.ts", languageId: "typescript" }
+{ id: 122, type: "vertex", label: "range", start: { line: 17, character: 538 }, end: { line: 17, character: 551 }, tag: { type: "definition", text: "ObservableMap", kind:7, fullRange: {start: { line: 17, character: 538 }, end: { line: 17, character: 551 } } } }
+{ id: 123, type: "edge", label: "contains", outV: 8, inV: 122 }
+{ id: 124, type: "vertex", label: "moniker", kind: "import", scheme: "tsc", identifier: "node_modules/mobx/lib/mobx:ObservableMap" }
+{ id: 126, type: "edge", label: "moniker", outV: 122, inV: 124 }
 ```
 
-Two things to note here: First, TypeScript uses declarations files for externally imported symbols. That has the nice effect that the moniker information can be attached to that file. In other languages, the information might be attached to the file actually referencing the symbol. Or a virtual document for the referenced item is generated. Second, the tool only generates this information for symbols actually referenced, not for all available symbols. This is why the external import items are collected using a lazy item edge.
+Two things to note here: First, TypeScript uses declarations files for externally imported symbols. That has the nice effect that the moniker information can be attached to the declaration ranges in these files. In other languages, the information might be attached to the file actually referencing the symbol. Or a virtual document for the referenced item is generated. Second, the tool only generates this information for symbols actually referenced, not for all available symbols.
 
 Piping this information through the npm tool will generate the following information:
 
 ```typescript
-{ id: 88, type: "vertex", label: "externalImportItem", moniker: "npm:mobx:ObservableMap", rangeIds:[80] }
+{ id: 9, type: "vertex", label: "packageInformation", name: "mobx", manager: "npm", version: "5.6.0", uri: "file:///Users/dirkb/samples/node_modules/mobx/package.json"}
+{ id: 124, type: "vertex", label: "moniker", kind: "import", scheme: "tsc", identifier: "mobx::ObservableMap" }
+{ id: 125, type: "edge", label: "packageInformation", outV: 124, inV:9 }
 ```
 
-which made the moniker specific to the npm `mobx` package.
+which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted.
 
 ## Meta Data Vertex
 
@@ -903,7 +898,9 @@ export interface MetaData {
 	label: 'metaData';
 
 	/**
-	 * The version of the LSIF format using semver notation. See https://semver.org/
+	 * The version of the LSIF format using semver notation. See https://semver.org/. Please note
+   * the version numbers starting with 0 don't adhere to semver and adopters have to assume
+   * the each new version is breaking.
 	 */
 	version: string;
 }
@@ -912,7 +909,7 @@ export interface MetaData {
 
 ## The TypeScript and NPM tools
 
-We have implemented a TypeScript indexer and a npm moniker linker. We plan to open source these tools in the next couple of days and will announce them via a GitHub issue in this repository.
+We have implemented a [TypeScript indexer](https://github.com/Microsoft/lsif-typescript) and a [npm moniker linker(https://github.com/Microsoft/lsif-typescript).
 
 ## Appendix
 
