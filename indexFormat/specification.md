@@ -2,6 +2,15 @@
 
 The purpose of the Language Server Index Format (LSIF) is it to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
 
+### ChangeLog
+
+#### Version 0.2.2
+
+- removed export and import result and replaced it with monikers linked to the definition / declaration ranges.
+- added a package information vertex to be linked to monikers that are provided through a package.
+- make results in `DefitionResult`, `DeclarationResult` and `TypeDefinitionResult` and array only.
+- make results in `DefitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using and item edge.
+
 ### Motivation
 
 Principal design goals:
@@ -172,7 +181,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 { id: 7, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
 
 // The definition result linked to the bar result set
-{ id: 13, type: "vertex", label: "definitionResult", result: 7 }
+{ id: 13, type: "vertex", label: "definitionResult", result: [7] }
 { id: 14, type: "edge", label: "textDocument/definition", outV: 4, inV: 13 }
 
 // The bar reference
@@ -186,7 +195,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 In the example above, the definition result has only one value: the id `7`. We could have instead emitted an edge directly pointing from id `14` to id `7`. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
-- The result can actually be an array as well in languages that support type merging. The LSP result for the `textDocument/definition` request is defined as `Location | Location[]` as well.
+- The result is actually an array to support languages that have type merging. The LSP result for the `textDocument/definition` request is defined as `Location | Location[]` but for easier handling the LSIF only supports arrays.
 
 Consider the following TypeScript example:
 
@@ -221,7 +230,7 @@ export interface DefinitionResult {
   /**
    * The actual result.
    */
-  result: DefinitionResultType;
+  result: (RangeId | lsp.Location)[];
 }
 ```
 
@@ -483,7 +492,7 @@ interface TypeDefinitionResult {
 
   label: `typeDefinition`
 
-  result: (RangeId | lsp.Location)[];
+  result?: (RangeId | lsp.Location)[];
 }
 ```
 
@@ -547,7 +556,7 @@ The corresponding `FoldingRangeResult` is defined as follows:
 export interface FoldingRangeResult {
   label: 'foldingRangeResult';
 
-  result: lsp.FoldingRange[];
+  result?: lsp.FoldingRange[];
 }
 ```
 
@@ -559,7 +568,7 @@ Again, for document links, we define a result type and a corresponding edge to l
 export interface DocumentLinkResult {
   label: 'documentLinkResult';
 
-  result: lsp.DocumentLink[];
+  result?: lsp.DocumentLink[];
 }
 ```
 
