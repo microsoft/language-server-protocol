@@ -798,9 +798,9 @@ These properties on the `project` vertex, if defined, should have this semantic:
 
 The project vertex may include additional properties where they are applicable and interesting for a given language.
 
-## Embedding content
+## Embedding contents
 
-It can be valuable to embed the content of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
+It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
 
 ## Project exports and external imports
 
