@@ -490,7 +490,7 @@ The corresponding `TypeDefinitionResult` looks like this:
 ```typescript
 interface TypeDefinitionResult {
 
-  label: `typeDefinition`
+  label: `typeDefinitionResult`
 
   result?: (RangeId | lsp.Location)[];
 }
