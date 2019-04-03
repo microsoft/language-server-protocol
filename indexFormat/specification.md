@@ -784,7 +784,7 @@ Since diagnostics are not very common in dumps, no effort has been made to reuse
 Usually language servers operate in some sort of project context. In TypeScript, a project is defined using a `tsconfig.json` file. C# and C++ have their own means. The project file usually contains information about compile options and other parameters. Having these in the dump can be valuable. The LSIF therefore defines a project vertex. In addition, all documents that belong to that project are connected to the project using a `contains` edge. If there was a `tsconfig.json` in the previous examples, the first emitted edges and vertices would look like this:
 
 ```typescript
-{ id: 1, type: "vertex", label: "project", projectFile: "file:///Users/dirkb/tsconfig.json", version: "3.1.1", languageId: "typescript"}
+{ id: 1, type: "vertex", label: "project", resource: "file:///Users/dirkb/tsconfig.json", kind: "typescript"}
 { id: 2, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
 { id: 3, type: "edge", label: "contains", outV: 1, inV: 2 }
 ```
@@ -793,10 +793,10 @@ These properties on the `project` vertex, if defined, should have this semantic:
 
 | Name | Meaning |
 |--|--
-| `projectFile` | An absolute URI to the project file
-| `languageId` | the identifier for the language, as enumerated in the LSP spec under the `TextDocumentItem` section.
-
-The project vertex may include additional properties where they are applicable and interesting for a given language.
+| `resource` | An absolute URI to the project file.
+| `kind` | The identifier for the language, as enumerated in the LSP spec under the `TextDocumentItem` section.
+| `data` | Project related data, specific to the programming language.
+| `contents` | The content of the project file, `base64` encoded.
 
 ## Embedding contents
 
