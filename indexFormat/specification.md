@@ -2,14 +2,14 @@
 
 The purpose of the Language Server Index Format (LSIF) is it to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
 
-### ChangeLog
+### Changelog
 
 #### Version 0.2.2
 
-- removed export and import result and replaced it with monikers linked to the definition / declaration ranges.
-- added a package information vertex to be linked to monikers that are provided through a package.
-- make results in `DefitionResult`, `DeclarationResult` and `TypeDefinitionResult` and array only.
-- make results in `DefitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using and item edge.
+- Removed export and import result and replaced it with monikers linked to the definition / declaration ranges.
+- Added a package information vertex to be linked to monikers that are provided through a package.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` and array only.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using and item edge.
 
 ### Motivation
 
@@ -26,7 +26,7 @@ LSP requests that are good candidates to be supported in LSIF are:
 - [`textDocument/foldingRange`](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange)
 - [`textDocument/documentLink`](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentLink)
 - [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specification#textDocument_definition)
-- `textDocument/declaration`   // This is a recent addition to the LSP.
+- [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specification#textDocument_declaration)
 - [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)
 - [`textDocument/hover`](https://microsoft.github.io/language-server-protocol/specification#textDocument_hover)
 - [`textDocument/references`](https://microsoft.github.io/language-server-protocol/specification#textDocument_references)
@@ -915,14 +915,11 @@ export interface MetaData {
 }
 ```
 
+## Tools
 
-## The TypeScript and NPM tools
-
-We have implemented a [TypeScript indexer](https://github.com/Microsoft/lsif-typescript) and a [npm moniker linker(https://github.com/Microsoft/lsif-typescript).
-
-## Appendix
-
-A TypeScript file using interfaces to define the emitted JSON structures is [here](./protocol.ts).
+* [`lsif-protocol`](https://github.com/Microsoft/lsif-node/tree/master/protocol): Protocol defined as TypeScript interfaces
+* [`lsif-tsc`](https://github.com/Microsoft/lsif-node/tree/master/tsc): LSIF indexer for TypeScript
+* [`lsif-npm`](https://github.com/Microsoft/lsif-node/tree/master/npm): Linker for NPM monikers
 
 ## Open Questions
 
