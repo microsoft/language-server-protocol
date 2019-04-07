@@ -25,6 +25,7 @@ index: 2
 | vim8 and neovim | [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
 | vim8 and neovim | [Qiming Zhao](https://github.com/chemzqm) | [coc.nvim](https://github.com/neoclide/coc.nvim) |
 | vim8 and neovim| [Nate Bosch](https://github.com/natebosch) | [vim-lsc](https://github.com/natebosch/vim-lsc) |
+| vim8 and neovim| [w0rp](https://github.com/w0rp) | [ALE (Asynchronous Lint Engine) ](https://github.com/w0rp/ale) |
 | Visual Studio | [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
 | Visual Studio | Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 | Oni | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
