@@ -50,6 +50,19 @@ With the [LSIF extension for VS Code](https://github.com/Microsoft/vscode-lsif-e
 
 We have seen the following patterns work well in existing implementations.
 
+### Method checklist
+
+For an ideal integration with Rich Code Navigation, the following methods are required. For some languages, methods such as `textDocument/declaration` might not be applicable.
+
+- [ ] `textDocument/hover`
+- [ ] `textDocument/definition`
+- [ ] `textDocument/references`
+- [ ] `textDocument/implementation`
+- [ ] `textDocument/declaration`
+- [ ] `textDocument/typeDefinition`
+- [ ] `textDocument/diagnostic`
+- [ ] Cross-repo navigation for dependencies
+
 ### Cross-platform
 
 If the LSIF exporter does not work across platforms (Windows, Linux, Mac), platform dependencies should be called out.
