@@ -17,7 +17,7 @@ With Rich Code Navigation, users use navigate features (peek definition, find al
 | Language | Repository |
 |--|--|
 | TypeScript/JavaScript | [lsif-node](https://github.com/Microsoft/lsif-node) |
-| Java | |
+| Java | [lsif-java](https://github.com/Microsoft/lsif-java) |
 | C# | |
 
 > Are we missing an implementation? File a new issue on GitHub to add it here.
@@ -46,7 +46,7 @@ The [`lsif-util`](https://github.com/jumattos/lsif-util) tool can validate your 
 
 With the [LSIF extension for VS Code](https://github.com/Microsoft/vscode-lsif-extension), you can dogfood an LSIF index to power navigation inside VS Code.
 
-## Recommended patterns
+## Recommended checklist
 
 We have seen the following patterns work well in existing implementations.
 
@@ -67,20 +67,31 @@ For an ideal integration with Rich Code Navigation, the following methods are re
 
 If the LSIF exporter does not work across platforms (Windows, Linux, Mac), platform dependencies should be called out.
 
-### `--outputFormat` execution flag
+### Output format
 
-It is recommended that the LSIF exporter support two output formats: `line` and `json`. The `line` format is required for an integration with Rich Code Navigation.
+The LSIF exporter is expected to implement the [line-delimited JSON](https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON) (also known as [JSON lines](http://jsonlines.org/)) output format: series of JSON objects (vertex or edge) separated by newline. Since JSON lines is suitable for streaming output and works better for larger repos, it is preferred over a JSON array output.
 
-1. `line`: Output is a series of JSON objects (vertex or edge) separated by newline. This format is optimized for streaming output, and works better for larger repos.
-1. `json`: Output is a valid JSON array, with each JSON object (vertex or edge) as an element of this array. The VS Code LSIF extension uses this format.
+If an LSIF consumer requires a valid JSON array as input (for example, the VS Code LSIF extension), the JSON lines output can be converted into a JSON array by piping into a conversion tool.
 
-### `--projectRoot` execution flag
+```
+cat lsif.jsonl | sed '1s/^/[/;$!s/$/,/;$s/$/]/'
+```
 
-This flag can be used to specify the root of the project directory, or specify the location of the project configuration file (`tsconfig.json` for TypeScript projects).
+### Project configuration
+
+The LSIF index exporter can expose a flag to specify the root of the project directory. For example, the [TypeScript implementation](https://github.com/Microsoft/lsif-node) exposes the `--project` (`-p`) to specify the root of the tsconfig.json file.
+
+```
+lsif-tsc --project ./frontend/tsconfig.json
+```
+
+### Error behavior
+
+The LSIF tool is expected to signal for error conditions, with a numeric exit code. A successful execution returns a 0, whereas error conditions (unable to build project, unable to find project file) return 1. 
 
 ### Required documentation
 
-Since LSIF is an evolving protocol, it is critical to document which version of LSIF is being supported by the exporter.
+Since LSIF is an evolving protocol, it is critical to document the [protocol version](specification.md#changelog) supported by the exporter.
 
 ## Support
 
