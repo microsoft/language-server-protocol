@@ -192,7 +192,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 
 <img src="./definitionResult.png" alt="Definition Result" style="max-width: 50%; max-height: 50%"/>
 
-In the example above, the definition result has only one value: the id `7`. We could have instead emitted an edge directly pointing from id `14` to id `7`. However, we introduced the definition result vertex for two reasons:
+In the example above, the definition result has only one value: the id `7`. We could have instead emitted an edge directly pointing from id `4` to id `7`. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
 - The result is actually an array to support languages that have type merging. The LSP result for the `textDocument/definition` request is defined as `Location | Location[]` but for easier handling the LSIF only supports arrays.
