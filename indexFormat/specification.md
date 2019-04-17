@@ -314,16 +314,16 @@ The relevant JSON output looks like this:
 
 <img src="./referenceResult.png" alt="References Result"  style="max-width: 50%; max-height: 50%"/>
 
-We tag the `item` edge with id 10 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly. The `ReferenceResult` is declared as follows:
+We tag the `item` edge with id 10 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly. The `ReferenceResult` could be declared as follows:
 
 ```typescript
-export interface ReferenceResult {
+export interface Draft_ReferenceResult { // See below
 
   label: 'referenceResult';
 
-  definitions?: (RangeId | lsp.Location)[];
-
   declarations?: (RangeId | lsp.Location)[];
+
+  definitions?: (RangeId | lsp.Location)[];
 
   references?: (RangeId | lsp.Location)[];
 }
@@ -451,7 +451,7 @@ In the above example, there will be three reference results
 
 For Typescript, method references are recorded at their most abstract declaration and if methods are merged (`B#foo`), they are combined using a reference result pointing to other results.
 
-The declaration of `ReferenceResult` looks like this:
+All things considered, the declaration of `ReferenceResult` looks like this:
 
 ```typescript
 export interface ReferenceResult {
