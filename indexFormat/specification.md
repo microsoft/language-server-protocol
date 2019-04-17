@@ -9,7 +9,7 @@ The purpose of the Language Server Index Format (LSIF) is it to define a standar
 - Removed export and import result and replaced it with monikers linked to the definition / declaration ranges.
 - Added a package information vertex to be linked to monikers that are provided through a package.
 - Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` and array only.
-- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using and item edge.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using an item edge.
 
 ### Motivation
 
@@ -230,13 +230,15 @@ export interface DefinitionResult {
   /**
    * The actual result.
    */
-  result: (RangeId | lsp.Location)[];
+  result?: (RangeId | lsp.Location)[];
 }
 ```
 
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+
 ### Request: `textDocument/declaration`
 
-There are programming languages that have the concept of declarations and definitions (like C/C++). If this is the case, the dump can contain a corresponding `declarationResult` vertex and a `textDocument/declaration` edge to store the information.
+There are programming languages that have the concept of declarations and definitions (like C/C++). If this is the case, the dump can contain a corresponding `declarationResult` vertex and a `textDocument/declaration` edge to store the information. They are handled analogously to the entities emitted for the `textDocument/definition` request.
 
 ### More about Request: `textDocument/hover`
 
@@ -481,6 +483,8 @@ interface ImplementationResult {
 }
 ```
 
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+
 ### Request: `textDocument/typeDefinition`
 
 Supporting `textDocument/typeDefinition` is straightforward. The edge is either recorded at the range or at the `ResultSet`.
@@ -516,6 +520,8 @@ The relevant emitted vertices and edges looks like this:
 // Hook the result to the declaration
 { id: 38, type: "edge", label: "textDocument/typeDefinition", outV: 26, inV:37 }
 ```
+
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Document requests
 
