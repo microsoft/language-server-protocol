@@ -9,7 +9,7 @@ The purpose of the Language Server Index Format (LSIF) is it to define a standar
 - Removed export and import result and replaced it with monikers linked to the definition / declaration ranges.
 - Added a package information vertex to be linked to monikers that are provided through a package.
 - Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` and array only.
-- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using and item edge.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using an item edge.
 
 ### Motivation
 
@@ -230,13 +230,15 @@ export interface DefinitionResult {
   /**
    * The actual result.
    */
-  result: (RangeId | lsp.Location)[];
+  result?: (RangeId | lsp.Location)[];
 }
 ```
 
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+
 ### Request: `textDocument/declaration`
 
-There are programming languages that have the concept of declarations and definitions (like C/C++). If this is the case, the dump can contain a corresponding `declarationResult` vertex and a `textDocument/declaration` edge to store the information.
+There are programming languages that have the concept of declarations and definitions (like C/C++). If this is the case, the dump can contain a corresponding `declarationResult` vertex and a `textDocument/declaration` edge to store the information. They are handled analogously to the entities emitted for the `textDocument/definition` request.
 
 ### More about Request: `textDocument/hover`
 
@@ -312,16 +314,16 @@ The relevant JSON output looks like this:
 
 <img src="./referenceResult.png" alt="References Result"  style="max-width: 50%; max-height: 50%"/>
 
-We tag the `item` edge with id 10 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly. The `ReferenceResult` is declared as follows:
+We tag the `item` edge with id 10 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly. The `ReferenceResult` could be declared as follows:
 
 ```typescript
-export interface ReferenceResult {
+export interface Draft_ReferenceResult { // See below
 
   label: 'referenceResult';
 
-  definitions?: (RangeId | lsp.Location)[];
-
   declarations?: (RangeId | lsp.Location)[];
+
+  definitions?: (RangeId | lsp.Location)[];
 
   references?: (RangeId | lsp.Location)[];
 }
@@ -449,7 +451,7 @@ In the above example, there will be three reference results
 
 For Typescript, method references are recorded at their most abstract declaration and if methods are merged (`B#foo`), they are combined using a reference result pointing to other results.
 
-The declaration of `ReferenceResult` looks like this:
+All things considered, the declaration of `ReferenceResult` looks like this:
 
 ```typescript
 export interface ReferenceResult {
@@ -480,6 +482,8 @@ interface ImplementationResult {
   implementationResults?: ImplementationResultId[];
 }
 ```
+
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Request: `textDocument/typeDefinition`
 
@@ -516,6 +520,8 @@ The relevant emitted vertices and edges looks like this:
 // Hook the result to the declaration
 { id: 38, type: "edge", label: "textDocument/typeDefinition", outV: 26, inV:37 }
 ```
+
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Document requests
 
@@ -917,9 +923,10 @@ export interface MetaData {
 
 ## Tools
 
-* [`lsif-protocol`](https://github.com/Microsoft/lsif-node/tree/master/protocol): Protocol defined as TypeScript interfaces
-* [`lsif-tsc`](https://github.com/Microsoft/lsif-node/tree/master/tsc): LSIF indexer for TypeScript
-* [`lsif-npm`](https://github.com/Microsoft/lsif-node/tree/master/npm): Linker for NPM monikers
+- [`lsif-protocol`](https://github.com/Microsoft/lsif-node/tree/master/protocol): Protocol defined as TypeScript interfaces
+- [`lsif-util`](https://github.com/jumattos/lsif-util): Utility tools for LSIF development
+- [`lsif-tsc`](https://github.com/Microsoft/lsif-node/tree/master/tsc): LSIF indexer for TypeScript
+- [`lsif-npm`](https://github.com/Microsoft/lsif-node/tree/master/npm): Linker for NPM monikers
 
 ## Open Questions
 
