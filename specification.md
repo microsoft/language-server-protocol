@@ -655,6 +655,7 @@ Text documents have a language identifier to identify a document on the server s
 
 Language | Identifier
 -------- | ----------
+ABAP | `abap`
 Windows Bat | `bat`
 BibTeX | `bibtex`
 Clojure | `clojure`
@@ -675,6 +676,7 @@ HTML | `html`
 Ini | `ini`
 Java | `java`
 JavaScript | `javascript`
+JavaScript React | `javascriptreact`
 JSON | `json`
 LaTeX | `latex`
 Less | `less`
@@ -693,13 +695,14 @@ R | `r`
 Razor (cshtml) | `razor`
 Ruby | `ruby`
 Rust | `rust`
-Sass | `scss` (syntax using curly brackets), `sass` (indented syntax)
+SCSS | `scss` (syntax using curly brackets), `sass` (indented syntax)
 Scala | `scala`
 ShaderLab | `shaderlab`
 Shell Script (Bash) | `shellscript`
 SQL | `sql`
 Swift | `swift`
 TypeScript | `typescript`
+TypeScript React| `typescriptreact`
 TeX | `tex`
 Visual Basic | `vb`
 XML | `xml`
