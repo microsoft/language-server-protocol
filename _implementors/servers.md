@@ -11,6 +11,7 @@ index: 1
 
 | Language | Maintainer | Repository | Implementation Language |
 |------|--------|----------|---------------|
+| Ada/SPARK | AdaCore |  [ada_language_server](https://github.com/AdaCore/ada_language_server) | Ada |
 | [API Elements](http://api-elements.readthedocs.io/en/latest/) | [Vincenzo Chianese(@XVincentX)](https://github.com/XVincentX) | [vscode-apielements](https://github.com/XVincentX/vscode-apielements) | TypeScript |
 | Apache Camel | [Contributors](https://github.com/camel-tooling/camel-language-server/graphs/contributors) | [Apache Camel Language Server](https://github.com/camel-tooling/camel-language-server) | Java |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) | TypeScript |
