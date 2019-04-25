@@ -2536,6 +2536,14 @@ export interface ApplyWorkspaceEditResponse {
 	 * Indicates whether the edit was applied or not.
 	 */
 	applied: boolean;
+	
+	/**
+	 * An optional textual description for why the edit was not applied.
+	 * This may be used may be used by the server for diagnostic
+	 * logging or to provide a suitable error for a request that
+	 * triggered the edit.
+	 */
+	failureReason?: string;
 }
 ```
 * error: code and message set in case an exception happens during the request.
