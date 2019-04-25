@@ -1741,7 +1741,8 @@ export interface FoldingRangeProviderOptions {
 
 export interface TextDocumentSyncOptions {
 	/**
-	 * Open and close notifications are sent to the server.
+	 * Open and close notifications are sent to the server. If omitted open close notification should not
+	 * be sent.
 	 */
 	openClose?: boolean;
 	/**
@@ -1750,15 +1751,18 @@ export interface TextDocumentSyncOptions {
 	 */
 	change?: number;
 	/**
-	 * Will save notifications are sent to the server.
+	 * If present will save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
 	 */
 	willSave?: boolean;
 	/**
-	 * Will save wait until requests are sent to the server.
+	 * If present will save wait until requests are sent to the server. If omitted the request should not be
+	 * sent.
 	 */
 	willSaveWaitUntil?: boolean;
 	/**
-	 * Save notifications are sent to the server.
+	 * If present save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
 	 */
 	save?: SaveOptions;
 }
