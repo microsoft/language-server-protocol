@@ -4105,6 +4105,21 @@ interface FormattingOptions {
 	insertSpaces: boolean;
 
 	/**
+	 * Trim trailing whitespaces on a line.
+	 */
+	trimTrailingWhitespace?: boolean;
+
+	/**
+	 * Insert a newline character at the end of the file if one does not exist.
+	 */
+	insertFinalNewline?: boolean;
+
+	/**
+	 * Trim all newlines after the final newline at the end of the file.
+	 */
+	trimFinalNewlines?: boolean;
+
+	/**
 	 * Signature for further properties.
 	 */
 	[key: string]: boolean | number | string;
