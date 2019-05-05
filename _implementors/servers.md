@@ -39,7 +39,8 @@ index: 1
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
 | Fortran | [Chris Hansen](https://github.com/hansec) | [fortran-language-server](https://github.com/hansec/fortran-language-server) | Python |
 | GLSL | [Sven-Hendrik Haase (@svenstaro)](https://github.com/svenstaro) | [glsl-language-server](https://github.com/svenstaro/glsl-language-server) | C++ |
-| Gauge| [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) | C++ |
+| Gauge | [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) | C++ |
+| Gluon | [Gluon](https://github.com/gluon-lang/gluon) | [Gluon Language Server)(https://github.com/gluon-lang/gluon_language-server) | Rust |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
 | [GraphQL](http://graphql.org/) | GraphQL community | [Server in GraphQL](https://github.com/graphql/graphql-language-service) |  JavaScript |
 | Groovy | [Palantir](https://github.com/palantir) | [groovy-language-server](https://github.com/palantir/groovy-language-server/) | Java |
