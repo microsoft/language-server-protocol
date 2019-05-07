@@ -2540,7 +2540,7 @@ export interface ApplyWorkspaceEditResponse {
 	 * Indicates whether the edit was applied or not.
 	 */
 	applied: boolean;
-	
+
 	/**
 	 * An optional textual description for why the edit was not applied.
 	 * This may be used may be used by the server for diagnostic
@@ -3048,6 +3048,15 @@ export interface CompletionRegistrationOptions extends TextDocumentRegistrationO
 	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`.
 	 */
 	triggerCharacters?: string[];
+
+	/**
+	 * The list of all possible characters that commit a completion. This field can be used
+	 * if clients don't support individual commmit characters per completion item. See
+	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`
+	 *
+   * Since 3.2.0
+	 */
+	allCommitCharacters?: string[];
 
 	/**
 	 * The server provides support to resolve additional
