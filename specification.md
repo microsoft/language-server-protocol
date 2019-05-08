@@ -1448,6 +1448,8 @@ export interface TextDocumentClientCapabilities {
 		};
 		/**
 		 * Whether code action supports flagging actions for `auto fix`
+		 *
+		 * Since 3.15.0
 		 */
 		isPreferred?: boolean;
 	};
