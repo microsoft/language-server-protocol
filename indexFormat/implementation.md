@@ -77,6 +77,8 @@ If an LSIF consumer requires a valid JSON array as input (for example, the VS Co
 cat lsif.jsonl | sed '1s/^/[/;$!s/$/,/;$s/$/]/'
 ```
 
+If the LSIF exporter needs to log additional output, it is recommended to use `stderr`, since `stdout` is reserved for JSON line output.
+
 ### Project configuration
 
 The LSIF index exporter can expose a flag to specify the root of the project directory. For example, the [TypeScript implementation](https://github.com/Microsoft/lsif-node) exposes the `--project` (`-p`) to specify the root of the tsconfig.json file.
@@ -87,7 +89,7 @@ lsif-tsc --project ./frontend/tsconfig.json
 
 ### Error behavior
 
-The LSIF tool is expected to signal for error conditions, with a numeric exit code. A successful execution returns a 0, whereas error conditions (unable to build project, unable to find project file) return 1. 
+The LSIF tool is expected to signal for error conditions, with a numeric exit code. A successful execution returns a 0, whereas error conditions (unable to build project, unable to find project file) return 1.
 
 ### Required documentation
 
