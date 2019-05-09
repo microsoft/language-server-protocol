@@ -2897,7 +2897,8 @@ interface CompletionItem {
 
 	/**
 	 * The kind of this completion item. Based of the kind
-	 * an icon is chosen by the editor.
+	 * an icon is chosen by the editor. The standardized set
+	 * of available values is defined in `CompletionItemKind`.
 	 */
 	kind?: number;
 
