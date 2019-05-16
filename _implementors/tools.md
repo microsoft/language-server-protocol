@@ -32,5 +32,6 @@ index: 2
 | [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
 | [Sublime Text](https://www.sublimetext.com/) | [Tom van Ommeren](https://github.com/tomv564) | [lsp](https://github.com/tomv564/LSP) |
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
+| [Brackets](http://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) | 
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  | 
 {: .table .table-bordered .table-responsive}
