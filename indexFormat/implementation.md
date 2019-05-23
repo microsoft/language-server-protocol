@@ -46,6 +46,20 @@ The [`lsif-util`](https://github.com/jumattos/lsif-util) tool can validate your 
 
 With the [LSIF extension for VS Code](https://github.com/Microsoft/vscode-lsif-extension), you can dogfood an LSIF index to power navigation inside VS Code.
 
+## Performance
+
+Generating LSIF for a project is expected to take roughly the same time as compilation.
+
+A primitive LSIF index exporter loops over source files, and for every symbol encountered, queries the language server for responses to LSP requests. With this approach, computing references can become very expensive: references are computed multiple times for the same symbol spread over files. This can be inefficient, depending on the language server implementation.
+
+This approach can optimized by computing references only once for a symbol spread over files. The approach taken by the [lsif-tsc](https://github.com/Microsoft/lsif-node) tool is outlined below:
+
+- Parse the project configuration to get source files
+- Loop over files, and run the following on the AST of each file
+  - When you encounter a symbol, find out the binding of the symbol (declaration)
+  - If the binding is local to the file, create a referencesResult data structure and add symbols with the same binding. When the parsing of the file is complete, we know that the referenceResult is complete and can be emitted.
+  - If the binding is not local, keep result set in memory, and keep parsing other files.
+
 ## Recommended checklist
 
 We have seen the following patterns work well in existing implementations.
