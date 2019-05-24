@@ -309,7 +309,7 @@ interface LocationLink {
 	/**
 	 * The target resource identifier of this link.
 	 */
-	targetUri: string;
+	targetUri: DocumentUri;
 
 	/**
 	 * The full target range of this link. If the target for example is a symbol then target range is the
