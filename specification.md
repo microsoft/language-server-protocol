@@ -507,7 +507,7 @@ export interface CreateFile {
 	/**
 	 * The resource to create.
 	 */
-	uri: string;
+	uri: DocumentUri;
 	/**
 	 * Additional options
 	 */
@@ -539,11 +539,11 @@ export interface RenameFile {
 	/**
 	 * The old (existing) location.
 	 */
-	oldUri: string;
+	oldUri: DocumentUri;
 	/**
 	 * The new location.
 	 */
-	newUri: string;
+	newUri: DocumentUri;
 	/**
 	 * Rename options.
 	 */
@@ -575,7 +575,7 @@ export interface DeleteFile {
 	/**
 	 * The file to delete.
 	 */
-	uri: string;
+	uri: DocumentUri;
 	/**
 	 * Delete options.
 	 */
@@ -592,7 +592,7 @@ export interface WorkspaceEdit {
 	/**
 	 * Holds changes to existing resources.
 	 */
-	changes?: { [uri: string]: TextEdit[]; };
+	changes?: { [uri: DocumentUri]: TextEdit[]; };
 
 	/**
 	 * Depending on the client capability `workspace.workspaceEdit.resourceOperations` document changes
@@ -2217,7 +2217,7 @@ export interface WorkspaceFolder {
 	/**
 	 * The associated URI for this workspace folder.
 	 */
-	uri: string;
+	uri: DocumentUri;
 
 	/**
 	 * The name of the workspace folder. Used to refer to this
@@ -2308,7 +2308,7 @@ export interface ConfigurationItem {
 	/**
 	 * The scope to get the configuration section for.
 	 */
-	scopeUri?: string;
+	scopeUri?: DocumentUri;
 
 	/**
 	 * The configuration section asked for.
