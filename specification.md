@@ -2949,8 +2949,6 @@ interface CompletionItem {
 	 * and a completion item with an `insertText` of `console` is provided it
 	 * will only insert `sole`. Therefore it is recommended to use `textEdit` instead
 	 * since it avoids additional client side interpretation.
-	 *
-	 * @deprecated Use textEdit instead.
 	 */
 	insertText?: string;
 
