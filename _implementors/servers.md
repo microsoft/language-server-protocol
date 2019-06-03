@@ -44,6 +44,7 @@ index: 1
 | Gluon | [Gluon](https://github.com/gluon-lang/gluon) | [Gluon Language Server](https://github.com/gluon-lang/gluon_language-server) | Rust |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
 | [GraphQL](http://graphql.org/) | GraphQL community | [Server in GraphQL](https://github.com/graphql/graphql-language-service) |  JavaScript |
+| [GraphQL](http://graphql.org/) | [Mayank Agarwal (@Mayank1791989)](https://github.com/Mayank1791989) | [GQL Language Server](https://github.com/Mayank1791989/gql-language-server) | JavaScript |
 | Groovy | [Palantir](https://github.com/palantir) | [groovy-language-server](https://github.com/palantir/groovy-language-server/) | Java |
 | HTML | MS | [vscode-html-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/html-language-features/server) | TypeScript |
 | Haskell| [Alan Zimmerman](https://github.com/alanz) | [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine) | Haskell |
