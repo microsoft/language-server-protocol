@@ -2449,7 +2449,8 @@ _Request_:
  */
 interface WorkspaceSymbolParams {
 	/**
-	 * A non-empty query string
+	 * A query string to filter symbols by. Clients may send an empty
+	 * string here to request all symbols.
 	 */
 	query: string;
 }
