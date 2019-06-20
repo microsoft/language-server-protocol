@@ -40,7 +40,7 @@ For TypeScript/JavaScript, [`lsif-npm`](https://github.com/Microsoft/lsif-node/t
 
 ### LSIF validation utility
 
-The [`lsif-util`](https://github.com/jumattos/lsif-util) tool can validate your generated LSIF output. Additionally, the tool can also be used to search the output and visualize via Graphviz.
+The [`lsif-util`](https://github.com/microsoft/lsif-node/tree/master/util) tool can validate your generated LSIF output. Additionally, the tool can also be used to search the output and visualize via Graphviz.
 
 ### VS Code LSIF extension
 
