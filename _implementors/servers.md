@@ -42,6 +42,7 @@ index: 1
 | GLSL | [Sven-Hendrik Haase (@svenstaro)](https://github.com/svenstaro) | [glsl-language-server](https://github.com/svenstaro/glsl-language-server) | C++ |
 | Gauge | [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) | C++ |
 | Gluon | [Gluon](https://github.com/gluon-lang/gluon) | [Gluon Language Server](https://github.com/gluon-lang/gluon_language-server) | Rust |
+| Go | [Go Team](https://github.com/golang/tools) | [gopls](https://github.com/golang/tools/tree/master/gopls) | Go |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
 | [GraphQL](http://graphql.org/) | GraphQL community | [Server in GraphQL](https://github.com/graphql/graphql-language-service) |  JavaScript |
 | [GraphQL](http://graphql.org/) | [Mayank Agarwal (@Mayank1791989)](https://github.com/Mayank1791989) | [GQL Language Server](https://github.com/Mayank1791989/gql-language-server) | JavaScript |
