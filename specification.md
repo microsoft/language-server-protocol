@@ -895,6 +895,11 @@ interface InitializeParams {
 	 * If the parent process is not alive then the server should exit (see exit notification) its process.
 	 */
 	processId: number | null;
+	
+	/**
+	 * The name of the client identifies itself.
+	 */
+	clientName?: string | null;
 
 	/**
 	 * The rootPath of the workspace. Is null
