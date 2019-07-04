@@ -979,14 +979,14 @@ export namespace FailureHandlingKind {
 	export const Abort: FailureHandlingKind = 'abort';
 
 	/**
-	 * All operations are executed transactional. That means they either all
+	 * All operations are executed transactionally. That means they either all
 	 * succeed or no changes at all are applied to the workspace.
 	 */
 	export const Transactional: FailureHandlingKind = 'transactional';
 
 
 	/**
-	 * If the workspace edit contains only textual file changes they are executed transactional.
+	 * If the workspace edit contains only textual file changes they are executed transactionally.
 	 * If resource changes (create, rename or delete file) are part of the change the failure
 	 * handling strategy is abort.
 	 */
@@ -994,7 +994,7 @@ export namespace FailureHandlingKind {
 
 	/**
 	 * The client tries to undo the operations already executed. But there is no
-	 * guarantee that this is succeeding.
+	 * guarantee that this succeeds.
 	 */
 	export const Undo: FailureHandlingKind = 'undo';
 }
