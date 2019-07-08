@@ -4,11 +4,12 @@ The purpose of the Language Server Index Format (LSIF) is it to define a standar
 
 ### Changelog
 
-#### Version 0.4.0
+#### Version 0.2.2
 
-Up to version 0.4.0 the focus of the LSIF format was to ease the generation of the dump for language tool providers. However this made it very hard for consumers of the dump to efficiently import them into a DB unless the DB format one to one mapped to the LSIF format. This version of the specification tries to balance this by requiring tools providers to emit additional events of when certain data is ready to be consumed. It also adds support to partition data per document.
-
-Since 0.4.0 changes some of the LSIF aspects more deeply an old 0.3.x version of the specification is available [here](./versions/specification-0-3-x.md)
+- Removed export and import result and replaced it with monikers linked to the definition / declaration ranges.
+- Added a package information vertex to be linked to monikers that are provided through a package.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` and array only.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using an item edge.
 
 ### Motivation
 
@@ -55,8 +56,6 @@ The dump format therefore should support the following features:
 - Each element has a unique id (which may be a string or a number).
 - It should be possible to emit data as soon as it is available to allow streaming rather than large memory requirements. For example, emitting data based on document syntax should be done for each file as parsing progresses.
 - It should be easy to add additional requests later on.
-- It should be easy for a tool to consume a dump and for example import it into a database without holding the dump in memory.
-
 
 We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
 
@@ -87,13 +86,11 @@ A hover request for a position denoting the `b` in `bar` will return the same re
 { id: 4, type: "vertex", label: "range", start: { line: 0, character: 9}, end: { line: 0, character: 12 } }
 ```
 
-To bind the range to a document, we use a special edge labeled `contains` which points from a document to a set of ranges.
+To bind the range to a document, we use a special edge labeled `contains` which points from a document to a range.
 
 ```typescript
-{ id: 5, type: "edge", label: "contains", outV: 1, inVs: [4] }
+{ id: 5, type: "edge", label: "contains", outV: 1, inV: 4}
 ```
-
-LSIF supports 1:n edges for the `contains` relationship which in a graph can easily be mapped to n 1:1 edges. LSIF support this for two reasons: (a) to make the output more compact since a document usually contains hundreds of those ranges and (b) to easy the import and batching for consumers of a LSIF dump.
 
 To bind the hover result to the range, we use the same pattern as we used for the folding ranges. We emit a vertex representing the hover result and an edge representing the `textDocument/hover` request.
 
@@ -117,7 +114,6 @@ The corresponding graph looks like this
 
 The ranges emitted for a document must follow these rules:
 
-1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if the have the same start / end value.
 1. No two ranges can be equal.
 1. No two ranges can overlap, claiming the same position in a document unless one range is entirely contained by the other.
 
@@ -145,8 +141,8 @@ The corresponding output of the above example with a hover using a result set lo
 { id: 1, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
 { id: 2, type: "vertex", label: "resultSet" }
 { id: 3, type: "vertex", label: "range", start: { line: 0, character: 9}, end: { line: 0, character: 12 } }
-{ id: 4, type: "edge", label: "contains", outV: 1, inVs: [3] }
-{ id: 5, type: "edge", label: "next", outV: 3, inV: 2 }
+{ id: 4, type: "edge", label: "contains", outV: 1, inV: 3 }
+{ id: 5, type: "edge", label: "refersTo", outV: 3, inV: 2 }
 { id: 6, type: "vertex", label: "hoverResult", result: {"contents":[{"language":"typescript","value":"function bar(): void"},""] }
 { id: 7, type: "edge", label: "textDocument/hover", outV: 2, inV: 6 }
 ```
@@ -181,13 +177,12 @@ This will emit the following vertices and edges to model the `textDocument/defin
 
 ```typescript
 // The bar declaration
-{ id: 6, type: "vertex", label: "resultSet" }
-{ id: 9, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
+{ id: 4, type: "vertex", label: "resultSet" }
+{ id: 7, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
 
 // The definition result linked to the bar result set
-{ id: 22, type: "vertex", label: "definitionResult" }
-{ id: 23, type: "edge", label: "textDocument/definition", outV: 6, inV: 22 }
-{ id: 24, type: "edge", label: "item", outV: 22, inVs: [9], document: 4 }
+{ id: 13, type: "vertex", label: "definitionResult", result: [7] }
+{ id: 14, type: "edge", label: "textDocument/definition", outV: 4, inV: 13 }
 
 // The bar reference
 { id: 26, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
@@ -231,6 +226,11 @@ export interface DefinitionResult {
    * The label property.
    */
   label: 'definitionResult';
+
+  /**
+   * The actual result.
+   */
+  result?: (RangeId | lsp.Location)[];
 }
 ```
 
