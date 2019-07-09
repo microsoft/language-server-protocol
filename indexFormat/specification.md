@@ -183,24 +183,25 @@ This will emit the following vertices and edges to model the `textDocument/defin
 // The bar declaration
 { id: 6, type: "vertex", label: "resultSet" }
 { id: 9, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
+{ id: 10, type: "edge", label: "next", outV: 9, inV: 6 }
+
+
+// The bar reference
+{ id: 20, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
+{ id: 21, type: "edge", label: "next", outV: 20, inV: 6}
 
 // The definition result linked to the bar result set
 { id: 22, type: "vertex", label: "definitionResult" }
 { id: 23, type: "edge", label: "textDocument/definition", outV: 6, inV: 22 }
 { id: 24, type: "edge", label: "item", outV: 22, inVs: [9], document: 4 }
-
-// The bar reference
-{ id: 26, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
-// The bar range pointing to the bar result set
-{ id: 28, type: "edge", label: "refersTo", outV: 26, inV: 4}
 ```
 
 <img src="./definitionResult.png" alt="Definition Result" style="max-width: 50%; max-height: 50%"/>
 
-In the example above, the definition result has only one value: the id `7`. We could have instead emitted an edge directly pointing from id `4` to id `7`. However, we introduced the definition result vertex for two reasons:
+The definition result above has only one value (the range with id '9') and we could have emitted it directly. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
-- The result is actually an array to support languages that have type merging. The LSP result for the `textDocument/definition` request is defined as `Location | Location[]` but for easier handling the LSIF only supports arrays.
+- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
 
 Consider the following TypeScript example:
 
@@ -217,24 +218,11 @@ let x: X;
 Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets the user select between the two definitions of the `interface X`. The emitted JSON in this case looks like this:
 
 ```typescript
-{ id: 31, type: "vertex", label: "definitionResult", result: [5, 10] }
+{ id : 38, type: "vertex", label: "definitionResult" }
+{ id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], document: 4 }
 ```
 
-The TypeScript interface for a definition result looks like this:
-
-```typescript
-/**
- * A vertex representing a definition result.
- */
-export interface DefinitionResult {
-  /**
-   * The label property.
-   */
-  label: 'definitionResult';
-}
-```
-
-Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `containes` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
 
 ### Request: `textDocument/declaration`
 
@@ -270,10 +258,7 @@ This makes the hover different for every location so we can't really store it wi
 
 ### Request: `textDocument/references`
 
-Storing references will be done in the same way as storing a hover or Go to Definition ranges. It uses a reference result vertex. In a naïve approach, the reference result would contain range ids as well. However, that would force the emitter of the reference result to buffer the result until all files are parsed to ensure all references are contained. This usually leads to high memory consumption so we added a way to add values into a result vertex dynamically. This is done as follows:
-
-- The result is emitted empty.
-- An item is added to the result by emitting an `item` edge which points from the result to the item.
+Storing references will be done in the same way as storing a hover or go to definition ranges. It uses a reference result vertex and `item` edges to add ranges to the result.
 
 Look at the following example:
 
@@ -290,26 +275,24 @@ The relevant JSON output looks like this:
 
 ```typescript
 // The bar declaration
-{ id: 4, type: "vertex", label: "resultSet" }
+{ id: 6, type: "vertex", label: "resultSet" }
+{ id: 9, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
+{ id: 10, type: "edge", label: "next", outV: 9, inV: 6 }
+
+// The bar reference range
+{ id: 20, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
+{ id: 21, type: "edge", label: "next", outV: 20, inV: 6 }
 
 // The reference result
-{ id: 5, type: "vertex", label: "referenceResult"}
+{ id : 25, type: "vertex", label: "referenceResult" }
 // Link it to the result set
-{ id: 6, type: "edge", label: "textDocument/references", outV: 4, inV: 5 }
+{ id : 26, type: "edge", label: "textDocument/references",  outV: 6, inV: 25 }
 
-// The range defining bar
-{ id: 7, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
-// Link the range to the result set
-{ id: 9, type: "edge", label: "refersTo", outV: 7, inV: 4 }
-// Add the range to the reference result
-{ id: 10, type: "edge", label: "item", property: "definition", outV: 5, inV: 7 }
+// Add the bar definition as a reference to the reference result
+{ id: 27, type: "edge", label: "item", outV: 25, inVs: [9], document: 4, property : "definitions" }
 
-// The range referencing bar
-{ id: 26, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
-// Link it to the result set
-{ id: 28, type: "edge", label: "refersTo", outV: 26, inV: 4 }
-// Add it to the reference result.
-{ id: 29, type: "edge", label: "item", property: "reference", outV: 5, inV: 26 }
+// Add the bar reference as a reference to the reference result
+{ id: 28, type: "edge", label: "item", outV: 25, inVs: [20], document:4, property: "references" }
 ```
 
 <img src="./referenceResult.png" alt="References Result"  style="max-width: 50%; max-height: 50%"/>
@@ -483,7 +466,7 @@ interface ImplementationResult {
 }
 ```
 
-Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+Optionally results can be emitted lazily, by omitting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Request: `textDocument/typeDefinition`
 
@@ -521,7 +504,7 @@ The relevant emitted vertices and edges looks like this:
 { id: 38, type: "edge", label: "textDocument/typeDefinition", outV: 26, inV:37 }
 ```
 
-Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+Optionally results can be emitted lazily, by omitting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Document requests
 
