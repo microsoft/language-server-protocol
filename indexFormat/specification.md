@@ -297,24 +297,9 @@ The relevant JSON output looks like this:
 
 <img src="./referenceResult.png" alt="References Result"  style="max-width: 50%; max-height: 50%"/>
 
-We tag the `item` edge with id 10 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly. The `ReferenceResult` could be declared as follows:
+We tag the `item` edge with id 27 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly.
 
-```typescript
-export interface Draft_ReferenceResult { // See below
-
-  label: 'referenceResult';
-
-  declarations?: (RangeId | lsp.Location)[];
-
-  definitions?: (RangeId | lsp.Location)[];
-
-  references?: (RangeId | lsp.Location)[];
-}
-```
-
-The reference result also allows inlining the result as an ID within the array. This should be used if the result vertex can easily be computed (for example, for local variable, private members, not exported members, ...) to make the output more compact. It also allows inlining a `lsp.Location` directly. This can be used if a range needs to be stored that conflicts with the rule that ranges must not overlap.
-
-The concept of a reference result is also useful when computing references to methods overridden in a type hierarchy.
+The item edge also support linking reference results to other reference results. This is useful when computing references to methods overridden in a type hierarchy.
 
 Take the following example:
 
@@ -346,37 +331,42 @@ The output looks like this:
 
 ```typescript
 // The declaration of I#foo
-{ id: 15, type: "vertex", label: "resultSet" }
-// The shared reference result
-{ id: 16, type: "vertex", label: "referenceResult" }
-{ id: 17, type: "edge", label: "textDocument/references", outV: 15, inV: 16 }
-{ id: 18, type: "vertex", label: "range", start: { line: 1, character: 2 }, end: { line: 1, character: 5 } }
-{ id: 20, type: "edge", label: "refersTo", outV: 18, inV: 15 }
-{ id: 21, type: "edge", label: "item", property: "definition", outV: 16, inV: 18 }
+{ id: 13, type: "vertex", label: "resultSet" }
+{ id: 16, type: "vertex", label: "range", start: { line: 1, character: 2 }, end: { line: 1, character: 5 } }
+{ id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
+// The reference result for I#foo
+{ id: 30, type: "vertex", label: "referenceResult" }
+{ id: 31, type: "edge", label: "textDocument/references", outV: 13, inV: 30 }
 
-// The declaration of A#foo. Observe it reuses the reference result with id 16
-{ id: 41, type: "vertex", label: "resultSet" }
-{ id: 42, type: "edge", label: "textDocument/references", outV: 41, inV: 16 }
-{ id: 43, type: "vertex", label: "range", start: { line: 5, character: 2 }, end: { line: 5, character: 5 } }
-{ id: 45, type: "edge", label: "refersTo", outV: 43, inV: 41 }
-{ id: 46, type: "edge", label: "item", property: "definition", outV: 16, inV: 43 }
+// The declaration of A#foo
+{ id: 29, type: "vertex", label: "resultSet" }
+{ id: 34, type: "vertex", label: "range", start: { line: 5, character: 2 }, end: { line: 5, character: 5 } }
+{ id: 35, type: "edge", label: "next", outV: 34, inV: 29 }
 
-// The declaration of B#foo. Observe it reuses the reference result with id id 16
-{ id: 66, type: "vertex", label: "resultSet" }
-{ id: 67, type: "edge", label: "textDocument/references", outV: 66, inV: 16 }
-{ id: 68, type: "vertex", label: "range", start: { line: 10, character: 2 }, end: { line: 10, character: 5 } }
-{ id: 70, type: "edge", label: "refersTo", outV: 68, inV: 66 }
-{ id: 71, type: "edge", label: "item", property: "definition", outV: 16, inV: 68 }
+// The declaration of B#foo
+{ id: 47, type: "vertex", label: "resultSet" }
+{ id: 50, type: "vertex", label: "range", start: { line: 10, character: 2 }, end: { line: 10, character: 5 } }
+{ id: 51, type: "edge", label: "next", outV: 50, inV: 47 }
 
-// The reference `i.foo()`
-{ id: 97, type: "vertex", label: "range", start: { line: 15, character: 2 }, end: { line: 15, character: 5 } }
-{ id: 99, type: "edge", label: "refersTo", outV: 97, inV: 15 }
-{ id: 100, type: "edge", label: "item", property: "reference", outV: 16, inV: 97 }
+// The reference i.foo()
+{ id: 65, type: "vertex", label: "range", start: { line: 15, character: 2 }, end: { line: 15, character: 5 } }
 
-// The reference `b.foo()`
-{ id: 122, type: "vertex", label: "range", start: { line: 18, character: 2 }, end: { line: 18, character: 5 } }
-{ id: 124, type: "edge", label: "refersTo", outV: 122, inV: 66 }
-{ id: 125, type: "edge", label: "item", property: "reference", outV: 16, inV: 122 }
+// The reference b.foo()
+{ id: 78, type: "vertex", label: "range", start: { line: 18, character: 2 }, end: { line: 18, character: 5 } }
+
+// The insertion of the ranges into the shared reference result
+{ id: 90, type: "edge", label: "item", outV: 30, inVs: [16,34,50], document: 4, property: definitions }
+{ id: 91, type: "edge", label: "item", outV: 30, inVs: [65,78], document: 4, property: references }
+
+// Linking A#foo to I#foo
+{ id: 101, type: "vertex", label: "referenceResult" }
+{ id: 102, type: "edge", label: "textDocument/references", outV: 29, inV: 101 }
+{ id: 103, type: "edge", label: "item", outV: 101, inVs: [30], document: 4, property: referenceResults }
+
+// Linking B#foo to I#foo
+{ id: 114, type: "vertex", label: "referenceResult" }
+{ id: 115, type: "edge", label: "textDocument/references", outV: 47, inV: 114 }
+{ id: 116, type: "edge", label: "item", outV: 114, inVs: [30], document: 4, property: referenceResults }
 ```
 
 One goal of the language server index format is that the information can be emitted as soon as possible without caching too much information in memory. With languages that support overriding methods defined in more than one interface, this can be more complicated since the whole inheritance tree might only be known after parsing all documents.
@@ -411,45 +401,37 @@ In the above example, there will be three reference results
 ```typescript
 
 // Declaration of I#foo
-{ id: 15, type: "vertex", label: "resultSet" }
-{ id: 16, type: "vertex", label: "referenceResult" }
-{ id: 17, type: "edge", label: "textDocument/references", outV: 15, inV: 16 }
+{ id: 13, type: "vertex", label":"resultSet"}
+{ id: 16, type: "vertex", label":"range","start":{"line":1,"character":2},"end":{"line":1,"character":5}}
+{ id: 17, type: "edge", label":"next","outV":16,"inV":13}
 
 // Declaration of II#foo
-{ id: 37, type: "vertex", label: "resultSet" }
-{ id: 38, type: "vertex", label: "referenceResult"}
-{ id: 39, type: "edge", label: "textDocument/references", outV: 37, inV: 38 }
+{ id: 27, type: "vertex", label":"resultSet"}
+{ id: 30, type: "vertex", label":"range","start":{"line":5,"character":2},"end":{"line":5,"character":5}}
+{ id: 31, type: "edge", label":"next","outV":30,"inV":27}
 
 // Declaration of B#foo
-{ id: 67, type: "vertex", label: "resultSet" }
-// The combined reference result
-{ id: 68, type: "vertex", label: "referenceResult", referenceResults: [ 16,38 ] }
-// Link the reference result to the result set of B#foo
-{ id: 69, type: "edge", label: "textDocument/references", outV: 67, inV: 68 }
-// Add the declaratin to both linked reference results. This ensures that find all references
-// on I#foo and II#foo lists B#foo as well.
-{ id: 73, type: "edge", label: "item", property: "definition", outV: 16, inV: 70 }
-{ id: 74, type: "edge", label: "item", property: "definition", outV: 38, inV: 70 }
+{ id: 45, type: "vertex", label":"resultSet"}
+{ id: 52, type: "vertex", label":"range","start":{"line":9,"character":2},"end":{"line":9,"character":5}}
+{ id: 53, type: "edge", label":"next","outV":52,"inV":45}
+
+// Reference result for I#foo
+{ id: 46, type: "vertex", label":"referenceResult"}
+{ id: 47, type: "edge", label":"textDocument/references","outV":13,"inV":46}
+
+// Reference result for II#foo
+{ id: 48, type: "vertex", label":"referenceResult"}
+{ id: 49, type: "edge", label":"textDocument/references","outV":27,"inV":48}
+
+// Reference result for B#foo
+{ id: 116 "typ" :"ve tex","label":"referenceResult"}
+{ id: 117 "typ" :"ed e","label":"textDocument/references","outV":45,"inV":116}
+
+// Link B#foo reference result to I#foo and II#foo
+{ id: 118 "typ" :"ed e","label":"item","outV":116,"inVs":[46,48],"document":4,"property":"referenceResults"}
 ```
 
 For Typescript, method references are recorded at their most abstract declaration and if methods are merged (`B#foo`), they are combined using a reference result pointing to other results.
-
-All things considered, the declaration of `ReferenceResult` looks like this:
-
-```typescript
-export interface ReferenceResult {
-
-  label: 'referenceResult';
-
-  declarations?: (RangeId | lsp.Location)[];
-
-  definitions?: (RangeId | lsp.Location)[];
-
-  references?: (RangeId | lsp.Location)[];
-
-  referenceResults?: ReferenceResultId[];
-}
-```
 
 ### Request: `textDocument/implementation`
 
