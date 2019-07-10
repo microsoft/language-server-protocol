@@ -1031,7 +1031,7 @@ The following emitting constraints (some of which have already mean mentioned in
 - a `range` and `resultRange` can only be contained in one document.
 - a `resultRange` can not be used as a target in a `contains` edge.
 - after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
-- if ranges point to result sets and monikers are emitted, they must be emitted on the result set not on each range.
+- if ranges point to result sets and monikers are emitted, they must be emitted on the result set and can't be emitted on individual ranges.
 
 ## Tools
 
