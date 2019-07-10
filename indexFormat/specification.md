@@ -153,14 +153,18 @@ The corresponding output of the above example with a hover using a result set lo
 
 <img src="./resultSet.png" alt="Result Set"  style="max-width: 50%; max-height: 50%"/>
 
+Result sets are linked to ranges using a `next` edge. A results set can also forward information to another result set by linking to it using a `next` edge.
+
 The pattern of storing the result with the `ResultSet` will be used for other requests as well. The lookup algorithm is therefore as follows for a request [document, position, method]:
 
 1. find all ranges for [document, position]. If none exist, return `null` as the result
 1. sort the ranges by containment the innermost first
 1. for range in ranges do
-   1. check if range has an outgoing edge `textDocument/${method}`. if yes, use it and return the corresponding result
-   1. check if range has an outgoing edge `refersTo`. if yes, resolve the result set
-   1. check if the result set has an outgoing edge `textDocument/${method}`. if yes, use it and return the corresponding result
+   1. assign range to out
+   1. while out !== `null`
+      1. check if out has an outgoing edge `textDocument/${method}`. if yes, use it and return the corresponding result
+      1. check if out has an outgoing `next` edge. If yes, set out to the target vertex. Else set out to `null`
+   1. end
 1. end
 1. otherwise return `null`
 
@@ -719,9 +723,9 @@ Produces the following output:
 // The declaration of Main
 { id: 7 , type: "vertex", label: "range", start: { line: 0, character: 10 }, end: { line: 0, character: 14 }, tag: { type: "definition", text: "Main", kind: 7, fullRange: { start: { line: 0, character: 0 }, end: { line: 5, character: 1 } } } }
 // The declaration of hello
-{ id: 18 , type: "vertex", label: "range", start: { line: 1, character: 11 }, end: { line: 1, character: 16 },tag: { type: "definition", text: "hello", kind: 12, fullRange: { start: { line: 1, character: 2 }, end: { line: 2, character: 3 } } } }
+{ id: 18 , type: "vertex", label: "range", start: { line: 1, character: 11 }, end: { line: 1, character: 16 }, tag: { type: "definition", text: "hello", kind: 12, fullRange: { start: { line: 1, character: 2 }, end: { line: 2, character: 3 } } } }
 // The declaration of world
-{ id: 29 , type: "vertex", label: "range", start: { line: 3, character: 11 }, end: { line: 3, character: 16 },tag: { type: "definition", text: "world", kind: 12, fullRange: { start: { line: 3, character: 2 }, end: { line: 4, character: 3 } } } }
+{ id: 29 , type: "vertex", label: "range", start: { line: 3, character: 11 }, end: { line: 3, character: 16 }, tag: { type: "definition", text: "world", kind: 12, fullRange: { start: { line: 3, character: 2 }, end: { line: 4, character: 3 } } } }
 // The document symbol
 { id: 39 , type: "vertex", label: "documentSymbolResult", result: [ { id: 7 , children: [ { id: 18 }, { id: 29 } ] } ] }
 { id: 40 , type: "edge", label: "textDocument/documentSymbol", outV: 2, inV: 39 }
@@ -834,8 +838,6 @@ The events for projects looks similar:
 { id: 55, type: "vertex", label: "$event", kind: "end", scope: "project", data: 2 }
 ```
 
-
-
 ## Project exports and external imports
 
 One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **A** references a library **B**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional monikers which can be linked to ranges using a corresponding edge. The monikers can be used to describe what a project exports and what it imports. Let's first look at the export case.
@@ -927,7 +929,7 @@ Things to observe:
 
 - a special `packageInformation`vertex got emitted to point to the corresponding npm package information.
 - the npm moniker refer to the package name.
-- since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were onblky the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
+- since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were only the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
 - the `nextMoniker` edge points from the tsc moniker vertex to the npm moniker vertex.
 
 For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
@@ -964,6 +966,15 @@ However piping this information through the npm tool will generate the following
 
 which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
 
+## Result ranges
+
+Ranges in LSIF have currently two meanings:
+
+1. they act as LSP request sensitive areas in a document (e.g. we use them to decided of for a given position a corresponding LSP request result exists)
+1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
+
+To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
+
 ## Meta Data Vertex
 
 To support versioning the LSIF defines a meta data vertex as follows:
@@ -971,21 +982,49 @@ To support versioning the LSIF defines a meta data vertex as follows:
 ```typescript
 export interface MetaData {
 
-	/**
-	 * The label property.
-	 */
-	label: 'metaData';
+  /**
+   * The label property.
+   */
+  label: 'metaData';
 
-	/**
-	 * The version of the LSIF format using semver notation. See https://semver.org/. Please note
+  /**
+   * The version of the LSIF format using semver notation. See https://semver.org/. Please note
    * the version numbers starting with 0 don't adhere to semver and adopters have to assume
    * the each new version is breaking.
-	 */
-	version: string;
+   */
+  version: string;
+
+  /**
+   * The project root (in form of an URI) used to compute this dump.
+   */
+  projectRoot: Uri;
+
+  /**
+   * The string encoding used to compute line and character values in
+   * positions and ranges. Currently only 'utf-16' is support due to the
+   * limitations in LSP.
+   */
+  positionEncoding: 'utf-16',
+
+  /**
+   * Information about the tool that created the dump
+   */
+  toolInfo?: {
+    name: string;
+    version?: string;
+    args?: string[];
+  }
 }
 ```
 
 ## Emitting constraints
+
+The following emitting constraints (some of which have already mean mentioned in the document) exists:
+
+- a vertex needs to be emitted before it can be referenced in an edge.
+- a `range` and `resultRange` can only be contained in one document.
+- a `resultRange` can not be used as a target in a `contains` edge.
+- after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 
 ## Tools
 
