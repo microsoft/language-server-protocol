@@ -970,6 +970,8 @@ However piping this information through the npm tool will generate the following
 
 which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
 
+Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
+
 ## Result ranges
 
 Ranges in LSIF have currently two meanings:
@@ -978,8 +980,6 @@ Ranges in LSIF have currently two meanings:
 1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
 
 To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
-
-Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
 
 ## Meta Data Vertex
 
