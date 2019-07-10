@@ -979,6 +979,8 @@ Ranges in LSIF have currently two meanings:
 
 To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
 
+Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
+
 ## Meta Data Vertex
 
 To support versioning the LSIF defines a meta data vertex as follows:
@@ -1029,6 +1031,7 @@ The following emitting constraints (some of which have already mean mentioned in
 - a `range` and `resultRange` can only be contained in one document.
 - a `resultRange` can not be used as a target in a `contains` edge.
 - after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
+- if ranges point to result sets and monikers are emitted, they must be emitted on the result set not on each range.
 
 ## Tools
 
