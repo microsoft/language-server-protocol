@@ -180,6 +180,9 @@ function foo() {
 This will emit the following vertices and edges to model the `textDocument/definition` request:
 
 ```typescript
+// The document
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
+
 // The bar declaration
 { id: 6, type: "vertex", label: "resultSet" }
 { id: 9, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
@@ -274,6 +277,9 @@ function foo() {
 The relevant JSON output looks like this:
 
 ```typescript
+// The document
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
+
 // The bar declaration
 { id: 6, type: "vertex", label: "resultSet" }
 { id: 9, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
@@ -330,6 +336,9 @@ The reference result for the method `foo` in TypeScript contains all three decla
 The output looks like this:
 
 ```typescript
+// The document
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
+
 // The declaration of I#foo
 { id: 13, type: "vertex", label: "resultSet" }
 { id: 16, type: "vertex", label: "range", start: { line: 1, character: 2 }, end: { line: 1, character: 5 } }
@@ -399,56 +408,54 @@ Searching for `I#foo()` finds 4 references, searching for `II#foo()` finds 3 ref
 In the above example, there will be three reference results
 
 ```typescript
+// The document
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
 
 // Declaration of I#foo
-{ id: 13, type: "vertex", label":"resultSet"}
-{ id: 16, type: "vertex", label":"range","start":{"line":1,"character":2},"end":{"line":1,"character":5}}
-{ id: 17, type: "edge", label":"next","outV":16,"inV":13}
+{ id: 13, type: "vertex", label: "resultSet" }
+{ id: 16, type: "vertex", label: "range", start: { line: 1, character: 2 }, end: { line: 1, character: 5 } }
+{ id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
 
 // Declaration of II#foo
-{ id: 27, type: "vertex", label":"resultSet"}
-{ id: 30, type: "vertex", label":"range","start":{"line":5,"character":2},"end":{"line":5,"character":5}}
-{ id: 31, type: "edge", label":"next","outV":30,"inV":27}
+{ id: 27, type: "vertex", label: "resultSet" }
+{ id: 30, type: "vertex", label: "range", start: { line: 5, character: 2 }, end: { line: 5, character: 5 } }
+{ id: 31, type: "edge", label: "next", outV: 30, inV: 27 }
 
 // Declaration of B#foo
-{ id: 45, type: "vertex", label":"resultSet"}
-{ id: 52, type: "vertex", label":"range","start":{"line":9,"character":2},"end":{"line":9,"character":5}}
-{ id: 53, type: "edge", label":"next","outV":52,"inV":45}
+{ id: 45, type: "vertex", label: "resultSet" }
+{ id: 52, type: "vertex", label: "range", start: { line: 9, character: 2 }, end: { line: 9, character: 5 } }
+{ id: 53, type: "edge", label: "next", outV: 52, inV: 45 }
 
 // Reference result for I#foo
-{ id: 46, type: "vertex", label":"referenceResult"}
-{ id: 47, type: "edge", label":"textDocument/references","outV":13,"inV":46}
+{ id: 46, type: "vertex", label: "referenceResult" }
+{ id: 47, type: "edge", label: "textDocument/references", outV: 13, inV: 46 }
 
 // Reference result for II#foo
-{ id: 48, type: "vertex", label":"referenceResult"}
-{ id: 49, type: "edge", label":"textDocument/references","outV":27,"inV":48}
+{ id: 48, type: "vertex", label: "referenceResult" }
+{ id: 49, type: "edge", label: "textDocument/references", outV: 27, inV: 48 }
 
 // Reference result for B#foo
-{ id: 116 "typ" :"ve tex","label":"referenceResult"}
-{ id: 117 "typ" :"ed e","label":"textDocument/references","outV":45,"inV":116}
+{ id: 116 "typ" :"vertex", label: "referenceResult" }
+{ id: 117 "typ" :"edge", label: "textDocument/references", outV: 45, inV: 116 }
 
 // Link B#foo reference result to I#foo and II#foo
-{ id: 118 "typ" :"ed e","label":"item","outV":116,"inVs":[46,48],"document":4,"property":"referenceResults"}
+{ id: 118 "typ" :"edge", label: "item", outV: 116, inVs: [46,48], document: 4, property: "referenceResults" }
 ```
 
 For Typescript, method references are recorded at their most abstract declaration and if methods are merged (`B#foo`), they are combined using a reference result pointing to other results.
 
 ### Request: `textDocument/implementation`
 
-Supporting a `textDocument/implementation` request is done reusing what we implemented for a `textDocument/references` request. In most cases, the `textDocument/implementation` returns the declaration values of the reference result that a symbol declaration points to. For cases where the result differs, the LSIF provides an `ImplementationResult`. The result also allows nesting results and is defined as follows:
+Supporting a `textDocument/implementation` request is done reusing what we implemented for a `textDocument/references` request. In most cases, the `textDocument/implementation` returns the declaration values of the reference result that a symbol declaration points to. For cases where the result differs, the LSIF provides an `ImplementationResult`. To nest implementation results the `item` edge supports a `property` value `"implementationResults"`.
+
+The corresponding `ImplementationResult` looks like this:
 
 ```typescript
 interface ImplementationResult {
 
-  label: 'implementationResult';
-
-  result?: (RangeId | lsp.Location)[];
-
-  implementationResults?: ImplementationResultId[];
+  label: `implementationResult`
 }
 ```
-
-Optionally results can be emitted lazily, by omitting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Request: `textDocument/typeDefinition`
 
@@ -460,8 +467,6 @@ The corresponding `TypeDefinitionResult` looks like this:
 interface TypeDefinitionResult {
 
   label: `typeDefinitionResult`
-
-  result?: (RangeId | lsp.Location)[];
 }
 ```
 
@@ -478,15 +483,25 @@ let i: I;
 The relevant emitted vertices and edges looks like this:
 
 ```typescript
+// The document
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
+
+// The declaration of I
+{ id: 6, type: "vertex", label: "resultSet" }
+{ id: 9, type: "vertex", label: "range", start: { line: 0, character: 10 }, end: { line: 0, character: 11 } }
+{ id: 10, type: "edge", label: "next", outV: 9, inV: 6 }
+
 // The declaration of i
 { id: 26, type: "vertex", label: "resultSet" }
 // The type definition result
-{ id: 37, type: "vertex", label: "typeDefinitionResult", result: 7 }
+{ id: 37, type: "vertex", label: "typeDefinitionResult" }
 // Hook the result to the declaration
 { id: 38, type: "edge", label: "textDocument/typeDefinition", outV: 26, inV:37 }
+// Add the declaration of I as a target range.
+{ id: 51, type: "edge", label: "item", outV: 37, inVs: [9], document: 4 }
 ```
 
-Optionally results can be emitted lazily, by omitting `result` field and adding results later with an `item` edge (without `property`).
+As with other results ranges get added using a `item` edge. In this case without a `property` since there is only on kind of range.
 
 ### Document requests
 
@@ -527,7 +542,7 @@ The corresponding `FoldingRangeResult` is defined as follows:
 export interface FoldingRangeResult {
   label: 'foldingRangeResult';
 
-  result?: lsp.FoldingRange[];
+  result: lsp.FoldingRange[];
 }
 ```
 
@@ -539,7 +554,7 @@ Again, for document links, we define a result type and a corresponding edge to l
 export interface DocumentLinkResult {
   label: 'documentLinkResult';
 
-  result?: lsp.DocumentLink[];
+  result: lsp.DocumentLink[];
 }
 ```
 
@@ -760,18 +775,66 @@ Usually language servers operate in some sort of project context. In TypeScript,
 { id: 3, type: "edge", label: "contains", outV: 1, inV: 2 }
 ```
 
-These properties on the `project` vertex, if defined, should have this semantic:
+The definition of the `project` vertex looks as follows:
 
-| Name | Meaning |
-|--|--
-| `resource` | An absolute URI to the project file.
-| `kind` | The identifier for the language, as enumerated in the LSP spec under the `TextDocumentItem` section.
-| `data` | Project related data, specific to the programming language.
-| `contents` | The content of the project file, `base64` encoded.
+```ts
+export interface Project extends V {
+
+	/**
+	 * The label property.
+	 */
+	label: VertexLabels.project;
+
+	/**
+	 * The project kind like 'typescript' or 'csharp'. See also the language ids
+	 * in the [specification](https://microsoft.github.io/language-server-protocol/specification)
+	 */
+	kind: string;
+
+	/**
+	 * The resource URI of the project file.
+	 */
+	resource?: Uri;
+
+	/**
+	 * Optional the content of the project file, `base64` encoded.
+	 */
+	contents?: string;
+}
+```
 
 ## Embedding contents
 
 It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
+
+## Events
+
+To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
+
+```ts
+// The actual document
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript", contents: "..." }
+// The begin event
+{ id: 5, type: "vertex", label: "$event", kind: "begin", scope: "document" , data: 4 }
+// The end event
+{ id: 53, type: "vertex", label: "$event", kind: "end", scope: "document" , data: 4 }
+```
+
+Between the document vertex `4` and the document begin event `5` no information specific to document `4` can be emitted. Please note that more than one document can be open at a given point in time meaning that there have been n different document begin events without corresponding document end events.
+
+The events for projects looks similar:
+
+```ts
+{ id: 2, type: "vertex", label: "project", kind: "typescript" }
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript", contents: "..." }
+{ id: 5, type: "vertex", label: "$event", kind: "begin", scope: "document" , data: 4 }
+{ id: 3, type: "vertex", label: "$event", kind: "begin", scope: "project", data: 2 }
+{ id: 53, type: "vertex", label: "$event", kind: "end", scope: "document", data: 4 }
+{ id: 54, type: "edge", label: "contains", outV: 2, inVs: [4] }
+{ id: 55, type: "vertex", label: "$event", kind: "end", scope: "project", data: 2 }
+```
+
+
 
 ## Project exports and external imports
 
@@ -788,27 +851,41 @@ export class Emitter {
   }
 
   public emit() {
-    this.do
+    this.doEmit();
   }
 }
 ```
 
 ```typescript
-{ id: 3, type: "vertex", label: "document", uri:"file:///Users/dirkb/samples/index.ts", languageId: "typescript" }
-{ id: 8, type: "vertex", label: "range", start:{ line: 0, character: 16 }, end: { line: 0, character: 20 }, tag: { type: "definition", text: "func", kind: 12, fullRange: { start: { line: 0, character: 0 }, end: { line: 1, character: 1 } } } }
-{ id: 19, type: "vertex", label: "range", start:{ line: 3, character: 13 }, end: { line: 3, character: 20 }, tag: { type: "definition", text: "Emitter", kind: 5, fullRange: { start: { line: 3, character: 0 }, end: { line: 9, character: 1 } } } }
-{ id: 40, type: "vertex", label: "range", start:{ line: 7, character: 8 }, end: { line: 7, character: 12 }, tag: { type: "definition", text: "emit", kind: 6, fullRange: { start: { line: 7, character: 1 }, end: { line: 8, character: 2 } } } }
-{ id: 48, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:func" }
-{ id: 49, type: "edge", label: "moniker", outV: 8, inV: 48 }
-{ id: 50, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter" }
-{ id: 51, type: "edge", label: "moniker", outV: 19, inV: 50 }
-{ id: 58, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit" }
-{ id: 59, type: "edge", label: "moniker", outV: 40, inV: 58 }
+{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/index.ts", languageId: "typescript", contents: "..." }
+{ id: 11, type: "vertex", label: "resultSet" }
+{ id: 12, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:func" }
+{ id: 13, type: "edge", label: "moniker", outV: 11, inV: 12 }
+{ id: 14, type: "vertex", label: "range", start: { line: 0, character: 16 }, end: { line: 0, character: 20 } }
+{ id: 15, type: "edge", label: "next", outV: 14, inV: 11 }
+
+{ id: 18, type: "vertex", label: "resultSet" }
+{ id: 19, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter" }
+{ id: 20, type: "edge", label: "moniker", outV: 18, inV: 19 }
+{ id: 21, type: "vertex", label: "range", start: { line: 3, character: 13 }, end: { line: 3, character: 20 } }
+{ id: 22, type: "edge", label: "next", outV: 21, inV: 18 }
+
+{ id: 25, type: "vertex", label: "resultSet" }
+{ id: 26, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.doEmit" }
+{ id: 27, type: "edge", label: "moniker", outV: 25, inV: 26 }
+{ id: 28, type: "vertex", label: "range", start: { line: 4, character: 10 }, end: { line: 4, character: 16 } }
+{ id: 29, type: "edge", label: "next", outV: 28, inV: 25 }
+
+{ id: 32, type: "vertex", label: "resultSet" }
+{ id: 33, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit" }
+{ id: 34, type: "edge", label: "moniker", outV: 32, inV: 33 }
+{ id: 35, type: "vertex", label: "range", start: { line: 7, character: 9 }, end: { line: 7, character: 13 } }
+{ id: 36, type: "edge", label: "next", outV: 35, inV: 32 }
 ```
 
 This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has two properties: a `scheme` to indicate how the `identifiers` is to be interpreted. And the `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 
-Also note that the `doEmit` method has no moniker associated since the method is private.
+Please also note that the method `Emitter#doEmit` has a moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript cant enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
 
 How these exported elements are visible in other projects in most programming languages depends on how many files are packaged into a library or program. In TypeScript, the standard package manager is npm.
 
@@ -825,15 +902,35 @@ Consider that the following `package.json` file exists:
 }
 ```
 
-These monikers can be translated into monikers that are `npm` dependent. They will look like this then:
+then these monikers can be translated into monikers that are `npm` dependent. Instead of replacing the monikers we emit a second set of monikers and link the `tsc` monikers to corresponding `npm` monikers using a `nextMoniker`edge:
 
 ```typescript
-{ id: 48, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func" }
-{ id: 50, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter" }
-{ id: 58, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.emit" }
-```
+{ id: 991, type: "vertex", label: "packageInformation", name: "lsif-ts-sample", manager: "npm", version: "1.0.0" }
 
-For the LSIF, we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
+{ id: 987, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func" }
+{ id: 986, type: "edge", label: "packageInformation", outV: 987, inV: 991 }
+{ id: 985, type: "edge", label: "nextMoniker", outV: 12, inV: 987 }
+
+{ id: 984, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter" }
+{ id: 983, type: "edge", label: "packageInformation", outV: 984, inV: 991 }
+{ id: 982, type: "edge", label: "nextMoniker", outV: 19, inV: 984 }
+
+{ id: 981, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.doEmit" }
+{ id: 980, type: "edge", label: "packageInformation", outV: 981, inV: 991 }
+{ id: 979, type: "edge", label: "nextMoniker", outV: 26, inV: 981 }
+
+{id: 978, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.emit" }
+{id: 977, type: "edge", label: "packageInformation", outV: 978, inV: 991 }
+{id: 976, type: "edge", label: "nextMoniker", outV: 33, inV: 978 }
+```
+Things to observe:
+
+- a special `packageInformation`vertex got emitted to point to the corresponding npm package information.
+- the npm moniker refer to the package name.
+- since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were onblky the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
+- the `nextMoniker` edge points from the tsc moniker vertex to the npm moniker vertex.
+
+For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
 
 Reporting importing external symbols is done using the same approach. The LSIF emits monikers of kind `import`. Consider the following typescript example:
 
@@ -846,24 +943,26 @@ let map: mobx.ObservableMap = new mobx.ObservableMap();
 where `mobx` is the [npm mobx package](https://www.npmjs.com/package/mobx). Running the tsc index tools produces:
 
 ```typescript
-{ id: 8, type: "vertex", label: "document", uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/mobx.d.ts", languageId: "typescript" }
-{ id: 122, type: "vertex", label: "range", start: { line: 17, character: 538 }, end: { line: 17, character: 551 }, tag: { type: "definition", text: "ObservableMap", kind:7, fullRange: {start: { line: 17, character: 538 }, end: { line: 17, character: 551 } } } }
-{ id: 123, type: "edge", label: "contains", outV: 8, inV: 122 }
-{ id: 124, type: "vertex", label: "moniker", kind: "import", scheme: "tsc", identifier: "node_modules/mobx/lib/mobx:ObservableMap" }
-{ id: 126, type: "edge", label: "moniker", outV: 122, inV: 124 }
+{ id: 41, type: "vertex", label: "document", uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/types/observablemap.d.ts", languageId: "typescript", contents: "..." }
+{ id: 55, type: "vertex", label: "resultSet" }
+{ id: 57, type: "vertex", label: "moniker",  kind: "import", scheme: "tsc", identifier: "node_modules/mobx/lib/mobx:ObservableMap" }
+{ id: 58, type: "edge", label: "moniker", outV: 55, inV: 57 }
+{ id: 59, type: "vertex", label: "range", start: { line: 17, character: 538 }, end: { line: 17, character: 551 } }
+{ id: 60, type: "edge", label: "next", outV: 59, inV: 55 }
 ```
 
-Two things to note here: First, TypeScript uses declarations files for externally imported symbols. That has the nice effect that the moniker information can be attached to the declaration ranges in these files. In other languages, the information might be attached to the file actually referencing the symbol. Or a virtual document for the referenced item is generated. Second, the tool only generates this information for symbols actually referenced, not for all available symbols.
+Three things to note here: First, TypeScript uses declarations files for externally imported symbols. That has the nice effect that the moniker information can be attached to the declaration ranges in these files. In other languages, the information might be attached to the file actually referencing the symbol. Or a virtual document for the referenced item is generated. Second, the tool only generates this information for symbols actually referenced, not for all available symbols. Third these monikers are `tsc` specific and point to the `node_modules` folder.
 
-Piping this information through the npm tool will generate the following information:
+However piping this information through the npm tool will generate the following information:
 
 ```typescript
-{ id: 9, type: "vertex", label: "packageInformation", name: "mobx", manager: "npm", version: "5.6.0", uri: "file:///Users/dirkb/samples/node_modules/mobx/package.json"}
-{ id: 124, type: "vertex", label: "moniker", kind: "import", scheme: "tsc", identifier: "mobx::ObservableMap" }
-{ id: 125, type: "edge", label: "packageInformation", outV: 124, inV:9 }
+{id: 991, type: "vertex", label: "packageInformation", name: "mobx", manager: "npm", version: "5.6.0", repository: { type: "git", url: "git+https://github.com/mobxjs/mobx.git" } }
+{ id: 978, type: "vertex", label: "moniker", kind: "import", scheme: "npm", identifier: "mobx::ObservableMap" }
+{ id: 977, type: "edge", label: "packageInformation", outV: 978, inV: 991 }
+{ id: 976, type: "edge", label: "nextMoniker", outV: 978, inV: 57 }
 ```
 
-which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted.
+which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
 
 ## Meta Data Vertex
 
@@ -885,6 +984,8 @@ export interface MetaData {
 	version: string;
 }
 ```
+
+## Emitting constraints
 
 ## Tools
 
