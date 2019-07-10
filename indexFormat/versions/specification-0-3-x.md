@@ -1,18 +1,15 @@
-# Under Construction
-
-The 0.4.0 version of LSIF is currently under construction.
-
 ## Language Server Index Format
 
 The purpose of the Language Server Index Format (LSIF) is it to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
 
 ### Changelog
 
-#### Version 0.4.0
+#### Version 0.2.2
 
-Up to version 0.4.0 the focus of the LSIF format was to ease the generation of the dump for language tool providers. However this made it very hard for consumers of the dump to efficiently import them into a DB unless the DB format one to one mapped to the LSIF format. This version of the specification tries to balance this by requiring tools providers to emit additional events of when certain data is ready to be consumed. It also adds support to partition data per document.
-
-Since 0.4.0 changes some of the LSIF aspects more deeply an old 0.3.x version of the specification is available [here](./versions/specification-0-3-x.md)
+- Removed export and import result and replaced it with monikers linked to the definition / declaration ranges.
+- Added a package information vertex to be linked to monikers that are provided through a package.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` and array only.
+- Make results in `DefinitionResult`, `DeclarationResult` and `TypeDefinitionResult` optional so that they can be filled using an item edge.
 
 ### Motivation
 
@@ -59,8 +56,6 @@ The dump format therefore should support the following features:
 - Each element has a unique id (which may be a string or a number).
 - It should be possible to emit data as soon as it is available to allow streaming rather than large memory requirements. For example, emitting data based on document syntax should be done for each file as parsing progresses.
 - It should be easy to add additional requests later on.
-- It should be easy for a tool to consume a dump and for example import it into a database without holding the dump in memory.
-
 
 We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
 
@@ -91,13 +86,11 @@ A hover request for a position denoting the `b` in `bar` will return the same re
 { id: 4, type: "vertex", label: "range", start: { line: 0, character: 9}, end: { line: 0, character: 12 } }
 ```
 
-To bind the range to a document, we use a special edge labeled `contains` which points from a document to a set of ranges.
+To bind the range to a document, we use a special edge labeled `contains` which points from a document to a range.
 
 ```typescript
-{ id: 5, type: "edge", label: "contains", outV: 1, inVs: [4] }
+{ id: 5, type: "edge", label: "contains", outV: 1, inV: 4}
 ```
-
-LSIF supports 1:n edges for the `contains` relationship which in a graph can easily be mapped to n 1:1 edges. LSIF support this for two reasons: (a) to make the output more compact since a document usually contains hundreds of those ranges and (b) to easy the import and batching for consumers of a LSIF dump.
 
 To bind the hover result to the range, we use the same pattern as we used for the folding ranges. We emit a vertex representing the hover result and an edge representing the `textDocument/hover` request.
 
@@ -121,7 +114,6 @@ The corresponding graph looks like this
 
 The ranges emitted for a document must follow these rules:
 
-1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if the have the same start / end value.
 1. No two ranges can be equal.
 1. No two ranges can overlap, claiming the same position in a document unless one range is entirely contained by the other.
 
@@ -149,26 +141,22 @@ The corresponding output of the above example with a hover using a result set lo
 { id: 1, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
 { id: 2, type: "vertex", label: "resultSet" }
 { id: 3, type: "vertex", label: "range", start: { line: 0, character: 9}, end: { line: 0, character: 12 } }
-{ id: 4, type: "edge", label: "contains", outV: 1, inVs: [3] }
-{ id: 5, type: "edge", label: "next", outV: 3, inV: 2 }
+{ id: 4, type: "edge", label: "contains", outV: 1, inV: 3 }
+{ id: 5, type: "edge", label: "refersTo", outV: 3, inV: 2 }
 { id: 6, type: "vertex", label: "hoverResult", result: {"contents":[{"language":"typescript","value":"function bar(): void"},""] }
 { id: 7, type: "edge", label: "textDocument/hover", outV: 2, inV: 6 }
 ```
 
 <img src="./resultSet.png" alt="Result Set"  style="max-width: 50%; max-height: 50%"/>
 
-Result sets are linked to ranges using a `next` edge. A results set can also forward information to another result set by linking to it using a `next` edge.
-
 The pattern of storing the result with the `ResultSet` will be used for other requests as well. The lookup algorithm is therefore as follows for a request [document, position, method]:
 
 1. find all ranges for [document, position]. If none exist, return `null` as the result
 1. sort the ranges by containment the innermost first
 1. for range in ranges do
-   1. assign range to out
-   1. while out !== `null`
-      1. check if out has an outgoing edge `textDocument/${method}`. if yes, use it and return the corresponding result
-      1. check if out has an outgoing `next` edge. If yes, set out to the target vertex. Else set out to `null`
-   1. end
+   1. check if range has an outgoing edge `textDocument/${method}`. if yes, use it and return the corresponding result
+   1. check if range has an outgoing edge `refersTo`. if yes, resolve the result set
+   1. check if the result set has an outgoing edge `textDocument/${method}`. if yes, use it and return the corresponding result
 1. end
 1. otherwise return `null`
 
@@ -188,31 +176,26 @@ function foo() {
 This will emit the following vertices and edges to model the `textDocument/definition` request:
 
 ```typescript
-// The document
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
-
 // The bar declaration
-{ id: 6, type: "vertex", label: "resultSet" }
-{ id: 9, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
-{ id: 10, type: "edge", label: "next", outV: 9, inV: 6 }
-
-
-// The bar reference
-{ id: 20, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
-{ id: 21, type: "edge", label: "next", outV: 20, inV: 6}
+{ id: 4, type: "vertex", label: "resultSet" }
+{ id: 7, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
 
 // The definition result linked to the bar result set
-{ id: 22, type: "vertex", label: "definitionResult" }
-{ id: 23, type: "edge", label: "textDocument/definition", outV: 6, inV: 22 }
-{ id: 24, type: "edge", label: "item", outV: 22, inVs: [9], document: 4 }
+{ id: 13, type: "vertex", label: "definitionResult", result: [7] }
+{ id: 14, type: "edge", label: "textDocument/definition", outV: 4, inV: 13 }
+
+// The bar reference
+{ id: 26, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
+// The bar range pointing to the bar result set
+{ id: 28, type: "edge", label: "refersTo", outV: 26, inV: 4}
 ```
 
 <img src="./definitionResult.png" alt="Definition Result" style="max-width: 50%; max-height: 50%"/>
 
-The definition result above has only one value (the range with id '9') and we could have emitted it directly. However, we introduced the definition result vertex for two reasons:
+In the example above, the definition result has only one value: the id `7`. We could have instead emitted an edge directly pointing from id `4` to id `7`. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
-- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
+- The result is actually an array to support languages that have type merging. The LSP result for the `textDocument/definition` request is defined as `Location | Location[]` but for easier handling the LSIF only supports arrays.
 
 Consider the following TypeScript example:
 
@@ -229,11 +212,29 @@ let x: X;
 Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets the user select between the two definitions of the `interface X`. The emitted JSON in this case looks like this:
 
 ```typescript
-{ id : 38, type: "vertex", label: "definitionResult" }
-{ id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], document: 4 }
+{ id: 31, type: "vertex", label: "definitionResult", result: [5, 10] }
 ```
 
-The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `containes` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
+The TypeScript interface for a definition result looks like this:
+
+```typescript
+/**
+ * A vertex representing a definition result.
+ */
+export interface DefinitionResult {
+  /**
+   * The label property.
+   */
+  label: 'definitionResult';
+
+  /**
+   * The actual result.
+   */
+  result?: (RangeId | lsp.Location)[];
+}
+```
+
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Request: `textDocument/declaration`
 
@@ -269,7 +270,10 @@ This makes the hover different for every location so we can't really store it wi
 
 ### Request: `textDocument/references`
 
-Storing references will be done in the same way as storing a hover or go to definition ranges. It uses a reference result vertex and `item` edges to add ranges to the result.
+Storing references will be done in the same way as storing a hover or Go to Definition ranges. It uses a reference result vertex. In a naïve approach, the reference result would contain range ids as well. However, that would force the emitter of the reference result to buffer the result until all files are parsed to ensure all references are contained. This usually leads to high memory consumption so we added a way to add values into a result vertex dynamically. This is done as follows:
+
+- The result is emitted empty.
+- An item is added to the result by emitting an `item` edge which points from the result to the item.
 
 Look at the following example:
 
@@ -285,35 +289,49 @@ function foo() {
 The relevant JSON output looks like this:
 
 ```typescript
-// The document
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
-
 // The bar declaration
-{ id: 6, type: "vertex", label: "resultSet" }
-{ id: 9, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
-{ id: 10, type: "edge", label: "next", outV: 9, inV: 6 }
-
-// The bar reference range
-{ id: 20, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
-{ id: 21, type: "edge", label: "next", outV: 20, inV: 6 }
+{ id: 4, type: "vertex", label: "resultSet" }
 
 // The reference result
-{ id : 25, type: "vertex", label: "referenceResult" }
+{ id: 5, type: "vertex", label: "referenceResult"}
 // Link it to the result set
-{ id : 26, type: "edge", label: "textDocument/references",  outV: 6, inV: 25 }
+{ id: 6, type: "edge", label: "textDocument/references", outV: 4, inV: 5 }
 
-// Add the bar definition as a reference to the reference result
-{ id: 27, type: "edge", label: "item", outV: 25, inVs: [9], document: 4, property : "definitions" }
+// The range defining bar
+{ id: 7, type: "vertex", label: "range", start: { line: 0, character: 9 }, end: { line: 0, character: 12 } }
+// Link the range to the result set
+{ id: 9, type: "edge", label: "refersTo", outV: 7, inV: 4 }
+// Add the range to the reference result
+{ id: 10, type: "edge", label: "item", property: "definition", outV: 5, inV: 7 }
 
-// Add the bar reference as a reference to the reference result
-{ id: 28, type: "edge", label: "item", outV: 25, inVs: [20], document:4, property: "references" }
+// The range referencing bar
+{ id: 26, type: "vertex", label: "range", start: { line: 4, character: 2 }, end: { line: 4, character: 5 } }
+// Link it to the result set
+{ id: 28, type: "edge", label: "refersTo", outV: 26, inV: 4 }
+// Add it to the reference result.
+{ id: 29, type: "edge", label: "item", property: "reference", outV: 5, inV: 26 }
 ```
 
 <img src="./referenceResult.png" alt="References Result"  style="max-width: 50%; max-height: 50%"/>
 
-We tag the `item` edge with id 27 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly.
+We tag the `item` edge with id 10 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly. The `ReferenceResult` could be declared as follows:
 
-The item edge also support linking reference results to other reference results. This is useful when computing references to methods overridden in a type hierarchy.
+```typescript
+export interface Draft_ReferenceResult { // See below
+
+  label: 'referenceResult';
+
+  declarations?: (RangeId | lsp.Location)[];
+
+  definitions?: (RangeId | lsp.Location)[];
+
+  references?: (RangeId | lsp.Location)[];
+}
+```
+
+The reference result also allows inlining the result as an ID within the array. This should be used if the result vertex can easily be computed (for example, for local variable, private members, not exported members, ...) to make the output more compact. It also allows inlining a `lsp.Location` directly. This can be used if a range needs to be stored that conflicts with the rule that ranges must not overlap.
+
+The concept of a reference result is also useful when computing references to methods overridden in a type hierarchy.
 
 Take the following example:
 
@@ -344,46 +362,38 @@ The reference result for the method `foo` in TypeScript contains all three decla
 The output looks like this:
 
 ```typescript
-// The document
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
-
 // The declaration of I#foo
-{ id: 13, type: "vertex", label: "resultSet" }
-{ id: 16, type: "vertex", label: "range", start: { line: 1, character: 2 }, end: { line: 1, character: 5 } }
-{ id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
-// The reference result for I#foo
-{ id: 30, type: "vertex", label: "referenceResult" }
-{ id: 31, type: "edge", label: "textDocument/references", outV: 13, inV: 30 }
+{ id: 15, type: "vertex", label: "resultSet" }
+// The shared reference result
+{ id: 16, type: "vertex", label: "referenceResult" }
+{ id: 17, type: "edge", label: "textDocument/references", outV: 15, inV: 16 }
+{ id: 18, type: "vertex", label: "range", start: { line: 1, character: 2 }, end: { line: 1, character: 5 } }
+{ id: 20, type: "edge", label: "refersTo", outV: 18, inV: 15 }
+{ id: 21, type: "edge", label: "item", property: "definition", outV: 16, inV: 18 }
 
-// The declaration of A#foo
-{ id: 29, type: "vertex", label: "resultSet" }
-{ id: 34, type: "vertex", label: "range", start: { line: 5, character: 2 }, end: { line: 5, character: 5 } }
-{ id: 35, type: "edge", label: "next", outV: 34, inV: 29 }
+// The declaration of A#foo. Observe it reuses the reference result with id 16
+{ id: 41, type: "vertex", label: "resultSet" }
+{ id: 42, type: "edge", label: "textDocument/references", outV: 41, inV: 16 }
+{ id: 43, type: "vertex", label: "range", start: { line: 5, character: 2 }, end: { line: 5, character: 5 } }
+{ id: 45, type: "edge", label: "refersTo", outV: 43, inV: 41 }
+{ id: 46, type: "edge", label: "item", property: "definition", outV: 16, inV: 43 }
 
-// The declaration of B#foo
-{ id: 47, type: "vertex", label: "resultSet" }
-{ id: 50, type: "vertex", label: "range", start: { line: 10, character: 2 }, end: { line: 10, character: 5 } }
-{ id: 51, type: "edge", label: "next", outV: 50, inV: 47 }
+// The declaration of B#foo. Observe it reuses the reference result with id id 16
+{ id: 66, type: "vertex", label: "resultSet" }
+{ id: 67, type: "edge", label: "textDocument/references", outV: 66, inV: 16 }
+{ id: 68, type: "vertex", label: "range", start: { line: 10, character: 2 }, end: { line: 10, character: 5 } }
+{ id: 70, type: "edge", label: "refersTo", outV: 68, inV: 66 }
+{ id: 71, type: "edge", label: "item", property: "definition", outV: 16, inV: 68 }
 
-// The reference i.foo()
-{ id: 65, type: "vertex", label: "range", start: { line: 15, character: 2 }, end: { line: 15, character: 5 } }
+// The reference `i.foo()`
+{ id: 97, type: "vertex", label: "range", start: { line: 15, character: 2 }, end: { line: 15, character: 5 } }
+{ id: 99, type: "edge", label: "refersTo", outV: 97, inV: 15 }
+{ id: 100, type: "edge", label: "item", property: "reference", outV: 16, inV: 97 }
 
-// The reference b.foo()
-{ id: 78, type: "vertex", label: "range", start: { line: 18, character: 2 }, end: { line: 18, character: 5 } }
-
-// The insertion of the ranges into the shared reference result
-{ id: 90, type: "edge", label: "item", outV: 30, inVs: [16,34,50], document: 4, property: definitions }
-{ id: 91, type: "edge", label: "item", outV: 30, inVs: [65,78], document: 4, property: references }
-
-// Linking A#foo to I#foo
-{ id: 101, type: "vertex", label: "referenceResult" }
-{ id: 102, type: "edge", label: "textDocument/references", outV: 29, inV: 101 }
-{ id: 103, type: "edge", label: "item", outV: 101, inVs: [30], document: 4, property: referenceResults }
-
-// Linking B#foo to I#foo
-{ id: 114, type: "vertex", label: "referenceResult" }
-{ id: 115, type: "edge", label: "textDocument/references", outV: 47, inV: 114 }
-{ id: 116, type: "edge", label: "item", outV: 114, inVs: [30], document: 4, property: referenceResults }
+// The reference `b.foo()`
+{ id: 122, type: "vertex", label: "range", start: { line: 18, character: 2 }, end: { line: 18, character: 5 } }
+{ id: 124, type: "edge", label: "refersTo", outV: 122, inV: 66 }
+{ id: 125, type: "edge", label: "item", property: "reference", outV: 16, inV: 122 }
 ```
 
 One goal of the language server index format is that the information can be emitted as soon as possible without caching too much information in memory. With languages that support overriding methods defined in more than one interface, this can be more complicated since the whole inheritance tree might only be known after parsing all documents.
@@ -416,54 +426,64 @@ Searching for `I#foo()` finds 4 references, searching for `II#foo()` finds 3 ref
 In the above example, there will be three reference results
 
 ```typescript
-// The document
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
 
 // Declaration of I#foo
-{ id: 13, type: "vertex", label: "resultSet" }
-{ id: 16, type: "vertex", label: "range", start: { line: 1, character: 2 }, end: { line: 1, character: 5 } }
-{ id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
+{ id: 15, type: "vertex", label: "resultSet" }
+{ id: 16, type: "vertex", label: "referenceResult" }
+{ id: 17, type: "edge", label: "textDocument/references", outV: 15, inV: 16 }
 
 // Declaration of II#foo
-{ id: 27, type: "vertex", label: "resultSet" }
-{ id: 30, type: "vertex", label: "range", start: { line: 5, character: 2 }, end: { line: 5, character: 5 } }
-{ id: 31, type: "edge", label: "next", outV: 30, inV: 27 }
+{ id: 37, type: "vertex", label: "resultSet" }
+{ id: 38, type: "vertex", label: "referenceResult"}
+{ id: 39, type: "edge", label: "textDocument/references", outV: 37, inV: 38 }
 
 // Declaration of B#foo
-{ id: 45, type: "vertex", label: "resultSet" }
-{ id: 52, type: "vertex", label: "range", start: { line: 9, character: 2 }, end: { line: 9, character: 5 } }
-{ id: 53, type: "edge", label: "next", outV: 52, inV: 45 }
-
-// Reference result for I#foo
-{ id: 46, type: "vertex", label: "referenceResult" }
-{ id: 47, type: "edge", label: "textDocument/references", outV: 13, inV: 46 }
-
-// Reference result for II#foo
-{ id: 48, type: "vertex", label: "referenceResult" }
-{ id: 49, type: "edge", label: "textDocument/references", outV: 27, inV: 48 }
-
-// Reference result for B#foo
-{ id: 116 "typ" :"vertex", label: "referenceResult" }
-{ id: 117 "typ" :"edge", label: "textDocument/references", outV: 45, inV: 116 }
-
-// Link B#foo reference result to I#foo and II#foo
-{ id: 118 "typ" :"edge", label: "item", outV: 116, inVs: [46,48], document: 4, property: "referenceResults" }
+{ id: 67, type: "vertex", label: "resultSet" }
+// The combined reference result
+{ id: 68, type: "vertex", label: "referenceResult", referenceResults: [ 16,38 ] }
+// Link the reference result to the result set of B#foo
+{ id: 69, type: "edge", label: "textDocument/references", outV: 67, inV: 68 }
+// Add the declaratin to both linked reference results. This ensures that find all references
+// on I#foo and II#foo lists B#foo as well.
+{ id: 73, type: "edge", label: "item", property: "definition", outV: 16, inV: 70 }
+{ id: 74, type: "edge", label: "item", property: "definition", outV: 38, inV: 70 }
 ```
 
 For Typescript, method references are recorded at their most abstract declaration and if methods are merged (`B#foo`), they are combined using a reference result pointing to other results.
 
+All things considered, the declaration of `ReferenceResult` looks like this:
+
+```typescript
+export interface ReferenceResult {
+
+  label: 'referenceResult';
+
+  declarations?: (RangeId | lsp.Location)[];
+
+  definitions?: (RangeId | lsp.Location)[];
+
+  references?: (RangeId | lsp.Location)[];
+
+  referenceResults?: ReferenceResultId[];
+}
+```
+
 ### Request: `textDocument/implementation`
 
-Supporting a `textDocument/implementation` request is done reusing what we implemented for a `textDocument/references` request. In most cases, the `textDocument/implementation` returns the declaration values of the reference result that a symbol declaration points to. For cases where the result differs, the LSIF provides an `ImplementationResult`. To nest implementation results the `item` edge supports a `property` value `"implementationResults"`.
-
-The corresponding `ImplementationResult` looks like this:
+Supporting a `textDocument/implementation` request is done reusing what we implemented for a `textDocument/references` request. In most cases, the `textDocument/implementation` returns the declaration values of the reference result that a symbol declaration points to. For cases where the result differs, the LSIF provides an `ImplementationResult`. The result also allows nesting results and is defined as follows:
 
 ```typescript
 interface ImplementationResult {
 
-  label: `implementationResult`
+  label: 'implementationResult';
+
+  result?: (RangeId | lsp.Location)[];
+
+  implementationResults?: ImplementationResultId[];
 }
 ```
+
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Request: `textDocument/typeDefinition`
 
@@ -475,6 +495,8 @@ The corresponding `TypeDefinitionResult` looks like this:
 interface TypeDefinitionResult {
 
   label: `typeDefinitionResult`
+
+  result?: (RangeId | lsp.Location)[];
 }
 ```
 
@@ -491,25 +513,15 @@ let i: I;
 The relevant emitted vertices and edges looks like this:
 
 ```typescript
-// The document
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
-
-// The declaration of I
-{ id: 6, type: "vertex", label: "resultSet" }
-{ id: 9, type: "vertex", label: "range", start: { line: 0, character: 10 }, end: { line: 0, character: 11 } }
-{ id: 10, type: "edge", label: "next", outV: 9, inV: 6 }
-
 // The declaration of i
 { id: 26, type: "vertex", label: "resultSet" }
 // The type definition result
-{ id: 37, type: "vertex", label: "typeDefinitionResult" }
+{ id: 37, type: "vertex", label: "typeDefinitionResult", result: 7 }
 // Hook the result to the declaration
 { id: 38, type: "edge", label: "textDocument/typeDefinition", outV: 26, inV:37 }
-// Add the declaration of I as a target range.
-{ id: 51, type: "edge", label: "item", outV: 37, inVs: [9], document: 4 }
 ```
 
-As with other results ranges get added using a `item` edge. In this case without a `property` since there is only on kind of range.
+Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Document requests
 
@@ -550,7 +562,7 @@ The corresponding `FoldingRangeResult` is defined as follows:
 export interface FoldingRangeResult {
   label: 'foldingRangeResult';
 
-  result: lsp.FoldingRange[];
+  result?: lsp.FoldingRange[];
 }
 ```
 
@@ -562,7 +574,7 @@ Again, for document links, we define a result type and a corresponding edge to l
 export interface DocumentLinkResult {
   label: 'documentLinkResult';
 
-  result: lsp.DocumentLink[];
+  result?: lsp.DocumentLink[];
 }
 ```
 
@@ -727,9 +739,9 @@ Produces the following output:
 // The declaration of Main
 { id: 7 , type: "vertex", label: "range", start: { line: 0, character: 10 }, end: { line: 0, character: 14 }, tag: { type: "definition", text: "Main", kind: 7, fullRange: { start: { line: 0, character: 0 }, end: { line: 5, character: 1 } } } }
 // The declaration of hello
-{ id: 18 , type: "vertex", label: "range", start: { line: 1, character: 11 }, end: { line: 1, character: 16 }, tag: { type: "definition", text: "hello", kind: 12, fullRange: { start: { line: 1, character: 2 }, end: { line: 2, character: 3 } } } }
+{ id: 18 , type: "vertex", label: "range", start: { line: 1, character: 11 }, end: { line: 1, character: 16 },tag: { type: "definition", text: "hello", kind: 12, fullRange: { start: { line: 1, character: 2 }, end: { line: 2, character: 3 } } } }
 // The declaration of world
-{ id: 29 , type: "vertex", label: "range", start: { line: 3, character: 11 }, end: { line: 3, character: 16 }, tag: { type: "definition", text: "world", kind: 12, fullRange: { start: { line: 3, character: 2 }, end: { line: 4, character: 3 } } } }
+{ id: 29 , type: "vertex", label: "range", start: { line: 3, character: 11 }, end: { line: 3, character: 16 },tag: { type: "definition", text: "world", kind: 12, fullRange: { start: { line: 3, character: 2 }, end: { line: 4, character: 3 } } } }
 // The document symbol
 { id: 39 , type: "vertex", label: "documentSymbolResult", result: [ { id: 7 , children: [ { id: 18 }, { id: 29 } ] } ] }
 { id: 40 , type: "edge", label: "textDocument/documentSymbol", outV: 2, inV: 39 }
@@ -783,64 +795,18 @@ Usually language servers operate in some sort of project context. In TypeScript,
 { id: 3, type: "edge", label: "contains", outV: 1, inV: 2 }
 ```
 
-The definition of the `project` vertex looks as follows:
+These properties on the `project` vertex, if defined, should have this semantic:
 
-```ts
-export interface Project extends V {
-
-	/**
-	 * The label property.
-	 */
-	label: VertexLabels.project;
-
-	/**
-	 * The project kind like 'typescript' or 'csharp'. See also the language ids
-	 * in the [specification](https://microsoft.github.io/language-server-protocol/specification)
-	 */
-	kind: string;
-
-	/**
-	 * The resource URI of the project file.
-	 */
-	resource?: Uri;
-
-	/**
-	 * Optional the content of the project file, `base64` encoded.
-	 */
-	contents?: string;
-}
-```
+| Name | Meaning |
+|--|--
+| `resource` | An absolute URI to the project file.
+| `kind` | The identifier for the language, as enumerated in the LSP spec under the `TextDocumentItem` section.
+| `data` | Project related data, specific to the programming language.
+| `contents` | The content of the project file, `base64` encoded.
 
 ## Embedding contents
 
 It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
-
-## Events
-
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
-
-```ts
-// The actual document
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript", contents: "..." }
-// The begin event
-{ id: 5, type: "vertex", label: "$event", kind: "begin", scope: "document" , data: 4 }
-// The end event
-{ id: 53, type: "vertex", label: "$event", kind: "end", scope: "document" , data: 4 }
-```
-
-Between the document vertex `4` and the document begin event `5` no information specific to document `4` can be emitted. Please note that more than one document can be open at a given point in time meaning that there have been n different document begin events without corresponding document end events.
-
-The events for projects looks similar:
-
-```ts
-{ id: 2, type: "vertex", label: "project", kind: "typescript" }
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript", contents: "..." }
-{ id: 5, type: "vertex", label: "$event", kind: "begin", scope: "document" , data: 4 }
-{ id: 3, type: "vertex", label: "$event", kind: "begin", scope: "project", data: 2 }
-{ id: 53, type: "vertex", label: "$event", kind: "end", scope: "document", data: 4 }
-{ id: 54, type: "edge", label: "contains", outV: 2, inVs: [4] }
-{ id: 55, type: "vertex", label: "$event", kind: "end", scope: "project", data: 2 }
-```
 
 ## Project exports and external imports
 
@@ -857,41 +823,27 @@ export class Emitter {
   }
 
   public emit() {
-    this.doEmit();
+    this.do
   }
 }
 ```
 
 ```typescript
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/index.ts", languageId: "typescript", contents: "..." }
-{ id: 11, type: "vertex", label: "resultSet" }
-{ id: 12, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:func" }
-{ id: 13, type: "edge", label: "moniker", outV: 11, inV: 12 }
-{ id: 14, type: "vertex", label: "range", start: { line: 0, character: 16 }, end: { line: 0, character: 20 } }
-{ id: 15, type: "edge", label: "next", outV: 14, inV: 11 }
-
-{ id: 18, type: "vertex", label: "resultSet" }
-{ id: 19, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter" }
-{ id: 20, type: "edge", label: "moniker", outV: 18, inV: 19 }
-{ id: 21, type: "vertex", label: "range", start: { line: 3, character: 13 }, end: { line: 3, character: 20 } }
-{ id: 22, type: "edge", label: "next", outV: 21, inV: 18 }
-
-{ id: 25, type: "vertex", label: "resultSet" }
-{ id: 26, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.doEmit" }
-{ id: 27, type: "edge", label: "moniker", outV: 25, inV: 26 }
-{ id: 28, type: "vertex", label: "range", start: { line: 4, character: 10 }, end: { line: 4, character: 16 } }
-{ id: 29, type: "edge", label: "next", outV: 28, inV: 25 }
-
-{ id: 32, type: "vertex", label: "resultSet" }
-{ id: 33, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit" }
-{ id: 34, type: "edge", label: "moniker", outV: 32, inV: 33 }
-{ id: 35, type: "vertex", label: "range", start: { line: 7, character: 9 }, end: { line: 7, character: 13 } }
-{ id: 36, type: "edge", label: "next", outV: 35, inV: 32 }
+{ id: 3, type: "vertex", label: "document", uri:"file:///Users/dirkb/samples/index.ts", languageId: "typescript" }
+{ id: 8, type: "vertex", label: "range", start:{ line: 0, character: 16 }, end: { line: 0, character: 20 }, tag: { type: "definition", text: "func", kind: 12, fullRange: { start: { line: 0, character: 0 }, end: { line: 1, character: 1 } } } }
+{ id: 19, type: "vertex", label: "range", start:{ line: 3, character: 13 }, end: { line: 3, character: 20 }, tag: { type: "definition", text: "Emitter", kind: 5, fullRange: { start: { line: 3, character: 0 }, end: { line: 9, character: 1 } } } }
+{ id: 40, type: "vertex", label: "range", start:{ line: 7, character: 8 }, end: { line: 7, character: 12 }, tag: { type: "definition", text: "emit", kind: 6, fullRange: { start: { line: 7, character: 1 }, end: { line: 8, character: 2 } } } }
+{ id: 48, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:func" }
+{ id: 49, type: "edge", label: "moniker", outV: 8, inV: 48 }
+{ id: 50, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter" }
+{ id: 51, type: "edge", label: "moniker", outV: 19, inV: 50 }
+{ id: 58, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit" }
+{ id: 59, type: "edge", label: "moniker", outV: 40, inV: 58 }
 ```
 
 This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has two properties: a `scheme` to indicate how the `identifiers` is to be interpreted. And the `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 
-Please also note that the method `Emitter#doEmit` has a moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript cant enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
+Also note that the `doEmit` method has no moniker associated since the method is private.
 
 How these exported elements are visible in other projects in most programming languages depends on how many files are packaged into a library or program. In TypeScript, the standard package manager is npm.
 
@@ -908,35 +860,15 @@ Consider that the following `package.json` file exists:
 }
 ```
 
-then these monikers can be translated into monikers that are `npm` dependent. Instead of replacing the monikers we emit a second set of monikers and link the `tsc` monikers to corresponding `npm` monikers using a `nextMoniker`edge:
+These monikers can be translated into monikers that are `npm` dependent. They will look like this then:
 
 ```typescript
-{ id: 991, type: "vertex", label: "packageInformation", name: "lsif-ts-sample", manager: "npm", version: "1.0.0" }
-
-{ id: 987, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func" }
-{ id: 986, type: "edge", label: "packageInformation", outV: 987, inV: 991 }
-{ id: 985, type: "edge", label: "nextMoniker", outV: 12, inV: 987 }
-
-{ id: 984, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter" }
-{ id: 983, type: "edge", label: "packageInformation", outV: 984, inV: 991 }
-{ id: 982, type: "edge", label: "nextMoniker", outV: 19, inV: 984 }
-
-{ id: 981, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.doEmit" }
-{ id: 980, type: "edge", label: "packageInformation", outV: 981, inV: 991 }
-{ id: 979, type: "edge", label: "nextMoniker", outV: 26, inV: 981 }
-
-{id: 978, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.emit" }
-{id: 977, type: "edge", label: "packageInformation", outV: 978, inV: 991 }
-{id: 976, type: "edge", label: "nextMoniker", outV: 33, inV: 978 }
+{ id: 48, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func" }
+{ id: 50, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter" }
+{ id: 58, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.emit" }
 ```
-Things to observe:
 
-- a special `packageInformation`vertex got emitted to point to the corresponding npm package information.
-- the npm moniker refer to the package name.
-- since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were only the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
-- the `nextMoniker` edge points from the tsc moniker vertex to the npm moniker vertex.
-
-For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
+For the LSIF, we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
 
 Reporting importing external symbols is done using the same approach. The LSIF emits monikers of kind `import`. Consider the following typescript example:
 
@@ -949,35 +881,24 @@ let map: mobx.ObservableMap = new mobx.ObservableMap();
 where `mobx` is the [npm mobx package](https://www.npmjs.com/package/mobx). Running the tsc index tools produces:
 
 ```typescript
-{ id: 41, type: "vertex", label: "document", uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/types/observablemap.d.ts", languageId: "typescript", contents: "..." }
-{ id: 55, type: "vertex", label: "resultSet" }
-{ id: 57, type: "vertex", label: "moniker",  kind: "import", scheme: "tsc", identifier: "node_modules/mobx/lib/mobx:ObservableMap" }
-{ id: 58, type: "edge", label: "moniker", outV: 55, inV: 57 }
-{ id: 59, type: "vertex", label: "range", start: { line: 17, character: 538 }, end: { line: 17, character: 551 } }
-{ id: 60, type: "edge", label: "next", outV: 59, inV: 55 }
+{ id: 8, type: "vertex", label: "document", uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/mobx.d.ts", languageId: "typescript" }
+{ id: 122, type: "vertex", label: "range", start: { line: 17, character: 538 }, end: { line: 17, character: 551 }, tag: { type: "definition", text: "ObservableMap", kind:7, fullRange: {start: { line: 17, character: 538 }, end: { line: 17, character: 551 } } } }
+{ id: 123, type: "edge", label: "contains", outV: 8, inV: 122 }
+{ id: 124, type: "vertex", label: "moniker", kind: "import", scheme: "tsc", identifier: "node_modules/mobx/lib/mobx:ObservableMap" }
+{ id: 126, type: "edge", label: "moniker", outV: 122, inV: 124 }
 ```
 
-Three things to note here: First, TypeScript uses declarations files for externally imported symbols. That has the nice effect that the moniker information can be attached to the declaration ranges in these files. In other languages, the information might be attached to the file actually referencing the symbol. Or a virtual document for the referenced item is generated. Second, the tool only generates this information for symbols actually referenced, not for all available symbols. Third these monikers are `tsc` specific and point to the `node_modules` folder.
+Two things to note here: First, TypeScript uses declarations files for externally imported symbols. That has the nice effect that the moniker information can be attached to the declaration ranges in these files. In other languages, the information might be attached to the file actually referencing the symbol. Or a virtual document for the referenced item is generated. Second, the tool only generates this information for symbols actually referenced, not for all available symbols.
 
-However piping this information through the npm tool will generate the following information:
+Piping this information through the npm tool will generate the following information:
 
 ```typescript
-{id: 991, type: "vertex", label: "packageInformation", name: "mobx", manager: "npm", version: "5.6.0", repository: { type: "git", url: "git+https://github.com/mobxjs/mobx.git" } }
-{ id: 978, type: "vertex", label: "moniker", kind: "import", scheme: "npm", identifier: "mobx::ObservableMap" }
-{ id: 977, type: "edge", label: "packageInformation", outV: 978, inV: 991 }
-{ id: 976, type: "edge", label: "nextMoniker", outV: 978, inV: 57 }
+{ id: 9, type: "vertex", label: "packageInformation", name: "mobx", manager: "npm", version: "5.6.0", uri: "file:///Users/dirkb/samples/node_modules/mobx/package.json"}
+{ id: 124, type: "vertex", label: "moniker", kind: "import", scheme: "tsc", identifier: "mobx::ObservableMap" }
+{ id: 125, type: "edge", label: "packageInformation", outV: 124, inV:9 }
 ```
 
-which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
-
-## Result ranges
-
-Ranges in LSIF have currently two meanings:
-
-1. they act as LSP request sensitive areas in a document (e.g. we use them to decided of for a given position a corresponding LSP request result exists)
-1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
-
-To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
+which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted.
 
 ## Meta Data Vertex
 
@@ -986,49 +907,19 @@ To support versioning the LSIF defines a meta data vertex as follows:
 ```typescript
 export interface MetaData {
 
-  /**
-   * The label property.
-   */
-  label: 'metaData';
+	/**
+	 * The label property.
+	 */
+	label: 'metaData';
 
-  /**
-   * The version of the LSIF format using semver notation. See https://semver.org/. Please note
+	/**
+	 * The version of the LSIF format using semver notation. See https://semver.org/. Please note
    * the version numbers starting with 0 don't adhere to semver and adopters have to assume
    * the each new version is breaking.
-   */
-  version: string;
-
-  /**
-   * The project root (in form of an URI) used to compute this dump.
-   */
-  projectRoot: Uri;
-
-  /**
-   * The string encoding used to compute line and character values in
-   * positions and ranges. Currently only 'utf-16' is support due to the
-   * limitations in LSP.
-   */
-  positionEncoding: 'utf-16',
-
-  /**
-   * Information about the tool that created the dump
-   */
-  toolInfo?: {
-    name: string;
-    version?: string;
-    args?: string[];
-  }
+	 */
+	version: string;
 }
 ```
-
-## Emitting constraints
-
-The following emitting constraints (some of which have already mean mentioned in the document) exists:
-
-- a vertex needs to be emitted before it can be referenced in an edge.
-- a `range` and `resultRange` can only be contained in one document.
-- a `resultRange` can not be used as a target in a `contains` edge.
-- after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 
 ## Tools
 
