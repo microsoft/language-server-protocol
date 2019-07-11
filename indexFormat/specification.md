@@ -842,7 +842,7 @@ The events for projects looks similar:
 { id: 55, type: "vertex", label: "$event", kind: "end", scope: "project", data: 2 }
 ```
 
-## Project exports and external imports
+## Project exports and external imports (Monikers)
 
 One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **A** references a library **B**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional monikers which can be linked to ranges using a corresponding edge. The monikers can be used to describe what a project exports and what it imports. Let's first look at the export case.
 
@@ -971,6 +971,27 @@ However piping this information through the npm tool will generate the following
 which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
 
 Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
+
+For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
+
+For the following example
+
+```ts
+funciton foo(x: number): void {
+}
+```
+
+The moniker for `x` looks like this:
+
+```ts
+{ id: 13, type: "vertex", label: "resultSet" }
+{ id: 14, type: "vertex", label: "moniker", kind: "local", scheme: "tsc", identifier: "SfeOP6s53Y2HAkcViolxYA==" }
+{ id: 15, type: "edge", label: "moniker", outV: 13, inV: 14 }
+{ id: 16, type: "vertex", label: "range", start: { line: 0, character: 13 }, end: { line: 0, character: 14 }, tag: { type: "definition", text: "x", kind: 7, fullRange: { start: { line: 0, character: 13 }, end: { line: 0, character: 22 } } } }
+{ id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
+```
+
+In addition to this moniker schemes starting with `$` are reserved and shouldn't be used by a LSIF tool.
 
 ## Result ranges
 
