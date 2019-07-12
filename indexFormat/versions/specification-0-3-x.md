@@ -69,7 +69,7 @@ Assume there is a file `/Users/dirkb/sample.ts` and we want to store the folding
 
 The corresponding graph looks like this
 
-<img src="./foldingRange.png" alt="Folding Range Result" style="max-width: 66%; max-height: 66%"/>
+<img src="../foldingRange.png" alt="Folding Range Result" style="max-width: 66%; max-height: 66%"/>
 
 ### Ranges
 
@@ -110,7 +110,7 @@ To bind the hover result to the range, we use the same pattern as we used for th
 
 The corresponding graph looks like this
 
-<img src="./hoverResult.png" alt="Hover Result" style="max-width: 66%; max-height: 66%"/>
+<img src="../hoverResult.png" alt="Hover Result" style="max-width: 66%; max-height: 66%"/>
 
 The ranges emitted for a document must follow these rules:
 
@@ -147,7 +147,7 @@ The corresponding output of the above example with a hover using a result set lo
 { id: 7, type: "edge", label: "textDocument/hover", outV: 2, inV: 6 }
 ```
 
-<img src="./resultSet.png" alt="Result Set"  style="max-width: 50%; max-height: 50%"/>
+<img src="../resultSet.png" alt="Result Set"  style="max-width: 50%; max-height: 50%"/>
 
 The pattern of storing the result with the `ResultSet` will be used for other requests as well. The lookup algorithm is therefore as follows for a request [document, position, method]:
 
@@ -190,7 +190,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 { id: 28, type: "edge", label: "refersTo", outV: 26, inV: 4}
 ```
 
-<img src="./definitionResult.png" alt="Definition Result" style="max-width: 50%; max-height: 50%"/>
+<img src="../definitionResult.png" alt="Definition Result" style="max-width: 50%; max-height: 50%"/>
 
 In the example above, the definition result has only one value: the id `7`. We could have instead emitted an edge directly pointing from id `4` to id `7`. However, we introduced the definition result vertex for two reasons:
 
@@ -312,7 +312,7 @@ The relevant JSON output looks like this:
 { id: 29, type: "edge", label: "item", property: "reference", outV: 5, inV: 26 }
 ```
 
-<img src="./referenceResult.png" alt="References Result"  style="max-width: 50%; max-height: 50%"/>
+<img src="../referenceResult.png" alt="References Result"  style="max-width: 50%; max-height: 50%"/>
 
 We tag the `item` edge with id 10 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly. The `ReferenceResult` could be declared as follows:
 
