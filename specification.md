@@ -304,7 +304,7 @@ interface Diagnostic {
 	 * The diagnostic's severity. Can be omitted. If omitted it is up to the
 	 * client to interpret diagnostics as error, warning, info or hint.
 	 */
-	severity?: number;
+	severity?: DiagnosticSeverity;
 
 	/**
 	 * The diagnostic's code, which might appear in the user interface.
@@ -678,7 +678,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	 * is sent from the server to the client and the file is not open in the editor
 	 * (the server has not received an open notification before) the server can send
 	 * `null` to indicate that the version is known and the content on disk is the
-	 * truth (as speced with document content ownership).
+	 * truth (as specced with document content ownership).
 	 *
 	 * The version number of a document will increase after each change, including
 	 * undo/redo. The number doesn't need to be consecutive.
@@ -808,7 +808,7 @@ This section documents the actual language server protocol. It uses the followin
 
 * a header describing the request
 * a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
-* a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specced if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
 #### Request, Notification and Response ordering
@@ -1662,7 +1662,7 @@ export interface TextDocumentSyncOptions {
  */
 interface StaticRegistrationOptions {
 	/**
-	 * The id used to register the request. The id can be used to deregister
+	 * The id used to register the request. The id can be used to unregister
 	 * the request again. See also Registration#id.
 	 */
 	id?: string;
@@ -1968,7 +1968,7 @@ Where `RegistrationParams` are defined as follows:
  */
 export interface Registration {
 	/**
-	 * The id used to register the request. The id can be used to deregister
+	 * The id used to register the request. The id can be used to unregister
 	 * the request again.
 	 */
 	id: string;
@@ -2083,7 +2083,7 @@ _Response_:
 
 > *Since version 3.6.0*
 
-Many tools support more than one root folder per workspace. Examples for this are VS Code's multi-root support, Atom's project folder support or Sublime's project support. If a client workspace consists of multiple roots then a server typically needs to know about this. The protocol up to now assumes one root folder which is announced to the server by the `rootUri` property of the `InitializeParams`. If the client supports workspace folders and announces them via the corrsponding `workspaceFolders` client capability, the `InitializeParams` contain an additional property `workspaceFolders` with the configured workspace folders when the server starts.
+Many tools support more than one root folder per workspace. Examples for this are VS Code's multi-root support, Atom's project folder support or Sublime's project support. If a client workspace consists of multiple roots then a server typically needs to know about this. The protocol up to now assumes one root folder which is announced to the server by the `rootUri` property of the `InitializeParams`. If the client supports workspace folders and announces them via the corresponding `workspaceFolders` client capability, the `InitializeParams` contain an additional property `workspaceFolders` with the configured workspace folders when the server starts.
 
 The `workspace/workspaceFolders` request is sent from the server to the client to fetch the current open list of workspace folders. Returns `null` in the response if only a single file is open in the tool. Returns an empty array if a workspace is open but no folders are configured.
 
