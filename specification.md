@@ -341,7 +341,7 @@ interface Diagnostic {
 	 * The diagnostic's severity. Can be omitted. If omitted it is up to the
 	 * client to interpret diagnostics as error, warning, info or hint.
 	 */
-	severity?: number;
+	severity?: DiagnosticSeverity;
 
 	/**
 	 * The diagnostic's code, which might appear in the user interface.
@@ -721,7 +721,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	 * is sent from the server to the client and the file is not open in the editor
 	 * (the server has not received an open notification before) the server can send
 	 * `null` to indicate that the version is known and the content on disk is the
-	 * truth (as speced with document content ownership).
+	 * truth (as spec'd with document content ownership).
 	 *
 	 * The version number of a document will increase after each change, including
 	 * undo/redo. The number doesn't need to be consecutive.
@@ -1772,7 +1772,7 @@ export interface TextDocumentSyncOptions {
  */
 interface StaticRegistrationOptions {
 	/**
-	 * The id used to register the request. The id can be used to deregister
+	 * The id used to register the request. The id can be used to unregister
 	 * the request again. See also Registration#id.
 	 */
 	id?: string;
@@ -2084,7 +2084,7 @@ Where `RegistrationParams` are defined as follows:
  */
 export interface Registration {
 	/**
-	 * The id used to register the request. The id can be used to deregister
+	 * The id used to register the request. The id can be used to unregister
 	 * the request again.
 	 */
 	id: string;
