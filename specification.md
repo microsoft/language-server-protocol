@@ -1136,7 +1136,7 @@ export interface TextDocumentClientCapabilities {
 		 * The client supports did save notifications.
 		 */
 		didSave?: boolean;
-	}
+	};
 
 	/**
 	 * Capabilities specific to the `textDocument/completion`
@@ -1165,7 +1165,7 @@ export interface TextDocumentClientCapabilities {
 			/**
 			 * The client supports commit characters on a completion item.
 			 */
-			commitCharactersSupport?: boolean
+			commitCharactersSupport?: boolean;
 
 			/**
 			 * The client supports the following content formats for the documentation
@@ -1182,7 +1182,7 @@ export interface TextDocumentClientCapabilities {
 			 * The client supports the preselect property on a completion item.
 			 */
 			preselectSupport?: boolean;
-		}
+		};
 
 		completionItemKind?: {
 			/**
@@ -1196,7 +1196,7 @@ export interface TextDocumentClientCapabilities {
 			 * the initial version of the protocol.
 			 */
 			valueSet?: CompletionItemKind[];
-		},
+		};
 
 		/**
 		 * The client supports to send additional context information for a
@@ -1252,8 +1252,16 @@ export interface TextDocumentClientCapabilities {
 				 * Since 3.14.0
 				 */
 				labelOffsetSupport?: boolean;
-			}
+			};
 		};
+
+		/**
+		 * The client supports to send additional context information for a
+		 * `textDocument/signatureHelp` request.
+		 *
+		 * Since 3.15.0
+		 */
+		contextSupport?: boolean;
 	};
 
 	/**
@@ -1300,7 +1308,7 @@ export interface TextDocumentClientCapabilities {
 			 * the initial version of the protocol.
 			 */
 			valueSet?: SymbolKind[];
-		}
+		};
 
 		/**
 		 * The client supports hierarchical document symbols.
@@ -3218,7 +3226,71 @@ The signature help request is sent from the client to the server to request sign
 
 _Request_:
 * method: 'textDocument/signatureHelp'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `SignatureHelpParams` defined as follows:
+
+```typescript
+export interface SignatureHelpParams extends TextDocumentPositionParams {
+
+	/**
+	 * The signature help context. This is only available if the client specifies
+	 * to send this using `ClientCapabilities.textDocument.signatureHelp.contextSupport === true`
+	 */
+	context?: SignatureHelpContext;
+}
+
+/**
+ * How a signature help was triggered.
+ */
+export namespace SignatureHelpTriggerKind {
+	/**
+	 * Signature help was invoked manually by the user or by a command.
+	 */
+	export const Invoked: 1 = 1,
+
+	/**
+	 * Signature help was triggered by a trigger character.
+	 */
+	export const TriggerCharacter: 2 = 2,
+
+	/**
+	 * Signature help was triggered by the cursor moving or by the document content changing.
+	 */
+	export const ContentChange: 3 = 3,
+}
+
+/**
+	* Additional information about the context in which a signature help request was triggered.
+	*/
+export interface SignatureHelpContext {
+	/**
+		* Action that caused signature help to be triggered.
+		*/
+	triggerKind: SignatureHelpTriggerKind;
+
+	/**
+		* Character that caused signature help to be triggered.
+		*
+		* This is undefined when `triggerKind !== SignatureHelpTriggerKind.TriggerCharacter`
+		*/
+	triggerCharacter?: string;
+
+	/**
+		* `true` if signature help was already showing when it was triggered.
+		*
+		* Retriggers occur when the signature help is already active and can be caused by actions such as
+		* typing a trigger character, a cursor move, or document content changes.
+		*/
+	isRetrigger: boolean;
+
+	/**
+		* The currently active `SignatureHelp`.
+		*
+		* The `activeSignatureHelp` has its `SignatureHelp.activeSignature` field updated based on
+		* the user navigating through available signatures.
+		*/
+	activeSignatureHelp?: SignatureHelp;
+}
+```
 
 _Response_:
 * result: `SignatureHelp` \| `null` defined as follows:
