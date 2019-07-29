@@ -3590,7 +3590,7 @@ interface SymbolInformation {
 	/**
 	 * The kind of this symbol.
 	 */
-	kind: number;
+	kind: SymbolKind;
 
 	/**
 	 * Indicates if this symbol is deprecated.
@@ -3618,7 +3618,6 @@ interface SymbolInformation {
 	 */
 	containerName?: string;
 }
-
 ```
 
 * error: code and message set in case an exception happens during the document symbol request.
