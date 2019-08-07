@@ -99,6 +99,7 @@ index: 1
 | Turtle | [Stardog Union](https://github.com/stardog-union) | [Turtle Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
+| Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
 | VHDL | [Olof Kraigher](https://github.com/kraigher) | [vhdl_ls](https://github.com/kraigher/rust_hdl) | Rust |
 | Viml | [iamcco](https://github.com/iamcco) | [vim-language-server](https://github.com/iamcco/vim-language-server) | Typescript |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) | |
