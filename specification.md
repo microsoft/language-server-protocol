@@ -4354,6 +4354,9 @@ export interface FoldingRange {
 
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
+_Registration Options_: `TextDocumentRegistrationOptions`
+
+
 ### Implementation considerations
 
 Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
