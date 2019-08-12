@@ -3479,7 +3479,10 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_documentSymbol" name="textDocument_documentSymbol" class="anchor">Document Symbols Request (:leftwards_arrow_with_hook:)</a>
 
-The document symbol request is sent from the client to the server to return a flat list of all symbols found in a given text document. Neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
+The document symbol request is sent from the client to the server. The returned result is either
+
+- `SymbolInformation[]` which is a flat list of all symbols found in a given text document. Then neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
+- `DocumentSymbol[]` which is a hierarchy of symbols found in a given text document.
 
 _Request_:
 * method: 'textDocument/documentSymbol'
