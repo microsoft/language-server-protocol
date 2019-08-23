@@ -780,7 +780,7 @@ Usually language servers operate in some sort of project context. In TypeScript,
 ```typescript
 { id: 1, type: "vertex", label: "project", resource: "file:///Users/dirkb/tsconfig.json", kind: "typescript"}
 { id: 2, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts", languageId: "typescript" }
-{ id: 3, type: "edge", label: "contains", outV: 1, inV: 2 }
+{ id: 3, type: "edge", label: "contains", outV: 1, inVs: [2] }
 ```
 
 The definition of the `project` vertex looks as follows:
