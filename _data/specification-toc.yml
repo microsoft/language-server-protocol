@@ -56,6 +56,8 @@
       anchor: documentFilter
     - title: Text Document Registration Options
       anchor: textDocumentRegistrationOptions
+    - title: Work Done Progress Options
+      anchor: workDoneProgressOptions
     - title: Markup Content
       anchor: markupContent
     - title: Work Done Progress

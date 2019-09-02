@@ -837,6 +837,16 @@ export interface TextDocumentRegistrationOptions {
 }
 ```
 
+#### <a href="#workDoneProgressOptions" name="workDoneProgressOptions" class="anchor"> WorkDoneProgressOptions </a>
+
+Options to signal work done progress support in server capabilities.
+
+```typescript
+export interface WorkDoneProgressOptions {
+	workDoneProgress?: boolean;
+}
+```
+
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`.
@@ -1080,8 +1090,10 @@ To avoid that clients set up a progress monitor user interface before sending a 
 This section documents the actual language server protocol. It uses the following format:
 
 * a header describing the request
-* a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
-* a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
+* an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure.
+* a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
 #### Request, Notification and Response ordering
@@ -2661,6 +2673,45 @@ export namespace WatchKind {
 
 The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
 
+_Client Capability_:
+* property path (optional): `workspace.symbol`
+* JSON structure: `WorkspaceSymbolClientCapabilities` defined as follows:
+
+```typescript
+interface WorkspaceSymbolClientCapabilities {
+	/**
+	 * Symbol request supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
+	 */
+	symbolKind?: {
+		/**
+		 * The symbol kind values the client supports. When this
+		 * property exists the client also guarantees that it will
+		 * handle values outside its set gracefully and falls back
+		 * to a default value when unknown.
+		 *
+		 * If this property is not present the client only supports
+		 * the symbol kinds from `File` to `Array` as defined in
+		 * the initial version of the protocol.
+		 */
+		valueSet?: SymbolKind[];
+	}
+}
+```
+
+_Server Capability_:
+* property path (optional): `workspaceSymbolProvider`
+* JSON structure: `boolean | WorkspaceSymbolOptions` were `WorkspaceSymbolOptions` is defined as follows:
+
+```typescript
+export interface WorkspaceSymbolOptions extends WorkDoneProgressOptions {
+}
+```
+
 _Request_:
 * method: 'workspace/symbol'
 * params: `WorkspaceSymbolParams` defined as follows:
@@ -2681,8 +2732,12 @@ _Response_:
 * result: `SymbolInformation[]` \| `null` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
-_Registration Options_: void
+_Registration Options_: `WorkspaceSymbolRegistrationOptions` defined as follows:
 
+```typescript
+export interface WorkspaceSymbolRegistrationOptions extends WorkspaceSymbolOptions {
+}
+```
 
 #### <a href="#workspace_executeCommand" name="workspace_executeCommand" class="anchor">Execute a command (:leftwards_arrow_with_hook:)</a>
 
