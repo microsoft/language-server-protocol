@@ -64,6 +64,10 @@
       anchor: workDoneProgressOptions
     - title: Work Done Progress Params
       anchor: workDoneProgressParams
+    - title: Partial Results
+      anchor: partialResults
+    - title: Partial Result Params
+      anchor: partialResultParams
   - title: General Messages
     anchor: general
     children:
