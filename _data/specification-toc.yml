@@ -1,6 +1,66 @@
 - title: Message Overview
   children:
-  - title: General
+  - title: Base Protocol
+    anchor: baseProtocol
+    children:
+    - title: Header Part
+      anchor: headerPart
+    - title: Content Part
+      anchor: contentPart
+    - title: Request Message
+      anchor: requestMessage
+    - title: Response Message
+      anchor: responseMessage
+    - title: Notification Message
+      anchor: notificationMessage
+    - title: $/cancelRequest
+      anchor: cancelRequest
+    - title: $/progress
+      anchor: progress
+  - title: Basic Structures
+    anchor: dataTypes
+    children:
+    - title: URI
+      anchor: uri
+    - title: Text Documents
+      anchor: textDocuments
+    - title: Position
+      anchor: position
+    - title: Range
+      anchor: range
+    - title: Location
+      anchor: location
+    - title: Location Link
+      anchor: locationLink
+    - title: Diagnostic
+      anchor: diagnostic
+    - title: Command
+      anchor: command
+    - title: Text Edit
+      anchor: textEdit
+    - title: Text Document Edit
+      anchor: textDocumentEdit
+    - title: File Resource Changes
+      anchor: resourceChanges
+    - title: Workspace Edit
+      anchor: workspaceEdit
+    - title: Text Document Identifier
+      anchor: textDocumentIdentifier
+    - title: Text Document Item
+      anchor: textDocumentItem
+    - title: Versioned Text Document Identifier
+      anchor: versionedTextDocumentIdentifier
+    - title: Text Document Position Params
+      anchor: textDocumentPositionParams
+    - title: Document Filter
+      anchor: documentFilter
+    - title: Text Document Registration Options
+      anchor: textDocumentRegistrationOptions
+    - title: Markup Content
+      anchor: markupContent
+    - title: Work Done Progress
+      anchor: workDoneProgress
+  - title: General Messages
     anchor: general
     children:
     - title: initialize
@@ -11,8 +71,6 @@
       anchor: shutdown
     - title: exit
       anchor: exit
-    - title: $/cancelRequest
-      anchor: cancelRequest
   - title: Window
     anchor: window
     children:

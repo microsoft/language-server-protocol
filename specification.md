@@ -13,12 +13,12 @@ The 1.x version of this document can be found [here](https://github.com/Microsof
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/specification.md).
 
-## Base Protocol
+## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
 separated by a '\r\n'.
 
-### Header Part
+### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
 The header part consists of header fields. Each header field is comprised of a name and a value,
 separated by ': ' (a colon and a space).
@@ -37,7 +37,7 @@ Currently the following header fields are supported:
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
-### Content Part
+### <a href="#contentPart" name="contentPart" class="anchor"> Content Part </a>
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding then `utf-8` it should respond with an error.
 
@@ -70,7 +70,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### Request Message
+#### <a href="#requestMessage" name="requestMessage" class="anchor"> Request Message </a>
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -94,7 +94,7 @@ interface RequestMessage extends Message {
 }
 ```
 
-#### Response Message
+#### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
 
 A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
@@ -152,7 +152,7 @@ export namespace ErrorCodes {
 	export const ContentModified: number = -32801;
 }
 ```
-#### Notification Message
+#### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
 
 A notification message. A processed notification message must not send a response back. They work like events.
 
@@ -193,6 +193,35 @@ interface CancelParams {
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
+#### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
+
+> *Since version 3.15.0*
+
+The base protocol offers also support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including work done progress (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
+
+A progress notification has the following properties:
+
+_Notification_:
+* method: '$/progress'
+* params: `ProgressParams` defined as follows:
+
+```typescript
+type ProgressToken = number | string;
+interface ProgressParams<T> {
+	/**
+	 * The progress token provided by the client or server.
+	 */
+	token: ProgressToken;
+
+	/**
+	 * The progress data.
+	 */
+	value: T;
+}
+```
+
+Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
+
 ## Language Server Protocol
 
 The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces to describe these. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
@@ -203,7 +232,7 @@ The protocol currently assumes that one server serves one tool. There is current
 
 ### Basic JSON Structures
 
-#### URI
+#### <a href="#uri" name="uri" class="anchor"> URI </a>
 
 URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
 
@@ -225,7 +254,7 @@ Many of the interfaces contain fields that correspond to the URI of a document. 
 type DocumentUri = string;
 ```
 
-#### Text Documents
+#### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
@@ -235,7 +264,7 @@ Positions are line end character agnostic. So you can not specify  a position th
 export const EOL: string[] = ['\n', '\r\n', '\r'];
 ```
 
-#### Position
+#### <a href="#position" name="position" class="anchor"> Position </a>
 
 Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in a editor. Special values like for example `-1` to denote the end of a line are not supported.
 
@@ -257,7 +286,7 @@ interface Position {
 	character: number;
 }
 ```
-#### Range
+#### <a href="#range" name="range" class="anchor"> Range </a>
 
 A range in a text document expressed as (zero-based) start and end positions. A range is comparable to a selection in an editor. Therefore the end position is exclusive. If you want to specify a range that contains a line including the line ending character(s) then use an end position denoting the start of the next line. For example:
 ```typescript
@@ -281,7 +310,7 @@ interface Range {
 }
 ```
 
-#### Location
+#### <a href="#location" name="location" class="anchor"> Location </a>
 
 Represents a location inside a resource, such as a line inside a text file.
 ```typescript
@@ -291,7 +320,7 @@ interface Location {
 }
 ```
 
-#### LocationLink
+#### <a href="#locationLink" name="locationLink" class="anchor"> LocationLink </a>
 
 Represents a link between a source and a target location.
 
@@ -326,7 +355,7 @@ interface LocationLink {
 }
 ```
 
-#### Diagnostic
+#### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
@@ -409,7 +438,7 @@ export interface DiagnosticRelatedInformation {
 }
 ```
 
-#### Command
+#### <a href="#command" name="command" class="anchor"> Command </a>
 
 Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identified by a string identifier. The recommended way to handle commands is to implement their execution on the server side if the client and server provides the corresponding capabilities. Alternatively the tool extension code could handle the command. The protocol currently doesn't specify a set of well-known commands.
 
@@ -431,7 +460,7 @@ interface Command {
 }
 ```
 
-#### TextEdit
+#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit </a>
 
 A textual edit applicable to a text document.
 
@@ -457,7 +486,7 @@ Complex text manipulations are described with an array of `TextEdit`'s, represen
 
 All text edits ranges refer to positions in the original document. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position: multiple inserts, or any number of inserts followed by a single remove or replace edit. If multiple inserts have the same position, the order in the array defines the order in which the inserted strings appear in the resulting text.
 
-#### TextDocumentEdit
+#### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
 
 Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array or do any kind of ordering. However the edits must be non overlapping.
 
@@ -475,7 +504,7 @@ export interface TextDocumentEdit {
 }
 ```
 
-### File Resource changes
+### <a href="#resourceChanges" name="resourceChanges" class="anchor"> File Resource changes </a>
 
 > New in version 3.13:
 
@@ -583,7 +612,7 @@ export interface DeleteFile {
 }
 ```
 
-#### WorkspaceEdit
+#### <a href="#workspaceEdit" name="workspaceEdit" class="anchor"> WorkspaceEdit </a>
 
 A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChanges` are present, the latter are preferred over `changes`.
 
@@ -610,7 +639,7 @@ export interface WorkspaceEdit {
 }
 ```
 
-#### TextDocumentIdentifier
+#### <a href="#textDocumentIdentifier" name="textDocumentIdentifier" class="anchor"> TextDocumentIdentifier </a>
 
 Text documents are identified using a URI. On the protocol level, URIs are passed as strings. The corresponding JSON structure looks like this:
 ```typescript
@@ -622,7 +651,7 @@ interface TextDocumentIdentifier {
 }
 ```
 
-#### TextDocumentItem
+#### <a href="#textDocumentItem" name="textDocumentItem" class="anchor"> TextDocumentItem </a>
 
 An item to transfer a text document from the client to the server.
 
@@ -710,7 +739,7 @@ XSL | `xsl`
 YAML | `yaml`
 {: .table .table-bordered .table-responsive}
 
-#### VersionedTextDocumentIdentifier
+#### <a href="#versionedTextDocumentIdentifier" name="versionedTextDocumentIdentifier" class="anchor"> VersionedTextDocumentIdentifier </a>
 
 An identifier to denote a specific version of a text document.
 
@@ -730,7 +759,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 }
 ```
 
-#### TextDocumentPositionParams
+#### <a href="#textDocumentPositionParams" name="textDocumentPositionParams" class="anchor"> TextDocumentPositionParams </a>
 
 Was `TextDocumentPosition` in 1.0 with inlined parameters.
 
@@ -750,7 +779,7 @@ interface TextDocumentPositionParams {
 }
 ```
 
-#### DocumentFilter
+#### <a href="#documentFilter" name="documentFilter" class="anchor"> DocumentFilter </a>
 
 A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter the applies to JSON files with name `package.json`:
 ```typescript
@@ -791,7 +820,24 @@ A document selector is the combination of one or more document filters.
 export type DocumentSelector = DocumentFilter[];
 ```
 
-#### MarkupContent
+#### <a href="#textDocumentRegistrationOptions" name="textDocumentRegistrationOptions" class="anchor"> TextDocumentRegistrationOptions </a>
+
+Options to dynamically register for requests for a set of text documents.
+
+```typescript
+/**
+ * General text document registration options.
+ */
+export interface TextDocumentRegistrationOptions {
+	/**
+	 * A document selector to identify the scope of the registration. If set to null
+	 * the document selector provided on the client side will be used.
+	 */
+	documentSelector: DocumentSelector | null;
+}
+```
+
+#### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`.
 
@@ -853,12 +899,188 @@ export interface MarkupContent {
 }
 ```
 
+#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
+
+> *Since version 3.15.0*
+
+Work done progress is reported using the generic [`$/progress`](#progress) notification. The value payload of a work done progress notification can be of three different forms.
+
+##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor"> Work Done Progress Begin </a>
+
+To start progress reporting a `$/progress` notification with the following payload must be sent:
+
+```typescript
+export interface WorkDoneProgressBegin {
+
+	kind: 'begin';
+
+	/**
+	 * Mandatory title of the progress operation. Used to briefly inform about
+	 * the kind of operation being performed.
+	 *
+	 * Examples: "Indexing" or "Linking dependencies".
+	 */
+	title: string;
+
+	/**
+	 * Controls if a cancel button should show to allow the user to cancel the
+	 * long running operation. Clients that don't support cancellation are allowed
+	 * to ignore the setting.
+	 */
+	cancellable?: boolean;
+
+	/**
+	 * Optional, more detailed associated progress message. Contains
+	 * complementary information to the `title`.
+	 *
+	 * Examples: "3/25 files", "project/src/module2", "node_modules/some_dep".
+	 * If unset, the previous progress message (if any) is still valid.
+	 */
+	message?: string;
+
+	/**
+	 * Optional progress percentage to display (value 100 is considered 100%).
+	 * If not provided infinite progress is assumed and clients are allowed
+	 * to ignore the `percentage` value in subsequent in report notifications.
+	 *
+	 * The value should be steadily rising. Clients are free to ignore values
+	 * that are not following this rule.
+	 */
+	percentage?: number;
+}
+```
+
+##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor"> Work Done Progress Report </a>
+
+Reporting progress is done using the following payload:
+
+```typescript
+export interface WorkDoneProgressReport {
+
+	kind: 'report';
+
+	/**
+	 * Controls enablement state of a cancel button. This property is only valid if a cancel
+	 * button got requested in the `WorkDoneProgressStart` payload.
+	 *
+	 * Clients that don't support cancellation or don't support control the button's
+	 * enablement state are allowed to ignore the setting.
+	 */
+	cancellable?: boolean;
+
+	/**
+	 * Optional, more detailed associated progress message. Contains
+	 * complementary information to the `title`.
+	 *
+	 * Examples: "3/25 files", "project/src/module2", "node_modules/some_dep".
+	 * If unset, the previous progress message (if any) is still valid.
+	 */
+	message?: string;
+
+	/**
+	 * Optional progress percentage to display (value 100 is considered 100%).
+	 * If not provided infinite progress is assumed and clients are allowed
+	 * to ignore the `percentage` value in subsequent in report notifications.
+	 *
+	 * The value should be steadily rising. Clients are free to ignore values
+	 * that are not following this rule.
+	 */
+	percentage?: number;
+}
+```
+
+##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor"> Work Done Progress End </a>
+
+Signaling the end of a progress reporting is done using the following payload:
+
+```typescript
+export interface WorkDoneProgressEnd {
+
+	kind: 'end';
+
+	/**
+	 * Optional, a final message indicating to for example indicate the outcome
+	 * of the operation.
+	 */
+	message?: string;
+}
+
+```
+
+##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor">  Initiating Work Done Progress </a>
+
+Work Done progress can be initiated in two different ways:
+
+1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal.
+1. by a server using the request `window/workDoneProgress/create`.
+
+Consider a client sending a `textDocument/reference` request to a server and the client accepts work done progress reporting on that request. To signal this to the server the client would add a `workDoneToken` property to the reference request parameters. Something like this:
+
+```json
+{
+	"textDocument": {
+		"uri": "file:///folder/file.ts"
+	},
+	"position": {
+		"line": 9,
+		"character": 5
+	},
+	"context": {
+		"includeDeclaration": true
+	},
+	// The token used to report work done progress.
+	"workDoneToken": "1d546990-40a3-4b77-b134-46622995f6ae"
+}
+```
+
+A server uses the `workDoneToken` to report progress for the specific `textDocument/reference`. For the above request the `$/progress` notification params look like this:
+
+```json
+{
+	"token": "1d546990-40a3-4b77-b134-46622995f6ae",
+	"value": {
+		"title": "Finding references for A#foo",
+		"cancellable": false,
+		"message": "Processing file X.ts",
+		"percentage": 0
+	}
+}
+```
+
+Server initiated work done progress works the same. The only difference is that the server requests a progress user interface using the `window/workDoneProgress/create` request providing a token that is afterwards used to report progress.
+
+##### <a href="#signalingWorkDoneProgressReporting" name="signalingWorkDoneProgressReporting" class="anchor"> Signaling Work Done Progress Reporting </a>
+
+To keep the protocol backwards compatible servers are only allowed to use work done progress reporting if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
+
+```typescript
+	/**
+	 * Window specific client capabilities.
+	 */
+	window?: {
+		/**
+		 * Whether client supports handling progress notifications.
+		 */
+		workDoneProgress?: boolean;
+	}
+```
+
+To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress a server needs to signal work done progress reporting in the corresponding server capability. For the above find references example a server would signal such a support by setting the `referencesProvider` property in the server capabilities as follows:
+
+```json
+{
+	"referencesProvider": {
+		"workDoneProgress": true
+	}
+}
+```
+
 ### Actual Protocol
 
 This section documents the actual language server protocol. It uses the following format:
 
 * a header describing the request
-* a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
+* a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
 * a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
