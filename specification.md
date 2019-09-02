@@ -837,16 +837,6 @@ export interface TextDocumentRegistrationOptions {
 }
 ```
 
-#### <a href="#workDoneProgressOptions" name="workDoneProgressOptions" class="anchor"> WorkDoneProgressOptions </a>
-
-Options to signal work done progress support in server capabilities.
-
-```typescript
-export interface WorkDoneProgressOptions {
-	workDoneProgress?: boolean;
-}
-```
-
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`.
@@ -1085,6 +1075,29 @@ To avoid that clients set up a progress monitor user interface before sending a 
 }
 ```
 
+#### <a href="#workDoneProgressParams" name="workDoneProgressParams" class="anchor"> WorkDoneProgressParams </a>
+
+A parameter literal used to pass a work done progress token.
+
+```typescript
+export interface WorkDoneProgressParams {
+	/**
+	 * An optional token that a server can use to report work done progress.
+	 */
+	workDoneToken?: ProgressToken;
+}
+```
+
+#### <a href="#workDoneProgressOptions" name="workDoneProgressOptions" class="anchor"> WorkDoneProgressOptions </a>
+
+Options to signal work done progress support in server capabilities.
+
+```typescript
+export interface WorkDoneProgressOptions {
+	workDoneProgress?: boolean;
+}
+```
+
 ### Actual Protocol
 
 This section documents the actual language server protocol. It uses the following format:
@@ -1290,39 +1303,12 @@ export interface WorkspaceClientCapabilities {
 	/**
 	 * Capabilities specific to the `workspace/symbol` request.
 	 */
-	symbol?: {
-		/**
-		 * Symbol request supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
-		 */
-		symbolKind?: {
-			/**
-			 * The symbol kind values the client supports. When this
-			 * property exists the client also guarantees that it will
-			 * handle values outside its set gracefully and falls back
-			 * to a default value when unknown.
-			 *
-			 * If this property is not present the client only supports
-			 * the symbol kinds from `File` to `Array` as defined in
-			 * the initial version of the protocol.
-			 */
-			valueSet?: SymbolKind[];
-		}
-	};
+	symbol?: WorkspaceSymbolClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `workspace/executeCommand` request.
 	 */
-	executeCommand?: {
-		/**
-		 * Execute command supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
+	executeCommand?: ExecuteCommandClientCapabilities;
 
 	/**
 	 * The client has support for workspace folders.
@@ -2720,7 +2706,7 @@ _Request_:
 /**
  * The parameters of a Workspace Symbol Request.
  */
-interface WorkspaceSymbolParams {
+interface WorkspaceSymbolParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * A non-empty query string
 	 */
@@ -2730,6 +2716,7 @@ interface WorkspaceSymbolParams {
 
 _Response_:
 * result: `SymbolInformation[]` \| `null` as defined above.
+* partial result: `SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
 _Registration Options_: `WorkspaceSymbolRegistrationOptions` defined as follows:
@@ -2745,12 +2732,38 @@ The `workspace/executeCommand` request is sent from the client to the server to 
 the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
 sent from the server to the client.
 
+_Client Capability_:
+* property path (optional): `workspace.executeCommand`
+* JSON structure: `ExecuteCommandClientCapabilities` defined as follows:
+
+```typescript
+export interface ExecuteCommandClientCapabilities {
+	/**
+	 * Execute command supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property path (optional): `executeCommandProvider`
+* JSON structure: `ExecuteCommandOptions` defined as follows:
+
+```typescript
+export interface ExecuteCommandOptions extends WorkDoneProgressOptions {
+	/**
+	 * The commands to be executed on the server
+	 */
+	commands: string[]
+}
+```
+
 _Request:_
 * method: 'workspace/executeCommand'
 * params: `ExecuteCommandParams` defined as follows:
 
 ```typescript
-export interface ExecuteCommandParams {
+export interface ExecuteCommandParams extends WorkDoneProgressParams {
 
 	/**
 	 * The identifier of the actual command handler.
@@ -2775,14 +2788,9 @@ _Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
 /**
  * Execute command registration options.
  */
-export interface ExecuteCommandRegistrationOptions {
-	/**
-	 * The commands to be executed on the server
-	 */
-	commands: string[]
+export interface ExecuteCommandRegistrationOptions extends ExecuteCommandOptions {
 }
 ```
-
 
 #### <a href="#workspace_applyEdit" name="workspace_applyEdit" class="anchor">Applies a WorkspaceEdit (:arrow_right_hook:)</a>
 
