@@ -480,7 +480,7 @@ interface TextEdit {
 }
 ```
 
-#### TextEdit[]
+#### <a href="#textEditArray" name="textEditArray" class="anchor"> TextEdit[] </a>
 
 Complex text manipulations are described with an array of `TextEdit`'s, representing a single change to the document.
 
@@ -636,6 +636,41 @@ export interface WorkspaceEdit {
 	 * only plain `TextEdit`s using the `changes` property are supported.
 	 */
 	documentChanges?: (TextDocumentEdit[] | (TextDocumentEdit | CreateFile | RenameFile | DeleteFile)[]);
+}
+```
+
+##### <a href="#workspaceEditClientCapabilities" name="workspaceEditClientCapabilities" class="anchor"> WorkspaceEditClientCapabilities </a>
+
+> New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
+
+
+The capabilities of a workspace edit has evolved over the time. Clients can describe their support using the following client capability:
+
+* property path (optional): `workspace.workspaceEdit`
+* property type: `WorkspaceEditClientCapabilities` defined as follows:
+
+```typescript
+export interface WorkspaceEditClientCapabilities {
+	/**
+	 * The client supports versioned document changes in `WorkspaceEdit`s
+	 */
+	documentChanges?: boolean;
+
+	/**
+	 * The resource operations the client supports. Clients should at least
+	 * support 'create', 'rename' and 'delete' files and folders.
+	 *
+	 * Since 3.13
+	 */
+	resourceOperations?: ResourceOperationKind[];
+
+	/**
+	 * The failure handling strategy of a client if applying the workspace edit
+	 * fails.
+	 *
+	 * Since 3.13
+	 */
+	failureHandling?: FailureHandlingKind;
 }
 ```
 
@@ -1149,7 +1184,7 @@ This section documents the actual language server protocol. It uses the followin
 * an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
 * an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure.
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
-* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
 #### Request, Notification and Response ordering
@@ -1227,147 +1262,8 @@ interface InitializeParams {
 	workspaceFolders?: WorkspaceFolder[] | null;
 }
 ```
-Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilities` are defined as follows:
+Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as follows:
 
-##### `WorkspaceClientCapabilities` define capabilities the editor / tool provides on the workspace:
-
-> New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
-
-```typescript
-
-/**
- * The kind of resource operations supported by the client.
- */
-export type ResourceOperationKind = 'create' | 'rename' | 'delete';
-
-export namespace ResourceOperationKind {
-
-	/**
-	 * Supports creating new files and folders.
-	 */
-	export const Create: ResourceOperationKind = 'create';
-
-	/**
-	 * Supports renaming existing files and folders.
-	 */
-	export const Rename: ResourceOperationKind = 'rename';
-
-	/**
-	 * Supports deleting existing files and folders.
-	 */
-	export const Delete: ResourceOperationKind = 'delete';
-}
-
-export type FailureHandlingKind = 'abort' | 'transactional' | 'undo' | 'textOnlyTransactional';
-
-export namespace FailureHandlingKind {
-
-	/**
-	 * Applying the workspace change is simply aborted if one of the changes provided
-	 * fails. All operations executed before the failing operation stay executed.
-	 */
-	export const Abort: FailureHandlingKind = 'abort';
-
-	/**
-	 * All operations are executed transactionally. That means they either all
-	 * succeed or no changes at all are applied to the workspace.
-	 */
-	export const Transactional: FailureHandlingKind = 'transactional';
-
-
-	/**
-	 * If the workspace edit contains only textual file changes they are executed transactionally.
-	 * If resource changes (create, rename or delete file) are part of the change the failure
-	 * handling strategy is abort.
-	 */
-	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
-
-	/**
-	 * The client tries to undo the operations already executed. But there is no
-	 * guarantee that this succeeds.
-	 */
-	export const Undo: FailureHandlingKind = 'undo';
-}
-
-/**
- * Workspace specific client capabilities.
- */
-export interface WorkspaceClientCapabilities {
-	/**
-	 * The client supports applying batch edits to the workspace by supporting
-	 * the request 'workspace/applyEdit'
-	 */
-	applyEdit?: boolean;
-
-	/**
-	 * Capabilities specific to `WorkspaceEdit`s
-	 */
-	workspaceEdit?: {
-		/**
-		 * The client supports versioned document changes in `WorkspaceEdit`s
-		 */
-		documentChanges?: boolean;
-
-		/**
-		 * The resource operations the client supports. Clients should at least
-		 * support 'create', 'rename' and 'delete' files and folders.
-		 */
-		resourceOperations?: ResourceOperationKind[];
-
-		/**
-		 * The failure handling strategy of a client if applying the workspace edit
-		 * fails.
-		 */
-		failureHandling?: FailureHandlingKind;
-	};
-
-	/**
-	 * Capabilities specific to the `workspace/didChangeConfiguration` notification.
-	 */
-	didChangeConfiguration?: {
-		/**
-		 * Did change configuration notification supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `workspace/didChangeWatchedFiles` notification.
-	 */
-	didChangeWatchedFiles?: {
-		/**
-		 * Did change watched files notification supports dynamic registration. Please note
-		 * that the current protocol doesn't support static configuration for file changes
-		 * from the server side.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `workspace/symbol` request.
-	 */
-	symbol?: WorkspaceSymbolClientCapabilities;
-
-	/**
-	 * Capabilities specific to the `workspace/executeCommand` request.
-	 */
-	executeCommand?: ExecuteCommandClientCapabilities;
-
-	/**
-	 * The client has support for workspace folders.
-	 *
-	 * Since 3.6.0
-	 */
-	workspaceFolders?: boolean;
-
-	/**
-	 * The client supports `workspace/configuration` requests.
-	 *
-	 * Since 3.6.0
-	 */
-	configuration?: boolean;
-}
-```
 
 ##### `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
 
@@ -1805,7 +1701,39 @@ interface ClientCapabilities {
 	/**
 	 * Workspace specific client capabilities.
 	 */
-	workspace?: WorkspaceClientCapabilities;
+	workspace?: {
+		/**
+		* The client supports applying batch edits
+		* to the workspace by supporting the request
+		* 'workspace/applyEdit'
+		*/
+		applyEdit?: boolean;
+
+		/**
+		* Capabilities specific to `WorkspaceEdit`s
+		*/
+		workspaceEdit?: WorkspaceEditClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/didChangeConfiguration` notification.
+		*/
+		didChangeConfiguration?: DidChangeConfigurationClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/didChangeWatchedFiles` notification.
+		*/
+		didChangeWatchedFiles?: DidChangeWatchedFilesClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/symbol` request.
+		*/
+		symbol?: WorkspaceSymbolClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/executeCommand` request.
+		*/
+		executeCommand?: ExecuteCommandClientCapabilities;
+	};
 
 	/**
 	 * Text document specific client capabilities.
@@ -2154,22 +2082,7 @@ interface ServerCapabilities {
 		 *
 		 * Since 3.6.0
 		 */
-		workspaceFolders?: {
-			/**
-			* The server has support for workspace folders
-			*/
-			supported?: boolean;
-			/**
-			* Whether the server wants to receive workspace folder
-			* change notifications.
-			*
-			* If a strings is provided the string is treated as a ID
-			* under which the notification is registered on the client
-			* side. The ID can be used to unregister for these events
-			* using the `client/unregisterCapability` request.
-			*/
-			changeNotifications?: string | boolean;
-		}
+		workspaceFolders?: WorkspaceFoldersServerCapabilities;
 	}
 	/**
 	 * Experimental server capabilities.
@@ -2466,6 +2379,34 @@ Many tools support more than one root folder per workspace. Examples for this ar
 
 The `workspace/workspaceFolders` request is sent from the server to the client to fetch the current open list of workspace folders. Returns `null` in the response if only a single file is open in the tool. Returns an empty array if a workspace is open but no folders are configured.
 
+_Client Capability_:
+* property path (optional): `workspace.workspaceFolders`
+* property type: `boolean`
+
+_Server Capability_:
+* property path (optional): `workspace.workspaceFolders`
+* property type: `WorkspaceFoldersServerCapabilities` defined as follows:
+
+```typescript
+export interface WorkspaceFoldersServerCapabilities {
+	/**
+	 * The Server has support for workspace folders
+	 */
+	supported?: boolean;
+
+	/**
+	 * Whether the server wants to receive workspace folder
+	 * change notifications.
+	 *
+	 * If a strings is provided the string is treated as a ID
+	 * under which the notification is registed on the client
+	 * side. The ID can be used to unregister for these events
+	 * using the `client/unregisterCapability` request.
+	 */
+	changeNotifications?: string | boolean;
+}
+```
+
 _Request_:
 
 * method: 'workspace/workspaceFolders'
@@ -2495,7 +2436,7 @@ export interface WorkspaceFolder {
 
 > *Since version 3.6.0*
 
-The `workspace/didChangeWorkspaceFolders` notification is sent from the client to the server to inform the server about workspace folder configuration changes. The notification is sent by default if both _ServerCapabilities/workspace/workspaceFolders_ and _ClientCapabilities/workspace/workspaceFolders_ are true; or if the server has registered itself to receive this notification. To register for the `workspace/didChangeWorkspaceFolders` send a `client/registerCapability` request from the server to the client. The registration parameter must have a `registrations` item of the following form, where `id` is a unique id used to unregister the capability (the example uses a UUID):
+The `workspace/didChangeWorkspaceFolders` notification is sent from the client to the server to inform the server about workspace folder configuration changes. The notification is sent by default if both _client capability_ `workspace.workspaceFolders` and the _server capability_ `workspace.workspaceFolders.supported` are true; or if the server has registered itself to receive this notification. To register for the `workspace/didChangeWorkspaceFolders` send a `client/registerCapability` request from the server to the client. The registration parameter must have a `registrations` item of the following form, where `id` is a unique id used to unregister the capability (the example uses a UUID):
 ```ts
 {
 	id: "28c6150c-bd7b-11e7-abc4-cec278b6b50a",
@@ -2536,6 +2477,19 @@ export interface WorkspaceFoldersChangeEvent {
 
 A notification sent from the client to the server to signal the change of configuration settings.
 
+_Client Capability_:
+* property path (optional): `workspace.didChangeConfiguration`
+* property type: `DidChangeConfigurationClientCapabilities` defined as follows:
+
+```typescript
+export interface DidChangeConfigurationClientCapabilities {
+	/**
+	 * Did change configuration notification supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
 _Notification_:
 * method: 'workspace/didChangeConfiguration',
 * params: `DidChangeConfigurationParams` defined as follows:
@@ -2557,8 +2511,11 @@ The `workspace/configuration` request is sent from the server to the client to f
 
 A `ConfigurationItem` consists of the configuration section to ask for and an additional scope URI. The configuration section ask for is defined by the server and doesn't necessarily need to correspond to the configuration store used be the client. So a server might ask for a configuration `cpp.formatterOptions` but the client stores the configuration in a XML store layout differently. It is up to the client to do the necessary conversion. If a scope URI is provided the client should return the setting scoped to the provided resource. If the client for example uses [EditorConfig](http://editorconfig.org/) to manage its settings the configuration should be returned for the passed resource URI. If the client can't provide a configuration setting for a given scope then `null` need to be present in the returned array.
 
-_Request_:
+_Client Capability_:
+* property path (optional): `workspace.configuration`
+* property type: `boolean`
 
+_Request_:
 * method: 'workspace/configuration'
 * params: `ConfigurationParams` defined as follows
 
@@ -2595,6 +2552,20 @@ Servers are allowed to run their own file watching mechanism and not rely on cli
 - a client usually starts more than one server. If every server runs its own file watching it can become a CPU or memory problem.
 - in general there are more server than client implementations. So this problem is better solved on the client side.
 
+_Client Capability_:
+* property path (optional): `workspace.didChangeWatchedFiles`
+* property type: `DidChangeWatchedFilesClientCapabilities` defined as follows:
+
+```typescript
+export interface DidChangeWatchedFilesClientCapabilities {
+	/**
+	 * Did change watched files notification supports dynamic registration. Please note
+	 * that the current protocol doesn't support static configuration for file changes
+	 * from the server side.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
 
 _Notification_:
 * method: 'workspace/didChangeWatchedFiles'
@@ -2704,7 +2675,7 @@ The workspace symbol request is sent from the client to the server to list proje
 
 _Client Capability_:
 * property path (optional): `workspace.symbol`
-* JSON structure: `WorkspaceSymbolClientCapabilities` defined as follows:
+* property type: `WorkspaceSymbolClientCapabilities` defined as follows:
 
 ```typescript
 interface WorkspaceSymbolClientCapabilities {
@@ -2734,7 +2705,7 @@ interface WorkspaceSymbolClientCapabilities {
 
 _Server Capability_:
 * property path (optional): `workspaceSymbolProvider`
-* JSON structure: `boolean | WorkspaceSymbolOptions` were `WorkspaceSymbolOptions` is defined as follows:
+* property type: `boolean | WorkspaceSymbolOptions` were `WorkspaceSymbolOptions` is defined as follows:
 
 ```typescript
 export interface WorkspaceSymbolOptions extends WorkDoneProgressOptions {
@@ -2777,7 +2748,7 @@ sent from the server to the client.
 
 _Client Capability_:
 * property path (optional): `workspace.executeCommand`
-* JSON structure: `ExecuteCommandClientCapabilities` defined as follows:
+* property type: `ExecuteCommandClientCapabilities` defined as follows:
 
 ```typescript
 export interface ExecuteCommandClientCapabilities {
@@ -2790,7 +2761,7 @@ export interface ExecuteCommandClientCapabilities {
 
 _Server Capability_:
 * property path (optional): `executeCommandProvider`
-* JSON structure: `ExecuteCommandOptions` defined as follows:
+* property type: `ExecuteCommandOptions` defined as follows:
 
 ```typescript
 export interface ExecuteCommandOptions extends WorkDoneProgressOptions {
@@ -2838,6 +2809,12 @@ export interface ExecuteCommandRegistrationOptions extends ExecuteCommandOptions
 #### <a href="#workspace_applyEdit" name="workspace_applyEdit" class="anchor">Applies a WorkspaceEdit (:arrow_right_hook:)</a>
 
 The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
+
+_Client Capability_:
+* property path (optional): `workspace.applyEdit`
+* property type: `boolean`
+
+See also the [WorkspaceEditClientCapabilities](#workspaceEditClientCapabilities) for the supported capabilities of a workspace edit.
 
 _Request_:
 * method: 'workspace/applyEdit'
@@ -2900,7 +2877,7 @@ interface DidOpenTextDocumentParams {
 }
 ```
 
-_Registration Options_: `TextDocumentRegistrationOptions`
+_Registration Options_: [`TextDocumentRegistrationOptions`](#textDocumentRegistrationOptions)
 
 
 #### <a href="#textDocument_didChange" name="textDocument_didChange" class="anchor">DidChangeTextDocument Notification (:arrow_right:)</a>
