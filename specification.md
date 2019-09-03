@@ -2857,12 +2857,152 @@ export interface ApplyWorkspaceEditResponse {
 ```
 * error: code and message set in case an exception happens during the request.
 
+#### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
+
+Client support for `textDocument/open`, `textDocument/change` and `textDocument/close` notifications is mandantory in the protocol and clients can not opt out supporting them. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
+
+_Client Capability_:
+* property path (optional): `textDocument.synchronization.dynamicRegistration`
+* property type: `boolean`
+
+Controls whether text document synchronization supports dynamic registration.
+
+_Server Capability_:
+* property path (optional): `textDocumentSync`
+* property type: `TextDocumentSyncKind | TextDocumentSyncOptions` both defined as follows:
+
+```typescript
+/**
+ * Defines how the host (editor) should sync document changes to the language server.
+ */
+export namespace TextDocumentSyncKind {
+	/**
+	 * Documents should not be synced at all.
+	 */
+	export const None = 0;
+
+	/**
+	 * Documents are synced by always sending the full content
+	 * of the document.
+	 */
+	export const Full = 1;
+
+	/**
+	 * Documents are synced by sending the full content on open.
+	 * After that only incremental updates to the document are
+	 * send.
+	 */
+	export const Incremental = 2;
+}
+
+export interface TextDocumentSyncOptions {
+	/**
+	 * Open and close notifications are sent to the server. If omitted open close notification should not
+	 * be sent.
+	 */
+	openClose?: boolean;
+	/**
+	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
+	 */
+	change?: TextDocumentSyncKind;
+}
+```
 
 #### <a href="#textDocument_didOpen" name="textDocument_didOpen" class="anchor">DidOpenTextDocument Notification (:arrow_right:)</a>
 
 The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's Uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
 The `DidOpenTextDocumentParams` contain the language id the document is associated with. If the language Id of a document changes, the client needs to send a `textDocument/didClose` to the server followed by a `textDocument/didOpen` with the new language id if the server handles the new language id as well.
+
+_Client Capability_:
+* property path (optional): `textDocument.synchronization`
+* property type: `SynchronizationClientCapabilities` defined as follows:
+
+<a href="#synchronizationClientCapabilities" name="synchronizationClientCapabilities" class="anchor"></a>
+
+```typescript
+export interface SynchronizationClientCapabilities {
+	/**
+	 * Whether text document synchronization supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports sending will save notifications.
+	 */
+	willSave?: boolean;
+
+	/**
+	 * The client supports sending a will save request and
+	 * waits for a response providing text edits which will
+	 * be applied to the document before it is saved.
+	 */
+	willSaveWaitUntil?: boolean;
+
+	/**
+	 * The client supports did save notifications.
+	 */
+	didSave?: boolean;
+}
+```
+
+_Server Capability_:
+* property path (optional): `textDocumentSync`
+* property type: `TextDocumentSyncKind | TextDocumentSyncOptions` both defined as follows:
+
+```typescript
+/**
+ * Defines how the host (editor) should sync document changes to the language server.
+ */
+export namespace TextDocumentSyncKind {
+	/**
+	 * Documents should not be synced at all.
+	 */
+	export const None = 0;
+
+	/**
+	 * Documents are synced by always sending the full content
+	 * of the document.
+	 */
+	export const Full = 1;
+
+	/**
+	 * Documents are synced by sending the full content on open.
+	 * After that only incremental updates to the document are
+	 * send.
+	 */
+	export const Incremental = 2;
+}
+
+export interface TextDocumentSyncOptions {
+	/**
+	 * Open and close notifications are sent to the server. If omitted open close notification should not
+	 * be sent.
+	 */
+	openClose?: boolean;
+	/**
+	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
+	 */
+	change?: TextDocumentSyncKind;
+	/**
+	 * If present will save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
+	 */
+	willSave?: boolean;
+	/**
+	 * If present will save wait until requests are sent to the server. If omitted the request should not be
+	 * sent.
+	 */
+	willSaveWaitUntil?: boolean;
+	/**
+	 * If present save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
+	 */
+	save?: SaveOptions;
+}
+```
 
 _Notification_:
 * method: 'textDocument/didOpen'

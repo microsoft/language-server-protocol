@@ -122,6 +122,8 @@
   - title: Text Synchronization
     anchor: textSynchronization
     children:
+    - title: Genernal Capabilities
+      anchor: textDocument_synchronization
     - title: didOpen
       anchor: textDocument_didOpen
     - title: didChange
