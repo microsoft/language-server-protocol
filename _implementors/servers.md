@@ -25,6 +25,7 @@ index: 1
 | CSS/LESS/SASS | MS | [vscode-css-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/css-language-features/server) | TypeScript |
 | [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) | Ceylon |
 | [Clojure](https://clojure.org/) | [Case Nelson](https://github.com/snoe) | [clojure-lsp](https://github.com/snoe/clojure-lsp) | Clojure |
+| [CWL](https://www.commonwl.org/) | [Rabix](https://github.com/rabix) | [Benten](https://github.com/rabix/benten) | Python |
 | Crane PHP | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) | TypeScript |
 | [Crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [scry](https://github.com/kofno/scry) | Crystal |
 | [D](https://dlang.org) | [Jan Jurzitza](https://github.com/WebFreak001) | [serve-d](https://github.com/Pure-D/serve-d) | D |
