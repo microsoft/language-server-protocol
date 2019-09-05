@@ -1307,69 +1307,7 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the `textDocument/completion`
 	 */
-	completion?: {
-		/**
-		 * Whether completion supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports the following `CompletionItem` specific
-		 * capabilities.
-		 */
-		completionItem?: {
-			/**
-			 * The client supports snippets as insert text.
-			 *
-			 * A snippet can define tab stops and placeholders with `$1`, `$2`
-			 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
-			 * the end of the snippet. Placeholders with equal identifiers are linked,
-			 * that is typing in one will update others too.
-			 */
-			snippetSupport?: boolean;
-
-			/**
-			 * The client supports commit characters on a completion item.
-			 */
-			commitCharactersSupport?: boolean
-
-			/**
-			 * The client supports the following content formats for the documentation
-			 * property. The order describes the preferred format of the client.
-			 */
-			documentationFormat?: MarkupKind[];
-
-			/**
-			 * The client supports the deprecated property on a completion item.
-			 */
-			deprecatedSupport?: boolean;
-
-			/**
-			 * The client supports the preselect property on a completion item.
-			 */
-			preselectSupport?: boolean;
-		}
-
-		completionItemKind?: {
-			/**
-			 * The completion item kind values the client supports. When this
-			 * property exists the client also guarantees that it will
-			 * handle values outside its set gracefully and falls back
-			 * to a default value when unknown.
-			 *
-			 * If this property is not present the client only supports
-			 * the completion items kinds from `Text` to `Reference` as defined in
-			 * the initial version of the protocol.
-			 */
-			valueSet?: CompletionItemKind[];
-		},
-
-		/**
-		 * The client supports to send additional context information for a
-		 * `textDocument/completion` request.
-		 */
-		contextSupport?: boolean;
-	};
+	completion?: CompletionClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/hover`
@@ -1795,21 +1733,6 @@ The server can signal the following capabilities:
 
 ```typescript
 
-/**
- * Completion options.
- */
-export interface CompletionOptions {
-	/**
-	 * The server provides support to resolve additional
-	 * information for a completion item.
-	 */
-	resolveProvider?: boolean;
-
-	/**
-	 * The characters that trigger completion automatically.
-	 */
-	triggerCharacters?: string[];
-}
 /**
  * Signature help options.
  */
@@ -3265,6 +3188,113 @@ interface PublishDiagnosticsParams {
 #### <a href="#textDocument_completion" name="textDocument_completion" class="anchor">Completion Request (:leftwards_arrow_with_hook:)</a>
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. The request can delay the computation of the `detail` and `documentation` properties. However, properties that are needed for the initial sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` response and must not be changed during resolve.
+
+_Client Capability_:
+* property name (optional): `textDocument.completion`
+* property type: `CompletionClientCapabilities` defined as follows:
+
+```typescript
+export interface CompletionClientCapabilities {
+	/**
+	 * Whether completion supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports the following `CompletionItem` specific
+	 * capabilities.
+	 */
+	completionItem?: {
+		/**
+		 * Client supports snippets as insert text.
+		 *
+		 * A snippet can define tab stops and placeholders with `$1`, `$2`
+		 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+		 * the end of the snippet. Placeholders with equal identifiers are linked,
+		 * that is typing in one will update others too.
+		 */
+		snippetSupport?: boolean;
+
+		/**
+		 * Client supports commit characters on a completion item.
+		 */
+		commitCharactersSupport?: boolean
+
+		/**
+		 * Client supports the follow content formats for the documentation
+		 * property. The order describes the preferred format of the client.
+		 */
+		documentationFormat?: MarkupKind[];
+
+		/**
+		 * Client supports the deprecated property on a completion item.
+		 */
+		deprecatedSupport?: boolean;
+
+		/**
+		 * Client supports the preselect property on a completion item.
+		 */
+		preselectSupport?: boolean;
+	};
+
+	completionItemKind?: {
+		/**
+		 * The completion item kind values the client supports. When this
+		 * property exists the client also guarantees that it will
+		 * handle values outside its set gracefully and falls back
+		 * to a default value when unknown.
+		 *
+		 * If this property is not present the client only supports
+		 * the completion items kinds from `Text` to `Reference` as defined in
+		 * the initial version of the protocol.
+		 */
+		valueSet?: CompletionItemKind[];
+	};
+
+	/**
+	 * The client supports to send additional context information for a
+	 * `textDocument/completion` requestion.
+	 */
+	contextSupport?: boolean;
+}
+```
+
+_Server Capability_:
+
+* property name (optional): `completionProvider`
+* property type: `CompletionOptions` defined as follows:
+
+```typescript
+/**
+ * Completion options.
+ */
+export interface CompletionOptions extends WorkDoneProgressOptions {
+	/**
+	 * Most tools trigger completion request automatically without explicitly requesting
+	 * it using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
+	 * starts to type an identifier. For example if the user types `c` in a JavaScript file
+	 * code complete will automatically pop up present `console` besides others as a
+	 * completion item. Characters that make up identifiers don't need to be listed here.
+	 *
+	 * If code complete should automatically be trigger on characters not being valid inside
+	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`.
+	 */
+	triggerCharacters?: string[];
+
+	/**
+	 * The list of all possible characters that commit a completion. This field can be used
+	 * if clients don't support individual commmit characters per completion item. See
+	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`
+	 */
+	allCommitCharacters?: string[];
+
+	/**
+	 * The server provides support to resolve additional
+	 * information for a completion item.
+	 */
+	resolveProvider?: boolean;
+}
+```
 
 _Request_:
 * method: 'textDocument/completion'
