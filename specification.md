@@ -360,7 +360,7 @@ interface LocationLink {
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
 ```typescript
-interface Diagnostic {
+export interface Diagnostic {
 	/**
 	 * The range at which the message applies.
 	 */
@@ -370,7 +370,7 @@ interface Diagnostic {
 	 * The diagnostic's severity. Can be omitted. If omitted it is up to the
 	 * client to interpret diagnostics as error, warning, info or hint.
 	 */
-	severity?: number;
+	severity?: DiagnosticSeverity;
 
 	/**
 	 * The diagnostic's code, which might appear in the user interface.
@@ -389,6 +389,13 @@ interface Diagnostic {
 	message: string;
 
 	/**
+	 * Additional metadata about the diagnostic.
+	 *
+	 * Since 3.15
+	 */
+	tags?: DiagnosticTag[];
+
+	/**
 	 * An array of related diagnostic information, e.g. when symbol-names within
 	 * a scope collide all definitions can be marked via this property.
 	 */
@@ -396,10 +403,10 @@ interface Diagnostic {
 }
 ```
 
-The protocol currently supports the following diagnostic severities:
+The protocol currently supports the following diagnostic severities and tags:
 
 ```typescript
-namespace DiagnosticSeverity {
+export namespace DiagnosticSeverity {
 	/**
 	 * Reports an error.
 	 */
@@ -417,7 +424,29 @@ namespace DiagnosticSeverity {
 	 */
 	export const Hint = 4;
 }
+
+export type DiagnosticSeverity = 1 | 2 | 3 | 4;
+
+export namespace DiagnosticTag {
+    /**
+     * Unused or unnecessary code.
+     *
+     * Clients are allowed to render diagnostics with this tag faded out instead of having
+     * an error squiggle.
+     */
+    export const Unnecessary: 1;
+    /**
+     * Deprecated or obsolete code.
+     *
+     * Clients are allowed to rendered diagnostics with this tag strike through.
+     */
+    export const Deprecated: 2;
+}
+
+export type DiagnosticTag = 1 | 2;
 ```
+
+`DiagnosticRelatedInformation` is defined as follows:
 
 ```typescript
 /**
@@ -1273,29 +1302,7 @@ Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as f
  */
 export interface TextDocumentClientCapabilities {
 
-	synchronization?: {
-		/**
-		 * Whether text document synchronization supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports sending will save notifications.
-		 */
-		willSave?: boolean;
-
-		/**
-		 * The client supports sending a will save request and
-		 * waits for a response providing text edits which will
-		 * be applied to the document before it is saved.
-		 */
-		willSaveWaitUntil?: boolean;
-
-		/**
-		 * The client supports did save notifications.
-		 */
-		didSave?: boolean;
-	}
+	synchronization?: TextDocumentSyncClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/completion`
@@ -1660,12 +1667,8 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to `textDocument/publishDiagnostics`.
 	 */
-	publishDiagnostics?: {
-		/**
-		 * Whether the clients accepts diagnostics with related information.
-		 */
-		relatedInformation?: boolean;
-	};
+	publishDiagnostics?: PublishDiagnosticsClientCapabilities;
+
 	/**
 	 * Capabilities specific to `textDocument/foldingRange` requests.
 	 *
@@ -1791,28 +1794,6 @@ interface InitializeError {
 The server can signal the following capabilities:
 
 ```typescript
-/**
- * Defines how the host (editor) should sync document changes to the language server.
- */
-export namespace TextDocumentSyncKind {
-	/**
-	 * Documents should not be synced at all.
-	 */
-	export const None = 0;
-
-	/**
-	 * Documents are synced by always sending the full content
-	 * of the document.
-	 */
-	export const Full = 1;
-
-	/**
-	 * Documents are synced by sending the full content on open.
-	 * After that only incremental updates to the document are
-	 * send.
-	 */
-	export const Incremental = 2;
-}
 
 /**
  * Completion options.
@@ -1928,34 +1909,6 @@ export interface ColorProviderOptions {
  * Folding range provider options.
  */
 export interface FoldingRangeProviderOptions {
-}
-
-export interface TextDocumentSyncOptions {
-	/**
-	 * Open and close notifications are sent to the server. If omitted open close notification should not
-	 * be sent.
-	 */
-	openClose?: boolean;
-	/**
-	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
-	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
-	 */
-	change?: number;
-	/**
-	 * If present will save notifications are sent to the server. If omitted the notification should not be
-	 * sent.
-	 */
-	willSave?: boolean;
-	/**
-	 * If present will save wait until requests are sent to the server. If omitted the request should not be
-	 * sent.
-	 */
-	willSaveWaitUntil?: boolean;
-	/**
-	 * If present save notifications are sent to the server. If omitted the notification should not be
-	 * sent.
-	 */
-	save?: SaveOptions;
 }
 
 /**
@@ -2861,13 +2814,13 @@ export interface ApplyWorkspaceEditResponse {
 
 Client support for `textDocument/open`, `textDocument/change` and `textDocument/close` notifications is mandantory in the protocol and clients can not opt out supporting them. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
 
-_Client Capability_:
+<a href="#textDocument_synchronization_cc" name="textDocument_synchronization_cc" class="anchor"></a>_Client Capability_:
 * property path (optional): `textDocument.synchronization.dynamicRegistration`
 * property type: `boolean`
 
 Controls whether text document synchronization supports dynamic registration.
 
-_Server Capability_:
+<a href="#textDocument_synchronization_sc" name="textDocument_synchronization_sc" class="anchor"></a>_Server Capability_:
 * property path (optional): `textDocumentSync`
 * property type: `TextDocumentSyncKind | TextDocumentSyncOptions` both defined as follows:
 
@@ -2916,93 +2869,12 @@ The document open notification is sent from the client to the server to signal n
 The `DidOpenTextDocumentParams` contain the language id the document is associated with. If the language Id of a document changes, the client needs to send a `textDocument/didClose` to the server followed by a `textDocument/didOpen` with the new language id if the server handles the new language id as well.
 
 _Client Capability_:
-* property path (optional): `textDocument.synchronization`
-* property type: `SynchronizationClientCapabilities` defined as follows:
 
-<a href="#synchronizationClientCapabilities" name="synchronizationClientCapabilities" class="anchor"></a>
-
-```typescript
-export interface SynchronizationClientCapabilities {
-	/**
-	 * Whether text document synchronization supports dynamic registration.
-	 */
-	dynamicRegistration?: boolean;
-
-	/**
-	 * The client supports sending will save notifications.
-	 */
-	willSave?: boolean;
-
-	/**
-	 * The client supports sending a will save request and
-	 * waits for a response providing text edits which will
-	 * be applied to the document before it is saved.
-	 */
-	willSaveWaitUntil?: boolean;
-
-	/**
-	 * The client supports did save notifications.
-	 */
-	didSave?: boolean;
-}
-```
+See general synchronization [client capabilities](#textDocument_synchronization_cc).
 
 _Server Capability_:
-* property path (optional): `textDocumentSync`
-* property type: `TextDocumentSyncKind | TextDocumentSyncOptions` both defined as follows:
 
-```typescript
-/**
- * Defines how the host (editor) should sync document changes to the language server.
- */
-export namespace TextDocumentSyncKind {
-	/**
-	 * Documents should not be synced at all.
-	 */
-	export const None = 0;
-
-	/**
-	 * Documents are synced by always sending the full content
-	 * of the document.
-	 */
-	export const Full = 1;
-
-	/**
-	 * Documents are synced by sending the full content on open.
-	 * After that only incremental updates to the document are
-	 * send.
-	 */
-	export const Incremental = 2;
-}
-
-export interface TextDocumentSyncOptions {
-	/**
-	 * Open and close notifications are sent to the server. If omitted open close notification should not
-	 * be sent.
-	 */
-	openClose?: boolean;
-	/**
-	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
-	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
-	 */
-	change?: TextDocumentSyncKind;
-	/**
-	 * If present will save notifications are sent to the server. If omitted the notification should not be
-	 * sent.
-	 */
-	willSave?: boolean;
-	/**
-	 * If present will save wait until requests are sent to the server. If omitted the request should not be
-	 * sent.
-	 */
-	willSaveWaitUntil?: boolean;
-	/**
-	 * If present save notifications are sent to the server. If omitted the notification should not be
-	 * sent.
-	 */
-	save?: SaveOptions;
-}
-```
+See general synchronization [server capabilities](#textDocument_synchronization_sc).
 
 _Notification_:
 * method: 'textDocument/didOpen'
@@ -3023,6 +2895,14 @@ _Registration Options_: [`TextDocumentRegistrationOptions`](#textDocumentRegistr
 #### <a href="#textDocument_didChange" name="textDocument_didChange" class="anchor">DidChangeTextDocument Notification (:arrow_right:)</a>
 
 The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
+
+_Client Capability_:
+
+See general synchronization [client capabilities](#textDocument_synchronization_cc).
+
+_Server Capability_:
+
+See general synchronization [server capabilities](#textDocument_synchronization_sc).
 
 _Notification_:
 * method: 'textDocument/didChange'
@@ -3087,6 +2967,20 @@ export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegis
 
 The document will save notification is sent from the client to the server before the document is actually saved.
 
+_Client Capability_:
+
+* property name (optional): `textDocument.synchronization.willSave`
+* property type: `boolean`
+
+The capability indicates that the client supports `textDocument/willSave` notifications.
+
+_Server Capability_:
+
+* property name (optional): `textDocumentSync.willSave`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `textDocument/willSave` notifications.
+
 _Notification_:
 * method: 'textDocument/willSave'
 * params: `WillSaveTextDocumentParams` defined as follows:
@@ -3132,10 +3026,23 @@ export namespace TextDocumentSaveReason {
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
-
 #### <a href="#textDocument_willSaveWaitUntil" name="textDocument_willSaveWaitUntil" class="anchor">WillSaveWaitUntilTextDocument Request (:leftwards_arrow_with_hook:)</a>
 
 The document will save request is sent from the client to the server before the document is actually saved. The request can return an array of TextEdits which will be applied to the text document before it is saved. Please note that clients might drop results if computing the text edits took too long or if a server constantly fails on this request. This is done to keep the save fast and reliable.
+
+_Client Capability_:
+
+* property name (optional): `textDocument.synchronization.willSaveWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the client supports `textDocument/willSaveWaitUntil` requests.
+
+_Server Capability_:
+
+* property name (optional): `textDocumentSync.willSaveWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `textDocument/willSaveWaitUntil` requests.
 
 _Request_:
 * method: 'textDocument/willSaveWaitUntil'
@@ -3150,6 +3057,22 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 #### <a href="#textDocument_didSave" name="textDocument_didSave" class="anchor">DidSaveTextDocument Notification (:arrow_right:)</a>
 
 The document save notification is sent from the client to the server when the document was saved in the client.
+
+_Client Capability_:
+
+* property name (optional): `textDocument.synchronization.didSave`
+* property type: `boolean`
+
+The capability indicates that the client supports `textDocument/didSave` notifications.
+
+_Server Capability_:
+
+* property name (optional): `textDocumentSync.didSave`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `textDocument/didSave` notifications.
+
+_Notification_:
 
 * method: 'textDocument/didSave'
 * params: `DidSaveTextDocumentParams` defined as follows:
@@ -3184,7 +3107,16 @@ export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistr
 
 The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's Uri points to (e.g. if the document's Uri is a file Uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
+_Client Capability_:
+
+See general synchronization [client capabilities](#textDocument_synchronization_cc).
+
+_Server Capability_:
+
+See general synchronization [server capabilities](#textDocument_synchronization_sc).
+
 _Notification_:
+
 * method: 'textDocument/didClose'
 * params: `DidCloseTextDocumentParams` defined as follows:
 
@@ -3199,6 +3131,84 @@ interface DidCloseTextDocumentParams {
 
 _Registration Options_: `TextDocumentRegistrationOptions`
 
+The final structure of the `TextDocumentSyncClientCapabilities` and the `TextDocumentSyncOptions` server options look like this
+
+```typescript
+export interface TextDocumentSyncClientCapabilities {
+	/**
+	 * Whether text document synchronization supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports sending will save notifications.
+	 */
+	willSave?: boolean;
+
+	/**
+	 * The client supports sending a will save request and
+	 * waits for a response providing text edits which will
+	 * be applied to the document before it is saved.
+	 */
+	willSaveWaitUntil?: boolean;
+
+	/**
+	 * The client supports did save notifications.
+	 */
+	didSave?: boolean;
+}
+
+/**
+ * Defines how the host (editor) should sync document changes to the language server.
+ */
+export namespace TextDocumentSyncKind {
+	/**
+	 * Documents should not be synced at all.
+	 */
+	export const None = 0;
+
+	/**
+	 * Documents are synced by always sending the full content
+	 * of the document.
+	 */
+	export const Full = 1;
+
+	/**
+	 * Documents are synced by sending the full content on open.
+	 * After that only incremental updates to the document are
+	 * send.
+	 */
+	export const Incremental = 2;
+}
+
+export interface TextDocumentSyncOptions {
+	/**
+	 * Open and close notifications are sent to the server. If omitted open close notification should not
+	 * be sent.
+	 */
+	openClose?: boolean;
+	/**
+	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
+	 */
+	change?: number;
+	/**
+	 * If present will save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
+	 */
+	willSave?: boolean;
+	/**
+	 * If present will save wait until requests are sent to the server. If omitted the request should not be
+	 * sent.
+	 */
+	willSaveWaitUntil?: boolean;
+	/**
+	 * If present save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
+	 */
+	save?: SaveOptions;
+}
+```
 
 #### <a href="#textDocument_publishDiagnostics" name="textDocument_publishDiagnostics" class="anchor">PublishDiagnostics Notification (:arrow_left:)</a>
 
@@ -3210,6 +3220,29 @@ Diagnostics are "owned" by the server so it is the server's responsibility to cl
 * if a language has a project system (for example C#) diagnostics are not cleared when a file closes. When a project is opened all diagnostics for all files are recomputed (or read from a cache).
 
 When a file changes it is the server's responsibility to re-compute diagnostics and push them to the client. If the computed set is empty it has to push the empty array to clear former diagnostics. Newly pushed diagnostics always replace previously pushed diagnostics. There is no merging that happens on the client side.
+
+See also the [Diagnostic](#diagnostic) section.
+
+_Client Capability_:
+
+* property name (optional): `textDocument.publishDiagnostics`
+* property type `PublishDiagnosticsClientCapabilities` defined as follows:
+
+```typescript
+export interface PublishDiagnosticsClientCapabilities {
+	/**
+	 * Whether the clients accepts diagnostics with related information.
+	 */
+	relatedInformation?: boolean;
+
+	/**
+	 * Client supports the tag property to provide meta data about a diagnostic.
+	 *
+	 * Since 3.15
+	 */
+	tagSupport?: boolean;
+}
+```
 
 _Notification_:
 * method: 'textDocument/publishDiagnostics'
