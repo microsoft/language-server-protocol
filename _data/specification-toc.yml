@@ -54,6 +54,8 @@
       anchor: textDocumentPositionParams
     - title: Document Filter
       anchor: documentFilter
+    - title: Static Registration Options
+      anchor: staticRegistrationOptions
     - title: Text Document Registration Options
       anchor: textDocumentRegistrationOptions
     - title: Markup Content
