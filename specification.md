@@ -1349,56 +1349,38 @@ export interface TextDocumentClientCapabilities {
 	definition?: DefinitionClientCapabilities;
 
 	/**
+	 * Capabilities specific to the `textDocument/typeDefinition`
+	 *
+	 * Since 3.6.0
+	 */
+	typeDefinition?: TypeDefinitionClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/implementation`.
+	 *
+	 * Since 3.6.0
+	 */
+	implementation?: ImplementationClientCapabilities;
+
+	/**
 	 * Capabilities specific to the `textDocument/references`
 	 */
-	references?: {
-		/**
-		 * Whether references supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
+	references?: ReferenceClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/documentHighlight`
 	 */
-	documentHighlight?: {
-		/**
-		 * Whether document highlight supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
+	documentHighlight?: DocumentHighlightClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/documentSymbol`
 	 */
-	documentSymbol?: {
-		/**
-		 * Whether document symbol supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
+	documentSymbol?: DocumentSymbolClientCapabilities;
 
-		/**
-		 * Specific capabilities for the `SymbolKind`.
-		 */
-		symbolKind?: {
-			/**
-			 * The symbol kind values the client supports. When this
-			 * property exists the client also guarantees that it will
-			 * handle values outside its set gracefully and falls back
-			 * to a default value when unknown.
-			 *
-			 * If this property is not present the client only supports
-			 * the symbol kinds from `File` to `Array` as defined in
-			 * the initial version of the protocol.
-			 */
-			valueSet?: SymbolKind[];
-		}
-
-		/**
-		 * The client supports hierarchical document symbols.
-		 */
-		hierarchicalDocumentSymbolSupport?: boolean;
-	};
+	/**
+	 * Capabilities specific to the `textDocument/codeAction`
+	 */
+	codeAction?: CodeActionClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/formatting`
@@ -1428,81 +1410,6 @@ export interface TextDocumentClientCapabilities {
 		 * Whether on type formatting supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
-	};
-
-
-	/**
-	 * Capabilities specific to the `textDocument/typeDefinition`
-	 *
-	 * Since 3.6.0
-	 */
-	typeDefinition?: {
-		/**
-		 * Whether typeDefinition supports dynamic registration. If this is set to `true`
-		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports additional metadata in the form of definition links.
-		 *
-		 * Since 3.14.0
-		 */
-		linkSupport?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/implementation`.
-	 *
-	 * Since 3.6.0
-	 */
-	implementation?: {
-		/**
-		 * Whether implementation supports dynamic registration. If this is set to `true`
-		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports additional metadata in the form of definition links.
-		 *
-		 * Since 3.14.0
-		 */
-		linkSupport?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/codeAction`
-	 */
-	codeAction?: {
-		/**
-		 * Whether code action supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-		/**
-		 * The client support code action literals as a valid
-		 * response of the `textDocument/codeAction` request.
-		 *
-		 * Since 3.8.0
-		 */
-		codeActionLiteralSupport?: {
-			/**
-			 * The code action kind is support with the following value
-			 * set.
-			 */
-			codeActionKind: {
-
-				/**
-				 * The code action kind values the client supports. When this
-				 * property exists the client also guarantees that it will
-				 * handle values outside its set gracefully and falls back
-				 * to a default value when unknown.
-				 */
-				valueSet: CodeActionKind[];
-			};
-		};
 	};
 
 	/**
@@ -1820,35 +1727,35 @@ interface ServerCapabilities {
 	 *
 	 * Since 3.6.0
 	 */
-	typeDefinitionProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	typeDefinitionProvider?: boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions;
 	/**
 	 * The server provides Goto Implementation support.
 	 *
 	 * Since 3.6.0
 	 */
-	implementationProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	implementationProvider?: boolean | ImplementationOptions | ImplementationRegistrationOptions;
 	/**
 	 * The server provides find references support.
 	 */
-	referencesProvider?: boolean;
+	referencesProvider?: boolean | ReferenceOptions;
 	/**
 	 * The server provides document highlight support.
 	 */
-	documentHighlightProvider?: boolean;
+	documentHighlightProvider?: boolean | DocumentHighlightOptions;
 	/**
 	 * The server provides document symbol support.
 	 */
-	documentSymbolProvider?: boolean;
-	/**
-	 * The server provides workspace symbol support.
-	 */
-	workspaceSymbolProvider?: boolean;
+	documentSymbolProvider?: boolean | DocumentSymbolOptions;
 	/**
 	 * The server provides code actions. The `CodeActionOptions` return type is only
 	 * valid if the client signals code action literal support via the property
 	 * `textDocument.codeAction.codeActionLiteralSupport`.
 	 */
 	codeActionProvider?: boolean | CodeActionOptions;
+	/**
+	 * The server provides workspace symbol support.
+	 */
+	workspaceSymbolProvider?: boolean;
 	/**
 	 * The server provides code lens.
 	 */
@@ -3462,6 +3369,7 @@ export namespace CompletionItemKind {
 	export const TypeParameter = 25;
 }
 ```
+* partial result: `CompletionItem[]`
 * error: code and message set in case an exception happens during the completion request.
 
 Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is as follows:
@@ -3805,7 +3713,7 @@ export interface ParameterInformation {
 
 The go to declaration request is sent from the client to the server to resolve the declaration location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends on the corresponding client capability `textDocument.declaration.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends on the corresponding client capability `textDocument.declaration.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.declaration`
@@ -3815,8 +3723,8 @@ _Client Capability_:
 export interface DeclarationClientCapabilities {
 	/**
 	 * Whether declaration supports dynamic registration. If this is set to `true`
-	 * the client supports the new `(DeclarationRegistrationOptions & StaticRegistrationOptions)`
-	 * return value for the corresponding server capability as well.
+	 * the client supports the new `DeclarationRegistrationOptions` return value
+	 * for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
 
@@ -3847,14 +3755,15 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \|`null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \|`null`
+* partial result: [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the declaration request.
 
 #### <a href="#textDocument_definition" name="textDocument_definition" class="anchor">Goto Definition Request (:leftwards_arrow_with_hook:)</a>
 
 The go to definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 `
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `textDocument.definition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `textDocument.definition.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.definition`
@@ -3896,7 +3805,8 @@ _Request_:
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the definition request.
 
 #### <a href="#textDocument_typeDefinition" name="textDocument_typeDefinition" class="anchor">Goto Type Definition Request (:leftwards_arrow_with_hook:)</a>
@@ -3905,17 +3815,53 @@ _Response_:
 
 The go to type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `textDocument.typeDefinition.linkSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.typeDefinition`
+* property type: `DefinitionClientCapabilities` defined as follows:
+
+```typescript
+export interface TypeDefinitionClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `TypeDefinitionRegistrationOptions` return value
+	 * for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports additional metadata in the form of definition links.
+	 *
+	 * Since 3.14.0
+	 */
+	linkSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `typeDefinitionProvider`
+* property type: `boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions` were `TypeDefinitionOptions` is defined as follows:
+
+```typescript
+export interface TypeDefinitionOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `TypeDefinitionRegistrationOptions` defined as follows:
+```typescript
+export interface TypeDefinitionRegistrationOptions extends TextDocumentRegistrationOptions, TypeDefinitionOptions, StaticRegistrationOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/typeDefinition'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the definition request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_implementation" name="textDocument_implementation" class="anchor">Goto Implementation Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3923,32 +3869,96 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The go to implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.implementation.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `implementation.typeDefinition.linkSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.implementation`
+* property type: `ImplementationClientCapabilities` defined as follows:
+
+```typescript
+export interface ImplementationClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `ImplementationRegistrationOptions` return value
+	 * for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports additional metadata in the form of definition links.
+	 *
+	 * Since 3.14.0
+	 */
+	linkSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `implementationProvider`
+* property type: `boolean | ImplementationOptions | ImplementationRegistrationOptions` were `ImplementationOptions` is defined as follows:
+
+```typescript
+export interface ImplementationOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `ImplementationRegistrationOptions` defined as follows:
+```typescript
+export interface ImplementationRegistrationOptions extends TextDocumentRegistrationOptions, ImplementationOptions, StaticRegistrationOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/implementation'
 * params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the definition request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_references" name="textDocument_references" class="anchor">Find References Request (:leftwards_arrow_with_hook:)</a>
 
 The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
+
+_Client Capability_:
+* property name (optional): `textDocument.references`
+* property type: `ReferenceClientCapabilities` defined as follows:
+
+```typescript
+export interface ReferenceClientCapabilities {
+	/**
+	 * Whether references supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `referencesProvider`
+* property type: `boolean | ReferenceOptions` were `ReferenceOptions` is defined as follows:
+
+```typescript
+export interface ReferenceOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `ReferenceRegistrationOptions` defined as follows:
+```typescript
+export interface ReferenceRegistrationOptions extends TextDocumentRegistrationOptions, ReferenceOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/references'
 * params: `ReferenceParams` defined as follows:
 
 ```typescript
-interface ReferenceParams extends TextDocumentPositionParams {
+export interface ReferenceParams extends TextDocumentPositionParams {
 	context: ReferenceContext
 }
 
-interface ReferenceContext {
+export interface ReferenceContext {
 	/**
 	 * Include the declaration of the current symbol.
 	 */
@@ -3957,9 +3967,8 @@ interface ReferenceContext {
 ```
 _Response_:
 * result: [`Location`](#location)[] \| `null`
+* partial result: [`Location`](#location)[]
 * error: code and message set in case an exception happens during the reference request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_documentHighlight" name="textDocument_documentHighlight" class="anchor">Document Highlights Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3967,6 +3976,34 @@ The document highlight request is sent from the client to the server to resolve 
 For programming languages this usually highlights all references to the symbol scoped to this file. However we kept 'textDocument/documentHighlight'
 and 'textDocument/references' separate requests since the first one is allowed to be more fuzzy. Symbol matches usually have a `DocumentHighlightKind`
 of `Read` or `Write` whereas fuzzy or textual matches use `Text`as the kind.
+
+_Client Capability_:
+* property name (optional): `textDocument.documentHighlight`
+* property type: `DocumentHighlightClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentHighlightClientCapabilities {
+	/**
+	 * Whether document highlight supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentHighlightProvider`
+* property type: `boolean | DocumentHighlightOptions` were `DocumentHighlightOptions` is defined as follows:
+
+```typescript
+export interface DocumentHighlightOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentHighlightRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentHighlightRegistrationOptions extends TextDocumentRegistrationOptions, DocumentHighlightOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/documentHighlight'
@@ -3982,7 +4019,7 @@ _Response_:
  * the background color of its range.
  *
  */
-interface DocumentHighlight {
+export interface DocumentHighlight {
 	/**
 	 * The range this highlight applies to.
 	 */
@@ -4015,9 +4052,8 @@ export namespace DocumentHighlightKind {
 }
 ```
 
+* partial result: `DocumentHighlight[]`
 * error: code and message set in case an exception happens during the document highlight request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_documentSymbol" name="textDocument_documentSymbol" class="anchor">Document Symbols Request (:leftwards_arrow_with_hook:)</a>
 
@@ -4025,6 +4061,34 @@ The document symbol request is sent from the client to the server. The returned 
 
 - `SymbolInformation[]` which is a flat list of all symbols found in a given text document. Then neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
 - `DocumentSymbol[]` which is a hierarchy of symbols found in a given text document.
+
+_Client Capability_:
+* property name (optional): `textDocument.documentSymbol`
+* property type: `DocumentSymbolClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentHighlightClientCapabilities {
+	/**
+	 * Whether document highlight supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentSymbolProvider`
+* property type: `boolean | DocumentSymbolOptions` were `DocumentSymbolOptions` is defined as follows:
+
+```typescript
+export interface DocumentSymbolOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentSymbolRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentSymbolRegistrationOptions extends TextDocumentRegistrationOptions, DocumentSymbolOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/documentSymbol'
@@ -4080,7 +4144,7 @@ export namespace SymbolKind {
  * hierarchical and they have two ranges: one that encloses its definition and one that points to its most interesting range,
  * e.g. the range of an identifier.
  */
-export class DocumentSymbol {
+export interface DocumentSymbol {
 
 	/**
 	 * The name of this symbol. Will be displayed in the user interface and therefore must not be
@@ -4126,7 +4190,7 @@ export class DocumentSymbol {
  * Represents information about programming constructs like variables, classes,
  * interfaces etc.
  */
-interface SymbolInformation {
+export interface SymbolInformation {
 	/**
 	 * The name of this symbol.
 	 */
@@ -4163,12 +4227,10 @@ interface SymbolInformation {
 	 */
 	containerName?: string;
 }
-
 ```
 
+* partial result: `DocumentSymbol[]` \| `SymbolInformation[]`
 * error: code and message set in case an exception happens during the document symbol request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_codeAction" name="textDocument_codeAction" class="anchor">Code Action Request (:leftwards_arrow_with_hook:)</a>
 
@@ -4181,7 +4243,65 @@ When the command is selected the server should be contacted again (via the `work
 - the ability to directly return a workspace edit from the code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is simply a command and the actual edit is only computed when needed.
 - the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action for example into corresponding menus (e.g. all refactor code actions into a refactor menu).
 
-Clients need to announce their support for code action literals and code action kinds via the corresponding client capability `textDocument.codeAction.codeActionLiteralSupport`.
+Clients need to announce their support for code action literals and code action kinds via the corresponding client capability `codeAction.codeActionLiteralSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.codeAction`
+* property type: `CodeActionClientCapabilities` defined as follows:
+
+```typescript
+export interface CodeActionClientCapabilities {
+	/**
+	 * Whether code action supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client support code action literals as a valid
+	 * response of the `textDocument/codeAction` request.
+	 *
+	 * Since 3.8.0
+	 */
+	codeActionLiteralSupport?: {
+		/**
+		 * The code action kind is support with the following value
+		 * set.
+		 */
+		codeActionKind: {
+
+			/**
+			 * The code action kind values the client supports. When this
+			 * property exists the client also guarantees that it will
+			 * handle values outside its set gracefully and falls back
+			 * to a default value when unknown.
+			 */
+			valueSet: CodeActionKind[];
+		};
+	};
+}
+```
+
+_Server Capability_:
+* property name (optional): `codeActionProvider`
+* property type: `boolean | CodeActionOptions` were `CodeActionOptions` is defined as follows:
+
+```typescript
+export interface CodeActionOptions extends WorkDoneProgressOptions {
+	/**
+	 * CodeActionKinds that this server may return.
+	 *
+	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, or the server
+	 * may list out every specific kind they provide.
+	 */
+	codeActionKinds?: CodeActionKind[];
+}
+```
+
+_Registration Options_: `CodeActionRegistrationOptions` defined as follows:
+```typescript
+export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions, CodeActionOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/codeAction'
@@ -4191,7 +4311,7 @@ _Request_:
 /**
  * Params for the CodeActionRequest
  */
-interface CodeActionParams {
+export interface CodeActionParams {
 	/**
 	 * The document in which the command was invoked.
 	 */
@@ -4294,7 +4414,7 @@ export namespace CodeActionKind {
  * Contains additional diagnostic information about the context in which
  * a code action is run.
  */
-interface CodeActionContext {
+export interface CodeActionContext {
 	/**
 	 * An array of diagnostics.
 	 */
@@ -4352,16 +4472,8 @@ export interface CodeAction {
 	command?: Command;
 }
 ```
-
+* partial result: `(Command | CodeAction)[]`
 * error: code and message set in case an exception happens during the code action request.
-
-_Registration Options_: `CodeActionRegistrationOptions`  defined as follows:
-
-```typescript
-export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions, CodeActionOptions {
-}
-```
-
 
 #### <a href="#textDocument_codeLens" name="textDocument_codeLens" class="anchor">Code Lens Request (:leftwards_arrow_with_hook:)</a>
 
