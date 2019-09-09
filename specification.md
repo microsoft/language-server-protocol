@@ -1594,19 +1594,6 @@ The server can signal the following capabilities:
 ```typescript
 
 /**
- * Code Action options.
- */
-export interface CodeActionOptions {
-	/**
-	 * CodeActionKinds that this server may return.
-	 *
-	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, or the server
-	 * may list out every specific kind they provide.
-	 */
-	codeActionKinds?: CodeActionKind[];
-}
-
-/**
  * Code Lens options.
  */
 export interface CodeLensOptions {
@@ -1753,13 +1740,13 @@ interface ServerCapabilities {
 	 */
 	codeActionProvider?: boolean | CodeActionOptions;
 	/**
-	 * The server provides workspace symbol support.
-	 */
-	workspaceSymbolProvider?: boolean;
-	/**
 	 * The server provides code lens.
 	 */
 	codeLensProvider?: CodeLensOptions;
+	/**
+	 * The server provides workspace symbol support.
+	 */
+	workspaceSymbolProvider?: boolean;
 	/**
 	 * The server provides document formatting.
 	 */
@@ -4479,6 +4466,38 @@ export interface CodeAction {
 
 The code lens request is sent from the client to the server to compute code lenses for a given text document.
 
+_Client Capability_:
+* property name (optional): `textDocument.codeLens`
+* property type: `CodeLensClientCapabilities` defined as follows:
+
+```typescript
+export interface CodeLensClientCapabilities {
+	/**
+	 * Whether code lens supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `codeLensProvider`
+* property type: `CodeLensOptions` defined as follows:
+
+```typescript
+export interface CodeLensOptions extends WorkDoneProgressOptions {
+	/**
+	 * Code lens has a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}
+```
+
+_Registration Options_: `CodeLensRegistrationOptions` defined as follows:
+```typescript
+export interface CodeLensRegistrationOptions extends TextDocumentRegistrationOptions, CodeLensOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/codeLens'
 * params: `CodeLensParams` defined as follows:
@@ -4521,18 +4540,8 @@ interface CodeLens {
 	data?: any
 }
 ```
+* partial result: `CodeLens[]`
 * error: code and message set in case an exception happens during the code lens request.
-
-_Registration Options_: `CodeLensRegistrationOptions` defined as follows:
-
-```typescript
-export interface CodeLensRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * Code lens has a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
-}
-```
 
 #### <a href="#codeLens_resolve" name="codeLens_resolve" class="anchor">Code Lens Resolve Request (:leftwards_arrow_with_hook:)</a>
 
