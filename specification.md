@@ -1393,49 +1393,27 @@ export interface TextDocumentClientCapabilities {
 	documentLink?: DocumentLinkClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/formatting`
-	 */
-	formatting?: {
-		/**
-		 * Whether formatting supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/rangeFormatting`
-	 */
-	rangeFormatting?: {
-		/**
-		 * Whether range formatting supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/onTypeFormatting`
-	 */
-	onTypeFormatting?: {
-		/**
-		 * Whether on type formatting supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
 	 * Capabilities specific to the `textDocument/documentColor` and the
 	 * `textDocument/colorPresentation` request.
 	 *
 	 * Since 3.6.0
 	 */
-	colorProvider?: {
-		/**
-		 * Whether colorProvider supports dynamic registration. If this is set to `true`
-		 * the client supports the new `(ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-	}
+	colorProvider?: DocumentColorClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/formatting`
+	 */
+	formatting?: DocumentFormattingClientCapabilities
+
+	/**
+	 * Capabilities specific to the `textDocument/rangeFormatting`
+	 */
+	rangeFormatting?: DocumentRangeFormattingClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/onTypeFormatting`
+	 */
+	onTypeFormatting?: DocumentOnTypeFormattingClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/rename`
@@ -1582,22 +1560,6 @@ interface InitializeError {
 The server can signal the following capabilities:
 
 ```typescript
-
-/**
- * Format document on type options.
- */
-export interface DocumentOnTypeFormattingOptions {
-	/**
-	 * A character on which formatting should be triggered, like `}`.
-	 */
-	firstTriggerCharacter: string;
-
-	/**
-	 * More trigger characters.
-	 */
-	moreTriggerCharacter?: string[];
-}
-
 /**
  * Rename options
  */
@@ -1657,94 +1619,112 @@ interface ServerCapabilities {
 	 * for backwards compatibility the TextDocumentSyncKind number. If omitted it defaults to `TextDocumentSyncKind.None`.
 	 */
 	textDocumentSync?: TextDocumentSyncOptions | number;
+
 	/**
 	 * The server provides completion support.
 	 */
 	completionProvider?: CompletionOptions;
+
 	/**
 	 * The server provides hover support.
 	 */
 	hoverProvider?: boolean | HoverOptions;
+
 	/**
 	 * The server provides signature help support.
 	 */
 	signatureHelpProvider?: SignatureHelpOptions;
+
 	/**
 	 * The server provides go to declaration support.
 	 *
 	 * Since 3.14.0
 	 */
 	declarationProvider?: boolean | DeclarationOptions | DeclarationRegistrationOptions;
+
 	/**
 	 * The server provides goto definition support.
 	 */
 	definitionProvider?: boolean | DefinitionOptions;
+
 	/**
 	 * The server provides Goto Type Definition support.
 	 *
 	 * Since 3.6.0
 	 */
 	typeDefinitionProvider?: boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions;
+
 	/**
 	 * The server provides Goto Implementation support.
 	 *
 	 * Since 3.6.0
 	 */
 	implementationProvider?: boolean | ImplementationOptions | ImplementationRegistrationOptions;
+
 	/**
 	 * The server provides find references support.
 	 */
 	referencesProvider?: boolean | ReferenceOptions;
+
 	/**
 	 * The server provides document highlight support.
 	 */
 	documentHighlightProvider?: boolean | DocumentHighlightOptions;
+
 	/**
 	 * The server provides document symbol support.
 	 */
 	documentSymbolProvider?: boolean | DocumentSymbolOptions;
+
 	/**
 	 * The server provides code actions. The `CodeActionOptions` return type is only
 	 * valid if the client signals code action literal support via the property
 	 * `textDocument.codeAction.codeActionLiteralSupport`.
 	 */
 	codeActionProvider?: boolean | CodeActionOptions;
+
 	/**
 	 * The server provides code lens.
 	 */
 	codeLensProvider?: CodeLensOptions;
+
 	/**
 	 * The server provides document link support.
 	 */
 	documentLinkProvider?: DocumentLinkOptions;
+
 	/**
-	 * The server provides workspace symbol support.
+	 * The server provides color provider support.
+	 *
+	 * Since 3.6.0
 	 */
-	workspaceSymbolProvider?: boolean;
+	colorProvider?: boolean | DocumentColorOptions | DocumentColorRegistrationOptions;
+
 	/**
 	 * The server provides document formatting.
 	 */
-	documentFormattingProvider?: boolean;
+	documentFormattingProvider?: boolean | DocumentFormattingOptions;
+
 	/**
 	 * The server provides document range formatting.
 	 */
-	documentRangeFormattingProvider?: boolean;
+	documentRangeFormattingProvider?: boolean | DocumentRangeFormattingOptions;
+
 	/**
 	 * The server provides document formatting on typing.
 	 */
 	documentOnTypeFormattingProvider?: DocumentOnTypeFormattingOptions;
+
+	/**
+	 * The server provides workspace symbol support.
+	 */
+	workspaceSymbolProvider?: boolean;
 	/**
 	 * The server provides rename support. RenameOptions may only be
 	 * specified if the client states that it supports
 	 * `prepareSupport` in its initial `initialize` request.
 	 */
 	renameProvider?: boolean | RenameOptions;
-	/**
-	 * The server provides color provider support.
-	 *
-	 * Since 3.6.0
-	 */
-	colorProvider?: boolean | ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
 	/**
 	 * The server provides folding provider support.
 	 *
@@ -4622,6 +4602,38 @@ Clients can use the result to decorate color references in an editor. For exampl
 - Color boxes showing the actual color next to the reference
 - Show a color picker when a color reference is edited
 
+_Client Capability_:
+* property name (optional): `textDocument.colorProvider`
+* property type: `DocumentColorClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentColorClientCapabilities {
+	/**
+	 * Whether code lens supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `colorProvider`
+* property type: `boolean | DocumentColorOptions | DocumentColorRegistrationOptions` were `DocumentColorOptions` is defined as follows:
+
+```typescript
+export interface DocumentColorOptions extends WorkDoneProgressOptions {
+	/**
+	 * Code lens has a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}
+```
+
+_Registration Options_: `DocumentColorRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentColorRegistrationOptions extends TextDocumentRegistrationOptions, StaticRegistrationOptions, DocumentColorOptions {
+}
+```
+
 _Request_:
 
 * method: 'textDocument/documentColor'
@@ -4678,6 +4690,7 @@ interface Color {
 	readonly alpha: number;
 }
 ```
+* partial result: `ColorInformation[]`
 * error: code and message set in case an exception happens during the 'textDocument/documentColor' request
 
 #### <a href="#textDocument_colorPresentation" name="textDocument_colorPresentation" class="anchor">Color Presentation Request (:leftwards_arrow_with_hook:)</a>
@@ -4687,7 +4700,6 @@ interface Color {
 The color presentation request is sent from the client to the server to obtain a list of presentations for a color value at a given location. Clients can use the result to
 - modify a color reference.
 - show in a color picker and let users pick one of the presentations
-
 
 _Request_:
 
@@ -4744,6 +4756,34 @@ interface ColorPresentation {
 
 The document formatting request is sent from the client to the server to format a whole document.
 
+_Client Capability_:
+* property name (optional): `textDocument.formatting`
+* property type: `DocumentFormattingClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentFormattingClientCapabilities {
+	/**
+	 * Whether formatting supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentFormattingProvider`
+* property type: `boolean | DocumentFormattingOptions` were `DocumentFormattingOptions` is defined as follows:
+
+```typescript
+export interface DocumentFormattingOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentFormattingRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentFormattingRegistrationOptions extends TextDocumentRegistrationOptions, DocumentFormattingOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/formatting'
 * params: `DocumentFormattingParams` defined as follows
@@ -4786,11 +4826,37 @@ _Response_:
 * result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
 #### <a href="#textDocument_rangeFormatting" name="textDocument_rangeFormatting" class="anchor">Document Range Formatting Request (:leftwards_arrow_with_hook:)</a>
 
 The document range formatting request is sent from the client to the server to format a given range in a document.
+
+_Client Capability_:
+* property name (optional): `textDocument.rangeFormatting`
+* property type: `DocumentRangeFormattingClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentRangeFormattingClientCapabilities {
+	/**
+	 * Whether formatting supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentRangeFormattingProvider`
+* property type: `boolean | DocumentRangeFormattingOptions` were `DocumentRangeFormattingOptions` is defined as follows:
+
+```typescript
+export interface DocumentRangeFormattingOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentFormattingRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentRangeFormattingRegistrationOptions extends TextDocumentRegistrationOptions, DocumentRangeFormattingOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/rangeFormatting',
@@ -4819,11 +4885,46 @@ _Response_:
 * result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
 #### <a href="#textDocument_onTypeFormatting" name="textDocument_onTypeFormatting" class="anchor">Document on Type Formatting Request (:leftwards_arrow_with_hook:)</a>
 
 The document on type formatting request is sent from the client to the server to format parts of the document during typing.
+
+_Client Capability_:
+* property name (optional): `textDocument.onTypeFormatting`
+* property type: `DocumentOnTypeFormattingClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentOnTypeFormattingClientCapabilities {
+	/**
+	 * Whether on type formatting supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentOnTypeFormattingProvider`
+* property type: `DocumentOnTypeFormattingOptions` defined as follows:
+
+```typescript
+export interface DocumentOnTypeFormattingOptions {
+	/**
+	 * A character on which formatting should be triggered, like `}`.
+	 */
+	firstTriggerCharacter: string;
+
+	/**
+	 * More trigger characters.
+	 */
+	moreTriggerCharacter?: string[];
+}
+```
+
+_Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentOnTypeFormattingRegistrationOptions extends TextDocumentRegistrationOptions, DocumentOnTypeFormattingOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/onTypeFormatting'
