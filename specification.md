@@ -1268,6 +1268,23 @@ interface InitializeParams {
 	processId: number | null;
 
 	/**
+	 * Information about the client
+	 *
+	 * Since 3.15.0
+	 */
+	clientInfo?: {
+		/**
+		 * The name of the client as defined by the client.
+		 */
+		name: string;
+
+		/**
+		 * The client's version as defined by the client.
+		 */
+		version?: string;
+	};
+
+	/**
 	 * The rootPath of the workspace. Is null
 	 * if no folder is open.
 	 *
@@ -1498,6 +1515,23 @@ interface InitializeResult {
 	 * The capabilities the language server provides.
 	 */
 	capabilities: ServerCapabilities;
+
+	/**
+	 * Information about the server.
+	 *
+	 * Since 3.15.0
+	 */
+	serverInfo?: {
+		/**
+		 * The name of the server as defined by the server.
+		 */
+		name: string;
+
+		/**
+		 * The servers's version as defined by the server.
+		 */
+		version?: string;
+	};
 }
 ```
 * error.code:
@@ -3021,8 +3055,7 @@ _Request_:
 * params: `CompletionParams` defined as follows:
 
 ```typescript
-export interface CompletionParams extends TextDocumentPositionParams {
-
+export interface CompletionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The completion context. This is only available if the client specifies
 	 * to send this using `ClientCapabilities.textDocument.completion.contextSupport === true`
@@ -3395,7 +3428,11 @@ export interface HoverRegistrationOptions extends TextDocumentRegistrationOption
 
 _Request_:
 * method: 'textDocument/hover'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `HoverParams` defined as follows:
+```typescript
+export interface HoverParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+}
+```
 
 _Response_:
 * result: `Hover` \| `null` defined as follows:
@@ -3504,7 +3541,11 @@ export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrati
 
 _Request_:
 * method: 'textDocument/signatureHelp'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `SignatureHelpParams` defined as follows:
+```typescript
+export interface SignatureHelpParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+}
+```
 
 _Response_:
 * result: `SignatureHelp` \| `null` defined as follows:
@@ -3641,7 +3682,11 @@ export interface DeclarationRegistrationOptions extends DeclarationOptions, Text
 
 _Request_:
 * method: 'textDocument/declaration'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `DeclarationParams` defined as follows:
+```typescript
+export interface DeclarationParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
 * result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \|`null`
@@ -3691,7 +3736,11 @@ export interface DefinitionRegistrationOptions extends TextDocumentRegistrationO
 
 _Request_:
 * method: 'textDocument/definition'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `DefinitionParams` defined as follows:
+```typescript
+export interface DefinitionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
 * result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
@@ -3745,7 +3794,11 @@ export interface TypeDefinitionRegistrationOptions extends TextDocumentRegistrat
 
 _Request_:
 * method: 'textDocument/typeDefinition'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `TypeDefinitionParams` defined as follows:
+```typescript
+export interface TypeDefinitionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
 * result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
@@ -3799,7 +3852,11 @@ export interface ImplementationRegistrationOptions extends TextDocumentRegistrat
 
 _Request_:
 * method: 'textDocument/implementation'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `ImplementationParams` defined as follows:
+```typescript
+export interface ImplementationParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
 * result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
@@ -3843,7 +3900,7 @@ _Request_:
 * params: `ReferenceParams` defined as follows:
 
 ```typescript
-export interface ReferenceParams extends TextDocumentPositionParams {
+export interface ReferenceParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 	context: ReferenceContext
 }
 
@@ -3896,7 +3953,11 @@ export interface DocumentHighlightRegistrationOptions extends TextDocumentRegist
 
 _Request_:
 * method: 'textDocument/documentHighlight'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `DocumentHighlightParams` defined as follows:
+```typescript
+export interface DocumentHighlightParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
 * result: `DocumentHighlight[]` \| `null` defined as follows:
@@ -3984,7 +4045,7 @@ _Request_:
 * params: `DocumentSymbolParams` defined as follows:
 
 ```typescript
-interface DocumentSymbolParams {
+export interface DocumentSymbolParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -4200,7 +4261,7 @@ _Request_:
 /**
  * Params for the CodeActionRequest
  */
-export interface CodeActionParams {
+export interface CodeActionParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The document in which the command was invoked.
 	 */
@@ -4405,7 +4466,7 @@ _Request_:
 * params: `CodeLensParams` defined as follows:
 
 ```typescript
-interface CodeLensParams {
+interface CodeLensParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The document to request code lens for.
 	 */
@@ -4497,7 +4558,7 @@ _Request_:
 * params: `DocumentLinkParams`, defined as follows:
 
 ```typescript
-interface DocumentLinkParams {
+interface DocumentLinkParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The document to provide document links for.
 	 */
@@ -4592,7 +4653,7 @@ _Request_:
 * params: `DocumentColorParams` defined as follows
 
 ```ts
-interface DocumentColorParams {
+interface DocumentColorParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -4741,7 +4802,7 @@ _Request_:
 * params: `DocumentFormattingParams` defined as follows
 
 ```typescript
-interface DocumentFormattingParams {
+interface DocumentFormattingParams extends WorkDoneProgressParams {
 	/**
 	 * The document to format.
 	 */
@@ -4815,7 +4876,7 @@ _Request_:
 * params: `DocumentRangeFormattingParams` defined as follows:
 
 ```typescript
-interface DocumentRangeFormattingParams {
+interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 	/**
 	 * The document to format.
 	 */
@@ -4961,7 +5022,7 @@ _Request_:
 * params: `RenameParams` defined as follows
 
 ```typescript
-interface RenameParams {
+interface RenameParams extends WorkDoneProgressParams {
 	/**
 	 * The document to rename.
 	 */
@@ -5051,7 +5112,7 @@ _Request_:
 * params: `FoldingRangeParams` defined as follows
 
 ```typescript
-export interface FoldingRangeParams {
+export interface FoldingRangeParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -5118,7 +5179,83 @@ export interface FoldingRange {
 * partial result: `FoldingRange[]`
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
+#### <a href="#textDocument_selectionRange" name="textDocument_selectionRange" class="anchor">Selection Range Request (:leftwards_arrow_with_hook:)</a>
 
+> *Since version 3.15.0*
+
+The selection range request is sent from the client to the server to return suggested selection ranges at an array of given positions. A selection range is a range around the cursor position which the user might be interested in selecting.
+
+A selection range in the return array is for the position in the provided parameters at the same index. Therefore positions[i] must be contained in result[i].range.
+
+Typically, but not necessary, selection ranges correspond to the nodes of the syntax tree.
+
+_Client Capability_:
+* property name (optional): `textDocument.selectionRange`
+* property type: `SelectionRangeClientCapabilities` defined as follows:
+
+```typescript
+export interface SelectionRangeClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration for selection range providers. If this is set to `true`
+	 * the client supports the new `SelectionRangeRegistrationOptions` return value for the corresponding server
+	 * capability as well.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `selectionRangeProvider`
+* property type: `boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions` were `SelectionRangeOptions` is defined as follows:
+
+```typescript
+export interface SelectionRangeOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `SelectionRangeRegistrationOptions` defined as follows:
+```typescript
+export interface SelectionRangeRegistrationOptions extends SelectionRangeOptions, TextDocumentRegistrationOptions, StaticRegistrationOptions {
+}
+```
+
+_Request_:
+
+* method: 'textDocument/selectionRange'
+* params: `SelectionRangeParams` defined as follows
+
+```typescript
+export interface SelectionRangeParams extends WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The positions inside the text document.
+	 */
+	positions: Position[];
+}
+```
+
+_Response_:
+* result: `SelectionRange[] | null` defined as follows:
+
+```typescript
+export interface SelectionRange {
+    /**
+     * The [range](#Range) of this selection range.
+     */
+    range: Range;
+    /**
+     * The parent selection range containing this range. Therefore `parent.range` must contain `this.range`.
+     */
+    parent?: SelectionRange;
+}
+```
+
+* partial result: `SelectionRange[]`
+* error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
 ### Implementation considerations
 
@@ -5130,6 +5267,15 @@ Language servers usually run in a separate process and client communicate with t
 - if a client notices that a server exists unexpectedly it should try to restart the server. However clients should be careful to not restart a crashing server endlessly. VS Code for example doesn't restart a server if it crashes 5 times in the last 180 seconds.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
+
+#### <a href="#version_3_15_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
+
+* Add generic progress reporting support.
+* Add specific work done progress reporting support to requests were applicable.
+* Add specific partial result progress support to requests were applicable.
+* Add support for `textDocument/selectionRange`.
+* Add support for server and client information.
+
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
 

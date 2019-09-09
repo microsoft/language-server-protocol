@@ -194,9 +194,13 @@
       anchor: textDocument_prepareRename
     - title: foldingRange
       anchor: textDocument_foldingRange
+    - title: selectionRange
+      anchor: textDocument_selectionRange
   - title: Change Log
     anchor: changeLog
     children:
+    - title: 3.15.0
+      anchor: version_3_15_0
     - title: 3.14.0
       anchor: version_3_14_0
     - title: 3.13.0
