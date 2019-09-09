@@ -1383,6 +1383,16 @@ export interface TextDocumentClientCapabilities {
 	codeAction?: CodeActionClientCapabilities;
 
 	/**
+	 * Capabilities specific to the `textDocument/codeLens`
+	 */
+	codeLens?: CodeLensClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/documentLink`
+	 */
+	documentLink?: DocumentLinkClientCapabilities;
+
+	/**
 	 * Capabilities specific to the `textDocument/formatting`
 	 */
 	formatting?: {
@@ -1408,26 +1418,6 @@ export interface TextDocumentClientCapabilities {
 	onTypeFormatting?: {
 		/**
 		 * Whether on type formatting supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/codeLens`
-	 */
-	codeLens?: {
-		/**
-		 * Whether code lens supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/documentLink`
-	 */
-	documentLink?: {
-		/**
-		 * Whether document link supports dynamic registration.
 		 */
 		dynamicRegistration?: boolean;
 	};
@@ -1594,16 +1584,6 @@ The server can signal the following capabilities:
 ```typescript
 
 /**
- * Code Lens options.
- */
-export interface CodeLensOptions {
-	/**
-	 * Code lens has a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
-}
-
-/**
  * Format document on type options.
  */
 export interface DocumentOnTypeFormattingOptions {
@@ -1626,16 +1606,6 @@ export interface RenameOptions {
 	 * Renames should be checked and tested before being executed.
 	 */
 	prepareProvider?: boolean;
-}
-
-/**
- * Document link options.
- */
-export interface DocumentLinkOptions {
-	/**
-	 * Document links have a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
 }
 
 /**
@@ -1744,6 +1714,10 @@ interface ServerCapabilities {
 	 */
 	codeLensProvider?: CodeLensOptions;
 	/**
+	 * The server provides document link support.
+	 */
+	documentLinkProvider?: DocumentLinkOptions;
+	/**
 	 * The server provides workspace symbol support.
 	 */
 	workspaceSymbolProvider?: boolean;
@@ -1765,10 +1739,6 @@ interface ServerCapabilities {
 	 * `prepareSupport` in its initial `initialize` request.
 	 */
 	renameProvider?: boolean | RenameOptions;
-	/**
-	 * The server provides document link support.
-	 */
-	documentLinkProvider?: DocumentLinkOptions;
 	/**
 	 * The server provides color provider support.
 	 *
@@ -4559,6 +4529,37 @@ _Response_:
 
 The document links request is sent from the client to the server to request the location of links in a document.
 
+_Client Capability_:
+* property name (optional): `textDocument.documentLink`
+* property type: `DocumentLinkClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentLinkClientCapabilities {
+	/**
+	 * Whether document link supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentLinkProvider`
+* property type: `DocumentLinkOptions` defined as follows:
+
+```typescript
+export interface DocumentLinkOptions extends WorkDoneProgressOptions {
+	/**
+	 * Document links have a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}```
+
+_Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentLinkRegistrationOptions extends TextDocumentRegistrationOptions, DocumentLinkOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/documentLink'
 * params: `DocumentLinkParams`, defined as follows:
@@ -4573,7 +4574,7 @@ interface DocumentLinkParams {
 ```
 
 _Response_:
-* result: An array of `DocumentLink` \| `null`.
+* result: `DocumentLink[]` \| `null`.
 
 ```typescript
 /**
@@ -4596,18 +4597,8 @@ interface DocumentLink {
 	data?: any;
 }
 ```
+* partial result: `DocumentLink[]`
 * error: code and message set in case an exception happens during the document link request.
-
-_Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
-
-```typescript
-export interface DocumentLinkRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * Document links have a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
-}
-```
 
 #### <a href="#documentLink_resolve" name="documentLink_resolve" class="anchor">Document Link Resolve Request (:leftwards_arrow_with_hook:)</a>
 
