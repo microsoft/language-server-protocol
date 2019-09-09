@@ -1418,17 +1418,7 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the `textDocument/rename`
 	 */
-	rename?: {
-		/**
-		 * Whether rename supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-		/**
-		 * The client supports testing for validity of rename operations
-		 * before execution.
-		 */
-		prepareSupport?: boolean;
-	};
+	rename?: RenameClientCapabilities;
 
 	/**
 	 * Capabilities specific to `textDocument/publishDiagnostics`.
@@ -1440,24 +1430,7 @@ export interface TextDocumentClientCapabilities {
 	 *
 	 * Since 3.10.0
 	 */
-	foldingRange?: {
-		/**
-		 * Whether implementation supports dynamic registration for folding range providers. If this is set to `true`
-		 * the client supports the new `(FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-		/**
-		 * The maximum number of folding ranges that the client prefers to receive per document. The value serves as a
-		 * hint, servers are free to follow the limit.
-		 */
-		rangeLimit?: number;
-		/**
-		 * If set, the client signals that it only supports folding complete lines. If set, client will
-		 * ignore specified `startCharacter` and `endCharacter` properties in a FoldingRange.
-		 */
-		lineFoldingOnly?: boolean;
-	};
+	foldingRange?: FoldingRangeClientCapabilities;
 }
 ```
 
@@ -1561,16 +1534,6 @@ The server can signal the following capabilities:
 
 ```typescript
 /**
- * Rename options
- */
-export interface RenameOptions {
-	/**
-	 * Renames should be checked and tested before being executed.
-	 */
-	prepareProvider?: boolean;
-}
-
-/**
  * Execute command options.
  */
 export interface ExecuteCommandOptions {
@@ -1578,39 +1541,6 @@ export interface ExecuteCommandOptions {
 	 * The commands to be executed on the server
 	 */
 	commands: string[]
-}
-
-/**
- * Save options.
- */
-export interface SaveOptions {
-	/**
-	 * The client is supposed to include the content on save.
-	 */
-	includeText?: boolean;
-}
-
-/**
- * Color provider options.
- */
-export interface ColorProviderOptions {
-}
-
-/**
- * Folding range provider options.
- */
-export interface FoldingRangeProviderOptions {
-}
-
-/**
- * Static registration options to be returned in the initialize request.
- */
-interface StaticRegistrationOptions {
-	/**
-	 * The id used to register the request. The id can be used to deregister
-	 * the request again. See also Registration#id.
-	 */
-	id?: string;
 }
 
 interface ServerCapabilities {
@@ -1716,25 +1646,38 @@ interface ServerCapabilities {
 	documentOnTypeFormattingProvider?: DocumentOnTypeFormattingOptions;
 
 	/**
-	 * The server provides workspace symbol support.
-	 */
-	workspaceSymbolProvider?: boolean;
-	/**
 	 * The server provides rename support. RenameOptions may only be
 	 * specified if the client states that it supports
 	 * `prepareSupport` in its initial `initialize` request.
 	 */
 	renameProvider?: boolean | RenameOptions;
+
 	/**
 	 * The server provides folding provider support.
 	 *
 	 * Since 3.10.0
 	 */
-	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
+
+	/**
+	 * The server provides folding provider support.
+	 *
+	 * Since 3.10.0
+	 */
+	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
+
 	/**
 	 * The server provides execute command support.
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
+
+
+	/**
+	 * The server provides workspace symbol support.
+	 */
+	workspaceSymbolProvider?: boolean;
+
+
 	/**
 	 * Workspace specific server capabilities
 	 */
@@ -2758,7 +2701,16 @@ The capability indicates that the client supports `textDocument/didSave` notific
 
 _Server Capability_:
 * property name (optional): `textDocumentSync.didSave`
-* property type: `boolean`
+* property type: `boolean | SaveOptions` were `SaveOptions` is defined as follows:
+
+```typescript
+export interface SaveOptions {
+	/**
+	 * The client is supposed to include the content on save.
+	 */
+	includeText?: boolean;
+}
+```
 
 The capability indicates that the server is interested in `textDocument/didSave` notifications.
 
@@ -4958,23 +4910,51 @@ _Response_:
 * result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
-_Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
-
-```typescript
-export interface DocumentOnTypeFormattingRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * A character on which formatting should be triggered, like `}`.
-	 */
-	firstTriggerCharacter: string;
-	/**
-	 * More trigger characters.
-	 */
-	moreTriggerCharacter?: string[]
-}
-```
 #### <a href="#textDocument_rename" name="textDocument_rename" class="anchor">Rename Request (:leftwards_arrow_with_hook:)</a>
 
 The rename request is sent from the client to the server to perform a workspace-wide rename of a symbol.
+
+_Client Capability_:
+* property name (optional): `textDocument.rename`
+* property type: `RenameClientCapabilities` defined as follows:
+
+```typescript
+export interface RenameClientCapabilities {
+	/**
+	 * Whether rename supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * Client supports testing for validity of rename operations
+	 * before execution.
+	 *
+	 * Since version 3.12.0
+	 */
+	prepareSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `renameProvider`
+* property type: `boolean | RenameOptions` were `RenameOptions` is defined as follows:
+
+`RenameOptions` may only be specified if the client states that it supports `prepareSupport` in its initial `initialize` request.
+
+```typescript
+export interface RenameOptions extends WorkDoneProgressOptions {
+	/**
+	 * Renames should be checked and tested before being executed.
+	 */
+	prepareProvider?: boolean;
+}
+```
+
+_Registration Options_: `RenameRegistrationOptions` defined as follows:
+```typescript
+export interface RenameRegistrationOptions extends TextDocumentRegistrationOptions, RenameOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/rename'
@@ -5005,17 +4985,6 @@ _Response_:
 * result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
 
-_Registration Options_: `RenameRegistrationOptions` defined as follows:
-
-```typescript
-export interface RenameRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * Renames should be checked and tested for validity before being executed.
-	 */
-	prepareProvider?: boolean;
-}
-```
-
 #### <a href="#textDocument_prepareRename" name="textDocument_prepareRename" class="anchor">Prepare Rename Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.12.0*
@@ -5036,6 +5005,46 @@ _Response_:
 
 The folding range request is sent from the client to the server to return all folding ranges found in a given text document.
 
+_Client Capability_:
+* property name (optional): `textDocument.foldingRange`
+* property type: `FoldingRangeClientCapabilities` defined as follows:
+
+```typescript
+export interface FoldingRangeClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration for folding range providers. If this is set to `true`
+	 * the client supports the new `FoldingRangeRegistrationOptions` return value for the corresponding server
+	 * capability as well.
+	 */
+	dynamicRegistration?: boolean;
+	/**
+	 * The maximum number of folding ranges that the client prefers to receive per document. The value serves as a
+	 * hint, servers are free to follow the limit.
+	 */
+	rangeLimit?: number;
+	/**
+	 * If set, the client signals that it only supports folding complete lines. If set, client will
+	 * ignore specified `startCharacter` and `endCharacter` properties in a FoldingRange.
+	 */
+	lineFoldingOnly?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `foldingRangeProvider`
+* property type: `boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions` were `FoldingRangeOptions` is defined as follows:
+
+```typescript
+export interface FoldingRangeOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `FoldingRangeRegistrationOptions` defined as follows:
+```typescript
+export interface FoldingRangeRegistrationOptions extends TextDocumentRegistrationOptions, FoldingRangeOptions, StaticRegistrationOptions {
+}
+```
+
 _Request_:
 
 * method: 'textDocument/foldingRange'
@@ -5048,7 +5057,6 @@ export interface FoldingRangeParams {
 	 */
 	textDocument: TextDocumentIdentifier;
 }
-
 ```
 
 _Response_:
@@ -5107,9 +5115,9 @@ export interface FoldingRange {
 }
 ```
 
+* partial result: `FoldingRange[]`
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 
 ### Implementation considerations
