@@ -5349,6 +5349,8 @@ Language servers usually run in a separate process and client communicate with t
 * Add specific partial result progress support to requests were applicable.
 * Add support for `textDocument/selectionRange`.
 * Add support for server and client information.
+* Add signature help context.
+* Add Erlang and Elixir to the list of supported programming languages
 
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
