@@ -3431,6 +3431,7 @@ export interface HoverRegistrationOptions extends TextDocumentRegistrationOption
 _Request_:
 * method: 'textDocument/hover'
 * params: `HoverParams` defined as follows:
+
 ```typescript
 export interface HoverParams extends TextDocumentPositionParams, WorkDoneProgressParams {
 }
@@ -3757,6 +3758,7 @@ export interface DeclarationRegistrationOptions extends DeclarationOptions, Text
 _Request_:
 * method: 'textDocument/declaration'
 * params: `DeclarationParams` defined as follows:
+
 ```typescript
 export interface DeclarationParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 }
@@ -3811,6 +3813,7 @@ export interface DefinitionRegistrationOptions extends TextDocumentRegistrationO
 _Request_:
 * method: 'textDocument/definition'
 * params: `DefinitionParams` defined as follows:
+
 ```typescript
 export interface DefinitionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 }
@@ -3869,6 +3872,7 @@ export interface TypeDefinitionRegistrationOptions extends TextDocumentRegistrat
 _Request_:
 * method: 'textDocument/typeDefinition'
 * params: `TypeDefinitionParams` defined as follows:
+
 ```typescript
 export interface TypeDefinitionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 }
@@ -3927,6 +3931,7 @@ export interface ImplementationRegistrationOptions extends TextDocumentRegistrat
 _Request_:
 * method: 'textDocument/implementation'
 * params: `ImplementationParams` defined as follows:
+
 ```typescript
 export interface ImplementationParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 }
@@ -4028,6 +4033,7 @@ export interface DocumentHighlightRegistrationOptions extends TextDocumentRegist
 _Request_:
 * method: 'textDocument/documentHighlight'
 * params: `DocumentHighlightParams` defined as follows:
+
 ```typescript
 export interface DocumentHighlightParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 }
@@ -4629,7 +4635,7 @@ export interface DocumentLinkRegistrationOptions extends TextDocumentRegistratio
 
 _Request_:
 * method: 'textDocument/documentLink'
-* params: `DocumentLinkParams`, defined as follows:
+* params: `DocumentLinkParams` defined as follows:
 
 ```typescript
 interface DocumentLinkParams extends WorkDoneProgressParams, PartialResultParams {
