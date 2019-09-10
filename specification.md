@@ -5348,7 +5348,7 @@ Language servers usually run in a separate process and client communicate with t
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
-#### <a href="#version_3_15_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
+#### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (09/19/2019)</a>
 
 * Add generic progress reporting support.
 * Add specific work done progress reporting support to requests were applicable.
