@@ -391,7 +391,7 @@ export interface Diagnostic {
 	/**
 	 * Additional metadata about the diagnostic.
 	 *
-	 * Since 3.15
+	 * @since 3.15.0
 	 */
 	tags?: DiagnosticTag[];
 
@@ -689,7 +689,7 @@ export interface WorkspaceEditClientCapabilities {
 	 * The resource operations the client supports. Clients should at least
 	 * support 'create', 'rename' and 'delete' files and folders.
 	 *
-	 * Since 3.13
+	 * @since 3.13.0
 	 */
 	resourceOperations?: ResourceOperationKind[];
 
@@ -697,7 +697,7 @@ export interface WorkspaceEditClientCapabilities {
 	 * The failure handling strategy of a client if applying the workspace edit
 	 * fails.
 	 *
-	 * Since 3.13
+	 * @since 3.13.0
 	 */
 	failureHandling?: FailureHandlingKind;
 }
@@ -1272,7 +1272,7 @@ interface InitializeParams {
 	/**
 	 * Information about the client
 	 *
-	 * Since 3.15.0
+	 * @since 3.15.0
 	 */
 	clientInfo?: {
 		/**
@@ -1322,7 +1322,7 @@ interface InitializeParams {
 	 * It can be `null` if the client supports workspace folders but none are
 	 * configured.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	workspaceFolders?: WorkspaceFolder[] | null;
 }
@@ -1358,7 +1358,7 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the `textDocument/declaration`
 	 *
-	 * Since 3.14.0
+	 * @since 3.14.0
 	 */
 	declaration?: DeclarationClientCapabilities;
 
@@ -1370,14 +1370,14 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the `textDocument/typeDefinition`
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	typeDefinition?: TypeDefinitionClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/implementation`.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	implementation?: ImplementationClientCapabilities;
 
@@ -1415,7 +1415,7 @@ export interface TextDocumentClientCapabilities {
 	 * Capabilities specific to the `textDocument/documentColor` and the
 	 * `textDocument/colorPresentation` request.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	colorProvider?: DocumentColorClientCapabilities;
 
@@ -1447,7 +1447,7 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to `textDocument/foldingRange` requests.
 	 *
-	 * Since 3.10.0
+	 * @since 3.10.0
 	 */
 	foldingRange?: FoldingRangeClientCapabilities;
 }
@@ -1521,7 +1521,7 @@ interface InitializeResult {
 	/**
 	 * Information about the server.
 	 *
-	 * Since 3.15.0
+	 * @since 3.15.0
 	 */
 	serverInfo?: {
 		/**
@@ -1604,7 +1604,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides go to declaration support.
 	 *
-	 * Since 3.14.0
+	 * @since 3.14.0
 	 */
 	declarationProvider?: boolean | DeclarationOptions | DeclarationRegistrationOptions;
 
@@ -1616,14 +1616,14 @@ interface ServerCapabilities {
 	/**
 	 * The server provides Goto Type Definition support.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	typeDefinitionProvider?: boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions;
 
 	/**
 	 * The server provides Goto Implementation support.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	implementationProvider?: boolean | ImplementationOptions | ImplementationRegistrationOptions;
 
@@ -1662,7 +1662,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides color provider support.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	colorProvider?: boolean | DocumentColorOptions | DocumentColorRegistrationOptions;
 
@@ -1691,14 +1691,14 @@ interface ServerCapabilities {
 	/**
 	 * The server provides folding provider support.
 	 *
-	 * Since 3.10.0
+	 * @since 3.10.0
 	 */
 	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
 
 	/**
 	 * The server provides folding provider support.
 	 *
-	 * Since 3.10.0
+	 * @since 3.10.0
 	 */
 	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
 
@@ -1707,12 +1707,10 @@ interface ServerCapabilities {
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
 
-
 	/**
 	 * The server provides workspace symbol support.
 	 */
 	workspaceSymbolProvider?: boolean;
-
 
 	/**
 	 * Workspace specific server capabilities
@@ -1721,10 +1719,11 @@ interface ServerCapabilities {
 		/**
 		 * The server supports workspace folder.
 		 *
-		 * Since 3.6.0
+		 * @since 3.6.0
 		 */
 		workspaceFolders?: WorkspaceFoldersServerCapabilities;
 	}
+
 	/**
 	 * Experimental server capabilities.
 	 */
@@ -2910,7 +2909,7 @@ export interface PublishDiagnosticsClientCapabilities {
 	/**
 	 * Client supports the tag property to provide meta data about a diagnostic.
 	 *
-	 * Since 3.15
+	 * @since 3.15.0
 	 */
 	tagSupport?: boolean;
 }
@@ -3034,7 +3033,7 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 	 * if clients don't support individual commmit characters per completion item. See
 	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`
 	 *
-	 * Since 3.2.0
+	 * @since 3.2.0
 	 */
 	allCommitCharacters?: string[];
 
@@ -3514,7 +3513,7 @@ export interface SignatureHelpClientCapabilities {
 			 * The client supports processing label offsets instead of a
 			 * simple label string.
 			 *
-			 * Since 3.14.0
+			 * @since 3.14.0
 			 */
 			labelOffsetSupport?: boolean;
 		};
@@ -3524,7 +3523,7 @@ export interface SignatureHelpClientCapabilities {
 	 * The client supports to send additional context information for a
 	 * `textDocument/signatureHelp` request.
 	 *
-	 * Since 3.15.0
+	 * @since 3.15.0
 	 */
 	contextSupport?: boolean;
 }
@@ -3560,7 +3559,7 @@ export interface SignatureHelpParams extends TextDocumentPositionParams, WorkDon
 	 * The signature help context. This is only available if the client specifies
 	 * to send this using the client capability  `textDocument.signatureHelp.contextSupport === true`
 	 *
-	 * Since 3.15.0
+	 * @since 3.15.0
 	 */
 	context?: SignatureHelpContext;
 }
@@ -3568,7 +3567,7 @@ export interface SignatureHelpParams extends TextDocumentPositionParams, WorkDon
 /**
  * How a signature help was triggered.
  *
- * Since 3.15.0
+ * @since 3.15.0
  */
 export namespace SignatureHelpTriggerKind {
 	/**
@@ -3589,7 +3588,7 @@ export type SignatureHelpTriggerKind = 1 | 2 | 3;
 /**
  * Additional information about the context in which a signature help request was triggered.
  *
- * Since 3.15.0
+ * @since 3.15.0
  */
 export interface SignatureHelpContext {
 	/**
@@ -3789,7 +3788,7 @@ export interface DefinitionClientCapabilities {
 	/**
 	 * The client supports additional metadata in the form of definition links.
 	 *
-	 * Since 3.14.0
+	 * @since 3.14.0
 	 */
 	linkSupport?: boolean;
 }
@@ -3848,7 +3847,7 @@ export interface TypeDefinitionClientCapabilities {
 	/**
 	 * The client supports additional metadata in the form of definition links.
 	 *
-	 * Since 3.14.0
+	 * @since 3.14.0
 	 */
 	linkSupport?: boolean;
 }
@@ -3907,7 +3906,7 @@ export interface ImplementationClientCapabilities {
 	/**
 	 * The client supports additional metadata in the form of definition links.
 	 *
-	 * Since 3.14.0
+	 * @since 3.14.0
 	 */
 	linkSupport?: boolean;
 }
@@ -4290,7 +4289,7 @@ export interface CodeActionClientCapabilities {
 	 * The client support code action literals as a valid
 	 * response of the `textDocument/codeAction` request.
 	 *
-	 * Since 3.8.0
+	 * @since 3.8.0
 	 */
 	codeActionLiteralSupport?: {
 		/**
@@ -5070,7 +5069,7 @@ export interface RenameClientCapabilities {
 	 * Client supports testing for validity of rename operations
 	 * before execution.
 	 *
-	 * Since version 3.12.0
+	 * @since version 3.12.0
 	 */
 	prepareSupport?: boolean;
 }
@@ -5357,6 +5356,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for server and client information.
 * Add signature help context.
 * Add Erlang and Elixir to the list of supported programming languages
+* Add `version` on `PublishDiagnosticParams`
 
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
