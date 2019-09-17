@@ -4322,6 +4322,12 @@ export interface CodeActionClientCapabilities {
 			valueSet: CodeActionKind[];
 		};
 	};
+
+	/**
+	 * Whether code action supports the `isPreferred` property.
+	 * @since 3.15.0
+	 */
+	isPreferredSupport?: boolean;
 }
 ```
 
@@ -4502,6 +4508,17 @@ export interface CodeAction {
 	 * The diagnostics that this code action resolves.
 	 */
 	diagnostics?: Diagnostic[];
+
+	/**
+	 * Marks this as a preferred action. Preferred actions are used by the `auto fix` command and can be targeted
+	 * by keybindings.
+	 *
+	 * A quick fix should be marked preferred if it properly addresses the underlying error.
+	 * A refactoring should be marked preferred if it is the most reasonable choice of actions to take.
+	 *
+	 * @since 3.15.0
+	 */
+	isPreferred?: boolean;
 
 	/**
 	 * The workspace edit this code action performs.
@@ -5372,6 +5389,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add signature help context.
 * Add Erlang and Elixir to the list of supported programming languages
 * Add `version` on `PublishDiagnosticParams`
+* Add `CodeAction#isPreferred` support.
 
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
