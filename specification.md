@@ -2367,7 +2367,8 @@ _Request_:
  */
 interface WorkspaceSymbolParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
-	 * A non-empty query string
+	 * A query string to filter symbols by. Clients may send an empty
+	 * string here to request all symbols.
 	 */
 	query: string;
 }
@@ -5425,6 +5426,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add `version` on `PublishDiagnosticParams`
 * Add `CodeAction#isPreferred` support.
 * Add `CompletionItem#tag` support.
+* Clarified `WorkspaceSymbolParams#query` parameter.
 
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
