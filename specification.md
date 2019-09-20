@@ -427,6 +427,11 @@ export namespace DiagnosticSeverity {
 
 export type DiagnosticSeverity = 1 | 2 | 3 | 4;
 
+/**
+ * The diagnostic tags.
+ *
+ * @since 3.15.0
+ */
 export namespace DiagnosticTag {
     /**
      * Unused or unnecessary code.
@@ -2912,10 +2917,16 @@ export interface PublishDiagnosticsClientCapabilities {
 
 	/**
 	 * Client supports the tag property to provide meta data about a diagnostic.
+	 * Clients supporting tags have to handle unknown tags gracefully.
 	 *
 	 * @since 3.15.0
 	 */
-	tagSupport?: boolean;
+	tagSupport?: {
+		/**
+		 * The tags supported by the client.
+		 */
+		valueSet: DiagnosticTag[];
+	};
 }
 ```
 
@@ -2929,6 +2940,13 @@ interface PublishDiagnosticsParams {
 	 * The URI for which diagnostic information is reported.
 	 */
 	uri: DocumentUri;
+
+	/**
+	 * Optional the version number of the document the diagnostics are published for.
+	 *
+	 * @since 3.15.0
+	 */
+	version?: number;
 
 	/**
 	 * An array of diagnostic information items.
@@ -2989,7 +3007,10 @@ export interface CompletionClientCapabilities {
 		preselectSupport?: boolean;
 
 		/**
-		 * Client supports the tag property on a completion item.
+		 * Client supports the tag property on a completion item. Clients supporting
+		 * tags have to handle unknown tags gracefully. Clients especially need to
+		 * preserve unknown tags when sending a completion item back to the server in
+		 * a resolve call.
 		 *
 		 * @since 3.15.0
 		 */
@@ -5423,9 +5444,10 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for server and client information.
 * Add signature help context.
 * Add Erlang and Elixir to the list of supported programming languages
-* Add `version` on `PublishDiagnosticParams`
+* Add `version` on `PublishDiagnosticsParams`
 * Add `CodeAction#isPreferred` support.
 * Add `CompletionItem#tag` support.
+* Add `Diagnostic#tag` support.
 * Clarified `WorkspaceSymbolParams#query` parameter.
 
 
