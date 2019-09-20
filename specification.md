@@ -2986,6 +2986,18 @@ export interface CompletionClientCapabilities {
 		 * Client supports the preselect property on a completion item.
 		 */
 		preselectSupport?: boolean;
+
+		/**
+		 * Client supports the tag property on a completion item.
+		 *
+		 * @since 3.15.0
+		 */
+		tagSupport?: {
+			/**
+			 * The tags supported by the client.
+			 */
+			valueSet: CompletionItemTag[]
+		}
 	};
 
 	completionItemKind?: {
@@ -3152,6 +3164,21 @@ export namespace InsertTextFormat {
 
 export type InsertTextFormat = 1 | 2;
 
+/**
+ * Completion item tags are extra annotations that tweak the rendering of a completion
+ * item.
+ *
+ * @since 3.15.0
+ */
+export namespace CompletionItemTag {
+	/**
+	 * Render a completion as obsolete, usually using a strike-out.
+	 */
+	export const Deprecated = 1;
+}
+
+export type CompletionItemTag = 1;
+
 export interface CompletionItem {
 	/**
 	 * The label of this completion item. By default
@@ -3166,6 +3193,13 @@ export interface CompletionItem {
 	 * of available values is defined in `CompletionItemKind`.
 	 */
 	kind?: number;
+
+	/**
+	 * Tags for this completion item.
+	 *
+	 * @since 3.15.0
+	 */
+	tags?: CompletionItemTag[];
 
 	/**
 	 * A human-readable string with additional information
@@ -5390,6 +5424,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add Erlang and Elixir to the list of supported programming languages
 * Add `version` on `PublishDiagnosticParams`
 * Add `CodeAction#isPreferred` support.
+* Add `CompletionItem#tag` support.
 
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
