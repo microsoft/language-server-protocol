@@ -4699,6 +4699,13 @@ export interface DocumentLinkClientCapabilities {
 	 * Whether document link supports dynamic registration.
 	 */
 	dynamicRegistration?: boolean;
+
+	/**
+	 * Whether the client support the `tooltip` property on `DocumentLink`.
+	 *
+	 * @since 3.15.0
+	 */
+	tooltipSupport?: boolean;
 }
 ```
 
@@ -4746,10 +4753,23 @@ interface DocumentLink {
 	 * The range this link applies to.
 	 */
 	range: Range;
+
 	/**
 	 * The uri this link points to. If missing a resolve request is sent later.
 	 */
 	target?: DocumentUri;
+
+	/**
+	 * The tooltip text when you hover over this link.
+	 *
+	 * If a tooltip is provided, is will be displayed in a string that includes instructions on how to
+	 * trigger the link, such as `{0} (ctrl + click)`. The specific instructions vary depending on OS,
+	 * user settings, and localization.
+	 *
+	 * @since 3.15.0
+	 */
+	tooltip?: string;
+
 	/**
 	 * A data entry field that is preserved on a document link between a
 	 * DocumentLinkRequest and a DocumentLinkResolveRequest.
@@ -5448,6 +5468,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add `CodeAction#isPreferred` support.
 * Add `CompletionItem#tag` support.
 * Add `Diagnostic#tag` support.
+* Add `DocumentLink#tooltip` support.
 * Clarified `WorkspaceSymbolParams#query` parameter.
 
 
