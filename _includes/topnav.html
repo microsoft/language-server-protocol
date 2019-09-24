@@ -9,16 +9,18 @@
         </button>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
-            {% assign sorted = site.implementors | sort: 'index' %}
+            {% assign implementors = site.implementors | sort: 'index' %}
+            {% assign specifications = site.specifications | sort: 'index' %}
+
             <ul class="navbar-nav ml-auto">
                 <li {% if page.sectionid=='howItWorks' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/overview" | prepend: site.baseurl }}'>Overview</a>
                 </li>
                 <li {% if page.sectionid=='implementors' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href="{{ sorted.first.url | prepend: site.baseurl }}">Implementations</a>
+                    <a class="nav-link" href="{{ implementors.first.url | prepend: site.baseurl }}">Implementations</a>
                 </li>
                 <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href='{{ "/specification" | prepend: site.baseurl }}'>Specification</a>
+                    <a class="nav-link" href='{{ specifications.first.url | prepend: site.baseurl }}'>Specification</a>
                 </li>
                 <li {% if page.sectionid=='inspector' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/inspector" | prepend: site.baseurl }}'>Inspector</a>

@@ -4,15 +4,26 @@ layout: default
 
 <div class="container">
     <div class="row single-page">
-        <div class="col-lg-3 col-xl-2 d-none d-xl-block">
-
+        <div class="col-lg-2 d-none d-lg-block lsp-sidebar">
+            <div class="card">
+                <ul class="nav flex-column list-unstyled">
+                    {% assign sorted = site.specifications | sort: 'index' %}
+                    {% for post in sorted %}
+                    <li {% if page.title==post.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                        <a class="nav-link" href="{{ post.url | prepend: site.baseurl }}">
+                            {{ post.shortTitle }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         <div class="col-lg-8">
             <div id="markdown-content-container">{{ content }}</div>
         </div>
 
         <div class="col-lg-3 col-xl-2 d-none d-lg-block lsp-sidebar">
-            {% for toc-l1 in site.data.specification-toc %}
+            {% for toc-l1 in site.data[page.toc] %}
             <div class="card">
                 <div id="outlineAccordion" data-children=".item">
                     {% for toc-l2 in toc-l1.children %}

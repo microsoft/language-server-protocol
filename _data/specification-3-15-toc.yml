@@ -1,0 +1,233 @@
+- title: Message Overview
+  children:
+  - title: Base Protocol
+    anchor: baseProtocol
+    children:
+    - title: Header Part
+      anchor: headerPart
+    - title: Content Part
+      anchor: contentPart
+    - title: Request Message
+      anchor: requestMessage
+    - title: Response Message
+      anchor: responseMessage
+    - title: Notification Message
+      anchor: notificationMessage
+    - title: $/cancelRequest
+      anchor: cancelRequest
+    - title: $/progress
+      anchor: progress
+  - title: Basic Structures
+    anchor: dataTypes
+    children:
+    - title: URI
+      anchor: uri
+    - title: Text Documents
+      anchor: textDocuments
+    - title: Position
+      anchor: position
+    - title: Range
+      anchor: range
+    - title: Location
+      anchor: location
+    - title: Location Link
+      anchor: locationLink
+    - title: Diagnostic
+      anchor: diagnostic
+    - title: Command
+      anchor: command
+    - title: Text Edit
+      anchor: textEdit
+    - title: Text Document Edit
+      anchor: textDocumentEdit
+    - title: File Resource Changes
+      anchor: resourceChanges
+    - title: Workspace Edit
+      anchor: workspaceEdit
+    - title: Text Document Identifier
+      anchor: textDocumentIdentifier
+    - title: Text Document Item
+      anchor: textDocumentItem
+    - title: Versioned Text Document Identifier
+      anchor: versionedTextDocumentIdentifier
+    - title: Text Document Position Params
+      anchor: textDocumentPositionParams
+    - title: Document Filter
+      anchor: documentFilter
+    - title: Static Registration Options
+      anchor: staticRegistrationOptions
+    - title: Text Document Registration Options
+      anchor: textDocumentRegistrationOptions
+    - title: Markup Content
+      anchor: markupContent
+    - title: Work Done Progress
+      anchor: workDoneProgress
+    - title: Work Done Progress Params
+      anchor: workDoneProgressParams
+    - title: Work Done Progress Options
+      anchor: workDoneProgressOptions
+    - title: Partial Results
+      anchor: partialResults
+    - title: Partial Result Params
+      anchor: partialResultParams
+  - title: General Messages
+    anchor: general
+    children:
+    - title: initialize
+      anchor: initialize
+    - title: initialized
+      anchor: initialized
+    - title: shutdown
+      anchor: shutdown
+    - title: exit
+      anchor: exit
+  - title: Window
+    anchor: window
+    children:
+    - title: showMessage
+      anchor: window_showMessage
+    - title: showMessageRequest
+      anchor: window_showMessageRequest
+    - title: logMessage
+      anchor: window_logMessage
+  - title: Telemetry
+    anchor: telemetry
+    children:
+    - title: event
+      anchor: telemetry_event
+  - title: Client
+    anchor: client
+    children:
+    - title: registerCapability
+      anchor: client_registerCapability
+    - title: unregisterCapability
+      anchor: client_unregisterCapability
+  - title: Workspace
+    anchor: workspace
+    children:
+    - title: workspaceFolders
+      anchor: workspace_workspaceFolders
+    - title: didChangeWorkspaceFolders
+      anchor: workspace_didChangeWorkspaceFolders
+    - title: didChangeConfiguration
+      anchor: workspace_didChangeConfiguration
+    - title: configuration
+      anchor: workspace_configuration
+    - title: didChangeWatchedFiles
+      anchor: workspace_didChangeWatchedFiles
+    - title: symbol
+      anchor: workspace_symbol
+    - title: executeCommand
+      anchor: workspace_executeCommand
+    - title: applyEdit
+      anchor: workspace_applyEdit
+  - title: Text Synchronization
+    anchor: textSynchronization
+    children:
+    - title: Genernal Capabilities
+      anchor: textDocument_synchronization
+    - title: didOpen
+      anchor: textDocument_didOpen
+    - title: didChange
+      anchor: textDocument_didChange
+    - title: willSave
+      anchor: textDocument_willSave
+    - title: willSaveWaitUntil
+      anchor: textDocument_willSaveWaitUntil
+    - title: didSave
+      anchor: textDocument_didSave
+    - title: didClose
+      anchor: textDocument_didClose
+  - title: Diagnostics
+    anchor: diagnostics
+    children:
+    - title: publishDiagnostics
+      anchor: textDocument_publishDiagnostics
+  - title: Language Features
+    anchor: languageFeatures
+    children:
+    - title: completion
+      anchor: textDocument_completion
+    - title: completion resolve
+      anchor: completionItem_resolve
+    - title: hover
+      anchor: textDocument_hover
+    - title: signatureHelp
+      anchor: textDocument_signatureHelp
+    - title: declaration
+      anchor: textDocument_declaration
+    - title: definition
+      anchor: textDocument_definition
+    - title: typeDefinition
+      anchor: textDocument_typeDefinition
+    - title: implementation
+      anchor: textDocument_implementation
+    - title: references
+      anchor: textDocument_references
+    - title: documentHighlight
+      anchor: textDocument_documentHighlight
+    - title: documentSymbol
+      anchor: textDocument_documentSymbol
+    - title: codeAction
+      anchor: textDocument_codeAction
+    - title: codeLens
+      anchor: textDocument_codeLens
+    - title: codeLens resolve
+      anchor: codeLens_resolve
+    - title: documentLink
+      anchor: textDocument_documentLink
+    - title: documentLink resolve
+      anchor: documentLink_resolve
+    - title: documentColor
+      anchor: textDocument_documentColor
+    - title: colorPresentation
+      anchor: textDocument_colorPresentation
+    - title: formatting
+      anchor: textDocument_formatting
+    - title: rangeFormatting
+      anchor: textDocument_rangeFormatting
+    - title: onTypeFormatting
+      anchor: textDocument_onTypeFormatting
+    - title: rename
+      anchor: textDocument_rename
+    - title: prepareRename
+      anchor: textDocument_prepareRename
+    - title: foldingRange
+      anchor: textDocument_foldingRange
+    - title: selectionRange
+      anchor: textDocument_selectionRange
+  - title: Change Log
+    anchor: changeLog
+    children:
+    - title: 3.15.0
+      anchor: version_3_15_0
+    - title: 3.14.0
+      anchor: version_3_14_0
+    - title: 3.13.0
+      anchor: version_3_13_0
+    - title: 3.12.0
+      anchor: version_3_12_0
+    - title: 3.11.0
+      anchor: version_3_11_0
+    - title: 3.10.0
+      anchor: version_3_10_0
+    - title: 3.9.0
+      anchor: version_3_9_0
+    - title: 3.8.0
+      anchor: version_3_8_0
+    - title: 3.7.0
+      anchor: version_3_7_0
+    - title: 3.6.0
+      anchor: version_3_6_0
+    - title: 3.5.0
+      anchor: version_3_5_0
+    - title: 3.4.0
+      anchor: version_3_4_0
+    - title: 3.3.0
+      anchor: version_3_3_0
+    - title: 3.2.0
+      anchor: version_3_2_0
+    - title: 3.1.0
+      anchor: version_3_1_0
+    - title: 3.0
+      anchor: version_3_0_0

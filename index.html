@@ -92,9 +92,10 @@ layout: default
         </div>
         <div class="col-lg-4">
             <h1 class="text-center"><i class="fas fa-book" aria-hidden="true"></i></h1>
-            <a href='{{ "/specification" | prepend: site.baseurl }}'><h3 class="text-center">Specification</h3></a>
+            {% assign sorted = site.specifications | sort: 'index' %}
+            <a href='{{ sorted.first.url | prepend: site.baseurl }}'><h3 class="text-center">Specification</h3></a>
             <p>
-                The latest version of the protocol specification is version 3.0.
+                The latest version of the protocol specification is version 3.14.
             </p>
         </div>
         <div class="col-lg-4">

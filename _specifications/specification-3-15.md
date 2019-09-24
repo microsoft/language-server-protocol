@@ -1,24 +1,23 @@
 ---
 title: Specification
-layout: specification
-sectionid: specification
-toc: true
+shortTitle: 3.15 - Upcoming
+layout: specifications
+sectionid: specification-3-15
+toc: specification-3-15-toc
+index: 2
 ---
-# Language Server Protocol Specification
+# Language Server Protocol Specification - 3.15
 
-This document describes version 3.x of the language server protocol. An implementation for node of the 3.0 version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
-
-The 2.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-2-x.md).
-The 1.x version of this document can be found [here](https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md).
+This document describes the upcoming 3.15.x version of the language server protocol. An implementation for node of the 3.15.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/specification.md).
 
-## Base Protocol
+## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
 separated by a '\r\n'.
 
-### Header Part
+### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
 The header part consists of header fields. Each header field is comprised of a name and a value,
 separated by ': ' (a colon and a space).
@@ -37,7 +36,7 @@ Currently the following header fields are supported:
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
-### Content Part
+### <a href="#contentPart" name="contentPart" class="anchor"> Content Part </a>
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding then `utf-8` it should respond with an error.
 
@@ -70,7 +69,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### Request Message
+#### <a href="#requestMessage" name="requestMessage" class="anchor"> Request Message </a>
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -94,7 +93,7 @@ interface RequestMessage extends Message {
 }
 ```
 
-#### Response Message
+#### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
 
 A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
@@ -152,7 +151,7 @@ export namespace ErrorCodes {
 	export const ContentModified: number = -32801;
 }
 ```
-#### Notification Message
+#### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
 
 A notification message. A processed notification message must not send a response back. They work like events.
 
@@ -193,6 +192,35 @@ interface CancelParams {
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
+#### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
+
+> *Since version 3.15.0*
+
+The base protocol offers also support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including work done progress (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
+
+A progress notification has the following properties:
+
+_Notification_:
+* method: '$/progress'
+* params: `ProgressParams` defined as follows:
+
+```typescript
+type ProgressToken = number | string;
+interface ProgressParams<T> {
+	/**
+	 * The progress token provided by the client or server.
+	 */
+	token: ProgressToken;
+
+	/**
+	 * The progress data.
+	 */
+	value: T;
+}
+```
+
+Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
+
 ## Language Server Protocol
 
 The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces to describe these. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
@@ -203,7 +231,7 @@ The protocol currently assumes that one server serves one tool. There is current
 
 ### Basic JSON Structures
 
-#### URI
+#### <a href="#uri" name="uri" class="anchor"> URI </a>
 
 URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
 
@@ -225,7 +253,7 @@ Many of the interfaces contain fields that correspond to the URI of a document. 
 type DocumentUri = string;
 ```
 
-#### Text Documents
+#### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
@@ -235,7 +263,7 @@ Positions are line end character agnostic. So you can not specify  a position th
 export const EOL: string[] = ['\n', '\r\n', '\r'];
 ```
 
-#### Position
+#### <a href="#position" name="position" class="anchor"> Position </a>
 
 Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in a editor. Special values like for example `-1` to denote the end of a line are not supported.
 
@@ -257,7 +285,7 @@ interface Position {
 	character: number;
 }
 ```
-#### Range
+#### <a href="#range" name="range" class="anchor"> Range </a>
 
 A range in a text document expressed as (zero-based) start and end positions. A range is comparable to a selection in an editor. Therefore the end position is exclusive. If you want to specify a range that contains a line including the line ending character(s) then use an end position denoting the start of the next line. For example:
 ```typescript
@@ -281,7 +309,7 @@ interface Range {
 }
 ```
 
-#### Location
+#### <a href="#location" name="location" class="anchor"> Location </a>
 
 Represents a location inside a resource, such as a line inside a text file.
 ```typescript
@@ -291,7 +319,7 @@ interface Location {
 }
 ```
 
-#### LocationLink
+#### <a href="#locationLink" name="locationLink" class="anchor"> LocationLink </a>
 
 Represents a link between a source and a target location.
 
@@ -326,12 +354,12 @@ interface LocationLink {
 }
 ```
 
-#### Diagnostic
+#### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
 ```typescript
-interface Diagnostic {
+export interface Diagnostic {
 	/**
 	 * The range at which the message applies.
 	 */
@@ -341,7 +369,7 @@ interface Diagnostic {
 	 * The diagnostic's severity. Can be omitted. If omitted it is up to the
 	 * client to interpret diagnostics as error, warning, info or hint.
 	 */
-	severity?: number;
+	severity?: DiagnosticSeverity;
 
 	/**
 	 * The diagnostic's code, which might appear in the user interface.
@@ -360,6 +388,13 @@ interface Diagnostic {
 	message: string;
 
 	/**
+	 * Additional metadata about the diagnostic.
+	 *
+	 * @since 3.15.0
+	 */
+	tags?: DiagnosticTag[];
+
+	/**
 	 * An array of related diagnostic information, e.g. when symbol-names within
 	 * a scope collide all definitions can be marked via this property.
 	 */
@@ -367,10 +402,10 @@ interface Diagnostic {
 }
 ```
 
-The protocol currently supports the following diagnostic severities:
+The protocol currently supports the following diagnostic severities and tags:
 
 ```typescript
-namespace DiagnosticSeverity {
+export namespace DiagnosticSeverity {
 	/**
 	 * Reports an error.
 	 */
@@ -388,7 +423,34 @@ namespace DiagnosticSeverity {
 	 */
 	export const Hint = 4;
 }
+
+export type DiagnosticSeverity = 1 | 2 | 3 | 4;
+
+/**
+ * The diagnostic tags.
+ *
+ * @since 3.15.0
+ */
+export namespace DiagnosticTag {
+    /**
+     * Unused or unnecessary code.
+     *
+     * Clients are allowed to render diagnostics with this tag faded out instead of having
+     * an error squiggle.
+     */
+    export const Unnecessary: 1;
+    /**
+     * Deprecated or obsolete code.
+     *
+     * Clients are allowed to rendered diagnostics with this tag strike through.
+     */
+    export const Deprecated: 2;
+}
+
+export type DiagnosticTag = 1 | 2;
 ```
+
+`DiagnosticRelatedInformation` is defined as follows:
 
 ```typescript
 /**
@@ -409,7 +471,7 @@ export interface DiagnosticRelatedInformation {
 }
 ```
 
-#### Command
+#### <a href="#command" name="command" class="anchor"> Command </a>
 
 Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identified by a string identifier. The recommended way to handle commands is to implement their execution on the server side if the client and server provides the corresponding capabilities. Alternatively the tool extension code could handle the command. The protocol currently doesn't specify a set of well-known commands.
 
@@ -431,7 +493,7 @@ interface Command {
 }
 ```
 
-#### TextEdit
+#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit </a>
 
 A textual edit applicable to a text document.
 
@@ -451,13 +513,13 @@ interface TextEdit {
 }
 ```
 
-#### TextEdit[]
+#### <a href="#textEditArray" name="textEditArray" class="anchor"> TextEdit[] </a>
 
 Complex text manipulations are described with an array of `TextEdit`'s, representing a single change to the document.
 
 All text edits ranges refer to positions in the original document. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position: multiple inserts, or any number of inserts followed by a single remove or replace edit. If multiple inserts have the same position, the order in the array defines the order in which the inserted strings appear in the resulting text.
 
-#### TextDocumentEdit
+#### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
 
 Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array or do any kind of ordering. However the edits must be non overlapping.
 
@@ -475,7 +537,7 @@ export interface TextDocumentEdit {
 }
 ```
 
-### File Resource changes
+### <a href="#resourceChanges" name="resourceChanges" class="anchor"> File Resource changes </a>
 
 > New in version 3.13:
 
@@ -583,7 +645,7 @@ export interface DeleteFile {
 }
 ```
 
-#### WorkspaceEdit
+#### <a href="#workspaceEdit" name="workspaceEdit" class="anchor"> WorkspaceEdit </a>
 
 A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChanges` are present, the latter are preferred over `changes`.
 
@@ -610,7 +672,42 @@ export interface WorkspaceEdit {
 }
 ```
 
-#### TextDocumentIdentifier
+##### <a href="#workspaceEditClientCapabilities" name="workspaceEditClientCapabilities" class="anchor"> WorkspaceEditClientCapabilities </a>
+
+> New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
+
+
+The capabilities of a workspace edit has evolved over the time. Clients can describe their support using the following client capability:
+
+* property path (optional): `workspace.workspaceEdit`
+* property type: `WorkspaceEditClientCapabilities` defined as follows:
+
+```typescript
+export interface WorkspaceEditClientCapabilities {
+	/**
+	 * The client supports versioned document changes in `WorkspaceEdit`s
+	 */
+	documentChanges?: boolean;
+
+	/**
+	 * The resource operations the client supports. Clients should at least
+	 * support 'create', 'rename' and 'delete' files and folders.
+	 *
+	 * @since 3.13.0
+	 */
+	resourceOperations?: ResourceOperationKind[];
+
+	/**
+	 * The failure handling strategy of a client if applying the workspace edit
+	 * fails.
+	 *
+	 * @since 3.13.0
+	 */
+	failureHandling?: FailureHandlingKind;
+}
+```
+
+#### <a href="#textDocumentIdentifier" name="textDocumentIdentifier" class="anchor"> TextDocumentIdentifier </a>
 
 Text documents are identified using a URI. On the protocol level, URIs are passed as strings. The corresponding JSON structure looks like this:
 ```typescript
@@ -622,7 +719,7 @@ interface TextDocumentIdentifier {
 }
 ```
 
-#### TextDocumentItem
+#### <a href="#textDocumentItem" name="textDocumentItem" class="anchor"> TextDocumentItem </a>
 
 An item to transfer a text document from the client to the server.
 
@@ -667,6 +764,8 @@ CSS | `css`
 Diff | `diff`
 Dart | `dart`
 Dockerfile | `dockerfile`
+Elixir | `elixir`
+Erlang | `erlang`
 F# | `fsharp`
 Git | `git-commit` and `git-rebase`
 Go | `go`
@@ -710,7 +809,7 @@ XSL | `xsl`
 YAML | `yaml`
 {: .table .table-bordered .table-responsive}
 
-#### VersionedTextDocumentIdentifier
+#### <a href="#versionedTextDocumentIdentifier" name="versionedTextDocumentIdentifier" class="anchor"> VersionedTextDocumentIdentifier </a>
 
 An identifier to denote a specific version of a text document.
 
@@ -730,7 +829,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 }
 ```
 
-#### TextDocumentPositionParams
+#### <a href="#textDocumentPositionParams" name="textDocumentPositionParams" class="anchor"> TextDocumentPositionParams </a>
 
 Was `TextDocumentPosition` in 1.0 with inlined parameters.
 
@@ -750,7 +849,7 @@ interface TextDocumentPositionParams {
 }
 ```
 
-#### DocumentFilter
+#### <a href="#documentFilter" name="documentFilter" class="anchor"> DocumentFilter </a>
 
 A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter the applies to JSON files with name `package.json`:
 ```typescript
@@ -791,7 +890,41 @@ A document selector is the combination of one or more document filters.
 export type DocumentSelector = DocumentFilter[];
 ```
 
-#### MarkupContent
+#### <a href="#staticRegistrationOptions" name="staticRegistrationOptions" class="anchor"> StaticRegistrationOptions </a>
+
+Static registration options can be used to register a feature in the initialize result with a given server control ID to be able to un-register the feature later on.
+
+```typescript
+/**
+ * Static registration options to be returned in the initialize request.
+ */
+export interface StaticRegistrationOptions {
+	/**
+	 * The id used to register the request. The id can be used to deregister
+	 * the request again. See also Registration#id.
+	 */
+	id?: string;
+}
+```
+
+#### <a href="#textDocumentRegistrationOptions" name="textDocumentRegistrationOptions" class="anchor"> TextDocumentRegistrationOptions </a>
+
+Options to dynamically register for requests for a set of text documents.
+
+```typescript
+/**
+ * General text document registration options.
+ */
+export interface TextDocumentRegistrationOptions {
+	/**
+	 * A document selector to identify the scope of the registration. If set to null
+	 * the document selector provided on the client side will be used.
+	 */
+	documentSelector: DocumentSelector | null;
+}
+```
+
+#### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`.
 
@@ -853,13 +986,257 @@ export interface MarkupContent {
 }
 ```
 
+#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
+
+> *Since version 3.15.0*
+
+Work done progress is reported using the generic [`$/progress`](#progress) notification. The value payload of a work done progress notification can be of three different forms.
+
+##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor"> Work Done Progress Begin </a>
+
+To start progress reporting a `$/progress` notification with the following payload must be sent:
+
+```typescript
+export interface WorkDoneProgressBegin {
+
+	kind: 'begin';
+
+	/**
+	 * Mandatory title of the progress operation. Used to briefly inform about
+	 * the kind of operation being performed.
+	 *
+	 * Examples: "Indexing" or "Linking dependencies".
+	 */
+	title: string;
+
+	/**
+	 * Controls if a cancel button should show to allow the user to cancel the
+	 * long running operation. Clients that don't support cancellation are allowed
+	 * to ignore the setting.
+	 */
+	cancellable?: boolean;
+
+	/**
+	 * Optional, more detailed associated progress message. Contains
+	 * complementary information to the `title`.
+	 *
+	 * Examples: "3/25 files", "project/src/module2", "node_modules/some_dep".
+	 * If unset, the previous progress message (if any) is still valid.
+	 */
+	message?: string;
+
+	/**
+	 * Optional progress percentage to display (value 100 is considered 100%).
+	 * If not provided infinite progress is assumed and clients are allowed
+	 * to ignore the `percentage` value in subsequent in report notifications.
+	 *
+	 * The value should be steadily rising. Clients are free to ignore values
+	 * that are not following this rule.
+	 */
+	percentage?: number;
+}
+```
+
+##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor"> Work Done Progress Report </a>
+
+Reporting progress is done using the following payload:
+
+```typescript
+export interface WorkDoneProgressReport {
+
+	kind: 'report';
+
+	/**
+	 * Controls enablement state of a cancel button. This property is only valid if a cancel
+	 * button got requested in the `WorkDoneProgressStart` payload.
+	 *
+	 * Clients that don't support cancellation or don't support control the button's
+	 * enablement state are allowed to ignore the setting.
+	 */
+	cancellable?: boolean;
+
+	/**
+	 * Optional, more detailed associated progress message. Contains
+	 * complementary information to the `title`.
+	 *
+	 * Examples: "3/25 files", "project/src/module2", "node_modules/some_dep".
+	 * If unset, the previous progress message (if any) is still valid.
+	 */
+	message?: string;
+
+	/**
+	 * Optional progress percentage to display (value 100 is considered 100%).
+	 * If not provided infinite progress is assumed and clients are allowed
+	 * to ignore the `percentage` value in subsequent in report notifications.
+	 *
+	 * The value should be steadily rising. Clients are free to ignore values
+	 * that are not following this rule.
+	 */
+	percentage?: number;
+}
+```
+
+##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor"> Work Done Progress End </a>
+
+Signaling the end of a progress reporting is done using the following payload:
+
+```typescript
+export interface WorkDoneProgressEnd {
+
+	kind: 'end';
+
+	/**
+	 * Optional, a final message indicating to for example indicate the outcome
+	 * of the operation.
+	 */
+	message?: string;
+}
+
+```
+
+##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor">  Initiating Work Done Progress </a>
+
+Work Done progress can be initiated in two different ways:
+
+1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal.
+1. by a server using the request `window/workDoneProgress/create`.
+
+Consider a client sending a `textDocument/reference` request to a server and the client accepts work done progress reporting on that request. To signal this to the server the client would add a `workDoneToken` property to the reference request parameters. Something like this:
+
+```json
+{
+	"textDocument": {
+		"uri": "file:///folder/file.ts"
+	},
+	"position": {
+		"line": 9,
+		"character": 5
+	},
+	"context": {
+		"includeDeclaration": true
+	},
+	// The token used to report work done progress.
+	"workDoneToken": "1d546990-40a3-4b77-b134-46622995f6ae"
+}
+```
+
+A server uses the `workDoneToken` to report progress for the specific `textDocument/reference`. For the above request the `$/progress` notification params look like this:
+
+```json
+{
+	"token": "1d546990-40a3-4b77-b134-46622995f6ae",
+	"value": {
+		"title": "Finding references for A#foo",
+		"cancellable": false,
+		"message": "Processing file X.ts",
+		"percentage": 0
+	}
+}
+```
+
+Server initiated work done progress works the same. The only difference is that the server requests a progress user interface using the `window/workDoneProgress/create` request providing a token that is afterwards used to report progress.
+
+##### <a href="#signalingWorkDoneProgressReporting" name="signalingWorkDoneProgressReporting" class="anchor"> Signaling Work Done Progress Reporting </a>
+
+To keep the protocol backwards compatible servers are only allowed to use work done progress reporting if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
+
+```typescript
+	/**
+	 * Window specific client capabilities.
+	 */
+	window?: {
+		/**
+		 * Whether client supports handling progress notifications.
+		 */
+		workDoneProgress?: boolean;
+	}
+```
+
+To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress a server needs to signal work done progress reporting in the corresponding server capability. For the above find references example a server would signal such a support by setting the `referencesProvider` property in the server capabilities as follows:
+
+```json
+{
+	"referencesProvider": {
+		"workDoneProgress": true
+	}
+}
+```
+
+#### <a href="#workDoneProgressParams" name="workDoneProgressParams" class="anchor"> WorkDoneProgressParams </a>
+
+A parameter literal used to pass a work done progress token.
+
+```typescript
+export interface WorkDoneProgressParams {
+	/**
+	 * An optional token that a server can use to report work done progress.
+	 */
+	workDoneToken?: ProgressToken;
+}
+```
+
+#### <a href="#workDoneProgressOptions" name="workDoneProgressOptions" class="anchor"> WorkDoneProgressOptions </a>
+
+Options to signal work done progress support in server capabilities.
+
+```typescript
+export interface WorkDoneProgressOptions {
+	workDoneProgress?: boolean;
+}
+```
+
+#### <a href="#partialResults" name="partialResults" class="anchor"> Partial Result Progress </a>
+
+> *Since version 3.15.0*
+
+Partial results are also reported using the generic [`$/progress`](#progress) notification. The value payload of a partial result progress notification is in most cases the same as the final result. For example the `workspace/symbol` request as `SymbolInfomtion[]` as the result type. Partial result is therefore also of type `SymbolInformation[]`. Whether a client accept partial result notifications for a request is signaled by adding a `partialResultToken` to the request parameters. For example a `textDocument/reference` request support both work done and partial result progress might look like this:
+
+```json
+{
+	"textDocument": {
+		"uri": "file:///folder/file.ts"
+	},
+	"position": {
+		"line": 9,
+		"character": 5
+	},
+	"context": {
+		"includeDeclaration": true
+	},
+	// The token used to report work done progress.
+	"workDoneToken": "1d546990-40a3-4b77-b134-46622995f6ae",
+	// The token used to report partial result progress.
+	"partialResultToken": "5f6f349e-4f81-4a3b-afff-ee04bff96804"
+}
+```
+
+The `partialResultToken` is then used to report partial results for the find references request.
+
+If a server reports partial result via a corresponding `$/progress` the whole result must be reported using n `$/progress` notifications. The final response has to be empty in terms of result values. This avoids confusion about how the final result should be interpreted, e.g. as another partial result or as a replacing result.
+
+#### <a href="#partialResultParams" name="partialResultParams" class="anchor"> PartialResultParams </a>
+
+A parameter literal used to pass a partial result token.
+
+```typescript
+export interface PartialResultParams {
+	/**
+	 * An optional token that a server can use to report partial results (e.g. streaming) to
+	 * the client.
+	 */
+	partialResultToken?: ProgressToken;
+}
+```
+
 ### Actual Protocol
 
 This section documents the actual language server protocol. It uses the following format:
 
 * a header describing the request
-* a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
-* a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
+* an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure.
+* a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
 #### Request, Notification and Response ordering
@@ -897,6 +1274,23 @@ interface InitializeParams {
 	processId: number | null;
 
 	/**
+	 * Information about the client
+	 *
+	 * @since 3.15.0
+	 */
+	clientInfo?: {
+		/**
+		 * The name of the client as defined by the client.
+		 */
+		name: string;
+
+		/**
+		 * The client's version as defined by the client.
+		 */
+		version?: string;
+	};
+
+	/**
 	 * The rootPath of the workspace. Is null
 	 * if no folder is open.
 	 *
@@ -932,179 +1326,13 @@ interface InitializeParams {
 	 * It can be `null` if the client supports workspace folders but none are
 	 * configured.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
 	workspaceFolders?: WorkspaceFolder[] | null;
 }
 ```
-Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClientCapabilities` are defined as follows:
+Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as follows:
 
-##### `WorkspaceClientCapabilities` define capabilities the editor / tool provides on the workspace:
-
-> New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
-
-```typescript
-
-/**
- * The kind of resource operations supported by the client.
- */
-export type ResourceOperationKind = 'create' | 'rename' | 'delete';
-
-export namespace ResourceOperationKind {
-
-	/**
-	 * Supports creating new files and folders.
-	 */
-	export const Create: ResourceOperationKind = 'create';
-
-	/**
-	 * Supports renaming existing files and folders.
-	 */
-	export const Rename: ResourceOperationKind = 'rename';
-
-	/**
-	 * Supports deleting existing files and folders.
-	 */
-	export const Delete: ResourceOperationKind = 'delete';
-}
-
-export type FailureHandlingKind = 'abort' | 'transactional' | 'undo' | 'textOnlyTransactional';
-
-export namespace FailureHandlingKind {
-
-	/**
-	 * Applying the workspace change is simply aborted if one of the changes provided
-	 * fails. All operations executed before the failing operation stay executed.
-	 */
-	export const Abort: FailureHandlingKind = 'abort';
-
-	/**
-	 * All operations are executed transactionally. That means they either all
-	 * succeed or no changes at all are applied to the workspace.
-	 */
-	export const Transactional: FailureHandlingKind = 'transactional';
-
-
-	/**
-	 * If the workspace edit contains only textual file changes they are executed transactionally.
-	 * If resource changes (create, rename or delete file) are part of the change the failure
-	 * handling strategy is abort.
-	 */
-	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
-
-	/**
-	 * The client tries to undo the operations already executed. But there is no
-	 * guarantee that this succeeds.
-	 */
-	export const Undo: FailureHandlingKind = 'undo';
-}
-
-/**
- * Workspace specific client capabilities.
- */
-export interface WorkspaceClientCapabilities {
-	/**
-	 * The client supports applying batch edits to the workspace by supporting
-	 * the request 'workspace/applyEdit'
-	 */
-	applyEdit?: boolean;
-
-	/**
-	 * Capabilities specific to `WorkspaceEdit`s
-	 */
-	workspaceEdit?: {
-		/**
-		 * The client supports versioned document changes in `WorkspaceEdit`s
-		 */
-		documentChanges?: boolean;
-
-		/**
-		 * The resource operations the client supports. Clients should at least
-		 * support 'create', 'rename' and 'delete' files and folders.
-		 */
-		resourceOperations?: ResourceOperationKind[];
-
-		/**
-		 * The failure handling strategy of a client if applying the workspace edit
-		 * fails.
-		 */
-		failureHandling?: FailureHandlingKind;
-	};
-
-	/**
-	 * Capabilities specific to the `workspace/didChangeConfiguration` notification.
-	 */
-	didChangeConfiguration?: {
-		/**
-		 * Did change configuration notification supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `workspace/didChangeWatchedFiles` notification.
-	 */
-	didChangeWatchedFiles?: {
-		/**
-		 * Did change watched files notification supports dynamic registration. Please note
-		 * that the current protocol doesn't support static configuration for file changes
-		 * from the server side.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `workspace/symbol` request.
-	 */
-	symbol?: {
-		/**
-		 * Symbol request supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
-		 */
-		symbolKind?: {
-			/**
-			 * The symbol kind values the client supports. When this
-			 * property exists the client also guarantees that it will
-			 * handle values outside its set gracefully and falls back
-			 * to a default value when unknown.
-			 *
-			 * If this property is not present the client only supports
-			 * the symbol kinds from `File` to `Array` as defined in
-			 * the initial version of the protocol.
-			 */
-			valueSet?: SymbolKind[];
-		}
-	};
-
-	/**
-	 * Capabilities specific to the `workspace/executeCommand` request.
-	 */
-	executeCommand?: {
-		/**
-		 * Execute command supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * The client has support for workspace folders.
-	 *
-	 * Since 3.6.0
-	 */
-	workspaceFolders?: boolean;
-
-	/**
-	 * The client supports `workspace/configuration` requests.
-	 *
-	 * Since 3.6.0
-	 */
-	configuration?: boolean;
-}
-```
 
 ##### `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
 
@@ -1114,422 +1342,118 @@ export interface WorkspaceClientCapabilities {
  */
 export interface TextDocumentClientCapabilities {
 
-	synchronization?: {
-		/**
-		 * Whether text document synchronization supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports sending will save notifications.
-		 */
-		willSave?: boolean;
-
-		/**
-		 * The client supports sending a will save request and
-		 * waits for a response providing text edits which will
-		 * be applied to the document before it is saved.
-		 */
-		willSaveWaitUntil?: boolean;
-
-		/**
-		 * The client supports did save notifications.
-		 */
-		didSave?: boolean;
-	}
+	synchronization?: TextDocumentSyncClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/completion`
 	 */
-	completion?: {
-		/**
-		 * Whether completion supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports the following `CompletionItem` specific
-		 * capabilities.
-		 */
-		completionItem?: {
-			/**
-			 * The client supports snippets as insert text.
-			 *
-			 * A snippet can define tab stops and placeholders with `$1`, `$2`
-			 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
-			 * the end of the snippet. Placeholders with equal identifiers are linked,
-			 * that is typing in one will update others too.
-			 */
-			snippetSupport?: boolean;
-
-			/**
-			 * The client supports commit characters on a completion item.
-			 */
-			commitCharactersSupport?: boolean
-
-			/**
-			 * The client supports the following content formats for the documentation
-			 * property. The order describes the preferred format of the client.
-			 */
-			documentationFormat?: MarkupKind[];
-
-			/**
-			 * The client supports the deprecated property on a completion item.
-			 */
-			deprecatedSupport?: boolean;
-
-			/**
-			 * The client supports the preselect property on a completion item.
-			 */
-			preselectSupport?: boolean;
-		}
-
-		completionItemKind?: {
-			/**
-			 * The completion item kind values the client supports. When this
-			 * property exists the client also guarantees that it will
-			 * handle values outside its set gracefully and falls back
-			 * to a default value when unknown.
-			 *
-			 * If this property is not present the client only supports
-			 * the completion items kinds from `Text` to `Reference` as defined in
-			 * the initial version of the protocol.
-			 */
-			valueSet?: CompletionItemKind[];
-		},
-
-		/**
-		 * The client supports to send additional context information for a
-		 * `textDocument/completion` request.
-		 */
-		contextSupport?: boolean;
-	};
+	completion?: CompletionClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/hover`
 	 */
-	hover?: {
-		/**
-		 * Whether hover supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports the follow content formats for the content
-		 * property. The order describes the preferred format of the client.
-		 */
-		contentFormat?: MarkupKind[];
-	};
+	hover?: HoverClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/signatureHelp`
 	 */
-	signatureHelp?: {
-		/**
-		 * Whether signature help supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports the following `SignatureInformation`
-		 * specific properties.
-		 */
-		signatureInformation?: {
-			/**
-			 * The client supports the follow content formats for the documentation
-			 * property. The order describes the preferred format of the client.
-			 */
-			documentationFormat?: MarkupKind[];
-
-			/**
-			 * Client capabilities specific to parameter information.
-			 */
-			parameterInformation?: {
-				/**
-				 * The client supports processing label offsets instead of a
-				 * simple label string.
-				 *
-				 * Since 3.14.0
-				 */
-				labelOffsetSupport?: boolean;
-			}
-		};
-	};
+	signatureHelp?: SignatureHelpClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/references`
+	 * Capabilities specific to the `textDocument/declaration`
+	 *
+	 * @since 3.14.0
 	 */
-	references?: {
-		/**
-		 * Whether references supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/documentHighlight`
-	 */
-	documentHighlight?: {
-		/**
-		 * Whether document highlight supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/documentSymbol`
-	 */
-	documentSymbol?: {
-		/**
-		 * Whether document symbol supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * Specific capabilities for the `SymbolKind`.
-		 */
-		symbolKind?: {
-			/**
-			 * The symbol kind values the client supports. When this
-			 * property exists the client also guarantees that it will
-			 * handle values outside its set gracefully and falls back
-			 * to a default value when unknown.
-			 *
-			 * If this property is not present the client only supports
-			 * the symbol kinds from `File` to `Array` as defined in
-			 * the initial version of the protocol.
-			 */
-			valueSet?: SymbolKind[];
-		}
-
-		/**
-		 * The client supports hierarchical document symbols.
-		 */
-		hierarchicalDocumentSymbolSupport?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/formatting`
-	 */
-	formatting?: {
-		/**
-		 * Whether formatting supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/rangeFormatting`
-	 */
-	rangeFormatting?: {
-		/**
-		 * Whether range formatting supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-	 * Capabilities specific to the `textDocument/onTypeFormatting`
-	 */
-	onTypeFormatting?: {
-		/**
-		 * Whether on type formatting supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
-
-	/**
-		* Capabilities specific to the `textDocument/declaration`
-		*/
-	declaration?: {
-		/**
-		 * Whether declaration supports dynamic registration. If this is set to `true`
-		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports additional metadata in the form of declaration links.
-		 *
-		 * Since 3.14.0
-		 */
-		linkSupport?: boolean;
-	};
+	declaration?: DeclarationClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/definition`.
-	 *
-	 * Since 3.14.0
 	 */
-	definition?: {
-		/**
-		 * Whether definition supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports additional metadata in the form of definition links.
-		 */
-		linkSupport?: boolean;
-	};
+	definition?: DefinitionClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/typeDefinition`
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
-	typeDefinition?: {
-		/**
-		 * Whether typeDefinition supports dynamic registration. If this is set to `true`
-		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-
-		/**
-		 * The client supports additional metadata in the form of definition links.
-		 *
-		 * Since 3.14.0
-		 */
-		linkSupport?: boolean;
-	};
+	typeDefinition?: TypeDefinitionClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/implementation`.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
-	implementation?: {
-		/**
-		 * Whether implementation supports dynamic registration. If this is set to `true`
-		 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
+	implementation?: ImplementationClientCapabilities;
 
-		/**
-		 * The client supports additional metadata in the form of definition links.
-		 *
-		 * Since 3.14.0
-		 */
-		linkSupport?: boolean;
-	};
+	/**
+	 * Capabilities specific to the `textDocument/references`
+	 */
+	references?: ReferenceClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/documentHighlight`
+	 */
+	documentHighlight?: DocumentHighlightClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/documentSymbol`
+	 */
+	documentSymbol?: DocumentSymbolClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/codeAction`
 	 */
-	codeAction?: {
-		/**
-		 * Whether code action supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-		/**
-		 * The client support code action literals as a valid
-		 * response of the `textDocument/codeAction` request.
-		 *
-		 * Since 3.8.0
-		 */
-		codeActionLiteralSupport?: {
-			/**
-			 * The code action kind is support with the following value
-			 * set.
-			 */
-			codeActionKind: {
-
-				/**
-				 * The code action kind values the client supports. When this
-				 * property exists the client also guarantees that it will
-				 * handle values outside its set gracefully and falls back
-				 * to a default value when unknown.
-				 */
-				valueSet: CodeActionKind[];
-			};
-		};
-	};
+	codeAction?: CodeActionClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/codeLens`
 	 */
-	codeLens?: {
-		/**
-		 * Whether code lens supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
+	codeLens?: CodeLensClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/documentLink`
 	 */
-	documentLink?: {
-		/**
-		 * Whether document link supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-	};
+	documentLink?: DocumentLinkClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/documentColor` and the
 	 * `textDocument/colorPresentation` request.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
-	colorProvider?: {
-		/**
-		 * Whether colorProvider supports dynamic registration. If this is set to `true`
-		 * the client supports the new `(ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-	}
+	colorProvider?: DocumentColorClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/formatting`
+	 */
+	formatting?: DocumentFormattingClientCapabilities
+
+	/**
+	 * Capabilities specific to the `textDocument/rangeFormatting`
+	 */
+	rangeFormatting?: DocumentRangeFormattingClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/onTypeFormatting`
+	 */
+	onTypeFormatting?: DocumentOnTypeFormattingClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/rename`
 	 */
-	rename?: {
-		/**
-		 * Whether rename supports dynamic registration.
-		 */
-		dynamicRegistration?: boolean;
-		/**
-		 * The client supports testing for validity of rename operations
-		 * before execution.
-		 */
-		prepareSupport?: boolean;
-	};
+	rename?: RenameClientCapabilities;
 
 	/**
 	 * Capabilities specific to `textDocument/publishDiagnostics`.
 	 */
-	publishDiagnostics?: {
-		/**
-		 * Whether the clients accepts diagnostics with related information.
-		 */
-		relatedInformation?: boolean;
-	};
+	publishDiagnostics?: PublishDiagnosticsClientCapabilities;
+
 	/**
 	 * Capabilities specific to `textDocument/foldingRange` requests.
 	 *
-	 * Since 3.10.0
+	 * @since 3.10.0
 	 */
-	foldingRange?: {
-		/**
-		 * Whether implementation supports dynamic registration for folding range providers. If this is set to `true`
-		 * the client supports the new `(FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-		 * return value for the corresponding server capability as well.
-		 */
-		dynamicRegistration?: boolean;
-		/**
-		 * The maximum number of folding ranges that the client prefers to receive per document. The value serves as a
-		 * hint, servers are free to follow the limit.
-		 */
-		rangeLimit?: number;
-		/**
-		 * If set, the client signals that it only supports folding complete lines. If set, client will
-		 * ignore specified `startCharacter` and `endCharacter` properties in a FoldingRange.
-		 */
-		lineFoldingOnly?: boolean;
-	};
+	foldingRange?: FoldingRangeClientCapabilities;
 }
 ```
 
@@ -1542,7 +1466,39 @@ interface ClientCapabilities {
 	/**
 	 * Workspace specific client capabilities.
 	 */
-	workspace?: WorkspaceClientCapabilities;
+	workspace?: {
+		/**
+		* The client supports applying batch edits
+		* to the workspace by supporting the request
+		* 'workspace/applyEdit'
+		*/
+		applyEdit?: boolean;
+
+		/**
+		* Capabilities specific to `WorkspaceEdit`s
+		*/
+		workspaceEdit?: WorkspaceEditClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/didChangeConfiguration` notification.
+		*/
+		didChangeConfiguration?: DidChangeConfigurationClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/didChangeWatchedFiles` notification.
+		*/
+		didChangeWatchedFiles?: DidChangeWatchedFilesClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/symbol` request.
+		*/
+		symbol?: WorkspaceSymbolClientCapabilities;
+
+		/**
+		* Capabilities specific to the `workspace/executeCommand` request.
+		*/
+		executeCommand?: ExecuteCommandClientCapabilities;
+	};
 
 	/**
 	 * Text document specific client capabilities.
@@ -1565,6 +1521,23 @@ interface InitializeResult {
 	 * The capabilities the language server provides.
 	 */
 	capabilities: ServerCapabilities;
+
+	/**
+	 * Information about the server.
+	 *
+	 * @since 3.15.0
+	 */
+	serverInfo?: {
+		/**
+		 * The name of the server as defined by the server.
+		 */
+		name: string;
+
+		/**
+		 * The servers's version as defined by the server.
+		 */
+		version?: string;
+	};
 }
 ```
 * error.code:
@@ -1601,113 +1574,6 @@ The server can signal the following capabilities:
 
 ```typescript
 /**
- * Defines how the host (editor) should sync document changes to the language server.
- */
-export namespace TextDocumentSyncKind {
-	/**
-	 * Documents should not be synced at all.
-	 */
-	export const None = 0;
-
-	/**
-	 * Documents are synced by always sending the full content
-	 * of the document.
-	 */
-	export const Full = 1;
-
-	/**
-	 * Documents are synced by sending the full content on open.
-	 * After that only incremental updates to the document are
-	 * send.
-	 */
-	export const Incremental = 2;
-}
-
-/**
- * Completion options.
- */
-export interface CompletionOptions {
-	/**
-	 * The server provides support to resolve additional
-	 * information for a completion item.
-	 */
-	resolveProvider?: boolean;
-
-	/**
-	 * The characters that trigger completion automatically.
-	 */
-	triggerCharacters?: string[];
-}
-/**
- * Signature help options.
- */
-export interface SignatureHelpOptions {
-	/**
-	 * The characters that trigger signature help
-	 * automatically.
-	 */
-	triggerCharacters?: string[];
-}
-
-/**
- * Code Action options.
- */
-export interface CodeActionOptions {
-	/**
-	 * CodeActionKinds that this server may return.
-	 *
-	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, or the server
-	 * may list out every specific kind they provide.
-	 */
-	codeActionKinds?: CodeActionKind[];
-}
-
-/**
- * Code Lens options.
- */
-export interface CodeLensOptions {
-	/**
-	 * Code lens has a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
-}
-
-/**
- * Format document on type options.
- */
-export interface DocumentOnTypeFormattingOptions {
-	/**
-	 * A character on which formatting should be triggered, like `}`.
-	 */
-	firstTriggerCharacter: string;
-
-	/**
-	 * More trigger characters.
-	 */
-	moreTriggerCharacter?: string[];
-}
-
-/**
- * Rename options
- */
-export interface RenameOptions {
-	/**
-	 * Renames should be checked and tested before being executed.
-	 */
-	prepareProvider?: boolean;
-}
-
-/**
- * Document link options.
- */
-export interface DocumentLinkOptions {
-	/**
-	 * Document links have a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
-}
-
-/**
  * Execute command options.
  */
 export interface ExecuteCommandOptions {
@@ -1717,171 +1583,139 @@ export interface ExecuteCommandOptions {
 	commands: string[]
 }
 
-/**
- * Save options.
- */
-export interface SaveOptions {
-	/**
-	 * The client is supposed to include the content on save.
-	 */
-	includeText?: boolean;
-}
-
-/**
- * Color provider options.
- */
-export interface ColorProviderOptions {
-}
-
-/**
- * Folding range provider options.
- */
-export interface FoldingRangeProviderOptions {
-}
-
-export interface TextDocumentSyncOptions {
-	/**
-	 * Open and close notifications are sent to the server. If omitted open close notification should not
-	 * be sent.
-	 */
-	openClose?: boolean;
-	/**
-	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
-	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
-	 */
-	change?: number;
-	/**
-	 * If present will save notifications are sent to the server. If omitted the notification should not be
-	 * sent.
-	 */
-	willSave?: boolean;
-	/**
-	 * If present will save wait until requests are sent to the server. If omitted the request should not be
-	 * sent.
-	 */
-	willSaveWaitUntil?: boolean;
-	/**
-	 * If present save notifications are sent to the server. If omitted the notification should not be
-	 * sent.
-	 */
-	save?: SaveOptions;
-}
-
-/**
- * Static registration options to be returned in the initialize request.
- */
-interface StaticRegistrationOptions {
-	/**
-	 * The id used to register the request. The id can be used to deregister
-	 * the request again. See also Registration#id.
-	 */
-	id?: string;
-}
-
 interface ServerCapabilities {
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure defining each notification or
 	 * for backwards compatibility the TextDocumentSyncKind number. If omitted it defaults to `TextDocumentSyncKind.None`.
 	 */
 	textDocumentSync?: TextDocumentSyncOptions | number;
-	/**
-	 * The server provides hover support.
-	 */
-	hoverProvider?: boolean;
+
 	/**
 	 * The server provides completion support.
 	 */
 	completionProvider?: CompletionOptions;
+
+	/**
+	 * The server provides hover support.
+	 */
+	hoverProvider?: boolean | HoverOptions;
+
 	/**
 	 * The server provides signature help support.
 	 */
 	signatureHelpProvider?: SignatureHelpOptions;
+
+	/**
+	 * The server provides go to declaration support.
+	 *
+	 * @since 3.14.0
+	 */
+	declarationProvider?: boolean | DeclarationOptions | DeclarationRegistrationOptions;
+
 	/**
 	 * The server provides goto definition support.
 	 */
-	definitionProvider?: boolean;
+	definitionProvider?: boolean | DefinitionOptions;
+
 	/**
 	 * The server provides Goto Type Definition support.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
-	typeDefinitionProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	typeDefinitionProvider?: boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions;
+
 	/**
 	 * The server provides Goto Implementation support.
 	 *
-	 * Since 3.6.0
+	 * @since 3.6.0
 	 */
-	implementationProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	implementationProvider?: boolean | ImplementationOptions | ImplementationRegistrationOptions;
+
 	/**
 	 * The server provides find references support.
 	 */
-	referencesProvider?: boolean;
+	referencesProvider?: boolean | ReferenceOptions;
+
 	/**
 	 * The server provides document highlight support.
 	 */
-	documentHighlightProvider?: boolean;
+	documentHighlightProvider?: boolean | DocumentHighlightOptions;
+
 	/**
 	 * The server provides document symbol support.
 	 */
-	documentSymbolProvider?: boolean;
-	/**
-	 * The server provides workspace symbol support.
-	 */
-	workspaceSymbolProvider?: boolean;
+	documentSymbolProvider?: boolean | DocumentSymbolOptions;
+
 	/**
 	 * The server provides code actions. The `CodeActionOptions` return type is only
 	 * valid if the client signals code action literal support via the property
 	 * `textDocument.codeAction.codeActionLiteralSupport`.
 	 */
 	codeActionProvider?: boolean | CodeActionOptions;
+
 	/**
 	 * The server provides code lens.
 	 */
 	codeLensProvider?: CodeLensOptions;
+
+	/**
+	 * The server provides document link support.
+	 */
+	documentLinkProvider?: DocumentLinkOptions;
+
+	/**
+	 * The server provides color provider support.
+	 *
+	 * @since 3.6.0
+	 */
+	colorProvider?: boolean | DocumentColorOptions | DocumentColorRegistrationOptions;
+
 	/**
 	 * The server provides document formatting.
 	 */
-	documentFormattingProvider?: boolean;
+	documentFormattingProvider?: boolean | DocumentFormattingOptions;
+
 	/**
 	 * The server provides document range formatting.
 	 */
-	documentRangeFormattingProvider?: boolean;
+	documentRangeFormattingProvider?: boolean | DocumentRangeFormattingOptions;
+
 	/**
 	 * The server provides document formatting on typing.
 	 */
 	documentOnTypeFormattingProvider?: DocumentOnTypeFormattingOptions;
+
 	/**
 	 * The server provides rename support. RenameOptions may only be
 	 * specified if the client states that it supports
 	 * `prepareSupport` in its initial `initialize` request.
 	 */
 	renameProvider?: boolean | RenameOptions;
-	/**
-	 * The server provides document link support.
-	 */
-	documentLinkProvider?: DocumentLinkOptions;
-	/**
-	 * The server provides color provider support.
-	 *
-	 * Since 3.6.0
-	 */
-	colorProvider?: boolean | ColorProviderOptions | (ColorProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
+
 	/**
 	 * The server provides folding provider support.
 	 *
-	 * Since 3.10.0
+	 * @since 3.10.0
 	 */
-	foldingRangeProvider?: boolean | FoldingRangeProviderOptions | (FoldingRangeProviderOptions & TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
+
 	/**
-	 * The server provides go to declaration support.
+	 * The server provides folding provider support.
 	 *
-	 * Since 3.14.0
+	 * @since 3.10.0
 	 */
-	declarationProvider?: boolean | (TextDocumentRegistrationOptions & StaticRegistrationOptions);
+	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
+
 	/**
 	 * The server provides execute command support.
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
+
+	/**
+	 * The server provides workspace symbol support.
+	 */
+	workspaceSymbolProvider?: boolean;
+
 	/**
 	 * Workspace specific server capabilities
 	 */
@@ -1889,25 +1723,11 @@ interface ServerCapabilities {
 		/**
 		 * The server supports workspace folder.
 		 *
-		 * Since 3.6.0
+		 * @since 3.6.0
 		 */
-		workspaceFolders?: {
-			/**
-			* The server has support for workspace folders
-			*/
-			supported?: boolean;
-			/**
-			* Whether the server wants to receive workspace folder
-			* change notifications.
-			*
-			* If a strings is provided the string is treated as a ID
-			* under which the notification is registered on the client
-			* side. The ID can be used to unregister for these events
-			* using the `client/unregisterCapability` request.
-			*/
-			changeNotifications?: string | boolean;
-		}
+		workspaceFolders?: WorkspaceFoldersServerCapabilities;
 	}
+
 	/**
 	 * Experimental server capabilities.
 	 */
@@ -2172,6 +1992,9 @@ export interface Unregistration {
 }
 
 export interface UnregistrationParams {
+	// This should correctly be named `unregistrations`. However changing this
+	// is a breaking change an needs to wait until we deliver a 4.x version
+	// of the specification.
 	unregisterations: Unregistration[];
 }
 ```
@@ -2203,13 +2026,39 @@ Many tools support more than one root folder per workspace. Examples for this ar
 
 The `workspace/workspaceFolders` request is sent from the server to the client to fetch the current open list of workspace folders. Returns `null` in the response if only a single file is open in the tool. Returns an empty array if a workspace is open but no folders are configured.
 
-_Request_:
+_Client Capability_:
+* property path (optional): `workspace.workspaceFolders`
+* property type: `boolean`
 
+_Server Capability_:
+* property path (optional): `workspace.workspaceFolders`
+* property type: `WorkspaceFoldersServerCapabilities` defined as follows:
+
+```typescript
+export interface WorkspaceFoldersServerCapabilities {
+	/**
+	 * The Server has support for workspace folders
+	 */
+	supported?: boolean;
+
+	/**
+	 * Whether the server wants to receive workspace folder
+	 * change notifications.
+	 *
+	 * If a strings is provided the string is treated as a ID
+	 * under which the notification is registed on the client
+	 * side. The ID can be used to unregister for these events
+	 * using the `client/unregisterCapability` request.
+	 */
+	changeNotifications?: string | boolean;
+}
+```
+
+_Request_:
 * method: 'workspace/workspaceFolders'
 * params: none
 
 _Response_:
-
 * result: `WorkspaceFolder[] | null` defined as follows:
 
 ```typescript
@@ -2232,7 +2081,7 @@ export interface WorkspaceFolder {
 
 > *Since version 3.6.0*
 
-The `workspace/didChangeWorkspaceFolders` notification is sent from the client to the server to inform the server about workspace folder configuration changes. The notification is sent by default if both _ServerCapabilities/workspace/workspaceFolders_ and _ClientCapabilities/workspace/workspaceFolders_ are true; or if the server has registered itself to receive this notification. To register for the `workspace/didChangeWorkspaceFolders` send a `client/registerCapability` request from the server to the client. The registration parameter must have a `registrations` item of the following form, where `id` is a unique id used to unregister the capability (the example uses a UUID):
+The `workspace/didChangeWorkspaceFolders` notification is sent from the client to the server to inform the server about workspace folder configuration changes. The notification is sent by default if both _client capability_ `workspace.workspaceFolders` and the _server capability_ `workspace.workspaceFolders.supported` are true; or if the server has registered itself to receive this notification. To register for the `workspace/didChangeWorkspaceFolders` send a `client/registerCapability` request from the server to the client. The registration parameter must have a `registrations` item of the following form, where `id` is a unique id used to unregister the capability (the example uses a UUID):
 ```ts
 {
 	id: "28c6150c-bd7b-11e7-abc4-cec278b6b50a",
@@ -2241,7 +2090,6 @@ The `workspace/didChangeWorkspaceFolders` notification is sent from the client t
 ```
 
 _Notification_:
-
 * method: 'workspace/didChangeWorkspaceFolders'
 * params: `DidChangeWorkspaceFoldersParams` defined as follows:
 
@@ -2273,6 +2121,19 @@ export interface WorkspaceFoldersChangeEvent {
 
 A notification sent from the client to the server to signal the change of configuration settings.
 
+_Client Capability_:
+* property path (optional): `workspace.didChangeConfiguration`
+* property type: `DidChangeConfigurationClientCapabilities` defined as follows:
+
+```typescript
+export interface DidChangeConfigurationClientCapabilities {
+	/**
+	 * Did change configuration notification supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
 _Notification_:
 * method: 'workspace/didChangeConfiguration',
 * params: `DidChangeConfigurationParams` defined as follows:
@@ -2294,8 +2155,11 @@ The `workspace/configuration` request is sent from the server to the client to f
 
 A `ConfigurationItem` consists of the configuration section to ask for and an additional scope URI. The configuration section ask for is defined by the server and doesn't necessarily need to correspond to the configuration store used be the client. So a server might ask for a configuration `cpp.formatterOptions` but the client stores the configuration in a XML store layout differently. It is up to the client to do the necessary conversion. If a scope URI is provided the client should return the setting scoped to the provided resource. If the client for example uses [EditorConfig](http://editorconfig.org/) to manage its settings the configuration should be returned for the passed resource URI. If the client can't provide a configuration setting for a given scope then `null` need to be present in the returned array.
 
-_Request_:
+_Client Capability_:
+* property path (optional): `workspace.configuration`
+* property type: `boolean`
 
+_Request_:
 * method: 'workspace/configuration'
 * params: `ConfigurationParams` defined as follows
 
@@ -2332,58 +2196,22 @@ Servers are allowed to run their own file watching mechanism and not rely on cli
 - a client usually starts more than one server. If every server runs its own file watching it can become a CPU or memory problem.
 - in general there are more server than client implementations. So this problem is better solved on the client side.
 
-
-_Notification_:
-* method: 'workspace/didChangeWatchedFiles'
-* params: `DidChangeWatchedFilesParams` defined as follows:
+_Client Capability_:
+* property path (optional): `workspace.didChangeWatchedFiles`
+* property type: `DidChangeWatchedFilesClientCapabilities` defined as follows:
 
 ```typescript
-interface DidChangeWatchedFilesParams {
+export interface DidChangeWatchedFilesClientCapabilities {
 	/**
-	 * The actual file events.
+	 * Did change watched files notification supports dynamic registration. Please note
+	 * that the current protocol doesn't support static configuration for file changes
+	 * from the server side.
 	 */
-	changes: FileEvent[];
+	dynamicRegistration?: boolean;
 }
 ```
 
-Where FileEvents are described as follows:
-
-```typescript
-/**
- * An event describing a file change.
- */
-interface FileEvent {
-	/**
-	 * The file's URI.
-	 */
-	uri: DocumentUri;
-	/**
-	 * The change type.
-	 */
-	type: number;
-}
-
-/**
- * The file event type.
- */
-export namespace FileChangeType {
-	/**
-	 * The file got created.
-	 */
-	export const Created = 1;
-	/**
-	 * The file got changed.
-	 */
-	export const Changed = 2;
-	/**
-	 * The file got deleted.
-	 */
-	export const Deleted = 3;
-}
-```
-
-_Registration Options_: `DidChangeWatchedFilesRegistrationOptions` defined as follows
-
+_Registration Options_: `DidChangeWatchedFilesRegistrationOptions` defined as follows:
 ```typescript
 /**
  * Describe options to be used when registering for file system change events.
@@ -2435,9 +2263,103 @@ export namespace WatchKind {
 }
 ```
 
+_Notification_:
+* method: 'workspace/didChangeWatchedFiles'
+* params: `DidChangeWatchedFilesParams` defined as follows:
+
+```typescript
+interface DidChangeWatchedFilesParams {
+	/**
+	 * The actual file events.
+	 */
+	changes: FileEvent[];
+}
+```
+
+Where FileEvents are described as follows:
+
+```typescript
+/**
+ * An event describing a file change.
+ */
+interface FileEvent {
+	/**
+	 * The file's URI.
+	 */
+	uri: DocumentUri;
+	/**
+	 * The change type.
+	 */
+	type: number;
+}
+
+/**
+ * The file event type.
+ */
+export namespace FileChangeType {
+	/**
+	 * The file got created.
+	 */
+	export const Created = 1;
+	/**
+	 * The file got changed.
+	 */
+	export const Changed = 2;
+	/**
+	 * The file got deleted.
+	 */
+	export const Deleted = 3;
+}
+```
+
 #### <a href="#workspace_symbol" name="workspace_symbol" class="anchor">Workspace Symbols Request (:leftwards_arrow_with_hook:)</a>
 
 The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
+
+_Client Capability_:
+* property path (optional): `workspace.symbol`
+* property type: `WorkspaceSymbolClientCapabilities` defined as follows:
+
+```typescript
+interface WorkspaceSymbolClientCapabilities {
+	/**
+	 * Symbol request supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
+	 */
+	symbolKind?: {
+		/**
+		 * The symbol kind values the client supports. When this
+		 * property exists the client also guarantees that it will
+		 * handle values outside its set gracefully and falls back
+		 * to a default value when unknown.
+		 *
+		 * If this property is not present the client only supports
+		 * the symbol kinds from `File` to `Array` as defined in
+		 * the initial version of the protocol.
+		 */
+		valueSet?: SymbolKind[];
+	}
+}
+```
+
+_Server Capability_:
+* property path (optional): `workspaceSymbolProvider`
+* property type: `boolean | WorkspaceSymbolOptions` were `WorkspaceSymbolOptions` is defined as follows:
+
+```typescript
+export interface WorkspaceSymbolOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `WorkspaceSymbolRegistrationOptions` defined as follows:
+```typescript
+export interface WorkspaceSymbolRegistrationOptions extends WorkspaceSymbolOptions {
+}
+```
 
 _Request_:
 * method: 'workspace/symbol'
@@ -2447,9 +2369,10 @@ _Request_:
 /**
  * The parameters of a Workspace Symbol Request.
  */
-interface WorkspaceSymbolParams {
+interface WorkspaceSymbolParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
-	 * A non-empty query string
+	 * A query string to filter symbols by. Clients may send an empty
+	 * string here to request all symbols.
 	 */
 	query: string;
 }
@@ -2457,10 +2380,8 @@ interface WorkspaceSymbolParams {
 
 _Response_:
 * result: `SymbolInformation[]` \| `null` as defined above.
+* partial result: `SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
-
-_Registration Options_: void
-
 
 #### <a href="#workspace_executeCommand" name="workspace_executeCommand" class="anchor">Execute a command (:leftwards_arrow_with_hook:)</a>
 
@@ -2468,12 +2389,47 @@ The `workspace/executeCommand` request is sent from the client to the server to 
 the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is
 sent from the server to the client.
 
+_Client Capability_:
+* property path (optional): `workspace.executeCommand`
+* property type: `ExecuteCommandClientCapabilities` defined as follows:
+
+```typescript
+export interface ExecuteCommandClientCapabilities {
+	/**
+	 * Execute command supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property path (optional): `executeCommandProvider`
+* property type: `ExecuteCommandOptions` defined as follows:
+
+```typescript
+export interface ExecuteCommandOptions extends WorkDoneProgressOptions {
+	/**
+	 * The commands to be executed on the server
+	 */
+	commands: string[]
+}
+```
+
+_Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
+```typescript
+/**
+ * Execute command registration options.
+ */
+export interface ExecuteCommandRegistrationOptions extends ExecuteCommandOptions {
+}
+```
+
 _Request:_
 * method: 'workspace/executeCommand'
 * params: `ExecuteCommandParams` defined as follows:
 
 ```typescript
-export interface ExecuteCommandParams {
+export interface ExecuteCommandParams extends WorkDoneProgressParams {
 
 	/**
 	 * The identifier of the actual command handler.
@@ -2492,24 +2448,15 @@ _Response_:
 * result: `any` \| `null`
 * error: code and message set in case an exception happens during the request.
 
-_Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
-
-```typescript
-/**
- * Execute command registration options.
- */
-export interface ExecuteCommandRegistrationOptions {
-	/**
-	 * The commands to be executed on the server
-	 */
-	commands: string[]
-}
-```
-
-
 #### <a href="#workspace_applyEdit" name="workspace_applyEdit" class="anchor">Applies a WorkspaceEdit (:arrow_right_hook:)</a>
 
 The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
+
+_Client Capability_:
+* property path (optional): `workspace.applyEdit`
+* property type: `boolean`
+
+See also the [WorkspaceEditClientCapabilities](#workspaceEditClientCapabilities) for the supported capabilities of a workspace edit.
 
 _Request_:
 * method: 'workspace/applyEdit'
@@ -2552,12 +2499,71 @@ export interface ApplyWorkspaceEditResponse {
 ```
 * error: code and message set in case an exception happens during the request.
 
+#### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
+
+Client support for `textDocument/open`, `textDocument/change` and `textDocument/close` notifications is mandantory in the protocol and clients can not opt out supporting them. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
+
+<a href="#textDocument_synchronization_cc" name="textDocument_synchronization_cc" class="anchor"></a>_Client Capability_:
+* property path (optional): `textDocument.synchronization.dynamicRegistration`
+* property type: `boolean`
+
+Controls whether text document synchronization supports dynamic registration.
+
+<a href="#textDocument_synchronization_sc" name="textDocument_synchronization_sc" class="anchor"></a>_Server Capability_:
+* property path (optional): `textDocumentSync`
+* property type: `TextDocumentSyncKind | TextDocumentSyncOptions` both defined as follows:
+
+```typescript
+/**
+ * Defines how the host (editor) should sync document changes to the language server.
+ */
+export namespace TextDocumentSyncKind {
+	/**
+	 * Documents should not be synced at all.
+	 */
+	export const None = 0;
+
+	/**
+	 * Documents are synced by always sending the full content
+	 * of the document.
+	 */
+	export const Full = 1;
+
+	/**
+	 * Documents are synced by sending the full content on open.
+	 * After that only incremental updates to the document are
+	 * send.
+	 */
+	export const Incremental = 2;
+}
+
+export interface TextDocumentSyncOptions {
+	/**
+	 * Open and close notifications are sent to the server. If omitted open close notification should not
+	 * be sent.
+	 */
+	openClose?: boolean;
+	/**
+	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
+	 */
+	change?: TextDocumentSyncKind;
+}
+```
 
 #### <a href="#textDocument_didOpen" name="textDocument_didOpen" class="anchor">DidOpenTextDocument Notification (:arrow_right:)</a>
 
 The document open notification is sent from the client to the server to signal newly opened text documents. The document's truth is now managed by the client and the server must not try to read the document's truth using the document's Uri. Open in this sense means it is managed by the client. It doesn't necessarily mean that its content is presented in an editor. An open notification must not be sent more than once without a corresponding close notification send before. This means open and close notification must be balanced and the max open count for a particular textDocument is one. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
 
 The `DidOpenTextDocumentParams` contain the language id the document is associated with. If the language Id of a document changes, the client needs to send a `textDocument/didClose` to the server followed by a `textDocument/didOpen` with the new language id if the server handles the new language id as well.
+
+_Client Capability_:
+See general synchronization [client capabilities](#textDocument_synchronization_cc).
+
+_Server Capability_:
+See general synchronization [server capabilities](#textDocument_synchronization_sc).
+
+_Registration Options_: [`TextDocumentRegistrationOptions`](#textDocumentRegistrationOptions)
 
 _Notification_:
 * method: 'textDocument/didOpen'
@@ -2572,12 +2578,29 @@ interface DidOpenTextDocumentParams {
 }
 ```
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
-
 #### <a href="#textDocument_didChange" name="textDocument_didChange" class="anchor">DidChangeTextDocument Notification (:arrow_right:)</a>
 
 The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
+
+_Client Capability_:
+See general synchronization [client capabilities](#textDocument_synchronization_cc).
+
+_Server Capability_:
+See general synchronization [server capabilities](#textDocument_synchronization_sc).
+
+_Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follows:
+```typescript
+/**
+ * Describe options to be used when registering for text document change events.
+ */
+export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
+	/**
+	 * How documents are synced to the server. See TextDocumentSyncKind.Full
+	 * and TextDocumentSyncKind.Incremental.
+	 */
+	syncKind: number;
+}
+```
 
 _Notification_:
 * method: 'textDocument/didChange'
@@ -2622,25 +2645,23 @@ interface TextDocumentContentChangeEvent {
 }
 ```
 
-_Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follows:
-
-```typescript
-/**
- * Describe options to be used when registering for text document change events.
- */
-export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * How documents are synced to the server. See TextDocumentSyncKind.Full
-	 * and TextDocumentSyncKind.Incremental.
-	 */
-	syncKind: number;
-}
-```
-
-
 #### <a href="#textDocument_willSave" name="textDocument_willSave" class="anchor">WillSaveTextDocument Notification (:arrow_right:)</a>
 
 The document will save notification is sent from the client to the server before the document is actually saved.
+
+_Client Capability_:
+* property name (optional): `textDocument.synchronization.willSave`
+* property type: `boolean`
+
+The capability indicates that the client supports `textDocument/willSave` notifications.
+
+_Server Capability_:
+* property name (optional): `textDocumentSync.willSave`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `textDocument/willSave` notifications.
+
+_Registration Options_: `TextDocumentRegistrationOptions`
 
 _Notification_:
 * method: 'textDocument/willSave'
@@ -2685,12 +2706,23 @@ export namespace TextDocumentSaveReason {
 }
 ```
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
-
 #### <a href="#textDocument_willSaveWaitUntil" name="textDocument_willSaveWaitUntil" class="anchor">WillSaveWaitUntilTextDocument Request (:leftwards_arrow_with_hook:)</a>
 
 The document will save request is sent from the client to the server before the document is actually saved. The request can return an array of TextEdits which will be applied to the text document before it is saved. Please note that clients might drop results if computing the text edits took too long or if a server constantly fails on this request. This is done to keep the save fast and reliable.
+
+_Client Capability_:
+* property name (optional): `textDocument.synchronization.willSaveWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the client supports `textDocument/willSaveWaitUntil` requests.
+
+_Server Capability_:
+* property name (optional): `textDocumentSync.willSaveWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `textDocument/willSaveWaitUntil` requests.
+
+_Registration Options_: `TextDocumentRegistrationOptions`
 
 _Request_:
 * method: 'textDocument/willSaveWaitUntil'
@@ -2700,12 +2732,42 @@ _Response_:
 * result:`TextEdit[]` \| `null`
 * error: code and message set in case an exception happens during the `willSaveWaitUntil` request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
 #### <a href="#textDocument_didSave" name="textDocument_didSave" class="anchor">DidSaveTextDocument Notification (:arrow_right:)</a>
 
 The document save notification is sent from the client to the server when the document was saved in the client.
 
+_Client Capability_:
+* property name (optional): `textDocument.synchronization.didSave`
+* property type: `boolean`
+
+The capability indicates that the client supports `textDocument/didSave` notifications.
+
+_Server Capability_:
+* property name (optional): `textDocumentSync.didSave`
+* property type: `boolean | SaveOptions` were `SaveOptions` is defined as follows:
+
+```typescript
+export interface SaveOptions {
+	/**
+	 * The client is supposed to include the content on save.
+	 */
+	includeText?: boolean;
+}
+```
+
+The capability indicates that the server is interested in `textDocument/didSave` notifications.
+
+_Registration Options_: `TextDocumentSaveRegistrationOptions` defined as follows:
+```typescript
+export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistrationOptions {
+	/**
+	 * The client is supposed to include the content on save.
+	 */
+	includeText?: boolean;
+}
+```
+
+_Notification_:
 * method: 'textDocument/didSave'
 * params: `DidSaveTextDocumentParams` defined as follows:
 
@@ -2724,20 +2786,17 @@ interface DidSaveTextDocumentParams {
 }
 ```
 
-_Registration Options_: `TextDocumentSaveRegistrationOptions` defined as follows:
-
-```typescript
-export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * The client is supposed to include the content on save.
-	 */
-	includeText?: boolean;
-}
-```
-
 #### <a href="#textDocument_didClose" name="textDocument_didClose" class="anchor">DidCloseTextDocument Notification (:arrow_right:)</a>
 
 The document close notification is sent from the client to the server when the document got closed in the client. The document's truth now exists where the document's Uri points to (e.g. if the document's Uri is a file Uri the truth now exists on disk). As with the open notification the close notification is about managing the document's content. Receiving a close notification doesn't mean that the document was open in an editor before. A close notification requires a previous open notification to be sent. Note that a server's ability to fulfill requests is independent of whether a text document is open or closed.
+
+_Client Capability_:
+See general synchronization [client capabilities](#textDocument_synchronization_cc).
+
+_Server Capability_:
+See general synchronization [server capabilities](#textDocument_synchronization_sc).
+
+_Registration Options_: `TextDocumentRegistrationOptions`
 
 _Notification_:
 * method: 'textDocument/didClose'
@@ -2752,8 +2811,84 @@ interface DidCloseTextDocumentParams {
 }
 ```
 
-_Registration Options_: `TextDocumentRegistrationOptions`
+The final structure of the `TextDocumentSyncClientCapabilities` and the `TextDocumentSyncOptions` server options look like this
 
+```typescript
+export interface TextDocumentSyncClientCapabilities {
+	/**
+	 * Whether text document synchronization supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports sending will save notifications.
+	 */
+	willSave?: boolean;
+
+	/**
+	 * The client supports sending a will save request and
+	 * waits for a response providing text edits which will
+	 * be applied to the document before it is saved.
+	 */
+	willSaveWaitUntil?: boolean;
+
+	/**
+	 * The client supports did save notifications.
+	 */
+	didSave?: boolean;
+}
+
+/**
+ * Defines how the host (editor) should sync document changes to the language server.
+ */
+export namespace TextDocumentSyncKind {
+	/**
+	 * Documents should not be synced at all.
+	 */
+	export const None = 0;
+
+	/**
+	 * Documents are synced by always sending the full content
+	 * of the document.
+	 */
+	export const Full = 1;
+
+	/**
+	 * Documents are synced by sending the full content on open.
+	 * After that only incremental updates to the document are
+	 * send.
+	 */
+	export const Incremental = 2;
+}
+
+export interface TextDocumentSyncOptions {
+	/**
+	 * Open and close notifications are sent to the server. If omitted open close notification should not
+	 * be sent.
+	 */
+	openClose?: boolean;
+	/**
+	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
+	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
+	 */
+	change?: number;
+	/**
+	 * If present will save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
+	 */
+	willSave?: boolean;
+	/**
+	 * If present will save wait until requests are sent to the server. If omitted the request should not be
+	 * sent.
+	 */
+	willSaveWaitUntil?: boolean;
+	/**
+	 * If present save notifications are sent to the server. If omitted the notification should not be
+	 * sent.
+	 */
+	save?: SaveOptions;
+}
+```
 
 #### <a href="#textDocument_publishDiagnostics" name="textDocument_publishDiagnostics" class="anchor">PublishDiagnostics Notification (:arrow_left:)</a>
 
@@ -2765,6 +2900,34 @@ Diagnostics are "owned" by the server so it is the server's responsibility to cl
 * if a language has a project system (for example C#) diagnostics are not cleared when a file closes. When a project is opened all diagnostics for all files are recomputed (or read from a cache).
 
 When a file changes it is the server's responsibility to re-compute diagnostics and push them to the client. If the computed set is empty it has to push the empty array to clear former diagnostics. Newly pushed diagnostics always replace previously pushed diagnostics. There is no merging that happens on the client side.
+
+See also the [Diagnostic](#diagnostic) section.
+
+_Client Capability_:
+* property name (optional): `textDocument.publishDiagnostics`
+* property type `PublishDiagnosticsClientCapabilities` defined as follows:
+
+```typescript
+export interface PublishDiagnosticsClientCapabilities {
+	/**
+	 * Whether the clients accepts diagnostics with related information.
+	 */
+	relatedInformation?: boolean;
+
+	/**
+	 * Client supports the tag property to provide meta data about a diagnostic.
+	 * Clients supporting tags have to handle unknown tags gracefully.
+	 *
+	 * @since 3.15.0
+	 */
+	tagSupport?: {
+		/**
+		 * The tags supported by the client.
+		 */
+		valueSet: DiagnosticTag[];
+	};
+}
+```
 
 _Notification_:
 * method: 'textDocument/publishDiagnostics'
@@ -2778,6 +2941,13 @@ interface PublishDiagnosticsParams {
 	uri: DocumentUri;
 
 	/**
+	 * Optional the version number of the document the diagnostics are published for.
+	 *
+	 * @since 3.15.0
+	 */
+	version?: number;
+
+	/**
 	 * An array of diagnostic information items.
 	 */
 	diagnostics: Diagnostic[];
@@ -2788,13 +2958,141 @@ interface PublishDiagnosticsParams {
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/editingevolved#_intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. The request can delay the computation of the `detail` and `documentation` properties. However, properties that are needed for the initial sorting and filtering, like `sortText`, `filterText`, `insertText`, and `textEdit` must be provided in the `textDocument/completion` response and must not be changed during resolve.
 
+_Client Capability_:
+* property name (optional): `textDocument.completion`
+* property type: `CompletionClientCapabilities` defined as follows:
+
+```typescript
+export interface CompletionClientCapabilities {
+	/**
+	 * Whether completion supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports the following `CompletionItem` specific
+	 * capabilities.
+	 */
+	completionItem?: {
+		/**
+		 * Client supports snippets as insert text.
+		 *
+		 * A snippet can define tab stops and placeholders with `$1`, `$2`
+		 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+		 * the end of the snippet. Placeholders with equal identifiers are linked,
+		 * that is typing in one will update others too.
+		 */
+		snippetSupport?: boolean;
+
+		/**
+		 * Client supports commit characters on a completion item.
+		 */
+		commitCharactersSupport?: boolean
+
+		/**
+		 * Client supports the follow content formats for the documentation
+		 * property. The order describes the preferred format of the client.
+		 */
+		documentationFormat?: MarkupKind[];
+
+		/**
+		 * Client supports the deprecated property on a completion item.
+		 */
+		deprecatedSupport?: boolean;
+
+		/**
+		 * Client supports the preselect property on a completion item.
+		 */
+		preselectSupport?: boolean;
+
+		/**
+		 * Client supports the tag property on a completion item. Clients supporting
+		 * tags have to handle unknown tags gracefully. Clients especially need to
+		 * preserve unknown tags when sending a completion item back to the server in
+		 * a resolve call.
+		 *
+		 * @since 3.15.0
+		 */
+		tagSupport?: {
+			/**
+			 * The tags supported by the client.
+			 */
+			valueSet: CompletionItemTag[]
+		}
+	};
+
+	completionItemKind?: {
+		/**
+		 * The completion item kind values the client supports. When this
+		 * property exists the client also guarantees that it will
+		 * handle values outside its set gracefully and falls back
+		 * to a default value when unknown.
+		 *
+		 * If this property is not present the client only supports
+		 * the completion items kinds from `Text` to `Reference` as defined in
+		 * the initial version of the protocol.
+		 */
+		valueSet?: CompletionItemKind[];
+	};
+
+	/**
+	 * The client supports to send additional context information for a
+	 * `textDocument/completion` requestion.
+	 */
+	contextSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `completionProvider`
+* property type: `CompletionOptions` defined as follows:
+
+```typescript
+/**
+ * Completion options.
+ */
+export interface CompletionOptions extends WorkDoneProgressOptions {
+	/**
+	 * Most tools trigger completion request automatically without explicitly requesting
+	 * it using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
+	 * starts to type an identifier. For example if the user types `c` in a JavaScript file
+	 * code complete will automatically pop up present `console` besides others as a
+	 * completion item. Characters that make up identifiers don't need to be listed here.
+	 *
+	 * If code complete should automatically be trigger on characters not being valid inside
+	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`.
+	 */
+	triggerCharacters?: string[];
+
+	/**
+	 * The list of all possible characters that commit a completion. This field can be used
+	 * if clients don't support individual commmit characters per completion item. See
+	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`
+	 *
+	 * @since 3.2.0
+	 */
+	allCommitCharacters?: string[];
+
+	/**
+	 * The server provides support to resolve additional
+	 * information for a completion item.
+	 */
+	resolveProvider?: boolean;
+}
+```
+
+_Registration Options_: `CompletionRegistrationOptions` options defined as follows:
+```typescript
+export interface CompletionRegistrationOptions extends TextDocumentRegistrationOptions, CompletionOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/completion'
 * params: `CompletionParams` defined as follows:
 
 ```typescript
-export interface CompletionParams extends TextDocumentPositionParams {
-
+export interface CompletionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The completion context. This is only available if the client specifies
 	 * to send this using `ClientCapabilities.textDocument.completion.contextSupport === true`
@@ -2851,7 +3149,7 @@ _Response_:
  * Represents a collection of [completion items](#CompletionItem) to be presented
  * in the editor.
  */
-interface CompletionList {
+export interface CompletionList {
 	/**
 	 * This list it not complete. Further typing should result in recomputing
 	 * this list.
@@ -2868,7 +3166,7 @@ interface CompletionList {
  * Defines whether the insert text in a completion item should be interpreted as
  * plain text or a snippet.
  */
-namespace InsertTextFormat {
+export namespace InsertTextFormat {
 	/**
 	 * The primary text to be inserted is treated as a plain string.
 	 */
@@ -2885,9 +3183,24 @@ namespace InsertTextFormat {
 	export const Snippet = 2;
 }
 
-type InsertTextFormat = 1 | 2;
+export type InsertTextFormat = 1 | 2;
 
-interface CompletionItem {
+/**
+ * Completion item tags are extra annotations that tweak the rendering of a completion
+ * item.
+ *
+ * @since 3.15.0
+ */
+export namespace CompletionItemTag {
+	/**
+	 * Render a completion as obsolete, usually using a strike-out.
+	 */
+	export const Deprecated = 1;
+}
+
+export type CompletionItemTag = 1;
+
+export interface CompletionItem {
 	/**
 	 * The label of this completion item. By default
 	 * also the text that is inserted when selecting
@@ -2901,6 +3214,13 @@ interface CompletionItem {
 	 * of available values is defined in `CompletionItemKind`.
 	 */
 	kind?: number;
+
+	/**
+	 * Tags for this completion item.
+	 *
+	 * @since 3.15.0
+	 */
+	tags?: CompletionItemTag[];
 
 	/**
 	 * A human-readable string with additional information
@@ -3002,7 +3322,7 @@ interface CompletionItem {
 /**
  * The kind of a completion entry.
  */
-namespace CompletionItemKind {
+export namespace CompletionItemKind {
 	export const Text = 1;
 	export const Method = 2;
 	export const Function = 3;
@@ -3030,40 +3350,8 @@ namespace CompletionItemKind {
 	export const TypeParameter = 25;
 }
 ```
+* partial result: `CompletionItem[]`
 * error: code and message set in case an exception happens during the completion request.
-
-_Registration Options_: `CompletionRegistrationOptions` options defined as follows:
-
-```typescript
-export interface CompletionRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * Most tools trigger completion request automatically without explicitly requesting
-	 * it using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
-	 * starts to type an identifier. For example if the user types `c` in a JavaScript file
-	 * code complete will automatically pop up present `console` besides others as a
-	 * completion item. Characters that make up identifiers don't need to be listed here.
-	 *
-	 * If code complete should automatically be trigger on characters not being valid inside
-	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`.
-	 */
-	triggerCharacters?: string[];
-
-	/**
-	 * The list of all possible characters that commit a completion. This field can be used
-	 * if clients don't support individual commmit characters per completion item. See
-	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`
-	 *
-   * Since 3.2.0
-	 */
-	allCommitCharacters?: string[];
-
-	/**
-	 * The server provides support to resolve additional
-	 * information for a completion item.
-	 */
-	resolveProvider?: boolean;
-}
-```
 
 Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is as follows:
 
@@ -3163,9 +3451,48 @@ _Response_:
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
+_Client Capability_:
+* property name (optional): `textDocument.hover`
+* property type: `HoverClientCapabilities` defined as follows:
+
+```typescript
+export interface HoverClientCapabilities {
+	/**
+	 * Whether hover supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * Client supports the follow content formats for the content
+	 * property. The order describes the preferred format of the client.
+	 */
+	contentFormat?: MarkupKind[];
+}
+```
+
+_Server Capability_:
+* property name (optional): `hoverProvider`
+* property type: `boolean | HoverOptions` were `HoverOptions` is defined as follows:
+
+```typescript
+export interface HoverOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `HoverRegistrationOptions` defined as follows:
+```typescript
+export interface HoverRegistrationOptions extends TextDocumentRegistrationOptions, HoverOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/hover'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `HoverParams` defined as follows:
+
+```typescript
+export interface HoverParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+}
+```
 
 _Response_:
 * result: `Hover` \| `null` defined as follows:
@@ -3174,7 +3501,7 @@ _Response_:
 /**
  * The result of a hover request.
  */
-interface Hover {
+export interface Hover {
 	/**
 	 * The hover's content
 	 */
@@ -3210,15 +3537,159 @@ type MarkedString = string | { language: string; value: string };
 
 * error: code and message set in case an exception happens during the hover request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
 #### <a href="#textDocument_signatureHelp" name="textDocument_signatureHelp" class="anchor">Signature Help Request (:leftwards_arrow_with_hook:)</a>
 
 The signature help request is sent from the client to the server to request signature information at a given cursor position.
 
+_Client Capability_:
+* property name (optional): `textDocument.signatureHelp`
+* property type: `SignatureHelpClientCapabilities` defined as follows:
+
+```typescript
+export interface SignatureHelpClientCapabilities {
+	/**
+	 * Whether signature help supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports the following `SignatureInformation`
+	 * specific properties.
+	 */
+	signatureInformation?: {
+		/**
+		 * Client supports the follow content formats for the documentation
+		 * property. The order describes the preferred format of the client.
+		 */
+		documentationFormat?: MarkupKind[];
+
+		/**
+		 * Client capabilities specific to parameter information.
+		 */
+		parameterInformation?: {
+			/**
+			 * The client supports processing label offsets instead of a
+			 * simple label string.
+			 *
+			 * @since 3.14.0
+			 */
+			labelOffsetSupport?: boolean;
+		};
+	};
+
+	/**
+	 * The client supports to send additional context information for a
+	 * `textDocument/signatureHelp` request. A client that opts into
+	 * contextSupport will also support the `retriggerCharacters` on
+	 * `SignatureHelpOptions`.
+	 *
+	 * @since 3.15.0
+	 */
+	contextSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `signatureHelpProvider`
+* property type: `SignatureHelpOptions` defined as follows:
+
+```typescript
+export interface SignatureHelpOptions extends WorkDoneProgressOptions {
+	/**
+	 * The characters that trigger signature help
+	 * automatically.
+	 */
+	triggerCharacters?: string[];
+
+	/**
+	 * List of characters that re-trigger signature help.
+	 *
+	 * These trigger characters are only active when signature help is already showing. All trigger characters
+	 * are also counted as re-trigger characters.
+	 *
+	 * @since 3.15.0
+	 */
+	retriggerCharacters?: string[];
+}
+```
+
+_Registration Options_: `SignatureHelpRegistrationOptions` defined as follows:
+```typescript
+export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrationOptions, SignatureHelpOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/signatureHelp'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `SignatureHelpParams` defined as follows:
+
+```typescript
+export interface SignatureHelpParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+	/**
+	 * The signature help context. This is only available if the client specifies
+	 * to send this using the client capability  `textDocument.signatureHelp.contextSupport === true`
+	 *
+	 * @since 3.15.0
+	 */
+	context?: SignatureHelpContext;
+}
+
+/**
+ * How a signature help was triggered.
+ *
+ * @since 3.15.0
+ */
+export namespace SignatureHelpTriggerKind {
+	/**
+	 * Signature help was invoked manually by the user or by a command.
+	 */
+	export const Invoked: 1 = 1;
+	/**
+	 * Signature help was triggered by a trigger character.
+	 */
+	export const TriggerCharacter: 2 = 2;
+	/**
+	 * Signature help was triggered by the cursor moving or by the document content changing.
+	 */
+	export const ContentChange: 3 = 3;
+}
+export type SignatureHelpTriggerKind = 1 | 2 | 3;
+
+/**
+ * Additional information about the context in which a signature help request was triggered.
+ *
+ * @since 3.15.0
+ */
+export interface SignatureHelpContext {
+	/**
+	 * Action that caused signature help to be triggered.
+	 */
+	triggerKind: SignatureHelpTriggerKind;
+
+	/**
+	 * Character that caused signature help to be triggered.
+	 *
+	 * This is undefined when `triggerKind !== SignatureHelpTriggerKind.TriggerCharacter`
+	 */
+	triggerCharacter?: string;
+
+	/**
+	 * `true` if signature help was already showing when it was triggered.
+	 *
+	 * Retriggers occur when the signature help is already active and can be caused by actions such as
+	 * typing a trigger character, a cursor move, or document content changes.
+	 */
+	isRetrigger: boolean;
+
+	/**
+	 * The currently active `SignatureHelp`.
+	 *
+	 * The `activeSignatureHelp` has its `SignatureHelp.activeSignature` field updated based on
+	 * the user navigating through available signatures.
+	 */
+	activeSignatureHelp?: SignatureHelp;
+}
+```
 
 _Response_:
 * result: `SignatureHelp` \| `null` defined as follows:
@@ -3229,7 +3700,7 @@ _Response_:
  * callable. There can be multiple signature but only one
  * active and only one active parameter.
  */
-interface SignatureHelp {
+export interface SignatureHelp {
 	/**
 	 * One or more signatures.
 	 */
@@ -3263,7 +3734,7 @@ interface SignatureHelp {
  * can have a label, like a function-name, a doc-comment, and
  * a set of parameters.
  */
-interface SignatureInformation {
+export interface SignatureInformation {
 	/**
 	 * The label of this signature. Will be shown in
 	 * the UI.
@@ -3286,7 +3757,7 @@ interface SignatureInformation {
  * Represents a parameter of a callable-signature. A parameter can
  * have a label and a doc-comment.
  */
-interface ParameterInformation {
+export interface ParameterInformation {
 
 	/**
 	 * The label of this parameter information.
@@ -3310,52 +3781,117 @@ interface ParameterInformation {
 
 * error: code and message set in case an exception happens during the signature help request.
 
-_Registration Options_: `SignatureHelpRegistrationOptions` defined as follows:
-
-```typescript
-export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * The characters that trigger signature help
-	 * automatically.
-	 */
-	triggerCharacters?: string[];
-}
-```
 #### <a href="#textDocument_declaration" name="textDocument_declaration" class="anchor">Goto Declaration Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.14.0*
 
 The go to declaration request is sent from the client to the server to resolve the declaration location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.declaration.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends on the corresponding client capability `textDocument.declaration.linkSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.declaration`
+* property type: `DeclarationClientCapabilities` defined as follows:
+
+```typescript
+export interface DeclarationClientCapabilities {
+	/**
+	 * Whether declaration supports dynamic registration. If this is set to `true`
+	 * the client supports the new `DeclarationRegistrationOptions` return value
+	 * for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports additional metadata in the form of declaration links.
+	 */
+	linkSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `declarationProvider`
+* property type: `boolean | DeclarationOptions | DeclarationRegistrationOptions` were `DeclarationOptions` is defined as follows:
+
+```typescript
+export interface DeclarationOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DeclarationRegistrationOptions` defined as follows:
+```typescript
+export interface DeclarationRegistrationOptions extends DeclarationOptions, TextDocumentRegistrationOptions, StaticRegistrationOptions  {
+}
+```
 
 _Request_:
 * method: 'textDocument/declaration'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `DeclarationParams` defined as follows:
+
+```typescript
+export interface DeclarationParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \|`null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \|`null`
+* partial result: [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the declaration request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_definition" name="textDocument_definition" class="anchor">Goto Definition Request (:leftwards_arrow_with_hook:)</a>
 
-> *Since version 3.14.0*
-
 The go to definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 `
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.definition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `textDocument.definition.linkSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.definition`
+* property type: `DefinitionClientCapabilities` defined as follows:
+
+```typescript
+export interface DefinitionClientCapabilities {
+	/**
+	 * Whether definition supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports additional metadata in the form of definition links.
+	 *
+	 * @since 3.14.0
+	 */
+	linkSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `definitionProvider`
+* property type: `boolean | DefinitionOptions` were `DefinitionOptions` is defined as follows:
+
+```typescript
+export interface DefinitionOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DefinitionRegistrationOptions` defined as follows:
+```typescript
+export interface DefinitionRegistrationOptions extends TextDocumentRegistrationOptions, DefinitionOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/definition'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `DefinitionParams` defined as follows:
+
+```typescript
+export interface DefinitionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the definition request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_typeDefinition" name="textDocument_typeDefinition" class="anchor">Goto Type Definition Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3363,17 +3899,58 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The go to type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `textDocument.typeDefinition.linkSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.typeDefinition`
+* property type: `DefinitionClientCapabilities` defined as follows:
+
+```typescript
+export interface TypeDefinitionClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `TypeDefinitionRegistrationOptions` return value
+	 * for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports additional metadata in the form of definition links.
+	 *
+	 * @since 3.14.0
+	 */
+	linkSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `typeDefinitionProvider`
+* property type: `boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions` were `TypeDefinitionOptions` is defined as follows:
+
+```typescript
+export interface TypeDefinitionOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `TypeDefinitionRegistrationOptions` defined as follows:
+```typescript
+export interface TypeDefinitionRegistrationOptions extends TextDocumentRegistrationOptions, TypeDefinitionOptions, StaticRegistrationOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/typeDefinition'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `TypeDefinitionParams` defined as follows:
+
+```typescript
+export interface TypeDefinitionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the definition request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_implementation" name="textDocument_implementation" class="anchor">Goto Implementation Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3381,32 +3958,101 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 The go to implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.implementation.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `implementation.typeDefinition.linkSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.implementation`
+* property type: `ImplementationClientCapabilities` defined as follows:
+
+```typescript
+export interface ImplementationClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `ImplementationRegistrationOptions` return value
+	 * for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports additional metadata in the form of definition links.
+	 *
+	 * @since 3.14.0
+	 */
+	linkSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `implementationProvider`
+* property type: `boolean | ImplementationOptions | ImplementationRegistrationOptions` were `ImplementationOptions` is defined as follows:
+
+```typescript
+export interface ImplementationOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `ImplementationRegistrationOptions` defined as follows:
+```typescript
+export interface ImplementationRegistrationOptions extends TextDocumentRegistrationOptions, ImplementationOptions, StaticRegistrationOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/implementation'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `ImplementationParams` defined as follows:
+
+```typescript
+export interface ImplementationParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
-* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationlink)[] \| `null`
+* result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the definition request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_references" name="textDocument_references" class="anchor">Find References Request (:leftwards_arrow_with_hook:)</a>
 
 The references request is sent from the client to the server to resolve project-wide references for the symbol denoted by the given text document position.
+
+_Client Capability_:
+* property name (optional): `textDocument.references`
+* property type: `ReferenceClientCapabilities` defined as follows:
+
+```typescript
+export interface ReferenceClientCapabilities {
+	/**
+	 * Whether references supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `referencesProvider`
+* property type: `boolean | ReferenceOptions` were `ReferenceOptions` is defined as follows:
+
+```typescript
+export interface ReferenceOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `ReferenceRegistrationOptions` defined as follows:
+```typescript
+export interface ReferenceRegistrationOptions extends TextDocumentRegistrationOptions, ReferenceOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/references'
 * params: `ReferenceParams` defined as follows:
 
 ```typescript
-interface ReferenceParams extends TextDocumentPositionParams {
+export interface ReferenceParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
 	context: ReferenceContext
 }
 
-interface ReferenceContext {
+export interface ReferenceContext {
 	/**
 	 * Include the declaration of the current symbol.
 	 */
@@ -3415,9 +4061,8 @@ interface ReferenceContext {
 ```
 _Response_:
 * result: [`Location`](#location)[] \| `null`
+* partial result: [`Location`](#location)[]
 * error: code and message set in case an exception happens during the reference request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_documentHighlight" name="textDocument_documentHighlight" class="anchor">Document Highlights Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3426,9 +4071,42 @@ For programming languages this usually highlights all references to the symbol s
 and 'textDocument/references' separate requests since the first one is allowed to be more fuzzy. Symbol matches usually have a `DocumentHighlightKind`
 of `Read` or `Write` whereas fuzzy or textual matches use `Text`as the kind.
 
+_Client Capability_:
+* property name (optional): `textDocument.documentHighlight`
+* property type: `DocumentHighlightClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentHighlightClientCapabilities {
+	/**
+	 * Whether document highlight supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentHighlightProvider`
+* property type: `boolean | DocumentHighlightOptions` were `DocumentHighlightOptions` is defined as follows:
+
+```typescript
+export interface DocumentHighlightOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentHighlightRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentHighlightRegistrationOptions extends TextDocumentRegistrationOptions, DocumentHighlightOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/documentHighlight'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `DocumentHighlightParams` defined as follows:
+
+```typescript
+export interface DocumentHighlightParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
 * result: `DocumentHighlight[]` \| `null` defined as follows:
@@ -3440,7 +4118,7 @@ _Response_:
  * the background color of its range.
  *
  */
-interface DocumentHighlight {
+export interface DocumentHighlight {
 	/**
 	 * The range this highlight applies to.
 	 */
@@ -3473,9 +4151,8 @@ export namespace DocumentHighlightKind {
 }
 ```
 
+* partial result: `DocumentHighlight[]`
 * error: code and message set in case an exception happens during the document highlight request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_documentSymbol" name="textDocument_documentSymbol" class="anchor">Document Symbols Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3484,12 +4161,40 @@ The document symbol request is sent from the client to the server. The returned 
 - `SymbolInformation[]` which is a flat list of all symbols found in a given text document. Then neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
 - `DocumentSymbol[]` which is a hierarchy of symbols found in a given text document.
 
+_Client Capability_:
+* property name (optional): `textDocument.documentSymbol`
+* property type: `DocumentSymbolClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentHighlightClientCapabilities {
+	/**
+	 * Whether document highlight supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentSymbolProvider`
+* property type: `boolean | DocumentSymbolOptions` were `DocumentSymbolOptions` is defined as follows:
+
+```typescript
+export interface DocumentSymbolOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentSymbolRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentSymbolRegistrationOptions extends TextDocumentRegistrationOptions, DocumentSymbolOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/documentSymbol'
 * params: `DocumentSymbolParams` defined as follows:
 
 ```typescript
-interface DocumentSymbolParams {
+export interface DocumentSymbolParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -3538,7 +4243,7 @@ export namespace SymbolKind {
  * hierarchical and they have two ranges: one that encloses its definition and one that points to its most interesting range,
  * e.g. the range of an identifier.
  */
-export class DocumentSymbol {
+export interface DocumentSymbol {
 
 	/**
 	 * The name of this symbol. Will be displayed in the user interface and therefore must not be
@@ -3584,7 +4289,7 @@ export class DocumentSymbol {
  * Represents information about programming constructs like variables, classes,
  * interfaces etc.
  */
-interface SymbolInformation {
+export interface SymbolInformation {
 	/**
 	 * The name of this symbol.
 	 */
@@ -3621,12 +4326,10 @@ interface SymbolInformation {
 	 */
 	containerName?: string;
 }
-
 ```
 
+* partial result: `DocumentSymbol[]` \| `SymbolInformation[]`
 * error: code and message set in case an exception happens during the document symbol request.
-
-_Registration Options_: `TextDocumentRegistrationOptions`
 
 #### <a href="#textDocument_codeAction" name="textDocument_codeAction" class="anchor">Code Action Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3639,7 +4342,71 @@ When the command is selected the server should be contacted again (via the `work
 - the ability to directly return a workspace edit from the code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is simply a command and the actual edit is only computed when needed.
 - the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action for example into corresponding menus (e.g. all refactor code actions into a refactor menu).
 
-Clients need to announce their support for code action literals and code action kinds via the corresponding client capability `textDocument.codeAction.codeActionLiteralSupport`.
+Clients need to announce their support for code action literals and code action kinds via the corresponding client capability `codeAction.codeActionLiteralSupport`.
+
+_Client Capability_:
+* property name (optional): `textDocument.codeAction`
+* property type: `CodeActionClientCapabilities` defined as follows:
+
+```typescript
+export interface CodeActionClientCapabilities {
+	/**
+	 * Whether code action supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client support code action literals as a valid
+	 * response of the `textDocument/codeAction` request.
+	 *
+	 * @since 3.8.0
+	 */
+	codeActionLiteralSupport?: {
+		/**
+		 * The code action kind is support with the following value
+		 * set.
+		 */
+		codeActionKind: {
+
+			/**
+			 * The code action kind values the client supports. When this
+			 * property exists the client also guarantees that it will
+			 * handle values outside its set gracefully and falls back
+			 * to a default value when unknown.
+			 */
+			valueSet: CodeActionKind[];
+		};
+	};
+
+	/**
+	 * Whether code action supports the `isPreferred` property.
+	 * @since 3.15.0
+	 */
+	isPreferredSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `codeActionProvider`
+* property type: `boolean | CodeActionOptions` were `CodeActionOptions` is defined as follows:
+
+```typescript
+export interface CodeActionOptions extends WorkDoneProgressOptions {
+	/**
+	 * CodeActionKinds that this server may return.
+	 *
+	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, or the server
+	 * may list out every specific kind they provide.
+	 */
+	codeActionKinds?: CodeActionKind[];
+}
+```
+
+_Registration Options_: `CodeActionRegistrationOptions` defined as follows:
+```typescript
+export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions, CodeActionOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/codeAction'
@@ -3649,7 +4416,7 @@ _Request_:
 /**
  * Params for the CodeActionRequest
  */
-interface CodeActionParams {
+export interface CodeActionParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The document in which the command was invoked.
 	 */
@@ -3752,7 +4519,7 @@ export namespace CodeActionKind {
  * Contains additional diagnostic information about the context in which
  * a code action is run.
  */
-interface CodeActionContext {
+export interface CodeActionContext {
 	/**
 	 * An array of diagnostics.
 	 */
@@ -3798,6 +4565,17 @@ export interface CodeAction {
 	diagnostics?: Diagnostic[];
 
 	/**
+	 * Marks this as a preferred action. Preferred actions are used by the `auto fix` command and can be targeted
+	 * by keybindings.
+	 *
+	 * A quick fix should be marked preferred if it properly addresses the underlying error.
+	 * A refactoring should be marked preferred if it is the most reasonable choice of actions to take.
+	 *
+	 * @since 3.15.0
+	 */
+	isPreferred?: boolean;
+
+	/**
 	 * The workspace edit this code action performs.
 	 */
 	edit?: WorkspaceEdit;
@@ -3810,27 +4588,51 @@ export interface CodeAction {
 	command?: Command;
 }
 ```
-
+* partial result: `(Command | CodeAction)[]`
 * error: code and message set in case an exception happens during the code action request.
-
-_Registration Options_: `CodeActionRegistrationOptions`  defined as follows:
-
-```typescript
-export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions, CodeActionOptions {
-}
-```
-
 
 #### <a href="#textDocument_codeLens" name="textDocument_codeLens" class="anchor">Code Lens Request (:leftwards_arrow_with_hook:)</a>
 
 The code lens request is sent from the client to the server to compute code lenses for a given text document.
+
+_Client Capability_:
+* property name (optional): `textDocument.codeLens`
+* property type: `CodeLensClientCapabilities` defined as follows:
+
+```typescript
+export interface CodeLensClientCapabilities {
+	/**
+	 * Whether code lens supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `codeLensProvider`
+* property type: `CodeLensOptions` defined as follows:
+
+```typescript
+export interface CodeLensOptions extends WorkDoneProgressOptions {
+	/**
+	 * Code lens has a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}
+```
+
+_Registration Options_: `CodeLensRegistrationOptions` defined as follows:
+```typescript
+export interface CodeLensRegistrationOptions extends TextDocumentRegistrationOptions, CodeLensOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/codeLens'
 * params: `CodeLensParams` defined as follows:
 
 ```typescript
-interface CodeLensParams {
+interface CodeLensParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The document to request code lens for.
 	 */
@@ -3867,18 +4669,8 @@ interface CodeLens {
 	data?: any
 }
 ```
+* partial result: `CodeLens[]`
 * error: code and message set in case an exception happens during the code lens request.
-
-_Registration Options_: `CodeLensRegistrationOptions` defined as follows:
-
-```typescript
-export interface CodeLensRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * Code lens has a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
-}
-```
 
 #### <a href="#codeLens_resolve" name="codeLens_resolve" class="anchor">Code Lens Resolve Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3896,12 +4688,50 @@ _Response_:
 
 The document links request is sent from the client to the server to request the location of links in a document.
 
-_Request_:
-* method: 'textDocument/documentLink'
-* params: `DocumentLinkParams`, defined as follows:
+_Client Capability_:
+* property name (optional): `textDocument.documentLink`
+* property type: `DocumentLinkClientCapabilities` defined as follows:
 
 ```typescript
-interface DocumentLinkParams {
+export interface DocumentLinkClientCapabilities {
+	/**
+	 * Whether document link supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * Whether the client support the `tooltip` property on `DocumentLink`.
+	 *
+	 * @since 3.15.0
+	 */
+	tooltipSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentLinkProvider`
+* property type: `DocumentLinkOptions` defined as follows:
+
+```typescript
+export interface DocumentLinkOptions extends WorkDoneProgressOptions {
+	/**
+	 * Document links have a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}```
+
+_Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentLinkRegistrationOptions extends TextDocumentRegistrationOptions, DocumentLinkOptions {
+}
+```
+
+_Request_:
+* method: 'textDocument/documentLink'
+* params: `DocumentLinkParams` defined as follows:
+
+```typescript
+interface DocumentLinkParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The document to provide document links for.
 	 */
@@ -3910,7 +4740,7 @@ interface DocumentLinkParams {
 ```
 
 _Response_:
-* result: An array of `DocumentLink` \| `null`.
+* result: `DocumentLink[]` \| `null`.
 
 ```typescript
 /**
@@ -3922,10 +4752,23 @@ interface DocumentLink {
 	 * The range this link applies to.
 	 */
 	range: Range;
+
 	/**
 	 * The uri this link points to. If missing a resolve request is sent later.
 	 */
 	target?: DocumentUri;
+
+	/**
+	 * The tooltip text when you hover over this link.
+	 *
+	 * If a tooltip is provided, is will be displayed in a string that includes instructions on how to
+	 * trigger the link, such as `{0} (ctrl + click)`. The specific instructions vary depending on OS,
+	 * user settings, and localization.
+	 *
+	 * @since 3.15.0
+	 */
+	tooltip?: string;
+
 	/**
 	 * A data entry field that is preserved on a document link between a
 	 * DocumentLinkRequest and a DocumentLinkResolveRequest.
@@ -3933,18 +4776,8 @@ interface DocumentLink {
 	data?: any;
 }
 ```
+* partial result: `DocumentLink[]`
 * error: code and message set in case an exception happens during the document link request.
-
-_Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
-
-```typescript
-export interface DocumentLinkRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * Document links have a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
-}
-```
 
 #### <a href="#documentLink_resolve" name="documentLink_resolve" class="anchor">Document Link Resolve Request (:leftwards_arrow_with_hook:)</a>
 
@@ -3968,13 +4801,45 @@ Clients can use the result to decorate color references in an editor. For exampl
 - Color boxes showing the actual color next to the reference
 - Show a color picker when a color reference is edited
 
+_Client Capability_:
+* property name (optional): `textDocument.colorProvider`
+* property type: `DocumentColorClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentColorClientCapabilities {
+	/**
+	 * Whether code lens supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `colorProvider`
+* property type: `boolean | DocumentColorOptions | DocumentColorRegistrationOptions` were `DocumentColorOptions` is defined as follows:
+
+```typescript
+export interface DocumentColorOptions extends WorkDoneProgressOptions {
+	/**
+	 * Code lens has a resolve provider as well.
+	 */
+	resolveProvider?: boolean;
+}
+```
+
+_Registration Options_: `DocumentColorRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentColorRegistrationOptions extends TextDocumentRegistrationOptions, StaticRegistrationOptions, DocumentColorOptions {
+}
+```
+
 _Request_:
 
 * method: 'textDocument/documentColor'
 * params: `DocumentColorParams` defined as follows
 
 ```ts
-interface DocumentColorParams {
+interface DocumentColorParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -4024,6 +4889,7 @@ interface Color {
 	readonly alpha: number;
 }
 ```
+* partial result: `ColorInformation[]`
 * error: code and message set in case an exception happens during the 'textDocument/documentColor' request
 
 #### <a href="#textDocument_colorPresentation" name="textDocument_colorPresentation" class="anchor">Color Presentation Request (:leftwards_arrow_with_hook:)</a>
@@ -4033,7 +4899,6 @@ interface Color {
 The color presentation request is sent from the client to the server to obtain a list of presentations for a color value at a given location. Clients can use the result to
 - modify a color reference.
 - show in a color picker and let users pick one of the presentations
-
 
 _Request_:
 
@@ -4090,12 +4955,40 @@ interface ColorPresentation {
 
 The document formatting request is sent from the client to the server to format a whole document.
 
+_Client Capability_:
+* property name (optional): `textDocument.formatting`
+* property type: `DocumentFormattingClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentFormattingClientCapabilities {
+	/**
+	 * Whether formatting supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentFormattingProvider`
+* property type: `boolean | DocumentFormattingOptions` were `DocumentFormattingOptions` is defined as follows:
+
+```typescript
+export interface DocumentFormattingOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentFormattingRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentFormattingRegistrationOptions extends TextDocumentRegistrationOptions, DocumentFormattingOptions {
+}
+```
+
 _Request_:
 * method: 'textDocument/formatting'
 * params: `DocumentFormattingParams` defined as follows
 
 ```typescript
-interface DocumentFormattingParams {
+interface DocumentFormattingParams extends WorkDoneProgressParams {
 	/**
 	 * The document to format.
 	 */
@@ -4122,6 +5015,27 @@ interface FormattingOptions {
 	insertSpaces: boolean;
 
 	/**
+	 * Trim trailing whitespaces on a line.
+	 *
+	 * @since 3.15.0
+	 */
+	trimTrailingWhitespace?: boolean;
+
+	/**
+	 * Insert a newline character at the end of the file if one does not exist.
+	 *
+	 * @since 3.15.0
+	 */
+	insertFinalNewline?: boolean;
+
+	/**
+	 * Trim all newlines after the final newline at the end of the file.
+	 *
+	 * @since 3.15.0
+	 */
+	trimFinalNewlines?: boolean;
+
+	/**
 	 * Signature for further properties.
 	 */
 	[key: string]: boolean | number | string;
@@ -4132,18 +5046,44 @@ _Response_:
 * result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
 #### <a href="#textDocument_rangeFormatting" name="textDocument_rangeFormatting" class="anchor">Document Range Formatting Request (:leftwards_arrow_with_hook:)</a>
 
 The document range formatting request is sent from the client to the server to format a given range in a document.
+
+_Client Capability_:
+* property name (optional): `textDocument.rangeFormatting`
+* property type: `DocumentRangeFormattingClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentRangeFormattingClientCapabilities {
+	/**
+	 * Whether formatting supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentRangeFormattingProvider`
+* property type: `boolean | DocumentRangeFormattingOptions` were `DocumentRangeFormattingOptions` is defined as follows:
+
+```typescript
+export interface DocumentRangeFormattingOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `DocumentFormattingRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentRangeFormattingRegistrationOptions extends TextDocumentRegistrationOptions, DocumentRangeFormattingOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/rangeFormatting',
 * params: `DocumentRangeFormattingParams` defined as follows:
 
 ```typescript
-interface DocumentRangeFormattingParams {
+interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 	/**
 	 * The document to format.
 	 */
@@ -4165,11 +5105,46 @@ _Response_:
 * result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
-_Registration Options_: `TextDocumentRegistrationOptions`
-
 #### <a href="#textDocument_onTypeFormatting" name="textDocument_onTypeFormatting" class="anchor">Document on Type Formatting Request (:leftwards_arrow_with_hook:)</a>
 
 The document on type formatting request is sent from the client to the server to format parts of the document during typing.
+
+_Client Capability_:
+* property name (optional): `textDocument.onTypeFormatting`
+* property type: `DocumentOnTypeFormattingClientCapabilities` defined as follows:
+
+```typescript
+export interface DocumentOnTypeFormattingClientCapabilities {
+	/**
+	 * Whether on type formatting supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `documentOnTypeFormattingProvider`
+* property type: `DocumentOnTypeFormattingOptions` defined as follows:
+
+```typescript
+export interface DocumentOnTypeFormattingOptions {
+	/**
+	 * A character on which formatting should be triggered, like `}`.
+	 */
+	firstTriggerCharacter: string;
+
+	/**
+	 * More trigger characters.
+	 */
+	moreTriggerCharacter?: string[];
+}
+```
+
+_Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
+```typescript
+export interface DocumentOnTypeFormattingRegistrationOptions extends TextDocumentRegistrationOptions, DocumentOnTypeFormattingOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/onTypeFormatting'
@@ -4203,30 +5178,58 @@ _Response_:
 * result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
-_Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
-
-```typescript
-export interface DocumentOnTypeFormattingRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * A character on which formatting should be triggered, like `}`.
-	 */
-	firstTriggerCharacter: string;
-	/**
-	 * More trigger characters.
-	 */
-	moreTriggerCharacter?: string[]
-}
-```
 #### <a href="#textDocument_rename" name="textDocument_rename" class="anchor">Rename Request (:leftwards_arrow_with_hook:)</a>
 
 The rename request is sent from the client to the server to perform a workspace-wide rename of a symbol.
+
+_Client Capability_:
+* property name (optional): `textDocument.rename`
+* property type: `RenameClientCapabilities` defined as follows:
+
+```typescript
+export interface RenameClientCapabilities {
+	/**
+	 * Whether rename supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * Client supports testing for validity of rename operations
+	 * before execution.
+	 *
+	 * @since version 3.12.0
+	 */
+	prepareSupport?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `renameProvider`
+* property type: `boolean | RenameOptions` were `RenameOptions` is defined as follows:
+
+`RenameOptions` may only be specified if the client states that it supports `prepareSupport` in its initial `initialize` request.
+
+```typescript
+export interface RenameOptions extends WorkDoneProgressOptions {
+	/**
+	 * Renames should be checked and tested before being executed.
+	 */
+	prepareProvider?: boolean;
+}
+```
+
+_Registration Options_: `RenameRegistrationOptions` defined as follows:
+```typescript
+export interface RenameRegistrationOptions extends TextDocumentRegistrationOptions, RenameOptions {
+}
+```
 
 _Request_:
 * method: 'textDocument/rename'
 * params: `RenameParams` defined as follows
 
 ```typescript
-interface RenameParams {
+interface RenameParams extends WorkDoneProgressParams {
 	/**
 	 * The document to rename.
 	 */
@@ -4250,17 +5253,6 @@ _Response_:
 * result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace.
 * error: code and message set in case an exception happens during the rename request.
 
-_Registration Options_: `RenameRegistrationOptions` defined as follows:
-
-```typescript
-export interface RenameRegistrationOptions extends TextDocumentRegistrationOptions {
-	/**
-	 * Renames should be checked and tested for validity before being executed.
-	 */
-	prepareProvider?: boolean;
-}
-```
-
 #### <a href="#textDocument_prepareRename" name="textDocument_prepareRename" class="anchor">Prepare Rename Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.12.0*
@@ -4281,19 +5273,58 @@ _Response_:
 
 The folding range request is sent from the client to the server to return all folding ranges found in a given text document.
 
+_Client Capability_:
+* property name (optional): `textDocument.foldingRange`
+* property type: `FoldingRangeClientCapabilities` defined as follows:
+
+```typescript
+export interface FoldingRangeClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration for folding range providers. If this is set to `true`
+	 * the client supports the new `FoldingRangeRegistrationOptions` return value for the corresponding server
+	 * capability as well.
+	 */
+	dynamicRegistration?: boolean;
+	/**
+	 * The maximum number of folding ranges that the client prefers to receive per document. The value serves as a
+	 * hint, servers are free to follow the limit.
+	 */
+	rangeLimit?: number;
+	/**
+	 * If set, the client signals that it only supports folding complete lines. If set, client will
+	 * ignore specified `startCharacter` and `endCharacter` properties in a FoldingRange.
+	 */
+	lineFoldingOnly?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `foldingRangeProvider`
+* property type: `boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions` were `FoldingRangeOptions` is defined as follows:
+
+```typescript
+export interface FoldingRangeOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `FoldingRangeRegistrationOptions` defined as follows:
+```typescript
+export interface FoldingRangeRegistrationOptions extends TextDocumentRegistrationOptions, FoldingRangeOptions, StaticRegistrationOptions {
+}
+```
+
 _Request_:
 
 * method: 'textDocument/foldingRange'
 * params: `FoldingRangeParams` defined as follows
 
 ```typescript
-export interface FoldingRangeParams {
+export interface FoldingRangeParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
 	 */
 	textDocument: TextDocumentIdentifier;
 }
-
 ```
 
 _Response_:
@@ -4352,10 +5383,86 @@ export interface FoldingRange {
 }
 ```
 
+* partial result: `FoldingRange[]`
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
-_Registration Options_: `TextDocumentRegistrationOptions`
+#### <a href="#textDocument_selectionRange" name="textDocument_selectionRange" class="anchor">Selection Range Request (:leftwards_arrow_with_hook:)</a>
 
+> *Since version 3.15.0*
+
+The selection range request is sent from the client to the server to return suggested selection ranges at an array of given positions. A selection range is a range around the cursor position which the user might be interested in selecting.
+
+A selection range in the return array is for the position in the provided parameters at the same index. Therefore positions[i] must be contained in result[i].range.
+
+Typically, but not necessary, selection ranges correspond to the nodes of the syntax tree.
+
+_Client Capability_:
+* property name (optional): `textDocument.selectionRange`
+* property type: `SelectionRangeClientCapabilities` defined as follows:
+
+```typescript
+export interface SelectionRangeClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration for selection range providers. If this is set to `true`
+	 * the client supports the new `SelectionRangeRegistrationOptions` return value for the corresponding server
+	 * capability as well.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `selectionRangeProvider`
+* property type: `boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions` were `SelectionRangeOptions` is defined as follows:
+
+```typescript
+export interface SelectionRangeOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `SelectionRangeRegistrationOptions` defined as follows:
+```typescript
+export interface SelectionRangeRegistrationOptions extends SelectionRangeOptions, TextDocumentRegistrationOptions, StaticRegistrationOptions {
+}
+```
+
+_Request_:
+
+* method: 'textDocument/selectionRange'
+* params: `SelectionRangeParams` defined as follows
+
+```typescript
+export interface SelectionRangeParams extends WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The positions inside the text document.
+	 */
+	positions: Position[];
+}
+```
+
+_Response_:
+* result: `SelectionRange[] | null` defined as follows:
+
+```typescript
+export interface SelectionRange {
+    /**
+     * The [range](#Range) of this selection range.
+     */
+    range: Range;
+    /**
+     * The parent selection range containing this range. Therefore `parent.range` must contain `this.range`.
+     */
+    parent?: SelectionRange;
+}
+```
+
+* partial result: `SelectionRange[]`
+* error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
 
 ### Implementation considerations
 
@@ -4367,6 +5474,24 @@ Language servers usually run in a separate process and client communicate with t
 - if a client notices that a server exists unexpectedly it should try to restart the server. However clients should be careful to not restart a crashing server endlessly. VS Code for example doesn't restart a server if it crashes 5 times in the last 180 seconds.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
+
+#### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (09/19/2019)</a>
+
+* Add generic progress reporting support.
+* Add specific work done progress reporting support to requests were applicable.
+* Add specific partial result progress support to requests were applicable.
+* Add support for `textDocument/selectionRange`.
+* Add support for server and client information.
+* Add signature help context.
+* Add Erlang and Elixir to the list of supported programming languages
+* Add `version` on `PublishDiagnosticsParams`
+* Add `CodeAction#isPreferred` support.
+* Add `CompletionItem#tag` support.
+* Add `Diagnostic#tag` support.
+* Add `DocumentLink#tooltip` support.
+* Add `trimTrailingWhitespace`, `insertFinalNewline` and `trimFinalNewlines` to `FormattingOptions`.
+* Clarified `WorkspaceSymbolParams#query` parameter.
+
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
 

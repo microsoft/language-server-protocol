@@ -28,21 +28,6 @@ exclude:
 timezone: Europe/Zurich
 
 defaults:
-- scope:
-    path: _posts
-    type: posts
-  values:
-    layout: post
-    sectionid: blog
-
-- scope:
-    path: _docs
-    type: docs
-  values:
-    layout: docs
-    sectionid: docs
-    seo:
-      type: "WebPage"
 
 - scope:
     path: _implementors
@@ -51,14 +36,18 @@ defaults:
     layout: implementors
     sectionid: implementors
 
+- scope:
+    path: _specifications
+    type: specifications
+  values:
+    layout: specifications
+    sectionid: specifications
+
 collections:
-  docs:
-    permalink: /:collection/:path/
-    output: true
-  posts:
-    permalink: /blog/:year/:month/:day/:title/
-    output: true
   implementors:
     permalink: /:collection/:path/
     output: true
-  
+  specifications:
+    permalink: /:collection/:path/
+    output: true
+
