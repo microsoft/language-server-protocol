@@ -5265,7 +5265,7 @@ _Request_:
 
 _Response_:
 * result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
-* error: code and message set in case an exception happens during the prepare rename request.
+* error: code and message set in case the element can't be renamed. Clients should show the information in their user interface.
 
 #### <a href="#textDocument_foldingRange" name="textDocument_foldingRange" class="anchor">Folding Range Request (:leftwards_arrow_with_hook:)</a>
 
