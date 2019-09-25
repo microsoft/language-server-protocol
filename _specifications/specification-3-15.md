@@ -1750,7 +1750,7 @@ interface InitializedParams {
 
 #### <a href="#shutdown" name="shutdown" class="anchor">Shutdown Request (:leftwards_arrow_with_hook:)</a>
 
-The shutdown request is sent from the client to the server. It asks the server to shut down, but to not exit (otherwise the response might not be delivered correctly to the client). There is a separate exit notification that asks the server to exit. Clients must not send any notifications other than `exit` or requests to a server to which they have sent a shutdown requests. If a server receives requests after a shutdown request those requests should be errored with `InvalidRequest`.
+The shutdown request is sent from the client to the server. It asks the server to shut down, but to not exit (otherwise the response might not be delivered correctly to the client). There is a separate exit notification that asks the server to exit. Clients must not send any notifications other than `exit` or requests to a server to which they have sent a shutdown request. If a server receives requests after a shutdown request those requests should error with `InvalidRequest`.
 
 _Request_:
 * method: 'shutdown'
@@ -5471,7 +5471,7 @@ Language servers usually run in a separate process and client communicate with t
 - if a client sends a request to the server and the client state changes in a way that the result will be invalid it should cancel the server request and ignore the result. If necessary it can resend the request to receive an up to date result.
 - if a server detects a state change that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if appropriate.
 - if servers end up in an inconsistent state they should log this to the client using the `window/logMessage` request. If they can't recover from this the best they can do right now is to exit themselves. We are considering an [extension to the protocol](https://github.com/Microsoft/language-server-protocol/issues/646) that allows servers to request a restart on the client side.
-- if a client notices that a server exists unexpectedly it should try to restart the server. However clients should be careful to not restart a crashing server endlessly. VS Code for example doesn't restart a server if it crashes 5 times in the last 180 seconds.
+- if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
