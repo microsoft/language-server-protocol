@@ -37,4 +37,6 @@ index: 2
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
 | [Spyder](http://spyder-ide.org) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
 | [MS Paint IDE](https://ms-paint-i.de/) | [RubbaBoy](https://github.com/RubbaBoy) | [MS Paint IDE](https://github.com/MSPaintIDE/MSPaintIDE) |
+| [Aginity Pro](https://www.aginity.com/products/aginity-pro/) | [Aginity] (https://www.aginity.com) | |
+| [Aginity Team](https://www.aginity.com/products/aginity-team/) | [Aginity] (https://www.aginity.com) | |
 {: .table .table-bordered .table-responsive}
