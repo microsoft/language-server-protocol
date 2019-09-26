@@ -2580,7 +2580,7 @@ interface DidOpenTextDocumentParams {
 
 #### <a href="#textDocument_didChange" name="textDocument_didChange" class="anchor">DidChangeTextDocument Notification (:arrow_right:)</a>
 
-The document change notification is sent from the client to the server to signal changes to a text document. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
+The document change notification is sent from the client to the server to signal changes to a text document. Before a client can change a text document it must claim ownership of its content using the `textDocument/didOpen` notification. In 2.0 the shape of the params has changed to include proper version numbers and language ids.
 
 _Client Capability_:
 See general synchronization [client capabilities](#textDocument_synchronization_cc).
