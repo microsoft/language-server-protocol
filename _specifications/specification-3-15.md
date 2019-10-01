@@ -1192,7 +1192,7 @@ export interface WorkDoneProgressOptions {
 
 > *Since version 3.15.0*
 
-Partial results are also reported using the generic [`$/progress`](#progress) notification. The value payload of a partial result progress notification is in most cases the same as the final result. For example the `workspace/symbol` request as `SymbolInfomtion[]` as the result type. Partial result is therefore also of type `SymbolInformation[]`. Whether a client accepts partial result notifications for a request is signaled by adding a `partialResultToken` to the request parameters. For example, a `textDocument/reference` request that supports both work done and partial result progress might look like this:
+Partial results are also reported using the generic [`$/progress`](#progress) notification. The value payload of a partial result progress notification is in most cases the same as the final result. For example the `workspace/symbol` request has `SymbolInformation[]` as the result type. Partial result is therefore also of type `SymbolInformation[]`. Whether a client accepts partial result notifications for a request is signaled by adding a `partialResultToken` to the request parameter. For example, a `textDocument/reference` request that supports both work done and partial result progress might look like this:
 
 ```json
 {
@@ -1215,9 +1215,9 @@ Partial results are also reported using the generic [`$/progress`](#progress) no
 
 The `partialResultToken` is then used to report partial results for the find references request.
 
-If a server reports partial result via a corresponding `$/progress` the whole result must be reported using n `$/progress` notifications. The final response has to be empty in terms of result values. This avoids confusion about how the final result should be interpreted, e.g. as another partial result or as a replacing result.
+If a server reports partial result via a corresponding `$/progress`, the whole result must be reported using n `$/progress` notifications. The final response has to be empty in terms of result values. This avoids confusion about how the final result should be interpreted, e.g. as another partial result or as a replacing result.
 
-TODO: describe what happens when the response contains an error object. are already sent partial results valid?
+TODO: describe what happens when the response contains an error object. Are already sent partial results valid?
 
 #### <a href="#partialResultParams" name="partialResultParams" class="anchor"> PartialResultParams </a>
 
@@ -1350,73 +1350,73 @@ export interface TextDocumentClientCapabilities {
 	synchronization?: TextDocumentSyncClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/completion`
+	 * Capabilities specific to the `textDocument/completion` request.
 	 */
 	completion?: CompletionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/hover`
+	 * Capabilities specific to the `textDocument/hover` request.
 	 */
 	hover?: HoverClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/signatureHelp`
+	 * Capabilities specific to the `textDocument/signatureHelp` request.
 	 */
 	signatureHelp?: SignatureHelpClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/declaration`
+	 * Capabilities specific to the `textDocument/declaration` request.
 	 *
 	 * @since 3.14.0
 	 */
 	declaration?: DeclarationClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/definition`.
+	 * Capabilities specific to the `textDocument/definition` request.
 	 */
 	definition?: DefinitionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/typeDefinition`
+	 * Capabilities specific to the `textDocument/typeDefinition` request.
 	 *
 	 * @since 3.6.0
 	 */
 	typeDefinition?: TypeDefinitionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/implementation`.
+	 * Capabilities specific to the `textDocument/implementation` request.
 	 *
 	 * @since 3.6.0
 	 */
 	implementation?: ImplementationClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/references`
+	 * Capabilities specific to the `textDocument/references` request.
 	 */
 	references?: ReferenceClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/documentHighlight`
+	 * Capabilities specific to the `textDocument/documentHighlight` request.
 	 */
 	documentHighlight?: DocumentHighlightClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/documentSymbol`
+	 * Capabilities specific to the `textDocument/documentSymbol` request.
 	 */
 	documentSymbol?: DocumentSymbolClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/codeAction`
+	 * Capabilities specific to the `textDocument/codeAction` request.
 	 */
 	codeAction?: CodeActionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/codeLens`
+	 * Capabilities specific to the `textDocument/codeLens` request.
 	 */
 	codeLens?: CodeLensClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/documentLink`
+	 * Capabilities specific to the `textDocument/documentLink` request.
 	 */
 	documentLink?: DocumentLinkClientCapabilities;
 
@@ -1429,32 +1429,32 @@ export interface TextDocumentClientCapabilities {
 	colorProvider?: DocumentColorClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/formatting`
+	 * Capabilities specific to the `textDocument/formatting` request.
 	 */
 	formatting?: DocumentFormattingClientCapabilities
 
 	/**
-	 * Capabilities specific to the `textDocument/rangeFormatting`
+	 * Capabilities specific to the `textDocument/rangeFormatting` request.
 	 */
 	rangeFormatting?: DocumentRangeFormattingClientCapabilities;
 
-	/**
-	 * Capabilities specific to the `textDocument/onTypeFormatting`
+	/** request.
+	 * Capabilities specific to the `textDocument/onTypeFormatting` request.
 	 */
 	onTypeFormatting?: DocumentOnTypeFormattingClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/rename`
+	 * Capabilities specific to the `textDocument/rename` request.
 	 */
 	rename?: RenameClientCapabilities;
 
 	/**
-	 * Capabilities specific to `textDocument/publishDiagnostics`.
+	 * Capabilities specific to the `textDocument/publishDiagnostics` notification.
 	 */
 	publishDiagnostics?: PublishDiagnosticsClientCapabilities;
 
 	/**
-	 * Capabilities specific to `textDocument/foldingRange` requests.
+	 * Capabilities specific to the `textDocument/foldingRange` request.
 	 *
 	 * @since 3.10.0
 	 */
@@ -1462,7 +1462,7 @@ export interface TextDocumentClientCapabilities {
 }
 ```
 
-`ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
+`ClientCapabilities` define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
