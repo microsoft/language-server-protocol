@@ -25,15 +25,15 @@ Principal design goals:
 
 LSP requests that are good candidates to be supported in LSIF are:
 
-- [`textDocument/documentSymbol`](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol)
-- [`textDocument/foldingRange`](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange)
-- [`textDocument/documentLink`](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentLink)
-- [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specification#textDocument_definition)
-- [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specification#textDocument_declaration)
-- [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)
-- [`textDocument/hover`](https://microsoft.github.io/language-server-protocol/specification#textDocument_hover)
-- [`textDocument/references`](https://microsoft.github.io/language-server-protocol/specification#textDocument_references)
-- [`textDocument/implementation`](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)
+- [`textDocument/documentSymbol`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_documentSymbol)
+- [`textDocument/foldingRange`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_foldingRange)
+- [`textDocument/documentLink`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_documentLink)
+- [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_definition)
+- [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_declaration)
+- [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_typeDefinition)
+- [`textDocument/hover`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_hover)
+- [`textDocument/references`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_references)
+- [`textDocument/implementation`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_implementation)
 
 The corresponding LSP requests have one of the following two forms:
 
