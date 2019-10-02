@@ -3851,7 +3851,7 @@ TODO: Can partial result also be a Location[] (to be symetric to other places th
 
 The go to definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends in the corresponding client capability `textDocument.definition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends on the corresponding client capability `textDocument.definition.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.definition`
@@ -3908,11 +3908,11 @@ _Response_:
 
 The go to type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends in the corresponding client capability `textDocument.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends on the corresponding client capability `textDocument.typeDefinition.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.typeDefinition`
-* property type: `DefinitionClientCapabilities` defined as follows:
+* property type: `TypeDefinitionClientCapabilities` defined as follows:
 
 ```typescript
 export interface TypeDefinitionClientCapabilities {
@@ -3967,7 +3967,7 @@ _Response_:
 
 The go to implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends in the corresponding client capability `implementation.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends on the corresponding client capability `textDocument.implementation.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.implementation`
@@ -4455,7 +4455,7 @@ export interface CodeActionParams extends WorkDoneProgressParams, PartialResultP
 export type CodeActionKind = string;
 
 /**
- * A set of predefined code action kinds
+ * A set of predefined code action kinds.
  */
 export namespace CodeActionKind {
 
@@ -4465,17 +4465,17 @@ export namespace CodeActionKind {
 	export const Empty: CodeActionKind = '';
 
 	/**
-	 * Base kind for quickfix actions: 'quickfix'
+	 * Base kind for quickfix actions: 'quickfix'.
 	 */
 	export const QuickFix: CodeActionKind = 'quickfix';
 
 	/**
-	 * Base kind for refactoring actions: 'refactor'
+	 * Base kind for refactoring actions: 'refactor'.
 	 */
 	export const Refactor: CodeActionKind = 'refactor';
 
 	/**
-	 * Base kind for refactoring extraction actions: 'refactor.extract'
+	 * Base kind for refactoring extraction actions: 'refactor.extract'.
 	 *
 	 * Example extract actions:
 	 *
@@ -4488,7 +4488,7 @@ export namespace CodeActionKind {
 	export const RefactorExtract: CodeActionKind = 'refactor.extract';
 
 	/**
-	 * Base kind for refactoring inline actions: 'refactor.inline'
+	 * Base kind for refactoring inline actions: 'refactor.inline'.
 	 *
 	 * Example inline actions:
 	 *
@@ -4500,7 +4500,7 @@ export namespace CodeActionKind {
 	export const RefactorInline: CodeActionKind = 'refactor.inline';
 
 	/**
-	 * Base kind for refactoring rewrite actions: 'refactor.rewrite'
+	 * Base kind for refactoring rewrite actions: 'refactor.rewrite'.
 	 *
 	 * Example rewrite actions:
 	 *
@@ -4514,14 +4514,14 @@ export namespace CodeActionKind {
 	export const RefactorRewrite: CodeActionKind = 'refactor.rewrite';
 
 	/**
-	 * Base kind for source actions: `source`
+	 * Base kind for source actions: `source`.
 	 *
 	 * Source code actions apply to the entire file.
 	 */
 	export const Source: CodeActionKind = 'source';
 
 	/**
-	 * Base kind for an organize imports source action: `source.organizeImports`
+	 * Base kind for an organize imports source action: `source.organizeImports`.
 	 */
 	export const SourceOrganizeImports: CodeActionKind = 'source.organizeImports';
 }
