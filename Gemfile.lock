@@ -234,6 +234,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll (= 3.6.2)
+  jekyll-redirect-from
   jekyll-remote-theme
   jemoji
   tzinfo-data
@@ -242,4 +243,4 @@ RUBY VERSION
    ruby 2.4.4p296
 
 BUNDLED WITH
-   1.16.2
+   2.0.2

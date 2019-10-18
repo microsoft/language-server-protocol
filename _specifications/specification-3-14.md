@@ -5,6 +5,8 @@ layout: specifications
 sectionid: specification-3-14
 toc: specification-3-14-toc
 index: 1
+redirect_from:
+  - /specification
 ---
 # Language Server Protocol Specification - 3.14
 
