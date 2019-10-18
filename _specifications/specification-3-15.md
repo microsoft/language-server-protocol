@@ -3276,7 +3276,8 @@ export interface CompletionItem {
 
 	/**
 	 * The format of the insert text. The format applies to both the `insertText` property
-	 * and the `newText` property of a provided `textEdit`.
+	 * and the `newText` property of a provided `textEdit`. If ommitted defaults to
+	 * `InsertTextFormat.PlainText`.
 	 */
 	insertTextFormat?: InsertTextFormat;
 
