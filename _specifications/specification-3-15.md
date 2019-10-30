@@ -2629,19 +2629,26 @@ interface DidChangeTextDocumentParams {
  * An event describing a change to a text document. If range and rangeLength are omitted
  * the new text is considered to be the full content of the document.
  */
-interface TextDocumentContentChangeEvent {
+export type TextDocumentContentChangeEvent = {
 	/**
 	 * The range of the document that changed.
 	 */
-	range?: Range;
+	range: Range;
 
 	/**
-	 * The length of the range that got replaced.
+	 * The optional length of the range that got replaced.
+	 *
+	 * @deprecated use range instead.
 	 */
 	rangeLength?: number;
 
 	/**
-	 * The new text of the range/document.
+	 * The new text for the provided range.
+	 */
+	text: string;
+} | {
+	/**
+	 * The new text of the whole document.
 	 */
 	text: string;
 }
