@@ -3059,7 +3059,7 @@ export interface CompletionRegistrationOptions extends TextDocumentRegistrationO
 	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`.
 	 *
 	 * If a server provides both `allCommitCharacters` and commit characters on an individual
-	 * completion item the once on the completion item win.
+	 * completion item the ones on the completion item win.
 	 *
      * Since 3.2.0
 	 */
