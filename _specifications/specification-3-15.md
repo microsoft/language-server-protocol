@@ -2600,7 +2600,7 @@ export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegis
 	 * How documents are synced to the server. See TextDocumentSyncKind.Full
 	 * and TextDocumentSyncKind.Incremental.
 	 */
-	syncKind: number;
+	syncKind: TextDocumentSyncKind;
 }
 ```
 
@@ -4311,7 +4311,7 @@ export interface SymbolInformation {
 	/**
 	 * The kind of this symbol.
 	 */
-	kind: number;
+	kind: SymbolKind;
 
 	/**
 	 * Indicates if this symbol is deprecated.
