@@ -25,7 +25,7 @@ index: 1
 | CSS/LESS/SASS | MS | [vscode-css-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/css-language-features/server) | TypeScript |
 | [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) | Ceylon |
 | [Clojure](https://clojure.org/) | [Case Nelson](https://github.com/snoe) | [clojure-lsp](https://github.com/snoe/clojure-lsp) | Clojure |
-| IBM Enterprise COBOL for z/OS | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | COBOL |
+| [IBM Enterprise COBOL for z/OS](https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/welcome.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | [CWL](https://www.commonwl.org/) | [Rabix](https://github.com/rabix) | [Benten](https://github.com/rabix/benten) | Python |
 | Crane PHP | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) | TypeScript |
 | [Crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [scry](https://github.com/kofno/scry) | Crystal |
@@ -77,7 +77,7 @@ index: 1
 | PHP | [Tom Gerrits](https://gitlab.com/Gert-dev) | [Serenata](https://gitlab.com/Serenata/Serenata) | PHP |
 | PHP | [Tyson Andre](https://github.com/TysonAndre) | [Phan](https://github.com/phan/phan) | PHP |
 | PHPUnit | [Recca0120](https://github.com/recca0120) | [phpunit-language-server](https://github.com/recca0120/vscode-phpunit) | TypeScript |
-| IBM Enterprise PL/I for z/OS | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | PL/I |
+| [IBM Enterprise PL/I for z/OS](https://www.ibm.com/support/knowledgecenter/SSY2V3_5.3.0/com.ibm.ent.pl1.zos.doc/single_template_nobrand.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | [Polymer](https://www.polymer-project.org) | [Polymer Team](https://github.com/Polymer) | [polymer-editor-service](https://github.com/Polymer/polymer-editor-service) | TypeScript |
 | PowerShell | MS | [PowerShell Editor Services](https://github.com/PowerShell/PowerShellEditorServices) | C# |
 | PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) | PureScript |
