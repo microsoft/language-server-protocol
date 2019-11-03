@@ -1701,13 +1701,6 @@ interface ServerCapabilities {
 	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
 
 	/**
-	 * The server provides folding provider support.
-	 *
-	 * @since 3.10.0
-	 */
-	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
-
-	/**
 	 * The server provides execute command support.
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
