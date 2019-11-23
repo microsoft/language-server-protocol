@@ -4179,11 +4179,33 @@ _Client Capability_:
 * property type: `DocumentSymbolClientCapabilities` defined as follows:
 
 ```typescript
-export interface DocumentHighlightClientCapabilities {
+export interface DocumentSymbolClientCapabilities {
 	/**
-	 * Whether document highlight supports dynamic registration.
+	 * Whether document symbol supports dynamic registration.
 	 */
 	dynamicRegistration?: boolean;
+
+	/**
+	 * Specific capabilities for the `SymbolKind` in the `textDocument/documentSymbol` request.
+	 */
+	symbolKind?: {
+		/**
+		 * The symbol kind values the client supports. When this
+		 * property exists the client also guarantees that it will
+		 * handle values outside its set gracefully and falls back
+		 * to a default value when unknown.
+		 *
+		 * If this property is not present the client only supports
+		 * the symbol kinds from `File` to `Array` as defined in
+		 * the initial version of the protocol.
+		 */
+		valueSet?: SymbolKind[];
+	}
+
+	/**
+	 * The client supports hierarchical document symbols.
+	 */
+	hierarchicalDocumentSymbolSupport?: boolean;
 }
 ```
 
