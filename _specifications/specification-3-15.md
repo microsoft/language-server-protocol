@@ -89,7 +89,7 @@ interface RequestMessage extends Message {
 	/**
 	 * The method's params.
 	 */
-	params?: Array<any> | object;
+	params?: array | object;
 }
 ```
 
