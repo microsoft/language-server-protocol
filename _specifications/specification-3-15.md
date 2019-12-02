@@ -10,7 +10,7 @@ index: 2
 
 This document describes the upcoming 3.15.x version of the language server protocol. An implementation for node of the 3.15.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
-**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/specification.md).
+**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-15.md).
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
@@ -113,10 +113,10 @@ interface ResponseMessage extends Message {
 	/**
 	 * The error object in case a request fails.
 	 */
-	error?: ResponseError<any>;
+	error?: ResponseError;
 }
 
-interface ResponseError<D> {
+interface ResponseError {
 	/**
 	 * A number indicating the error type that occurred.
 	 */
@@ -128,10 +128,10 @@ interface ResponseError<D> {
 	message: string;
 
 	/**
-	 * A Primitive or Structured value that contains additional
+	 * A primitive or structured value that contains additional
 	 * information about the error. Can be omitted.
 	 */
-	data?: D;
+	data?: string | number | boolean | array | object | null;
 }
 
 export namespace ErrorCodes {
@@ -165,7 +165,7 @@ interface NotificationMessage extends Message {
 	/**
 	 * The notification's params.
 	 */
-	params?: Array<any> | object;
+	params?: array | object;
 }
 ```
 
@@ -257,7 +257,7 @@ type DocumentUri = string;
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
-Positions are line end character agnostic. So you can not specify  a position that denotes `\r|\n` or `\n|` where `|` represents the character offset.
+Positions are line end character agnostic. So you can not specify a position that denotes `\r|\n` or `\n|` where `|` represents the character offset.
 
 ```typescript
 export const EOL: string[] = ['\n', '\r\n', '\r'];
@@ -291,7 +291,7 @@ A range in a text document expressed as (zero-based) start and end positions. A 
 ```typescript
 {
     start: { line: 5, character: 23 },
-    end : { line 6, character : 0 }
+    end : { line: 6, character: 0 }
 }
 ```
 
@@ -409,19 +409,19 @@ export namespace DiagnosticSeverity {
 	/**
 	 * Reports an error.
 	 */
-	export const Error = 1;
+	export const Error: 1 = 1;
 	/**
 	 * Reports a warning.
 	 */
-	export const Warning = 2;
+	export const Warning: 2 = 2;
 	/**
 	 * Reports an information.
 	 */
-	export const Information = 3;
+	export const Information: 3 = 3;
 	/**
 	 * Reports a hint.
 	 */
-	export const Hint = 4;
+	export const Hint: 4 = 4;
 }
 
 export type DiagnosticSeverity = 1 | 2 | 3 | 4;
@@ -438,13 +438,13 @@ export namespace DiagnosticTag {
      * Clients are allowed to render diagnostics with this tag faded out instead of having
      * an error squiggle.
      */
-    export const Unnecessary: 1;
+    export const Unnecessary: 1 = 1;
     /**
      * Deprecated or obsolete code.
      *
      * Clients are allowed to rendered diagnostics with this tag strike through.
      */
-    export const Deprecated: 2;
+    export const Deprecated: 2 = 2;
 }
 
 export type DiagnosticTag = 1 | 2;
@@ -455,7 +455,7 @@ export type DiagnosticTag = 1 | 2;
 ```typescript
 /**
  * Represents a related message and source code location for a diagnostic. This should be
- * used to point to code locations that cause or related to a diagnostics, e.g when duplicating
+ * used to point to code locations that cause or are related to a diagnostics, e.g when duplicating
  * a symbol in a scope.
  */
 export interface DiagnosticRelatedInformation {
@@ -1091,10 +1091,9 @@ export interface WorkDoneProgressEnd {
 	 */
 	message?: string;
 }
-
 ```
 
-##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor">  Initiating Work Done Progress </a>
+##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor"> Initiating Work Done Progress </a>
 
 Work Done progress can be initiated in two different ways:
 
@@ -1126,6 +1125,7 @@ A server uses the `workDoneToken` to report progress for the specific `textDocum
 {
 	"token": "1d546990-40a3-4b77-b134-46622995f6ae",
 	"value": {
+		"kind": "begin",
 		"title": "Finding references for A#foo",
 		"cancellable": false,
 		"message": "Processing file X.ts",
@@ -1189,7 +1189,7 @@ export interface WorkDoneProgressOptions {
 
 > *Since version 3.15.0*
 
-Partial results are also reported using the generic [`$/progress`](#progress) notification. The value payload of a partial result progress notification is in most cases the same as the final result. For example the `workspace/symbol` request as `SymbolInfomtion[]` as the result type. Partial result is therefore also of type `SymbolInformation[]`. Whether a client accept partial result notifications for a request is signaled by adding a `partialResultToken` to the request parameters. For example a `textDocument/reference` request support both work done and partial result progress might look like this:
+Partial results are also reported using the generic [`$/progress`](#progress) notification. The value payload of a partial result progress notification is in most cases the same as the final result. For example the `workspace/symbol` request has `SymbolInformation[]` as the result type. Partial result is therefore also of type `SymbolInformation[]`. Whether a client accepts partial result notifications for a request is signaled by adding a `partialResultToken` to the request parameter. For example, a `textDocument/reference` request that supports both work done and partial result progress might look like this:
 
 ```json
 {
@@ -1212,7 +1212,12 @@ Partial results are also reported using the generic [`$/progress`](#progress) no
 
 The `partialResultToken` is then used to report partial results for the find references request.
 
-If a server reports partial result via a corresponding `$/progress` the whole result must be reported using n `$/progress` notifications. The final response has to be empty in terms of result values. This avoids confusion about how the final result should be interpreted, e.g. as another partial result or as a replacing result.
+If a server reports partial result via a corresponding `$/progress`, the whole result must be reported using n `$/progress` notifications. The final response has to be empty in terms of result values. This avoids confusion about how the final result should be interpreted, e.g. as another partial result or as a replacing result.
+
+If the response errors the provided partial results should be treated as follows:
+
+- the `code` equals to `RequestCancelled`: the client is free to use the provided results but should make clear that the request got canceled and may be incomplete.
+- in all other cases the provided partial results shouldn't be used.
 
 #### <a href="#partialResultParams" name="partialResultParams" class="anchor"> PartialResultParams </a>
 
@@ -1345,73 +1350,73 @@ export interface TextDocumentClientCapabilities {
 	synchronization?: TextDocumentSyncClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/completion`
+	 * Capabilities specific to the `textDocument/completion` request.
 	 */
 	completion?: CompletionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/hover`
+	 * Capabilities specific to the `textDocument/hover` request.
 	 */
 	hover?: HoverClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/signatureHelp`
+	 * Capabilities specific to the `textDocument/signatureHelp` request.
 	 */
 	signatureHelp?: SignatureHelpClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/declaration`
+	 * Capabilities specific to the `textDocument/declaration` request.
 	 *
 	 * @since 3.14.0
 	 */
 	declaration?: DeclarationClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/definition`.
+	 * Capabilities specific to the `textDocument/definition` request.
 	 */
 	definition?: DefinitionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/typeDefinition`
+	 * Capabilities specific to the `textDocument/typeDefinition` request.
 	 *
 	 * @since 3.6.0
 	 */
 	typeDefinition?: TypeDefinitionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/implementation`.
+	 * Capabilities specific to the `textDocument/implementation` request.
 	 *
 	 * @since 3.6.0
 	 */
 	implementation?: ImplementationClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/references`
+	 * Capabilities specific to the `textDocument/references` request.
 	 */
 	references?: ReferenceClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/documentHighlight`
+	 * Capabilities specific to the `textDocument/documentHighlight` request.
 	 */
 	documentHighlight?: DocumentHighlightClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/documentSymbol`
+	 * Capabilities specific to the `textDocument/documentSymbol` request.
 	 */
 	documentSymbol?: DocumentSymbolClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/codeAction`
+	 * Capabilities specific to the `textDocument/codeAction` request.
 	 */
 	codeAction?: CodeActionClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/codeLens`
+	 * Capabilities specific to the `textDocument/codeLens` request.
 	 */
 	codeLens?: CodeLensClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/documentLink`
+	 * Capabilities specific to the `textDocument/documentLink` request.
 	 */
 	documentLink?: DocumentLinkClientCapabilities;
 
@@ -1424,32 +1429,32 @@ export interface TextDocumentClientCapabilities {
 	colorProvider?: DocumentColorClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/formatting`
+	 * Capabilities specific to the `textDocument/formatting` request.
 	 */
 	formatting?: DocumentFormattingClientCapabilities
 
 	/**
-	 * Capabilities specific to the `textDocument/rangeFormatting`
+	 * Capabilities specific to the `textDocument/rangeFormatting` request.
 	 */
 	rangeFormatting?: DocumentRangeFormattingClientCapabilities;
 
-	/**
-	 * Capabilities specific to the `textDocument/onTypeFormatting`
+	/** request.
+	 * Capabilities specific to the `textDocument/onTypeFormatting` request.
 	 */
 	onTypeFormatting?: DocumentOnTypeFormattingClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/rename`
+	 * Capabilities specific to the `textDocument/rename` request.
 	 */
 	rename?: RenameClientCapabilities;
 
 	/**
-	 * Capabilities specific to `textDocument/publishDiagnostics`.
+	 * Capabilities specific to the `textDocument/publishDiagnostics` notification.
 	 */
 	publishDiagnostics?: PublishDiagnosticsClientCapabilities;
 
 	/**
-	 * Capabilities specific to `textDocument/foldingRange` requests.
+	 * Capabilities specific to the `textDocument/foldingRange` request.
 	 *
 	 * @since 3.10.0
 	 */
@@ -1457,7 +1462,7 @@ export interface TextDocumentClientCapabilities {
 }
 ```
 
-`ClientCapabilities` now define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
+`ClientCapabilities` define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
@@ -1618,14 +1623,14 @@ interface ServerCapabilities {
 	definitionProvider?: boolean | DefinitionOptions;
 
 	/**
-	 * The server provides Goto Type Definition support.
+	 * The server provides goto type definition support.
 	 *
 	 * @since 3.6.0
 	 */
 	typeDefinitionProvider?: boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions;
 
 	/**
-	 * The server provides Goto Implementation support.
+	 * The server provides goto implementation support.
 	 *
 	 * @since 3.6.0
 	 */
@@ -1878,7 +1883,28 @@ interface LogMessageParams {
 }
 ```
 
-Where type is defined as above.
+###### <a href="#creatingWorkDoneProgress" name="creatingWorkDoneProgress" class="anchor"> Creating Work Done Progress </a> (:rightwards_arrow_with_hook:)
+
+The `window/workDoneProgress/create` request is sent from the server to the client to ask the client to create a work done progress.
+
+_Request_:
+
+* method: 'window/workDoneProgress/create'
+* params: `WorkDoneProgressCreateParams` defined as follows:
+
+```ts
+export interface WorkDoneProgressCreateParams {
+	/**
+	 * The token to be used to report progress.
+	 */
+	token: ProgressToken;
+}
+```
+
+_Response_:
+
+* result: void
+* error: code and message set in case an exception happens during the 'window/workDoneProgress/create' request
 
 #### <a href="#telemetry_event" name="telemetry_event" class="anchor">Telemetry Notification (:arrow_left:)</a>
 
@@ -2039,7 +2065,7 @@ _Server Capability_:
 ```typescript
 export interface WorkspaceFoldersServerCapabilities {
 	/**
-	 * The Server has support for workspace folders
+	 * The server has support for workspace folders
 	 */
 	supported?: boolean;
 
@@ -2350,7 +2376,7 @@ interface WorkspaceSymbolClientCapabilities {
 
 _Server Capability_:
 * property path (optional): `workspaceSymbolProvider`
-* property type: `boolean | WorkspaceSymbolOptions` were `WorkspaceSymbolOptions` is defined as follows:
+* property type: `boolean | WorkspaceSymbolOptions` where `WorkspaceSymbolOptions` is defined as follows:
 
 ```typescript
 export interface WorkspaceSymbolOptions extends WorkDoneProgressOptions {
@@ -2753,7 +2779,7 @@ The capability indicates that the client supports `textDocument/didSave` notific
 
 _Server Capability_:
 * property name (optional): `textDocumentSync.didSave`
-* property type: `boolean | SaveOptions` were `SaveOptions` is defined as follows:
+* property type: `boolean | SaveOptions` where `SaveOptions` is defined as follows:
 
 ```typescript
 export interface SaveOptions {
@@ -3363,7 +3389,7 @@ export namespace CompletionItemKind {
 	export const TypeParameter = 25;
 }
 ```
-* partial result: `CompletionItem[]`
+* partial result: `CompletionItem[]`  or `CompletionList` followed by `CompletionItem[]`. If the first provided result item is of type `CompletionList` subsequent partial results of `CompletionItem[]` add to the `items` property of the `CompletionList`.
 * error: code and message set in case an exception happens during the completion request.
 
 Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is as follows:
@@ -3485,7 +3511,7 @@ export interface HoverClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `hoverProvider`
-* property type: `boolean | HoverOptions` were `HoverOptions` is defined as follows:
+* property type: `boolean | HoverOptions` where `HoverOptions` is defined as follows:
 
 ```typescript
 export interface HoverOptions extends WorkDoneProgressOptions {
@@ -3800,7 +3826,7 @@ export interface ParameterInformation {
 
 The go to declaration request is sent from the client to the server to resolve the declaration location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends on the corresponding client capability `textDocument.declaration.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends on the corresponding client capability `textDocument.declaration.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.declaration`
@@ -3824,7 +3850,7 @@ export interface DeclarationClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `declarationProvider`
-* property type: `boolean | DeclarationOptions | DeclarationRegistrationOptions` were `DeclarationOptions` is defined as follows:
+* property type: `boolean | DeclarationOptions | DeclarationRegistrationOptions` where `DeclarationOptions` is defined as follows:
 
 ```typescript
 export interface DeclarationOptions extends WorkDoneProgressOptions {
@@ -3848,14 +3874,14 @@ export interface DeclarationParams extends TextDocumentPositionParams, WorkDoneP
 
 _Response_:
 * result: [`Location`](#location) \| [`Location`](#location)[] \| [`LocationLink`](#locationLink)[] \|`null`
-* partial result: [`LocationLink`](#locationLink)[]
+* partial result: [`Location`](#location)[] \| [`LocationLink`](#locationLink)[]
 * error: code and message set in case an exception happens during the declaration request.
 
 #### <a href="#textDocument_definition" name="textDocument_definition" class="anchor">Goto Definition Request (:leftwards_arrow_with_hook:)</a>
 
 The go to definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
-`
-The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `textDocument.definition.linkSupport`.
+
+The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends on the corresponding client capability `textDocument.definition.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.definition`
@@ -3879,7 +3905,7 @@ export interface DefinitionClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `definitionProvider`
-* property type: `boolean | DefinitionOptions` were `DefinitionOptions` is defined as follows:
+* property type: `boolean | DefinitionOptions` where `DefinitionOptions` is defined as follows:
 
 ```typescript
 export interface DefinitionOptions extends WorkDoneProgressOptions {
@@ -3912,11 +3938,11 @@ _Response_:
 
 The go to type definition request is sent from the client to the server to resolve the type definition location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `textDocument.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends on the corresponding client capability `textDocument.typeDefinition.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.typeDefinition`
-* property type: `DefinitionClientCapabilities` defined as follows:
+* property type: `TypeDefinitionClientCapabilities` defined as follows:
 
 ```typescript
 export interface TypeDefinitionClientCapabilities {
@@ -3938,7 +3964,7 @@ export interface TypeDefinitionClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `typeDefinitionProvider`
-* property type: `boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions` were `TypeDefinitionOptions` is defined as follows:
+* property type: `boolean | TypeDefinitionOptions | TypeDefinitionRegistrationOptions` where `TypeDefinitionOptions` is defined as follows:
 
 ```typescript
 export interface TypeDefinitionOptions extends WorkDoneProgressOptions {
@@ -3971,7 +3997,7 @@ _Response_:
 
 The go to implementation request is sent from the client to the server to resolve the implementation location of a symbol at a given text document position.
 
-The result type [`LocationLink`](#locationLink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `implementation.typeDefinition.linkSupport`.
+The result type [`LocationLink`](#locationLink)[] got introduced with version 3.14.0 and depends on the corresponding client capability `textDocument.implementation.linkSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.implementation`
@@ -3997,7 +4023,7 @@ export interface ImplementationClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `implementationProvider`
-* property type: `boolean | ImplementationOptions | ImplementationRegistrationOptions` were `ImplementationOptions` is defined as follows:
+* property type: `boolean | ImplementationOptions | ImplementationRegistrationOptions` where `ImplementationOptions` is defined as follows:
 
 ```typescript
 export interface ImplementationOptions extends WorkDoneProgressOptions {
@@ -4043,7 +4069,7 @@ export interface ReferenceClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `referencesProvider`
-* property type: `boolean | ReferenceOptions` were `ReferenceOptions` is defined as follows:
+* property type: `boolean | ReferenceOptions` where `ReferenceOptions` is defined as follows:
 
 ```typescript
 export interface ReferenceOptions extends WorkDoneProgressOptions {
@@ -4099,7 +4125,7 @@ export interface DocumentHighlightClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `documentHighlightProvider`
-* property type: `boolean | DocumentHighlightOptions` were `DocumentHighlightOptions` is defined as follows:
+* property type: `boolean | DocumentHighlightOptions` where `DocumentHighlightOptions` is defined as follows:
 
 ```typescript
 export interface DocumentHighlightOptions extends WorkDoneProgressOptions {
@@ -4189,7 +4215,7 @@ export interface DocumentHighlightClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `documentSymbolProvider`
-* property type: `boolean | DocumentSymbolOptions` were `DocumentSymbolOptions` is defined as follows:
+* property type: `boolean | DocumentSymbolOptions` where `DocumentSymbolOptions` is defined as follows:
 
 ```typescript
 export interface DocumentSymbolOptions extends WorkDoneProgressOptions {
@@ -4341,7 +4367,7 @@ export interface SymbolInformation {
 }
 ```
 
-* partial result: `DocumentSymbol[]` \| `SymbolInformation[]`
+* partial result: `DocumentSymbol[]` \| `SymbolInformation[]`. `DocumentSymbol[]` and `SymbolInformation[]` can not be mixed. That means the first chunk defines the type of all the other chunks.
 * error: code and message set in case an exception happens during the document symbol request.
 
 #### <a href="#textDocument_codeAction" name="textDocument_codeAction" class="anchor">Code Action Request (:leftwards_arrow_with_hook:)</a>
@@ -4369,14 +4395,14 @@ export interface CodeActionClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * The client support code action literals as a valid
+	 * The client supports code action literals as a valid
 	 * response of the `textDocument/codeAction` request.
 	 *
 	 * @since 3.8.0
 	 */
 	codeActionLiteralSupport?: {
 		/**
-		 * The code action kind is support with the following value
+		 * The code action kind is supported with the following value
 		 * set.
 		 */
 		codeActionKind: {
@@ -4401,7 +4427,7 @@ export interface CodeActionClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `codeActionProvider`
-* property type: `boolean | CodeActionOptions` were `CodeActionOptions` is defined as follows:
+* property type: `boolean | CodeActionOptions` where `CodeActionOptions` is defined as follows:
 
 ```typescript
 export interface CodeActionOptions extends WorkDoneProgressOptions {
@@ -4457,7 +4483,7 @@ export interface CodeActionParams extends WorkDoneProgressParams, PartialResultP
 export type CodeActionKind = string;
 
 /**
- * A set of predefined code action kinds
+ * A set of predefined code action kinds.
  */
 export namespace CodeActionKind {
 
@@ -4467,17 +4493,17 @@ export namespace CodeActionKind {
 	export const Empty: CodeActionKind = '';
 
 	/**
-	 * Base kind for quickfix actions: 'quickfix'
+	 * Base kind for quickfix actions: 'quickfix'.
 	 */
 	export const QuickFix: CodeActionKind = 'quickfix';
 
 	/**
-	 * Base kind for refactoring actions: 'refactor'
+	 * Base kind for refactoring actions: 'refactor'.
 	 */
 	export const Refactor: CodeActionKind = 'refactor';
 
 	/**
-	 * Base kind for refactoring extraction actions: 'refactor.extract'
+	 * Base kind for refactoring extraction actions: 'refactor.extract'.
 	 *
 	 * Example extract actions:
 	 *
@@ -4490,7 +4516,7 @@ export namespace CodeActionKind {
 	export const RefactorExtract: CodeActionKind = 'refactor.extract';
 
 	/**
-	 * Base kind for refactoring inline actions: 'refactor.inline'
+	 * Base kind for refactoring inline actions: 'refactor.inline'.
 	 *
 	 * Example inline actions:
 	 *
@@ -4502,7 +4528,7 @@ export namespace CodeActionKind {
 	export const RefactorInline: CodeActionKind = 'refactor.inline';
 
 	/**
-	 * Base kind for refactoring rewrite actions: 'refactor.rewrite'
+	 * Base kind for refactoring rewrite actions: 'refactor.rewrite'.
 	 *
 	 * Example rewrite actions:
 	 *
@@ -4516,14 +4542,14 @@ export namespace CodeActionKind {
 	export const RefactorRewrite: CodeActionKind = 'refactor.rewrite';
 
 	/**
-	 * Base kind for source actions: `source`
+	 * Base kind for source actions: `source`.
 	 *
 	 * Source code actions apply to the entire file.
 	 */
 	export const Source: CodeActionKind = 'source';
 
 	/**
-	 * Base kind for an organize imports source action: `source.organizeImports`
+	 * Base kind for an organize imports source action: `source.organizeImports`.
 	 */
 	export const SourceOrganizeImports: CodeActionKind = 'source.organizeImports';
 }
@@ -4717,7 +4743,7 @@ export interface DocumentLinkClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Whether the client support the `tooltip` property on `DocumentLink`.
+	 * Whether the client supports the `tooltip` property on `DocumentLink`.
 	 *
 	 * @since 3.15.0
 	 */
@@ -4825,7 +4851,7 @@ _Client Capability_:
 ```typescript
 export interface DocumentColorClientCapabilities {
 	/**
-	 * Whether code lens supports dynamic registration.
+	 * Whether document color supports dynamic registration.
 	 */
 	dynamicRegistration?: boolean;
 }
@@ -4833,12 +4859,12 @@ export interface DocumentColorClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `colorProvider`
-* property type: `boolean | DocumentColorOptions | DocumentColorRegistrationOptions` were `DocumentColorOptions` is defined as follows:
+* property type: `boolean | DocumentColorOptions | DocumentColorRegistrationOptions` where `DocumentColorOptions` is defined as follows:
 
 ```typescript
 export interface DocumentColorOptions extends WorkDoneProgressOptions {
 	/**
-	 * Code lens has a resolve provider as well.
+	 * Document color has a resolve provider as well.
 	 */
 	resolveProvider?: boolean;
 }
@@ -4923,7 +4949,7 @@ _Request_:
 * params: `ColorPresentationParams` defined as follows
 
 ```typescript
-interface ColorPresentationParams {
+interface ColorPresentationParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -4966,6 +4992,7 @@ interface ColorPresentation {
 }
 ```
 
+* partial result: `ColorPresentation[]`
 * error: code and message set in case an exception happens during the 'textDocument/colorPresentation' request
 
 #### <a href="#textDocument_formatting" name="textDocument_formatting" class="anchor">Document Formatting Request  (:leftwards_arrow_with_hook:)</a>
@@ -4987,7 +5014,7 @@ export interface DocumentFormattingClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `documentFormattingProvider`
-* property type: `boolean | DocumentFormattingOptions` were `DocumentFormattingOptions` is defined as follows:
+* property type: `boolean | DocumentFormattingOptions` where `DocumentFormattingOptions` is defined as follows:
 
 ```typescript
 export interface DocumentFormattingOptions extends WorkDoneProgressOptions {
@@ -5082,7 +5109,7 @@ export interface DocumentRangeFormattingClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `documentRangeFormattingProvider`
-* property type: `boolean | DocumentRangeFormattingOptions` were `DocumentRangeFormattingOptions` is defined as follows:
+* property type: `boolean | DocumentRangeFormattingOptions` where `DocumentRangeFormattingOptions` is defined as follows:
 
 ```typescript
 export interface DocumentRangeFormattingOptions extends WorkDoneProgressOptions {
@@ -5222,7 +5249,7 @@ export interface RenameClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `renameProvider`
-* property type: `boolean | RenameOptions` were `RenameOptions` is defined as follows:
+* property type: `boolean | RenameOptions` where `RenameOptions` is defined as follows:
 
 `RenameOptions` may only be specified if the client states that it supports `prepareSupport` in its initial `initialize` request.
 
@@ -5317,7 +5344,7 @@ export interface FoldingRangeClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `foldingRangeProvider`
-* property type: `boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions` were `FoldingRangeOptions` is defined as follows:
+* property type: `boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions` where `FoldingRangeOptions` is defined as follows:
 
 ```typescript
 export interface FoldingRangeOptions extends WorkDoneProgressOptions {
@@ -5430,7 +5457,7 @@ export interface SelectionRangeClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `selectionRangeProvider`
-* property type: `boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions` were `SelectionRangeOptions` is defined as follows:
+* property type: `boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions` where `SelectionRangeOptions` is defined as follows:
 
 ```typescript
 export interface SelectionRangeOptions extends WorkDoneProgressOptions {
@@ -5495,8 +5522,8 @@ Language servers usually run in a separate process and client communicate with t
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (09/19/2019)</a>
 
 * Add generic progress reporting support.
-* Add specific work done progress reporting support to requests were applicable.
-* Add specific partial result progress support to requests were applicable.
+* Add specific work done progress reporting support to requests where applicable.
+* Add specific partial result progress support to requests where applicable.
 * Add support for `textDocument/selectionRange`.
 * Add support for server and client information.
 * Add signature help context.
