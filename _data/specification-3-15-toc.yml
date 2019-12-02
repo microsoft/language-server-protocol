@@ -90,6 +90,8 @@
       anchor: window_showMessageRequest
     - title: logMessage
       anchor: window_logMessage
+    - title: progress/create
+      anchor: window_workDoneProgress_create
   - title: Telemetry
     anchor: telemetry
     children:
