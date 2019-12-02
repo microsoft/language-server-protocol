@@ -1904,7 +1904,7 @@ export interface WorkDoneProgressCreateParams {
 _Response_:
 
 * result: void
-* error: code and message set in case an exception happens during the 'window/workDoneProgress/create' request
+* error: code and message set in case an exception happens during the 'window/workDoneProgress/create' request. In case an error occurs a server must not send any progress notification using the token provided in the `WorkDoneProgressCreateParams`.
 
 #### <a href="#telemetry_event" name="telemetry_event" class="anchor">Telemetry Notification (:arrow_left:)</a>
 
