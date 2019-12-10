@@ -3476,7 +3476,7 @@ text        ::= .*
 
 #### <a href="#completionItem_resolve" name="completionItem_resolve" class="anchor">Completion Item Resolve Request (:leftwards_arrow_with_hook:)</a>
 
-The request is sent from the client to the server to resolve additional information for a given completion item. 
+The request is sent from the client to the server to resolve additional information for a given completion item.
 
 _Request_:
 * method: 'completionItem/resolve'
@@ -4885,10 +4885,6 @@ _Server Capability_:
 
 ```typescript
 export interface DocumentColorOptions extends WorkDoneProgressOptions {
-	/**
-	 * Document color has a resolve provider as well.
-	 */
-	resolveProvider?: boolean;
 }
 ```
 
@@ -4964,6 +4960,8 @@ interface Color {
 The color presentation request is sent from the client to the server to obtain a list of presentations for a color value at a given location. Clients can use the result to
 - modify a color reference.
 - show in a color picker and let users pick one of the presentations
+
+This request has no special capabilities and registration options since it is send as a resolve request for the `textDocument/documentColor` request.
 
 _Request_:
 
