@@ -3476,7 +3476,7 @@ text        ::= .*
 
 #### <a href="#completionItem_resolve" name="completionItem_resolve" class="anchor">Completion Item Resolve Request (:leftwards_arrow_with_hook:)</a>
 
-The request is sent from the client to the server to resolve additional information for a given completion item.
+The request is sent from the client to the server to resolve additional information for a given completion item. 
 
 _Request_:
 * method: 'completionItem/resolve'
