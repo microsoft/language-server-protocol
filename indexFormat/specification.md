@@ -119,7 +119,7 @@ The corresponding graph looks like this
 
 <img src="./hoverResult.png" alt="Hover Result" style="max-width: 66%; max-height: 66%"/>
 
-The ranges emitted for a document must follow these rules:
+The ranges emitted for a document in the contains relationship must follow these rules:
 
 1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if the have the same start / end value.
 1. No two ranges can be equal.
