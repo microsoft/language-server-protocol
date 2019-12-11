@@ -3352,7 +3352,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 > *Since version 3.14.0*
 
 The go to definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
-`
+
 The result type [`LocationLink`](#locationlink)[] got introduce with version 3.14.0 and depends in the corresponding client capability `clientCapabilities.textDocument.definition.linkSupport`.
 
 _Request_:
@@ -4352,7 +4352,7 @@ export interface FoldingRange {
 	endCharacter?: number;
 
 	/**
-	 * Describes the kind of the folding range such as `comment' or 'region'. The kind
+	 * Describes the kind of the folding range such as `comment` or `region`. The kind
 	 * is used to categorize folding ranges and used by commands like 'Fold all comments'. See
 	 * [FoldingRangeKind](#FoldingRangeKind) for an enumeration of standardized kinds.
 	 */
