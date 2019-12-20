@@ -4227,7 +4227,7 @@ export interface DocumentOnTypeFormattingRegistrationOptions extends TextDocumen
 ```
 #### <a href="#textDocument_rename" name="textDocument_rename" class="anchor">Rename Request (:leftwards_arrow_with_hook:)</a>
 
-The rename request is sent from the client to the server to perform a workspace-wide rename of a symbol.
+The rename request is sent from the client to the server to ask the server to compute a workspace change so that the client can perform a workspace-wide rename of a symbol.
 
 _Request_:
 * method: 'textDocument/rename'
