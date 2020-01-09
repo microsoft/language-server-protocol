@@ -40,4 +40,5 @@ index: 2
 | [Aginity Pro](https://www.aginity.com/products/aginity-pro/) | [Aginity](https://www.aginity.com) | |
 | [Aginity Team](https://www.aginity.com/products/aginity-team/) | [Aginity](https://www.aginity.com) | |
 | [JupyterLab](https://github.com/jupyterlab/jupyterlab) | [krassowski](https://github.com/krassowski) | [jupyterlab-lsp](https://github.com/krassowski/jupyterlab-lsp) |
+| [Kate](https://kate-editor.org) | [Kate Team](https://kate-editor.org) | [kate](https://invent.kde.org/kde/kate) |
 {: .table .table-bordered .table-responsive}
