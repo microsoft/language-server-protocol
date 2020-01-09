@@ -24,4 +24,5 @@ index: 3
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
 | Objective-C | [Christopher Atlan](https://twitter.com/catlan) | [LSPKit](https://github.com/catlan/LSPKit)|
 | Swift | [Chime](https://twitter.com/chimehq) | [SwiftLSPClient](https://github.com/chimehq/SwiftLSPClient)|
+| C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
 {: .table .table-bordered .table-responsive}
