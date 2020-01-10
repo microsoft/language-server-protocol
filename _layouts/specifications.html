@@ -5,18 +5,19 @@ layout: default
 <div class="container">
     <div class="row single-page">
         <div class="col-lg-2 d-none d-lg-block lsp-sidebar">
+            {% for specs in site.data.specifications %}
             <div class="card">
                 <ul class="nav flex-column list-unstyled">
-                    {% assign sorted = site.specifications | sort: 'index' %}
-                    {% for post in sorted %}
-                    <li {% if page.title==post.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                        <a class="nav-link" href="{{ post.url | prepend: site.baseurl }}">
-                            {{ post.shortTitle }}
+                    {% for spec in specs.children %}
+                    <li {% if page.title==spec.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                        <a class="nav-link" href="{{ spec.url | prepend: site.baseurl }}">
+                            {{ spec.title }}
                         </a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
+            {% endfor %}
         </div>
         <div class="col-lg-8">
             <div id="markdown-content-container">{{ content }}</div>
