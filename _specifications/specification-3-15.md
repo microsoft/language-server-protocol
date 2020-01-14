@@ -2645,8 +2645,10 @@ interface DidChangeTextDocumentParams {
 
 	/**
 	 * The actual content changes. The content changes describe single state changes
-	 * to the document. So if there are two content changes c1 and c2 for a document
-	 * in state S then c1 move the document to S' and c2 to S''.
+	 * to the document. So if there are two content changes c1 (at array index 0) and
+	 * c2 (at array index 1) for a document in state S then c1 moves the document from
+	 * S to S' and c2 from S' to S''. So c1 is computed on the state S and c2 is computed
+	 * on the state S'.
 	 */
 	contentChanges: TextDocumentContentChangeEvent[];
 }
