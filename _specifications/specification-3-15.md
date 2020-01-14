@@ -8,9 +8,16 @@ index: 2
 ---
 # Language Server Protocol Specification - 3.15
 
-This document describes the upcoming 3.15.x version of the language server protocol. An implementation for node of the 3.15.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
+This document describes the 3.15.x version of the language server protocol. An implementation for node of the 3.15.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-15.md).
+
+## What's new in 3.15
+
+All new 3.15 features are tagged with a corresponding since version 3.15 text or in JSDoc using `@since 3.15.0` annotation. Major new feature are:
+
+- [general progress support](#progress), [work done progress](#workDoneProgress) and [partial result progress](#partialResults)
+- support for [selection ranges](#textDocument_selectionRange)
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
@@ -2963,6 +2970,14 @@ export interface PublishDiagnosticsClientCapabilities {
 		 */
 		valueSet: DiagnosticTag[];
 	};
+
+	/**
+	 * Whether the client interprets the version property of the
+	 * `textDocument/publishDiagnostics` notification`s parameter.
+	 *
+	 * @since 3.15.0
+	 */
+	versionSupport?: boolean;
 }
 ```
 
