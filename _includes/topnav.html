@@ -20,7 +20,7 @@
                     <a class="nav-link" href="{{ implementors.first.url | prepend: site.baseurl }}">Implementations</a>
                 </li>
                 <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                    <a class="nav-link" href='{{ specifications.first.url | prepend: site.baseurl }}'>Specification</a>
+                    <a class="nav-link" href='{{ "/specifications/specification-current" | prepend: site.baseurl }}'>Specification</a>
                 </li>
                 <li {% if page.sectionid=='inspector' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/inspector" | prepend: site.baseurl }}'>Inspector</a>
