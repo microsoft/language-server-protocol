@@ -12,7 +12,7 @@ This document describes the 3.15.x version of the language server protocol. An i
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-15.md).
 
-## What's new in 3.15
+## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.15 </a>
 
 All new 3.15 features are tagged with a corresponding since version 3.15 text or in JSDoc using `@since 3.15.0` annotation. Major new feature are:
 
