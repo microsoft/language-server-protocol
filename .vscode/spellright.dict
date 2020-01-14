@@ -15,3 +15,5 @@ vscode
 vscode-jsonrpc
 vscode-languageserver-protocol
 boolean
+npm
+inlined
