@@ -762,7 +762,7 @@ export namespace FailureHandlingKind {
 
 	/**
 	 * The client tries to undo the operations already executed. But there is no
-	 * guaruntee that this is succeeding.
+	 * guarantee that this is succeeding.
 	 */
 	export const Undo: FailureHandlingKind = 'undo';
 }
