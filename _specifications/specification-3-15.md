@@ -712,6 +712,60 @@ export interface WorkspaceEditClientCapabilities {
 	 */
 	failureHandling?: FailureHandlingKind;
 }
+
+/**
+ * The kind of resource operations supported by the client.
+ */
+export type ResourceOperationKind = 'create' | 'rename' | 'delete';
+
+export namespace ResourceOperationKind {
+
+	/**
+	 * Supports creating new files and folders.
+	 */
+	export const Create: ResourceOperationKind = 'create';
+
+	/**
+	 * Supports renaming existing files and folders.
+	 */
+	export const Rename: ResourceOperationKind = 'rename';
+
+	/**
+	 * Supports deleting existing files and folders.
+	 */
+	export const Delete: ResourceOperationKind = 'delete';
+}
+
+export type FailureHandlingKind = 'abort' | 'transactional' | 'undo' | 'textOnlyTransactional';
+
+export namespace FailureHandlingKind {
+
+	/**
+	 * Applying the workspace change is simply aborted if one of the changes provided
+	 * fails. All operations executed before the failing operation stay executed.
+	 */
+	export const Abort: FailureHandlingKind = 'abort';
+
+	/**
+	 * All operations are executed transactional. That means they either all
+	 * succeed or no changes at all are applied to the workspace.
+	 */
+	export const Transactional: FailureHandlingKind = 'transactional';
+
+
+	/**
+	 * If the workspace edit contains only textual file changes they are executed transactional.
+	 * If resource changes (create, rename or delete file) are part of the change the failure
+	 * handling startegy is abort.
+	 */
+	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
+
+	/**
+	 * The client tries to undo the operations already executed. But there is no
+	 * guaruntee that this is succeeding.
+	 */
+	export const Undo: FailureHandlingKind = 'undo';
+}
 ```
 
 #### <a href="#textDocumentIdentifier" name="textDocumentIdentifier" class="anchor"> TextDocumentIdentifier </a>
