@@ -756,7 +756,7 @@ export namespace FailureHandlingKind {
 	/**
 	 * If the workspace edit contains only textual file changes they are executed transactional.
 	 * If resource changes (create, rename or delete file) are part of the change the failure
-	 * handling startegy is abort.
+	 * handling strategy is abort.
 	 */
 	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
 
@@ -1600,7 +1600,7 @@ interface InitializeResult {
 		name: string;
 
 		/**
-		 * The servers's version as defined by the server.
+		 * The server's version as defined by the server.
 		 */
 		version?: string;
 	};
@@ -2134,8 +2134,8 @@ export interface WorkspaceFoldersServerCapabilities {
 	 * Whether the server wants to receive workspace folder
 	 * change notifications.
 	 *
-	 * If a strings is provided the string is treated as a ID
-	 * under which the notification is registed on the client
+	 * If a string is provided, the string is treated as an ID
+	 * under which the notification is registered on the client
 	 * side. The ID can be used to unregister for these events
 	 * using the `client/unregisterCapability` request.
 	 */
@@ -3027,7 +3027,7 @@ export interface PublishDiagnosticsClientCapabilities {
 
 	/**
 	 * Whether the client interprets the version property of the
-	 * `textDocument/publishDiagnostics` notification`s parameter.
+	 * `textDocument/publishDiagnostics` notification's parameter.
 	 *
 	 * @since 3.15.0
 	 */
@@ -3143,7 +3143,7 @@ export interface CompletionClientCapabilities {
 
 	/**
 	 * The client supports to send additional context information for a
-	 * `textDocument/completion` requestion.
+	 * `textDocument/completion` request.
 	 */
 	contextSupport?: boolean;
 }
@@ -3172,7 +3172,7 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 
 	/**
 	 * The list of all possible characters that commit a completion. This field can be used
-	 * if clients don't support individual commmit characters per completion item. See
+	 * if clients don't support individual commit characters per completion item. See
 	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`.
 	 *
 	 * If a server provides both `allCommitCharacters` and commit characters on an individual
@@ -3383,7 +3383,7 @@ export interface CompletionItem {
 
 	/**
 	 * The format of the insert text. The format applies to both the `insertText` property
-	 * and the `newText` property of a provided `textEdit`. If ommitted defaults to
+	 * and the `newText` property of a provided `textEdit`. If omitted defaults to
 	 * `InsertTextFormat.PlainText`.
 	 */
 	insertTextFormat?: InsertTextFormat;
@@ -4654,7 +4654,7 @@ export namespace CodeActionKind {
 export interface CodeActionContext {
 	/**
 	 * An array of diagnostics known on the client side overlapping the range provided to the
-	 * `textDocument/codeAction` request. They are provied so that the server knows which
+	 * `textDocument/codeAction` request. They are provided so that the server knows which
 	 * errors are currently presented to the user for the given range. There is no guarantee
 	 * that these accurately reflect the error state of the resource. The primary parameter
 	 * to compute code actions is the provided range.
@@ -5150,7 +5150,7 @@ interface FormattingOptions {
 	insertSpaces: boolean;
 
 	/**
-	 * Trim trailing whitespaces on a line.
+	 * Trim trailing whitespace on a line.
 	 *
 	 * @since 3.15.0
 	 */
