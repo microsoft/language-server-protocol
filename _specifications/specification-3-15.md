@@ -5294,17 +5294,7 @@ _Request_:
 * params: `DocumentOnTypeFormattingParams` defined as follows:
 
 ```typescript
-interface DocumentOnTypeFormattingParams {
-	/**
-	 * The document to format.
-	 */
-	textDocument: TextDocumentIdentifier;
-
-	/**
-	 * The position at which this request was sent.
-	 */
-	position: Position;
-
+interface DocumentOnTypeFormattingParams extends TextDocumentPositionParams {
 	/**
 	 * The character that has been typed.
 	 */
@@ -5372,17 +5362,7 @@ _Request_:
 * params: `RenameParams` defined as follows
 
 ```typescript
-interface RenameParams extends WorkDoneProgressParams {
-	/**
-	 * The document to rename.
-	 */
-	textDocument: TextDocumentIdentifier;
-
-	/**
-	 * The position at which this request was sent.
-	 */
-	position: Position;
-
+interface RenameParams extends TextDocumentPositionParams, WorkDoneProgressParams {
 	/**
 	 * The new name of the symbol. If the given name is not valid the
 	 * request must return a [ResponseError](#ResponseError) with an
