@@ -528,7 +528,7 @@ All text edits ranges refer to positions in the document the are computed on. Th
 
 #### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
 
-Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array or do any kind of ordering. However the edits must be non overlapping.
+Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
 
 ```typescript
 export interface TextDocumentEdit {
@@ -2710,6 +2710,12 @@ interface DidChangeTextDocumentParams {
 	 * c2 (at array index 1) for a document in state S then c1 moves the document from
 	 * S to S' and c2 from S' to S''. So c1 is computed on the state S and c2 is computed
 	 * on the state S'.
+	 *
+	 * To mirror the content of a document using change events use the following approach:
+	 * - start with the same initial content
+	 * - apply the 'textDocument/didChange' notifications in the order you recevie them.
+	 * - apply the `TextDocumentContentChangeEvent`s in a single notification in the order
+	 *   you receive them.
 	 */
 	contentChanges: TextDocumentContentChangeEvent[];
 }
