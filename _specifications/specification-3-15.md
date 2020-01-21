@@ -3344,6 +3344,8 @@ export interface CompletionItem {
 
 	/**
 	 * Indicates if this item is deprecated.
+	 *
+	 * @deprecated Use `tags` instead if supported.
 	 */
 	deprecated?: boolean;
 
