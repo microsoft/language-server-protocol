@@ -1,6 +1,12 @@
-- title: Specifications Overview
+- title: LSP
+  anchor: lsp
   children:
   - title: 3.15 (Current)
     url: /specifications/specification-current
   - title: 3.14 (Previous)
     url: /specifications/specification-3-14
+- title: LSIF
+  anchor: lsif
+  children:
+  - title: 0.4.0
+    url: /specifications/lsif/0.4.0/specification
