@@ -1,4 +1,5 @@
 - title: Message Overview
+  reveal: general
   children:
   - title: General
     anchor: general

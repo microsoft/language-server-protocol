@@ -42,7 +42,7 @@ layout: default
                         <a class="nav-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ toc-l2.anchor }}" aria-expanded="true">
                             {{ toc-l2.title }}
                         </a>
-                        <div id="{{ toc-l2.anchor }}" class="collapse {% if toc-l2.anchor=='general' %}show{% endif%}" role="tabpanel">
+                        <div id="{{ toc-l2.anchor }}" class="collapse {% if toc-l2.anchor==toc-l1.reveal %}show{% endif%}" role="tabpanel">
                             <ul class="nav toc flex-column" style="padding-left: 0.5rem">
                                 {% for toc-l3 in toc-l2.children %}
                                 <li class="nav-item">

@@ -44,11 +44,21 @@ defaults:
     layout: specifications
     sectionid: specifications
 
+- scope:
+    path: _overviews
+    type: overviews
+  values:
+    layout: overviews
+    sectionid: overviews
+
 collections:
   implementors:
     permalink: /:collection/:path/
     output: true
   specifications:
+    permalink: /:collection/:path/
+    output: true
+  overviews:
     permalink: /:collection/:path/
     output: true
 
