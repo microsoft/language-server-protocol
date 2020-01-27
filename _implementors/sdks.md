@@ -25,4 +25,5 @@ index: 3
 | Objective-C | [Christopher Atlan](https://twitter.com/catlan) | [LSPKit](https://github.com/catlan/LSPKit)|
 | Swift | [Chime](https://twitter.com/chimehq) | [SwiftLSPClient](https://github.com/chimehq/SwiftLSPClient)|
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
+| Go | [disposedtrolley](https://github.com/disposedtrolley) | [golsp-sdk](https://github.com/goodgophers/golsp-sdk) (WIP)|
 {: .table .table-bordered .table-responsive}
