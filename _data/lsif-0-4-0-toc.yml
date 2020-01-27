@@ -1,0 +1,60 @@
+- title: Table of Contents
+  children:
+  - title: General
+    anchor: _general
+    children:
+    - title: Introduction
+      anchor: lsifIntro
+    - title: Motivation
+      anchor: lsifMotivation
+    - title: Ranges
+      anchor: ranges
+    - title: Result Sets
+      anchor: resultSet
+  - title: Language Features
+    anchor: _languageFeatures
+    children:
+    - title: definition
+      anchor: definition
+    - title: declaration
+      anchor: declaration
+    - title: hover
+      anchor: hover
+    - title: references
+      anchor: references
+    - title: implementation
+      anchor: implementation
+    - title: typeDefinition
+      anchor: typeDefinition
+    - title: foldingRange
+      anchor: foldingRange
+    - title: documentLink
+      anchor: documentLink
+    - title: documentSymbol
+      anchor: documentSymbol
+    - title: diagnostic
+      anchor: diagnostic
+    - title: project
+      anchor: projectContext
+    - title: Embedding Contents
+      anchor: embeddingContents
+  - title: Advanced Concepts
+    anchor: _advancedConcpets
+    children:
+    - title: Events
+      anchor: events
+    - title: Exports and Imports
+      anchor: exportsImports
+    - title: Result Ranges
+      anchor: resultRanges
+    - title: Meta Data
+      anchor: metaData
+    - title: Emitting Contstraints
+      anchor: emittingContstraints
+  - title: Additional Information
+    anchor: _additionalInformation
+    children:
+    - title: Tools
+      anchor: tools
+    - title: Open Questions
+      anchor: openQuestions
