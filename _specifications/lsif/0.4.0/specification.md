@@ -11,7 +11,7 @@ index: 2
 
 The 0.4.0 version of LSIF is currently under construction.
 
-## Language Server Index Format
+## <a href="#lsifIntro" name="lsifIntro" class="anchor">Language Server Index Format</a>
 
 The purpose of the Language Server Index Format (LSIF) is it to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
 
@@ -23,7 +23,7 @@ Up to version 0.4.0 the focus of the LSIF format was to ease the generation of t
 
 Since 0.4.0 changes some of the LSIF aspects more deeply an old 0.3.x version of the specification is available [here](./versions/specification-0-3-x.md)
 
-### Motivation
+## <a href="#lsifMotivation" name="lsifMotivation" class="anchor">Motivation</a>
 
 Principal design goals:
 
@@ -85,7 +85,7 @@ The corresponding graph looks like this
 
 <img src="../img/foldingRange.png" alt="Folding Range Result" style="max-width: 66%; max-height: 66%"/>
 
-### Ranges
+### <a href="#ranges" name="ranges" class="anchor">Ranges</a>
 
 For requests that take a position as its input, we need to store the position as well. Usually LSP requests return the same result for positions that point to the same word / name in a document. Take the following TypeScript example:
 
@@ -143,7 +143,7 @@ If a position in a document is mapped to a range and more than one range covers 
 1. end
 1. return `null`
 
-### Result Set
+### <a href="#resultSet" name="resultSet" class="anchor">Result Set</a>
 
 Usually the hover result is the same whether you hover over a definition of a function or over a reference of that function. The same is actually true for many LSP requests like `textDocument/definition`, `textDocument/references` or `textDocument/typeDefinition`. In a naïve model, each range would have outgoing edges for all these LSP requests and would point to the corresponding results. To optimize this and to make the graph easier to understand, the concept of a `ResultSet` is introduced. A result set acts as a hub to be able to store information common to a lot of ranges. The `ResultSet` itself doesn't carry any information. So it looks like this:
 
@@ -181,7 +181,9 @@ The pattern of storing the result with the `ResultSet` will be used for other re
 1. end
 1. otherwise return `null`
 
-### Request: `textDocument/definition`
+## <a href="#languageFeatures" name="languageFeatures" class="anchor">Language Features</a>
+
+### <a href="#definition" name="definition" class="anchor">Request: `textDocument/definition`</a>
 
 The same pattern of connecting a range, result set, or a document with a request edge to a method result is used for other requests as well. Let's next look at the `textDocument/definition` request using the following TypeScript sample:
 
@@ -244,11 +246,11 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 
 The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `containes` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
 
-### Request: `textDocument/declaration`
+### <a href="#declaration" name="declaration" class="anchor">Request: `textDocument/declaration`</a>
 
 There are programming languages that have the concept of declarations and definitions (like C/C++). If this is the case, the dump can contain a corresponding `declarationResult` vertex and a `textDocument/declaration` edge to store the information. They are handled analogously to the entities emitted for the `textDocument/definition` request.
 
-### More about Request: `textDocument/hover`
+### <a href="#hover" name="hover" class="anchor">More about Request: `textDocument/hover`</a>
 
 In the LSP, the hover is defined as follows:
 
@@ -276,7 +278,7 @@ This makes the hover different for every location so we can't really store it wi
 { id: 6, type: "vertex", label: "hoverResult", result: { contents: [ { language: "typescript", value: "function bar(): void" } ], range: { line: 4, character: 2 }, end: { line: 4, character: 5 } } }
 ```
 
-### Request: `textDocument/references`
+### <a href="#references" name="references" class="anchor">Request: `textDocument/references`</a>
 
 Storing references will be done in the same way as storing a hover or go to definition ranges. It uses a reference result vertex and `item` edges to add ranges to the result.
 
@@ -461,7 +463,7 @@ In the above example, there will be three reference results
 
 For Typescript, method references are recorded at their most abstract declaration and if methods are merged (`B#foo`), they are combined using a reference result pointing to other results.
 
-### Request: `textDocument/implementation`
+### <a href="#references" name="implementation" class="anchor">Request: `textDocument/implementation`</a>
 
 Supporting a `textDocument/implementation` request is done reusing what we implemented for a `textDocument/references` request. In most cases, the `textDocument/implementation` returns the declaration values of the reference result that a symbol declaration points to. For cases where the result differs, the LSIF provides an `ImplementationResult`. To nest implementation results the `item` edge supports a `property` value `"implementationResults"`.
 
@@ -474,7 +476,7 @@ interface ImplementationResult {
 }
 ```
 
-### Request: `textDocument/typeDefinition`
+###  <a href="#typeDefinition" name="typeDefinition" class="anchor">Request: `textDocument/typeDefinition`</a>
 
 Supporting `textDocument/typeDefinition` is straightforward. The edge is either recorded at the range or at the `ResultSet`.
 
@@ -520,11 +522,11 @@ The relevant emitted vertices and edges looks like this:
 
 As with other results ranges get added using a `item` edge. In this case without a `property` since there is only on kind of range.
 
-### Document requests
+## Document requests
 
 The Language Server Protocol also supports requests for documents only (without any position information). These requests are `textDocument/foldingRange`, `textDocument/documentLink`, and `textDocument/documentSymbol`. We follow the same pattern as before to model these, the difference being that the result is linked to the document instead of to a range.
 
-### Request: `textDocument/foldingRange`
+### <a href="#foldingRange" name="foldingRange" class="anchor">Request: `textDocument/foldingRange`</a>
 
 For the folding range result this looks like this:
 
@@ -563,7 +565,7 @@ export interface FoldingRangeResult {
 }
 ```
 
-### Request: `textDocument/documentLink`
+### <a href="#documentLink" name="documentLink" class="anchor">Request: `textDocument/documentLink`</a>
 
 Again, for document links, we define a result type and a corresponding edge to link it to a document. Since the link location usually appear in comments, the ranges don't denote any symbol declarations or references. We therefore inline the range into the result like we do with folding ranges.
 
@@ -575,7 +577,7 @@ export interface DocumentLinkResult {
 }
 ```
 
-### Request: `textDocument/documentSymbol`
+### <a href="#documentSymbol" name="documentSymbol" class="anchor">Request: `textDocument/documentSymbol`</a>
 
 Next we look at the `textDocument/documentSymbol` request. This request usually returns an outline view of the document in hierarchical form. However, not all programming symbols declared or defined in a document are part of the result (for example, locals are usually omitted). In addition, an outline item needs to provide additional information like the full range and a symbol kind. There are two ways we can model this: either we do the same as we do for folding ranges and the document links and store the information in a document symbol result as literals, or we extend the range vertex with some additional information and refer to these ranges in the document symbol result. Since the additional information for ranges might be helpful in other scenarios as well, we support adding additional tags to these ranges  by defining a `tag` property on the `range` vertex.
 
@@ -744,7 +746,7 @@ Produces the following output:
 { id: 40 , type: "edge", label: "textDocument/documentSymbol", outV: 2, inV: 39 }
 ```
 
-### Request: `textDocument/diagnostic`
+### <a href="#diagnostic" name="diagnostic" class="anchor">Request: `textDocument/diagnostic`</a>
 
 The only information missing that is useful in a dump are the diagnostics associated with documents. Diagnostics in the LSP are modeled as a push notifications sent from the server to the client. This doesn't work well with a dump modeled on request method names. However, the push notification can be emulated as a request where the request's result is the value sent during the push as a parameter.
 
@@ -782,7 +784,7 @@ Produces the following output:
 
 Since diagnostics are not very common in dumps, no effort has been made to reuse ranges in diagnostics.
 
-### The Project vertex
+### <a href="#projectContext" name="projectContext" class="anchor">The Project vertex</a>
 
 Usually language servers operate in some sort of project context. In TypeScript, a project is defined using a `tsconfig.json` file. C# and C++ have their own means. The project file usually contains information about compile options and other parameters. Having these in the dump can be valuable. The LSIF therefore defines a project vertex. In addition, all documents that belong to that project are connected to the project using a `contains` edge. If there was a `tsconfig.json` in the previous examples, the first emitted edges and vertices would look like this:
 
@@ -820,11 +822,13 @@ export interface Project extends V {
 }
 ```
 
-## Embedding contents
+### <a href="#embeddingContents" name="embeddingContents" class="anchor">Embedding contents</a>
 
 It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
 
-## Events
+## <a href="#advancedConcpets" name="advancedConcpets" class="anchor">Advanced Concepts</a>
+
+### <a href="#events" name="events" class="anchor">Events</a>
 
 To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
 
@@ -851,7 +855,7 @@ The events for projects looks similar:
 { id: 55, type: "vertex", label: "$event", kind: "end", scope: "project", data: 2 }
 ```
 
-## Project exports and external imports (Monikers)
+### <a href="#exportsImports" name="exportsImports" class="anchor">Project exports and external imports (Monikers)</a>
 
 One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **A** references a library **B**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional monikers which can be linked to ranges using a corresponding edge. The monikers can be used to describe what a project exports and what it imports. Let's first look at the export case.
 
@@ -1002,7 +1006,7 @@ The moniker for `x` looks like this:
 
 In addition to this moniker schemes starting with `$` are reserved and shouldn't be used by a LSIF tool.
 
-## Result ranges
+### <a href="#resultRanges" name="resultRanges" class="anchor">Result ranges</a>
 
 Ranges in LSIF have currently two meanings:
 
@@ -1011,7 +1015,7 @@ Ranges in LSIF have currently two meanings:
 
 To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
 
-## Meta Data Vertex
+### <a href="#metaData" name="metaData" class="anchor">Meta Data Vertex</a>
 
 To support versioning the LSIF defines a meta data vertex as follows:
 
@@ -1053,7 +1057,7 @@ export interface MetaData {
 }
 ```
 
-## Emitting constraints
+### <a href="#emittingContstraints" name="emittingContstraints" class="anchor">Emitting constraints</a>
 
 The following emitting constraints (some of which have already mean mentioned in the document) exists:
 
@@ -1063,13 +1067,15 @@ The following emitting constraints (some of which have already mean mentioned in
 - after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 - if ranges point to result sets and monikers are emitted, they must be emitted on the result set and can't be emitted on individual ranges.
 
-## Tools
+## <a href="#additionalInformation" name="additionalInformation" class="anchor">Additional Information </a>
+
+### <a href="#tools" name="tools" class="anchor">Tools</a>
 
 - [`lsif-protocol`](https://github.com/Microsoft/lsif-node/tree/master/protocol): Protocol defined as TypeScript interfaces
 - [`lsif-util`](https://github.com/jumattos/lsif-util): Utility tools for LSIF development
 - [`lsif-tsc`](https://github.com/Microsoft/lsif-node/tree/master/tsc): LSIF indexer for TypeScript
 - [`lsif-npm`](https://github.com/Microsoft/lsif-node/tree/master/npm): Linker for NPM monikers
 
-## Open Questions
+### <a href="#openQuestions" name="openQuestions" class="anchor">Open Questions</a>
 
 While implementing this for TypeScript and npm we collected a list of [open questions](https://github.com/Microsoft/lsif-typescript/labels/discussion) in form of GitHub issues we are already aware of.
