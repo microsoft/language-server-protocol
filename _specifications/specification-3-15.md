@@ -1967,6 +1967,24 @@ _Response_:
 * result: void
 * error: code and message set in case an exception happens during the 'window/workDoneProgress/create' request. In case an error occurs a server must not send any progress notification using the token provided in the `WorkDoneProgressCreateParams`.
 
+#### <a href="#window_workDoneProgress_cancel" name="window_workDoneProgress_cancel" class="anchor"> Canceling a Work Done Progress (:arrow_right:)</a>
+
+The `window/workDoneProgress/cancel` notification is sent from the client to the server to cancel a progress initiated on the server side using the `window/workDoneProgress/create`.
+
+_Notification_:
+
+* method: 'window/workDoneProgress/cancel'
+* params: `WorkDoneProgressCancelParams` defined as follows:
+
+```ts
+export interface WorkDoneProgressCancelParams {
+	/**
+	 * The token to be used to report progress.
+	 */
+	token: ProgressToken;
+}
+```
+
 #### <a href="#telemetry_event" name="telemetry_event" class="anchor">Telemetry Notification (:arrow_left:)</a>
 
 The telemetry notification is sent from the server to the client to ask the client to log a telemetry event.

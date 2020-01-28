@@ -93,6 +93,8 @@
       anchor: window_logMessage
     - title: progress/create
       anchor: window_workDoneProgress_create
+    - title: progress/cancel
+      anchor: window_workDoneProgress_cancel
   - title: Telemetry
     anchor: telemetry
     children:
