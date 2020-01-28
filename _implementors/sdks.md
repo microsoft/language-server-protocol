@@ -26,4 +26,5 @@ index: 3
 | Swift | [Chime](https://twitter.com/chimehq) | [SwiftLSPClient](https://github.com/chimehq/SwiftLSPClient)|
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
 | Go | [disposedtrolley](https://github.com/disposedtrolley) | [golsp-sdk](https://github.com/goodgophers/golsp-sdk) (WIP)|
+| C++17 | [otreblan](https://github.com/otreblan) | [libclsp](https://github.com/otreblan/libclsp) (WIP)|
 {: .table .table-bordered .table-responsive}
