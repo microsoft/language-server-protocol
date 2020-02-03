@@ -2618,7 +2618,7 @@ Controls whether text document synchronization supports dynamic registration.
 
 <a href="#textDocument_synchronization_sc" name="textDocument_synchronization_sc" class="anchor"></a>_Server Capability_:
 * property path (optional): `textDocumentSync`
-* property type: `TextDocumentSyncKind | TextDocumentSyncOptions` both defined as follows:
+* property type: `TextDocumentSyncKind | TextDocumentSyncOptions`. The below definition of the `TextDocumentSyncOptions` only covers the properties specific to the open, change and close notifications. A complete definition covering all properties can be found [here](#textDocument_didClose):
 
 ```typescript
 /**
@@ -2650,6 +2650,7 @@ export interface TextDocumentSyncOptions {
 	 * be sent.
 	 */
 	openClose?: boolean;
+
 	/**
 	 * Change notifications are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full
 	 * and TextDocumentSyncKind.Incremental. If omitted it defaults to TextDocumentSyncKind.None.
