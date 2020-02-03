@@ -11,6 +11,7 @@ index: 1
 
 | Language | Maintainer | Repository | Implementation Language |
 |------|--------|----------|---------------|
+| ActionScript 2.0 | [Adam Vernon](https://github.com/admvx) |  [AS2 Language Support](https://github.com/admvx/as2-language-support) | TypeScript |
 | Ada/SPARK | AdaCore |  [ada_language_server](https://github.com/AdaCore/ada_language_server) | Ada |
 | Antlr | [Ken Domino](https://github.com/kaby76) | [Antlrvsix](https://github.com/kaby76/AntlrVSIX) | C# |
 | [API Elements](http://api-elements.readthedocs.io/en/latest/) | [Vincenzo Chianese(@XVincentX)](https://github.com/XVincentX) | [vscode-apielements](https://github.com/XVincentX/vscode-apielements) | TypeScript |
