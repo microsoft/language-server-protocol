@@ -4881,7 +4881,8 @@ export interface DocumentLinkOptions extends WorkDoneProgressOptions {
 	 * Document links have a resolve provider as well.
 	 */
 	resolveProvider?: boolean;
-}```
+}
+```
 
 _Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
 ```typescript
