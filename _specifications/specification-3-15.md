@@ -1953,7 +1953,7 @@ _Request_:
 * method: 'window/workDoneProgress/create'
 * params: `WorkDoneProgressCreateParams` defined as follows:
 
-```ts
+```typescript
 export interface WorkDoneProgressCreateParams {
 	/**
 	 * The token to be used to report progress.
@@ -1976,7 +1976,7 @@ _Notification_:
 * method: 'window/workDoneProgress/cancel'
 * params: `WorkDoneProgressCancelParams` defined as follows:
 
-```ts
+```typescript
 export interface WorkDoneProgressCancelParams {
 	/**
 	 * The token to be used to report progress.
@@ -4997,7 +4997,7 @@ _Request_:
 * method: 'textDocument/documentColor'
 * params: `DocumentColorParams` defined as follows
 
-```ts
+```typescript
 interface DocumentColorParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The text document.
