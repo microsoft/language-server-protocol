@@ -1520,6 +1520,13 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.10.0
 	 */
 	foldingRange?: FoldingRangeClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/selectionRange` request.
+	 *
+	 * @since 3.15.0
+	 */
+	selectionRange?: SelectionRangeClientCapabilities;
 }
 ```
 
@@ -1776,6 +1783,13 @@ interface ServerCapabilities {
 	 * The server provides execute command support.
 	 */
 	executeCommandProvider?: ExecuteCommandOptions;
+
+	/**
+	 * The server provides selection range support.
+	 *
+	 * @since 3.15.0
+	 */
+	selectionRangeProvider?: boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
