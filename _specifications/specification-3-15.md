@@ -2015,17 +2015,7 @@ export interface RegistrationParams {
 }
 ```
 
-Since most of the registration options require to specify a document selector there is a base interface that can be used.
-
-```typescript
-export interface TextDocumentRegistrationOptions {
-	/**
-	 * A document selector to identify the scope of the registration. If set to null
-	 * the document selector provided on the client side will be used.
-	 */
-	documentSelector: DocumentSelector | null;
-}
-```
+Since most of the registration options require to specify a document selector there is a base interface that can be used. See `TextDocumentRegistrationOptions`.
 
 An example JSON RPC message to register dynamically for the `textDocument/willSaveWaitUntil` feature on the client side is as follows (only details shown):
 
