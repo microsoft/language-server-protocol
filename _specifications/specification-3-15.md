@@ -5592,7 +5592,7 @@ export interface SelectionRange {
 ```
 
 * partial result: `SelectionRange[]`
-* error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
+* error: code and message set in case an exception happens during the 'textDocument/selectionRange' request
 
 ### Implementation considerations
 
