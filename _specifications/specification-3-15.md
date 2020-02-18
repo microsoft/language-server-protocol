@@ -1639,16 +1639,6 @@ interface InitializeError {
 The server can signal the following capabilities:
 
 ```typescript
-/**
- * Execute command options.
- */
-export interface ExecuteCommandOptions {
-	/**
-	 * The commands to be executed on the server
-	 */
-	commands: string[]
-}
-
 interface ServerCapabilities {
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure defining each notification or
