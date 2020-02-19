@@ -76,7 +76,7 @@ index: 1
 | OCaml/Reason | [freebroccolo](https://github.com/freebroccolo) | [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server) | TypeScript |
 | [openVALIDATION](http://openvalidation.io/) | [openVALIDATION](https://github.com/openvalidation) | [ov-language-server](https://github.com/openvalidation/ov-language-server) | TypeScript
 | [Papyrus](https://www.creationkit.com/fallout4/index.php?title=Category:Papyrus) | [Joel Day](https://github.com/joelday) | [papyrus-lang](https://github.com/joelday/papyrus-lang) | C# |
-| Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl | 
+| Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [inteliphense](https://github.com/bmewburn/vscode-intelephense) | TypeScript |
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server) | PHP |
 | PHP | [Tom Gerrits](https://gitlab.com/Gert-dev) | [Serenata](https://gitlab.com/Serenata/Serenata) | PHP |
@@ -128,5 +128,4 @@ index: 1
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) | TypeScript |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
-
 {: .table .table-bordered .table-responsive}
