@@ -1571,6 +1571,20 @@ interface ClientCapabilities {
 		* Capabilities specific to the `workspace/executeCommand` request.
 		*/
 		executeCommand?: ExecuteCommandClientCapabilities;
+
+		/**
+		* The client has support for workspace folders.
+		*
+		* Since 3.6.0
+		*/
+		workspaceFolders?: boolean;
+
+		/**
+		* The client supports `workspace/configuration` requests.
+		*
+		* Since 3.6.0
+		*/
+		configuration?: boolean;
 	};
 
 	/**
