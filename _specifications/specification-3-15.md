@@ -1593,6 +1593,19 @@ interface ClientCapabilities {
 	textDocument?: TextDocumentClientCapabilities;
 
 	/**
+	 * Window specific client capabilities.
+	 */
+	window?: {
+		/**
+		 * Whether client supports handling progress notifications. If set servers are allowed to
+		 * report in `workDoneProgress` property in the request specific server capabilities.
+		 *
+		 * Since 3.15.0
+		 */
+		workDoneProgress?: boolean;
+	}
+	
+	/**
 	 * Experimental client capabilities.
 	 */
 	experimental?: any;
