@@ -1604,7 +1604,7 @@ interface ClientCapabilities {
 		 */
 		workDoneProgress?: boolean;
 	}
-	
+
 	/**
 	 * Experimental client capabilities.
 	 */
@@ -5418,7 +5418,11 @@ The prepare rename request is sent from the client to the server to setup and te
 
 _Request_:
 * method: 'textDocument/prepareRename'
-* params: [`TextDocumentPositionParams`](#textdocumentpositionparams)
+* params: `PrepareRenameParams` defined as follows:
+```typescript
+export interface PrepareRenameParams extends TextDocumentPositionParams {
+}
+```
 
 _Response_:
 * result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
