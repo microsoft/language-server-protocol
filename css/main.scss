@@ -35,7 +35,7 @@ body {
 
   .intro-text {
 	  margin: 0 auto;
-	  max-width: 450px;
+	  max-width: 650px;
 	  text-align: center;
   }
 }
@@ -361,7 +361,7 @@ pre[class=highlight] {
 
 		@media (min-width: 576px) {
 			float: right;
-		}		
+		}
 	}
 
 	ul {
@@ -384,7 +384,7 @@ pre[class=highlight] {
 		li {
 			list-style: none;
 			padding-bottom: 10px;
-			
+
 			@media (min-width: 576px) {
 				display: inline-block;
 				padding: 0;
