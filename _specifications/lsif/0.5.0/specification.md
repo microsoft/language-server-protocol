@@ -1,21 +1,32 @@
 ---
 title: LSIF Specification
-shortTitle: 0.4.0 pre-release
+shortTitle: 0.5.0 pre-release
 layout: specifications
-sectionid: lsif-0-4-0
-toc: lsif-0-4-0-toc
+sectionid: lsif-0-5-0
+toc: lsif-0-5-0-toc
 index: 2
 ---
 
 # Under Construction
 
-The 0.4.0 version of LSIF is currently under construction.
+The 0.5.0 version of LSIF is currently under construction.
 
 ## <a href="#lsifIntro" name="lsifIntro" class="anchor">Language Server Index Format</a>
 
 The purpose of the Language Server Index Format (LSIF) is it to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
 
 ### Changelog
+
+#### Version 0.5.0
+
+In version 0.4.0 support was added to dump larger systems project by project (in their revers dependency order) and then combine the dumps again in a database by linking result sets using their corresponding monikers. Use of the format has shown that a couple of features are missing to make this work nicely:
+
+1. support to logical group projects. To support this a `Group` vertex got added.
+1. knowing how unique a moniker is. To support this a `unique` property got added to the `Moniker`.
+1. the `nextMoniker` edge got replaced by a more generic `attach` edge. This was possible since monikers now carry a `unique` property which was before encoded in the direction of the `nextMoniker` edge.
+1. In programming languages supporting polymorphism calls at runtime can be bound to a different type then statically know. An example are overidden methods in object oriented programming languages. Since dumps can be created on a per project basis we need to add additional information to the dumps so that these polymorphic binds can be capture. The general concept of moniker cascades got therefore introduced.
+
+An old 0.4.0 version of the specification is available [here](../0.4.0/specification)
 
 #### Version 0.4.0
 
@@ -878,33 +889,144 @@ export class Emitter {
 ```typescript
 { id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/index.ts", languageId: "typescript", contents: "..." }
 { id: 11, type: "vertex", label: "resultSet" }
-{ id: 12, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:func" }
+{ id: 12, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:func", unique: "group" }
 { id: 13, type: "edge", label: "moniker", outV: 11, inV: 12 }
 { id: 14, type: "vertex", label: "range", start: { line: 0, character: 16 }, end: { line: 0, character: 20 } }
 { id: 15, type: "edge", label: "next", outV: 14, inV: 11 }
 
 { id: 18, type: "vertex", label: "resultSet" }
-{ id: 19, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter" }
+{ id: 19, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter", unique: "group" }
 { id: 20, type: "edge", label: "moniker", outV: 18, inV: 19 }
 { id: 21, type: "vertex", label: "range", start: { line: 3, character: 13 }, end: { line: 3, character: 20 } }
 { id: 22, type: "edge", label: "next", outV: 21, inV: 18 }
 
 { id: 25, type: "vertex", label: "resultSet" }
-{ id: 26, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.doEmit" }
+{ id: 26, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.doEmit", unique: "group" }
 { id: 27, type: "edge", label: "moniker", outV: 25, inV: 26 }
 { id: 28, type: "vertex", label: "range", start: { line: 4, character: 10 }, end: { line: 4, character: 16 } }
 { id: 29, type: "edge", label: "next", outV: 28, inV: 25 }
 
 { id: 32, type: "vertex", label: "resultSet" }
-{ id: 33, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit" }
+{ id: 33, type: "vertex", label: "moniker", kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit", unique: "group" }
 { id: 34, type: "edge", label: "moniker", outV: 32, inV: 33 }
 { id: 35, type: "vertex", label: "range", start: { line: 7, character: 9 }, end: { line: 7, character: 13 } }
 { id: 36, type: "edge", label: "next", outV: 35, inV: 32 }
 ```
 
-This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has two properties: a `scheme` to indicate how the `identifiers` is to be interpreted. And the `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
+This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has the following properties:
 
-Please also note that the method `Emitter#doEmit` has a moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript cant enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
+- `scheme` to indicate how the `identifiers` is to be interpreted.
+- `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
+- `kind` to indicate whether the moniker is exported, imported or local to the project.
+- `unique` to indicate how unique the moniker is. See the multi project section for more information on this.
+
+Please also note that the method `Emitter#doEmit` has a export moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
+
+### <a href="#multiProjects" name="multiProjects" class="anchor">Systems with multiple Projects</a>
+
+>New in 0.5.0
+
+Most software systems today consist out of multiple projects. Always creating LSIF dumps for all project of a system even if only one project changes is not very feasible, especially if only internals in a project changed. LSIF since 0.4.0 therefore allows to create an LSIF dump per project and link them to larger system in the DB again. However 0.4.0 was lacking some concepts to make this real. To motivate them consider the following example
+
+**Project P1**
+
+Project P1 consist of one `p1Main.ts` file with the following content:
+
+```typescript
+export interface Disposable {
+	dispose(): void;
+}
+
+let d: Disposable;
+d.dispose();
+```
+
+**Project P2**
+
+Project P2 depends on P1 and consists of one `p2Main.ts` file with the following content:
+
+```typescript
+import { Disposable } from 'p1';
+
+class Widget implements Disposable {
+	public dispose(): void {
+	}
+}
+
+let w: Widget;
+w.dispose();
+```
+
+Now if a user search for reference to `Widget#dispose` it is expected that the reference `d.dispose` in P1 is included in the result. However when P1 is process the tools doesn't know about P2. And when P2 is processed it usually doesn't know about the source of P1. It only knows about its API shape (e.g. in TypeScript the corresponding `d.ts` file).
+
+To make this work we first need to group projects into larger units so that we know in which projects `d.dispose` is actually a match. Assume there is a totally unrelated project PX which also uses `Disposable` from P1 but P2 is never linked into one system with PX. So a object of type `Wdiget` can never flow to code in PX hence reference in PX should not be listed. We therefore introduce the notation of a group to logically group projects into larger systems. Projects belong to a group and groups are identified using a URI. Lets look at the concrete dumps for P1 and P2:
+
+```typescript
+{id: 2, type: "vertex", label: "group", uri: "https://github.com/microsoft/lsif-node.git/samples/ts-cascade", conflictResolution: "takeDB", name: "ts-cascade", rootUri: "file:///Users/dirkb/samples/ts-cascade" }
+{id: 4, type: "vertex", label: "project", kind: "typescript", name: "p1" }
+{id: 5, type: "edge", label: "belongsTo", outV: 4, inV:2 }
+```
+
+As a group URI the path in a GitHub repository is used. However the URI could also be something like `lsif-group:://com.microsoft/vscode/lsif-node/samples/ts-cascade` if the URI should be repository independent. This would be useful if a company store code in many differrent repository systems. The edge with the id `5` binds the project to the group.
+
+The dump for project P2 looks like this:
+
+```typescript
+{id: 2, type: "vertex", label: "group", uri: "https://github.com/Microsoft/lsif-node.git/samples/ts-cascade", conflictResolution: "takeDB", name: "ts-cascade", rootUri: "file:///Users/dirkb/samples/ts-cascade" }
+{id: 4, type: "vertex", label: "project", kind: "typescript", name: "p2" }
+{id: 5, type: "edge", label: "belongsTo", outV: 4, inV: 2 }
+```
+
+Note thjat this binds P2 to the same group P1 belongs to. To avoid any kind of group management the group carries a property `conflictResolution` to tell a DB which group information to use if the DB already contains a group with the given URL. `takeDB` indicates to take the one already store in the DB and `takeDump` indicates that the one from the dump should overwrite the DB value.
+
+Whenever possible group URIs should be organized hierarchical to allow to group projects into a broader scope. For example a URI `https://github.com/microsoft` should capture all project organized under the GitHub Microsoft organization.
+
+
+Now lets look how we ensure that searching for references for `Widget#dispose` find the `d.dispose()` match in P1 as well. First lets look what kind of information will be in the dump of P1 for `Disposable#dispose`:
+
+```typescript
+// The result set for the Disposable#dispose symbol
+{ id: 21, type: "vertex", label: "resultSet" }
+// The export moniker of Disposable#dispose in P1 (note kind export).
+{ id: 22, type: "vertex", label: "moniker", scheme: "tsc", identifier: "p1/lib/p1Main:Disposable.dispose", unique: "group", kind:"export" }
+{ id: 23, type: "edge", label: "moniker", outV: 21, inV: 22 }
+// The actual definition of the symbol
+{ id: 24, type: "vertex", label: "range", start: { line: 1, character: 1 }, end: { line: 1, character: 8 }, tag: { type: definition, text: "dispose", kind: 7, fullRange: { start : { line: 1, character:1 }, end: { line: 1, character: 17 } } } }
+// Bind the reference result to the result set
+{ id: 57, type: "vertex", label: "referenceResult" }
+{ id: 58, type: "edge", label: "textDocument/references", outV: 21, inV: 57 }
+```
+
+Interesting here is line 22 which defines the moniker for `Disposable#dispose`. It has new a property `unique` telling that the moniker is unique inside a `group` of projects but not necessarily outside. Other possible values for `unique` are:
+
+- `file` to indicate that the moniker is only unique inside a file. Used for example for locals or private members
+- `project` to indicate that the moniker is only unique inside a project. Used for example for project internal symbols
+- `group` to indicate that the moniker is unique inside a group. Used for example for exported members.
+- `packageManager` to indicate that the moniker is unique inside a package managing system.
+- `global` to indicate that the moniker is globally unique.
+
+Now when generating the dump for P2 the information for `Widget#dispose` will look like this:
+
+```typescript
+// The import moniker for importing Disposable#dispose into P2
+{ id: 22, type: "vertex", label: "moniker", scheme: "tsc", identifier: "p1/lib/p1Main:Disposable.dispose", unique: "group", kind: "import" }
+
+// The result set for Widget#dispose
+{ id: 78, type: "vertex", label: "resultSet" }
+// The moniker for Widget#dispose. Note that the moniker is local since the Widget class is not exported
+{ id: 79, type: "vertex", label: "moniker", scheme: "tsc", identifier: "2Q46RTVRZTuVW1ajf68/Vw==", unique: "file", kind: "local" }
+{ id: 80, type: "edge", label: "moniker", outV: 78, inV: 79 }
+// The actual definition of the symbol
+{ id: 81, type: "vertex", label: "range", start: { line: 3, character: 8 }, end: { line: 3, character: 15 }, tag: { type: "definition", text: "dispose", kind: 6, fullRange: { start: { line: 3, character: 1 }, end: { line: 4, character: 2 } } } }
+// Bind the reference result to Widget#dispose
+{ id: 116, type: "vertex", label: "referenceResult" }
+{ id: 117, type: "edge", label: "textDocument/references", outV: 78, inV: 116}
+{ id: 118, type: "edge", label: "item", outV: 116, inVs: [43], document: 52, property: "referenceResults" }
+// Link the reference result set of Disposable#dispose to this result set using a moniker
+{ id: 119, type: "edge", label: "item", outV: 116, inVs: [22], document: 52, property: "referenceLinks" }
+{ id: 120, type: "edge", label: "item", outV: 43, inVs: [81], document: 52, property: "definitions" }
+{ id: 121, type: "edge", label: "item", outV: 43, inVs: [96], document: 52, property: "references" }
+```
 
 How these exported elements are visible in other projects in most programming languages depends on how many files are packaged into a library or program. In TypeScript, the standard package manager is npm.
 
