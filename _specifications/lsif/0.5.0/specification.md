@@ -26,7 +26,7 @@ In version 0.4.0 support was added to dump larger systems project by project (in
 1. the `nextMoniker` edge got replaced by a more generic `attach` edge. This was possible since monikers now carry a `unique` property which was before encoded in the direction of the `nextMoniker` edge.
 1. In programming languages supporting polymorphism calls at runtime can be bound to a different type then statically know. An example are overidden methods in object oriented programming languages. Since dumps can be created on a per project basis we need to add additional information to the dumps so that these polymorphic binds can be capture. The general concept of moniker cascades got therefore introduced.
 
-An old 0.4.0 version of the specification is available [here](../0.4.0/specification)
+An old 0.4.0 version of the specification is available [here](../../0.4.0/specification)
 
 #### Version 0.4.0
 
@@ -433,7 +433,7 @@ let b: B;
 b.foo();
 ```
 
-Searching for `I#foo()` finds 4 references, searching for `II#foo()` finds 3 reference, and searching on `B#foo()` finds 5 results. The interesting part here is when the declaration of `class B` gets processed which implements `I` and `II`, neither the reference result bound to `I#foo()` nor the one bound to `II#foo()` can be reused. So we need to create a new one. To still be able to profit from the results generated for `I#foo` and `II#foo`, the LSIF supports nested references results. This way the one referenced from `B#foo` will reuse the one from `I#foo` and `II#foo`. Depending on how these declarations are parsed, the two reference results might contain the same references. When a language server interprets reference results consisting of other reference results, the server is responsible to de-dup the final ranges.
+Searching for `I#foo()` finds 4 references, searching for `II#foo()` finds 3 reference, and searching on `B#foo()` finds 5 results. The interesting part here is when the declaration of `class B` gets processed which implements `I` and `II`, neither the reference result bound to `I#foo()` nor the one bound to `II#foo()` can be reused. So we need to create a new one. To still be able to profit from the results generated for `I#foo` and `II#foo`, the LSIF supports nested references results. This way the one referenced from `B#foo` will reuse the one from `I#foo` and `II#foo`. Depending on how these declarations are parsed, the two reference results might contain the same references. When a language server interprets reference results consisting of other reference results, the server is responsible to de-duplicate the final ranges.
 
 In the above example, there will be three reference results
 
@@ -868,7 +868,9 @@ The events for projects looks similar:
 
 ### <a href="#exportsImports" name="exportsImports" class="anchor">Project exports and external imports (Monikers)</a>
 
-One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **A** references a library **B**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional monikers which can be linked to ranges using a corresponding edge. The monikers can be used to describe what a project exports and what it imports. Let's first look at the export case.
+> Changed in 0.5.0
+
+One use case of the LSIF is to create dumps for released versions of a product, either a library or a program. If a project **P2** references a library **P1**, it would also be useful if the information in these two dumps could be related. To make this possible, the LSIF introduces optional monikers which can be linked to ranges using a corresponding edge. The monikers can be used to describe what a project exports and what it imports. Let's first look at the export case.
 
 Consider the following TypeScript file called `index.ts`:
 
@@ -999,13 +1001,13 @@ Now lets look how we ensure that searching for references for `Widget#dispose` f
 
 Interesting here is line 22 which defines the moniker for `Disposable#dispose`. It has new a property `unique` telling that the moniker is unique inside a `group` of projects but not necessarily outside. Other possible values for `unique` are:
 
-- `file` to indicate that the moniker is only unique inside a file. Used for example for locals or private members
-- `project` to indicate that the moniker is only unique inside a project. Used for example for project internal symbols
-- `group` to indicate that the moniker is unique inside a group. Used for example for exported members.
-- `packageManager` to indicate that the moniker is unique inside a package managing system.
+- `document` to indicate that the moniker is only unique inside a document. Used for example for locals or private members.
+- `project` to indicate that the moniker is only unique inside a project. Used for example for project internal symbols.
+- `group` to indicate that the moniker is unique inside a group of projects. Used for example for exported members.
+- `scheme` to indicate that the moniker is unique inside the monikers scheme.
 - `global` to indicate that the moniker is globally unique.
 
-Now when generating the dump for P2 the information for `Widget#dispose` will look like this:
+When generating the dump for P2 the information for `Widget#dispose` will look like this:
 
 ```typescript
 // The import moniker for importing Disposable#dispose into P2
@@ -1014,7 +1016,7 @@ Now when generating the dump for P2 the information for `Widget#dispose` will lo
 // The result set for Widget#dispose
 { id: 78, type: "vertex", label: "resultSet" }
 // The moniker for Widget#dispose. Note that the moniker is local since the Widget class is not exported
-{ id: 79, type: "vertex", label: "moniker", scheme: "tsc", identifier: "2Q46RTVRZTuVW1ajf68/Vw==", unique: "file", kind: "local" }
+{ id: 79, type: "vertex", label: "moniker", scheme: "tsc", identifier: "2Q46RTVRZTuVW1ajf68/Vw==", unique: "document", kind: "local" }
 { id: 80, type: "edge", label: "moniker", outV: 78, inV: 79 }
 // The actual definition of the symbol
 { id: 81, type: "vertex", label: "range", start: { line: 3, character: 8 }, end: { line: 3, character: 15 }, tag: { type: "definition", text: "dispose", kind: 6, fullRange: { start: { line: 3, character: 1 }, end: { line: 4, character: 2 } } } }
@@ -1028,7 +1030,16 @@ Now when generating the dump for P2 the information for `Widget#dispose` will lo
 { id: 121, type: "edge", label: "item", outV: 43, inVs: [96], document: 52, property: "references" }
 ```
 
-How these exported elements are visible in other projects in most programming languages depends on how many files are packaged into a library or program. In TypeScript, the standard package manager is npm.
+The noteworthy parts are:
+
+- the vertex with `id: 22`: is the import moniker for `Disposable#disose` from P1.
+- the edge with `id: 119`: this adds a reference link to the reference result of `Widget#dispose`. Item edges with a `referenceLinks` are conceptuall like imte edges with a `referenceResults` property. They allow for composite reference results. The different is that a `referenceResults` item edge references another result using the vertex id since the reference result is part of the same dump. A `referenceLinks` item edge references another result using a moniker. So the actual resolving needs to happen in a database which has the data for both P1 and P2. As with `referenceResults` item edges a language servers is responsible to de-duplicate the final ranges.
+
+### <a href="#packageManagers" name="packageManagers" class="anchor">Package Managers</a>
+
+> Changed in 0.5.0
+
+How exported elements are visible in other projects in most programming languages depends on how files are packaged into a library or program. In TypeScript, the standard package manager is npm.
 
 Consider that the following `package.json` file exists:
 
@@ -1043,35 +1054,52 @@ Consider that the following `package.json` file exists:
 }
 ```
 
-then these monikers can be translated into monikers that are `npm` dependent. Instead of replacing the monikers we emit a second set of monikers and link the `tsc` monikers to corresponding `npm` monikers using a `nextMoniker`edge:
+for the following TypeScript file (same as above):
+
+```typescript
+export function func(): void {
+}
+
+export class Emitter {
+  private doEmit() {
+  }
+
+  public emit() {
+    this.doEmit();
+  }
+}
+```
+
+then these monikers can be translated into monikers that are `npm` dependent. Instead of replacing the monikers we emit a second set of monikers and link the `tsc` monikers to corresponding `npm` monikers using an `attach`edge:
 
 ```typescript
 { id: 991, type: "vertex", label: "packageInformation", name: "lsif-ts-sample", manager: "npm", version: "1.0.0" }
 
-{ id: 987, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func" }
+{ id: 987, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func", unique: "scheme" }
 { id: 986, type: "edge", label: "packageInformation", outV: 987, inV: 991 }
-{ id: 985, type: "edge", label: "nextMoniker", outV: 12, inV: 987 }
+{ id: 985, type: "edge", label: "attach", outV: 987, inV: 12 }
 
-{ id: 984, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter" }
+{ id: 984, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter", unique: "scheme" }
 { id: 983, type: "edge", label: "packageInformation", outV: 984, inV: 991 }
-{ id: 982, type: "edge", label: "nextMoniker", outV: 19, inV: 984 }
+{ id: 982, type: "edge", label: "attach", outV: 984, inV: 19 }
 
-{ id: 981, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.doEmit" }
+{ id: 981, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.doEmit", unique: "scheme" }
 { id: 980, type: "edge", label: "packageInformation", outV: 981, inV: 991 }
-{ id: 979, type: "edge", label: "nextMoniker", outV: 26, inV: 981 }
+{ id: 979, type: "edge", label: "attach", outV: 981, inV: 26 }
 
-{id: 978, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.emit" }
+{id: 978, type: "vertex", label: "moniker", kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter.emit", unique: "scheme" }
 {id: 977, type: "edge", label: "packageInformation", outV: 978, inV: 991 }
-{id: 976, type: "edge", label: "nextMoniker", outV: 33, inV: 978 }
+{id: 976, type: "edge", label: "attach", outV: 978, inV: 33 }
 ```
 Things to observe:
 
-- a special `packageInformation`vertex got emitted to point to the corresponding npm package information.
+- a special `packageInformation` vertex got emitted to point to the corresponding npm package information.
 - the npm moniker refer to the package name.
+- its `unique` value is `scheme` denoting that the monikers indentifier is unique acroos all `npm` monikers.
 - since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were only the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
-- the `nextMoniker` edge points from the tsc moniker vertex to the npm moniker vertex.
+- the `attach` edge points from the npm moniker vertex to the tsc moniker vertex.
 
-For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
+For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which attaches the monikers taking the npm package information into account.
 
 Reporting importing external symbols is done using the same approach. The LSIF emits monikers of kind `import`. Consider the following typescript example:
 
@@ -1086,7 +1114,7 @@ where `mobx` is the [npm mobx package](https://www.npmjs.com/package/mobx). Runn
 ```typescript
 { id: 41, type: "vertex", label: "document", uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/types/observablemap.d.ts", languageId: "typescript", contents: "..." }
 { id: 55, type: "vertex", label: "resultSet" }
-{ id: 57, type: "vertex", label: "moniker",  kind: "import", scheme: "tsc", identifier: "node_modules/mobx/lib/mobx:ObservableMap" }
+{ id: 57, type: "vertex", label: "moniker",  kind: "import", scheme: "tsc", identifier: "node_modules/mobx/lib/mobx:ObservableMap", unique: 'group' }
 { id: 58, type: "edge", label: "moniker", outV: 55, inV: 57 }
 { id: 59, type: "vertex", label: "range", start: { line: 17, character: 538 }, end: { line: 17, character: 551 } }
 { id: 60, type: "edge", label: "next", outV: 59, inV: 55 }
@@ -1098,16 +1126,16 @@ However piping this information through the npm tool will generate the following
 
 ```typescript
 {id: 991, type: "vertex", label: "packageInformation", name: "mobx", manager: "npm", version: "5.6.0", repository: { type: "git", url: "git+https://github.com/mobxjs/mobx.git" } }
-{ id: 978, type: "vertex", label: "moniker", kind: "import", scheme: "npm", identifier: "mobx::ObservableMap" }
+{ id: 978, type: "vertex", label: "moniker", kind: "import", scheme: "npm", identifier: "mobx::ObservableMap", unique: 'scheme' }
 { id: 977, type: "edge", label: "packageInformation", outV: 978, inV: 991 }
-{ id: 976, type: "edge", label: "nextMoniker", outV: 978, inV: 57 }
+{ id: 976, type: "edge", label: "attach", outV: 978, inV: 57 }
 ```
 
-which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
+which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted.
 
 Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
 
-For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
+For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to efficiently decide this, LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
 
 For the following example
 
@@ -1120,7 +1148,7 @@ The moniker for `x` looks like this:
 
 ```ts
 { id: 13, type: "vertex", label: "resultSet" }
-{ id: 14, type: "vertex", label: "moniker", kind: "local", scheme: "tsc", identifier: "SfeOP6s53Y2HAkcViolxYA==" }
+{ id: 14, type: "vertex", label: "moniker", kind: "local", scheme: "tsc", identifier: "SfeOP6s53Y2HAkcViolxYA==", unique: 'document' }
 { id: 15, type: "edge", label: "moniker", outV: 13, inV: 14 }
 { id: 16, type: "vertex", label: "range", start: { line: 0, character: 13 }, end: { line: 0, character: 14 }, tag: { type: "definition", text: "x", kind: 7, fullRange: { start: { line: 0, character: 13 }, end: { line: 0, character: 22 } } } }
 { id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
@@ -1139,6 +1167,8 @@ To fulfil the first LSIF specifies that ranges can't overlap or be the same. How
 
 ### <a href="#metaData" name="metaData" class="anchor">Meta Data Vertex</a>
 
+> Changed in 0.5.0
+
 To support versioning the LSIF defines a meta data vertex as follows:
 
 ```typescript
@@ -1155,11 +1185,6 @@ export interface MetaData {
    * the each new version is breaking.
    */
   version: string;
-
-  /**
-   * The project root (in form of an URI) used to compute this dump.
-   */
-  projectRoot: Uri;
 
   /**
    * The string encoding used to compute line and character values in
