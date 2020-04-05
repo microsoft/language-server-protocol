@@ -1854,6 +1854,33 @@ _Notification_:
 * method: 'exit'
 * params: void
 
+#### <a href="logTrace" name="logTrace" class="anchor">LogTrace Notification (:arrow_left:)</a>
+
+A notification to log the trace of the server's execution.
+The amount and content of these notifications depends on the current `trace` configuration.
+If `trace` is `'off'`, the server should not send any `logTrace` notification.
+If `trace` is `'message'`, the server should not add the `'verbose'` field in the `logTraceParams`.
+
+** Insert a sentence about the difference between logTrace and logMessage **
+
+_Notification_:
+* method: 'logTrace'
+* params: `logTraceParams` defined as follows:
+
+```typescript
+interface logTraceParams {
+	/**
+	 * The message to be logged.
+	 */
+	message: string;
+
+	/**
+	 * Additional information that can be computed if the `trace` configuration is set to `'verbose'`
+	 */
+	verbose?: string;
+}
+```
+
 #### <a href="#window_showMessage" name="window_showMessage" class="anchor">ShowMessage Notification (:arrow_left:)</a>
 
 The show message notification is sent from a server to a client to ask the client to display a particular message in the user interface.
