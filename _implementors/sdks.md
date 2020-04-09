@@ -18,6 +18,7 @@ index: 3
 | Python | [Open Law Library](http://www.openlawlib.org/) | [pygls](https://github.com/openlawlibrary/pygls)|
 | Python | [Yeger](https://github.com/yeger00) | [pylspclient](https://github.com/yeger00/pylspclient)|
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
+| Rust | Bruno Medeiros and Markus Westerlind | [lsp-types](https://github.com/gluon-lang/lsp-types)
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
 | Haskell | [Luke Lau](https://github.com/Bubba) | [lsp-test](https://github.com/Bubba/lsp-test)|
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
