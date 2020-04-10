@@ -1861,7 +1861,8 @@ The amount and content of these notifications depends on the current `trace` con
 If `trace` is `'off'`, the server should not send any `logTrace` notification.
 If `trace` is `'message'`, the server should not add the `'verbose'` field in the `logTraceParams`.
 
-** Insert a sentence about the difference between logTrace and logMessage **
+`logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send `window/logMessage` notifications.
+
 
 _Notification_:
 * method: 'logTrace'
