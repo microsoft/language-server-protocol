@@ -1854,18 +1854,18 @@ _Notification_:
 * method: 'exit'
 * params: void
 
-#### <a href="logTrace" name="logTrace" class="anchor">LogTrace Notification (:arrow_left:)</a>
+#### <a href="#logTrace" name="logTrace" class="anchor">LogTrace Notification (:arrow_left:)</a>
 
 A notification to log the trace of the server's execution.
 The amount and content of these notifications depends on the current `trace` configuration.
 If `trace` is `'off'`, the server should not send any `logTrace` notification.
 If `trace` is `'message'`, the server should not add the `'verbose'` field in the `logTraceParams`.
 
-`logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send `window/logMessage` notifications.
+`$/logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send [`window/logMessage`](#window_logMessage) notifications.
 
 
 _Notification_:
-* method: 'logTrace'
+* method: '$/logTrace'
 * params: `logTraceParams` defined as follows:
 
 ```typescript
