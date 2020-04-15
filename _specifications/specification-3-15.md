@@ -2880,7 +2880,7 @@ _Client Capability_:
 The capability indicates that the client supports `textDocument/didSave` notifications.
 
 _Server Capability_:
-* property name (optional): `textDocumentSync.didSave`
+* property name (optional): `textDocumentSync.save`
 * property type: `boolean | SaveOptions` where `SaveOptions` is defined as follows:
 
 ```typescript
