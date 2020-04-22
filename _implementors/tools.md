@@ -31,7 +31,7 @@ index: 2
 | Visual Studio | Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 | Oni | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 | [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
-| [Sublime Text](https://www.sublimetext.com/) | [Tom van Ommeren](https://github.com/tomv564) | [lsp](https://github.com/tomv564/LSP) |
+| [Sublime Text](https://www.sublimetext.com/) | [Raoul Wols](https://github.com/rwols) | [lsp](https://github.com/sublimelsp/LSP) |
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
 | [Brackets](http://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) |
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
