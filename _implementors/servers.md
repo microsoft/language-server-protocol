@@ -118,6 +118,7 @@ index: 1
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
 | Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
+| VDM-SL, VDM++, VDM-RT | [Nick Battle](https://github.com/nickbattle)| [VDMJ-LSP](https://github.com/nickbattle/vdmj/tree/master/LSP) | Java |
 | VHDL | [Olof Kraigher](https://github.com/kraigher) | [vhdl_ls](https://github.com/kraigher/rust_hdl) | Rust |
 | Viml | [iamcco](https://github.com/iamcco) | [vim-language-server](https://github.com/iamcco/vim-language-server) | Typescript |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) | |
