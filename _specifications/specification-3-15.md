@@ -4518,7 +4518,7 @@ When the command is selected the server should be contacted again (via the `work
 - the ability to directly return a workspace edit from the code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is simply a command and the actual edit is only computed when needed.
 - the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action for example into corresponding menus (e.g. all refactor code actions into a refactor menu).
 
-Clients need to announce their support for code action literals and code action kinds via the corresponding client capability `codeAction.codeActionLiteralSupport`.
+Clients need to announce their support for code action literals (e.g. literals of type `CodeAction`) and code action kinds via the corresponding client capability `codeAction.codeActionLiteralSupport`.
 
 _Client Capability_:
 * property name (optional): `textDocument.codeAction`
