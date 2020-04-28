@@ -2622,7 +2622,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
-Client support for `textDocument/open`, `textDocument/change` and `textDocument/close` notifications is mandatory in the protocol and clients can not opt out supporting them. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
+Client support for `textDocument/open`, `textDocument/change` and `textDocument/close` notifications is mandatory in the protocol and clients can not opt out supporting them. This includes both full and incremental syncronization in the `textDocument/change` notification. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
 
 <a href="#textDocument_synchronization_cc" name="textDocument_synchronization_cc" class="anchor"></a>_Client Capability_:
 * property path (optional): `textDocument.synchronization.dynamicRegistration`
