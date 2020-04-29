@@ -1,6 +1,6 @@
 ---
 title: Specification
-shortTitle: 3.14 - Current
+shortTitle: 3.14 - Previous
 layout: specifications
 sectionid: specification-3-14
 toc: specification-3-14-toc

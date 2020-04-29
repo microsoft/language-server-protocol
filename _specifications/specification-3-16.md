@@ -1,23 +1,23 @@
 ---
 title: Specification
-shortTitle: 3.15 - Current
+shortTitle: 3.16 - Upcoming
 layout: specifications
-sectionid: specification-3-15
-toc: specification-3-15-toc
+sectionid: specification-3-16
+toc: specification-3-16-toc
 index: 2
 ---
-# Language Server Protocol Specification - 3.15
+# Language Server Protocol Specification - 3.16
 
-This document describes the 3.15.x version of the language server protocol. An implementation for node of the 3.15.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
+This document describes the upcoming 3.16.x version of the language server protocol. An implementation for node of the 3.16.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
-**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-15.md).
+**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-16.md).
 
-## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.15 </a>
+## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.16 </a>
 
-All new 3.15 features are tagged with a corresponding since version 3.15 text or in JSDoc using `@since 3.15.0` annotation. Major new feature are:
+All new 3.16 features are tagged with a corresponding since version 3.16 text or in JSDoc using `@since 3.16.0` annotation. Major new feature are:
 
-- [general progress support](#progress), [work done progress](#workDoneProgress) and [partial result progress](#partialResults)
-- support for [selection ranges](#textDocument_selectionRange)
+- Call Hierarchy support
+- Semantic Token support
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
@@ -5628,6 +5628,11 @@ export interface SelectionRange {
 * partial result: `SelectionRange[]`
 * error: code and message set in case an exception happens during the 'textDocument/selectionRange' request
 
+#### <a href="#textDocument_callHierarchy" name="textDocument_callHierarchy" class="anchor">Call Hierarchy Request (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+
 ### Implementation considerations
 
 Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
@@ -5638,6 +5643,14 @@ Language servers usually run in a separate process and client communicate with t
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
+
+#### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (xx/xx/xxxx)</a>
+
+* Add semantic token support
+* Add call hierarchy support
+* Add support for insert and replace ranges on `CompletionItem`
+* Add support for diagnsotic codes
+* Add support for tags on `SymbolInformation` and `DocumentSymbol`
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
