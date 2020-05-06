@@ -201,8 +201,12 @@
       anchor: textDocument_foldingRange
     - title: selectionRange
       anchor: textDocument_selectionRange
-    - title: callHierarchy
-      anchor: textDocument_callHierarchy
+    - title: prepareCallHierarchy
+      anchor: textDocument_prepareCallHierarchy
+    - title: callHierarchy incoming
+      anchor: callHierarchy_incomingCalls
+    - title: callHierarchy outgoing
+      anchor: callHierarchy_outgoingCalls
   - title: Change Log
     anchor: changeLog
     children:

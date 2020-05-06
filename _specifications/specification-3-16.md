@@ -5593,7 +5593,7 @@ export interface SelectionRangeRegistrationOptions extends SelectionRangeOptions
 _Request_:
 
 * method: 'textDocument/selectionRange'
-* params: `SelectionRangeParams` defined as follows
+* params: `SelectionRangeParams` defined as follows:
 
 ```typescript
 export interface SelectionRangeParams extends WorkDoneProgressParams, PartialResultParams {
@@ -5610,6 +5610,7 @@ export interface SelectionRangeParams extends WorkDoneProgressParams, PartialRes
 ```
 
 _Response_:
+
 * result: `SelectionRange[] | null` defined as follows:
 
 ```typescript
@@ -5628,10 +5629,184 @@ export interface SelectionRange {
 * partial result: `SelectionRange[]`
 * error: code and message set in case an exception happens during the 'textDocument/selectionRange' request
 
-#### <a href="#textDocument_callHierarchy" name="textDocument_callHierarchy" class="anchor">Call Hierarchy Request (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_prepareCallHierarchy" name="textDocument_prepareCallHierarchy" class="anchor">Prepare Call Hierarchy Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.16.0*
 
+The call hierarchy request is sent from the client to the server to return a call hierarchy for the language element of given text document positions. The call hierarchy requests are executed in two steps:
+
+  1. first a call hierarchy item is resolved for the given text document position
+  1. for a call hierarchy item the incoming or outgoing call hierarchy items are resolved.
+
+_Client Capability_:
+
+* property name (optional): `textDocument.callHierarchy`
+* property type: `CallHierarchyClientCapabilities` defined as follows:
+
+```typescript
+CallHierarchyClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * return value for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+
+* property name (optional): `callHierarchyProvider`
+* property type: `boolean | CallHierarchyOptions | CallHierarchyRegistrationOptions` where `CallHierarchyOptions` is defined as follows:
+
+```typescript
+export interface CallHierarchyOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `CallHierarchyRegistrationOptions` defined as follows:
+
+```typescript
+export interface CallHierarchyRegistrationOptions extends TextDocumentRegistrationOptions, CallHierarchyOptions, StaticRegistrationOptions {
+}
+```
+
+_Request_:
+
+* method: 'textDocument/prepareCallHierarchy'
+* params: `CallHierarchyPrepareParams` defined as follows:
+
+```typescript
+export interface CallHierarchyPrepareParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+}
+```
+
+_Response_:
+
+* result: `CallHierarchyItem[] | null` defined as follows:
+
+```typescript
+export interface CallHierarchyItem {
+	/**
+	 * The name of this item.
+	 */
+	name: string;
+
+	/**
+	 * The kind of this item.
+	 */
+	kind: SymbolKind;
+
+	/**
+	 * Tags for this item.
+	 */
+	tags?: SymbolTag[];
+
+	/**
+	 * More detail for this item, e.g. the signature of a function.
+	 */
+	detail?: string;
+
+	/**
+	 * The resource identifier of this item.
+	 */
+	uri: DocumentUri;
+
+	/**
+	 * The range enclosing this symbol not including leading/trailing whitespace but everything else, e.g. comments and code.
+	 */
+	range: Range;
+
+	/**
+	 * The range that should be selected and revealed when this symbol is being picked, e.g. the name of a function.
+	 * Must be contained by the [`range`](#CallHierarchyItem.range).
+	 */
+	selectionRange: Range;
+}
+```
+
+* error: code and message set in case an exception happens during the 'textDocument/prepareCallHierarchy' request
+
+#### <a href="#callHierarchy_incomingCalls" name="callHierarchy_incomingCalls" class="anchor">Call Hierarchy Incoming Calls (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+The request is sent from the client to the server to resolve incoming calls for a given call hierarchy item. The request doesn't define its own client and server capabilities. It is only issued if a server registers for the [`textDocument/prepareCallHierarchy` request](#textDocument_prepareCallHierarchy).
+
+_Request_:
+
+* method: 'callHierarchy/incomingCalls'
+* params: `CallHierarchyIncomingCallsParams` defined as follows:
+
+```typescript
+export interface CallHierarchyIncomingCallsParams extends WorkDoneProgressParams, PartialResultParams {
+	item: CallHierarchyItem;
+}
+```
+
+_Response_:
+
+* result: `CallHierarchyIncomingCall[] | null` defined as follows:
+
+```typescript
+export interface CallHierarchyIncomingCall {
+
+	/**
+	 * The item that makes the call.
+	 */
+	from: CallHierarchyItem;
+
+	/**
+	 * The ranges at which the calls appear. This is relative to the caller
+	 * denoted by [`this.from`](#CallHierarchyIncomingCall.from).
+	 */
+	fromRanges: Range[];
+}
+```
+
+* partial result: `CallHierarchyIncomingCall[]`
+* error: code and message set in case an exception happens during the 'callHierarchy/incomingCalls' request
+
+#### <a href="#callHierarchy_outgoingCalls" name="callHierarchy_outgoingCalls" class="anchor">Call Hierarchy Outgoing Calls (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+The request is sent from the client to the server to resolve outgoing calls for a given call hierarchy item. The request doesn't define its own client and server capabilities. It is only issued if a server registers for the [`textDocument/prepareCallHierarchy` request](#textDocument_prepareCallHierarchy).
+
+_Request_:
+
+* method: 'callHierarchy/outgoingCalls'
+* params: `CallHierarchyOutgoingCallsParams` defined as follows:
+
+```typescript
+export interface CallHierarchyOutgoingCallsParams extends WorkDoneProgressParams, PartialResultParams {
+	item: CallHierarchyItem;
+}
+```
+
+_Response_:
+
+* result: `CallHierarchyOutgoingCall[] | null` defined as follows:
+
+```typescript
+export interface CallHierarchyOutgoingCall {
+
+	/**
+	 * The item that is called.
+	 */
+	to: CallHierarchyItem;
+
+	/**
+	 * The range at which this item is called. This is the range relative to the caller, e.g the item
+	 * passed to [`provideCallHierarchyOutgoingCalls`](#CallHierarchyItemProvider.provideCallHierarchyOutgoingCalls)
+	 * and not [`this.to`](#CallHierarchyOutgoingCall.to).
+	 */
+	fromRanges: Range[];
+}
+```
+
+* partial result: `CallHierarchyOutgoingCall[]`
+* error: code and message set in case an exception happens during the 'callHierarchy/outgoingCalls' request
 
 ### Implementation considerations
 
