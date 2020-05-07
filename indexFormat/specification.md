@@ -1057,7 +1057,7 @@ The following emitting constraints (some of which have already mean mentioned in
 ## Tools
 
 - [`lsif-protocol`](https://github.com/Microsoft/lsif-node/tree/master/protocol): Protocol defined as TypeScript interfaces
-- [`lsif-util`](https://github.com/jumattos/lsif-util): Utility tools for LSIF development
+- [`lsif-util`](https://github.com/microsoft/lsif-node/tree/master/util): Utility tools for LSIF development
 - [`lsif-tsc`](https://github.com/Microsoft/lsif-node/tree/master/tsc): LSIF indexer for TypeScript
 - [`lsif-npm`](https://github.com/Microsoft/lsif-node/tree/master/npm): Linker for NPM monikers
 
