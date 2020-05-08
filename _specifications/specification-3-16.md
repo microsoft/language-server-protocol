@@ -3715,6 +3715,13 @@ export interface SignatureHelpClientCapabilities {
 		documentationFormat?: MarkupKind[];
 
 		/**
+		 * Whether the client supports the `activeParameter` property on `SignatureInformation`.
+		 *
+		 * @since 3.16.0
+		 */
+		activeParameterSupport?: boolean;
+
+		/**
 		 * Client capabilities specific to parameter information.
 		 */
 		parameterInformation?: {
@@ -3905,6 +3912,15 @@ export interface SignatureInformation {
 	 * The parameters of this signature.
 	 */
 	parameters?: ParameterInformation[];
+
+	/**
+	 * The index of the active parameter.
+	 *
+	 * If provided, this is used in place of `SignatureHelp.activeParameter`.
+	 * 
+	 * @since 3.16.0
+	 */
+	activeParameter?: number;
 }
 
 /**
@@ -5651,6 +5667,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for insert and replace ranges on `CompletionItem`
 * Add support for diagnsotic codes
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`
+* Add `SignatureInformation#activeParameter` support.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
