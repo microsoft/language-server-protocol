@@ -2622,7 +2622,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
-Client support for `textDocument/open`, `textDocument/change` and `textDocument/close` notifications is mandatory in the protocol and clients can not opt out supporting them. This includes both full and incremental syncronization in the `textDocument/change` notification. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
+Client support for `textDocument/open`, `textDocument/change` and `textDocument/close` notifications is mandatory in the protocol and clients can not opt out supporting them. This includes both full and incremental synchronization in the `textDocument/change` notification. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
 
 <a href="#textDocument_synchronization_cc" name="textDocument_synchronization_cc" class="anchor"></a>_Client Capability_:
 * property path (optional): `textDocument.synchronization.dynamicRegistration`
@@ -2746,7 +2746,7 @@ interface DidChangeTextDocumentParams {
 	 *
 	 * To mirror the content of a document using change events use the following approach:
 	 * - start with the same initial content
-	 * - apply the 'textDocument/didChange' notifications in the order you recevie them.
+	 * - apply the 'textDocument/didChange' notifications in the order you receive them.
 	 * - apply the `TextDocumentContentChangeEvent`s in a single notification in the order
 	 *   you receive them.
 	 */
@@ -3861,7 +3861,7 @@ _Response_:
  */
 export interface SignatureHelp {
 	/**
-	 * One or more signatures. If no signaures are availabe the signature help
+	 * One or more signatures. If no signatures are available the signature help
 	 * request should return `null`.
 	 */
 	signatures: SignatureInformation[];
@@ -5841,7 +5841,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add semantic token support
 * Add call hierarchy support
 * Add support for insert and replace ranges on `CompletionItem`
-* Add support for diagnsotic codes
+* Add support for diagnostic links
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
