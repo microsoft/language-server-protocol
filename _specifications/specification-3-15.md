@@ -26,12 +26,7 @@ separated by a '\r\n'.
 
 ### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
-The header part consists of header fields. Each header field is comprised of a name and a value,
-separated by ': ' (a colon and a space).
-Each header field is terminated by '\r\n'.
-Considering the last header field and the overall header itself are each terminated with '\r\n',
-and that at least one header is mandatory, this means that two '\r\n' sequences always
-immediately precede the content part of a message.
+The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conform to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
 
 Currently the following header fields are supported:
 
