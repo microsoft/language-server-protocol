@@ -19,7 +19,7 @@ The purpose of the Language Server Index Format (LSIF) is it to define a standar
 
 #### Version 0.5.0
 
-In version 0.4.0 support was added to dump larger systems project by project (in their revers dependency order) and then combine the dumps again in a database by linking result sets using their corresponding monikers. Use of the format has shown that a couple of features are missing to make this work nicely:
+In version 0.4.0 support was added to dump larger systems project by project (in their reverse dependency order) and then combine the dumps again in a database by linking result sets using their corresponding monikers. Use of the format has shown that a couple of features are missing to make this work nicely:
 
 1. support to logical group projects. To support this a `Group` vertex got added.
 1. knowing how unique a moniker is. To support this a `unique` property got added to the `Moniker`.
