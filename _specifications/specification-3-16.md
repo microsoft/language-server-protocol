@@ -3912,7 +3912,7 @@ export interface SignatureInformation {
 	/**
 	 * The index of the active parameter.
 	 *
-	 * If provided, this is used in place of `SignatureHelp.activeSignature`.
+	 * If provided, this is used in place of `SignatureHelp.activeParameter`.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
