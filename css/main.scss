@@ -54,7 +54,8 @@ table.table-responsive.table-bordered {
 			position: -moz-sticky;
 			position: -ms-sticky;
 			position: -o-sticky;
-			top: 55px;
+			top: 3rem; // 2.5rem for the header's height + padding,
+			           // +.5rem for the tr's own padding 
 			background: #fff;
 			outline: 1px solid #e9ecef;
 		}
