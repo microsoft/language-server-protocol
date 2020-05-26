@@ -44,6 +44,24 @@ h2 {
 	margin-bottom: 20px;
 }
 
+table.table-responsive.table-bordered {
+	display: table;
+	& thead > tr {
+		border: none;
+		& > th {
+			position: sticky;
+			position: -webkit-sticky;
+			position: -moz-sticky;
+			position: -ms-sticky;
+			position: -o-sticky;
+			top: 3rem; // 2.5rem for the header's height + padding,
+			           // +.5rem for the tr's own padding 
+			background: #fff;
+			outline: 1px solid #e9ecef;
+		}
+	}
+}
+
 .toc {
 	font-size: 85%
 }
