@@ -3501,7 +3501,7 @@ export namespace CompletionItemKind {
 
 Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is as follows:
 
-##### Snippet Syntax
+##### <a href="#snippet_syntax" name="snippet_syntax" class="anchor">Snippet Syntax</a>
 
 The `body` of a snippet can use special constructs to control cursors and the text being inserted. The following are supported features and their syntaxes:
 
