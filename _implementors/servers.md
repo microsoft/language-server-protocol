@@ -69,6 +69,7 @@ index: 1
 | Javascript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) | TypeScript |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) | Julia |
 | [Kerboscript (kOS)](https://ksp-kos.github.io/KOS/) | [John Chabot](https://github.com/jonnyboyC) | [kos-language-server](https://github.com/jonnyboyC/kos-language-server) | Typescript
+| [Kotlin](https://kotlinlang.org) | [@fwcd](https://github.com/fwcd) | [kotlin-language-server](https://github.com/fwcd/kotlin-language-server) | Kotlin |
 | [Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot) | [TypeCobolTeam](https://github.com/TypeCobolTeam) | [TypeCobol Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot/wiki) | C# |
 | [Language Tool](https://languagetool.org/)| [Adam Voss](https://github.com/adamvoss) | [languagetool](https://github.com/adamvoss/languagetool-languageserver) | Java |
 | [LaTeX](https://www.latex-project.org/)| [Eric Förster](https://github.com/efoerster) | [texlab](https://github.com/efoerster/texlab) |
