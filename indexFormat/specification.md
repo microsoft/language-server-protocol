@@ -467,7 +467,7 @@ interface ImplementationResult {
 
 ### Request: `textDocument/typeDefinition`
 
-Supporting `textDocument/typeDefinition` is straightforward. The edge is either recorded at the range or at the `ResultSet`.
+Supporting `textDocument/typeDefinition` is straightforward. The edge is either recorded at the range or the `ResultSet`.
 
 The corresponding `TypeDefinitionResult` looks like this:
 
