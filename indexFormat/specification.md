@@ -817,7 +817,7 @@ It can be valuable to embed the contents of a document or project file into the 
 
 ## Events
 
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example, no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The `begin`/`end` events for documents look like this:
+To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example, no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be referenced in a `contains` edge adding the document to a project. The `begin`/`end` events for documents look like this:
 
 ```ts
 // The actual document
