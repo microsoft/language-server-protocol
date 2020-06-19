@@ -313,7 +313,7 @@ The relevant JSON output looks like this:
 
 We tag the `item` edge with id 27 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly.
 
-The item edge also support linking reference results to other reference results. This is useful when computing references to methods overridden in a type hierarchy.
+The item edge also supports linking reference results to other reference results. This is useful when computing references to methods overridden in a type hierarchy.
 
 Take the following example:
 
