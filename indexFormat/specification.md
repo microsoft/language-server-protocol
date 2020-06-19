@@ -742,7 +742,7 @@ The only information missing that is useful in a dump are the diagnostics associ
 In the dump, we model diagnostics as follows:
 
 - We introduce a pseudo request `textDocument/diagnostic`.
-- We introduce a diagnostic result which contains the diagnostics associated with a document.
+- We introduce a diagnostic result that contains the diagnostics associated with a document.
 
 The result looks like this:
 
