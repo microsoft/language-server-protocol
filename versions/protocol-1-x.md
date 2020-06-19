@@ -1242,7 +1242,7 @@ _Response_
 
 #### Document Formatting
 
-The document formatting resquest is sent from the server to the client to format a whole document.
+The document formatting request is sent from the server to the client to format a whole document.
 
 _Request_
 * method: 'textDocument/formatting'
