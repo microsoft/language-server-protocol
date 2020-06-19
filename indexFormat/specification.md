@@ -1017,7 +1017,7 @@ export interface MetaData {
   /**
    * The version of the LSIF format using semver notation. See https://semver.org/. Please note
    * the version numbers starting with 0 don't adhere to semver and adopters have to assume
-   * the each new version is breaking.
+   * that each new version is breaking.
    */
   version: string;
 
