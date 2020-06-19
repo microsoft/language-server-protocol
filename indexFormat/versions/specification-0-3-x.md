@@ -443,7 +443,7 @@ In the above example, there will be three reference results
 { id: 68, type: "vertex", label: "referenceResult", referenceResults: [ 16,38 ] }
 // Link the reference result to the result set of B#foo
 { id: 69, type: "edge", label: "textDocument/references", outV: 67, inV: 68 }
-// Add the declaratin to both linked reference results. This ensures that find all references
+// Add the declaration to both linked reference results. This ensures that find all references
 // on I#foo and II#foo lists B#foo as well.
 { id: 73, type: "edge", label: "item", property: "definition", outV: 16, inV: 70 }
 { id: 74, type: "edge", label: "item", property: "definition", outV: 38, inV: 70 }
