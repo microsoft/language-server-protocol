@@ -972,7 +972,7 @@ which made the moniker specific to the npm `mobx` package. In addition informati
 
 Usually, monikers are attached to result sets since they are the same for all ranges pointing to the result set. However, for dumps that don't use result sets, monikers can also be emitted on ranges.
 
-For tools processing the dump and importing it into a database, it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
+For tools processing the dump and importing it into a database, it is sometimes useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
 
 For the following example
 
