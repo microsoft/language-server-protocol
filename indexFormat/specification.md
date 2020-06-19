@@ -233,7 +233,7 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 { id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], document: 4 }
 ```
 
-The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `containes` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
+The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
 
 ### Request: `textDocument/declaration`
 
