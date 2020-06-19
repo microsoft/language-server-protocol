@@ -353,7 +353,7 @@ enum DiagnosticSeverity {
 
 #### Command
 
-Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identitifed using a string identifier and the protocol currently doesn't specify a set of well known commands. So executing a command requires some tool extension code.
+Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identified using a string identifier and the protocol currently doesn't specify a set of well known commands. So executing a command requires some tool extension code.
 
 ```typescript
 interface Command {
