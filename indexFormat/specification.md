@@ -1028,7 +1028,7 @@ export interface MetaData {
 
   /**
    * The string encoding used to compute line and character values in
-   * positions and ranges. Currently only 'utf-16' is support due to the
+   * positions and ranges. Currently only 'utf-16' is supported due to the
    * limitations in LSP.
    */
   positionEncoding: 'utf-16',
