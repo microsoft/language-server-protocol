@@ -936,7 +936,7 @@ Things to observe:
 - since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were only the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
 - the `nextMoniker` edge points from the tsc moniker vertex to the npm moniker vertex.
 
-For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by an npm specific tool which rewrites the monikers taking the npm package information into account.
+For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by an npm specific tool that rewrites the monikers taking the npm package information into account.
 
 Reporting importing external symbols is done using the same approach. The LSIF emits monikers of kind `import`. Consider the following typescript example:
 
