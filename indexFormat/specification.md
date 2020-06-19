@@ -62,7 +62,7 @@ The dump format, therefore, should support the following features:
 - It should be easy for a tool to consume a dump and for example import it into a database without holding the dump in memory.
 
 
-We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
+We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method, and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
 
 Assume there is a file `/Users/dirkb/sample.ts` and we want to store the folding range information with it then the indexer emits two vertices: one representing the document with its URI `file:///Users/dirkb/sample.ts`, the other representing the folding result. In addition, an edge would be emitted representing the `textDocument/foldingRange` request.
 
