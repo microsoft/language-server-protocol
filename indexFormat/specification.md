@@ -737,7 +737,7 @@ Produces the following output:
 
 ### Request: `textDocument/diagnostic`
 
-The only information missing that is useful in a dump are the diagnostics associated with documents. Diagnostics in the LSP are modeled as a push notifications sent from the server to the client. This doesn't work well with a dump modeled on request method names. However, the push notification can be emulated as a request where the request's result is the value sent during the push as a parameter.
+The only information missing that is useful in a dump are the diagnostics associated with documents. Diagnostics in the LSP are modeled as push notifications sent from the server to the client. This doesn't work well with a dump modeled on request method names. However, the push notification can be emulated as a request where the request's result is the value sent during the push as a parameter.
 
 In the dump, we model diagnostics as follows:
 
