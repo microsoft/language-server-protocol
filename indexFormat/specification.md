@@ -78,7 +78,7 @@ The corresponding graph looks like this
 
 ### Ranges
 
-For requests that take a position as its input, we need to store the position as well. Usually LSP requests return the same result for positions that point to the same word / name in a document. Take the following TypeScript example:
+For requests that take a position as its input, we need to store the position as well. Usually, LSP requests return the same result for positions that point to the same word / name in a document. Take the following TypeScript example:
 
 ```typescript
 function bar() {
@@ -170,7 +170,7 @@ The pattern of storing the result with the `ResultSet` will be used for other re
       1. check if out has an outgoing `next` edge. If yes, set out to the target vertex. Else set out to `null`
    1. end
 1. end
-1. otherwise return `null`
+1. otherwise, return `null`
 
 ### Request: `textDocument/definition`
 
@@ -775,7 +775,7 @@ Since diagnostics are not very common in dumps, no effort has been made to reuse
 
 ### The Project vertex
 
-Usually language servers operate in some sort of project context. In TypeScript, a project is defined using a `tsconfig.json` file. C# and C++ have their own means. The project file usually contains information about compile options and other parameters. Having these in the dump can be valuable. The LSIF, therefore, defines a project vertex. In addition, all documents that belong to that project are connected to the project using a `contains` edge. If there was a `tsconfig.json` in the previous examples, the first emitted edges and vertices would look like this:
+Usually, language servers operate in some sort of project context. In TypeScript, a project is defined using a `tsconfig.json` file. C# and C++ have their own means. The project file usually contains information about compile options and other parameters. Having these in the dump can be valuable. The LSIF, therefore, defines a project vertex. In addition, all documents that belong to that project are connected to the project using a `contains` edge. If there was a `tsconfig.json` in the previous examples, the first emitted edges and vertices would look like this:
 
 ```typescript
 { id: 1, type: "vertex", label: "project", resource: "file:///Users/dirkb/tsconfig.json", kind: "typescript"}
@@ -817,7 +817,7 @@ It can be valuable to embed the contents of a document or project file into the 
 
 ## Events
 
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
+To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example, no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
 
 ```ts
 // The actual document
@@ -889,7 +889,7 @@ export class Emitter {
 { id: 36, type: "edge", label: "next", outV: 35, inV: 32 }
 ```
 
-This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker, therefore, has two properties: a `scheme` to indicate how the `identifiers` is to be interpreted. And the `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
+This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker, therefore, has two properties: a `scheme` to indicate how the `identifiers` is to be interpreted. And the `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example, the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 
 Please also note that the method `Emitter#doEmit` has a moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript cant enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
 
@@ -970,9 +970,9 @@ However piping this information through the npm tool will generate the following
 
 which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
 
-Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However, for dumps that don't use result sets, monikers can also be emitted on ranges.
+Usually, monikers are attached to result sets since they are the same for all ranges pointing to the result set. However, for dumps that don't use result sets, monikers can also be emitted on ranges.
 
-For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
+For tools processing the dump and importing it into a database, it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
 
 For the following example
 
