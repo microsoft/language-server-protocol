@@ -10,7 +10,7 @@ The purpose of the Language Server Index Format (LSIF) is to define a standard f
 
 #### Version 0.4.0
 
-Up to version 0.4.0, the focus of the LSIF format was to ease the generation of the dump for language tool providers. However, this made it very hard for consumers of the dump to efficiently import them into a DB unless the DB format one to one mapped to the LSIF format. This version of the specification tries to balance this by requiring tools providers to emit additional events of when certain data is ready to be consumed. It also adds support to partition data per document.
+Up to version 0.4.0, the focus of the LSIF format was to ease the generation of the dump for language tool providers. However, this made it very hard for consumers of the dump to efficiently import them into a DB unless the DB format one to one mapped to the LSIF format. This version of the specification tries to balance this by requiring tools providers to emit additional events when certain data is ready to be consumed. It also adds support to partition data per document.
 
 Since 0.4.0 changes some of the LSIF aspects more deeply an old 0.3.x version of the specification is available [here](./versions/specification-0-3-x.md)
 
