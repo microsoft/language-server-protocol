@@ -226,7 +226,7 @@ interface X {
 let x: X;
 ```
 
-Running **Go to Definition** on `X` in `let x: X` will show a dialog that lets the user select between the two definitions of the `interface X`. The emitted JSON in this case looks like this:
+Running **Go to Definition** on `X` in `let x: X` will show a dialog that lets the user select between the two definitions of the `interface X`. The emitted JSON, in this case, looks like this:
 
 ```typescript
 { id : 38, type: "vertex", label: "definitionResult" }
