@@ -97,7 +97,7 @@ To bind the range to a document, we use a special edge labeled `contains` which 
 { id: 5, type: "edge", label: "contains", outV: 1, inVs: [4] }
 ```
 
-LSIF supports 1:n edges for the `contains` relationship which, in a graph can easily be mapped to n 1:1 edges. LSIF support this for two reasons: (a) to make the output more compact since a document usually contains hundreds of those ranges and (b) to easy the import and batching for consumers of a LSIF dump.
+LSIF supports 1:n edges for the `contains` relationship which, in a graph can easily be mapped to n 1:1 edges. LSIF supports this for two reasons: (a) to make the output more compact since a document usually contains hundreds of those ranges and (b) to easy the import and batching for consumers of a LSIF dump.
 
 To bind the hover result to the range, we use the same pattern as we used for the folding ranges. We emit a vertex representing the hover result and an edge representing the `textDocument/hover` request.
 
