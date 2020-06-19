@@ -212,7 +212,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 The definition result above has only one value (the range with id '9') and we could have emitted it directly. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
-- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
+- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using a 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
 
 Consider the following TypeScript example:
 
