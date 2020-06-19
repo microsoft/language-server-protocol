@@ -556,7 +556,7 @@ export interface FoldingRangeResult {
 
 ### Request: `textDocument/documentLink`
 
-Again, for document links, we define a result type and a corresponding edge to link it to a document. Since the link location usually appears in comments, the ranges don't denote any symbol declarations or references. We, therefore, inline the range into the result like we do with folding ranges.
+Again, for document links, we define a result type and a corresponding edge to link it to a document. Since the link location usually appears in comments, the ranges don't denote any symbol declarations or references. We, therefore, inline the range into the result as we do with folding ranges.
 
 ```typescript
 export interface DocumentLinkResult {
