@@ -234,7 +234,7 @@ export interface DefinitionResult {
 }
 ```
 
-Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+Optionally results can be emitted lazily, by omitting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Request: `textDocument/declaration`
 
@@ -483,7 +483,7 @@ interface ImplementationResult {
 }
 ```
 
-Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+Optionally results can be emitted lazily, by omitting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Request: `textDocument/typeDefinition`
 
@@ -521,7 +521,7 @@ The relevant emitted vertices and edges looks like this:
 { id: 38, type: "edge", label: "textDocument/typeDefinition", outV: 26, inV:37 }
 ```
 
-Optionally results can be emitted lazily, by ommiting `result` field and adding results later with an `item` edge (without `property`).
+Optionally results can be emitted lazily, by omitting `result` field and adding results later with an `item` edge (without `property`).
 
 ### Document requests
 
