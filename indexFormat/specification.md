@@ -78,7 +78,7 @@ The corresponding graph looks like this
 
 ### Ranges
 
-For requests that take a position as its input, we need to store the position as well. Usually, LSP requests return the same result for positions that point to the same word / name in a document. Take the following TypeScript example:
+For requests that take a position as its input, we need to store the position as well. Usually, LSP requests return the same result for positions that point to the same word/name in a document. Take the following TypeScript example:
 
 ```typescript
 function bar() {
