@@ -1000,7 +1000,7 @@ Ranges in LSIF have currently two meanings:
 1. they act as LSP request sensitive areas in a document (e.g. we use them to decide if for a given position a corresponding LSP request result exists)
 1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
 
-To fulfil the first LSIF specifies that ranges can't overlap or be the same. However, this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
+To fulfill the first LSIF specifies that ranges can't overlap or be the same. However, this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
 
 ## Meta Data Vertex
 
