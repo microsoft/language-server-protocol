@@ -1230,7 +1230,7 @@ export interface CodeLens {
 
 #### Code Lens Resolve
 
-The code lens resolve request is sent from the clien to the server to resolve the command for a given code lens item.
+The code lens resolve request is sent from the client to the server to resolve the command for a given code lens item.
 
 _Request_
 * method: 'codeLens/resolve'
