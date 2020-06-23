@@ -18,6 +18,7 @@ All new 3.16 features are tagged with a corresponding since version 3.16 text or
 
 - Call Hierarchy support
 - Semantic Token support
+- Better trace logging support
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
