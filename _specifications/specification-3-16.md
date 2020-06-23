@@ -5820,7 +5820,7 @@ export interface CallHierarchyOutgoingCall {
 * partial result: `CallHierarchyOutgoingCall[]`
 * error: code and message set in case an exception happens during the 'callHierarchy/outgoingCalls' request
 
-#### <a href="#semanticTokens" name="semanticTokens" class="anchor">Semantic Tokens (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_semanticTokens" name="textDocument_semanticTokens" class="anchor">Semantic Tokens (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.16.0*
 
