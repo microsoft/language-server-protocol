@@ -5820,6 +5820,377 @@ export interface CallHierarchyOutgoingCall {
 * partial result: `CallHierarchyOutgoingCall[]`
 * error: code and message set in case an exception happens during the 'callHierarchy/outgoingCalls' request
 
+#### <a href="#semanticTokens" name="semanticTokens" class="anchor">Semantic Tokens (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+The request is sent from the client to the server to resolve semantic tokens for a given file. Semantic tokens are used to add additional color informaiton to a file that depends on language specific symbol information. A semantic token request usually produces a large result. The protocol therefore supports encoding tokens with numbers. In addition optional support for deltas is available.
+
+_General Concepts_
+
+Tokens are represented using one token type combined with n token modiifiers. A token type is something like `class` or `function` and token modifiers are like `static` or `async`. The protocol defines a set of token types and modifiers but clients are allowed to extend these and announce the values they support in the corresponding client capability. The predefined values are:
+
+```typescript
+export enum SemanticTokenTypes {
+	namespace = 'namespace',
+	type = 'type',
+	class = 'class',
+	enum = 'enum',
+	interface = 'interface',
+	struct = 'struct',
+	typeParameter = 'typeParameter',
+	parameter = 'parameter',
+	variable = 'variable',
+	property = 'property',
+	enumMember = 'enumMember',
+	event = 'event',
+	function = 'function',
+	member = 'member',
+	macro = 'macro',
+	keyword = 'keyword',
+	modifier = 'modifier',
+	comment = 'comment',
+	string = 'string',
+	number = 'number',
+	regexp = 'regexp',
+	operator = 'operator'
+}
+
+export enum SemanticTokenModifiers {
+	declaration = 'declaration',
+	definition = 'definition',
+	readonly = 'readonly',
+	static = 'static',
+	deprecated = 'deprecated',
+	abstract = 'abstract',
+	async = 'async',
+	modification = 'modification',
+	documentation = 'documentation',
+	defaultLibrary = 'defaultLibrary'
+}
+```
+
+On the capability level types and modifiers are defined using strings. However the real encoding happens using numbers. The server therefore needs to let the client know which numbers it is using for which types and modifiers. They do so using a legend, which is defined as follows:
+
+```typescript
+export interface SemanticTokensLegend {
+	/**
+	 * The token types a server uses.
+	 */
+	tokenTypes: string[];
+
+	/**
+	 * The token modifiers a server uses.
+	 */
+	tokenModifiers: string[];
+}
+```
+
+Token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Since a token type can have n modifiers, multiple token modifiers can be set by using bit flags,
+so a `tokenModifier` value of `3` is first viewed as binary `0b00000011`, which means `[tokenModifiers[0], tokenModifiers[1]]` because bits 0 and 1 are set.
+
+There are different way how the position of a token can be expressed in a file. Absolute positions or relative positons. The protocol uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. These simplies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
+
+- at index `5*i`   - `deltaLine`: token line number, relative to the previous token
+- at index `5*i+1` - `deltaStart`: token start character, relative to the previous token (relative to 0 or the previous token's start if they are on the same line)
+- at index `5*i+2` - `length`: the length of the token. A token cannot be multiline.
+- at index `5*i+3` - `tokenType`: will be looked up in `SemanticTokensLegend.tokenTypes`. We currently ask that `tokenType` < 65536.
+- at index `5*i+4` - `tokenModifiers`: each set bit will be looked up in `SemanticTokensLegend.tokenModifiers`
+
+Lets look at a concrete example for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
+
+```typescript
+{ line: 2, startChar:  5, length: 3, tokenType: "property",  tokenModifiers: ["private", "static"] },
+{ line: 2, startChar: 10, length: 4, tokenType: "type",      tokenModifiers: [] },
+{ line: 5, startChar:  2, length: 7, tokenType: "class",     tokenModifiers: [] }
+```
+
+First of all, a legend must be devised. This legend must be provided up-front on registration and capture all possible token types and modifiers. For the example we use this legend:
+
+```typescript
+{
+   tokenTypes: ['property', 'type', 'class'],
+   tokenModifiers: ['private', 'static']
+}
+```
+
+The first transformation step is to encode `tokenType` and `tokenModifiers` as integers using the legend. As said, token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Multiple token modifiers can be set by using bit flags, so a `tokenModifier` value of `3` is first viewed as binary `0b00000011`, which means `[tokenModifiers[0], tokenModifiers[1]]` because bits 0 and 1 are set. Using this legend, the tokens now are:
+
+```typescript
+{ line: 2, startChar:  5, length: 3, tokenType: 0, tokenModifiers: 3 },
+{ line: 2, startChar: 10, length: 4, tokenType: 1, tokenModifiers: 0 },
+{ line: 5, startChar:  2, length: 7, tokenType: 2, tokenModifiers: 0 }
+```
+
+The next step is to represent each token relative to the previous token in the file. In this case, the second token is on the same line as the first token, so the `startChar` of the second token is made relative to the `startChar` of the first token, so it will be `10 - 5`. The third token is on a different line than the second token, so the `startChar` of the third token will not be altered:
+
+ ```typescript
+{ deltaLine: 2, deltaStartChar: 5, length: 3, tokenType: 0, tokenModifiers: 3 },
+{ deltaLine: 0, deltaStartChar: 5, length: 4, tokenType: 1, tokenModifiers: 0 },
+{ deltaLine: 3, deltaStartChar: 2, length: 7, tokenType: 2, tokenModifiers: 0 }
+ ```
+
+Finally, the last step is to inline each of the 5 fields for a token in a single array, which is a memory friendly representation:
+
+```typescript
+// 1st token,  2nd token,  3rd token
+[  2,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0 ]
+```
+
+Now assume that the user types a new empty line at the beginning of the file which results in the following tokens in the file:
+
+```typescript
+{ line: 3, startChar:  5, length: 3, tokenType: "property",  tokenModifiers: ["private", "static"] },
+{ line: 3, startChar: 10, length: 4, tokenType: "type",      tokenModifiers: [] },
+{ line: 6, startChar:  2, length: 7, tokenType: "class",     tokenModifiers: [] }
+```
+
+Running the same transformations as above will result in the following number array:
+
+```typescript
+// 1st token,  2nd token,  3rd token
+[  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]
+```
+
+The delta is now expressed on these number arrays without any form of interpretation what these numbers mean. This is comparable to the text document edits send from the server to the client to modify the content of a file. Those are character based and don't make any assumption about the meaning of the characters. So `[  2,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0 ]` can be transformed into `[  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]` using the following edit description: `{ start:  0, deleteCount: 1, data: [3] }` which tells the client to simply replace the first number (e.g. `2`) in the array with `3`.
+
+The protocol defines an additional token format capability to allow future extensions of the format. The only format that is currently specified is `relative` expressing that the tokens are described using relative positions.
+
+```typescript
+export namespace TokenFormat {
+	export const Relative: 'relative' = 'relative';
+}
+
+export type TokenFormat = 'relative';
+```
+
+The following client and server capabilities are defined for semantic tokens:
+
+_Client Capability_
+
+* property name (optional): `textDocument.semanticTokens`
+* property type: `SemanticTokensClientCapabilities` defined as follows:
+
+```typescript
+SemanticTokensClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * return value for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * Which requests the client supports and might send to the server.
+	 */
+	requests: {
+		/**
+		 * The client will send the `textDocument/semanticTokens/range` request if
+		 * the server provides a corresponding handler.
+		 */
+		range?: boolean | {
+		};
+
+		/**
+		 * The client will send the `textDocument/semanticTokens/full` request if
+		 * the server provides a corresponding handler.
+		 */
+		full?: boolean | {
+			/**
+			 * The client will send the `textDocument/semanticTokens/full/delta` request if
+			 * the server provides a corresponding handler.
+			*/
+			delta?: boolean
+		}
+	}
+
+	/**
+	 * The token types that the client supports.
+	 */
+	tokenTypes: string[];
+
+	/**
+	 * The token modifiers that the client supports.
+	 */
+	tokenModifiers: string[];
+
+	/**
+	 * The formats the clients supports.
+	 */
+	formats: TokenFormat[];
+}
+```
+
+_Server Capability_
+
+* property name (optional): `semanticTokensProvider`
+* property type: `SemanticTokensOptions | SemanticTokensRegistrationOptions` where `SemanticTokensOptions` is defined as follows:
+
+```typescript
+export interface SemanticTokensOptions extends WorkDoneProgressOptions {
+	/**
+	 * The legend used by the server
+	 */
+	legend: SemanticTokensLegend;
+
+	/**
+	 * Server supports providing semantic tokens for a sepcific range
+	 * of a document.
+	 */
+	range?: boolean | {
+	};
+
+	/**
+	 * Server supports providing semantic tokens for a full document.
+	 */
+	full?: boolean | {
+		/**
+		 * The server supports deltas for full documents.
+		 */
+		delta?: boolean;
+	}
+}
+```
+
+_Registration Options_: `SemanticTokensRegistrationOptions` defined as follows:
+
+```typescript
+export interface SemanticTokensRegistrationOptions extends TextDocumentRegistrationOptions, SemanticTokensOptions, StaticRegistrationOptions {
+}
+```
+
+The following sections describe the concrete requests available for semantic tokens.
+
+**Requesting semantic tokens for a whole file**
+
+_Request_:
+
+* method: `textDocument/semanticTokens/full`
+* params: `SemanticTokensParams` defined as follows:
+
+```typescript
+export interface SemanticTokensParams extends WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+}
+```
+
+_Response_:
+
+* result: `SemanticTokens | null` where `SemanticTokens` is defined as follows:
+```typescript
+export interface SemanticTokens {
+	/**
+	 * An optional result id. If provided and clients support delta updating
+	 * the client will include the result id in the next semantic token request.
+	 * A server can then instead of computing all semantic tokens again simply
+	 * send a delta.
+	 */
+	resultId?: string;
+
+	/**
+	 * The actual tokens.
+	 */
+	data: number[];
+}
+```
+* partial result: `SemanticTokensPartialResult` defines as follows:
+```typescript
+export interface SemanticTokensPartialResult {
+	data: number[];
+}
+```
+* error: code and message set in case an exception happens during the 'textDocument/semanticTokens/full' request
+
+**Requesting semantic token delta for a whole file**
+
+_Request_:
+
+* method: `textDocument/semanticTokens/full/delta`
+* params: `SemanticTokensDeltaParams` defined as follows:
+
+```typescript
+export interface SemanticTokensDeltaParams extends WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The previous result id.
+	 */
+	previousResultId: string;
+}
+```
+
+_Response_:
+
+* result: `SemanticTokens | SemanticTokensDelta | null` where `SemanticTokensDelta` is defined as follows:
+```typescript
+export interface SemanticTokensDelta {
+	readonly resultId?: string;
+	/**
+	 * The semantic token edits to transform a previous result into a new result.
+	 */
+	edits: SemanticTokensEdit[];
+}
+
+export interface SemanticTokensEdit {
+	/**
+	 * The start offset of the edit.
+	 */
+	start: number;
+
+	/**
+	 * The count of elements to remove.
+	 */
+	deleteCount: number;
+
+	/**
+	 * The elements to insert.
+	 */
+	data?: number[];
+}
+```
+* partial result: `SemanticTokensDeltaPartialResult` defines as follows:
+```typescript
+export interface SemanticTokensDeltaPartialResult {
+	edits: SemanticTokensEdit[]
+}
+```
+* error: code and message set in case an exception happens during the 'textDocument/semanticTokens/full/delta' request
+
+**Requesting semantic tokens for a range**
+
+When a user opens a file it can be benificial to only compute the semantic tokens for the visible range (faster rendering of the tokens in the user interface). If a server can compute these tokens faster than for the whole file it can provide a handler for the `textDocument/semanticTokens/range` request to handle this case special. Please note that if a client also announces that it will send the `textDocument/semanticTokens/range` server should implement this request as well to allow for flicker free scrolling and semantic coloring of a minimap.
+
+_Request_:
+
+* method: `textDocument/semanticTokens/range`
+* params: `SemanticTokensRangeParams` defined as follows:
+```typescript
+export interface SemanticTokensRangeParams extends WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The range the semantic tokens are requested for.
+	 */
+	range: Range;
+}
+```
+
+_Response_:
+
+* result: `SemanticTokens | null` where `SemanticTokensDelta`
+* partial result: `SemanticTokensPartialResult`
+* error: code and message set in case an exception happens during the 'textDocument/semanticTokens/range' request
+
+
 ### Implementation considerations
 
 Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
