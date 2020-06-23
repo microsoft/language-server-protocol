@@ -71,6 +71,8 @@
       anchor: partialResults
     - title: Partial Result Params
       anchor: partialResultParams
+    - title: Trace Value
+      anchor: traceValue
   - title: General Messages
     anchor: general
     children:
