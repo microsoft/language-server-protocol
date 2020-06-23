@@ -18,6 +18,7 @@ All new 3.16 features are tagged with a corresponding since version 3.16 text or
 
 - Call Hierarchy support
 - Semantic Token support
+- Better trace logging support
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
@@ -1289,6 +1290,15 @@ export interface PartialResultParams {
 }
 ```
 
+#### <a href="#traceValue" name="traceValue" class="anchor"> TraceValue </a>
+
+A `TraceValue` represents the level of verbosity with which the server systematically reports its execution trace using [$/logTrace](#logTrace) notifications.
+The initial trace value is set by the client at initialization and can be modified later using the [$/setTrace](#setTrace) notification.
+
+```typescript
+export type TraceValue = 'off' | 'message' | 'verbose'
+```
+
 ### Actual Protocol
 
 This section documents the actual language server protocol. It uses the following format:
@@ -1379,7 +1389,7 @@ interface InitializeParams extends WorkDoneProgressParams {
 	/**
 	 * The initial trace setting. If omitted trace is disabled ('off').
 	 */
-	trace?: 'off' | 'messages' | 'verbose';
+	trace?: TraceValue;
 
 	/**
 	 * The workspace folders configured in the client when the server starts.
@@ -1853,6 +1863,50 @@ The server should exit with `success` code 0 if the shutdown request has been re
 _Notification_:
 * method: 'exit'
 * params: void
+
+#### <a href="#logTrace" name="logTrace" class="anchor">LogTrace Notification (:arrow_left:)</a>
+
+A notification to log the trace of the server's execution.
+The amount and content of these notifications depends on the current `trace` configuration.
+If `trace` is `'off'`, the server should not send any `logTrace` notification.
+If `trace` is `'message'`, the server should not add the `'verbose'` field in the `logTraceParams`.
+
+`$/logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send [`window/logMessage`](#window_logMessage) notifications.
+
+
+_Notification_:
+* method: '$/logTrace'
+* params: `logTraceParams` defined as follows:
+
+```typescript
+interface logTraceParams {
+	/**
+	 * The message to be logged.
+	 */
+	message: string;
+	/**
+	 * Additional information that can be computed if the `trace` configuration is set to `'verbose'`
+	 */
+	verbose?: string;
+}
+```
+
+#### <a href="#setTrace" name="setTrace" class="anchor">SetTrace Notification (:arrow_right:)</a>
+
+A notification that should be used by the client to modify the trace setting of the server.
+
+_Notification_:
+* method: '$/setTrace'
+* params: `setTraceParams` defined as follows:
+
+```typescript
+interface setTraceParams {
+	/**
+	 * The new value that should be assigned to the trace setting.
+	 */
+	value: TraceValue;
+}
+```
 
 #### <a href="#window_showMessage" name="window_showMessage" class="anchor">ShowMessage Notification (:arrow_left:)</a>
 
