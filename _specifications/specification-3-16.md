@@ -6080,6 +6080,7 @@ export interface SemanticTokensParams extends WorkDoneProgressParams, PartialRes
 _Response_:
 
 * result: `SemanticTokens | null` where `SemanticTokens` is defined as follows:
+
 ```typescript
 export interface SemanticTokens {
 	/**
@@ -6096,12 +6097,15 @@ export interface SemanticTokens {
 	data: number[];
 }
 ```
+
 * partial result: `SemanticTokensPartialResult` defines as follows:
+
 ```typescript
 export interface SemanticTokensPartialResult {
 	data: number[];
 }
 ```
+
 * error: code and message set in case an exception happens during the 'textDocument/semanticTokens/full' request
 
 **Requesting semantic token delta for a whole file**
@@ -6128,6 +6132,7 @@ export interface SemanticTokensDeltaParams extends WorkDoneProgressParams, Parti
 _Response_:
 
 * result: `SemanticTokens | SemanticTokensDelta | null` where `SemanticTokensDelta` is defined as follows:
+
 ```typescript
 export interface SemanticTokensDelta {
 	readonly resultId?: string;
@@ -6154,12 +6159,15 @@ export interface SemanticTokensEdit {
 	data?: number[];
 }
 ```
+
 * partial result: `SemanticTokensDeltaPartialResult` defines as follows:
+
 ```typescript
 export interface SemanticTokensDeltaPartialResult {
 	edits: SemanticTokensEdit[]
 }
 ```
+
 * error: code and message set in case an exception happens during the 'textDocument/semanticTokens/full/delta' request
 
 **Requesting semantic tokens for a range**
@@ -6170,6 +6178,7 @@ _Request_:
 
 * method: `textDocument/semanticTokens/range`
 * params: `SemanticTokensRangeParams` defined as follows:
+
 ```typescript
 export interface SemanticTokensRangeParams extends WorkDoneProgressParams, PartialResultParams {
 	/**
