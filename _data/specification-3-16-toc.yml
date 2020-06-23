@@ -82,6 +82,10 @@
       anchor: shutdown
     - title: exit
       anchor: exit
+    - title: logTrace
+      anchor: logTrace
+    - title: setTrace
+      anchor: setTrace
   - title: Window
     anchor: window
     children:
