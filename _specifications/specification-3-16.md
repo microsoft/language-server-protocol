@@ -6283,8 +6283,10 @@ Language servers usually run in a separate process and client communicate with t
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (xx/xx/xxxx)</a>
 
+* Add support for tracing
 * Add semantic token support
 * Add call hierarchy support
+* Add client capbility for resolving text edits on completion items.
 * Add support for insert and replace ranges on `CompletionItem`
 * Add support for diagnostic links
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`
