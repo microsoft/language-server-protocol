@@ -2513,6 +2513,19 @@ interface WorkspaceSymbolClientCapabilities {
 		 */
 		valueSet?: SymbolKind[];
 	}
+
+	/**
+	 * The client supports tags on `SymbolInformation`.
+	 * Clients supporting tags have to handle unknown tags gracefully.
+	 *
+	 * @since 3.16.0
+	 */
+	tagSupport?: {
+		/**
+		 * The tags supported by the client.
+		 */
+		valueSet: SymbolTag[]
+	}
 }
 ```
 
@@ -4429,6 +4442,20 @@ export interface DocumentSymbolClientCapabilities {
 	 * The client supports hierarchical document symbols.
 	 */
 	hierarchicalDocumentSymbolSupport?: boolean;
+
+	/**
+	 * The client supports tags on `SymbolInformation`. Tags are supported on
+	 * `DocumentSymbol` if `hierarchicalDocumentSymbolSupport` is set tot true.
+	 * Clients supporting tags have to handle unknown tags gracefully.
+	 *
+	 * @since 3.16.0
+	 */
+	tagSupport?: {
+		/**
+		 * The tags supported by the client.
+		 */
+		valueSet: SymbolTag[]
+	}
 }
 ```
 
@@ -4497,6 +4524,22 @@ export namespace SymbolKind {
 }
 
 /**
+ * Symbol tags are extra annotations that tweak the rendering of a symbol.
+ *
+ * @since 3.16
+ */
+export namespace SymbolTag {
+
+	/**
+	 * Render a symbol as obsolete, usually using a strike-out.
+	 */
+	export const Deprecated: 1 = 1;
+}
+
+export type SymbolTag = 1;
+
+
+/**
  * Represents programming constructs like variables, classes, interfaces etc. that appear in a document. Document symbols can be
  * hierarchical and they have two ranges: one that encloses its definition and one that points to its most interesting range,
  * e.g. the range of an identifier.
@@ -4520,7 +4563,16 @@ export interface DocumentSymbol {
 	kind: SymbolKind;
 
 	/**
+	 * Tags for this completion item.
+	 *
+	 * @since 3.16.0
+	 */
+	tags?: SymbolTag[];
+
+	/**
 	 * Indicates if this symbol is deprecated.
+	 *
+	 * @deprecated Use tags instead
 	 */
 	deprecated?: boolean;
 
@@ -4559,7 +4611,16 @@ export interface SymbolInformation {
 	kind: SymbolKind;
 
 	/**
+	 * Tags for this completion item.
+	 *
+	 * @since 3.16.0
+	 */
+	tags?: SymbolTag[];
+
+	/**
 	 * Indicates if this symbol is deprecated.
+	 *
+	 * @deprecated Use tags instead
 	 */
 	deprecated?: boolean;
 
