@@ -6165,7 +6165,7 @@ export interface SemanticTokensOptions extends WorkDoneProgressOptions {
 	legend: SemanticTokensLegend;
 
 	/**
-	 * Server supports providing semantic tokens for a sepcific range
+	 * Server supports providing semantic tokens for a specific range
 	 * of a document.
 	 */
 	range?: boolean | {
