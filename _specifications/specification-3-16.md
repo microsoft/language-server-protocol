@@ -5787,7 +5787,7 @@ _Client Capability_:
 * property type: `CallHierarchyClientCapabilities` defined as follows:
 
 ```typescript
-CallHierarchyClientCapabilities {
+interface CallHierarchyClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration. If this is set to `true`
 	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
@@ -6055,11 +6055,11 @@ The first transformation step is to encode `tokenType` and `tokenModifiers` as i
 
 The next step is to represent each token relative to the previous token in the file. In this case, the second token is on the same line as the first token, so the `startChar` of the second token is made relative to the `startChar` of the first token, so it will be `10 - 5`. The third token is on a different line than the second token, so the `startChar` of the third token will not be altered:
 
- ```typescript
+```typescript
 { deltaLine: 2, deltaStartChar: 5, length: 3, tokenType: 0, tokenModifiers: 3 },
 { deltaLine: 0, deltaStartChar: 5, length: 4, tokenType: 1, tokenModifiers: 0 },
 { deltaLine: 3, deltaStartChar: 2, length: 7, tokenType: 2, tokenModifiers: 0 }
- ```
+```
 
 Finally, the last step is to inline each of the 5 fields for a token in a single array, which is a memory friendly representation:
 
@@ -6103,7 +6103,7 @@ _Client Capability_
 * property type: `SemanticTokensClientCapabilities` defined as follows:
 
 ```typescript
-SemanticTokensClientCapabilities {
+interface SemanticTokensClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration. If this is set to `true`
 	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
