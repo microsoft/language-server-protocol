@@ -5955,7 +5955,7 @@ export interface CallHierarchyOutgoingCall {
 
 > *Since version 3.16.0*
 
-The request is sent from the client to the server to resolve semantic tokens for a given file. Semantic tokens are used to add additional color informaiton to a file that depends on language specific symbol information. A semantic token request usually produces a large result. The protocol therefore supports encoding tokens with numbers. In addition optional support for deltas is available.
+The request is sent from the client to the server to resolve semantic tokens for a given file. Semantic tokens are used to add additional color information to a file that depends on language specific symbol information. A semantic token request usually produces a large result. The protocol therefore supports encoding tokens with numbers. In addition optional support for deltas is available.
 
 _General Concepts_
 
