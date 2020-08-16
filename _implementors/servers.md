@@ -55,7 +55,7 @@ index: 1
 | Gluon | [Gluon](https://github.com/gluon-lang/gluon) | [Gluon Language Server](https://github.com/gluon-lang/gluon_language-server) | Rust |
 | Go | [Go Team](https://github.com/golang/tools) | [gopls](https://github.com/golang/tools/tree/master/gopls) | Go |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
-| [GraphQL](http://graphql.org/) | GraphQL community | [Server in GraphQL](https://github.com/graphql/graphql-language-service) |  JavaScript |
+| [GraphQL](http://graphql.org/) | [GraphQL Foundation](https://foundation.graphql.org/) | [Official GraphQL Language Server](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-server) |  TypeScript |
 | [GraphQL](http://graphql.org/) | [Mayank Agarwal (@Mayank1791989)](https://github.com/Mayank1791989) | [GQL Language Server](https://github.com/Mayank1791989/gql-language-server) | JavaScript |
 | Groovy | [Palantir](https://github.com/palantir) | [groovy-language-server](https://github.com/palantir/groovy-language-server/) | Java |
 | [Groovy](http://groovy-lang.org/) | [Prominic.NET](https://moonshine-ide.com/) | [Groovy Language Server](https://github.com/prominic/groovy-language-server) | Java |
