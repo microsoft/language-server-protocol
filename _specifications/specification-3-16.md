@@ -1532,6 +1532,13 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.15.0
 	 */
 	selectionRange?: SelectionRangeClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/semanticTokens/*` requests.
+	 *
+	 * @since 3.16.0
+	 */
+	semanticTokens?: SemanticTokensClientCapabilities;
 }
 ```
 
@@ -1805,6 +1812,13 @@ interface ServerCapabilities {
 	 * @since 3.15.0
 	 */
 	selectionRangeProvider?: boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions;
+
+	/**
+	 * The server provides semantic tokens support.
+	 *
+	 * @since 3.16.0
+	 */
+	semanticTokensProvider?: SemanticTokensOptions | SemanticTokensRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
