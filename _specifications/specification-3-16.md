@@ -6015,6 +6015,18 @@ export enum SemanticTokenModifiers {
 }
 ```
 
+The protocol defines an additional token format capability to allow future extensions of the format. The only format that is currently specified is `relative` expressing that the tokens are described using relative positions (see Integer Encoding for Tokens below).
+
+```typescript
+export namespace TokenFormat {
+	export const Relative: 'relative' = 'relative';
+}
+
+export type TokenFormat = 'relative';
+```
+
+_Integer Encoding for Tokens_
+
 On the capability level types and modifiers are defined using strings. However the real encoding happens using numbers. The server therefore needs to let the client know which numbers it is using for which types and modifiers. They do so using a legend, which is defined as follows:
 
 ```typescript
@@ -6034,7 +6046,7 @@ export interface SemanticTokensLegend {
 Token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Since a token type can have n modifiers, multiple token modifiers can be set by using bit flags,
 so a `tokenModifier` value of `3` is first viewed as binary `0b00000011`, which means `[tokenModifiers[0], tokenModifiers[1]]` because bits 0 and 1 are set.
 
-There are different way how the position of a token can be expressed in a file. Absolute positions or relative positons. The protocol uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. These simplies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
+There are different way how the position of a token can be expressed in a file. Absolute positions or relative positons. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
 
 - at index `5*i`   - `deltaLine`: token line number, relative to the previous token
 - at index `5*i+1` - `deltaStart`: token start character, relative to the previous token (relative to 0 or the previous token's start if they are on the same line)
@@ -6099,19 +6111,10 @@ Running the same transformations as above will result in the following number ar
 
 The delta is now expressed on these number arrays without any form of interpretation what these numbers mean. This is comparable to the text document edits send from the server to the client to modify the content of a file. Those are character based and don't make any assumption about the meaning of the characters. So `[  2,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0 ]` can be transformed into `[  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]` using the following edit description: `{ start:  0, deleteCount: 1, data: [3] }` which tells the client to simply replace the first number (e.g. `2`) in the array with `3`.
 
-The protocol defines an additional token format capability to allow future extensions of the format. The only format that is currently specified is `relative` expressing that the tokens are described using relative positions.
-
-```typescript
-export namespace TokenFormat {
-	export const Relative: 'relative' = 'relative';
-}
-
-export type TokenFormat = 'relative';
-```
-
-The following client and server capabilities are defined for semantic tokens:
 
 _Client Capability_
+
+The following client capabilities are defined for semantic tokens:
 
 * property name (optional): `textDocument.semanticTokens`
 * property type: `SemanticTokensClientCapabilities` defined as follows:
@@ -6167,6 +6170,8 @@ interface SemanticTokensClientCapabilities {
 ```
 
 _Server Capability_
+
+The following server capabilities are defined for semantic tokens:
 
 * property name (optional): `semanticTokensProvider`
 * property type: `SemanticTokensOptions | SemanticTokensRegistrationOptions` where `SemanticTokensOptions` is defined as follows:
@@ -6268,7 +6273,8 @@ export interface SemanticTokensDeltaParams extends WorkDoneProgressParams, Parti
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The previous result id.
+	 * The result id of a previous response. The result Id can either point to a full response
+	 * or a delta response depending on what was recevied last.
 	 */
 	previousResultId: string;
 }
