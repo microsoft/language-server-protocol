@@ -17,6 +17,10 @@ body {
 	padding: 40px 0;
 }
 
+.bg-primary {
+	background-color: #2753e3 !important;
+  }
+
 .header-container {
   color: #fff;
 
@@ -286,7 +290,7 @@ pre[class=highlight] {
 }
 
 .highlight .mi {
-	color: #F5871F
+	color: #85450a
 }
 
 .highlight .mo {
@@ -306,7 +310,7 @@ pre[class=highlight] {
 }
 
 .highlight .s2 {
-	color: #718C00
+	color: #5b7201
 }
 
 .highlight .se {
@@ -442,6 +446,22 @@ pre[class=highlight] {
 
 .navbar-dark .navbar-nav .nav-link:hover {
     color: rgba(255,255,255,0.5);
+}
+
+.nav .nav-link {
+	color: #2753e3 !important;
+  }  
+
+.nav .nav-link:hover {
+	color: #1034a8 !important;
+}  
+
+a { 
+	color: #2753e3;
+}  
+
+a:hover {
+	color: #1034a8
 }
 
 .navbar-dark .navbar-nav .nav-link {

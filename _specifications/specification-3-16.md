@@ -2700,13 +2700,13 @@ export interface ApplyWorkspaceEditResponse {
 
 Client support for `textDocument/didOpen`, `textDocument/didChange` and `textDocument/didClose` notifications is mandatory in the protocol and clients can not opt out supporting them. This includes both full and incremental synchronization in the `textDocument/didChange` notification. In addition a server must either implement all three of them or none. Their capabilities are therefore controlled via a combined client and server capability.
 
-<a href="#textDocument_synchronization_cc" name="textDocument_synchronization_cc" class="anchor"></a>_Client Capability_:
+<a href="#textDocument_synchronization_cc" name="textDocument_synchronization_cc" class="anchor">_Client Capability_:</a>
 * property path (optional): `textDocument.synchronization.dynamicRegistration`
 * property type: `boolean`
 
 Controls whether text document synchronization supports dynamic registration.
 
-<a href="#textDocument_synchronization_sc" name="textDocument_synchronization_sc" class="anchor"></a>_Server Capability_:
+<a href="#textDocument_synchronization_sc" name="textDocument_synchronization_sc" class="anchor">_Server Capability_:</a>
 * property path (optional): `textDocumentSync`
 * property type: `TextDocumentSyncKind | TextDocumentSyncOptions`. The below definition of the `TextDocumentSyncOptions` only covers the properties specific to the open, change and close notifications. A complete definition covering all properties can be found [here](#textDocument_didClose):
 
