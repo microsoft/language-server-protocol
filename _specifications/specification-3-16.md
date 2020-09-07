@@ -5527,6 +5527,13 @@ export interface RenameClientCapabilities {
 	 * @since version 3.12.0
 	 */
 	prepareSupport?: boolean;
+
+	/**
+	 * Client supports the default behavior result (`{ defaultBehavior: boolean }`).
+	 *
+	 * @since version 3.16.0
+	 */
+	prepareSupportDefaultBehavior?: boolean;
 }
 ```
 
@@ -5585,7 +5592,7 @@ export interface PrepareRenameParams extends TextDocumentPositionParams {
 ```
 
 _Response_:
-* result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
+* result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `{ defaultBehavior: boolean }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16) the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
 * error: code and message set in case the element can't be renamed. Clients should show the information in their user interface.
 
 #### <a href="#textDocument_foldingRange" name="textDocument_foldingRange" class="anchor">Folding Range Request (:leftwards_arrow_with_hook:)</a>
