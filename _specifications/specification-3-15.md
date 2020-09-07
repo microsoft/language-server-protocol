@@ -14,7 +14,7 @@ This document describes the 3.15.x version of the language server protocol. An i
 
 ## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.15 </a>
 
-All new 3.15 features are tagged with a corresponding since version 3.15 text or in JSDoc using `@since 3.15.0` annotation. Major new feature are:
+All new 3.15 features are tagged with a corresponding since version 3.15 text or in JSDoc using `@since 3.15.0` annotation. Major new features are:
 
 - [general progress support](#progress), [work done progress](#workDoneProgress) and [partial result progress](#partialResults)
 - support for [selection ranges](#textDocument_selectionRange)
