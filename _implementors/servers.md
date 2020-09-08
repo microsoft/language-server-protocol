@@ -136,7 +136,7 @@ index: 1
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
 | WXML| [Qiming Zhao](https://github.com/chemzqm)| [wxml-languageserver](https://github.com/chemzqm/wxml-languageserver) | TypeScript |
 | XML | IBM | [XML Language Server](https://github.com/microclimate-devops/xml-language-server) | Java |
-| XML | [Red Hat Developers](https://github.com/redhat-developer) and [Angelo ZERR](https://github.com/angelozerr/) | [XML Language Server (LSP4XML)](https://github.com/angelozerr/lsp4xml/tree/master/org.eclipse.lsp4xml) | Java |
+| XML | [Red Hat Developers](https://github.com/redhat-developer) and [Angelo ZERR](https://github.com/angelozerr/) | [XML Language Server (LemMinX)](https://github.com/eclipse/lemminx) | Java |
 | [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext](https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.xtend)| Java |
 | YAML (with JSON schemas)| [Adam Voss](https://github.com/adamvoss) | [vscode-yaml-languageservice](https://github.com/adamvoss/vscode-yaml-languageservice) | TypeScript |
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) | TypeScript |
