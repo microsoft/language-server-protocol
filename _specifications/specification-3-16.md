@@ -19,6 +19,7 @@ All new 3.16 features are tagged with a corresponding since version 3.16 text or
 - Call Hierarchy support
 - Semantic Token support
 - Better trace logging support
+- Moniker support
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
@@ -6357,6 +6358,123 @@ _Response_:
 * partial result: `SemanticTokensPartialResult`
 * error: code and message set in case an exception happens during the 'textDocument/semanticTokens/range' request
 
+#### <a href="#textDocument_moniker" name="textDocument_moniker" class="anchor">Monikers (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+Language Server Index Format (LSIF) introduced the concept of symbol monikers to help associate symbols across different indexes. This request adds capability for LSP server implementations to provide the same symbol moniker information given a text document position. Clients can utilize this method to get the moniker at the current location in a file user is editing and do further code navigation queries in other services that rely on LSIF indexes and link symbols together.
+
+_Client Capabilities_:
+
+```ts
+/**
+ * Moniker client capabilities
+ */
+textDocument?: {
+	/**
+	 * The client has support for moniker options.
+	 */
+	moniker?: {
+		dynamicRegistration?: boolean;
+	}
+}
+```
+
+##### Moniker Request
+
+The `textDocument/moniker` request is sent from the client to the server to get the symbol monikers for a given text document position. An array of Moniker types is returned as response to indicate possible monikers at the given location. If no monikers can be calculated, an empty array should be returned.
+
+_Request_:
+
+* method: `textDocument/moniker`
+* params: `TextDocumentPositionParams`
+
+_Response_:
+
+* result: `Moniker[]` where `Moniker` is defined as:
+
+```typescript
+/**
+  * Moniker uniqueness level to define scope of the moniker.
+  */
+export enum UniquenessLevel {
+	/**
+	 * The moniker is only unique inside a document
+	 */
+	document = 'document',
+
+	/**
+	 * The moniker is unique inside a project for which a dump got created
+	 */
+	project = 'project',
+
+	/**
+	 * The moniker is unique inside the group to which a project belongs
+	 */
+	group = 'group',
+
+	/**
+	 * The moniker is unique inside the moniker scheme.
+	 */
+	scheme = 'scheme',
+
+	/**
+	 * The moniker is globally unique
+	 */
+	global = 'global'
+}
+
+/**
+ * The moniker kind.
+ */
+export enum MonikerKind {
+	/**
+	 * The moniker represent a symbol that is imported into a project
+	 */
+	import = 'import',
+
+	/**
+	 * The moniker represents a symbol that is exported from a project
+	 */
+	export = 'export',
+
+	/**
+	 * The moniker represents a symbol that is local to a project (e.g. a local
+	 * variable of a function, a class not visible outside the project, ...)
+	 */
+	local = 'local'
+}
+
+/**
+ * Moniker definition to match LSIF 0.5 moniker definition.
+ */
+export interface Moniker {
+	/**
+	 * The scheme of the moniker. For example tsc or .Net
+	 */
+	scheme: string;
+
+	/**
+	 * The identifier of the moniker. The value is opaque in LSIF however
+	 * schema owners are allowed to define the structure if they want.
+	 */
+	identifier: string;
+
+	/**
+	 * The scope in which the moniker is unique
+	 */
+	unique: UniquenessLevel;
+
+	/**
+	 * The moniker kind if known.
+	 */
+	kind?: MonikerKind;
+}
+```
+
+##### Notes
+
+Server implementations of this method should ensure that the moniker calculation matches to those used in the corresponding LSIF implementation to ensure symbols can be associated correctly across IDE sessions and LSIF indexes.
 
 ### Implementation considerations
 
@@ -6378,6 +6496,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for insert and replace ranges on `CompletionItem`
 * Add support for diagnostic links
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`
+* Add support for moniker request method
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
