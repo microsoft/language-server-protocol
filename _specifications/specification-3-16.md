@@ -144,10 +144,49 @@ export namespace ErrorCodes {
 	export const MethodNotFound: number = -32601;
 	export const InvalidParams: number = -32602;
 	export const InternalError: number = -32603;
-	export const serverErrorStart: number = -32099;
-	export const serverErrorEnd: number = -32000;
+
+	/**
+	 * This is the start range of JSON RPC reserved error codes.
+	 * It doesn't denote a real error code. No error codes should
+	 * be defined between the start and end range. For backwards
+	 * compatibility the `ServerNotInitialized` and the `UnknownErrorCode`
+	 * are left in the range.
+	 *
+	 * @since 3.16.0
+	*/
+	export const jsonrpcReservedErrorRangeStart: number = -32099;
+	/** @deprecated use  jsonrpcReservedErrorRangeStart */
+	export const serverErrorStart: number = jsonrpcReservedErrorRangeStart;
+
 	export const ServerNotInitialized: number = -32002;
 	export const UnknownErrorCode: number = -32001;
+
+	/**
+	 * This is the start range of JSON RPC reserved error codes.
+	 * It doesn't denote a real error code.
+	*/
+	export const jsonrpcReservedErrorRangeEnd = -32000;
+	/** @deprecated use  jsonrpcReservedErrorRangeEnd */
+	export const serverErrorEnd: number = jsonrpcReservedErrorRangeEnd;
+
+	/**
+	 * This is the start range of LSP reserved error codes.
+	 * It doesn't denote a real error code.
+	 *
+	 * @since 3.16.0
+	 */
+	export const lspReservedErrorRangeStart: number = -32899;
+
+	export const ContentModified: number = -32801;
+	export const RequestCancelled: number = -32800;
+
+	/**
+	 * This is the end range of LSP reserved error codes.
+	 * It doesn't denote a real error code.
+	 *
+	 * @since 3.16.0
+	 */
+	export const lspReservedErrorRangeEnd: number = -32800;
 
 	// Defined by the protocol.
 	export const RequestCancelled: number = -32800;
