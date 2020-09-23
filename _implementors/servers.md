@@ -45,7 +45,7 @@ index: 1
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
 | Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) | Erlang |
 | [Erlang](https://www.erlang.org) | [Roberto Aloi](https://github.com/robertoaloi) and [Contributors](https://github.com/erlang-ls/erlang_ls/graphs/contributors) | [erlang_ls](https://github.com/erlang-ls/erlang_ls) | Erlang |
-| Elixir| [Jake Becker](https://github.com/JakeBecker) | [elixir-ls](https://github.com/JakeBecker/elixir-ls) | Elixir |
+| Elixir| [Elixir LSP](https://github.com/elixir-lsp) | [elixir-ls](https://github.com/elixir-lsp/elixir-ls) | Elixir |
 | Elm| [Kolja Lampe](https://github.com/razzeee) | [elmLS](https://github.com/elm-tooling/elm-language-server) | Typescript |
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
