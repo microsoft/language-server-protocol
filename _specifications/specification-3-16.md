@@ -4759,7 +4759,7 @@ export interface CodeActionClientCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-	disabledSupupport?: boolean;
+	disabledSupport?: boolean;
 }
 ```
 
