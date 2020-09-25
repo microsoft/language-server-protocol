@@ -5036,6 +5036,10 @@ export interface CodeAction {
 The request is sent from the client to the server to resolve additional information for a given code action. This is usally used to compute
 the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
 
+_Client Capability_:
+* property name (optional): `textDocument.codeAction.resolveSupport`
+* property type: `{ properties: string[]; }`
+
 _Request_:
 * method: 'codeAction/resolve'
 * params: `CodeAction`
@@ -6479,34 +6483,58 @@ _Response_:
 
 Language Server Index Format (LSIF) introduced the concept of symbol monikers to help associate symbols across different indexes. This request adds capability for LSP server implementations to provide the same symbol moniker information given a text document position. Clients can utilize this method to get the moniker at the current location in a file user is editing and do further code navigation queries in other services that rely on LSIF indexes and link symbols together.
 
+The `textDocument/moniker` request is sent from the client to the server to get the symbol monikers for a given text document position. An array of Moniker types is returned as response to indicate possible monikers at the given location. If no monikers can be calculated, an empty array or `null` should be returned.
+
 _Client Capabilities_:
 
-```ts
-/**
- * Moniker client capabilities
- */
-textDocument?: {
+* property name (optional): `textDocument.moniker`
+* property type: `MonikerClientCapabilities` defined as follows:
+
+```typescript
+interface MonikerClientCapabilities {
 	/**
-	 * The client has support for moniker options.
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * return value for the corresponding server capability as well.
 	 */
-	moniker?: {
-		dynamicRegistration?: boolean;
-	}
+	dynamicRegistration?: boolean;
 }
 ```
 
-##### Moniker Request
+_Server Capability_:
 
-The `textDocument/moniker` request is sent from the client to the server to get the symbol monikers for a given text document position. An array of Moniker types is returned as response to indicate possible monikers at the given location. If no monikers can be calculated, an empty array should be returned.
+* property name (optional): `monikerProvider`
+* property type: `boolean | MonikerOptions | MonikerRegistrationOptions`  is defined as follows:
+
+```typescript
+export interface MonikerOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `MonikerRegistrationOptions` defined as follows:
+
+```typescript
+export interface MonikerRegistrationOptions extends TextDocumentRegistrationOptions, MonikerOptions {
+}
+```
 
 _Request_:
 
 * method: `textDocument/moniker`
-* params: `TextDocumentPositionParams`
+* params: `MonikerParams` defined as follows:
+
+```typescript
+export interface MonikerParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+}
+```
 
 _Response_:
 
-* result: `Moniker[]` where `Moniker` is defined as:
+* result: `Moniker[] | null`
+* partial result: `Moniker[]`
+* error: code and message set in case an exception happens during the 'textDocument/semanticTokens/range' request
+
+`Moniker` is defined as follows:
 
 ```typescript
 /**
@@ -6611,7 +6639,9 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for insert and replace ranges on `CompletionItem`
 * Add support for diagnostic links
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`
-* Add support for moniker request method
+* Add support for moniker request method.
+* Add support for code action disabled property.
+* Add support for code action resolve request.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 

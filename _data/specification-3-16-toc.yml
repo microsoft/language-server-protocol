@@ -217,6 +217,8 @@
       anchor: callHierarchy_outgoingCalls
     - title: semantic tokens
       anchor: textDocument_semanticTokens
+    - title: moniker
+      anchor: textDocument_moniker
   - title: Change Log
     anchor: changeLog
     children:
