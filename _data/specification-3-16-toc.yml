@@ -181,6 +181,8 @@
       anchor: textDocument_documentSymbol
     - title: codeAction
       anchor: textDocument_codeAction
+    - title: codeAction resolve
+      anchor: codeAction_resolve
     - title: codeLens
       anchor: textDocument_codeLens
     - title: codeLens resolve

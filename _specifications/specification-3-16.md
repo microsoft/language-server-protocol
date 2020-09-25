@@ -20,6 +20,8 @@ All new 3.16 features are tagged with a corresponding since version 3.16 text or
 - Semantic Token support
 - Better trace logging support
 - Moniker support
+- Code Action disabled support
+- Code Action resolve support
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
@@ -145,14 +147,49 @@ export namespace ErrorCodes {
 	export const MethodNotFound: number = -32601;
 	export const InvalidParams: number = -32602;
 	export const InternalError: number = -32603;
-	export const serverErrorStart: number = -32099;
-	export const serverErrorEnd: number = -32000;
+
+	/**
+	 * This is the start range of JSON RPC reserved error codes.
+	 * It doesn't denote a real error code. No LSP error codes should
+	 * be defined between the start and end range. For backwards
+	 * compatibility the `ServerNotInitialized` and the `UnknownErrorCode`
+	 * are left in the range.
+	 *
+	 * @since 3.16.0
+	*/
+	export const jsonrpcReservedErrorRangeStart: number = -32099;
+	/** @deprecated use  jsonrpcReservedErrorRangeStart */
+	export const serverErrorStart: number = jsonrpcReservedErrorRangeStart;
+
 	export const ServerNotInitialized: number = -32002;
 	export const UnknownErrorCode: number = -32001;
 
-	// Defined by the protocol.
-	export const RequestCancelled: number = -32800;
+	/**
+	 * This is the start range of JSON RPC reserved error codes.
+	 * It doesn't denote a real error code.
+	*/
+	export const jsonrpcReservedErrorRangeEnd = -32000;
+	/** @deprecated use  jsonrpcReservedErrorRangeEnd */
+	export const serverErrorEnd: number = jsonrpcReservedErrorRangeEnd;
+
+	/**
+	 * This is the start range of LSP reserved error codes.
+	 * It doesn't denote a real error code.
+	 *
+	 * @since 3.16.0
+	 */
+	export const lspReservedErrorRangeStart: number = -32899;
+
 	export const ContentModified: number = -32801;
+	export const RequestCancelled: number = -32800;
+
+	/**
+	 * This is the end range of LSP reserved error codes.
+	 * It doesn't denote a real error code.
+	 *
+	 * @since 3.16.0
+	 */
+	export const lspReservedErrorRangeEnd: number = -32800;
 }
 ```
 #### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
@@ -3178,7 +3215,8 @@ interface PublishDiagnosticsParams {
 
 #### <a href="#textDocument_completion" name="textDocument_completion" class="anchor">Completion Request (:leftwards_arrow_with_hook:)</a>
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. By default the request can only delay the computation of the `detail` and `documentation` properties. Whether the server can delay the computation of `additionalTextEdits` depends on the presence of the `resolveAdditionalTextEditsSupport` client capability. If provided and set to `true` a server can delay the computation as well. Other properties like `sortText`, `filterText`, `insertText` and `textEdit` must be provided in the `textDocument/completion` response and must not be changed during resolve.
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. By default the request can only delay the computation of the `detail` and `documentation` properties. Since 3.16.0 the client
+can signale that it can resolve more properties lazily. This is done using the `completionItem#resolveSupport` client capability which list all properties that can be filled in during a 'completionItem/resolve' request. All other properties (usually `sortText`, `filterText`, `insertText` and `textEdit`) must be provided in the `textDocument/completion` response and must not be changed during resolve.
 
 _Client Capability_:
 * property name (optional): `textDocument.completion`
@@ -3251,12 +3289,18 @@ export interface CompletionClientCapabilities {
 		insertReplaceSupport?: boolean;
 
 		/**
-		 * Client supports to resolve `additionalTextEdits` in the `completionItem/resolve`
-		 * request. So servers can postpone computing them.
+		 * Indicates which properties a client can resolve lazily on a completion
+		 * item. Before version 3.16.0 only the predefined properties `documentation`
+		 * and `details` could be resolved lazily.
 		 *
 		 * @since 3.16.0 - Proposed state
 		 */
-		resolveAdditionalTextEditsSupport?: boolean;
+		resolveSupport?: {
+			/**
+			 * The properties that a client can resolve lazily.
+			 */
+			properties: string[];
+		};
 	};
 
 	completionItemKind?: {
@@ -4667,9 +4711,9 @@ export interface SymbolInformation {
 
 #### <a href="#textDocument_codeAction" name="textDocument_codeAction" class="anchor">Code Action Request (:leftwards_arrow_with_hook:)</a>
 
-The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. To ensure that a server is useful in many clients the commands specified in a code actions should be handled by the server and not by the client (see `workspace/executeCommand` and `ServerCapabilities.executeCommandProvider`). If the client supports providing edits with a code action then the mode should be used.
+The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. To ensure that a server is useful in many clients the commands specified in a code actions should be handled by the server and not by the client (see `workspace/executeCommand` and `ServerCapabilities.executeCommandProvider`). If the client supports providing edits with a code action then that mode should be used.
 
-When the command is selected the server should be contacted again (via the `workspace/executeCommand`) request to execute the command.
+Since 3.16.0 a client can offer a server to delay the computation of code action properties during a 'textDocument/codeAction' request in case they are expensive to compute (for example the `edit` property). Clients signal this through the `codeAction.resolveSupport` capability which list all properties a client can resolve lazily. The server capability `codeActionProvider.resolveSupport` signals that a server will offer a `codeAction/resolve` route.
 
 > *Since version 3.8.0:* support for CodeAction literals to enable the following scenarios:
 
@@ -4714,9 +4758,30 @@ export interface CodeActionClientCapabilities {
 
 	/**
 	 * Whether code action supports the `isPreferred` property.
+	 *
 	 * @since 3.15.0
 	 */
 	isPreferredSupport?: boolean;
+
+	/**
+	 * Whether code action supports the `disabled` property.
+	 *
+	 * @since 3.16.0
+	 */
+	disabledSupport?: boolean;
+
+	/**
+	 * Whether the client support resolving additional code action
+	 * properties via a separate `codeAction/resolve` request.
+	 *
+	 * @since 3.16.0
+	 */
+	 resolveSupport?: {
+		 /**
+		  * The properties that a client can resolve lazily.
+		  */
+		 properties: string[];
+	 };
 }
 ```
 
@@ -4733,6 +4798,14 @@ export interface CodeActionOptions extends WorkDoneProgressOptions {
 	 * may list out every specific kind they provide.
 	 */
 	codeActionKinds?: CodeActionKind[];
+
+	/**
+	 * The server provides support to resolve additional
+	 * information for a code action.
+	 *
+	 * @since 3.16.0
+	 */
+	resolveProvider?: boolean;
 }
 ```
 
@@ -4914,6 +4987,33 @@ export interface CodeAction {
 	isPreferred?: boolean;
 
 	/**
+	 * Marks that the code action cannot currently be applied.
+	 *
+	 * Clients should follow the following guidelines regarding disabled code actions:
+	 *
+	 *   - Disabled code actions are not shown in automatic [lightbulb](https://code.visualstudio.com/docs/editor/editingevolved#_code-action)
+	 *     code action menu.
+	 *
+	 *   - Disabled actions are shown as faded out in the code action menu when the user request a more specific type
+	 *     of code action, such as refactorings.
+	 *
+	 *   - If the user has a [keybinding](https://code.visualstudio.com/docs/editor/refactoring#_keybindings-for-code-actions)
+	 *     that auto applies a code action and only a disabled code actions are returned, the client should show the user an
+	 *     error message with `reason` in the editor.
+	 *
+	 * @since 3.16.0
+	 */
+	disabled?: {
+
+		/**
+		 * Human readable description of why the code action is currently disabled.
+		 *
+		 * This is displayed in the code actions UI.
+		 */
+		reason: string;
+	};
+
+	/**
 	 * The workspace edit this code action performs.
 	 */
 	edit?: WorkspaceEdit;
@@ -4928,6 +5028,21 @@ export interface CodeAction {
 ```
 * partial result: `(Command | CodeAction)[]`
 * error: code and message set in case an exception happens during the code action request.
+
+#### <a href="#codeAction_resolve" name="codeAction_resolve" class="anchor">Code Action Resolve Request (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+The request is sent from the client to the server to resolve additional information for a given code action. This is usally used to compute
+the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
+
+_Request_:
+* method: 'codeAction/resolve'
+* params: `CodeAction`
+
+_Response_:
+* result: `CodeAction`
+* error: code and message set in case an exception happens during the completion resolve request.
 
 #### <a href="#textDocument_codeLens" name="textDocument_codeLens" class="anchor">Code Lens Request (:leftwards_arrow_with_hook:)</a>
 
