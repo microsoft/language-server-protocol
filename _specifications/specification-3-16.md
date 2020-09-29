@@ -5051,7 +5051,7 @@ export interface CodeAction {
 
 > *Since version 3.16.0*
 
-The request is sent from the client to the server to resolve additional information for a given code action. This is usally used to compute
+The request is sent from the client to the server to resolve additional information for a given code action. This is usually used to compute
 the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
 
 _Client Capability_:
