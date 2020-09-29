@@ -3216,7 +3216,7 @@ interface PublishDiagnosticsParams {
 #### <a href="#textDocument_completion" name="textDocument_completion" class="anchor">Completion Request (:leftwards_arrow_with_hook:)</a>
 
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. By default the request can only delay the computation of the `detail` and `documentation` properties. Since 3.16.0 the client
-can signale that it can resolve more properties lazily. This is done using the `completionItem#resolveSupport` client capability which list all properties that can be filled in during a 'completionItem/resolve' request. All other properties (usually `sortText`, `filterText`, `insertText` and `textEdit`) must be provided in the `textDocument/completion` response and must not be changed during resolve.
+can signal that it can resolve more properties lazily. This is done using the `completionItem#resolveSupport` client capability which lists all properties that can be filled in during a 'completionItem/resolve' request. All other properties (usually `sortText`, `filterText`, `insertText` and `textEdit`) must be provided in the `textDocument/completion` response and must not be changed during resolve.
 
 _Client Capability_:
 * property name (optional): `textDocument.completion`
@@ -4713,9 +4713,9 @@ export interface SymbolInformation {
 
 The code action request is sent from the client to the server to compute commands for a given text document and range. These commands are typically code fixes to either fix problems or to beautify/refactor code. The result of a `textDocument/codeAction` request is an array of `Command` literals which are typically presented in the user interface. To ensure that a server is useful in many clients the commands specified in a code actions should be handled by the server and not by the client (see `workspace/executeCommand` and `ServerCapabilities.executeCommandProvider`). If the client supports providing edits with a code action then that mode should be used.
 
-> *Since version 3.16.0:* a client can offer a server to delay the computation of code action properties during a 'textDocument/codeAction' request:
+*Since version 3.16.0:* a client can offer a server to delay the computation of code action properties during a 'textDocument/codeAction' request:
 
-This is usful for cases where it is expensive to compute the value of a property (for example the `edit` property). Clients signal this through the `codeAction.resolveSupport` capability which list all properties a client can resolve lazily. The server capability `codeActionProvider.resolveSupport` signals that a server will offer a `codeAction/resolve` route. To help servers to uniquely identify a code action in the resolve request a code action literal can optional carry a data property. This is also guarded by an additional client capability `codeAction.dataSupport`. In general a client should offer data support if it offers resolve support.
+This is usful for cases where it is expensive to compute the value of a property (for example the `edit` property). Clients signal this through the `codeAction.resolveSupport` capability which lists all properties a client can resolve lazily. The server capability `codeActionProvider.resolveSupport` signals that a server will offer a `codeAction/resolve` route. To help servers to uniquely identify a code action in the resolve request, a code action literal can optional carry a data property. This is also guarded by an additional client capability `codeAction.dataSupport`. In general, a client should offer data support if it offers resolve support.
 
 > *Since version 3.8.0:* support for CodeAction literals to enable the following scenarios:
 
@@ -4783,17 +4783,17 @@ export interface CodeActionClientCapabilities {
 
 
 	/**
-	 * Whether the client support resolving additional code action
+	 * Whether the client supports resolving additional code action
 	 * properties via a separate `codeAction/resolve` request.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	 resolveSupport?: {
-		 /**
-		  * The properties that a client can resolve lazily.
-		  */
-		 properties: string[];
-	 };
+	resolveSupport?: {
+		/**
+		 * The properties that a client can resolve lazily.
+		*/
+		properties: string[];
+	};
 }
 ```
 
@@ -5053,7 +5053,7 @@ export interface CodeAction {
 
 > *Since version 3.16.0*
 
-The request is sent from the client to the server to resolve additional information for a given code action. This is usally used to compute
+The request is sent from the client to the server to resolve additional information for a given code action. This is usually used to compute
 the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
 
 _Client Capability_:
