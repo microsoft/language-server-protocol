@@ -1192,8 +1192,10 @@ export interface WorkDoneProgressEnd {
 
 Work Done progress can be initiated in two different ways:
 
-1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal.
-1. by a server using the request `window/workDoneProgress/create`.
+1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal. The document will refer to this kind of progress as client initiated progress.
+1. by a server using the request `window/workDoneProgress/create`. The document will refer to this kind of progress as server initiated progress.
+
+###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress </a>
 
 Consider a client sending a `textDocument/reference` request to a server and the client accepts work done progress reporting on that request. To signal this to the server the client would add a `workDoneToken` property to the reference request parameters. Something like this:
 
@@ -1214,6 +1216,17 @@ Consider a client sending a `textDocument/reference` request to a server and the
 }
 ```
 
+The corresponding type definition for the parameter property looks like this:
+
+```typescript
+export interface WorkDoneProgressParams {
+	/**
+	 * An optional token that a server can use to report work done progress.
+	 */
+	workDoneToken?: ProgressToken;
+}
+```
+
 A server uses the `workDoneToken` to report progress for the specific `textDocument/reference`. For the above request the `$/progress` notification params look like this:
 
 ```json
@@ -1229,25 +1242,9 @@ A server uses the `workDoneToken` to report progress for the specific `textDocum
 }
 ```
 
-Server initiated work done progress works the same. The only difference is that the server requests a progress user interface using the `window/workDoneProgress/create` request providing a token that is afterwards used to report progress.
+There is no specific client capability signaling whether a client will send a progres token per request. The reson for this is that this is in many clients not a static aspect and might even change for every request instance for the same request type. So the capability is signal on every request instance by the presence of a `workDoneToken` property.
 
-##### <a href="#signalingWorkDoneProgressReporting" name="signalingWorkDoneProgressReporting" class="anchor"> Signaling Work Done Progress Reporting </a>
-
-To keep the protocol backwards compatible servers are only allowed to use work done progress reporting if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
-
-```typescript
-	/**
-	 * Window specific client capabilities.
-	 */
-	window?: {
-		/**
-		 * Whether client supports handling progress notifications.
-		 */
-		workDoneProgress?: boolean;
-	}
-```
-
-To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress a server needs to signal work done progress reporting in the corresponding server capability. For the above find references example a server would signal such a support by setting the `referencesProvider` property in the server capabilities as follows:
+To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress a server needs to signal general work done progress reporting support in the corresponding server capability. For the above find references example a server would signal such a support by setting the `referencesProvider` property in the server capabilities as follows:
 
 ```json
 {
@@ -1257,27 +1254,30 @@ To avoid that clients set up a progress monitor user interface before sending a 
 }
 ```
 
-#### <a href="#workDoneProgressParams" name="workDoneProgressParams" class="anchor"> WorkDoneProgressParams </a>
-
-A parameter literal used to pass a work done progress token.
-
-```typescript
-export interface WorkDoneProgressParams {
-	/**
-	 * An optional token that a server can use to report work done progress.
-	 */
-	workDoneToken?: ProgressToken;
-}
-```
-
-#### <a href="#workDoneProgressOptions" name="workDoneProgressOptions" class="anchor"> WorkDoneProgressOptions </a>
-
-Options to signal work done progress support in server capabilities.
+The corresponding type definition for the server capability looks like this:
 
 ```typescript
 export interface WorkDoneProgressOptions {
 	workDoneProgress?: boolean;
 }
+```
+###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
+
+Servers can also initiate progres reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The returned token can then be used to report progress using the same notifications used as for client initiated progress.
+
+To keep the protocol backwards compatible servers are only allowed to use `window/workDoneProgress/create` request if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
+
+```typescript
+	/**
+	 * Window specific client capabilities.
+	 */
+	window?: {
+		/**
+		 * Whether client supports server initiated progress using the
+		 * `window/workDoneProgress/create` request.
+		 */
+		workDoneProgress?: boolean;
+	}
 ```
 
 #### <a href="#partialResults" name="partialResults" class="anchor"> Partial Result Progress </a>
