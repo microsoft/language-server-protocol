@@ -1697,19 +1697,49 @@ interface ClientCapabilities {
 		*/
 		files?: {
 			/**
-			 * The client has support for sending didRename file notifications.
+			 * The client has support for sending didCreateFiles notifications.
+			 */
+			didCreate?: boolean;
+
+			/**
+			 * The client has support for willCreateFiles notifications.
+			 */
+			willCreate?: boolean;
+
+			/**
+			 * The client has support for willCreateFiles requests.
+			 */
+			willCreateWaitUntil?: boolean;
+
+			/**
+			 * The client has support for sending didRenameFiles notifications.
 			 */
 			didRename?: boolean;
 
 			/**
-			 * The client has support for willRename file notifications.
+			 * The client has support for willRenameFiles notifications.
 			 */
 			willRename?: boolean;
 
 			/**
-			 * The client has support for willRename files requests.
+			 * The client has support for willRenameFiles requests.
 			 */
 			willRenameWaitUntil?: boolean;
+
+			/**
+			 * The client has support for sending didDeleteFiles notifications.
+			 */
+			didDelete?: boolean;
+
+			/**
+			 * The client has support for willDeleteFiles notifications.
+			 */
+			willDelete?: boolean;
+
+			/**
+			 * The client has support for willDeleteFiles requests.
+			 */
+			willDeleteWaitUntil?: boolean;
 		}
 
 		/**
@@ -1993,6 +2023,21 @@ interface ServerCapabilities {
 	*/
 	files?: {
 		/**
+		* The server is interested in didCreateFiles notifications.
+		*/
+		didCreate?: boolean;
+
+		/**
+		* The server is interested in willCreateFiles notifications.
+		*/
+		willCreate?: boolean;
+
+		/**
+		* The server is interested in willCreateFilesWaitUntil requests.
+		*/
+		willCreateWaitUntil?: boolean;
+
+		/**
 		* The server is interested in didRenameFiles notifications.
 		*/
 		didRename?: boolean;
@@ -2006,6 +2051,21 @@ interface ServerCapabilities {
 		* The server is interested in willRenameFilesWaitUntil requests.
 		*/
 		willRenameWaitUntil?: boolean;
+
+		/**
+		* The server is interested in didDeleteFiles file notifications.
+		*/
+		didDelete?: boolean;
+
+		/**
+		* The server is interested in willDeleteFiles file notifications.
+		*/
+		willDelete?: boolean;
+
+		/**
+		* The server is interested in willDeleteFilesWaitUntil requests.
+		*/
+		willDeleteWaitUntil?: boolean;
 	}
 
 	/**
@@ -2874,6 +2934,95 @@ export interface ApplyWorkspaceEditResponse {
 ```
 * error: code and message set in case an exception happens during the request.
 
+#### <a href="#workspace_willCreateFiles" name="workspace_willCreate" class="anchor">WillCreateFiles Notification (:arrow_right:)</a>
+
+The will create files notification is sent from the client to the server before files are actually created.
+
+_Client Capability_:
+* property name (optional): `workspace.files.willCreate`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/willCreateFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.files.willCreate`
+* property type: `bool`
+
+The capability indicates that the server is interested in `workspace/willCreateFiles` notifications.
+
+_Registration Options_: none
+
+_Notification_:
+* method: 'workspace/willCreateFiles'
+* params: `CreateFilesParams` defined as follows:
+
+```typescript
+/**
+ * The parameters sent in file create requests/notifications.
+ */
+export interface CreateFilesParams {
+	/**
+	 * An array of all files/folders created in this operation.
+	 */
+	files: FileCreate[];
+}
+/**
+ * Represents information on a file/folder create.
+ */
+export namespace FileCreate {
+	/**
+	 * A file:// URI for the location of the file/folder being created.
+	 */
+	uri: string;
+}
+```
+
+#### <a href="#workspace_willCreateFilesWaitUntil" name="workspace_willCreateFilesWaitUntil" class="anchor">WillCreateFilesWaitUntil Request (:leftwards_arrow_with_hook:)</a>
+
+The will create files wait until request is sent from the client to the server before files are actually created. The request can return a WorkspaceEdit which will be applied to workspace before the files are created. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep creates fast and reliable.
+
+_Client Capability_:
+* property name (optional): `workspace.files.willCreateWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/willCreateFilesWaitUntil` requests.
+
+_Server Capability_:
+* property name (optional): `workspace.files.willCreateWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `workspace/willCreateFilesWaitUntil` requests.
+
+_Registration Options_: none
+
+_Request_:
+* method: 'workspace/willCreateFilesWaitUntil'
+* params: `CreateFilesParams`
+
+_Response_:
+* result:`WorkspaceEdit` \| `null`
+* error: code and message set in case an exception happens during the `willCreateFilesWaitUntil` request.
+
+#### <a href="#workspace_didCreateFiles" name="workspace_didCreateFiles" class="anchor">DidCreateFiles Notification (:arrow_right:)</a>
+
+The did create files notification is sent from the client to the server when files were created in the client.
+
+_Client Capability_:
+* property name (optional): `workspace.files.didCreate`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/didCreateFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.files.didCreate`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `workspace/didCreateFiles` notifications.
+
+_Notification_:
+* method: 'workspace/didCreateFiles'
+* params: `CreateFilesParams`
+
 #### <a href="#workspace_willRenameFiles" name="workspace_willRename" class="anchor">WillRenameFiles Notification (:arrow_right:)</a>
 
 The will rename files notification is sent from the client to the server before files are actually renamed.
@@ -2967,6 +3116,95 @@ The capability indicates that the server is interested in `workspace/didRenameFi
 _Notification_:
 * method: 'workspace/didRenameFiles'
 * params: `RenameFilesParams`
+
+#### <a href="#workspace_willDeleteFiles" name="workspace_willDelete" class="anchor">WillDeleteFiles Notification (:arrow_right:)</a>
+
+The will delete files notification is sent from the client to the server before files are actually deleted.
+
+_Client Capability_:
+* property name (optional): `workspace.files.willDelete`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/willDeleteFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.files.willDelete`
+* property type: `bool`
+
+The capability indicates that the server is interested in `workspace/willDeleteFiles` notifications.
+
+_Registration Options_: none
+
+_Notification_:
+* method: 'workspace/willDeleteFiles'
+* params: `DeleteFilesParams` defined as follows:
+
+```typescript
+/**
+ * The parameters sent in file delete requests/notifications.
+ */
+export interface DeleteFilesParams {
+	/**
+	 * An array of all files/folders deleted in this operation.
+	 */
+	files: FileDelete[];
+}
+/**
+ * Represents information on a file/folder delete.
+ */
+export namespace FileDelete {
+	/**
+	 * A file:// URI for the location of the file/folder being deleted.
+	 */
+	uri: string;
+}
+```
+
+#### <a href="#workspace_willDeleteFilesWaitUntil" name="workspace_willDeleteFilesWaitUntil" class="anchor">WillDeleteFilesWaitUntil Request (:leftwards_arrow_with_hook:)</a>
+
+The will delete files wait until request is sent from the client to the server before files are actually deleted. The request can return a WorkspaceEdit which will be applied to workspace before the files are deleted. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep deletes fast and reliable.
+
+_Client Capability_:
+* property name (optional): `workspace.files.willDeleteWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/willDeleteFilesWaitUntil` requests.
+
+_Server Capability_:
+* property name (optional): `workspace.files.willDeleteWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `workspace/willDeleteFilesWaitUntil` requests.
+
+_Registration Options_: none
+
+_Request_:
+* method: 'workspace/willDeleteFilesWaitUntil'
+* params: `DeleteFilesParams`
+
+_Response_:
+* result:`WorkspaceEdit` \| `null`
+* error: code and message set in case an exception happens during the `willDeleteFilesWaitUntil` request.
+
+#### <a href="#workspace_didDeleteFiles" name="workspace_didDeleteFiles" class="anchor">DidDeleteFiles Notification (:arrow_right:)</a>
+
+The did delete files notification is sent from the client to the server when files were deleted in the client.
+
+_Client Capability_:
+* property name (optional): `workspace.files.didDelete`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/didDeleteFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.files.didDelete`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `workspace/didDeleteFiles` notifications.
+
+_Notification_:
+* method: 'workspace/didDeleteFiles'
+* params: `DeleteFilesParams`
 
 #### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
