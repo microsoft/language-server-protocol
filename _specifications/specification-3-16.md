@@ -1691,6 +1691,28 @@ interface ClientCapabilities {
 		workspaceFolders?: boolean;
 
 		/**
+		* The client has support for rename requests/notifications.
+		*
+		* Since 3.16.0
+		*/
+		renameFiles?: {
+			/**
+			 * The client has support for didRenameFiles notifications.
+			 */
+			didRenameFiles?: boolean;
+
+			/**
+			 * The client has support for willRenameFiles notifications.
+			 */
+			willRenameFiles?: boolean;
+
+			/**
+			 * The client has support for willRenameFilesWaitUntil requests.
+			 */
+			willRenameFilesWaitUntil?: boolean;
+		}
+
+		/**
 		 * The client supports `workspace/configuration` requests.
 		 *
 		 * @since 3.6.0
@@ -1962,6 +1984,28 @@ interface ServerCapabilities {
 		 * @since 3.6.0
 		 */
 		workspaceFolders?: WorkspaceFoldersServerCapabilities;
+	}
+
+	/**
+		* The server is interested in rename notifications/requests.
+		*
+		* @since 3.16.0
+		*/
+	renameFiles?: {
+		/**
+		* The server is interested in didRenameFiles notifications.
+		*/
+		didRenameFiles?: boolean;
+
+		/**
+		* The server is interested in willRenameFiles notifications.
+		*/
+		willRenameFiles?: boolean;
+
+		/**
+		* The server is interested in willRenameFilesWaitUntil requests.
+		*/
+		willRenameFilesWaitUntil?: boolean;
 	}
 
 	/**
@@ -2829,6 +2873,100 @@ export interface ApplyWorkspaceEditResponse {
 }
 ```
 * error: code and message set in case an exception happens during the request.
+
+#### <a href="#workspace_willRenameFiles" name="workspace_willRename" class="anchor">WillRenameFiles Notification (:arrow_right:)</a>
+
+The will rename files notification is sent from the client to the server before files are actually renamed.
+
+_Client Capability_:
+* property name (optional): `workspace.renameFiles.willRenameFiles`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/willRenameFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.renameFiles.willRenameFiles`
+* property type: `bool`
+
+The capability indicates that the server is interested in `workspace/willRenameFiles` notifications.
+
+_Registration Options_: none
+
+_Notification_:
+* method: 'workspace/willRenameFiles'
+* params: `RenameFilesParams` defined as follows:
+
+```typescript
+/**
+ * The parameters sent in file rename requests/notifications.
+ */
+export interface RenameFilesParams {
+	/**
+	 * An array of all files/folders renamed in this operation. When a folder is renamed, only
+	 * the folder will be included, and not its children.
+	 */
+	files: FileRename[];
+}
+/**
+ * Represents information on a file/folder rename.
+ */
+export namespace FileRename {
+	/**
+	 * A file:// URI for the original location of the file/folder being renamed.
+	 */
+	oldUri: string;
+	/**
+	 * A file:// URI for the new location of the file/folder being renamed.
+	 */
+	newUri: string;
+}
+```
+
+#### <a href="#workspace_willRenameFilesWaitUntil" name="workspace_willRenameFilesWaitUntil" class="anchor">WillRenameFilesWaitUntil Request (:leftwards_arrow_with_hook:)</a>
+
+The will rename files wait until request is sent from the client to the server before files are actually renamed. The request can return a WorkspaceEdit which will be applied to workspace before the files are renamed. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep renames fast and reliable.
+
+_Client Capability_:
+* property name (optional): `workspace.renameFiles.willRenameFilesWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/willRenameFilesWaitUntil` requests.
+
+_Server Capability_:
+* property name (optional): `workspace.renameFiles.willRenameFilesWaitUntil`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `workspace/willRenameFilesWaitUntil` requests.
+
+_Registration Options_: none
+
+_Request_:
+* method: 'workspace/willRenameFilesWaitUntil'
+* params: `RenameFilesParams`
+
+_Response_:
+* result:`WorkspaceEdit` \| `null`
+* error: code and message set in case an exception happens during the `willRenameFilesWaitUntil` request.
+
+#### <a href="#workspace_didRenameFiles" name="workspace_didRenameFiles" class="anchor">DidRenameFiles Notification (:arrow_right:)</a>
+
+The did rename files notification is sent from the client to the server when files were renamed in the client.
+
+_Client Capability_:
+* property name (optional): `workspace.renameFiles.didRenameFiles`
+* property type: `boolean`
+
+The capability indicates that the client supports `workspace/didRenameFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.renameFiles.didRenameFiles`
+* property type: `boolean`
+
+The capability indicates that the server is interested in `workspace/didRenameFiles` notifications.
+
+_Notification_:
+* method: 'workspace/didRenameFiles'
+* params: `RenameFilesParams`
 
 #### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
@@ -3903,7 +4041,7 @@ export interface HoverOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `HoverRegistrationOptions` defined as follows:
 ```typescript
-export interface HoverRegistrationOptions 
+export interface HoverRegistrationOptions
 	extends TextDocumentRegistrationOptions, HoverOptions {
 }
 ```
@@ -4989,7 +5127,7 @@ export interface CodeActionOptions extends WorkDoneProgressOptions {
 	/**
 	 * CodeActionKinds that this server may return.
 	 *
-	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, 
+	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`,
 	 * or the server may list out every specific kind they provide.
 	 */
 	codeActionKinds?: CodeActionKind[];
@@ -6951,6 +7089,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for code action resolve request.
 * Add support for diagnostic `data` property.
 * Add support for signature information `activeParameter` property.
+* Add support for `workspace/onWillRenameFiles`, `workspace/onWillRenameFilesWaitUntil` and `workspace/onDidRenameFiles`
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
