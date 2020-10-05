@@ -440,6 +440,14 @@ export interface Diagnostic {
 	 * a scope collide all definitions can be marked via this property.
 	 */
 	relatedInformation?: DiagnosticRelatedInformation[];
+
+	/**
+	 * A data entry field that is preserved between a `textDocument/publishDiagnostics`
+	 * notification and `textDocument/codeAction` request.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	data?: unknown;
 }
 ```
 
@@ -3185,6 +3193,14 @@ export interface PublishDiagnosticsClientCapabilities {
 	 * @since 3.15.0
 	 */
 	versionSupport?: boolean;
+
+	/**
+	 * A data entry field that is preserved between a `textDocument/publishDiagnostics`
+	 * notification and `textDocument/codeAction` request.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	data?: unknown;
 }
 ```
 
@@ -6656,12 +6672,13 @@ Language servers usually run in a separate process and client communicate with t
 * Add semantic token support
 * Add call hierarchy support
 * Add client capbility for resolving text edits on completion items.
-* Add support for insert and replace ranges on `CompletionItem`
-* Add support for diagnostic links
-* Add support for tags on `SymbolInformation` and `DocumentSymbol`
+* Add support for insert and replace ranges on `CompletionItem`.
+* Add support for diagnostic links.
+* Add support for tags on `SymbolInformation` and `DocumentSymbol`.
 * Add support for moniker request method.
 * Add support for code action disabled property.
 * Add support for code action resolve request.
+* Add support for diagnostic data property.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
