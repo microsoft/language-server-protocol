@@ -2879,13 +2879,13 @@ export interface ApplyWorkspaceEditResponse {
 The will rename files notification is sent from the client to the server before files are actually renamed.
 
 _Client Capability_:
-* property name (optional): `workspace.renameFiles.willRenameFiles`
+* property name (optional): `workspace.files.willRename`
 * property type: `boolean`
 
 The capability indicates that the client supports `workspace/willRenameFiles` notifications.
 
 _Server Capability_:
-* property name (optional): `workspace.renameFiles.willRenameFiles`
+* property name (optional): `workspace.files.willRename`
 * property type: `bool`
 
 The capability indicates that the server is interested in `workspace/willRenameFiles` notifications.
@@ -2927,13 +2927,13 @@ export namespace FileRename {
 The will rename files wait until request is sent from the client to the server before files are actually renamed. The request can return a WorkspaceEdit which will be applied to workspace before the files are renamed. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep renames fast and reliable.
 
 _Client Capability_:
-* property name (optional): `workspace.renameFiles.willRenameFilesWaitUntil`
+* property name (optional): `workspace.files.willRenameWaitUntil`
 * property type: `boolean`
 
 The capability indicates that the client supports `workspace/willRenameFilesWaitUntil` requests.
 
 _Server Capability_:
-* property name (optional): `workspace.renameFiles.willRenameFilesWaitUntil`
+* property name (optional): `workspace.files.willRenameWaitUntil`
 * property type: `boolean`
 
 The capability indicates that the server is interested in `workspace/willRenameFilesWaitUntil` requests.
@@ -2953,13 +2953,13 @@ _Response_:
 The did rename files notification is sent from the client to the server when files were renamed in the client.
 
 _Client Capability_:
-* property name (optional): `workspace.renameFiles.didRenameFiles`
+* property name (optional): `workspace.files.didRename`
 * property type: `boolean`
 
 The capability indicates that the client supports `workspace/didRenameFiles` notifications.
 
 _Server Capability_:
-* property name (optional): `workspace.renameFiles.didRenameFiles`
+* property name (optional): `workspace.files.didRename`
 * property type: `boolean`
 
 The capability indicates that the server is interested in `workspace/didRenameFiles` notifications.
