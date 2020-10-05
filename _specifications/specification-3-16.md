@@ -1691,25 +1691,25 @@ interface ClientCapabilities {
 		workspaceFolders?: boolean;
 
 		/**
-		* The client has support for rename requests/notifications.
+		* The client has support for file requests/notifications.
 		*
 		* Since 3.16.0
 		*/
-		renameFiles?: {
+		files?: {
 			/**
-			 * The client has support for didRenameFiles notifications.
+			 * The client has support for sending didRename file notifications.
 			 */
-			didRenameFiles?: boolean;
+			didRename?: boolean;
 
 			/**
-			 * The client has support for willRenameFiles notifications.
+			 * The client has support for willRename file notifications.
 			 */
-			willRenameFiles?: boolean;
+			willRename?: boolean;
 
 			/**
-			 * The client has support for willRenameFilesWaitUntil requests.
+			 * The client has support for willRename files requests.
 			 */
-			willRenameFilesWaitUntil?: boolean;
+			willRenameWaitUntil?: boolean;
 		}
 
 		/**
@@ -1987,25 +1987,25 @@ interface ServerCapabilities {
 	}
 
 	/**
-		* The server is interested in rename notifications/requests.
-		*
-		* @since 3.16.0
-		*/
-	renameFiles?: {
+	* The server is interested in rename notifications/requests.
+	*
+	* @since 3.16.0
+	*/
+	files?: {
 		/**
 		* The server is interested in didRenameFiles notifications.
 		*/
-		didRenameFiles?: boolean;
+		didRename?: boolean;
 
 		/**
 		* The server is interested in willRenameFiles notifications.
 		*/
-		willRenameFiles?: boolean;
+		willRename?: boolean;
 
 		/**
 		* The server is interested in willRenameFilesWaitUntil requests.
 		*/
-		willRenameFilesWaitUntil?: boolean;
+		willRenameWaitUntil?: boolean;
 	}
 
 	/**
