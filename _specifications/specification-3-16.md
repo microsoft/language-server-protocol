@@ -7327,7 +7327,9 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for code action resolve request.
 * Add support for diagnostic `data` property.
 * Add support for signature information `activeParameter` property.
+* Add support for `workspace/onWillCreateFiles`, `workspace/onWillCreateFilesWaitUntil` and `workspace/onDidCreateFiles`
 * Add support for `workspace/onWillRenameFiles`, `workspace/onWillRenameFilesWaitUntil` and `workspace/onDidRenameFiles`
+* Add support for `workspace/onWillDeleteFiles`, `workspace/onWillDeleteFilesWaitUntil` and `workspace/onDidDeleteFiles`
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
