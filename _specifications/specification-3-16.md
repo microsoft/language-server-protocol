@@ -418,6 +418,13 @@ export interface Diagnostic {
 	code?: number | string;
 
 	/**
+	 * An optional property to describe the error code.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	codeDescription?: CodeDescription;
+
+	/**
 	 * A human-readable string describing the source of this
 	 * diagnostic, e.g. 'typescript' or 'super lint'.
 	 */
@@ -517,6 +524,22 @@ export interface DiagnosticRelatedInformation {
 	 * The message of this related diagnostic information.
 	 */
 	message: string;
+}
+```
+
+`CodeDescription` is defined as follows:
+
+```typescript
+/**
+ * Structure to capture a description for an error code.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface CodeDescription {
+	/**
+	 * An URI to open with more information about the diagnostic error.
+	 */
+	href: URI;
 }
 ```
 
@@ -3195,12 +3218,20 @@ export interface PublishDiagnosticsClientCapabilities {
 	versionSupport?: boolean;
 
 	/**
-	 * A data entry field that is preserved between a `textDocument/publishDiagnostics`
-	 * notification and `textDocument/codeAction` request.
+	 * Client supports a codeDescription property
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	data?: unknown;
+	codeDescriptionSupport?: boolean;
+
+	/**
+	 * Whether code action supports the `data` property which is
+	 * preserved between a `textDocument/publishDiagnostics` and
+	 * `textDocument/codeAction` request.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	dataSupport?: boolean;
 }
 ```
 
@@ -6688,7 +6719,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add call hierarchy support
 * Add client capbility for resolving text edits on completion items.
 * Add support for insert and replace ranges on `CompletionItem`.
-* Add support for diagnostic links.
+* Add support for diagnostic code descriptions.
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`.
 * Add support for moniker request method.
 * Add support for code action disabled property.
