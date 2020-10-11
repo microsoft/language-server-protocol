@@ -1,4 +1,12 @@
 <footer class="footer">
+    <script>
+        function manageConsent() {
+            if (WcpConsent.siteConsent.isConsentRequired) {
+                WcpConsent.siteConsent.manageConsent();
+            }
+        }
+    </script>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-7">
@@ -15,11 +23,19 @@
                 </ul>
             </div>
             <div class="col-sm-5">
-                <div class="copyright">
-                    <a id="footer-microsoft-link" class="logo" href="https://www.microsoft.com">
-                        <img src="{{site.baseurl}}/img/microsoft.svg" alt="Microsoft">
-                    </a>
-                </div>
+                <ul class="links">
+                    <li style="display: none;" >
+                        <a id="footer-cookie-link" style="cursor: pointer; padding-right:20px" onclick="manageConsent()"
+                            aria-label="Manage cookies">Manage cookies</a>
+                    </li>
+                    <li>
+                        <div class="copyright">
+                            <a id="footer-microsoft-link" class="logo" href="https://www.microsoft.com">
+                                <img src="{{site.baseurl}}/img/microsoft.svg" alt="Microsoft">
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
