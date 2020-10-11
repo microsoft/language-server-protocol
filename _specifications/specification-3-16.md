@@ -1273,7 +1273,7 @@ A server uses the `workDoneToken` to report progress for the specific `textDocum
 }
 ```
 
-There is no specific client capability signaling whether a client will send a progres token per request. The reson for this is that this is in many clients not a static aspect and might even change for every request instance for the same request type. So the capability is signal on every request instance by the presence of a `workDoneToken` property.
+There is no specific client capability signaling whether a client will send a progress token per request. The reason for this is that this is in many clients not a static aspect and might even change for every request instance for the same request type. So the capability is signal on every request instance by the presence of a `workDoneToken` property.
 
 To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress a server needs to signal general work done progress reporting support in the corresponding server capability. For the above find references example a server would signal such a support by setting the `referencesProvider` property in the server capabilities as follows:
 
@@ -1294,7 +1294,7 @@ export interface WorkDoneProgressOptions {
 ```
 ###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
 
-Servers can also initiate progres reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The returned token can then be used to report progress using the same notifications used as for client initiated progress.
+Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The returned token can then be used to report progress using the same notifications used as for client initiated progress.
 
 To keep the protocol backwards compatible servers are only allowed to use `window/workDoneProgress/create` request if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
 
@@ -6182,7 +6182,7 @@ The request is sent from the client to the server to resolve semantic tokens for
 
 _General Concepts_
 
-Tokens are represented using one token type combined with n token modiifiers. A token type is something like `class` or `function` and token modifiers are like `static` or `async`. The protocol defines a set of token types and modifiers but clients are allowed to extend these and announce the values they support in the corresponding client capability. The predefined values are:
+Tokens are represented using one token type combined with n token modifiers. A token type is something like `class` or `function` and token modifiers are like `static` or `async`. The protocol defines a set of token types and modifiers but clients are allowed to extend these and announce the values they support in the corresponding client capability. The predefined values are:
 
 ```typescript
 export enum SemanticTokenTypes {
@@ -6255,7 +6255,7 @@ export interface SemanticTokensLegend {
 Token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Since a token type can have n modifiers, multiple token modifiers can be set by using bit flags,
 so a `tokenModifier` value of `3` is first viewed as binary `0b00000011`, which means `[tokenModifiers[0], tokenModifiers[1]]` because bits 0 and 1 are set.
 
-There are different way how the position of a token can be expressed in a file. Absolute positions or relative positons. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
+There are different way how the position of a token can be expressed in a file. Absolute positions or relative positions. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplifies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
 
 - at index `5*i`   - `deltaLine`: token line number, relative to the previous token
 - at index `5*i+1` - `deltaStart`: token start character, relative to the previous token (relative to 0 or the previous token's start if they are on the same line)
@@ -6483,7 +6483,7 @@ export interface SemanticTokensDeltaParams extends WorkDoneProgressParams, Parti
 
 	/**
 	 * The result id of a previous response. The result Id can either point to a full response
-	 * or a delta response depending on what was recevied last.
+	 * or a delta response depending on what was received last.
 	 */
 	previousResultId: string;
 }
@@ -6532,7 +6532,7 @@ export interface SemanticTokensDeltaPartialResult {
 
 **Requesting semantic tokens for a range**
 
-When a user opens a file it can be benificial to only compute the semantic tokens for the visible range (faster rendering of the tokens in the user interface). If a server can compute these tokens faster than for the whole file it can provide a handler for the `textDocument/semanticTokens/range` request to handle this case special. Please note that if a client also announces that it will send the `textDocument/semanticTokens/range` server should implement this request as well to allow for flicker free scrolling and semantic coloring of a minimap.
+When a user opens a file it can be beneficial to only compute the semantic tokens for the visible range (faster rendering of the tokens in the user interface). If a server can compute these tokens faster than for the whole file it can provide a handler for the `textDocument/semanticTokens/range` request to handle this case special. Please note that if a client also announces that it will send the `textDocument/semanticTokens/range` server should implement this request as well to allow for flicker free scrolling and semantic coloring of a minimap.
 
 _Request_:
 
@@ -6717,7 +6717,7 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for tracing
 * Add semantic token support
 * Add call hierarchy support
-* Add client capbility for resolving text edits on completion items.
+* Add client capability for resolving text edits on completion items.
 * Add support for insert and replace ranges on `CompletionItem`.
 * Add support for diagnostic code descriptions.
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`.
