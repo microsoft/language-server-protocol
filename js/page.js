@@ -4,6 +4,12 @@ $('#small-nav-dropdown').change(function() {
     .val()
 })
 
+function onConsentChanged() {
+  console.log(WcpConsent.siteConsent.getConsent());
+
+  // Where we would handle non-essential cookies in the future
+}
+
 $(function() {
   // Load GA upfront because we classify it as essential cookie
   window.dataLayer = window.dataLayer || []
@@ -13,17 +19,14 @@ $(function() {
   gtag('js', new Date())
   gtag('config', 'UA-62780441-30', { anonymize_ip: true })
 
-  if (mscc) {
-    if (!mscc.hasConsent()) {
-      window.addEventListener('click', function() {
-        if (!mscc.hasConsent()) {
-          mscc.setConsent()
-        }
-      })
+  window.WcpConsent && WcpConsent.init("en-US", "cookie-banner", function (err, _siteConsent) {
+    }, onConsentChanged, WcpConsent.themes.light);
 
-      // Where future non-essential tracking cookie need to go
-      mscc.on('consent', function() {
-      })
-    }
+  const cookieManager = document.querySelector('#footer-cookie-link');
+  if (WcpConsent.siteConsent.isConsentRequired && cookieManager && cookieManager.parentElement) {
+    cookieManager.parentElement.style.display = '';
   }
+
+  // initialize consent
+  onConsentChanged();
 })
