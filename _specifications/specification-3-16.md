@@ -3434,7 +3434,8 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `CompletionRegistrationOptions` options defined as follows:
 ```typescript
-export interface CompletionRegistrationOptions extends TextDocumentRegistrationOptions, CompletionOptions {
+export interface CompletionRegistrationOptions extends TextDocumentRegistrationOptions,
+	CompletionOptions {
 }
 ```
 
@@ -3443,7 +3444,8 @@ _Request_:
 * params: `CompletionParams` defined as follows:
 
 ```typescript
-export interface CompletionParams extends TextDocumentPositionParams, WorkDoneProgressParams, PartialResultParams {
+export interface CompletionParams extends TextDocumentPositionParams, WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The completion context. This is only available if the client specifies
 	 * to send this using `ClientCapabilities.textDocument.completion.contextSupport === true`
@@ -4565,7 +4567,8 @@ export interface DocumentSymbolClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Specific capabilities for the `SymbolKind` in the `textDocument/documentSymbol` request.
+	 * Specific capabilities for the `SymbolKind` in the `textDocument/documentSymbol`
+	 * request.
 	 */
 	symbolKind?: {
 		/**
