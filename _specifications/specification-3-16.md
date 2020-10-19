@@ -6425,8 +6425,8 @@ interface SemanticTokensClientCapabilities {
 		 */
 		full?: boolean | {
 			/**
-			 * The client will send the `textDocument/semanticTokens/full/delta` request
-			 * if the server provides a corresponding handler.
+			 * The client will send the `textDocument/semanticTokens/full/delta`
+			 * request if the server provides a corresponding handler.
 			*/
 			delta?: boolean
 		}
