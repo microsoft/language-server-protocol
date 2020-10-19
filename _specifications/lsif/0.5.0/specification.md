@@ -325,7 +325,7 @@ The relevant JSON output looks like this:
 { id : 26, type: "edge", label: "textDocument/references",  outV: 6, inV: 25 }
 
 // Add the bar definition as a reference to the reference result
-{ id: 27, type: "edge", label: "item", outV: 25, inVs: [9], document: 4, property : "definitions" }
+{ id: 27, type: "edge", label: "item", outV: 25, inVs: [9], document: 4, property: "definitions" }
 
 // Add the bar reference as a reference to the reference result
 { id: 28, type: "edge", label: "item", outV: 25, inVs: [20], document:4, property: "references" }
@@ -394,18 +394,18 @@ The output looks like this:
 { id: 78, type: "vertex", label: "range", start: { line: 18, character: 2 }, end: { line: 18, character: 5 } }
 
 // The insertion of the ranges into the shared reference result
-{ id: 90, type: "edge", label: "item", outV: 30, inVs: [16,34,50], document: 4, property: definitions }
-{ id: 91, type: "edge", label: "item", outV: 30, inVs: [65,78], document: 4, property: references }
+{ id: 90, type: "edge", label: "item", outV: 30, inVs: [16,34,50], document: 4, property: "definitions" }
+{ id: 91, type: "edge", label: "item", outV: 30, inVs: [65,78], document: 4, property: "references" }
 
 // Linking A#foo to I#foo
 { id: 101, type: "vertex", label: "referenceResult" }
 { id: 102, type: "edge", label: "textDocument/references", outV: 29, inV: 101 }
-{ id: 103, type: "edge", label: "item", outV: 101, inVs: [30], document: 4, property: referenceResults }
+{ id: 103, type: "edge", label: "item", outV: 101, inVs: [30], document: 4, property: "referenceResults" }
 
 // Linking B#foo to I#foo
 { id: 114, type: "vertex", label: "referenceResult" }
 { id: 115, type: "edge", label: "textDocument/references", outV: 47, inV: 114 }
-{ id: 116, type: "edge", label: "item", outV: 114, inVs: [30], document: 4, property: referenceResults }
+{ id: 116, type: "edge", label: "item", outV: 114, inVs: [30], document: 4, property: "referenceResults" }
 ```
 
 One goal of the language server index format is that the information can be emitted as soon as possible without caching too much information in memory. With languages that support overriding methods defined in more than one interface, this can be more complicated since the whole inheritance tree might only be known after parsing all documents.
