@@ -5964,8 +5964,8 @@ export interface FoldingRange {
 
 	/**
 	 * Describes the kind of the folding range such as `comment` or `region`. The kind
-	 * is used to categorize folding ranges and used by commands like 'Fold all comments'. See
-	 * [FoldingRangeKind](#FoldingRangeKind) for an enumeration of standardized kinds.
+	 * is used to categorize folding ranges and used by commands like 'Fold all comments'.
+	 * See [FoldingRangeKind](#FoldingRangeKind) for an enumeration of standardized kinds.
 	 */
 	kind?: string;
 }
@@ -6425,8 +6425,8 @@ interface SemanticTokensClientCapabilities {
 		 */
 		full?: boolean | {
 			/**
-			 * The client will send the `textDocument/semanticTokens/full/delta` request if
-			 * the server provides a corresponding handler.
+			 * The client will send the `textDocument/semanticTokens/full/delta` request
+			 * if the server provides a corresponding handler.
 			*/
 			delta?: boolean
 		}
