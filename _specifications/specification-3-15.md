@@ -5527,7 +5527,8 @@ export interface FoldingRangeOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `FoldingRangeRegistrationOptions` defined as follows:
 ```typescript
-export interface FoldingRangeRegistrationOptions extends TextDocumentRegistrationOptions, FoldingRangeOptions, StaticRegistrationOptions {
+export interface FoldingRangeRegistrationOptions extends TextDocumentRegistrationOptions,
+	FoldingRangeOptions, StaticRegistrationOptions {
 }
 ```
 
