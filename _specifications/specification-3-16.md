@@ -1697,6 +1697,11 @@ interface ClientCapabilities {
 		*/
 		files?: {
 			/**
+			 * Whether the client supports dynamic registration for file requests/notifications.
+			 */
+			dynamicRegistration?: boolean;
+
+			/**
 			 * The client has support for sending didCreateFiles notifications.
 			 */
 			didCreate?: boolean;
