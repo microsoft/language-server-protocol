@@ -2010,32 +2010,32 @@ interface ServerCapabilities {
 		/**
 		* The server is interested in didCreateFiles notifications.
 		*/
-		didCreate?: boolean;
+		didCreate?: FileOperationRegistrationOptions;
 
 		/**
 		* The server is interested in willCreateFiles requests.
 		*/
-		willCreate?: boolean;
+		willCreate?: FileOperationRegistrationOptions;
 
 		/**
 		* The server is interested in didRenameFiles notifications.
 		*/
-		didRename?: boolean;
+		didRename?: FileOperationRegistrationOptions;
 
 		/**
 		* The server is interested in willRenameFiles requests.
 		*/
-		willRename?: boolean;
+		willRename?: FileOperationRegistrationOptions;
 
 		/**
 		* The server is interested in didDeleteFiles file notifications.
 		*/
-		didDelete?: boolean;
+		didDelete?: FileOperationRegistrationOptions;
 
 		/**
 		* The server is interested in willDeleteFiles file requests.
 		*/
-		willDelete?: boolean;
+		willDelete?: FileOperationRegistrationOptions;
 	}
 
 	/**
@@ -2916,7 +2916,23 @@ The capability indicates that the client supports `workspace/willCreateFiles` re
 
 _Server Capability_:
 * property name (optional): `workspace.files.willCreate`
-* property type: `boolean`
+* property type: `FileOperationRegistrationOptions` where `FileOperationRegistrationOptions` is defined as follows:
+
+```typescript
+interface FileOperationRegistrationOptions {
+	/**
+	 * The glob pattern to match. Glob patterns can have the following syntax:
+	 * - `*` to match one or more characters in a path segment
+	 * - `?` to match on one character in a path segment
+	 * - `**` to match any number of path segments, including none
+	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)
+	 * - `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
+	 * - `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
+	 * - `/` suffix to match only folders (e.g. `**{/,*.dart}` matches all Dart files and all folders)
+	 */
+	globPattern: string;
+}
+```
 
 The capability indicates that the server is interested in `workspace/willCreateFiles` requests.
 
