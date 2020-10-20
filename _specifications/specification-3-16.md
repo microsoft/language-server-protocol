@@ -1613,14 +1613,14 @@ export interface TextDocumentClientCapabilities {
 	selectionRange?: SelectionRangeClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/prepareCallHierarchy` request.
+	 * Capabilities specific to the various call hierarchy requests.
 	 *
 	 * @since 3.16.0
 	 */
 	callHierarchy?: CallHierarchyClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/semanticTokens/*` requests.
+	 * Capabilities specific to the various semantic token requsts.
 	 *
 	 * @since 3.16.0
 	 */
@@ -1673,16 +1673,24 @@ interface ClientCapabilities {
 		/**
 		* The client has support for workspace folders.
 		*
-		* Since 3.6.0
+		* @since 3.6.0
 		*/
 		workspaceFolders?: boolean;
 
 		/**
 		* The client supports `workspace/configuration` requests.
 		*
-		* Since 3.6.0
+		* @since 3.6.0
 		*/
 		configuration?: boolean;
+
+		/**
+		 * Capabilities specific to the semantic token requsts scoped to the
+		 * workspace.
+		 *
+		 * @since 3.16.0 - proposed state.
+		 */
+		 semanticTokens?: SemanticTokensWorkspaceClientCapabilities;
 	};
 
 	/**
@@ -6412,9 +6420,9 @@ Running the same transformations as above will result in the following number ar
 The delta is now expressed on these number arrays without any form of interpretation what these numbers mean. This is comparable to the text document edits send from the server to the client to modify the content of a file. Those are character based and don't make any assumption about the meaning of the characters. So `[  2,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0 ]` can be transformed into `[  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]` using the following edit description: `{ start:  0, deleteCount: 1, data: [3] }` which tells the client to simply replace the first number (e.g. `2`) in the array with `3`.
 
 
-_Client Capability_
+_Client Capability_:
 
-The following client capabilities are defined for semantic tokens:
+The following client capabilities are defined for semantic token requests sent from the client to the server:
 
 * property name (optional): `textDocument.semanticTokens`
 * property type: `SemanticTokensClientCapabilities` defined as follows:
@@ -6470,7 +6478,7 @@ interface SemanticTokensClientCapabilities {
 }
 ```
 
-_Server Capability_
+_Server Capability_:
 
 The following server capabilities are defined for semantic tokens:
 
@@ -6653,6 +6661,37 @@ _Response_:
 * result: `SemanticTokens | null` where `SemanticTokensDelta`
 * partial result: `SemanticTokensPartialResult`
 * error: code and message set in case an exception happens during the 'textDocument/semanticTokens/range' request
+
+**Requesting a refresh of all semantic tokens**
+
+The `workspace/semanticTokens/refresh` is sent from the server to the client. Servers can use it to ask clients to refresh the editors for which this server provides semantic tokens. As a result the client should ask the server to recompute the semantic tokens for these editors. This is useful if a server detects a project wide configuration change which requires a re-calculation of all semantic tokens. Note that the client still has the freedom to delay the re-calculation of the semantic tokens if for example an editor is currently not visible.
+
+_Client Capability_:
+
+* property name (optional): `workspace.semanticTokens`
+* property type: `SemanticTokensWorkspaceClientCapabilities` defined as follows:
+
+```typescript
+export interface SemanticTokensWorkspaceClientCapabilities {
+	/**
+	 * Whether the client implementation supports a refresh request send from the server
+	 * to the client. This is useful if a server detects a project wide configuration change
+	 * which requires a re-calculation of all semantic tokens provided by the server issuing
+	 * the request.
+	 */
+	refreshSupport?: boolean;
+}
+```
+
+_Request_:
+
+* method: `workspace/semanticTokens/refresh`
+* params: none
+
+_Response_:
+
+* result: void
+* error: code and message set in case an exception happens during the 'workspace/semanticTokens/refresh' request
 
 #### <a href="#textDocument_moniker" name="textDocument_moniker" class="anchor">Monikers (:leftwards_arrow_with_hook:)</a>
 
