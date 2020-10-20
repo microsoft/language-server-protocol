@@ -2007,7 +2007,7 @@ interface ServerCapabilities {
 	}
 
 	/**
-	* The server is interested in rename notifications/requests.
+	* The server is interested in file notifications/requests.
 	*
 	* @since 3.16.0
 	*/
@@ -2914,7 +2914,7 @@ export interface ApplyWorkspaceEditResponse {
 The will create files request is sent from the client to the server before files are actually created. The request can return a WorkspaceEdit which will be applied to workspace before the files are created. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep creates fast and reliable.
 
 _Client Capability_:
-* property name (optional): `workspace.files.willCreateWait`
+* property name (optional): `workspace.files.willCreate`
 * property type: `boolean`
 
 The capability indicates that the client supports `workspace/willCreateFiles` requests.
@@ -2984,7 +2984,7 @@ The capability indicates that the client supports `workspace/didCreateFiles` not
 
 _Server Capability_:
 * property name (optional): `workspace.files.didCreate`
-* property type: `boolean`
+* property type: `FileOperationRegistrationOptions`
 
 The capability indicates that the server is interested in `workspace/didCreateFiles` notifications.
 
@@ -3004,7 +3004,7 @@ The capability indicates that the client supports `workspace/willRenameFiles` re
 
 _Server Capability_:
 * property name (optional): `workspace.files.willRename`
-* property type: `boolean`
+* property type: `FileOperationRegistrationOptions`
 
 The capability indicates that the server is interested in `workspace/willRenameFiles` requests.
 
@@ -3056,7 +3056,7 @@ The capability indicates that the client supports `workspace/didRenameFiles` not
 
 _Server Capability_:
 * property name (optional): `workspace.files.didRename`
-* property type: `boolean`
+* property type: `FileOperationRegistrationOptions`
 
 The capability indicates that the server is interested in `workspace/didRenameFiles` notifications.
 
@@ -3076,7 +3076,7 @@ The capability indicates that the client supports `workspace/willDeleteFiles` re
 
 _Server Capability_:
 * property name (optional): `workspace.files.willDelete`
-* property type: `boolean`
+* property type: `FileOperationRegistrationOptions`
 
 The capability indicates that the server is interested in `workspace/willDeleteFiles` requests.
 
@@ -3123,7 +3123,7 @@ The capability indicates that the client supports `workspace/didDeleteFiles` not
 
 _Server Capability_:
 * property name (optional): `workspace.files.didDelete`
-* property type: `boolean`
+* property type: `FileOperationRegistrationOptions`
 
 The capability indicates that the server is interested in `workspace/didDeleteFiles` notifications.
 
