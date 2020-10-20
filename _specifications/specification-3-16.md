@@ -1613,6 +1613,13 @@ export interface TextDocumentClientCapabilities {
 	selectionRange?: SelectionRangeClientCapabilities;
 
 	/**
+	 * Capabilities specific to the `textDocument/prepareCallHierarchy` request.
+	 *
+	 * @since 3.16.0
+	 */
+	callHierarchy?: CallHierarchyClientCapabilities;
+
+	/**
 	 * Capabilities specific to the `textDocument/semanticTokens/*` requests.
 	 *
 	 * @since 3.16.0
@@ -1896,6 +1903,13 @@ interface ServerCapabilities {
 	 */
 	selectionRangeProvider?: boolean | SelectionRangeOptions
 		| SelectionRangeRegistrationOptions;
+
+	/**
+	 * The server provides call hierarchy support.
+	 *
+	 * @since 3.16.0
+	 */
+	callHierarchyProvider?: boolean | CallHierarchyOptions | CallHierarchyRegistrationOptions;
 
 	/**
 	 * The server provides semantic tokens support.
@@ -6799,9 +6813,10 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for diagnostic code descriptions.
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`.
 * Add support for moniker request method.
-* Add support for code action disabled property.
+* Add support for code action `disabled` property.
 * Add support for code action resolve request.
-* Add support for diagnostic data property.
+* Add support for diagnostic `data` property.
+* Add support for signature information `activeParameter` property.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
