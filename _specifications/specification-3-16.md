@@ -1909,7 +1909,8 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-	callHierarchyProvider?: boolean | CallHierarchyOptions | CallHierarchyRegistrationOptions;
+	callHierarchyProvider?: boolean | CallHierarchyOptions
+		| CallHierarchyRegistrationOptions;
 
 	/**
 	 * The server provides semantic tokens support.
