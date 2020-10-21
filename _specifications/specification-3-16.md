@@ -3370,7 +3370,7 @@ export interface CompletionClientCapabilities {
 		}
 
 		/**
-		 * Client support insert replace edit to control different behavior if a
+		 * Client supports insert replace edit to control different behavior if a
 		 * completion item is inserted in the text or should replace text.
 		 *
 		 * @since 3.16.0 - proposed state
@@ -3958,7 +3958,7 @@ export interface SignatureHelpClientCapabilities {
 		};
 
 		/**
-		 * The client support the `activeParameter` property on `SignatureInformation`
+		 * The client supports the `activeParameter` property on `SignatureInformation`
 		 * literal.
 		 *
 		 * @since 3.16.0 - proposed state
@@ -4749,7 +4749,7 @@ export interface DocumentSymbol {
 	kind: SymbolKind;
 
 	/**
-	 * Tags for this completion item.
+	 * Tags for this document symbol.
 	 *
 	 * @since 3.16.0
 	 */
@@ -6855,10 +6855,13 @@ Language servers usually run in a separate process and client communicate with t
 * Add semantic token support
 * Add call hierarchy support
 * Add client capability for resolving text edits on completion items.
+* Add support for client default behavior on renames.
 * Add support for insert and replace ranges on `CompletionItem`.
 * Add support for diagnostic code descriptions.
+* Add support for document symbol provider label.
 * Add support for tags on `SymbolInformation` and `DocumentSymbol`.
 * Add support for moniker request method.
+* Add support for code action `data` property.
 * Add support for code action `disabled` property.
 * Add support for code action resolve request.
 * Add support for diagnostic `data` property.
