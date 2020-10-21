@@ -1815,7 +1815,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides workspace symbol support.
 	 */
-	workspaceSymbolProvider?: boolean;
+	workspaceSymbolProvider?: boolean | WorkspaceSymbolOptions;
 
 	/**
 	 * Workspace specific server capabilities
