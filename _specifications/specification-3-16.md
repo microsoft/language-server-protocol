@@ -6519,7 +6519,7 @@ export interface SemanticTokensRegistrationOptions extends TextDocumentRegistrat
 }
 ```
 
-The following sections describe the concrete requests available for semantic tokens.
+Since the registration option handles range, full and delta requests the method used to register for semantic tokens requests is `textDocument\semanticTokens` and not one of the specific methods described below.
 
 **Requesting semantic tokens for a whole file**
 
