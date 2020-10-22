@@ -59,7 +59,7 @@ table.table-responsive.table-bordered {
 			position: -ms-sticky;
 			position: -o-sticky;
 			top: 3rem; // 2.5rem for the header's height + padding,
-			           // +.5rem for the tr's own padding 
+			           // +.5rem for the tr's own padding
 			background: #fff;
 			outline: 1px solid #e9ecef;
 		}
@@ -92,6 +92,7 @@ table.table-responsive.table-bordered {
 }
 
 pre[class=highlight] {
+	tab-size: 4ch;
 	padding: 9.5px;
 	overflow: auto;
 	font-size: 85%;
@@ -450,15 +451,15 @@ pre[class=highlight] {
 
 .nav .nav-link {
 	color: #2753e3 !important;
-  }  
+  }
 
 .nav .nav-link:hover {
 	color: #1034a8 !important;
-}  
+}
 
-a { 
+a {
 	color: #2753e3;
-}  
+}
 
 a:hover {
 	color: #1034a8
