@@ -316,12 +316,12 @@ interface Position {
 	line: number;
 
 	/**
-	 * Character offset on a line in a document (zero-based). Assuming that the line is
-	 * represented as a string, the `character` value represents the gap between the
-	 * `character` and `character + 1`.
+	 * Character offset on a line in a document (zero-based). Assuming that
+	 * the line is represented as a string, the `character` value represents
+	 * the gap between the `character` and `character + 1`.
 	 *
-	 * If the character value is greater than the line length it defaults back to the
-	 * line length.
+	 * If the character value is greater than the line length it defaults back
+	 * to the line length.
 	 */
 	character: number;
 }
@@ -370,8 +370,8 @@ interface LocationLink {
 	/**
 	 * Span of the origin of this link.
 	 *
-	 * Used as the underlined span for mouse interaction. Defaults to the word range at
-	 * the mouse position.
+	 * Used as the underlined span for mouse interaction. Defaults to the word
+	 * range at the mouse position.
 	 */
 	originSelectionRange?: Range;
 
@@ -381,17 +381,17 @@ interface LocationLink {
 	targetUri: DocumentUri;
 
 	/**
-	 * The full target range of this link. If the target for example is a symbol then target
-	 * range is the range enclosing this symbol not including leading/trailing whitespace
-	 * but everything else like comments. This information is typically used to highlight
-	 * the range in the editor.
+	 * The full target range of this link. If the target for example is a symbol
+	 * then target range is the range enclosing this symbol not including
+	 * leading/trailing whitespace but everything else like comments. This
+	 * information is typically used to highlight the range in the editor.
 	 */
 	targetRange: Range;
 
 	/**
-	 * The range that should be selected and revealed when this link is being followed,
-	 * e.g the name of a function. Must be contained by the the `targetRange`. See also
-	 * `DocumentSymbol#range`
+	 * The range that should be selected and revealed when this link is being
+	 * followed, e.g the name of a function. Must be contained by the the
+	 * `targetRange`. See also `DocumentSymbol#range`
 	 */
 	targetSelectionRange: Range;
 }
@@ -451,8 +451,9 @@ export interface Diagnostic {
 	relatedInformation?: DiagnosticRelatedInformation[];
 
 	/**
-	 * A data entry field that is preserved between a `textDocument/publishDiagnostics`
-	 * notification and `textDocument/codeAction` request.
+	 * A data entry field that is preserved between a
+	 * `textDocument/publishDiagnostics` notification and
+	 * `textDocument/codeAction` request.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
@@ -493,8 +494,8 @@ export namespace DiagnosticTag {
     /**
      * Unused or unnecessary code.
      *
-     * Clients are allowed to render diagnostics with this tag faded out instead of having
-     * an error squiggle.
+     * Clients are allowed to render diagnostics with this tag faded out
+	 * instead of having an error squiggle.
      */
     export const Unnecessary: 1 = 1;
     /**
@@ -512,9 +513,9 @@ export type DiagnosticTag = 1 | 2;
 
 ```typescript
 /**
- * Represents a related message and source code location for a diagnostic. This should be
- * used to point to code locations that cause or are related to a diagnostics, e.g when
- * duplicating a symbol in a scope.
+ * Represents a related message and source code location for a diagnostic.
+ * This should be used to point to code locations that cause or are related to
+ * a diagnostics, e.g when duplicating a symbol in a scope.
  */
 export interface DiagnosticRelatedInformation {
 	/**
@@ -731,18 +732,19 @@ export interface WorkspaceEdit {
 	changes?: { [uri: DocumentUri]: TextEdit[]; };
 
 	/**
-	 * Depending on the client capability `workspace.workspaceEdit.resourceOperations`
-	 * document changes are either an array of `TextDocumentEdit`s to express changes to
-	 * n different text documents where each text document edit addresses a specific
-	 * version of a text document. Or it can contain above `TextDocumentEdit`s mixed with
+	 * Depending on the client capability
+	 * `workspace.workspaceEdit.resourceOperations` document changes are either
+	 * an array of `TextDocumentEdit`s to express changes to n different text
+	 * documents where each text document edit addresses a specific version of
+	 * a text document. Or it can contain above `TextDocumentEdit`s mixed with
 	 * create, rename and delete file / folder operations.
 	 *
 	 * Whether a client supports versioned document edits is expressed via
 	 * `workspace.workspaceEdit.documentChanges` client capability.
 	 *
 	 * If a client neither supports `documentChanges` nor
-	 * `workspace.workspaceEdit.resourceOperations` then only plain `TextEdit`s using the
-	 * `changes` property are supported.
+	 * `workspace.workspaceEdit.resourceOperations` then only plain `TextEdit`s
+	 * using the `changes` property are supported.
 	 */
 	documentChanges?: (
 		TextDocumentEdit[] |
@@ -813,8 +815,9 @@ export type FailureHandlingKind = 'abort' | 'transactional' | 'undo' | 'textOnly
 export namespace FailureHandlingKind {
 
 	/**
-	 * Applying the workspace change is simply aborted if one of the changes provided
-	 * fails. All operations executed before the failing operation stay executed.
+	 * Applying the workspace change is simply aborted if one of the changes
+	 * provided fails. All operations executed before the failing operation
+	 * stay executed.
 	 */
 	export const Abort: FailureHandlingKind = 'abort';
 
@@ -826,9 +829,9 @@ export namespace FailureHandlingKind {
 
 
 	/**
-	 * If the workspace edit contains only textual file changes they are executed
-	 * transactional. If resource changes (create, rename or delete file) are part of
-	 * the change the failure handling strategy is abort.
+	 * If the workspace edit contains only textual file changes they are
+	 * executed transactional. If resource changes (create, rename or delete
+	 * file) are part of the change the failure handling strategy is abort.
 	 */
 	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
 
@@ -949,14 +952,15 @@ An identifier to denote a specific version of a text document.
 ```typescript
 interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	/**
-	 * The version number of this document. If a versioned text document identifier
-	 * is sent from the server to the client and the file is not open in the editor
-	 * (the server has not received an open notification before) the server can send
-	 * `null` to indicate that the version is known and the content on disk is the
-	 * master (as speced with document content ownership).
+	 * The version number of this document. If a versioned text document
+	 * identifier is sent from the server to the client and the file is not
+	 * open in the editor (the server has not received an open notification
+	 * before) the server can send `null` to indicate that the version is
+	 * known and the content on disk is the master (as speced with document
+	 * content ownership).
 	 *
-	 * The version number of a document will increase after each change, including
-	 * undo/redo. The number doesn't need to be consecutive.
+	 * The version number of a document will increase after each change,
+	 * including undo/redo. The number doesn't need to be consecutive.
 	 */
 	version: number | null;
 }
@@ -1009,12 +1013,13 @@ export interface DocumentFilter {
 	 * - `*` to match one or more characters in a path segment
 	 * - `?` to match on one character in a path segment
 	 * - `**` to match any number of path segments, including none
-	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and
-	 *   JavaScript files)
+	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript
+	 *   and JavaScript files)
 	 * - `[]` to declare a range of characters to match in a path segment
 	 *   (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
 	 * - `[!...]` to negate a range of characters to match in a path segment
-	 *   (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
+	 *   (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but
+	 *   not `example.0`)
 	 */
 	pattern?: string;
 }
@@ -1053,8 +1058,8 @@ Options to dynamically register for requests for a set of text documents.
  */
 export interface TextDocumentRegistrationOptions {
 	/**
-	 * A document selector to identify the scope of the registration. If set to null
-	 * the document selector provided on the client side will be used.
+	 * A document selector to identify the scope of the registration. If set to
+	 * null the document selector provided on the client side will be used.
 	 */
 	documentSelector: DocumentSelector | null;
 }
@@ -1086,13 +1091,15 @@ export namespace MarkupKind {
 export type MarkupKind = 'plaintext' | 'markdown';
 
 /**
- * A `MarkupContent` literal represents a string value which content is interpreted base on
- * its kind flag. Currently the protocol supports `plaintext` and `markdown` as markup kinds.
+ * A `MarkupContent` literal represents a string value which content is
+ * interpreted base on its kind flag. Currently the protocol supports
+ * `plaintext` and `markdown` as markup kinds.
  *
- * If the kind is `markdown` then the value can contain fenced code blocks like in GitHub
- * issues.
+ * If the kind is `markdown` then the value can contain fenced code blocks like
+ * in GitHub issues.
  *
- * Here is an example how such a string can be constructed using JavaScript / TypeScript:
+ * Here is an example how such a string can be constructed using
+ * JavaScript / TypeScript:
  * ```typescript
  * let markdown: MarkdownContent = {
  *  kind: MarkupKind.Markdown,
@@ -1106,8 +1113,8 @@ export type MarkupKind = 'plaintext' | 'markdown';
  * };
  * ```
  *
- * *Please Note* that clients might sanitize the return markdown. A client could decide to
- * remove HTML from the markdown to avoid script execution.
+ * *Please Note* that clients might sanitize the return markdown. A client could
+ * decide to remove HTML from the markdown to avoid script execution.
  */
 export interface MarkupContent {
 	/**
@@ -1147,8 +1154,8 @@ export interface WorkDoneProgressBegin {
 
 	/**
 	 * Controls if a cancel button should show to allow the user to cancel the
-	 * long running operation. Clients that don't support cancellation are allowed
-	 * to ignore the setting.
+	 * long running operation. Clients that don't support cancellation are
+	 * allowed to ignore the setting.
 	 */
 	cancellable?: boolean;
 
@@ -1183,11 +1190,11 @@ export interface WorkDoneProgressReport {
 	kind: 'report';
 
 	/**
-	 * Controls enablement state of a cancel button. This property is only valid if a cancel
-	 * button got requested in the `WorkDoneProgressStart` payload.
+	 * Controls enablement state of a cancel button. This property is only valid
+	 *  if a cancel button got requested in the `WorkDoneProgressStart` payload.
 	 *
-	 * Clients that don't support cancellation or don't support control the button's
-	 * enablement state are allowed to ignore the setting.
+	 * Clients that don't support cancellation or don't support control the
+	 * button's enablement state are allowed to ignore the setting.
 	 */
 	cancellable?: boolean;
 
@@ -1362,8 +1369,8 @@ A parameter literal used to pass a partial result token.
 ```typescript
 export interface PartialResultParams {
 	/**
-	 * An optional token that a server can use to report partial results (e.g. streaming) to
-	 * the client.
+	 * An optional token that a server can use to report partial results (e.g.
+	 * streaming) to the client.
 	 */
 	partialResultToken?: ProgressToken;
 }
@@ -1417,9 +1424,10 @@ _Request_:
 ```typescript
 interface InitializeParams extends WorkDoneProgressParams {
 	/**
-	 * The process Id of the parent process that started the server. Is null if the process
-	 * has not been started by another process. If the parent process is not alive then the
-	 * server should exit (see exit notification) its process.
+	 * The process Id of the parent process that started the server. Is null if
+	 * the process has not been started by another process. If the parent
+	 * process is not alive then the server should exit (see exit notification)
+	 * its process.
 	 */
 	processId: number | null;
 
@@ -1594,7 +1602,8 @@ export interface TextDocumentClientCapabilities {
 	rename?: RenameClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/publishDiagnostics` notification.
+	 * Capabilities specific to the `textDocument/publishDiagnostics`
+	 * notification.
 	 */
 	publishDiagnostics?: PublishDiagnosticsClientCapabilities;
 
@@ -1639,49 +1648,51 @@ interface ClientCapabilities {
 	 */
 	workspace?: {
 		/**
-		* The client supports applying batch edits
-		* to the workspace by supporting the request
-		* 'workspace/applyEdit'
-		*/
+		 * The client supports applying batch edits
+		 * to the workspace by supporting the request
+		 * 'workspace/applyEdit'
+		 */
 		applyEdit?: boolean;
 
 		/**
-		* Capabilities specific to `WorkspaceEdit`s
-		*/
+		 * Capabilities specific to `WorkspaceEdit`s
+		 */
 		workspaceEdit?: WorkspaceEditClientCapabilities;
 
 		/**
-		* Capabilities specific to the `workspace/didChangeConfiguration` notification.
-		*/
+		 * Capabilities specific to the `workspace/didChangeConfiguration`
+		 * notification.
+		 */
 		didChangeConfiguration?: DidChangeConfigurationClientCapabilities;
 
 		/**
-		* Capabilities specific to the `workspace/didChangeWatchedFiles` notification.
-		*/
+		 * Capabilities specific to the `workspace/didChangeWatchedFiles`
+		 * notification.
+		 */
 		didChangeWatchedFiles?: DidChangeWatchedFilesClientCapabilities;
 
 		/**
-		* Capabilities specific to the `workspace/symbol` request.
-		*/
+		 * Capabilities specific to the `workspace/symbol` request.
+		 */
 		symbol?: WorkspaceSymbolClientCapabilities;
 
 		/**
-		* Capabilities specific to the `workspace/executeCommand` request.
-		*/
+		 * Capabilities specific to the `workspace/executeCommand` request.
+		 */
 		executeCommand?: ExecuteCommandClientCapabilities;
 
 		/**
-		* The client has support for workspace folders.
-		*
-		* @since 3.6.0
-		*/
+		 * The client has support for workspace folders.
+		 *
+		 * @since 3.6.0
+		 */
 		workspaceFolders?: boolean;
 
 		/**
-		* The client supports `workspace/configuration` requests.
-		*
-		* @since 3.6.0
-		*/
+		 * The client supports `workspace/configuration` requests.
+		 *
+		 * @since 3.6.0
+		 */
 		configuration?: boolean;
 
 		/**
@@ -1703,11 +1714,11 @@ interface ClientCapabilities {
 	 */
 	window?: {
 		/**
-		 * Whether client supports handling progress notifications. If set servers are
-		 * allowed to report in `workDoneProgress` property in the request specific server
-		 * capabilities.
+		 * Whether client supports handling progress notifications. If set
+		 * servers are allowed to report in `workDoneProgress` property in the
+		 * request specific server capabilities.
 		 *
-		 * Since 3.15.0
+		 * @since 3.15.0
 		 */
 		workDoneProgress?: boolean;
 	}
@@ -1755,9 +1766,11 @@ interface InitializeResult {
  */
 export namespace InitializeError {
 	/**
-	 * If the protocol version provided by the client can't be handled by the server.
-	 * @deprecated This initialize error got replaced by client capabilities. There is
-	 * no version handshake in version 3.0x
+	 * If the protocol version provided by the client can't be handled by the
+	 * server.
+	 *
+	 * @deprecated This initialize error got replaced by client capabilities.
+	 * There is no version handshake in version 3.0x
 	 */
 	export const unknownProtocolVersion: number = 1;
 }
@@ -1782,9 +1795,10 @@ The server can signal the following capabilities:
 ```typescript
 interface ServerCapabilities {
 	/**
-	 * Defines how text documents are synced. Is either a detailed structure defining each
-	 * notification or for backwards compatibility the TextDocumentSyncKind number. If
-	 * omitted it defaults to `TextDocumentSyncKind.None`.
+	 * Defines how text documents are synced. Is either a detailed structure
+	 * defining each notification or for backwards compatibility the
+	 * TextDocumentSyncKind number. If omitted it defaults to
+	 * `TextDocumentSyncKind.None`.
 	 */
 	textDocumentSync?: TextDocumentSyncOptions | number;
 
@@ -1808,7 +1822,8 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.14.0
 	 */
-	declarationProvider?: boolean | DeclarationOptions | DeclarationRegistrationOptions;
+	declarationProvider?: boolean | DeclarationOptions
+		| DeclarationRegistrationOptions;
 
 	/**
 	 * The server provides goto definition support.
@@ -1847,9 +1862,9 @@ interface ServerCapabilities {
 	documentSymbolProvider?: boolean | DocumentSymbolOptions;
 
 	/**
-	 * The server provides code actions. The `CodeActionOptions` return type is only
-	 * valid if the client signals code action literal support via the property
-	 * `textDocument.codeAction.codeActionLiteralSupport`.
+	 * The server provides code actions. The `CodeActionOptions` return type is
+	 * only valid if the client signals code action literal support via the
+	 * property `textDocument.codeAction.codeActionLiteralSupport`.
 	 */
 	codeActionProvider?: boolean | CodeActionOptions;
 
@@ -1868,7 +1883,8 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.6.0
 	 */
-	colorProvider?: boolean | DocumentColorOptions | DocumentColorRegistrationOptions;
+	colorProvider?: boolean | DocumentColorOptions
+		| DocumentColorRegistrationOptions;
 
 	/**
 	 * The server provides document formatting.
@@ -1897,7 +1913,8 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.10.0
 	 */
-	foldingRangeProvider?: boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions;
+	foldingRangeProvider?: boolean | FoldingRangeOptions
+		| FoldingRangeRegistrationOptions;
 
 	/**
 	 * The server provides execute command support.
@@ -1925,7 +1942,8 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-	semanticTokensProvider?: SemanticTokensOptions | SemanticTokensRegistrationOptions;
+	semanticTokensProvider?: SemanticTokensOptions
+		| SemanticTokensRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
@@ -2006,8 +2024,8 @@ interface logTraceParams {
 	 */
 	message: string;
 	/**
-	 * Additional information that can be computed if the `trace` configuration is set
-	 * to `'verbose'`
+	 * Additional information that can be computed if the `trace` configuration
+	 * is set to `'verbose'`
 	 */
 	verbose?: string;
 }
@@ -2495,9 +2513,9 @@ _Client Capability_:
 ```typescript
 export interface DidChangeWatchedFilesClientCapabilities {
 	/**
-	 * Did change watched files notification supports dynamic registration. Please note
-	 * that the current protocol doesn't support static configuration for file changes
-	 * from the server side.
+	 * Did change watched files notification supports dynamic registration.
+	 * Please note that the current protocol doesn't support static
+	 * configuration for file changes from the server side.
 	 */
 	dynamicRegistration?: boolean;
 }
@@ -2523,12 +2541,13 @@ export interface FileSystemWatcher {
 	 * - `*` to match one or more characters in a path segment
 	 * - `?` to match on one character in a path segment
 	 * - `**` to match any number of path segments, including none
-	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and
-	 *   JavaScript files)
+	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript
+	 *   and JavaScript files)
 	 * - `[]` to declare a range of characters to match in a path segment
 	 *   (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
 	 * - `[!...]` to negate a range of characters to match in a path segment
-	 *   (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
+	 *   (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not
+	 *   `example.0`)
 	 */
 	globPattern: string;
 
@@ -2623,7 +2642,8 @@ interface WorkspaceSymbolClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Specific capabilities for the `SymbolKind` in the `workspace/symbol` request.
+	 * Specific capabilities for the `SymbolKind` in the `workspace/symbol`
+	 * request.
 	 */
 	symbolKind?: {
 		/**
@@ -2665,7 +2685,8 @@ export interface WorkspaceSymbolOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `WorkspaceSymbolRegistrationOptions` defined as follows:
 ```typescript
-export interface WorkspaceSymbolRegistrationOptions extends WorkspaceSymbolOptions {
+export interface WorkspaceSymbolRegistrationOptions
+	extends WorkspaceSymbolOptions {
 }
 ```
 
@@ -2677,7 +2698,8 @@ _Request_:
 /**
  * The parameters of a Workspace Symbol Request.
  */
-interface WorkspaceSymbolParams extends WorkDoneProgressParams, PartialResultParams {
+interface WorkspaceSymbolParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * A query string to filter symbols by. Clients may send an empty
 	 * string here to request all symbols.
@@ -2726,7 +2748,8 @@ _Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
 /**
  * Execute command registration options.
  */
-export interface ExecuteCommandRegistrationOptions extends ExecuteCommandOptions {
+export interface ExecuteCommandRegistrationOptions
+	extends ExecuteCommandOptions {
 }
 ```
 
@@ -2821,7 +2844,8 @@ Controls whether text document synchronization supports dynamic registration.
 
 ```typescript
 /**
- * Defines how the host (editor) should sync document changes to the language server.
+ * Defines how the host (editor) should sync document changes to the language
+ * server.
  */
 export namespace TextDocumentSyncKind {
 	/**
@@ -2845,15 +2869,16 @@ export namespace TextDocumentSyncKind {
 
 export interface TextDocumentSyncOptions {
 	/**
-	 * Open and close notifications are sent to the server. If omitted open close
-	 * notification should not be sent.
+	 * Open and close notifications are sent to the server. If omitted open
+	 * close notification should not be sent.
 	 */
 	openClose?: boolean;
 
 	/**
-	 * Change notifications are sent to the server. See TextDocumentSyncKind.None,
-	 * TextDocumentSyncKind.Full and TextDocumentSyncKind.Incremental. If omitted it defaults
-	 * to TextDocumentSyncKind.None.
+	 * Change notifications are sent to the server. See
+	 * TextDocumentSyncKind.None, TextDocumentSyncKind.Full and
+	 * TextDocumentSyncKind.Incremental. If omitted it defaults to
+	 * TextDocumentSyncKind.None.
 	 */
 	change?: TextDocumentSyncKind;
 }
@@ -2901,7 +2926,8 @@ _Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follo
 /**
  * Describe options to be used when registering for text document change events.
  */
-export interface TextDocumentChangeRegistrationOptions extends TextDocumentRegistrationOptions {
+export interface TextDocumentChangeRegistrationOptions
+	extends TextDocumentRegistrationOptions {
 	/**
 	 * How documents are synced to the server. See TextDocumentSyncKind.Full
 	 * and TextDocumentSyncKind.Incremental.
@@ -2924,24 +2950,26 @@ interface DidChangeTextDocumentParams {
 	textDocument: VersionedTextDocumentIdentifier;
 
 	/**
-	 * The actual content changes. The content changes describe single state changes
-	 * to the document. So if there are two content changes c1 (at array index 0) and
-	 * c2 (at array index 1) for a document in state S then c1 moves the document from
-	 * S to S' and c2 from S' to S''. So c1 is computed on the state S and c2 is computed
-	 * on the state S'.
+	 * The actual content changes. The content changes describe single state
+	 * changes to the document. So if there are two content changes c1 (at
+	 * array index 0) and c2 (at array index 1) for a document in state S then
+	 * c1 moves the document from S to S' and c2 from S' to S''. So c1 is
+	 * computed on the state S and c2 is computed on the state S'.
 	 *
-	 * To mirror the content of a document using change events use the following approach:
+	 * To mirror the content of a document using change events use the following
+	 * approach:
 	 * - start with the same initial content
-	 * - apply the 'textDocument/didChange' notifications in the order you receive them.
-	 * - apply the `TextDocumentContentChangeEvent`s in a single notification in the order
-	 *   you receive them.
+	 * - apply the 'textDocument/didChange' notifications in the order you
+	 *   receive them.
+	 * - apply the `TextDocumentContentChangeEvent`s in a single notification
+	 *   in the order you receive them.
 	 */
 	contentChanges: TextDocumentContentChangeEvent[];
 }
 
 /**
- * An event describing a change to a text document. If range and rangeLength are omitted
- * the new text is considered to be the full content of the document.
+ * An event describing a change to a text document. If range and rangeLength are
+ * omitted the new text is considered to be the full content of the document.
  */
 export type TextDocumentContentChangeEvent = {
 	/**
@@ -3012,8 +3040,8 @@ export interface WillSaveTextDocumentParams {
 export namespace TextDocumentSaveReason {
 
 	/**
-	 * Manually triggered, e.g. by the user pressing save, by starting debugging,
-	 * or by an API call.
+	 * Manually triggered, e.g. by the user pressing save, by starting
+	 * debugging, or by an API call.
 	 */
 	export const Manual = 1;
 
@@ -3082,7 +3110,8 @@ The capability indicates that the server is interested in `textDocument/didSave`
 
 _Registration Options_: `TextDocumentSaveRegistrationOptions` defined as follows:
 ```typescript
-export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistrationOptions {
+export interface TextDocumentSaveRegistrationOptions
+	extends TextDocumentRegistrationOptions {
 	/**
 	 * The client is supposed to include the content on save.
 	 */
@@ -3162,7 +3191,8 @@ export interface TextDocumentSyncClientCapabilities {
 }
 
 /**
- * Defines how the host (editor) should sync document changes to the language server.
+ * Defines how the host (editor) should sync document changes to the language
+ * server.
  */
 export namespace TextDocumentSyncKind {
 	/**
@@ -3186,29 +3216,30 @@ export namespace TextDocumentSyncKind {
 
 export interface TextDocumentSyncOptions {
 	/**
-	 * Open and close notifications are sent to the server. If omitted open close notification
-	 * should not be sent.
+	 * Open and close notifications are sent to the server. If omitted open
+	 * close notification should not be sent.
 	 */
 	openClose?: boolean;
 	/**
-	 * Change notifications are sent to the server. See TextDocumentSyncKind.None,
-	 * TextDocumentSyncKind.Full and TextDocumentSyncKind.Incremental. If omitted it defaults
-	 * to TextDocumentSyncKind.None.
+	 * Change notifications are sent to the server. See
+	 * TextDocumentSyncKind.None, TextDocumentSyncKind.Full and
+	 * TextDocumentSyncKind.Incremental. If omitted it defaults to
+	 * TextDocumentSyncKind.None.
 	 */
 	change?: number;
 	/**
-	 * If present will save notifications are sent to the server. If omitted the notification
-	 * should not be sent.
+	 * If present will save notifications are sent to the server. If omitted
+	 * the notification should not be sent.
 	 */
 	willSave?: boolean;
 	/**
-	 * If present will save wait until requests are sent to the server. If omitted the request
-	 * should not be sent.
+	 * If present will save wait until requests are sent to the server. If
+	 * omitted the request should not be sent.
 	 */
 	willSaveWaitUntil?: boolean;
 	/**
-	 * If present save notifications are sent to the server. If omitted the notification
-	 * should not be sent.
+	 * If present save notifications are sent to the server. If omitted the
+	 * notification should not be sent.
 	 */
 	save?: boolean | SaveOptions;
 }
@@ -3289,7 +3320,8 @@ interface PublishDiagnosticsParams {
 	uri: DocumentUri;
 
 	/**
-	 * Optional the version number of the document the diagnostics are published for.
+	 * Optional the version number of the document the diagnostics are published
+	 * for.
 	 *
 	 * @since 3.15.0
 	 */
@@ -3328,8 +3360,8 @@ export interface CompletionClientCapabilities {
 		 *
 		 * A snippet can define tab stops and placeholders with `$1`, `$2`
 		 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
-		 * the end of the snippet. Placeholders with equal identifiers are linked,
-		 * that is typing in one will update others too.
+		 * the end of the snippet. Placeholders with equal identifiers are
+		 * linked, that is typing in one will update others too.
 		 */
 		snippetSupport?: boolean;
 
@@ -3355,10 +3387,10 @@ export interface CompletionClientCapabilities {
 		preselectSupport?: boolean;
 
 		/**
-		 * Client supports the tag property on a completion item. Clients supporting
-		 * tags have to handle unknown tags gracefully. Clients especially need to
-		 * preserve unknown tags when sending a completion item back to the server in
-		 * a resolve call.
+		 * Client supports the tag property on a completion item. Clients
+		 * supporting tags have to handle unknown tags gracefully. Clients
+		 * especially need to preserve unknown tags when sending a completion
+		 * item back to the server in a resolve call.
 		 *
 		 * @since 3.15.0
 		 */
@@ -3370,17 +3402,17 @@ export interface CompletionClientCapabilities {
 		}
 
 		/**
-		 * Client supports insert replace edit to control different behavior if a
-		 * completion item is inserted in the text or should replace text.
+		 * Client supports insert replace edit to control different behavior if
+		 * a completion item is inserted in the text or should replace text.
 		 *
 		 * @since 3.16.0 - proposed state
 		 */
 		insertReplaceSupport?: boolean;
 
 		/**
-		 * Indicates which properties a client can resolve lazily on a completion
-		 * item. Before version 3.16.0 only the predefined properties `documentation`
-		 * and `details` could be resolved lazily.
+		 * Indicates which properties a client can resolve lazily on a
+		 * completion item. Before version 3.16.0 only the predefined properties
+		 * `documentation` and `details` could be resolved lazily.
 		 *
 		 * @since 3.16.0 - proposed state
 		 */
@@ -3424,24 +3456,27 @@ _Server Capability_:
  */
 export interface CompletionOptions extends WorkDoneProgressOptions {
 	/**
-	 * Most tools trigger completion request automatically without explicitly requesting
-	 * it using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
-	 * starts to type an identifier. For example if the user types `c` in a JavaScript file
-	 * code complete will automatically pop up present `console` besides others as a
-	 * completion item. Characters that make up identifiers don't need to be listed here.
+	 * Most tools trigger completion request automatically without explicitly
+	 * requesting it using a keyboard shortcut (e.g. Ctrl+Space). Typically they
+	 * do so when the user starts to type an identifier. For example if the user
+	 * types `c` in a JavaScript file code complete will automatically pop up
+	 * present `console` besides others as a completion item. Characters that
+	 * make up identifiers don't need to be listed here.
 	 *
-	 * If code complete should automatically be trigger on characters not being valid inside
-	 * an identifier (for example `.` in JavaScript) list them in `triggerCharacters`.
+	 * If code complete should automatically be trigger on characters not being
+	 * valid inside an identifier (for example `.` in JavaScript) list them in
+	 * `triggerCharacters`.
 	 */
 	triggerCharacters?: string[];
 
 	/**
-	 * The list of all possible characters that commit a completion. This field can be used
-	 * if clients don't support individual commit characters per completion item. See
-	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`.
+	 * The list of all possible characters that commit a completion. This field
+	 * can be used if clients don't support individual commit characters per
+	 * completion item. See client capability
+	 * `completion.completionItem.commitCharactersSupport`.
 	 *
-	 * If a server provides both `allCommitCharacters` and commit characters on an individual
-	 * completion item the ones on the completion item win.
+	 * If a server provides both `allCommitCharacters` and commit characters on
+	 * an individual completion item the ones on the completion item win.
 	 *
 	 * @since 3.2.0
 	 */
@@ -3471,7 +3506,8 @@ export interface CompletionParams extends TextDocumentPositionParams, WorkDonePr
 	PartialResultParams {
 	/**
 	 * The completion context. This is only available if the client specifies
-	 * to send this using `ClientCapabilities.textDocument.completion.contextSupport === true`
+	 * to send this using the client capability
+	 * `completion.contextSupport === true`
 	 */
 	context?: CompletionContext;
 }
@@ -3488,7 +3524,8 @@ export namespace CompletionTriggerKind {
 
 	/**
 	 * Completion was triggered by a trigger character specified by
-	 * the `triggerCharacters` properties of the `CompletionRegistrationOptions`.
+	 * the `triggerCharacters` properties of the
+	 * `CompletionRegistrationOptions`.
 	 */
 	export const TriggerCharacter: 2 = 2;
 
@@ -3501,8 +3538,8 @@ export type CompletionTriggerKind = 1 | 2 | 3;
 
 
 /**
- * Contains additional information about the context in which a completion request is
- * triggered.
+ * Contains additional information about the context in which a completion
+ * request is triggered.
  */
 export interface CompletionContext {
 	/**
@@ -3511,8 +3548,9 @@ export interface CompletionContext {
 	triggerKind: CompletionTriggerKind;
 
 	/**
-	 * The trigger character (a single character) that has trigger code complete.
-	 * Is undefined if `triggerKind !== CompletionTriggerKind.TriggerCharacter`
+	 * The trigger character (a single character) that has trigger code
+	 * complete. Is undefined if
+	 * `triggerKind !== CompletionTriggerKind.TriggerCharacter`
 	 */
 	triggerCharacter?: string;
 }
@@ -3523,8 +3561,8 @@ _Response_:
 
 ```typescript
 /**
- * Represents a collection of [completion items](#CompletionItem) to be presented
- * in the editor.
+ * Represents a collection of [completion items](#CompletionItem) to be
+ * presented in the editor.
  */
 export interface CompletionList {
 	/**
@@ -3563,8 +3601,8 @@ export namespace InsertTextFormat {
 export type InsertTextFormat = 1 | 2;
 
 /**
- * Completion item tags are extra annotations that tweak the rendering of a completion
- * item.
+ * Completion item tags are extra annotations that tweak the rendering of a
+ * completion item.
  *
  * @since 3.15.0
  */
@@ -3644,51 +3682,53 @@ export interface CompletionItem {
 	 *
 	 * The `insertText` is subject to interpretation by the client side.
 	 * Some tools might not take the string literally. For example
-	 * VS Code when code complete is requested in this example `con<cursor position>`
-	 * and a completion item with an `insertText` of `console` is provided it
-	 * will only insert `sole`. Therefore it is recommended to use `textEdit` instead
-	 * since it avoids additional client side interpretation.
+	 * VS Code when code complete is requested in this example
+	 * `con<cursor position>` and a completion item with an `insertText` of
+	 * `console` is provided it will only insert `sole`. Therefore it is
+	 * recommended to use `textEdit` instead since it avoids additional client
+	 * side interpretation.
 	 */
 	insertText?: string;
 
 	/**
-	 * The format of the insert text. The format applies to both the `insertText` property
-	 * and the `newText` property of a provided `textEdit`. If omitted defaults to
-	 * `InsertTextFormat.PlainText`.
+	 * The format of the insert text. The format applies to both the
+	 * `insertText` property and the `newText` property of a provided
+	 * `textEdit`. If omitted defaults to `InsertTextFormat.PlainText`.
 	 */
 	insertTextFormat?: InsertTextFormat;
 
 	/**
-	 * An edit which is applied to a document when selecting this completion. When an edit
-	 * is provided the value of `insertText` is ignored.
+	 * An edit which is applied to a document when selecting this completion.
+	 * When an edit is provided the value of `insertText` is ignored.
 	 *
-	 * *Note:* The range of the edit must be a single line range and it must contain the
-	 * position at which completion has been requested.
+	 * *Note:* The range of the edit must be a single line range and it must
+	 * contain the position at which completion has been requested.
 	 */
 	textEdit?: TextEdit;
 
 	/**
 	 * An optional array of additional text edits that are applied when
-	 * selecting this completion. Edits must not overlap (including the same insert position)
-	 * with the main edit nor with themselves.
+	 * selecting this completion. Edits must not overlap (including the same
+	 * insert position) with the main edit nor with themselves.
 	 *
-	 * Additional text edits should be used to change text unrelated to the current cursor
-	 * position (for example adding an import statement at the top of the file if the
-	 * completion item will insert an unqualified type).
+	 * Additional text edits should be used to change text unrelated to the
+	 * current cursor position (for example adding an import statement at the
+	 * top of the file if the completion item will insert an unqualified type).
 	 */
 	additionalTextEdits?: TextEdit[];
 
 	/**
-	 * An optional set of characters that when pressed while this completion is active will
-	 * accept it first and then type that character. *Note* that all commit characters should
-	 * have `length=1` and that superfluous characters will be ignored.
+	 * An optional set of characters that when pressed while this completion is
+	 * active will accept it first and then type that character. *Note* that all
+	 * commit characters should have `length=1` and that superfluous characters
+	 * will be ignored.
 	 */
 	commitCharacters?: string[];
 
 	/**
-	 * An optional command that is executed *after* inserting this completion. *Note* that
-	 * additional modifications to the current document should be described with the
-	 * additionalTextEdits-property.
+	 * An optional command that is executed *after* inserting this completion.
+	 * *Note* that additional modifications to the current document should be
+	 * described with the additionalTextEdits-property.
 	 */
 	command?: Command;
 
@@ -3900,19 +3940,21 @@ Where `MarkedString` is defined as follows:
 
 ```typescript
 /**
- * MarkedString can be used to render human readable text. It is either a markdown string
- * or a code-block that provides a language and a code snippet. The language identifier
- * is semantically equal to the optional language identifier in fenced code blocks in GitHub
- * issues.
+ * MarkedString can be used to render human readable text. It is either a
+ * markdown string or a code-block that provides a language and a code snippet.
+ * The language identifier is semantically equal to the optional language
+ * identifier in fenced code blocks in GitHub issues.
  *
  * The pair of a language and a value is an equivalent to markdown:
  * ```${language}
  * ${value}
  * ```
  *
- * Note that markdown strings will be sanitized - that means html will be escaped.
-* @deprecated use MarkupContent instead.
-*/
+ * Note that markdown strings will be sanitized - that means html will be
+ * escaped.
+ *
+ * @deprecated use MarkupContent instead.
+ */
 type MarkedString = string | { language: string; value: string };
 ```
 
@@ -3958,8 +4000,8 @@ export interface SignatureHelpClientCapabilities {
 		};
 
 		/**
-		 * The client supports the `activeParameter` property on `SignatureInformation`
-		 * literal.
+		 * The client supports the `activeParameter` property on
+		 * `SignatureInformation` literal.
 		 *
 		 * @since 3.16.0 - proposed state
 		 */
@@ -3993,8 +4035,9 @@ export interface SignatureHelpOptions extends WorkDoneProgressOptions {
 	/**
 	 * List of characters that re-trigger signature help.
 	 *
-	 * These trigger characters are only active when signature help is already showing. All
-	 * trigger characters are also counted as re-trigger characters.
+	 * These trigger characters are only active when signature help is already
+	 * showing. All trigger characters are also counted as re-trigger
+	 * characters.
 	 *
 	 * @since 3.15.0
 	 */
@@ -4041,14 +4084,16 @@ export namespace SignatureHelpTriggerKind {
 	 */
 	export const TriggerCharacter: 2 = 2;
 	/**
-	 * Signature help was triggered by the cursor moving or by the document content changing.
+	 * Signature help was triggered by the cursor moving or by the document
+	 * content changing.
 	 */
 	export const ContentChange: 3 = 3;
 }
 export type SignatureHelpTriggerKind = 1 | 2 | 3;
 
 /**
- * Additional information about the context in which a signature help request was triggered.
+ * Additional information about the context in which a signature help request
+ * was triggered.
  *
  * @since 3.15.0
  */
@@ -4061,23 +4106,25 @@ export interface SignatureHelpContext {
 	/**
 	 * Character that caused signature help to be triggered.
 	 *
-	 * This is undefined when `triggerKind !== SignatureHelpTriggerKind.TriggerCharacter`
+	 * This is undefined when triggerKind !==
+	 * SignatureHelpTriggerKind.TriggerCharacter
 	 */
 	triggerCharacter?: string;
 
 	/**
 	 * `true` if signature help was already showing when it was triggered.
 	 *
-	 * Retriggers occur when the signature help is already active and can be caused by actions
-	 * such as typing a trigger character, a cursor move, or document content changes.
+	 * Retriggers occur when the signature help is already active and can be
+	 * caused by actions such as typing a trigger character, a cursor move, or
+	 * document content changes.
 	 */
 	isRetrigger: boolean;
 
 	/**
 	 * The currently active `SignatureHelp`.
 	 *
-	 * The `activeSignatureHelp` has its `SignatureHelp.activeSignature` field updated based
-	 * on the user navigating through available signatures.
+	 * The `activeSignatureHelp` has its `SignatureHelp.activeSignature` field
+	 * updated based on the user navigating through available signatures.
 	 */
 	activeSignatureHelp?: SignatureHelp;
 }
@@ -4166,13 +4213,14 @@ export interface ParameterInformation {
 	/**
 	 * The label of this parameter information.
 	 *
-	 * Either a string or an inclusive start and exclusive end offsets within its containing
-	 * signature label. (see SignatureInformation.label). The offsets are based on a UTF-16
-	 * string representation as `Position` and `Range` does.
+	 * Either a string or an inclusive start and exclusive end offsets within
+	 * its containing signature label. (see SignatureInformation.label). The
+	 * offsets are based on a UTF-16 string representation as `Position` and
+	 * `Range` does.
 	 *
-	 * *Note*: a label of type string should be a substring of its containing signature label.
-	 * Its intended use case is to highlight the parameter label part in the
-	 * `SignatureInformation.label`.
+	 * *Note*: a label of type string should be a substring of its containing
+	 * signature label. Its intended use case is to highlight the parameter
+	 * label part in the `SignatureInformation.label`.
 	 */
 	label: string | [number, number];
 
@@ -4201,9 +4249,9 @@ _Client Capability_:
 ```typescript
 export interface DeclarationClientCapabilities {
 	/**
-	 * Whether declaration supports dynamic registration. If this is set to `true`
-	 * the client supports the new `DeclarationRegistrationOptions` return value
-	 * for the corresponding server capability as well.
+	 * Whether declaration supports dynamic registration. If this is set to
+	 * `true` the client supports the new `DeclarationRegistrationOptions`
+	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
 
@@ -4235,8 +4283,8 @@ _Request_:
 * params: `DeclarationParams` defined as follows:
 
 ```typescript
-export interface DeclarationParams extends TextDocumentPositionParams, WorkDoneProgressParams,
-	PartialResultParams {
+export interface DeclarationParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams, PartialResultParams {
 }
 ```
 
@@ -4282,8 +4330,8 @@ export interface DefinitionOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `DefinitionRegistrationOptions` defined as follows:
 ```typescript
-export interface DefinitionRegistrationOptions extends TextDocumentRegistrationOptions,
-	DefinitionOptions {
+export interface DefinitionRegistrationOptions extends
+	TextDocumentRegistrationOptions, DefinitionOptions {
 }
 ```
 
@@ -4292,8 +4340,8 @@ _Request_:
 * params: `DefinitionParams` defined as follows:
 
 ```typescript
-export interface DefinitionParams extends TextDocumentPositionParams, WorkDoneProgressParams,
-	PartialResultParams {
+export interface DefinitionParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams, PartialResultParams {
 }
 ```
 
@@ -4317,9 +4365,9 @@ _Client Capability_:
 ```typescript
 export interface TypeDefinitionClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to `true`
-	 * the client supports the new `TypeDefinitionRegistrationOptions` return value
-	 * for the corresponding server capability as well.
+	 * Whether implementation supports dynamic registration. If this is set to
+	 * `true` the client supports the new `TypeDefinitionRegistrationOptions`
+	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
 
@@ -4343,8 +4391,9 @@ export interface TypeDefinitionOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `TypeDefinitionRegistrationOptions` defined as follows:
 ```typescript
-export interface TypeDefinitionRegistrationOptions extends TextDocumentRegistrationOptions,
-	TypeDefinitionOptions, StaticRegistrationOptions {
+export interface TypeDefinitionRegistrationOptions extends
+	TextDocumentRegistrationOptions, TypeDefinitionOptions,
+	StaticRegistrationOptions {
 }
 ```
 
@@ -4378,9 +4427,9 @@ _Client Capability_:
 ```typescript
 export interface ImplementationClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to `true`
-	 * the client supports the new `ImplementationRegistrationOptions` return value
-	 * for the corresponding server capability as well.
+	 * Whether implementation supports dynamic registration. If this is set to
+	 * `true` the client supports the new `ImplementationRegistrationOptions`
+	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
 
@@ -4404,8 +4453,9 @@ export interface ImplementationOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `ImplementationRegistrationOptions` defined as follows:
 ```typescript
-export interface ImplementationRegistrationOptions extends TextDocumentRegistrationOptions,
-	ImplementationOptions, StaticRegistrationOptions {
+export interface ImplementationRegistrationOptions extends
+	TextDocumentRegistrationOptions, ImplementationOptions,
+	StaticRegistrationOptions {
 }
 ```
 
@@ -4452,8 +4502,8 @@ export interface ReferenceOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `ReferenceRegistrationOptions` defined as follows:
 ```typescript
-export interface ReferenceRegistrationOptions extends TextDocumentRegistrationOptions,
-	ReferenceOptions {
+export interface ReferenceRegistrationOptions extends
+	TextDocumentRegistrationOptions, ReferenceOptions {
 }
 ```
 
@@ -4462,8 +4512,8 @@ _Request_:
 * params: `ReferenceParams` defined as follows:
 
 ```typescript
-export interface ReferenceParams extends TextDocumentPositionParams, WorkDoneProgressParams,
-	PartialResultParams {
+export interface ReferenceParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams, PartialResultParams {
 	context: ReferenceContext
 }
 
@@ -4510,8 +4560,8 @@ export interface DocumentHighlightOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `DocumentHighlightRegistrationOptions` defined as follows:
 ```typescript
-export interface DocumentHighlightRegistrationOptions extends TextDocumentRegistrationOptions,
-	DocumentHighlightOptions {
+export interface DocumentHighlightRegistrationOptions extends
+	TextDocumentRegistrationOptions, DocumentHighlightOptions {
 }
 ```
 
@@ -4590,8 +4640,8 @@ export interface DocumentSymbolClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Specific capabilities for the `SymbolKind` in the `textDocument/documentSymbol`
-	 * request.
+	 * Specific capabilities for the `SymbolKind` in the
+	 * `textDocument/documentSymbol` request.
 	 */
 	symbolKind?: {
 		/**
@@ -4654,8 +4704,8 @@ export interface DocumentSymbolOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `DocumentSymbolRegistrationOptions` defined as follows:
 ```typescript
-export interface DocumentSymbolRegistrationOptions extends TextDocumentRegistrationOptions,
-	DocumentSymbolOptions {
+export interface DocumentSymbolRegistrationOptions extends
+	TextDocumentRegistrationOptions, DocumentSymbolOptions {
 }
 ```
 
@@ -4664,7 +4714,8 @@ _Request_:
 * params: `DocumentSymbolParams` defined as follows:
 
 ```typescript
-export interface DocumentSymbolParams extends WorkDoneProgressParams, PartialResultParams {
+export interface DocumentSymbolParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -4725,16 +4776,17 @@ export type SymbolTag = 1;
 
 
 /**
- * Represents programming constructs like variables, classes, interfaces etc. that appear
- * in a document. Document symbols can be hierarchical and they have two ranges: one that
- * encloses its definition and one that points to its most interesting range, e.g. the
- * range of an identifier.
+ * Represents programming constructs like variables, classes, interfaces etc.
+ * that appear in a document. Document symbols can be hierarchical and they
+ * have two ranges: one that encloses its definition and one that points to its
+ * most interesting range, e.g. the range of an identifier.
  */
 export interface DocumentSymbol {
 
 	/**
-	 * The name of this symbol. Will be displayed in the user interface and therefore must
-	 * not be an empty string or a string only consisting of white spaces.
+	 * The name of this symbol. Will be displayed in the user interface and
+	 * therefore must not be an empty string or a string only consisting of
+	 * white spaces.
 	 */
 	name: string;
 
@@ -4763,15 +4815,16 @@ export interface DocumentSymbol {
 	deprecated?: boolean;
 
 	/**
-	 * The range enclosing this symbol not including leading/trailing whitespace but
-	 * everything else like comments. This information is typically used to determine if the
-	 * clients cursor is inside the symbol to reveal in the symbol in the UI.
+	 * The range enclosing this symbol not including leading/trailing whitespace
+	 * but everything else like comments. This information is typically used to
+	 * determine if the clients cursor is inside the symbol to reveal in the
+	 * symbol in the UI.
 	 */
 	range: Range;
 
 	/**
-	 * The range that should be selected and revealed when this symbol is being picked, e.g.
-	 * the name of a function. Must be contained by the `range`.
+	 * The range that should be selected and revealed when this symbol is being
+	 * picked, e.g. the name of a function. Must be contained by the `range`.
 	 */
 	selectionRange: Range;
 
@@ -4950,8 +5003,8 @@ export interface CodeActionOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `CodeActionRegistrationOptions` defined as follows:
 ```typescript
-export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions,
-	CodeActionOptions {
+export interface CodeActionRegistrationOptions extends
+	TextDocumentRegistrationOptions, CodeActionOptions {
 }
 ```
 
@@ -4963,7 +5016,8 @@ _Request_:
 /**
  * Params for the CodeActionRequest
  */
-export interface CodeActionParams extends WorkDoneProgressParams, PartialResultParams {
+export interface CodeActionParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The document in which the command was invoked.
 	 */
@@ -4986,8 +5040,8 @@ export interface CodeActionParams extends WorkDoneProgressParams, PartialResultP
  * Kinds are a hierarchical list of identifiers separated by `.`,
  * e.g. `"refactor.extract.function"`.
  *
- * The set of kinds is open and client needs to announce the kinds it supports to the server
- * during initialization.
+ * The set of kinds is open and client needs to announce the kinds it supports
+ * to the server during initialization.
  */
 export type CodeActionKind = string;
 
@@ -5069,10 +5123,11 @@ export namespace CodeActionKind {
  */
 export interface CodeActionContext {
 	/**
-	 * An array of diagnostics known on the client side overlapping the range provided to the
-	 * `textDocument/codeAction` request. They are provided so that the server knows which
-	 * errors are currently presented to the user for the given range. There is no guarantee
-	 * that these accurately reflect the error state of the resource. The primary parameter
+	 * An array of diagnostics known on the client side overlapping the range
+	 * provided to the `textDocument/codeAction` request. They are provided so
+	 * that the server knows which errors are currently presented to the user
+	 * for the given range. There is no guarantee that these accurately reflect
+	 * the error state of the resource. The primary parameter
 	 * to compute code actions is the provided range.
 	 */
 	diagnostics: Diagnostic[];
@@ -5080,8 +5135,8 @@ export interface CodeActionContext {
 	/**
 	 * Requested kind of actions to return.
 	 *
-	 * Actions not of this kind are filtered out by the client before being shown. So servers
-	 * can omit computing them.
+	 * Actions not of this kind are filtered out by the client before being
+	 * shown. So servers can omit computing them.
 	 */
 	only?: CodeActionKind[];
 }
