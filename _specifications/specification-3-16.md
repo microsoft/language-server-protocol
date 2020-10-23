@@ -5112,9 +5112,11 @@ export namespace CodeActionKind {
 	export const Source: CodeActionKind = 'source';
 
 	/**
-	 * Base kind for an organize imports source action: `source.organizeImports`.
+	 * Base kind for an organize imports source action:
+	 * `source.organizeImports`.
 	 */
-	export const SourceOrganizeImports: CodeActionKind = 'source.organizeImports';
+	export const SourceOrganizeImports: CodeActionKind =
+		'source.organizeImports';
 }
 
 /**
@@ -5147,11 +5149,11 @@ _Response_:
 
 ```typescript
 /**
- * A code action represents a change that can be performed in code, e.g. to fix a problem or
- * to refactor code.
+ * A code action represents a change that can be performed in code, e.g. to fix
+ * a problem or to refactor code.
  *
- * A CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is
- * applied first, then the `command` is executed.
+ * A CodeAction must set either `edit` and/or a `command`. If both are supplied,
+ * the `edit` is applied first, then the `command` is executed.
  */
 export interface CodeAction {
 
@@ -5173,12 +5175,12 @@ export interface CodeAction {
 	diagnostics?: Diagnostic[];
 
 	/**
-	 * Marks this as a preferred action. Preferred actions are used by the `auto fix` command
-	 * and can be targeted by keybindings.
+	 * Marks this as a preferred action. Preferred actions are used by the
+	 * `auto fix` command and can be targeted by keybindings.
 	 *
-	 * A quick fix should be marked preferred if it properly addresses the underlying error.
-	 * A refactoring should be marked preferred if it is the most reasonable choice of actions
-	 * to take.
+	 * A quick fix should be marked preferred if it properly addresses the
+	 * underlying error. A refactoring should be marked preferred if it is the
+	 * most reasonable choice of actions to take.
 	 *
 	 * @since 3.15.0
 	 */
@@ -5187,25 +5189,27 @@ export interface CodeAction {
 	/**
 	 * Marks that the code action cannot currently be applied.
 	 *
-	 * Clients should follow the following guidelines regarding disabled code actions:
+	 * Clients should follow the following guidelines regarding disabled code
+	 * actions:
 	 *
-	 * - Disabled code actions are not shown in automatic
-	 *   [lightbulb](https://code.visualstudio.com/docs/editor/editingevolved#_code-action)
-	 *   code action menu.
+	 * - Disabled code actions are not shown in automatic lightbulbs code
+	 *   action menus.
 	 *
-	 * - Disabled actions are shown as faded out in the code action menu when the user request
-	 *   a more specific type of code action, such as refactorings.
+	 * - Disabled actions are shown as faded out in the code action menu when
+	 *   the user request a more specific type of code action, such as
+	 *   refactorings.
 	 *
-	 * - If the user has a keybinding that auto applies a code action and only a disabled code
-	 *   actions are returned, the client should show the user an error message with `reason`
-	 *   in the editor.
+	 * - If the user has a keybinding that auto applies a code action and only
+	 *   a disabled code actions are returned, the client should show the user
+	 *   an error message with `reason` in the editor.
 	 *
 	 * @since 3.16.0
 	 */
 	disabled?: {
 
 		/**
-		 * Human readable description of why the code action is currently disabled.
+		 * Human readable description of why the code action is currently
+		 * disabled.
 		 *
 		 * This is displayed in the code actions UI.
 		 */
@@ -5287,8 +5291,8 @@ export interface CodeLensOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `CodeLensRegistrationOptions` defined as follows:
 ```typescript
-export interface CodeLensRegistrationOptions extends TextDocumentRegistrationOptions,
-	CodeLensOptions {
+export interface CodeLensRegistrationOptions extends
+	TextDocumentRegistrationOptions, CodeLensOptions {
 }
 ```
 
@@ -5313,12 +5317,14 @@ _Response_:
  * A code lens represents a command that should be shown along with
  * source text, like the number of references, a way to run tests, etc.
  *
- * A code lens is _unresolved_ when no command is associated to it. For performance
- * reasons the creation of a code lens and resolving should be done in two stages.
+ * A code lens is _unresolved_ when no command is associated to it. For
+ * performance reasons the creation of a code lens and resolving should be done
+ * in two stages.
  */
 interface CodeLens {
 	/**
-	 * The range in which this code lens is valid. Should only span a single line.
+	 * The range in which this code lens is valid. Should only span a single
+	 * line.
 	 */
 	range: Range;
 
@@ -5388,8 +5394,8 @@ export interface DocumentLinkOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
 ```typescript
-export interface DocumentLinkRegistrationOptions extends TextDocumentRegistrationOptions,
-	DocumentLinkOptions {
+export interface DocumentLinkRegistrationOptions extends
+	TextDocumentRegistrationOptions, DocumentLinkOptions {
 }
 ```
 
@@ -5398,7 +5404,8 @@ _Request_:
 * params: `DocumentLinkParams` defined as follows:
 
 ```typescript
-interface DocumentLinkParams extends WorkDoneProgressParams, PartialResultParams {
+interface DocumentLinkParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The document to provide document links for.
 	 */
@@ -5411,8 +5418,8 @@ _Response_:
 
 ```typescript
 /**
- * A document link is a range in a text document that links to an internal or external
- * resource, like another text document or a web site.
+ * A document link is a range in a text document that links to an internal or
+ * external resource, like another text document or a web site.
  */
 interface DocumentLink {
 	/**
@@ -5428,9 +5435,10 @@ interface DocumentLink {
 	/**
 	 * The tooltip text when you hover over this link.
 	 *
-	 * If a tooltip is provided, is will be displayed in a string that includes instructions
-	 * on how to trigger the link, such as `{0} (ctrl + click)`. The specific instructions
-	 * vary depending on OS, user settings, and localization.
+	 * If a tooltip is provided, is will be displayed in a string that includes
+	 * instructions on how to trigger the link, such as `{0} (ctrl + click)`.
+	 * The specific instructions vary depending on OS, user settings, and
+	 * localization.
 	 *
 	 * @since 3.15.0
 	 */
@@ -5492,8 +5500,9 @@ export interface DocumentColorOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `DocumentColorRegistrationOptions` defined as follows:
 ```typescript
-export interface DocumentColorRegistrationOptions extends TextDocumentRegistrationOptions,
-	StaticRegistrationOptions, DocumentColorOptions {
+export interface DocumentColorRegistrationOptions extends
+	TextDocumentRegistrationOptions, StaticRegistrationOptions,
+	DocumentColorOptions {
 }
 ```
 
@@ -5503,7 +5512,8 @@ _Request_:
 * params: `DocumentColorParams` defined as follows
 
 ```typescript
-interface DocumentColorParams extends WorkDoneProgressParams, PartialResultParams {
+interface DocumentColorParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -5572,7 +5582,8 @@ _Request_:
 * params: `ColorPresentationParams` defined as follows
 
 ```typescript
-interface ColorPresentationParams extends WorkDoneProgressParams, PartialResultParams {
+interface ColorPresentationParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -5597,20 +5608,20 @@ _Response_:
 interface ColorPresentation {
 	/**
 	 * The label of this color presentation. It will be shown on the color
-	 * picker header. By default this is also the text that is inserted when selecting
-	 * this color presentation.
+	 * picker header. By default this is also the text that is inserted when
+	 * selecting this color presentation.
 	 */
 	label: string;
 	/**
 	 * An [edit](#TextEdit) which is applied to a document when selecting
-	 * this presentation for the color.  When `falsy` the [label](#ColorPresentation.label)
-	 * is used.
+	 * this presentation for the color.  When `falsy` the
+	 * [label](#ColorPresentation.label) is used.
 	 */
 	textEdit?: TextEdit;
 	/**
-	 * An optional array of additional [text edits](#TextEdit) that are applied when
-	 * selecting this color presentation. Edits must not overlap with the main
-	 * [edit](#ColorPresentation.textEdit) nor with themselves.
+	 * An optional array of additional [text edits](#TextEdit) that are applied
+	 * when selecting this color presentation. Edits must not overlap with the
+	 * main [edit](#ColorPresentation.textEdit) nor with themselves.
 	 */
 	additionalTextEdits?: TextEdit[];
 }
@@ -5647,8 +5658,8 @@ export interface DocumentFormattingOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `DocumentFormattingRegistrationOptions` defined as follows:
 ```typescript
-export interface DocumentFormattingRegistrationOptions extends TextDocumentRegistrationOptions,
-	DocumentFormattingOptions {
+export interface DocumentFormattingRegistrationOptions extends
+	TextDocumentRegistrationOptions, DocumentFormattingOptions {
 }
 ```
 
@@ -5737,7 +5748,8 @@ _Server Capability_:
 * property type: `boolean | DocumentRangeFormattingOptions` where `DocumentRangeFormattingOptions` is defined as follows:
 
 ```typescript
-export interface DocumentRangeFormattingOptions extends WorkDoneProgressOptions {
+export interface DocumentRangeFormattingOptions extends
+	WorkDoneProgressOptions {
 }
 ```
 
@@ -5863,7 +5875,8 @@ export interface RenameClientCapabilities {
 	prepareSupport?: boolean;
 
 	/**
-	 * Client supports the default behavior result (`{ defaultBehavior: boolean }`).
+	 * Client supports the default behavior result
+	 * (`{ defaultBehavior: boolean }`).
 	 *
 	 * @since version 3.16.0
 	 */
@@ -5888,8 +5901,8 @@ export interface RenameOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `RenameRegistrationOptions` defined as follows:
 ```typescript
-export interface RenameRegistrationOptions extends TextDocumentRegistrationOptions,
-	RenameOptions {
+export interface RenameRegistrationOptions extends
+	TextDocumentRegistrationOptions, RenameOptions {
 }
 ```
 
@@ -5898,7 +5911,8 @@ _Request_:
 * params: `RenameParams` defined as follows
 
 ```typescript
-interface RenameParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+interface RenameParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams {
 	/**
 	 * The new name of the symbol. If the given name is not valid the
 	 * request must return a [ResponseError](#ResponseError) with an
@@ -5943,19 +5957,22 @@ _Client Capability_:
 ```typescript
 export interface FoldingRangeClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration for folding range providers.
-	 * If this is set to `true` the client supports the new `FoldingRangeRegistrationOptions`
-	 * return value for the corresponding server capability as well.
+	 * Whether implementation supports dynamic registration for folding range
+	 * providers. If this is set to `true` the client supports the new
+	 * `FoldingRangeRegistrationOptions` return value for the corresponding
+	 * server capability as well.
 	 */
 	dynamicRegistration?: boolean;
 	/**
-	 * The maximum number of folding ranges that the client prefers to receive per document.
-	 * The value serves as a hint, servers are free to follow the limit.
+	 * The maximum number of folding ranges that the client prefers to receive
+	 * per document. The value serves as a hint, servers are free to follow the
+	 * limit.
 	 */
 	rangeLimit?: number;
 	/**
-	 * If set, the client signals that it only supports folding complete lines. If set, client
-	 * will ignore specified `startCharacter` and `endCharacter` properties in a FoldingRange.
+	 * If set, the client signals that it only supports folding complete lines.
+	 * If set, client will ignore specified `startCharacter` and `endCharacter`
+	 * properties in a FoldingRange.
 	 */
 	lineFoldingOnly?: boolean;
 }
@@ -5972,8 +5989,9 @@ export interface FoldingRangeOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `FoldingRangeRegistrationOptions` defined as follows:
 ```typescript
-export interface FoldingRangeRegistrationOptions extends TextDocumentRegistrationOptions,
-	FoldingRangeOptions, StaticRegistrationOptions {
+export interface FoldingRangeRegistrationOptions extends
+	TextDocumentRegistrationOptions, FoldingRangeOptions,
+	StaticRegistrationOptions {
 }
 ```
 
@@ -5983,7 +6001,8 @@ _Request_:
 * params: `FoldingRangeParams` defined as follows
 
 ```typescript
-export interface FoldingRangeParams extends WorkDoneProgressParams, PartialResultParams {
+export interface FoldingRangeParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -6024,8 +6043,8 @@ export interface FoldingRange {
 	startLine: number;
 
 	/**
-	 * The zero-based character offset from where the folded range starts. If not defined,
-	 * defaults to the length of the start line.
+	 * The zero-based character offset from where the folded range starts. If
+	 * not defined, defaults to the length of the start line.
 	 */
 	startCharacter?: number;
 
@@ -6035,15 +6054,16 @@ export interface FoldingRange {
 	endLine: number;
 
 	/**
-	 * The zero-based character offset before the folded range ends. If not defined, defaults
-	 * to the length of the end line.
+	 * The zero-based character offset before the folded range ends. If not
+	 * defined, defaults to the length of the end line.
 	 */
 	endCharacter?: number;
 
 	/**
-	 * Describes the kind of the folding range such as `comment` or `region`. The kind
-	 * is used to categorize folding ranges and used by commands like 'Fold all comments'.
-	 * See [FoldingRangeKind](#FoldingRangeKind) for an enumeration of standardized kinds.
+	 * Describes the kind of the folding range such as `comment` or `region`.
+	 * The kind is used to categorize folding ranges and used by commands like
+	 * 'Fold all comments'. See [FoldingRangeKind](#FoldingRangeKind) for an
+	 * enumeration of standardized kinds.
 	 */
 	kind?: string;
 }
@@ -6069,9 +6089,10 @@ _Client Capability_:
 ```typescript
 export interface SelectionRangeClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration for selection range providers. If
-	 * this is set to `true` the client supports the new `SelectionRangeRegistrationOptions`
-	 * return value for the corresponding server capability as well.
+	 * Whether implementation supports dynamic registration for selection range
+	 * providers. If this is set to `true` the client supports the new
+	 * `SelectionRangeRegistrationOptions` return value for the corresponding
+	 * server capability as well.
 	 */
 	dynamicRegistration?: boolean;
 }
@@ -6088,8 +6109,9 @@ export interface SelectionRangeOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `SelectionRangeRegistrationOptions` defined as follows:
 ```typescript
-export interface SelectionRangeRegistrationOptions extends SelectionRangeOptions,
-	TextDocumentRegistrationOptions, StaticRegistrationOptions {
+export interface SelectionRangeRegistrationOptions extends
+	SelectionRangeOptions, TextDocumentRegistrationOptions,
+	StaticRegistrationOptions {
 }
 ```
 
@@ -6099,7 +6121,8 @@ _Request_:
 * params: `SelectionRangeParams` defined as follows:
 
 ```typescript
-export interface SelectionRangeParams extends WorkDoneProgressParams, PartialResultParams {
+export interface SelectionRangeParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -6123,8 +6146,8 @@ export interface SelectionRange {
      */
     range: Range;
     /**
-     * The parent selection range containing this range. Therefore `parent.range` must
-	 * contain `this.range`.
+     * The parent selection range containing this range. Therefore
+	 * `parent.range` must contain `this.range`.
      */
     parent?: SelectionRange;
 }
@@ -6150,10 +6173,10 @@ _Client Capability_:
 ```typescript
 interface CallHierarchyClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to `true`
-	 * the client supports the new `(TextDocumentRegistrationOptions &
-	 * StaticRegistrationOptions)` return value for the corresponding server capability
-	 * as well.
+	 * Whether implementation supports dynamic registration. If this is set to
+	 * `true` the client supports the new `(TextDocumentRegistrationOptions &
+	 * StaticRegistrationOptions)` return value for the corresponding server
+	 * capability as well.
 	 */
 	dynamicRegistration?: boolean;
 }
@@ -6172,8 +6195,9 @@ export interface CallHierarchyOptions extends WorkDoneProgressOptions {
 _Registration Options_: `CallHierarchyRegistrationOptions` defined as follows:
 
 ```typescript
-export interface CallHierarchyRegistrationOptions extends TextDocumentRegistrationOptions,
-	CallHierarchyOptions, StaticRegistrationOptions {
+export interface CallHierarchyRegistrationOptions extends
+	TextDocumentRegistrationOptions, CallHierarchyOptions,
+	StaticRegistrationOptions {
 }
 ```
 
@@ -6220,14 +6244,14 @@ export interface CallHierarchyItem {
 	uri: DocumentUri;
 
 	/**
-	 * The range enclosing this symbol not including leading/trailing whitespace but
-	 * everything else, e.g. comments and code.
+	 * The range enclosing this symbol not including leading/trailing whitespace
+	 * but everything else, e.g. comments and code.
 	 */
 	range: Range;
 
 	/**
-	 * The range that should be selected and revealed when this symbol is being picked,
-	 * e.g. the name of a function. Must be contained by the
+	 * The range that should be selected and revealed when this symbol is being
+	 * picked, e.g. the name of a function. Must be contained by the
 	 * [`range`](#CallHierarchyItem.range).
 	 */
 	selectionRange: Range;
@@ -6254,8 +6278,8 @@ _Request_:
 * params: `CallHierarchyIncomingCallsParams` defined as follows:
 
 ```typescript
-export interface CallHierarchyIncomingCallsParams extends WorkDoneProgressParams,
-	PartialResultParams {
+export interface CallHierarchyIncomingCallsParams extends
+	WorkDoneProgressParams, PartialResultParams {
 	item: CallHierarchyItem;
 }
 ```
@@ -6295,8 +6319,8 @@ _Request_:
 * params: `CallHierarchyOutgoingCallsParams` defined as follows:
 
 ```typescript
-export interface CallHierarchyOutgoingCallsParams extends WorkDoneProgressParams,
-	PartialResultParams {
+export interface CallHierarchyOutgoingCallsParams extends
+	WorkDoneProgressParams, PartialResultParams {
 	item: CallHierarchyItem;
 }
 ```
@@ -6314,8 +6338,8 @@ export interface CallHierarchyOutgoingCall {
 	to: CallHierarchyItem;
 
 	/**
-	 * The range at which this item is called. This is the range relative to the caller,
-	 * e.g the item passed to `callHierarchy/outgoingCalls` request.
+	 * The range at which this item is called. This is the range relative to
+	 * the caller, e.g the item passed to `callHierarchy/outgoingCalls` request.
 	 */
 	fromRanges: Range[];
 }
@@ -6485,10 +6509,10 @@ The following client capabilities are defined for semantic token requests sent f
 ```typescript
 interface SemanticTokensClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to `true`
-	 * the client supports the new `(TextDocumentRegistrationOptions &
-	 * StaticRegistrationOptions)` return value for the corresponding server capability
-	 * as well.
+	 * Whether implementation supports dynamic registration. If this is set to
+	 * `true` the client supports the new `(TextDocumentRegistrationOptions &
+	 * StaticRegistrationOptions)` return value for the corresponding server
+	 * capability as well.
 	 */
 	dynamicRegistration?: boolean;
 
@@ -6497,15 +6521,15 @@ interface SemanticTokensClientCapabilities {
 	 */
 	requests: {
 		/**
-		 * The client will send the `textDocument/semanticTokens/range` request if
-		 * the server provides a corresponding handler.
+		 * The client will send the `textDocument/semanticTokens/range` request
+		 * if the server provides a corresponding handler.
 		 */
 		range?: boolean | {
 		};
 
 		/**
-		 * The client will send the `textDocument/semanticTokens/full` request if
-		 * the server provides a corresponding handler.
+		 * The client will send the `textDocument/semanticTokens/full` request
+		 * if the server provides a corresponding handler.
 		 */
 		full?: boolean | {
 			/**
@@ -6569,8 +6593,9 @@ export interface SemanticTokensOptions extends WorkDoneProgressOptions {
 _Registration Options_: `SemanticTokensRegistrationOptions` defined as follows:
 
 ```typescript
-export interface SemanticTokensRegistrationOptions extends TextDocumentRegistrationOptions,
-	SemanticTokensOptions, StaticRegistrationOptions {
+export interface SemanticTokensRegistrationOptions extends
+	TextDocumentRegistrationOptions, SemanticTokensOptions,
+	StaticRegistrationOptions {
 }
 ```
 
@@ -6584,7 +6609,8 @@ _Request_:
 * params: `SemanticTokensParams` defined as follows:
 
 ```typescript
-export interface SemanticTokensParams extends WorkDoneProgressParams, PartialResultParams {
+export interface SemanticTokensParams extends WorkDoneProgressParams,
+	PartialResultParams {
 	/**
 	 * The text document.
 	 */
@@ -6639,8 +6665,8 @@ export interface SemanticTokensDeltaParams extends WorkDoneProgressParams,
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The result id of a previous response. The result Id can either point to a full response
-	 * or a delta response depending on what was received last.
+	 * The result id of a previous response. The result Id can either point to
+	 * a full response or a delta response depending on what was received last.
 	 */
 	previousResultId: string;
 }
@@ -6654,7 +6680,8 @@ _Response_:
 export interface SemanticTokensDelta {
 	readonly resultId?: string;
 	/**
-	 * The semantic token edits to transform a previous result into a new result.
+	 * The semantic token edits to transform a previous result into a new
+	 * result.
 	 */
 	edits: SemanticTokensEdit[];
 }
@@ -6729,10 +6756,10 @@ _Client Capability_:
 ```typescript
 export interface SemanticTokensWorkspaceClientCapabilities {
 	/**
-	 * Whether the client implementation supports a refresh request send from the server
-	 * to the client. This is useful if a server detects a project wide configuration change
-	 * which requires a re-calculation of all semantic tokens provided by the server issuing
-	 * the request.
+	 * Whether the client implementation supports a refresh request send from
+	 * the server to the client. This is useful if a server detects a project
+	 * wide configuration change which requires a re-calculation of all semantic
+	 * tokens provided by the server issuing the request.
 	 */
 	refreshSupport?: boolean;
 }
@@ -6764,10 +6791,10 @@ _Client Capabilities_:
 ```typescript
 interface MonikerClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to `true`
-	 * the client supports the new `(TextDocumentRegistrationOptions &
-	 * StaticRegistrationOptions)` return value for the corresponding server capability
-	 * as well.
+	 * Whether implementation supports dynamic registration. If this is set to
+	 * `true` the client supports the new `(TextDocumentRegistrationOptions &
+	 * StaticRegistrationOptions)` return value for the corresponding server
+	 * capability as well.
 	 */
 	dynamicRegistration?: boolean;
 }
@@ -6786,8 +6813,8 @@ export interface MonikerOptions extends WorkDoneProgressOptions {
 _Registration Options_: `MonikerRegistrationOptions` defined as follows:
 
 ```typescript
-export interface MonikerRegistrationOptions extends TextDocumentRegistrationOptions,
-	MonikerOptions {
+export interface MonikerRegistrationOptions extends
+	TextDocumentRegistrationOptions, MonikerOptions {
 }
 ```
 
@@ -6797,8 +6824,8 @@ _Request_:
 * params: `MonikerParams` defined as follows:
 
 ```typescript
-export interface MonikerParams extends TextDocumentPositionParams, WorkDoneProgressParams,
-	PartialResultParams {
+export interface MonikerParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams, PartialResultParams {
 }
 ```
 
