@@ -97,7 +97,9 @@ Assume there is a file `/Users/dirkb/sample.ts` and we want to store the folding
 { id: 1, type: "vertex", label: "document",
   uri: "file:///Users/dirkb/sample.ts", languageId: "typescript"
 }
-{ id: 2, type: "vertex", label: "foldingRangeResult", result: [ { ... }, { ... }, ... ] }
+{ id: 2, type: "vertex", label: "foldingRangeResult",
+  result: [ { ... }, { ... }, ... ]
+}
 { id: 3, type: "edge", label: "textDocument/foldingRange", outV: 1, inV: 2 }
 ```
 
@@ -694,8 +696,9 @@ export interface DeclarationTag {
   kind: lsp.SymbolKind;
 
   /**
-   * The full range of the declaration not including leading/trailing whitespace but
-   * everything else, e.g comments and code. The range must be included in fullRange.
+   * The full range of the declaration not including leading/trailing whitespace
+   * but everything else, e.g comments and code. The range must be included in
+   * fullRange.
    */
   fullRange: lsp.Range;
 
@@ -725,8 +728,9 @@ export interface DefinitionTag {
   kind: lsp.SymbolKind;
 
   /**
-   * The full range of the definition not including leading/trailing whitespace but
-   * everything else, e.g comments and code. The range must be included in fullRange.
+   * The full range of the definition not including leading/trailing whitespace
+   * but everything else, e.g comments and code. The range must be included in
+   * fullRange.
    */
   fullRange: lsp.Range;
 
@@ -789,7 +793,9 @@ Will look like this:
   start: { line: 0, character: 9 }, end: { line: 0, character: 14 },
   tag: {
     type: "definition", text: "hello", kind: 12,
-    fullRange: { start: { line: 0, character: 0 }, end: { line: 1, character: 1 } }
+    fullRange: {
+      start: { line: 0, character: 0 }, end: { line: 1, character: 1 }
+    }
   }
 }
 ```
@@ -836,7 +842,9 @@ Produces the following output:
   start: { line: 0, character: 10 }, end: { line: 0, character: 14 },
   tag: {
     type: "definition", text: "Main", kind: 7,
-    fullRange: { start: { line: 0, character: 0 }, end: { line: 5, character: 1 } }
+    fullRange: {
+      start: { line: 0, character: 0 }, end: { line: 5, character: 1 }
+    }
   }
 }
 // The declaration of hello
@@ -844,7 +852,9 @@ Produces the following output:
   start: { line: 1, character: 11 }, end: { line: 1, character: 16 },
   tag: {
     type: "definition", text: "hello", kind: 12,
-    fullRange: { start: { line: 1, character: 2 }, end: { line: 2, character: 3 } }
+    fullRange: {
+      start: { line: 1, character: 2 }, end: { line: 2, character: 3 }
+    }
   }
 }
 // The declaration of world
@@ -852,14 +862,18 @@ Produces the following output:
   start: { line: 3, character: 11 }, end: { line: 3, character: 16 },
   tag: {
     type: "definition", text: "world", kind: 12,
-    fullRange: { start: { line: 3, character: 2 }, end: { line: 4, character: 3 } }
+    fullRange: {
+      start: { line: 3, character: 2 }, end: { line: 4, character: 3 }
+    }
   }
 }
 // The document symbol
 { id: 39 , type: "vertex", label: "documentSymbolResult",
   result: [ { id: 7 , children: [ { id: 18 }, { id: 29 } ] } ]
 }
-{ id: 40 , type: "edge", label: "textDocument/documentSymbol", outV: 2, inV: 39 }
+{ id: 40 , type: "edge", label: "textDocument/documentSymbol",
+  outV: 2, inV: 39
+}
 ```
 
 ### <a href="#diagnostic" name="diagnostic" class="anchor">Request: `textDocument/diagnostic`</a>
@@ -899,8 +913,11 @@ Produces the following output:
 { id: 18, type: "vertex", label: "diagnosticResult",
   result: [
     {
-      severity: 1, code: 2322, message: "Type '10' is not assignable to type 'string'.",
-      range: { start : { line: 1, character: 5 }, end: { line: 1, character: 6 } }
+      severity: 1, code: 2322,
+      message: "Type '10' is not assignable to type 'string'.",
+      range: {
+        start : { line: 1, character: 5 }, end: { line: 1, character: 6 }
+      }
     }
   ]
 }
@@ -964,13 +981,18 @@ To ease the processing of an LSIF dump to for example import it into a database 
 
 ```ts
 // The actual document
-{ id: 4, type: "vertex", label: "document", uri: "file:///Users/dirkb/sample.ts",
-  languageId: "typescript", contents: "..."
+{ id: 4, type: "vertex", label: "document",
+  uri: "file:///Users/dirkb/sample.ts", languageId: "typescript",
+  contents: "..."
 }
 // The begin event
-{ id: 5, type: "vertex", label: "$event", kind: "begin", scope: "document" , data: 4 }
+{ id: 5, type: "vertex", label: "$event",
+  kind: "begin", scope: "document" , data: 4
+}
 // The end event
-{ id: 53, type: "vertex", label: "$event", kind: "end", scope: "document" , data: 4 }
+{ id: 53, type: "vertex", label: "$event",
+  kind: "end", scope: "document" , data: 4
+}
 ```
 
 Between the document vertex `4` and the document begin event `5` no information specific to document `4` can be emitted. Please note that more than one document can be open at a given point in time meaning that there have been n different document begin events without corresponding document end events.
@@ -980,13 +1002,22 @@ The events for projects looks similar:
 ```ts
 { id: 2, type: "vertex", label: "project", kind: "typescript" }
 { id: 4, type: "vertex", label: "document",
-  uri: "file:///Users/dirkb/sample.ts", languageId: "typescript", contents: "..."
+  uri: "file:///Users/dirkb/sample.ts", languageId: "typescript",
+  contents: "..."
 }
-{ id: 5, type: "vertex", label: "$event", kind: "begin", scope: "document" , data: 4 }
-{ id: 3, type: "vertex", label: "$event", kind: "begin", scope: "project", data: 2 }
-{ id: 53, type: "vertex", label: "$event", kind: "end", scope: "document", data: 4 }
+{ id: 5, type: "vertex", label: "$event",
+  kind: "begin", scope: "document" , data: 4
+}
+{ id: 3, type: "vertex", label: "$event",
+  kind: "begin", scope: "project", data: 2
+}
+{ id: 53, type: "vertex", label: "$event",
+  kind: "end", scope: "document", data: 4
+}
 { id: 54, type: "edge", label: "contains", outV: 2, inVs: [4] }
-{ id: 55, type: "vertex", label: "$event", kind: "end", scope: "project", data: 2 }
+{ id: 55, type: "vertex", label: "$event",
+  kind: "end", scope: "project", data: 2
+}
 ```
 
 ### <a href="#exportsImports" name="exportsImports" class="anchor">Project exports and external imports (Monikers)</a>
@@ -1013,7 +1044,8 @@ export class Emitter {
 
 ```typescript
 { id: 4, type: "vertex", label: "document",
-  uri: "file:///Users/dirkb/index.ts", languageId: "typescript", contents: "..."
+  uri: "file:///Users/dirkb/index.ts", languageId: "typescript",
+  contents: "..."
 }
 { id: 11, type: "vertex", label: "resultSet" }
 { id: 12, type: "vertex", label: "moniker",
@@ -1027,7 +1059,8 @@ export class Emitter {
 
 { id: 18, type: "vertex", label: "resultSet" }
 { id: 19, type: "vertex", label: "moniker",
-  kind: "export", scheme: "tsc", identifier: "lib/index:Emitter", unique: "group"
+  kind: "export", scheme: "tsc", identifier: "lib/index:Emitter",
+  unique: "group"
 }
 { id: 20, type: "edge", label: "moniker", outV: 18, inV: 19 }
 { id: 21, type: "vertex", label: "range",
@@ -1037,7 +1070,8 @@ export class Emitter {
 
 { id: 25, type: "vertex", label: "resultSet" }
 { id: 26, type: "vertex", label: "moniker",
-  kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.doEmit", unique: "group"
+  kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.doEmit",
+  unique: "group"
 }
 { id: 27, type: "edge", label: "moniker", outV: 25, inV: 26 }
 { id: 28, type: "vertex", label: "range",
@@ -1047,7 +1081,8 @@ export class Emitter {
 
 { id: 32, type: "vertex", label: "resultSet" }
 { id: 33, type: "vertex", label: "moniker",
-  kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit", unique: "group"
+  kind: "export", scheme: "tsc", identifier: "lib/index:Emitter.emit",
+  unique: "group"
 }
 { id: 34, type: "edge", label: "moniker", outV: 32, inV: 33 }
 { id: 35, type: "vertex", label: "range",
@@ -1149,7 +1184,9 @@ Now lets look how we ensure that searching for references for `Widget#dispose` f
   start: { line: 1, character: 1 }, end: { line: 1, character: 8 },
   tag: {
     type: definition, text: "dispose", kind: 7,
-    fullRange: { start : { line: 1, character:1 }, end: { line: 1, character: 17 } }
+    fullRange: {
+      start : { line: 1, character:1 }, end: { line: 1, character: 17 }
+    }
   }
 }
 // Bind the reference result to the result set
@@ -1176,8 +1213,8 @@ When generating the dump for P2 the information for `Widget#dispose` will look l
 
 // The result set for Widget#dispose
 { id: 78, type: "vertex", label: "resultSet" }
-// The moniker for Widget#dispose. Note that the moniker is local since the Widget class
-// is not exported
+// The moniker for Widget#dispose. Note that the moniker is local since the
+// Widget class is not exported
 { id: 79, type: "vertex", label: "moniker",
   scheme: "tsc", identifier: "2Q46RTVRZTuVW1ajf68/Vw==",
   unique: "document", kind: "local"
@@ -1188,7 +1225,9 @@ When generating the dump for P2 the information for `Widget#dispose` will look l
   start: { line: 3, character: 8 }, end: { line: 3, character: 15 },
   tag: {
     type: "definition", text: "dispose", kind: 6,
-    fullRange: { start: { line: 3, character: 1 }, end: { line: 4, character: 2 } }
+    fullRange: {
+      start: { line: 3, character: 1 }, end: { line: 4, character: 2 }
+    }
   }
 }
 // Bind the reference result to Widget#dispose
@@ -1197,7 +1236,8 @@ When generating the dump for P2 the information for `Widget#dispose` will look l
 { id: 118, type: "edge", label: "item",
   outV: 116, inVs: [43], document: 52, property: "referenceResults"
 }
-// Link the reference result set of Disposable#dispose to this result set using a moniker
+// Link the reference result set of Disposable#dispose to this result set
+// using a moniker
 { id: 119, type: "edge", label: "item",
   outV: 116, inVs: [22], document: 52, property: "referenceLinks"
 }
@@ -1257,13 +1297,15 @@ then these monikers can be translated into monikers that are `npm` dependent. In
 }
 
 { id: 987, type: "vertex", label: "moniker",
-  kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func", unique: "scheme"
+  kind: "export", scheme: "npm", identifier: "lsif-ts-sample::func",
+  unique: "scheme"
 }
 { id: 986, type: "edge", label: "packageInformation", outV: 987, inV: 991 }
 { id: 985, type: "edge", label: "attach", outV: 987, inV: 12 }
 
 { id: 984, type: "vertex", label: "moniker",
-  kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter", unique: "scheme"
+  kind: "export", scheme: "npm", identifier: "lsif-ts-sample::Emitter",
+  unique: "scheme"
 }
 { id: 983, type: "edge", label: "packageInformation", outV: 984, inV: 991 }
 { id: 982, type: "edge", label: "attach", outV: 984, inV: 19 }
@@ -1304,7 +1346,7 @@ where `mobx` is the [npm mobx package](https://www.npmjs.com/package/mobx). Runn
 
 ```typescript
 { id: 41, type: "vertex", label: "document",
-  uri: "file:///Users/dirkb/samples/node_modules/mobx/lib/types/observablemap.d.ts",
+  uri: "file:///samples/node_modules/mobx/lib/types/observablemap.d.ts",
   languageId: "typescript", contents: "..."
 }
 { id: 55, type: "vertex", label: "resultSet" }
@@ -1329,7 +1371,8 @@ However piping this information through the npm tool will generate the following
   repository: { type: "git", url: "git+https://github.com/mobxjs/mobx.git" }
 }
 { id: 978, type: "vertex", label: "moniker",
-  kind: "import", scheme: "npm", identifier: "mobx::ObservableMap", unique: 'scheme'
+  kind: "import", scheme: "npm", identifier: "mobx::ObservableMap",
+  unique: 'scheme'
 }
 { id: 977, type: "edge", label: "packageInformation", outV: 978, inV: 991 }
 { id: 976, type: "edge", label: "attach", outV: 978, inV: 57 }
@@ -1353,14 +1396,17 @@ The moniker for `x` looks like this:
 ```ts
 { id: 13, type: "vertex", label: "resultSet" }
 { id: 14, type: "vertex", label: "moniker",
-  kind: "local", scheme: "tsc", identifier: "SfeOP6s53Y2HAkcViolxYA==", unique: 'document'
+  kind: "local", scheme: "tsc", identifier: "SfeOP6s53Y2HAkcViolxYA==",
+  unique: 'document'
 }
 { id: 15, type: "edge", label: "moniker", outV: 13, inV: 14 }
 { id: 16, type: "vertex", label: "range",
   start: { line: 0, character: 13 }, end: { line: 0, character: 14 },
   tag: {
     type: "definition", text: "x", kind: 7,
-    fullRange: { start: { line: 0, character: 13 }, end: { line: 0, character: 22 } }
+    fullRange: {
+      start: { line: 0, character: 13 }, end: { line: 0, character: 22 }
+    }
   }
 }
 { id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
@@ -1392,9 +1438,10 @@ export interface MetaData {
   label: 'metaData';
 
   /**
-   * The version of the LSIF format using semver notation. See https://semver.org/.
-   * Please note the version numbers starting with 0 don't adhere to semver and adopters
-   * have to assume the each new version is breaking.
+   * The version of the LSIF format using semver notation. See
+   * https://semver.org/. Please note the version numbers starting with 0
+   * don't adhere to semver and adopters have to assume the each new version
+   * is breaking.
    */
   version: string;
 
