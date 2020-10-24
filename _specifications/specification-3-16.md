@@ -810,7 +810,8 @@ export namespace ResourceOperationKind {
 	export const Delete: ResourceOperationKind = 'delete';
 }
 
-export type FailureHandlingKind = 'abort' | 'transactional' | 'undo' | 'textOnlyTransactional';
+export type FailureHandlingKind = 'abort' | 'transactional' | 'undo'
+	| 'textOnlyTransactional';
 
 export namespace FailureHandlingKind {
 
@@ -833,7 +834,8 @@ export namespace FailureHandlingKind {
 	 * executed transactional. If resource changes (create, rename or delete
 	 * file) are part of the change the failure handling strategy is abort.
 	 */
-	export const TextOnlyTransactional: FailureHandlingKind = 'textOnlyTransactional';
+	export const TextOnlyTransactional: FailureHandlingKind
+		= 'textOnlyTransactional';
 
 	/**
 	 * The client tries to undo the operations already executed. But there is no
@@ -3492,8 +3494,8 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `CompletionRegistrationOptions` options defined as follows:
 ```typescript
-export interface CompletionRegistrationOptions extends TextDocumentRegistrationOptions,
-	CompletionOptions {
+export interface CompletionRegistrationOptions
+	extends TextDocumentRegistrationOptions, CompletionOptions {
 }
 ```
 
@@ -3502,8 +3504,8 @@ _Request_:
 * params: `CompletionParams` defined as follows:
 
 ```typescript
-export interface CompletionParams extends TextDocumentPositionParams, WorkDoneProgressParams,
-	PartialResultParams {
+export interface CompletionParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams, PartialResultParams {
 	/**
 	 * The completion context. This is only available if the client specifies
 	 * to send this using the client capability
@@ -3901,8 +3903,8 @@ export interface HoverOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `HoverRegistrationOptions` defined as follows:
 ```typescript
-export interface HoverRegistrationOptions extends TextDocumentRegistrationOptions,
-	HoverOptions {
+export interface HoverRegistrationOptions 
+	extends TextDocumentRegistrationOptions, HoverOptions {
 }
 ```
 
@@ -3911,7 +3913,8 @@ _Request_:
 * params: `HoverParams` defined as follows:
 
 ```typescript
-export interface HoverParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+export interface HoverParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams {
 }
 ```
 
@@ -4047,8 +4050,8 @@ export interface SignatureHelpOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `SignatureHelpRegistrationOptions` defined as follows:
 ```typescript
-export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrationOptions,
-	SignatureHelpOptions {
+export interface SignatureHelpRegistrationOptions
+	extends TextDocumentRegistrationOptions, SignatureHelpOptions {
 }
 ```
 
@@ -4986,8 +4989,8 @@ export interface CodeActionOptions extends WorkDoneProgressOptions {
 	/**
 	 * CodeActionKinds that this server may return.
 	 *
-	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, or the server
-	 * may list out every specific kind they provide.
+	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, 
+	 * or the server may list out every specific kind they provide.
 	 */
 	codeActionKinds?: CodeActionKind[];
 
