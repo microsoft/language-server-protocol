@@ -2960,7 +2960,7 @@ export interface CreateFilesParams {
 /**
  * Represents information on a file/folder create.
  */
-export namespace FileCreate {
+export interface FileCreate {
 	/**
 	 * A file:// URI for the location of the file/folder being created.
 	 */
@@ -3028,7 +3028,7 @@ export interface RenameFilesParams {
 /**
  * Represents information on a file/folder rename.
  */
-export namespace FileRename {
+export interface FileRename {
 	/**
 	 * A file:// URI for the original location of the file/folder being renamed.
 	 */
@@ -3099,7 +3099,7 @@ export interface DeleteFilesParams {
 /**
  * Represents information on a file/folder delete.
  */
-export namespace FileDelete {
+export interface FileDelete {
 	/**
 	 * A file:// URI for the location of the file/folder being deleted.
 	 */
