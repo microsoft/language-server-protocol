@@ -2715,7 +2715,7 @@ _Response_:
 * partial result: `SymbolInformation[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
 
-#### <a href="#workspace_executeCommand" name="workspace_executeCommand" class="anchor">Execute a command (:leftwards_arrow_with_hook:)</a>
+#### <a href="#workspace_executeCommand" name="workspace_executeCommand" class="anchor">Execute a server command (:leftwards_arrow_with_hook:)</a>
 
 The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is sent from the server to the client.
 
@@ -2774,6 +2774,31 @@ export interface ExecuteCommandParams extends WorkDoneProgressParams {
 ```
 
 The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
+
+_Response_:
+* result: `any` \| `null`
+* error: code and message set in case an exception happens during the request.
+
+#### <a href="#client_executeCommand" name="client_executeCommand" class="anchor">Execute a client command(:leftwards_arrow_with_hook:)</a>
+
+The `client/executeCommand` request is similar to `workspace/executeCommand` but is sent from the server to the client, to trigger command execution on the client. 
+
+_Client Capability_:
+* property path (optional): `client.executeCommand`
+* property type: `ClientExecuteCommandClientCapabilities` defined as follows:
+
+```typescript
+export interface ClientExecuteCommandClientCapabilities {
+	/**
+	 * The client supports message 'client/executeCommand'.
+	 */
+	supported: boolean;
+}
+```
+
+_Request:_
+* method: 'client/executeCommand'
+* params: `ExecuteCommandParams` defined exactly the same way as for 'workspace/executeCommand'. 
 
 _Response_:
 * result: `any` \| `null`
