@@ -2804,6 +2804,11 @@ _Response_:
 * result: `any` \| `null`
 * error: code and message set in case an exception happens during the request.
 
+The client shall return `ErrorCode.InvalidParams` when the server requests
+
+- a command that doesn't exist
+- invalid params for the command signature
+
 #### <a href="#workspace_applyEdit" name="workspace_applyEdit" class="anchor">Applies a WorkspaceEdit (:arrow_right_hook:)</a>
 
 The `workspace/applyEdit` request is sent from the server to the client to modify resource on the client side.
