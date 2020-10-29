@@ -3903,7 +3903,7 @@ export interface HoverOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `HoverRegistrationOptions` defined as follows:
 ```typescript
-export interface HoverRegistrationOptions 
+export interface HoverRegistrationOptions
 	extends TextDocumentRegistrationOptions, HoverOptions {
 }
 ```
@@ -4989,7 +4989,7 @@ export interface CodeActionOptions extends WorkDoneProgressOptions {
 	/**
 	 * CodeActionKinds that this server may return.
 	 *
-	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`, 
+	 * The list of kinds may be generic, such as `CodeActionKind.Refactor`,
 	 * or the server may list out every specific kind they provide.
 	 */
 	codeActionKinds?: CodeActionKind[];
@@ -6364,6 +6364,10 @@ Tokens are represented using one token type combined with n token modifiers. A t
 ```typescript
 export enum SemanticTokenTypes {
 	namespace = 'namespace',
+	/**
+	 * Represents a generic type. Acts as a fallback for types which
+	 * can't be mapped to a specific type like class or enum.
+	 */
 	type = 'type',
 	class = 'class',
 	enum = 'enum',
