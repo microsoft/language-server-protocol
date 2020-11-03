@@ -3617,6 +3617,28 @@ export namespace CompletionItemTag {
 
 export type CompletionItemTag = 1;
 
+/**
+ * A special text edit to provide an insert and a replace operation.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface InsertReplaceEdit {
+	/**
+	 * The string to be inserted.
+	 */
+	newText: string;
+
+	/**
+	 * The range if the insert is requested
+	 */
+	insert: Range;
+
+	/**
+	 * The range if the replace is requested.
+	 */
+	replace: Range;
+}
+
 export interface CompletionItem {
 	/**
 	 * The label of this completion item. By default
@@ -3705,8 +3727,25 @@ export interface CompletionItem {
 	 *
 	 * *Note:* The range of the edit must be a single line range and it must
 	 * contain the position at which completion has been requested.
+	 *
+	 * Most editors support two different operation when accepting a completion
+	 * item. One is to insert a completion text and the other is to replace an
+	 * existing text with a competion text. Since this can usually not
+	 * predetermend by a server it can report both ranges. Clients need to
+	 * signal support for `InsertReplaceEdits` via the
+	 * `textDocument.completion.insertReplaceSupport` client capability
+	 * property.
+	 *
+	 * *Note 1:* The text edit's range as well as both ranges from a insert
+	 * replace edit must be a [single line] and they must contain the position
+	 * at which completion has been requested.
+	 * *Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range
+	 * must be a prefix of the edit's replace range, that means it must be
+	 * contained and starting at the same position.
+	 *
+	 * @since 3.16.0 additional type `InsertReplaceEdit` - proposed state
 	 */
-	textEdit?: TextEdit;
+	textEdit?: TextEdit | InsertReplaceEdit;
 
 	/**
 	 * An optional array of additional text edits that are applied when
