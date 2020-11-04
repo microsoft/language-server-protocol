@@ -118,6 +118,7 @@ index: 1
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) | Scala |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) | Scala |
 | SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) | TypeScript |
+| Stylable | [Wix.com](https://www.wix.com) | [stylable/language-service](https://github.com/wix/stylable/tree/master/packages/language-service) | TypeScript |
 | Svelte | [UnwrittenFun](https://github.com/UnwrittenFun) | [svelte-language-server](https://github.com/UnwrittenFun/svelte-language-server) | TypeScript |
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
