@@ -6475,15 +6475,17 @@ export interface SemanticTokensLegend {
 Token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Since a token type can have n modifiers, multiple token modifiers can be set by using bit flags,
 so a `tokenModifier` value of `3` is first viewed as binary `0b00000011`, which means `[tokenModifiers[0], tokenModifiers[1]]` because bits 0 and 1 are set.
 
-There are different way how the position of a token can be expressed in a file. Absolute positions or relative positions. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplifies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
+There are different ways how the position of a token can be expressed in a file. Absolute positions or relative positions. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplifies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
 
 - at index `5*i`   - `deltaLine`: token line number, relative to the previous token
 - at index `5*i+1` - `deltaStart`: token start character, relative to the previous token (relative to 0 or the previous token's start if they are on the same line)
-- at index `5*i+2` - `length`: the length of the token. A token cannot be multiline.
+- at index `5*i+2` - `length`: the length of the token.
 - at index `5*i+3` - `tokenType`: will be looked up in `SemanticTokensLegend.tokenTypes`. We currently ask that `tokenType` < 65536.
 - at index `5*i+4` - `tokenModifiers`: each set bit will be looked up in `SemanticTokensLegend.tokenModifiers`
 
-Lets look at a concrete example for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
+Whether a token can span multiple lines is defined by the client capability `multilineTokenSupport`. The client capability `overlappingTokenSupport` defines whether tokens can overlap each other.
+
+Lets look at a concrete example which uses single line tokens without overlaps for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
 
 ```typescript
 { line: 2, startChar:  5, length: 3, tokenType: "property",
@@ -6600,6 +6602,16 @@ interface SemanticTokensClientCapabilities {
 	 * The formats the clients supports.
 	 */
 	formats: TokenFormat[];
+
+	/**
+	 * Whether the client supports tokens that can overlap each other.
+	 */
+	overlappingTokenSupport?: boolean;
+
+	/**
+	 * Whether the client supports tokens that can span multiple lines.
+	 */
+	multilineTokenSupport?: boolean;
 }
 ```
 
