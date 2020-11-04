@@ -66,6 +66,35 @@ Content-Length: ...\r\n
 
 The following TypeScript definitions describe the base [JSON-RPC protocol](http://www.jsonrpc.org/specification):
 
+#### <a href="#number" name="number" class="anchor"> Numbers </a>
+
+The protocol use the following definitions for integers, unsigned integers and decimal numbers:
+
+```typescript
+/**
+ * Defines an integer number in the range of -2^31 to 2^31 - 1.
+ */
+export type integer = number;
+```
+
+```typescript
+/**
+ * Defines an unsigned integer number in the range of 0 to 2^31 - 1.
+ */
+export type uinteger = number;
+```
+
+```typescript
+/**
+ * Defines a decimal number. Since decimal numbers are very
+ * rare in the language server specification we denote the
+ * exact range with every decimal using the mathematics
+ * interval notation (e.g. [0, 1] denotes all decimals d with
+ * 0 <= d <= 1.
+ */
+export type decimal = number;
+```
+
 #### Abstract Message
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
@@ -85,7 +114,7 @@ interface RequestMessage extends Message {
 	/**
 	 * The request id.
 	 */
-	id: number | string;
+	id: integer | string;
 
 	/**
 	 * The method to be invoked.
@@ -108,7 +137,7 @@ interface ResponseMessage extends Message {
 	/**
 	 * The request id.
 	 */
-	id: number | string | null;
+	id: integer | string | null;
 
 	/**
 	 * The result of a request. This member is REQUIRED on success.
@@ -126,7 +155,7 @@ interface ResponseError {
 	/**
 	 * A number indicating the error type that occurred.
 	 */
-	code: number;
+	code: integer;
 
 	/**
 	 * A string providing a short description of the error.
@@ -142,11 +171,11 @@ interface ResponseError {
 
 export namespace ErrorCodes {
 	// Defined by JSON RPC
-	export const ParseError: number = -32700;
-	export const InvalidRequest: number = -32600;
-	export const MethodNotFound: number = -32601;
-	export const InvalidParams: number = -32602;
-	export const InternalError: number = -32603;
+	export const ParseError: integer = -32700;
+	export const InvalidRequest: integer = -32600;
+	export const MethodNotFound: integer = -32601;
+	export const InvalidParams: integer = -32602;
+	export const InternalError: integer = -32603;
 
 	/**
 	 * This is the start range of JSON RPC reserved error codes.
@@ -157,12 +186,12 @@ export namespace ErrorCodes {
 	 *
 	 * @since 3.16.0
 	*/
-	export const jsonrpcReservedErrorRangeStart: number = -32099;
+	export const jsonrpcReservedErrorRangeStart: integer = -32099;
 	/** @deprecated use  jsonrpcReservedErrorRangeStart */
-	export const serverErrorStart: number = jsonrpcReservedErrorRangeStart;
+	export const serverErrorStart: integer = jsonrpcReservedErrorRangeStart;
 
-	export const ServerNotInitialized: number = -32002;
-	export const UnknownErrorCode: number = -32001;
+	export const ServerNotInitialized: integer = -32002;
+	export const UnknownErrorCode: integer = -32001;
 
 	/**
 	 * This is the start range of JSON RPC reserved error codes.
@@ -170,7 +199,7 @@ export namespace ErrorCodes {
 	*/
 	export const jsonrpcReservedErrorRangeEnd = -32000;
 	/** @deprecated use  jsonrpcReservedErrorRangeEnd */
-	export const serverErrorEnd: number = jsonrpcReservedErrorRangeEnd;
+	export const serverErrorEnd: integer = jsonrpcReservedErrorRangeEnd;
 
 	/**
 	 * This is the start range of LSP reserved error codes.
@@ -178,10 +207,10 @@ export namespace ErrorCodes {
 	 *
 	 * @since 3.16.0
 	 */
-	export const lspReservedErrorRangeStart: number = -32899;
+	export const lspReservedErrorRangeStart: integer = -32899;
 
-	export const ContentModified: number = -32801;
-	export const RequestCancelled: number = -32800;
+	export const ContentModified: integer = -32801;
+	export const RequestCancelled: integer = -32800;
 
 	/**
 	 * This is the end range of LSP reserved error codes.
@@ -189,7 +218,7 @@ export namespace ErrorCodes {
 	 *
 	 * @since 3.16.0
 	 */
-	export const lspReservedErrorRangeEnd: number = -32800;
+	export const lspReservedErrorRangeEnd: integer = -32800;
 }
 ```
 #### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
@@ -227,7 +256,7 @@ interface CancelParams {
 	/**
 	 * The request id to cancel.
 	 */
-	id: number | string;
+	id: integer | string;
 }
 ```
 
@@ -313,7 +342,7 @@ interface Position {
 	/**
 	 * Line position in a document (zero-based).
 	 */
-	line: number;
+	line: uinteger;
 
 	/**
 	 * Character offset on a line in a document (zero-based). Assuming that
@@ -323,7 +352,7 @@ interface Position {
 	 * If the character value is greater than the line length it defaults back
 	 * to the line length.
 	 */
-	character: number;
+	character: uinteger;
 }
 ```
 #### <a href="#range" name="range" class="anchor"> Range </a>
@@ -417,7 +446,7 @@ export interface Diagnostic {
 	/**
 	 * The diagnostic's code, which might appear in the user interface.
 	 */
-	code?: number | string;
+	code?: integer | string;
 
 	/**
 	 * An optional property to describe the error code.
@@ -877,7 +906,7 @@ interface TextDocumentItem {
 	 * The version number of this document (it will increase after each
 	 * change, including undo/redo).
 	 */
-	version: number;
+	version: integer;
 
 	/**
 	 * The content of the opened text document.
@@ -964,7 +993,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	 * The version number of a document will increase after each change,
 	 * including undo/redo. The number doesn't need to be consecutive.
 	 */
-	version: number | null;
+	version: integer | null;
 }
 ```
 
@@ -1176,9 +1205,9 @@ export interface WorkDoneProgressBegin {
 	 * to ignore the `percentage` value in subsequent in report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule.
+	 * that are not following this rule. The value range is [0, 100]
 	 */
-	percentage?: number;
+	percentage?: uinteger;
 }
 ```
 
@@ -1215,9 +1244,9 @@ export interface WorkDoneProgressReport {
 	 * to ignore the `percentage` value in subsequent in report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule.
+	 * that are not following this rule. The value range is [0, 100]
 	 */
-	percentage?: number;
+	percentage?: uinteger;
 }
 ```
 
@@ -1431,7 +1460,7 @@ interface InitializeParams extends WorkDoneProgressParams {
 	 * process is not alive then the server should exit (see exit notification)
 	 * its process.
 	 */
-	processId: number | null;
+	processId: integer | null;
 
 	/**
 	 * Information about the client
@@ -1774,7 +1803,7 @@ export namespace InitializeError {
 	 * @deprecated This initialize error got replaced by client capabilities.
 	 * There is no version handshake in version 3.0x
 	 */
-	export const unknownProtocolVersion: number = 1;
+	export const unknownProtocolVersion: 1 = 1;
 }
 ```
 
@@ -1802,7 +1831,7 @@ interface ServerCapabilities {
 	 * TextDocumentSyncKind number. If omitted it defaults to
 	 * `TextDocumentSyncKind.None`.
 	 */
-	textDocumentSync?: TextDocumentSyncOptions | number;
+	textDocumentSync?: TextDocumentSyncOptions | TextDocumentSyncKind;
 
 	/**
 	 * The server provides completion support.
@@ -2063,7 +2092,7 @@ interface ShowMessageParams {
 	/**
 	 * The message type. See {@link MessageType}.
 	 */
-	type: number;
+	type: MessageType;
 
 	/**
 	 * The actual message.
@@ -2093,6 +2122,8 @@ export namespace MessageType {
 	 */
 	export const Log = 4;
 }
+
+export type MessageType = 1 | 2 | 3 | 4;
 ```
 
 #### <a href="#window_showMessageRequest" name="window_showMessageRequest" class="anchor">ShowMessage Request (:arrow_right_hook:)</a>
@@ -2112,7 +2143,7 @@ interface ShowMessageRequestParams {
 	/**
 	 * The message type. See {@link MessageType}
 	 */
-	type: number;
+	type: MessageType;
 
 	/**
 	 * The actual message
@@ -2150,7 +2181,7 @@ interface LogMessageParams {
 	/**
 	 * The message type. See {@link MessageType}
 	 */
-	type: number;
+	type: MessageType;
 
 	/**
 	 * The actual message
@@ -2558,7 +2589,7 @@ export interface FileSystemWatcher {
 	 * to WatchKind.Create | WatchKind.Change | WatchKind.Delete
 	 * which is 7.
 	 */
-	kind?: number;
+	kind?: uinteger;
 }
 
 export namespace WatchKind {
@@ -2606,7 +2637,7 @@ interface FileEvent {
 	/**
 	 * The change type.
 	 */
-	type: number;
+	type: uinteger;
 }
 
 /**
@@ -2984,7 +3015,7 @@ export type TextDocumentContentChangeEvent = {
 	 *
 	 * @deprecated use range instead.
 	 */
-	rangeLength?: number;
+	rangeLength?: uinteger;
 
 	/**
 	 * The new text for the provided range.
@@ -3033,7 +3064,7 @@ export interface WillSaveTextDocumentParams {
 	/**
 	 * The 'TextDocumentSaveReason'.
 	 */
-	reason: number;
+	reason: TextDocumentSaveReason;
 }
 
 /**
@@ -3057,6 +3088,8 @@ export namespace TextDocumentSaveReason {
 	 */
 	export const FocusOut = 3;
 }
+
+export type TextDocumentSaveReason = 1 | 2 | 3;
 ```
 
 #### <a href="#textDocument_willSaveWaitUntil" name="textDocument_willSaveWaitUntil" class="anchor">WillSaveWaitUntilTextDocument Request (:leftwards_arrow_with_hook:)</a>
@@ -3216,6 +3249,8 @@ export namespace TextDocumentSyncKind {
 	export const Incremental = 2;
 }
 
+export type TextDocumentSyncKind = 0 | 1 | 2;
+
 export interface TextDocumentSyncOptions {
 	/**
 	 * Open and close notifications are sent to the server. If omitted open
@@ -3228,7 +3263,7 @@ export interface TextDocumentSyncOptions {
 	 * TextDocumentSyncKind.Incremental. If omitted it defaults to
 	 * TextDocumentSyncKind.None.
 	 */
-	change?: number;
+	change?: TextDocumentSyncKind;
 	/**
 	 * If present will save notifications are sent to the server. If omitted
 	 * the notification should not be sent.
@@ -3327,7 +3362,7 @@ interface PublishDiagnosticsParams {
 	 *
 	 * @since 3.15.0
 	 */
-	version?: number;
+	version?: uinteger;
 
 	/**
 	 * An array of diagnostic information items.
@@ -3652,7 +3687,7 @@ export interface CompletionItem {
 	 * an icon is chosen by the editor. The standardized set
 	 * of available values is defined in `CompletionItemKind`.
 	 */
-	kind?: number;
+	kind?: CompletionItemKind;
 
 	/**
 	 * Tags for this completion item.
@@ -4199,7 +4234,7 @@ export interface SignatureHelp {
 	 * In future version of the protocol this property might become
 	 * mandatory to better express this.
 	 */
-	activeSignature?: number;
+	activeSignature?: uinteger;
 
 	/**
 	 * The active parameter of the active signature. If omitted or the value
@@ -4210,7 +4245,7 @@ export interface SignatureHelp {
 	 * mandatory to better express the active parameter if the
 	 * active signature does have any.
 	 */
-	activeParameter?: number;
+	activeParameter?: uinteger;
 }
 
 /**
@@ -4243,7 +4278,7 @@ export interface SignatureInformation {
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	activeParameter?: number;
+	activeParameter?: uinteger;
 }
 
 /**
@@ -4264,7 +4299,7 @@ export interface ParameterInformation {
 	 * signature label. Its intended use case is to highlight the parameter
 	 * label part in the `SignatureInformation.label`.
 	 */
-	label: string | [number, number];
+	label: string | [uinteger, uinteger];
 
 	/**
 	 * The human-readable doc-comment of this parameter. Will be shown
@@ -4636,7 +4671,7 @@ export interface DocumentHighlight {
 	/**
 	 * The highlight kind, default is DocumentHighlightKind.Text.
 	 */
-	kind?: number;
+	kind?: DocumentHighlightKind;
 }
 
 /**
@@ -4658,6 +4693,8 @@ export namespace DocumentHighlightKind {
 	 */
 	export const Write = 3;
 }
+
+export type DocumentHighlightKind = 1 | 2 | 3;
 ```
 
 * partial result: `DocumentHighlight[]`
@@ -5587,22 +5624,22 @@ interface Color {
 	/**
 	 * The red component of this color in the range [0-1].
 	 */
-	readonly red: number;
+	readonly red: decimal;
 
 	/**
 	 * The green component of this color in the range [0-1].
 	 */
-	readonly green: number;
+	readonly green: decimal;
 
 	/**
 	 * The blue component of this color in the range [0-1].
 	 */
-	readonly blue: number;
+	readonly blue: decimal;
 
 	/**
 	 * The alpha component of this color in the range [0-1].
 	 */
-	readonly alpha: number;
+	readonly alpha: decimal;
 }
 ```
 * partial result: `ColorInformation[]`
@@ -5729,7 +5766,7 @@ interface FormattingOptions {
 	/**
 	 * Size of a tab in spaces.
 	 */
-	tabSize: number;
+	tabSize: uinteger;
 
 	/**
 	 * Prefer spaces over tabs.
@@ -5760,7 +5797,7 @@ interface FormattingOptions {
 	/**
 	 * Signature for further properties.
 	 */
-	[key: string]: boolean | number | string;
+	[key: string]: boolean | integer | string;
 }
 ```
 
@@ -6010,7 +6047,7 @@ export interface FoldingRangeClientCapabilities {
 	 * per document. The value serves as a hint, servers are free to follow the
 	 * limit.
 	 */
-	rangeLimit?: number;
+	rangeLimit?: uinteger;
 	/**
 	 * If set, the client signals that it only supports folding complete lines.
 	 * If set, client will ignore specified `startCharacter` and `endCharacter`
@@ -6075,31 +6112,37 @@ export enum FoldingRangeKind {
 }
 
 /**
- * Represents a folding range.
+ * Represents a folding range. To be valid, start and end line must be bigger
+ * than zero and smaller than the number of lines in the document. Clients
+ * are free to ignore invalid ranges.
  */
 export interface FoldingRange {
 
 	/**
-	 * The zero-based line number from where the folded range starts.
+	 * The zero-based start line of the range to fold. The folded area starts
+	 * after the line's last character. To be valid, the end must be zero or
+	 * larger and smaller than the number of lines in the document.
 	 */
-	startLine: number;
+	startLine: uinteger;
 
 	/**
 	 * The zero-based character offset from where the folded range starts. If
 	 * not defined, defaults to the length of the start line.
 	 */
-	startCharacter?: number;
+	startCharacter?: uinteger;
 
 	/**
-	 * The zero-based line number where the folded range ends.
+	 * The zero-based end line of the range to fold. The folded area ends with
+	 * the line's last character. To be valid, the end must be zero or larger
+	 * and smaller than the number of lines in the document.
 	 */
-	endLine: number;
+	endLine: uinteger;
 
 	/**
 	 * The zero-based character offset before the folded range ends. If not
 	 * defined, defaults to the length of the end line.
 	 */
-	endCharacter?: number;
+	endCharacter?: uinteger;
 
 	/**
 	 * Describes the kind of the folding range such as `comment` or `region`.
@@ -6693,7 +6736,7 @@ export interface SemanticTokens {
 	/**
 	 * The actual tokens.
 	 */
-	data: number[];
+	data: uinteger[];
 }
 ```
 
@@ -6701,7 +6744,7 @@ export interface SemanticTokens {
 
 ```typescript
 export interface SemanticTokensPartialResult {
-	data: number[];
+	data: uinteger[];
 }
 ```
 
@@ -6748,17 +6791,17 @@ export interface SemanticTokensEdit {
 	/**
 	 * The start offset of the edit.
 	 */
-	start: number;
+	start: uinteger;
 
 	/**
 	 * The count of elements to remove.
 	 */
-	deleteCount: number;
+	deleteCount: uinteger;
 
 	/**
 	 * The elements to insert.
 	 */
-	data?: number[];
+	data?: uinteger[];
 }
 ```
 
