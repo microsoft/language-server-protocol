@@ -1491,6 +1491,18 @@ interface InitializeParams extends WorkDoneProgressParams {
 	};
 
 	/**
+	 * The locale the client is currently showing the user interface
+	 * in. This must not necessarily be the locale of the operating
+	 * system.
+	 *
+	 * Uses IETF language tags as the value's syntax
+	 * (See https://en.wikipedia.org/wiki/IETF_language_tag)
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	locale?: string;
+
+	/**
 	 * The rootPath of the workspace. Is null
 	 * if no folder is open.
 	 *
@@ -7077,9 +7089,9 @@ Language servers usually run in a separate process and client communicate with t
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (xx/xx/xxxx)</a>
 
-* Add support for tracing
-* Add semantic token support
-* Add call hierarchy support
+* Add support for tracing.
+* Add semantic token support.
+* Add call hierarchy support.
 * Add client capability for resolving text edits on completion items.
 * Add support for client default behavior on renames.
 * Add support for insert and replace ranges on `CompletionItem`.
@@ -7092,8 +7104,9 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for code action resolve request.
 * Add support for diagnostic `data` property.
 * Add support for signature information `activeParameter` property.
-* Add client capability to signale whether the client normalizes line endings
-* Add support to preserve aditional attributes on `MessageActionItem`
+* Add client capability to signale whether the client normalizes line endings.
+* Add support to preserve aditional attributes on `MessageActionItem`.
+* Add support to provide the clients locale in the initialize call.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
