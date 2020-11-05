@@ -814,6 +814,17 @@ export interface WorkspaceEditClientCapabilities {
 	 * @since 3.13.0
 	 */
 	failureHandling?: FailureHandlingKind;
+
+	/**
+	 * Whether the client normalizes line endings to the client specific
+	 * setting.
+	 * If set to `true` the client will normalize line ending characters
+	 * in a workspace edit containg to the client specific new line
+	 * character.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	normalizesLineEndings?: boolean;
 }
 
 /**
@@ -7081,6 +7092,8 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for code action resolve request.
 * Add support for diagnostic `data` property.
 * Add support for signature information `activeParameter` property.
+* Add client capability to signale whether the client normalizes line endings
+* Add support to preserve aditional attributes on `MessageActionItem`
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
