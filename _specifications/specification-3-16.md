@@ -1754,6 +1754,13 @@ interface ClientCapabilities {
 		 * @since 3.15.0
 		 */
 		workDoneProgress?: boolean;
+
+		/**
+		 * Capabilities specific to the showMessage request
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		showMessage : ShowMessageRequestClientCapabilities;
 	}
 
 	/**
@@ -2131,6 +2138,29 @@ export type MessageType = 1 | 2 | 3 | 4;
 #### <a href="#window_showMessageRequest" name="window_showMessageRequest" class="anchor">ShowMessage Request (:arrow_right_hook:)</a>
 
 The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
+
+_Client Capability_:
+* property path (optional): `window.showMessageRequest`
+* property type: `ShowMessageRequestClientCapabilities` defined as follows:
+
+```typescript
+/**
+ * Show message request client capabilities
+ */
+export interface ShowMessageRequestClientCapabilities {
+	/**
+	 * Capabilities specific to the `MessageActionItem` type.
+	 */
+	messageActionItem?: {
+		/**
+		 * Whether the client supports additional attribues which
+		 * are preserved and send back to the server in the
+		 * request's response.
+		 */
+		additionalPropertiesSupport?: boolean;
+	}
+}
+```
 
 _Request_:
 * method: 'window/showMessageRequest'
