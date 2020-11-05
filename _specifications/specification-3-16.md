@@ -1523,7 +1523,9 @@ interface InitializeParams extends WorkDoneProgressParams {
 Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as follows:
 
 
-##### `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
+##### TextDocumentClientCapabilities
+
+`TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
 
 ```typescript
 /**
