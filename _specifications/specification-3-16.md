@@ -3514,6 +3514,17 @@ export interface CompletionClientCapabilities {
 			 */
 			properties: string[];
 		};
+
+		/**
+		 * The client supports the `insertTextMode` propeprty on
+		 * a completion item to override the whitespace handling mode
+		 * as defined by the client (see `insertTextMode`).
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		insertTextModeSupport?: {
+			valueSet: InsertTextMode[];
+		}
 	};
 
 	completionItemKind?: {
@@ -3729,6 +3740,36 @@ export interface InsertReplaceEdit {
 	replace: Range;
 }
 
+/**
+ * How whitespace and indentation is handled during completion
+ * item insertion.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export namespace InsertTextMode {
+	/**
+	 * The insertion or replace strings is taken as it is. If the
+	 * value is multi line the lines below the cursor will be
+	 * inserted using the indentation defined in the string value.
+	 * The client will not apply any kind of adjustments to the
+	 * string.
+	 */
+	export const asIs: 1 = 1;
+
+	/**
+	 * The editor adjusts leading whitespace of new lines so that
+	 * they match the indentation of the line for which the item
+	 * is accepted.
+	 *
+	 * For example if the line containing the cursor when a accepting
+	 * a multi line completion item is indented using 3 tabs all
+	 * following lines inserted will be indented using 3 tabs as well.
+	 */
+	export const adjustIndentation: 2 = 2;
+}
+
+export type InsertTextMode = 1 | 2;
+
 export interface CompletionItem {
 	/**
 	 * The label of this completion item. By default
@@ -3810,6 +3851,14 @@ export interface CompletionItem {
 	 * `textEdit`. If omitted defaults to `InsertTextFormat.PlainText`.
 	 */
 	insertTextFormat?: InsertTextFormat;
+
+	/**
+	 * How whitespace and indentation is handled during completion
+	 * item insertion.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	insertTextMode?: InsertTextMode;
 
 	/**
 	 * An edit which is applied to a document when selecting this completion.
