@@ -187,6 +187,8 @@
       anchor: textDocument_codeLens
     - title: codeLens resolve
       anchor: codeLens_resolve
+    - title: codeLens refresh
+      anchor: codeLens_refresh
     - title: documentLink
       anchor: textDocument_documentLink
     - title: documentLink resolve

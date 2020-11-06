@@ -1755,9 +1755,17 @@ interface ClientCapabilities {
 		 * Capabilities specific to the semantic token requsts scoped to the
 		 * workspace.
 		 *
-		 * @since 3.16.0 - proposed state.
+		 * @since 3.16.0 - proposed state
 		 */
 		 semanticTokens?: SemanticTokensWorkspaceClientCapabilities;
+
+		/**
+		 * Capabilities specific to the code lens requsts scoped to the
+		 * workspace.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		codeLens?: CodeLensWorkspaceClientCapabilities;
 	};
 
 	/**
@@ -5537,6 +5545,38 @@ _Request_:
 _Response_:
 * result: `CodeLens`
 * error: code and message set in case an exception happens during the code lens resolve request.
+
+#### <a href="#codeLens_refresh" name="codeLens_refresh" class="anchor">Code Lens Refresh Request (:rightwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+The `workspace/codeLens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the code lenses currently shown in editors. As a result the client should ask the server to recompute the code lenses for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all code lenses. Note that the client still has the freedom to delay the re-calculation of the code lenses if for example an editor is currently not visible.
+
+_Client Capability_:
+
+* property name (optional): `workspace.codeLens`
+* property type: `CodeLensWorkspaceClientCapabilities` defined as follows:
+
+```typescript
+export interface CodeLensWorkspaceClientCapabilities {
+	/**
+	 * Whether the client implementation supports a refresh request send from the server
+	 * to the client. This is useful if a server detects a change which requires a
+	 * re-calculation of all code lenses.
+	 */
+	refreshSupport?: boolean;
+}
+```
+
+_Request_:
+
+* method: `workspace/codeLens/refresh`
+* params: none
+
+_Response_:
+
+* result: void
+* error: code and message set in case an exception happens during the 'workspace/codeLens/refresh' request
 
 #### <a href="#textDocument_documentLink" name="textDocument_documentLink" class="anchor">Document Link Request (:leftwards_arrow_with_hook:)</a>
 
