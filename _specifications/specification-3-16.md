@@ -7134,6 +7134,13 @@ Language servers usually run in a separate process and client communicate with t
 - if servers end up in an inconsistent state they should log this to the client using the `window/logMessage` request. If they can't recover from this the best they can do right now is to exit themselves. We are considering an [extension to the protocol](https://github.com/Microsoft/language-server-protocol/issues/646) that allows servers to request a restart on the client side.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
+Servers usually support different communication channels (e.g. stdio, pipes, ...). To easy the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
+
+- **stdio**: uses stdio as the communication channel.
+- **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
+- **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
+- **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
+
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (xx/xx/xxxx)</a>
