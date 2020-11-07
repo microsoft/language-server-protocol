@@ -4441,15 +4441,11 @@ export interface DocumentSymbolClientCapabilities {
 		 */
 		valueSet?: SymbolKind[];
 	}
+
 	/**
 	 * The client supports hierarchical document symbols.
 	 */
 	hierarchicalDocumentSymbolSupport?: boolean;
-	
-	/**
-	 * The client supports `MarkupContent` in `DocumentSymbol.detail?`.
-	 */
-	detailMarkupSupport?: boolean;
 }
 ```
 
@@ -4535,11 +4531,9 @@ export interface DocumentSymbol {
 	name: string;
 
 	/**
-	 * More detail for this symbol, e.g the signature of a function. Can be
-     * `MarkupContent` only if the
-	 * client specifies `DocumentSymbolClientCapabilities.detailMarkupSupport?`.
+	 * More detail for this symbol, e.g the signature of a function.
 	 */
-	detail?: string | MarkupContent;
+	detail?: string;
 
 	/**
 	 * The kind of this symbol.

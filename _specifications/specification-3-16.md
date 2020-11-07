@@ -4874,6 +4874,13 @@ export interface DocumentSymbolClientCapabilities {
 	 * @since 3.16.0
 	 */
 	labelSupport?: boolean;
+
+	/**
+	 * The client supports `MarkupContent` in `DocumentSymbol.detail?`.
+     *
+     * @since 3.16.0
+	 */
+	detailMarkupSupport?: boolean;
 }
 ```
 
@@ -4983,8 +4990,11 @@ export interface DocumentSymbol {
 
 	/**
 	 * More detail for this symbol, e.g the signature of a function.
+     *
+     * @since 3.16.0 Can be `MarkupContent` if the client specifies
+     * `DocumentSymbolClientCapabilities.detailMarkupSupport?`.
 	 */
-	detail?: string;
+	detail?: string | MarkupContent;
 
 	/**
 	 * The kind of this symbol.
