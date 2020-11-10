@@ -3862,7 +3862,7 @@ export interface CompletionItem {
 
 	/**
 	 * How whitespace and indentation is handled during completion
-	 * item insertion. If ignored the clients default value depends on
+	 * item insertion. If not provided the clients default value depends on
 	 * the `textDocument.completion.insertTextMode` client capability.
 	 *
 	 * @since 3.16.0 - proposed state
