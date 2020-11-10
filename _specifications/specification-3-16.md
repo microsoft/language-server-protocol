@@ -2240,6 +2240,7 @@ The show document request is sent from a server to a client to ask the client to
 _Client Capability_:
 * property path (optional): `window.showDocument`
 * property type: `ShowDocumentClientCapabilities` defined as follows:
+
 ```typescript
 /**
  * Client capabilities for the show document request.
@@ -2299,6 +2300,7 @@ export interface ShowDocumentParams {
 _Response_:
 
 * result: `ShowDocumentResult` defined as follows:
+
 ```typescript
 /**
  * The result of an show document request.
