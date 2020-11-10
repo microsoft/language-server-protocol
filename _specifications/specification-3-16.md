@@ -2231,6 +2231,89 @@ interface MessageActionItem {
 }
 ```
 
+#### <a href="#window_showDocumentRequest" name="window_showDocumentRequest" class="anchor">Show Document Request (:arrow_right_hook:)</a>
+
+> New in version 3.16.0
+
+The show document request is sent from a server to a client to ask the client to display a particular document in the user interface.
+
+_Client Capability_:
+* property path (optional): `window.showDocument`
+* property type: `ShowDocumentClientCapabilities` defined as follows:
+```typescript
+/**
+ * Client capabilities for the show document request.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ShowDocumentClientCapabilities {
+	/**
+	 * The client has support for the show document
+	 * request.
+	 */
+	support: boolean;
+}
+```
+
+_Request_:
+* method: 'window/showDocument'
+* params: `ShowDocumentParams` defined as follows:
+
+```typescript
+/**
+ * Params to show a document.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ShowDocumentParams {
+	/**
+	 * The document uri to show.
+	 */
+	uri: URI;
+
+	/**
+	 * Indicates to show the resource in an external program.
+	 * To show for example `https://code.visualstudio.com/`
+	 * in the default WEB browser set `external` to `true`.
+	 */
+	external?: boolean;
+
+	/**
+	 * An optional property to indicate whether the editor
+	 * showing the document should take focus or not.
+	 * Clients might ignore this property if an external
+	 * program in started.
+	 */
+	takeFocus?: boolean;
+
+	/**
+	 * An optional selection range if the document is a text
+	 * document. Clients might ignore the property if an
+	 * external program is started or the file is not a text
+	 * file.
+	 */
+	selection?: Range;
+}
+```
+
+_Response_:
+
+* result: `ShowDocumentResult` defined as follows:
+```typescript
+/**
+ * The result of an show document request.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ShowDocumentResult {
+	/**
+	 * A boolean indicating if the show was successful.
+	 */
+	success: boolean;
+}
+```
+* error: code and message set in case an exception happens during showing a document.
+
 #### <a href="#window_logMessage" name="window_logMessage" class="anchor">LogMessage Notification (:arrow_left:)</a>
 
 The log message notification is sent from the server to the client to ask the client to log a particular message.
@@ -5547,7 +5630,7 @@ _Response_:
 * result: `CodeLens`
 * error: code and message set in case an exception happens during the code lens resolve request.
 
-#### <a href="#codeLens_refresh" name="codeLens_refresh" class="anchor">Code Lens Refresh Request (:rightwards_arrow_with_hook:)</a>
+#### <a href="#codeLens_refresh" name="codeLens_refresh" class="anchor">Code Lens Refresh Request (:arrow_right_hook:)</a>
 
 > *Since version 3.16.0*
 
@@ -7204,6 +7287,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 * Add client capability to signale whether the client normalizes line endings.
 * Add support to preserve aditional attributes on `MessageActionItem`.
 * Add support to provide the clients locale in the initialize call.
+* Add support for opening and showing a document in the client user interface.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 

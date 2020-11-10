@@ -95,6 +95,8 @@
       anchor: window_showMessage
     - title: showMessageRequest
       anchor: window_showMessageRequest
+    - title: showDocument
+      anchor: window_showDocument
     - title: logMessage
       anchor: window_logMessage
     - title: progress/create
