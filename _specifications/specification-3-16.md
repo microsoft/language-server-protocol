@@ -2231,7 +2231,7 @@ interface MessageActionItem {
 }
 ```
 
-#### <a href="#window_showDocumentRequest" name="window_showDocumentRequest" class="anchor">Show Document Request (:arrow_right_hook:)</a>
+#### <a href="#window_showDocument" name="window_showDocumen" class="anchor">Show Document Request (:arrow_right_hook:)</a>
 
 > New in version 3.16.0
 
