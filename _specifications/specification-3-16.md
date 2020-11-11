@@ -23,6 +23,8 @@ All new 3.16 features are tagged with a corresponding since version 3.16 text or
 - Code Action disabled support
 - Code Action resolve support
 
+The version of the specification is used to group features into a new specification release and to refer to their first appearance. Features in the spec are kept compatible using so called capability flags which are exchanged between the client and the server during initialization.
+
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
