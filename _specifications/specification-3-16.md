@@ -2383,11 +2383,11 @@ export interface WorkDoneProgressCancelParams {
 
 #### <a href="#telemetry_event" name="telemetry_event" class="anchor">Telemetry Notification (:arrow_left:)</a>
 
-The telemetry notification is sent from the server to the client to ask the client to log a telemetry event.
+The telemetry notification is sent from the server to the client to ask the client to log a telemetry event. The protocol doesn't specify the playload since no interpretation of the data happens in the protocol. Most clients even don't handle the event directly but forward them to the extensions owing the corresponding server issuing the event.
 
 _Notification_:
 * method: 'telemetry/event'
-* params: 'any'
+* params: 'object'
 
 #### <a href="#client_registerCapability" name="client_registerCapability" class="anchor">Register Capability (:arrow_right_hook:)</a>
 
