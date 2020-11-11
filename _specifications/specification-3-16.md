@@ -1506,7 +1506,7 @@ interface InitializeParams extends WorkDoneProgressParams {
 	 * The rootPath of the workspace. Is null
 	 * if no folder is open.
 	 *
-	 * @deprecated in favour of rootUri.
+	 * @deprecated in favour of `rootUri`.
 	 */
 	rootPath?: string | null;
 
@@ -1514,6 +1514,8 @@ interface InitializeParams extends WorkDoneProgressParams {
 	 * The rootUri of the workspace. Is null if no
 	 * folder is open. If both `rootPath` and `rootUri` are set
 	 * `rootUri` wins.
+	 *
+	 * @deprecated in favour of `workspaceFolders`
 	 */
 	rootUri: DocumentUri | null;
 
