@@ -3005,6 +3005,14 @@ export interface ApplyWorkspaceEditResponse {
 	 * triggered the edit.
 	 */
 	failureReason?: string;
+
+	/**
+	 * Depending on the client's failure handling strategy `failedChange`
+	 * might contain the index of the change that failed. This property is
+	 * only available if the client signals a `failureHandlingStrategy`
+	 * in its client capabilities.
+	 */
+	failedChange?: uinteger;
 }
 ```
 * error: code and message set in case an exception happens during the request.
