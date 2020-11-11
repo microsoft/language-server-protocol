@@ -4915,6 +4915,8 @@ The document symbol request is sent from the client to the server. The returned 
 - `SymbolInformation[]` which is a flat list of all symbols found in a given text document. Then neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
 - `DocumentSymbol[]` which is a hierarchy of symbols found in a given text document.
 
+Servers should whenever possible return `DocumentSymbol` since it is the richer data structure.
+
 _Client Capability_:
 * property name (optional): `textDocument.documentSymbol`
 * property type: `DocumentSymbolClientCapabilities` defined as follows:
