@@ -325,6 +325,54 @@ Many of the interfaces contain fields that correspond to the URI of a document. 
 type DocumentUri = string;
 ```
 
+#### <a href="#regExp" name="regExp" class="anchor"> Regular Expressions </a>
+
+Regular expression are a powerful tool and there are actual use cases for them in the language server protocol. However the downside with them is that almost every programming language has its own set of regular expression features so the specification can not simply refer to them as a regular expression. So the LSP uses a two step approach to support regular expressions:
+
+* the client will announce which regular expression engine it will use. This will allow server that are written for a very specific client make full use of the regular expression capabilities of the client
+* the specification will define a set of regular expression features that should be supported by a client. Instead of writing a new specification LSP will refer to the [ECMAScript Regular Expression specification](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) and remove features from it that are not necessary in the context of LSP or hard to implement for other clients.
+
+_Client Capability_:
+
+The following client capability is used to announce a client's regular expression engine
+
+* property path (optional): `general.regularExpressions`
+* property type: `RegularExpressionsClientCapabilites` defined as follows:
+
+```typescript
+/**
+ * Client capabilities specific to regular expressions.
+ */
+export interface RegularExpressionsClientCapabilites {
+	/**
+	 * The engine's name.
+	 */
+	engine: string;
+
+	/**
+	 * The engine's version.
+	 */
+	version?: string;
+}
+```
+
+The following table lists the well known engine values
+
+Enginge | version
+------- | -------
+ECMAScript | `ES2020`
+
+_Regular Expression Subset_:
+
+The following features from the [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) regular expression specification are NOT mandantory for a client:
+
+- *Assertions*: Lookahead assertion, Negative lookahead assertion, lookbehind assertion, negative lookbehind assertion.
+- *Character classes*: matching control characters using caret notation (e.g. `\cX`) and matching UTF-16 code units (e.g. \uhhhh).
+- *Group and ranges*: named capturing groups.
+- *Unicode property escapes*: none of the features needs to be supported.
+
+The only regular expression flag that a client needs to support is 'i' to specify a case insensitive search.
+
 #### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
@@ -4097,7 +4145,7 @@ The following variables can be used:
 
 Transformations allow you to modify the value of a variable before it is inserted. The definition of a transformation consists of three parts:
 
-1. A regular expression that is matched against the value of a variable, or the empty string when the variable cannot be resolved.
+1. A [regular expression](#regExp) that is matched against the value of a variable, or the empty string when the variable cannot be resolved.
 2. A "format string" that allows to reference matching groups from the regular expression. The format string allows for conditional inserts and simple modifications.
 3. Options that are passed to the regular expression.
 
@@ -4134,8 +4182,8 @@ format      ::= '$' int | '${' int '}'
                 | '${' int ':+' if '}'
                 | '${' int ':?' if ':' else '}'
                 | '${' int ':-' else '}' | '${' int ':' else '}'
-regex       ::= JavaScript Regular Expression value (ctor-string)
-options     ::= JavaScript Regular Expression option (ctor-options)
+regex       ::= Regular Expression value (ctor-string)
+options     ::= Regular Expression option (ctor-options)
 var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
 int         ::= [0-9]+
 text        ::= .*
