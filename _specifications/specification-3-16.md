@@ -2682,13 +2682,13 @@ _Response_:
 
 #### <a href="#workspace_didChangeWatchedFiles" name="workspace_didChangeWatchedFiles" class="anchor">DidChangeWatchedFiles Notification (:arrow_right:)</a>
 
-The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client. It is recommended that servers register for these file events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
+The watched files notification is sent from the client to the server when the client detects changes to files and folders watched by the language client (note although the name suggest that only file events are sent it is about file system events which include folders as well). It is recommended that servers register for these file system events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
 
-Servers are allowed to run their own file watching mechanism and not rely on clients to provide file events. However this is not recommended due to the following reasons:
+Servers are allowed to run their own file sytem watching mechanism and not rely on clients to provide file system events. However this is not recommended due to the following reasons:
 
-- to our experience getting file watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
-- file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare time stamps (as for example some node modules do)
-- a client usually starts more than one server. If every server runs its own file watching it can become a CPU or memory problem.
+- to our experience getting file system watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
+- file system watching is not for free especially if the implementation uses some sort of polling and keeps a file system tree in memory to compare time stamps (as for example some node modules do)
+- a client usually starts more than one server. If every server runs its own file system watching it can become a CPU or memory problem.
 - in general there are more server than client implementations. So this problem is better solved on the client side.
 
 _Client Capability_:
