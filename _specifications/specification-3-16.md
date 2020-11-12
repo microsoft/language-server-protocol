@@ -337,13 +337,13 @@ _Client Capability_:
 The following client capability is used to announce a client's regular expression engine
 
 * property path (optional): `general.regularExpressions`
-* property type: `RegularExpressionsClientCapabilites` defined as follows:
+* property type: `RegularExpressionsClientCapabilities` defined as follows:
 
 ```typescript
 /**
  * Client capabilities specific to regular expressions.
  */
-export interface RegularExpressionsClientCapabilites {
+export interface RegularExpressionsClientCapabilities {
 	/**
 	 * The engine's name.
 	 */
@@ -1844,6 +1844,25 @@ interface ClientCapabilities {
 		 * @since 3.16.0 - proposed state
 		 */
 		showMessage?: ShowMessageRequestClientCapabilities;
+
+		/**
+		 * Client capabilities for the show document request.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		showDocument?: ShowDocumentClientCapabilities;
+	}
+
+	/**
+	 * General client capabilities.
+	 */
+	general?: {
+		/**
+		 * Client capabilities specific to regular expressions.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		regularExpressions?: RegularExpressionsClientCapabilities;
 	}
 
 	/**
