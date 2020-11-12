@@ -358,9 +358,9 @@ export interface RegularExpressionsClientCapabilites {
 
 The following table lists the well known engine values
 
-Enginge | version
-------- | -------
-ECMAScript | `ES2020`
+Engine | version | Documentation
+------- | ------- | -------------
+ECMAScript | `ES2020` | [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) & [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
 
 _Regular Expression Subset_:
 
