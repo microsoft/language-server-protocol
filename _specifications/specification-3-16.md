@@ -3405,7 +3405,7 @@ interface DidSaveTextDocumentParams {
 	/**
 	 * The document that was saved.
 	 */
-	textDocument: TextDocumentIdentifier;
+	textDocument: VersionedTextDocumentIdentifier;
 
 	/**
 	 * Optional the content when saved. Depends on the includeText value
