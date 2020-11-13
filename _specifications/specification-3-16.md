@@ -2456,7 +2456,7 @@ The telemetry notification is sent from the server to the client to ask the clie
 
 _Notification_:
 * method: 'telemetry/event'
-* params: 'object'
+* params: 'object' \| 'number' \| 'boolean' \| 'string';
 
 #### <a href="#client_registerCapability" name="client_registerCapability" class="anchor">Register Capability (:arrow_right_hook:)</a>
 
