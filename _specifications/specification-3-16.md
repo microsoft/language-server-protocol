@@ -356,7 +356,7 @@ export interface RegularExpressionsClientCapabilities {
 }
 ```
 
-The following table lists the well known engine values
+The following table lists the well known engine values. Please note that the table should be driven by the community which integrates LSP into existing client. It is not the goal of the spec to list all available regulare expression engines.
 
 Engine | version | Documentation
 ------- | ------- | -------------
