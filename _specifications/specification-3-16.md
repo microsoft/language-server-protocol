@@ -676,14 +676,14 @@ All text edits ranges refer to positions in the document the are computed on. Th
 
 #### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
 
-Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
+Describes textual changes on a single text document. The text document is referred to as a `OptionalVersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
 
 ```typescript
 export interface TextDocumentEdit {
 	/**
 	 * The text document to change.
 	 */
-	textDocument: VersionedTextDocumentIdentifier;
+	textDocument: OptionalVersionedTextDocumentIdentifier;
 
 	/**
 	 * The edits to be applied.
@@ -1040,12 +1040,26 @@ YAML | `yaml`
 
 #### <a href="#versionedTextDocumentIdentifier" name="versionedTextDocumentIdentifier" class="anchor"> VersionedTextDocumentIdentifier </a>
 
-An identifier to denote a specific version of a text document.
+An identifier to denote a specific version of a text document. This information usaually flows from the client to the server.
 
 ```typescript
 interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	/**
-	 * The version number of this document. If a versioned text document
+	 * The version number of this document.
+	 *
+	 * The version number of a document will increase after each change,
+	 * including undo/redo. The number doesn't need to be consecutive.
+	 */
+	version: integer;
+}
+```
+
+An identifier which optionally denotes a specific version of a text document. This information usaually flows from the server to the client.
+
+```typescript
+interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier {
+	/**
+	 * The version number of this document. If a optinal versioned text document
 	 * identifier is sent from the server to the client and the file is not
 	 * open in the editor (the server has not received an open notification
 	 * before) the server can send `null` to indicate that the version is
