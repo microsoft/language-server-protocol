@@ -277,7 +277,8 @@ _Notification_:
 * params: `ProgressParams` defined as follows:
 
 ```typescript
-type ProgressToken = number | string;
+type ProgressToken = integer | string;
+
 interface ProgressParams<T> {
 	/**
 	 * The progress token provided by the client or server.
