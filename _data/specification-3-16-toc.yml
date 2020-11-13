@@ -213,6 +213,8 @@
       anchor: textDocument_foldingRange
     - title: selectionRange
       anchor: textDocument_selectionRange
+    - title: onTypeRename
+      anchor: textDocument_onTypeRename
     - title: prepareCallHierarchy
       anchor: textDocument_prepareCallHierarchy
     - title: callHierarchy incoming

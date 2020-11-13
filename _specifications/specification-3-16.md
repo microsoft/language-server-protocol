@@ -1744,6 +1744,13 @@ export interface TextDocumentClientCapabilities {
 	selectionRange?: SelectionRangeClientCapabilities;
 
 	/**
+	 * Capabilities specific to the `textDocument/onTypeRename` request.
+	 *
+	 * @since 3.16.0
+	 */
+	onTypeRename?: OnTypeRenameClientCapabilities;
+
+	/**
 	 * Capabilities specific to the various call hierarchy requests.
 	 *
 	 * @since 3.16.0
@@ -1756,6 +1763,13 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.16.0
 	 */
 	semanticTokens?: SemanticTokensClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/moniker` request.
+	 *
+	 * @since 3.16.0
+	 */
+	moniker?: MonikerClientCapabilities;
 }
 ```
 
@@ -2086,6 +2100,14 @@ interface ServerCapabilities {
 		| SelectionRangeRegistrationOptions;
 
 	/**
+	 * The server provides on type rename support.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	onTypeRenameProvider?: boolean | OnTypeRenameOptions
+		| OnTypeRenameRegistrationOptions;
+
+	/**
 	 * The server provides call hierarchy support.
 	 *
 	 * @since 3.16.0
@@ -2100,6 +2122,13 @@ interface ServerCapabilities {
 	 */
 	semanticTokensProvider?: SemanticTokensOptions
 		| SemanticTokensRegistrationOptions;
+
+	/**
+	 * Whether server provides moniker support.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+    monikerProvider?: boolean | MonikerOptions | MonikerRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
@@ -7216,6 +7245,81 @@ _Response_:
 * result: void
 * error: code and message set in case an exception happens during the 'workspace/semanticTokens/refresh' request
 
+#### <a href="#textDocument_onTypeRename" name="textDocument_onTypeRename" class="anchor">On Type Rename (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+The on type rename request is sent from the client to the server to return for a given position in a document the range of the symbol at the position and all ranges that have the same content and can be renamed together. Optionally a word pattern can be returned to describe valid contents. A rename to one of the ranges can be applied to all other ranges if the new content
+is valid. If no result-specific word pattern is provided, the word pattern from the client's language configuration is used.
+
+_Client Capabilities_:
+
+* property name (optional): `textDocument.onTypeRename`
+* property type: `OnTypeRenameClientCapabilities` defined as follows:
+
+```typescript
+export interface OnTypeRenameClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * return value for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+
+* property name (optional): `onTypeRenameProvider`
+* property type: `boolean` \| `OnTypeRenameOptions` \| `OnTypeRenameRegistrationOptions` defined as follows:
+
+```typescript
+export interface OnTypeRenameOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `OnTypeRenameRegistrationOptions` defined as follows:
+
+```typescript
+export interface OnTypeRenameRegistrationOptions extends
+	TextDocumentRegistrationOptions, OnTypeRenameOptions,
+	StaticRegistrationOptions {
+}
+```
+
+_Request_:
+
+* method: `textDocument/onTypeRename`
+* params: `OnTypeRenameParams` defined as follows:
+
+```typescript
+export interface OnTypeRenameParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams {
+}
+```
+
+_Response_:
+
+* result: `OnTypeRenameRanges` \| `null` defined as follows:
+
+```typescript
+export interface OnTypeRenameRanges {
+	/**
+	 * A list of ranges that can be renamed together. The ranges must have
+	 * identical length and contain identical text content. The ranges cannot overlap.
+	 */
+	ranges: Range[];
+
+	/**
+	 * An optional word pattern (regular expression) that describes valid contents for
+	 * the given ranges. If no pattern is provided, the client configuration's word
+	 * pattern will be used.
+	 */
+	wordPattern?: string;
+}
+```
+* error: code and message set in case an exception happens during the 'textDocument/onTypeRename' request
+
 #### <a href="#textDocument_moniker" name="textDocument_moniker" class="anchor">Monikers (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.16.0*
@@ -7274,7 +7378,7 @@ _Response_:
 
 * result: `Moniker[] | null`
 * partial result: `Moniker[]`
-* error: code and message set in case an exception happens during the 'textDocument/semanticTokens/range' request
+* error: code and message set in case an exception happens during the 'textDocument/moniker' request
 
 `Moniker` is defined as follows:
 
