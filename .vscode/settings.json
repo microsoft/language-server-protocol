@@ -1,3 +1,32 @@
 {
-	"editor.rulers": [80]
+	"editor.rulers": [
+		80
+	],
+	"cSpell.words": [
+		"ABAP",
+		"EBNF",
+		"LSIF",
+		"Naur",
+		"RGBA",
+		"Retriggers",
+		"Struct",
+		"Sublime's",
+		"Unregistration",
+		"bibtex",
+		"downcase",
+		"hover's",
+		"lightbulbs",
+		"quickfix",
+		"refactorings",
+		"retrigger",
+		"sectionid",
+		"textedit",
+		"uhhhh",
+		"uinteger",
+		"unregister",
+		"unregisterations",
+		"unregistrations",
+		"upcase",
+		"workspaceedit"
+	]
 }

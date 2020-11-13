@@ -368,7 +368,7 @@ _Regular Expression Subset_:
 The following features from the [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) regular expression specification are NOT mandatory for a client:
 
 - *Assertions*: Lookahead assertion, Negative lookahead assertion, lookbehind assertion, negative lookbehind assertion.
-- *Character classes*: matching control characters using caret notation (e.g. `\cX`) and matching UTF-16 code units (e.g. \uhhhh).
+- *Character classes*: matching control characters using caret notation (e.g. `\cX`) and matching UTF-16 code units (e.g. `\uhhhh`).
 - *Group and ranges*: named capturing groups.
 - *Unicode property escapes*: none of the features needs to be supported.
 
@@ -489,13 +489,13 @@ export interface Diagnostic {
 	range: Range;
 
 	/**
-	 * The diagnostic's severity. Can be omitted. If omitted it is up to the
+	 * The diagnostics's severity. Can be omitted. If omitted it is up to the
 	 * client to interpret diagnostics as error, warning, info or hint.
 	 */
 	severity?: DiagnosticSeverity;
 
 	/**
-	 * The diagnostic's code, which might appear in the user interface.
+	 * The diagnostics's code, which might appear in the user interface.
 	 */
 	code?: integer | string;
 
@@ -513,7 +513,7 @@ export interface Diagnostic {
 	source?: string;
 
 	/**
-	 * The diagnostic's message.
+	 * The diagnostics's message.
 	 */
 	message: string;
 
@@ -1062,7 +1062,7 @@ interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier
 	 * identifier is sent from the server to the client and the file is not
 	 * open in the editor (the server has not received an open notification
 	 * before) the server can send `null` to indicate that the version is
-	 * known and the content on disk is the master (as speced with document
+	 * known and the content on disk is the master (as specified with document
 	 * content ownership).
 	 *
 	 * The version number of a document will increase after each change,
@@ -1500,7 +1500,7 @@ This section documents the actual language server protocol. It uses the followin
 * an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure. Clients should ignore server capabilities they don't understand (e.g. the initialize request shouldn't fail in this case).
 * an optional _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration. See the [register](#client_registerCapability) and [unregister](#client_unregisterCapability) request for how this works in detail.
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
-* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
 #### Request, Notification and Response ordering
 
@@ -3085,7 +3085,7 @@ export interface ApplyWorkspaceEditResponse {
 
 	/**
 	 * An optional textual description for why the edit was not applied.
-	 * This may be used by the server for diagnostic logging or to provide 
+	 * This may be used by the server for diagnostic logging or to provide
 	 * a suitable error for a request that triggered the edit.
 	 */
 	failureReason?: string;
@@ -5756,8 +5756,8 @@ _Client Capability_:
 ```typescript
 export interface CodeLensWorkspaceClientCapabilities {
 	/**
-	 * Whether the client implementation supports a refresh request sent from the 
-	 * server to the client. This is useful if a server detects a change which 
+	 * Whether the client implementation supports a refresh request sent from the
+	 * server to the client. This is useful if a server detects a change which
 	 * requires a re-calculation of all code lenses.
 	 */
 	refreshSupport?: boolean;
