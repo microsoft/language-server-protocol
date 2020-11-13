@@ -213,8 +213,6 @@
       anchor: textDocument_foldingRange
     - title: selectionRange
       anchor: textDocument_selectionRange
-    - title: onTypeRename
-      anchor: textDocument_onTypeRename
     - title: prepareCallHierarchy
       anchor: textDocument_prepareCallHierarchy
     - title: callHierarchy incoming
@@ -223,6 +221,8 @@
       anchor: callHierarchy_outgoingCalls
     - title: semantic tokens
       anchor: textDocument_semanticTokens
+    - title: onTypeRename
+      anchor: textDocument_onTypeRename
     - title: moniker
       anchor: textDocument_moniker
   - title: Change Log
