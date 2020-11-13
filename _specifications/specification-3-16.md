@@ -7504,6 +7504,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 * Add support to preserve additional attributes on `MessageActionItem`.
 * Add support to provide the clients locale in the initialize call.
 * Add support for opening and showing a document in the client user interface.
+* Add support for on type rename.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
