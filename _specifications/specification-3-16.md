@@ -357,7 +357,7 @@ export interface RegularExpressionsClientCapabilities {
 }
 ```
 
-The following table lists the well known engine values. Please note that the table should be driven by the community which integrates LSP into existing client. It is not the goal of the spec to list all available regulare expression engines.
+The following table lists the well known engine values. Please note that the table should be driven by the community which integrates LSP into existing clients. It is not the goal of the spec to list all available regular expression engines.
 
 Engine | version | Documentation
 ------- | ------- | -------------
@@ -365,7 +365,7 @@ ECMAScript | `ES2020` | [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-re
 
 _Regular Expression Subset_:
 
-The following features from the [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) regular expression specification are NOT mandantory for a client:
+The following features from the [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) regular expression specification are NOT mandatory for a client:
 
 - *Assertions*: Lookahead assertion, Negative lookahead assertion, lookbehind assertion, negative lookbehind assertion.
 - *Character classes*: matching control characters using caret notation (e.g. `\cX`) and matching UTF-16 code units (e.g. \uhhhh).
@@ -870,8 +870,7 @@ export interface WorkspaceEditClientCapabilities {
 	 * Whether the client normalizes line endings to the client specific
 	 * setting.
 	 * If set to `true` the client will normalize line ending characters
-	 * in a workspace edit containg to the client specific new line
-	 * character.
+	 * in a workspace edit to the client specific new line character(s).
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
@@ -1040,7 +1039,7 @@ YAML | `yaml`
 
 #### <a href="#versionedTextDocumentIdentifier" name="versionedTextDocumentIdentifier" class="anchor"> VersionedTextDocumentIdentifier </a>
 
-An identifier to denote a specific version of a text document. This information usaually flows from the client to the server.
+An identifier to denote a specific version of a text document. This information usually flows from the client to the server.
 
 ```typescript
 interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
@@ -1054,12 +1053,12 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 }
 ```
 
-An identifier which optionally denotes a specific version of a text document. This information usaually flows from the server to the client.
+An identifier which optionally denotes a specific version of a text document. This information usually flows from the server to the client.
 
 ```typescript
 interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	/**
-	 * The version number of this document. If a optinal versioned text document
+	 * The version number of this document. If an optional versioned text document
 	 * identifier is sent from the server to the client and the file is not
 	 * open in the editor (the server has not received an open notification
 	 * before) the server can send `null` to indicate that the version is
@@ -1174,7 +1173,7 @@ export interface TextDocumentRegistrationOptions {
 
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
- A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content can contain denced code blocks like in [GitHub issues](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting)
+ A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content can contain fenced code blocks like in [GitHub issues](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting)
 
 ```typescript
 /**
@@ -1752,7 +1751,7 @@ export interface TextDocumentClientCapabilities {
 	callHierarchy?: CallHierarchyClientCapabilities;
 
 	/**
-	 * Capabilities specific to the various semantic token requsts.
+	 * Capabilities specific to the various semantic token requests.
 	 *
 	 * @since 3.16.0
 	 */
@@ -1819,7 +1818,7 @@ interface ClientCapabilities {
 		configuration?: boolean;
 
 		/**
-		 * Capabilities specific to the semantic token requsts scoped to the
+		 * Capabilities specific to the semantic token requests scoped to the
 		 * workspace.
 		 *
 		 * @since 3.16.0 - proposed state
@@ -1827,7 +1826,7 @@ interface ClientCapabilities {
 		 semanticTokens?: SemanticTokensWorkspaceClientCapabilities;
 
 		/**
-		 * Capabilities specific to the code lens requsts scoped to the
+		 * Capabilities specific to the code lens requests scoped to the
 		 * workspace.
 		 *
 		 * @since 3.16.0 - proposed state
@@ -2270,8 +2269,8 @@ export interface ShowMessageRequestClientCapabilities {
 	 */
 	messageActionItem?: {
 		/**
-		 * Whether the client supports additional attribues which
-		 * are preserved and send back to the server in the
+		 * Whether the client supports additional attributes which
+		 * are preserved and sent back to the server in the
 		 * request's response.
 		 */
 		additionalPropertiesSupport?: boolean;
@@ -2369,7 +2368,7 @@ export interface ShowDocumentParams {
 	 * An optional property to indicate whether the editor
 	 * showing the document should take focus or not.
 	 * Clients might ignore this property if an external
-	 * program in started.
+	 * program is started.
 	 */
 	takeFocus?: boolean;
 
@@ -2467,7 +2466,7 @@ export interface WorkDoneProgressCancelParams {
 
 #### <a href="#telemetry_event" name="telemetry_event" class="anchor">Telemetry Notification (:arrow_left:)</a>
 
-The telemetry notification is sent from the server to the client to ask the client to log a telemetry event. The protocol doesn't specify the playload since no interpretation of the data happens in the protocol. Most clients even don't handle the event directly but forward them to the extensions owing the corresponding server issuing the event.
+The telemetry notification is sent from the server to the client to ask the client to log a telemetry event. The protocol doesn't specify the payload since no interpretation of the data happens in the protocol. Most clients even don't handle the event directly but forward them to the extensions owing the corresponding server issuing the event.
 
 _Notification_:
 * method: 'telemetry/event'
@@ -2766,7 +2765,7 @@ _Response_:
 
 The watched files notification is sent from the client to the server when the client detects changes to files and folders watched by the language client (note although the name suggest that only file events are sent it is about file system events which include folders as well). It is recommended that servers register for these file system events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
 
-Servers are allowed to run their own file sytem watching mechanism and not rely on clients to provide file system events. However this is not recommended due to the following reasons:
+Servers are allowed to run their own file system watching mechanism and not rely on clients to provide file system events. However this is not recommended due to the following reasons:
 
 - to our experience getting file system watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
 - file system watching is not for free especially if the implementation uses some sort of polling and keeps a file system tree in memory to compare time stamps (as for example some node modules do)
@@ -3086,9 +3085,8 @@ export interface ApplyWorkspaceEditResponse {
 
 	/**
 	 * An optional textual description for why the edit was not applied.
-	 * This may be used may be used by the server for diagnostic
-	 * logging or to provide a suitable error for a request that
-	 * triggered the edit.
+	 * This may be used by the server for diagnostic logging or to provide 
+	 * a suitable error for a request that triggered the edit.
 	 */
 	failureReason?: string;
 
@@ -3703,7 +3701,7 @@ export interface CompletionClientCapabilities {
 		};
 
 		/**
-		 * The client supports the `insertTextMode` propeprty on
+		 * The client supports the `insertTextMode` property on
 		 * a completion item to override the whitespace handling mode
 		 * as defined by the client (see `insertTextMode`).
 		 *
@@ -4041,7 +4039,7 @@ export interface CompletionItem {
 
 	/**
 	 * How whitespace and indentation is handled during completion
-	 * item insertion. If not provided the clients default value depends on
+	 * item insertion. If not provided the client's default value depends on
 	 * the `textDocument.completion.insertTextMode` client capability.
 	 *
 	 * @since 3.16.0 - proposed state
@@ -4055,15 +4053,15 @@ export interface CompletionItem {
 	 * *Note:* The range of the edit must be a single line range and it must
 	 * contain the position at which completion has been requested.
 	 *
-	 * Most editors support two different operation when accepting a completion
+	 * Most editors support two different operations when accepting a completion
 	 * item. One is to insert a completion text and the other is to replace an
-	 * existing text with a competion text. Since this can usually not
-	 * predetermend by a server it can report both ranges. Clients need to
+	 * existing text with a completion text. Since this can usually not be
+	 * predetermined by a server it can report both ranges. Clients need to
 	 * signal support for `InsertReplaceEdits` via the
 	 * `textDocument.completion.insertReplaceSupport` client capability
 	 * property.
 	 *
-	 * *Note 1:* The text edit's range as well as both ranges from a insert
+	 * *Note 1:* The text edit's range as well as both ranges from an insert
 	 * replace edit must be a [single line] and they must contain the position
 	 * at which completion has been requested.
 	 * *Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range
@@ -5623,7 +5621,7 @@ the `edit` property of a code action to avoid its unnecessary computation during
 Consider the clients announces the `edit` property as a property that can be resolved lazy using the client capability
 
 ```typescript
-textDocument.codeAction.resolveSupppprt = { properties: ['edit']};
+textDocument.codeAction.resolveSupport = { properties: ['edit']};
 ```
 
 then a code action
@@ -5758,9 +5756,9 @@ _Client Capability_:
 ```typescript
 export interface CodeLensWorkspaceClientCapabilities {
 	/**
-	 * Whether the client implementation supports a refresh request send from the server
-	 * to the client. This is useful if a server detects a change which requires a
-	 * re-calculation of all code lenses.
+	 * Whether the client implementation supports a refresh request sent from the 
+	 * server to the client. This is useful if a server detects a change which 
+	 * requires a re-calculation of all code lenses.
 	 */
 	refreshSupport?: boolean;
 }
@@ -7199,7 +7197,7 @@ _Client Capability_:
 ```typescript
 export interface SemanticTokensWorkspaceClientCapabilities {
 	/**
-	 * Whether the client implementation supports a refresh request send from
+	 * Whether the client implementation supports a refresh request sent from
 	 * the server to the client. This is useful if a server detects a project
 	 * wide configuration change which requires a re-calculation of all semantic
 	 * tokens provided by the server issuing the request.
@@ -7398,8 +7396,8 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 * Add support for code action resolve request.
 * Add support for diagnostic `data` property.
 * Add support for signature information `activeParameter` property.
-* Add client capability to signale whether the client normalizes line endings.
-* Add support to preserve aditional attributes on `MessageActionItem`.
+* Add client capability to signal whether the client normalizes line endings.
+* Add support to preserve additional attributes on `MessageActionItem`.
 * Add support to provide the clients locale in the initialize call.
 * Add support for opening and showing a document in the client user interface.
 
