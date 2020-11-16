@@ -807,13 +807,7 @@ export interface Project extends V {
 	/**
 	 * Optional the content of the project file, `base64` encoded.
 	 */
-  contents?: string;
-
-  /**
-   * An optional hash of the files included in the project, `base64` encoded. projectHash should be the same
-   * for two projects if their LSIF output is equivalent.
-   */
-  projectHash?: string;
+	contents?: string;
 }
 ```
 
@@ -1046,6 +1040,7 @@ export interface MetaData {
     name: string;
     version?: string;
     args?: string[];
+    dumpHash?: string;
   }
 }
 ```
