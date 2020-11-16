@@ -648,7 +648,9 @@ interface Command {
 }
 ```
 
-#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit </a>
+#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit  & AnnotatedTextEdit </a>
+
+> New in version 3.16: Support for `AnnotatedTextEdit`.
 
 A textual edit applicable to a text document.
 
@@ -668,13 +670,56 @@ interface TextEdit {
 }
 ```
 
+Since 3.16.0 there is also the concept of a annotated text edit which supports to add an annotation to a text edit. The annotation can add information describing the change to the text edit.
+
+```typescript
+/**
+ * Additional information that describes document changes.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ChangeAnnotation {
+        /**
+         * A human-readable string describing the actual change. The string
+		 * is rendered prominent in the user interface.
+         */
+        label: string;
+
+        /**
+         * A flag which indicates that user confirmation is needed
+		 * before applying the change.
+         */
+        needsConfirmation?: boolean;
+
+        /**
+         * A human-readable string which is rendered less prominent in
+		 * the user interface.
+         */
+        description?: string;
+}
+
+/**
+ * A special text edit with an additional change annotation.
+ *
+ * @since 3.16.0 - proposed state.
+ */
+export interface AnnotatedTextEdit extends TextEdit {
+	/**
+	 * The actual annotation
+	 */
+	annotation: ChangeAnnotation;
+}
+```
+
 #### <a href="#textEditArray" name="textEditArray" class="anchor"> TextEdit[] </a>
 
-Complex text manipulations are described with an array of `TextEdit`'s, representing a single change to the document.
+Complex text manipulations are described with an array of `TextEdit`'s or `AnnotatedTextEdit`'s, representing a single change to the document.
 
 All text edits ranges refer to positions in the document the are computed on. They therefore move a document from state S1 to S2 without describing any intermediate state. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position: multiple inserts, or any number of inserts followed by a single remove or replace edit. If multiple inserts have the same position, the order in the array defines the order in which the inserted strings appear in the resulting text.
 
 #### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
+
+> New in version 3.16: support for `AnnotatedTextEdit`. The support is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`. If a client doesn't signal the capability servers shouldn't send `AnnotatedTextEdit` literals back to the client.
 
 Describes textual changes on a single text document. The text document is referred to as a `OptionalVersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
 
@@ -687,14 +732,17 @@ export interface TextDocumentEdit {
 
 	/**
 	 * The edits to be applied.
+	 *
+	 * @since 3.16.0 - support for AnnotatedTextEdit. This is guarded by the
+	 * client capability `workspace.workspaceEdit.changeAnnotationSupport`
 	 */
-	edits: TextEdit[];
+	edits: (TextEdit | AnnotatedTextEdit)[];
 }
 ```
 
 ### <a href="#resourceChanges" name="resourceChanges" class="anchor"> File Resource changes </a>
 
-> New in version 3.13:
+> New in version 3.13. Since version 3.16 file resource changes can carry an additional property `changeAnnotation` to describe the actual change in more detail. Whether a client has support for change annotations is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`.
 
 File resource changes allow servers to create, rename and delete files and folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
 
@@ -707,6 +755,7 @@ export interface CreateFileOptions {
 	 * Overwrite existing file. Overwrite wins over `ignoreIfExists`
 	 */
 	overwrite?: boolean;
+
 	/**
 	 * Ignore if exists.
 	 */
@@ -721,14 +770,23 @@ export interface CreateFile {
 	 * A create
 	 */
 	kind: 'create';
+
 	/**
 	 * The resource to create.
 	 */
 	uri: DocumentUri;
+
 	/**
 	 * Additional options
 	 */
 	options?: CreateFileOptions;
+
+	/**
+	 * An optional annotation describing the operation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	annotation?: ChangeAnnotation;
 }
 
 /**
@@ -739,6 +797,7 @@ export interface RenameFileOptions {
 	 * Overwrite target if existing. Overwrite wins over `ignoreIfExists`
 	 */
 	overwrite?: boolean;
+
 	/**
 	 * Ignores if target exists.
 	 */
@@ -753,18 +812,28 @@ export interface RenameFile {
 	 * A rename
 	 */
 	kind: 'rename';
+
 	/**
 	 * The old (existing) location.
 	 */
 	oldUri: DocumentUri;
+
 	/**
 	 * The new location.
 	 */
 	newUri: DocumentUri;
+
 	/**
 	 * Rename options.
 	 */
 	options?: RenameFileOptions;
+
+	/**
+	 * An optional annotation describing the operation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	annotation?: ChangeAnnotation;
 }
 
 /**
@@ -775,6 +844,7 @@ export interface DeleteFileOptions {
 	 * Delete the content recursively if a folder is denoted.
 	 */
 	recursive?: boolean;
+
 	/**
 	 * Ignore the operation if the file doesn't exist.
 	 */
@@ -789,14 +859,23 @@ export interface DeleteFile {
 	 * A delete
 	 */
 	kind: 'delete';
+
 	/**
 	 * The file to delete.
 	 */
 	uri: DocumentUri;
+
 	/**
 	 * Delete options.
 	 */
 	options?: DeleteFileOptions;
+
+	/**
+	 * An optional annotation describing the operation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	annotation?: ChangeAnnotation;
 }
 ```
 
@@ -875,6 +954,14 @@ export interface WorkspaceEditClientCapabilities {
 	 * @since 3.16.0 - proposed state
 	 */
 	normalizesLineEndings?: boolean;
+
+	/**
+	 * Whether the client in general supports change annotations on text edits,
+	 * create file, rename file and delete file changes.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	changeAnnotationSupport?: boolean;
 }
 
 /**
@@ -5374,6 +5461,17 @@ export interface CodeActionClientCapabilities {
 		*/
 		properties: string[];
 	};
+
+	/**
+	 * Whether th client honors the change annotations in
+	 * text edits and resource operations returned via the
+	 * `CodeAction#edit` property by for example presenting
+	 * the workspace edit in the user interface and asking
+	 * for confirmation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	honorsChangeAnnotations?: boolean;
 }
 ```
 
@@ -6329,6 +6427,17 @@ export interface RenameClientCapabilities {
 	 * @since version 3.16.0
 	 */
 	prepareSupportDefaultBehavior?: boolean;
+
+	/**
+	 * Whether th client honors the change annotations in
+	 * text edits and resource operations returned via the
+	 * rename request's workspace edit by for example presenting
+	 * the workspace edit in the user interface and asking
+	 * for confirmation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	honorsChangeAnnotations?: boolean;
 }
 ```
 
@@ -7505,6 +7614,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 * Add support to provide the clients locale in the initialize call.
 * Add support for opening and showing a document in the client user interface.
 * Add support for on type rename.
+* Add support for change annotations in text edits as well as in create file, rename file and delete file operations.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
