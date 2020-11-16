@@ -489,13 +489,13 @@ export interface Diagnostic {
 	range: Range;
 
 	/**
-	 * The diagnostics's severity. Can be omitted. If omitted it is up to the
+	 * The diagnostic's severity. Can be omitted. If omitted it is up to the
 	 * client to interpret diagnostics as error, warning, info or hint.
 	 */
 	severity?: DiagnosticSeverity;
 
 	/**
-	 * The diagnostics's code, which might appear in the user interface.
+	 * The diagnostic's code, which might appear in the user interface.
 	 */
 	code?: integer | string;
 
@@ -513,7 +513,7 @@ export interface Diagnostic {
 	source?: string;
 
 	/**
-	 * The diagnostics's message.
+	 * The diagnostic's message.
 	 */
 	message: string;
 
