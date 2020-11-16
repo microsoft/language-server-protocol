@@ -2193,17 +2193,17 @@ _Notification_:
 A notification to log the trace of the server's execution.
 The amount and content of these notifications depends on the current `trace` configuration.
 If `trace` is `'off'`, the server should not send any `logTrace` notification.
-If `trace` is `'message'`, the server should not add the `'verbose'` field in the `logTraceParams`.
+If `trace` is `'message'`, the server should not add the `'verbose'` field in the `LogTraceParams`.
 
 `$/logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send [`window/logMessage`](#window_logMessage) notifications.
 
 
 _Notification_:
 * method: '$/logTrace'
-* params: `logTraceParams` defined as follows:
+* params: `LogTraceParams` defined as follows:
 
 ```typescript
-interface logTraceParams {
+interface LogTraceParams {
 	/**
 	 * The message to be logged.
 	 */
@@ -2222,10 +2222,10 @@ A notification that should be used by the client to modify the trace setting of 
 
 _Notification_:
 * method: '$/setTrace'
-* params: `setTraceParams` defined as follows:
+* params: `SetTraceParams` defined as follows:
 
 ```typescript
-interface setTraceParams {
+interface SetTraceParams {
 	/**
 	 * The new value that should be assigned to the trace setting.
 	 */
