@@ -95,6 +95,8 @@
       anchor: window_showMessage
     - title: showMessageRequest
       anchor: window_showMessageRequest
+    - title: showDocument
+      anchor: window_showDocument
     - title: logMessage
       anchor: window_logMessage
     - title: progress/create
@@ -187,6 +189,8 @@
       anchor: textDocument_codeLens
     - title: codeLens resolve
       anchor: codeLens_resolve
+    - title: codeLens refresh
+      anchor: codeLens_refresh
     - title: documentLink
       anchor: textDocument_documentLink
     - title: documentLink resolve
@@ -217,6 +221,8 @@
       anchor: callHierarchy_outgoingCalls
     - title: semantic tokens
       anchor: textDocument_semanticTokens
+    - title: onTypeRename
+      anchor: textDocument_onTypeRename
     - title: moniker
       anchor: textDocument_moniker
   - title: Change Log

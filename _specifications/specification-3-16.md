@@ -23,6 +23,8 @@ All new 3.16 features are tagged with a corresponding since version 3.16 text or
 - Code Action disabled support
 - Code Action resolve support
 
+The version of the specification is used to group features into a new specification release and to refer to their first appearance. Features in the spec are kept compatible using so called capability flags which are exchanged between the client and the server during initialization.
+
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
@@ -66,6 +68,35 @@ Content-Length: ...\r\n
 
 The following TypeScript definitions describe the base [JSON-RPC protocol](http://www.jsonrpc.org/specification):
 
+#### <a href="#number" name="number" class="anchor"> Numbers </a>
+
+The protocol use the following definitions for integers, unsigned integers and decimal numbers:
+
+```typescript
+/**
+ * Defines an integer number in the range of -2^31 to 2^31 - 1.
+ */
+export type integer = number;
+```
+
+```typescript
+/**
+ * Defines an unsigned integer number in the range of 0 to 2^31 - 1.
+ */
+export type uinteger = number;
+```
+
+```typescript
+/**
+ * Defines a decimal number. Since decimal numbers are very
+ * rare in the language server specification we denote the
+ * exact range with every decimal using the mathematics
+ * interval notation (e.g. [0, 1] denotes all decimals d with
+ * 0 <= d <= 1.
+ */
+export type decimal = number;
+```
+
 #### Abstract Message
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
@@ -85,7 +116,7 @@ interface RequestMessage extends Message {
 	/**
 	 * The request id.
 	 */
-	id: number | string;
+	id: integer | string;
 
 	/**
 	 * The method to be invoked.
@@ -108,7 +139,7 @@ interface ResponseMessage extends Message {
 	/**
 	 * The request id.
 	 */
-	id: number | string | null;
+	id: integer | string | null;
 
 	/**
 	 * The result of a request. This member is REQUIRED on success.
@@ -126,7 +157,7 @@ interface ResponseError {
 	/**
 	 * A number indicating the error type that occurred.
 	 */
-	code: number;
+	code: integer;
 
 	/**
 	 * A string providing a short description of the error.
@@ -142,11 +173,11 @@ interface ResponseError {
 
 export namespace ErrorCodes {
 	// Defined by JSON RPC
-	export const ParseError: number = -32700;
-	export const InvalidRequest: number = -32600;
-	export const MethodNotFound: number = -32601;
-	export const InvalidParams: number = -32602;
-	export const InternalError: number = -32603;
+	export const ParseError: integer = -32700;
+	export const InvalidRequest: integer = -32600;
+	export const MethodNotFound: integer = -32601;
+	export const InvalidParams: integer = -32602;
+	export const InternalError: integer = -32603;
 
 	/**
 	 * This is the start range of JSON RPC reserved error codes.
@@ -157,12 +188,12 @@ export namespace ErrorCodes {
 	 *
 	 * @since 3.16.0
 	*/
-	export const jsonrpcReservedErrorRangeStart: number = -32099;
+	export const jsonrpcReservedErrorRangeStart: integer = -32099;
 	/** @deprecated use  jsonrpcReservedErrorRangeStart */
-	export const serverErrorStart: number = jsonrpcReservedErrorRangeStart;
+	export const serverErrorStart: integer = jsonrpcReservedErrorRangeStart;
 
-	export const ServerNotInitialized: number = -32002;
-	export const UnknownErrorCode: number = -32001;
+	export const ServerNotInitialized: integer = -32002;
+	export const UnknownErrorCode: integer = -32001;
 
 	/**
 	 * This is the start range of JSON RPC reserved error codes.
@@ -170,7 +201,7 @@ export namespace ErrorCodes {
 	*/
 	export const jsonrpcReservedErrorRangeEnd = -32000;
 	/** @deprecated use  jsonrpcReservedErrorRangeEnd */
-	export const serverErrorEnd: number = jsonrpcReservedErrorRangeEnd;
+	export const serverErrorEnd: integer = jsonrpcReservedErrorRangeEnd;
 
 	/**
 	 * This is the start range of LSP reserved error codes.
@@ -178,10 +209,10 @@ export namespace ErrorCodes {
 	 *
 	 * @since 3.16.0
 	 */
-	export const lspReservedErrorRangeStart: number = -32899;
+	export const lspReservedErrorRangeStart: integer = -32899;
 
-	export const ContentModified: number = -32801;
-	export const RequestCancelled: number = -32800;
+	export const ContentModified: integer = -32801;
+	export const RequestCancelled: integer = -32800;
 
 	/**
 	 * This is the end range of LSP reserved error codes.
@@ -189,7 +220,7 @@ export namespace ErrorCodes {
 	 *
 	 * @since 3.16.0
 	 */
-	export const lspReservedErrorRangeEnd: number = -32800;
+	export const lspReservedErrorRangeEnd: integer = -32800;
 }
 ```
 #### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
@@ -212,7 +243,7 @@ interface NotificationMessage extends Message {
 
 #### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
 
-Notification and requests whose methods start with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest' notification. If a server or client receives notifications starting with '$/' it is free to ignore the notification. If a server or client receives a requests starting with '$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
+Notification and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a requests starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
 #### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
 
@@ -227,7 +258,7 @@ interface CancelParams {
 	/**
 	 * The request id to cancel.
 	 */
-	id: number | string;
+	id: integer | string;
 }
 ```
 
@@ -246,7 +277,8 @@ _Notification_:
 * params: `ProgressParams` defined as follows:
 
 ```typescript
-type ProgressToken = number | string;
+type ProgressToken = integer | string;
+
 interface ProgressParams<T> {
 	/**
 	 * The progress token provided by the client or server.
@@ -294,6 +326,54 @@ Many of the interfaces contain fields that correspond to the URI of a document. 
 type DocumentUri = string;
 ```
 
+#### <a href="#regExp" name="regExp" class="anchor"> Regular Expressions </a>
+
+Regular expression are a powerful tool and there are actual use cases for them in the language server protocol. However the downside with them is that almost every programming language has its own set of regular expression features so the specification can not simply refer to them as a regular expression. So the LSP uses a two step approach to support regular expressions:
+
+* the client will announce which regular expression engine it will use. This will allow server that are written for a very specific client make full use of the regular expression capabilities of the client
+* the specification will define a set of regular expression features that should be supported by a client. Instead of writing a new specification LSP will refer to the [ECMAScript Regular Expression specification](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) and remove features from it that are not necessary in the context of LSP or hard to implement for other clients.
+
+_Client Capability_:
+
+The following client capability is used to announce a client's regular expression engine
+
+* property path (optional): `general.regularExpressions`
+* property type: `RegularExpressionsClientCapabilities` defined as follows:
+
+```typescript
+/**
+ * Client capabilities specific to regular expressions.
+ */
+export interface RegularExpressionsClientCapabilities {
+	/**
+	 * The engine's name.
+	 */
+	engine: string;
+
+	/**
+	 * The engine's version.
+	 */
+	version?: string;
+}
+```
+
+The following table lists the well known engine values. Please note that the table should be driven by the community which integrates LSP into existing clients. It is not the goal of the spec to list all available regular expression engines.
+
+Engine | version | Documentation
+------- | ------- | -------------
+ECMAScript | `ES2020` | [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) & [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+_Regular Expression Subset_:
+
+The following features from the [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) regular expression specification are NOT mandatory for a client:
+
+- *Assertions*: Lookahead assertion, Negative lookahead assertion, lookbehind assertion, negative lookbehind assertion.
+- *Character classes*: matching control characters using caret notation (e.g. `\cX`) and matching UTF-16 code units (e.g. `\uhhhh`).
+- *Group and ranges*: named capturing groups.
+- *Unicode property escapes*: none of the features needs to be supported.
+
+The only regular expression flag that a client needs to support is 'i' to specify a case insensitive search.
+
 #### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
@@ -313,7 +393,7 @@ interface Position {
 	/**
 	 * Line position in a document (zero-based).
 	 */
-	line: number;
+	line: uinteger;
 
 	/**
 	 * Character offset on a line in a document (zero-based). Assuming that
@@ -323,7 +403,7 @@ interface Position {
 	 * If the character value is greater than the line length it defaults back
 	 * to the line length.
 	 */
-	character: number;
+	character: uinteger;
 }
 ```
 #### <a href="#range" name="range" class="anchor"> Range </a>
@@ -417,7 +497,7 @@ export interface Diagnostic {
 	/**
 	 * The diagnostic's code, which might appear in the user interface.
 	 */
-	code?: number | string;
+	code?: integer | string;
 
 	/**
 	 * An optional property to describe the error code.
@@ -596,14 +676,14 @@ All text edits ranges refer to positions in the document the are computed on. Th
 
 #### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
 
-Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
+Describes textual changes on a single text document. The text document is referred to as a `OptionalVersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
 
 ```typescript
 export interface TextDocumentEdit {
 	/**
 	 * The text document to change.
 	 */
-	textDocument: VersionedTextDocumentIdentifier;
+	textDocument: OptionalVersionedTextDocumentIdentifier;
 
 	/**
 	 * The edits to be applied.
@@ -785,6 +865,16 @@ export interface WorkspaceEditClientCapabilities {
 	 * @since 3.13.0
 	 */
 	failureHandling?: FailureHandlingKind;
+
+	/**
+	 * Whether the client normalizes line endings to the client specific
+	 * setting.
+	 * If set to `true` the client will normalize line ending characters
+	 * in a workspace edit to the client specific new line character(s).
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	normalizesLineEndings?: boolean;
 }
 
 /**
@@ -877,7 +967,7 @@ interface TextDocumentItem {
 	 * The version number of this document (it will increase after each
 	 * change, including undo/redo).
 	 */
-	version: number;
+	version: integer;
 
 	/**
 	 * The content of the opened text document.
@@ -949,22 +1039,36 @@ YAML | `yaml`
 
 #### <a href="#versionedTextDocumentIdentifier" name="versionedTextDocumentIdentifier" class="anchor"> VersionedTextDocumentIdentifier </a>
 
-An identifier to denote a specific version of a text document.
+An identifier to denote a specific version of a text document. This information usually flows from the client to the server.
 
 ```typescript
 interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	/**
-	 * The version number of this document. If a versioned text document
+	 * The version number of this document.
+	 *
+	 * The version number of a document will increase after each change,
+	 * including undo/redo. The number doesn't need to be consecutive.
+	 */
+	version: integer;
+}
+```
+
+An identifier which optionally denotes a specific version of a text document. This information usually flows from the server to the client.
+
+```typescript
+interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier {
+	/**
+	 * The version number of this document. If an optional versioned text document
 	 * identifier is sent from the server to the client and the file is not
 	 * open in the editor (the server has not received an open notification
 	 * before) the server can send `null` to indicate that the version is
-	 * known and the content on disk is the master (as speced with document
+	 * known and the content on disk is the master (as specified with document
 	 * content ownership).
 	 *
 	 * The version number of a document will increase after each change,
 	 * including undo/redo. The number doesn't need to be consecutive.
 	 */
-	version: number | null;
+	version: integer | null;
 }
 ```
 
@@ -1069,7 +1173,7 @@ export interface TextDocumentRegistrationOptions {
 
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
- A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content can contain denced code blocks like in [GitHub issues](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting)
+ A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content can contain fenced code blocks like in [GitHub issues](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting)
 
 ```typescript
 /**
@@ -1176,9 +1280,9 @@ export interface WorkDoneProgressBegin {
 	 * to ignore the `percentage` value in subsequent in report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule.
+	 * that are not following this rule. The value range is [0, 100]
 	 */
-	percentage?: number;
+	percentage?: uinteger;
 }
 ```
 
@@ -1215,9 +1319,9 @@ export interface WorkDoneProgressReport {
 	 * to ignore the `percentage` value in subsequent in report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule.
+	 * that are not following this rule. The value range is [0, 100]
 	 */
-	percentage?: number;
+	percentage?: uinteger;
 }
 ```
 
@@ -1394,9 +1498,9 @@ This section documents the actual language server protocol. It uses the followin
 * a header describing the request
 * an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
 * an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure. Clients should ignore server capabilities they don't understand (e.g. the initialize request shouldn't fail in this case).
+* an optional _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration. See the [register](#client_registerCapability) and [unregister](#client_unregisterCapability) request for how this works in detail.
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
-* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
-* a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
 #### Request, Notification and Response ordering
 
@@ -1431,7 +1535,7 @@ interface InitializeParams extends WorkDoneProgressParams {
 	 * process is not alive then the server should exit (see exit notification)
 	 * its process.
 	 */
-	processId: number | null;
+	processId: integer | null;
 
 	/**
 	 * Information about the client
@@ -1451,10 +1555,22 @@ interface InitializeParams extends WorkDoneProgressParams {
 	};
 
 	/**
+	 * The locale the client is currently showing the user interface
+	 * in. This must not necessarily be the locale of the operating
+	 * system.
+	 *
+	 * Uses IETF language tags as the value's syntax
+	 * (See https://en.wikipedia.org/wiki/IETF_language_tag)
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	locale?: string;
+
+	/**
 	 * The rootPath of the workspace. Is null
 	 * if no folder is open.
 	 *
-	 * @deprecated in favour of rootUri.
+	 * @deprecated in favour of `rootUri`.
 	 */
 	rootPath?: string | null;
 
@@ -1462,6 +1578,8 @@ interface InitializeParams extends WorkDoneProgressParams {
 	 * The rootUri of the workspace. Is null if no
 	 * folder is open. If both `rootPath` and `rootUri` are set
 	 * `rootUri` wins.
+	 *
+	 * @deprecated in favour of `workspaceFolders`
 	 */
 	rootUri: DocumentUri | null;
 
@@ -1494,7 +1612,9 @@ interface InitializeParams extends WorkDoneProgressParams {
 Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as follows:
 
 
-##### `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
+##### TextDocumentClientCapabilities
+
+`TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
 
 ```typescript
 /**
@@ -1624,6 +1744,13 @@ export interface TextDocumentClientCapabilities {
 	selectionRange?: SelectionRangeClientCapabilities;
 
 	/**
+	 * Capabilities specific to the `textDocument/onTypeRename` request.
+	 *
+	 * @since 3.16.0
+	 */
+	onTypeRename?: OnTypeRenameClientCapabilities;
+
+	/**
 	 * Capabilities specific to the various call hierarchy requests.
 	 *
 	 * @since 3.16.0
@@ -1631,11 +1758,18 @@ export interface TextDocumentClientCapabilities {
 	callHierarchy?: CallHierarchyClientCapabilities;
 
 	/**
-	 * Capabilities specific to the various semantic token requsts.
+	 * Capabilities specific to the various semantic token requests.
 	 *
 	 * @since 3.16.0
 	 */
 	semanticTokens?: SemanticTokensClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/moniker` request.
+	 *
+	 * @since 3.16.0
+	 */
+	moniker?: MonikerClientCapabilities;
 }
 ```
 
@@ -1740,12 +1874,20 @@ interface ClientCapabilities {
 		configuration?: boolean;
 
 		/**
-		 * Capabilities specific to the semantic token requsts scoped to the
+		 * Capabilities specific to the semantic token requests scoped to the
 		 * workspace.
 		 *
-		 * @since 3.16.0 - proposed state.
+		 * @since 3.16.0 - proposed state
 		 */
 		 semanticTokens?: SemanticTokensWorkspaceClientCapabilities;
+
+		/**
+		 * Capabilities specific to the code lens requests scoped to the
+		 * workspace.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		codeLens?: CodeLensWorkspaceClientCapabilities;
 	};
 
 	/**
@@ -1765,6 +1907,32 @@ interface ClientCapabilities {
 		 * @since 3.15.0
 		 */
 		workDoneProgress?: boolean;
+
+		/**
+		 * Capabilities specific to the showMessage request
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		showMessage?: ShowMessageRequestClientCapabilities;
+
+		/**
+		 * Client capabilities for the show document request.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		showDocument?: ShowDocumentClientCapabilities;
+	}
+
+	/**
+	 * General client capabilities.
+	 */
+	general?: {
+		/**
+		 * Client capabilities specific to regular expressions.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		regularExpressions?: RegularExpressionsClientCapabilities;
 	}
 
 	/**
@@ -1816,7 +1984,7 @@ export namespace InitializeError {
 	 * @deprecated This initialize error got replaced by client capabilities.
 	 * There is no version handshake in version 3.0x
 	 */
-	export const unknownProtocolVersion: number = 1;
+	export const unknownProtocolVersion: 1 = 1;
 }
 ```
 
@@ -1844,7 +2012,7 @@ interface ServerCapabilities {
 	 * TextDocumentSyncKind number. If omitted it defaults to
 	 * `TextDocumentSyncKind.None`.
 	 */
-	textDocumentSync?: TextDocumentSyncOptions | number;
+	textDocumentSync?: TextDocumentSyncOptions | TextDocumentSyncKind;
 
 	/**
 	 * The server provides completion support.
@@ -1974,6 +2142,14 @@ interface ServerCapabilities {
 		| SelectionRangeRegistrationOptions;
 
 	/**
+	 * The server provides on type rename support.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	onTypeRenameProvider?: boolean | OnTypeRenameOptions
+		| OnTypeRenameRegistrationOptions;
+
+	/**
 	 * The server provides call hierarchy support.
 	 *
 	 * @since 3.16.0
@@ -1988,6 +2164,13 @@ interface ServerCapabilities {
 	 */
 	semanticTokensProvider?: SemanticTokensOptions
 		| SemanticTokensRegistrationOptions;
+
+	/**
+	 * Whether server provides moniker support.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+    monikerProvider?: boolean | MonikerOptions | MonikerRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
@@ -2089,17 +2272,17 @@ _Notification_:
 A notification to log the trace of the server's execution.
 The amount and content of these notifications depends on the current `trace` configuration.
 If `trace` is `'off'`, the server should not send any `logTrace` notification.
-If `trace` is `'message'`, the server should not add the `'verbose'` field in the `logTraceParams`.
+If `trace` is `'message'`, the server should not add the `'verbose'` field in the `LogTraceParams`.
 
 `$/logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send [`window/logMessage`](#window_logMessage) notifications.
 
 
 _Notification_:
 * method: '$/logTrace'
-* params: `logTraceParams` defined as follows:
+* params: `LogTraceParams` defined as follows:
 
 ```typescript
-interface logTraceParams {
+interface LogTraceParams {
 	/**
 	 * The message to be logged.
 	 */
@@ -2118,10 +2301,10 @@ A notification that should be used by the client to modify the trace setting of 
 
 _Notification_:
 * method: '$/setTrace'
-* params: `setTraceParams` defined as follows:
+* params: `SetTraceParams` defined as follows:
 
 ```typescript
-interface setTraceParams {
+interface SetTraceParams {
 	/**
 	 * The new value that should be assigned to the trace setting.
 	 */
@@ -2142,7 +2325,7 @@ interface ShowMessageParams {
 	/**
 	 * The message type. See {@link MessageType}.
 	 */
-	type: number;
+	type: MessageType;
 
 	/**
 	 * The actual message.
@@ -2172,11 +2355,36 @@ export namespace MessageType {
 	 */
 	export const Log = 4;
 }
+
+export type MessageType = 1 | 2 | 3 | 4;
 ```
 
 #### <a href="#window_showMessageRequest" name="window_showMessageRequest" class="anchor">ShowMessage Request (:arrow_right_hook:)</a>
 
 The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
+
+_Client Capability_:
+* property path (optional): `window.showMessage`
+* property type: `ShowMessageRequestClientCapabilities` defined as follows:
+
+```typescript
+/**
+ * Show message request client capabilities
+ */
+export interface ShowMessageRequestClientCapabilities {
+	/**
+	 * Capabilities specific to the `MessageActionItem` type.
+	 */
+	messageActionItem?: {
+		/**
+		 * Whether the client supports additional attributes which
+		 * are preserved and sent back to the server in the
+		 * request's response.
+		 */
+		additionalPropertiesSupport?: boolean;
+	}
+}
+```
 
 _Request_:
 * method: 'window/showMessageRequest'
@@ -2191,7 +2399,7 @@ interface ShowMessageRequestParams {
 	/**
 	 * The message type. See {@link MessageType}
 	 */
-	type: number;
+	type: MessageType;
 
 	/**
 	 * The actual message
@@ -2216,6 +2424,91 @@ interface MessageActionItem {
 }
 ```
 
+#### <a href="#window_showDocument" name="window_showDocument" class="anchor">Show Document Request (:arrow_right_hook:)</a>
+
+> New in version 3.16.0
+
+The show document request is sent from a server to a client to ask the client to display a particular document in the user interface.
+
+_Client Capability_:
+* property path (optional): `window.showDocument`
+* property type: `ShowDocumentClientCapabilities` defined as follows:
+
+```typescript
+/**
+ * Client capabilities for the show document request.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ShowDocumentClientCapabilities {
+	/**
+	 * The client has support for the show document
+	 * request.
+	 */
+	support: boolean;
+}
+```
+
+_Request_:
+* method: 'window/showDocument'
+* params: `ShowDocumentParams` defined as follows:
+
+```typescript
+/**
+ * Params to show a document.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ShowDocumentParams {
+	/**
+	 * The document uri to show.
+	 */
+	uri: URI;
+
+	/**
+	 * Indicates to show the resource in an external program.
+	 * To show for example `https://code.visualstudio.com/`
+	 * in the default WEB browser set `external` to `true`.
+	 */
+	external?: boolean;
+
+	/**
+	 * An optional property to indicate whether the editor
+	 * showing the document should take focus or not.
+	 * Clients might ignore this property if an external
+	 * program is started.
+	 */
+	takeFocus?: boolean;
+
+	/**
+	 * An optional selection range if the document is a text
+	 * document. Clients might ignore the property if an
+	 * external program is started or the file is not a text
+	 * file.
+	 */
+	selection?: Range;
+}
+```
+
+_Response_:
+
+* result: `ShowDocumentResult` defined as follows:
+
+```typescript
+/**
+ * The result of an show document request.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ShowDocumentResult {
+	/**
+	 * A boolean indicating if the show was successful.
+	 */
+	success: boolean;
+}
+```
+* error: code and message set in case an exception happens during showing a document.
+
 #### <a href="#window_logMessage" name="window_logMessage" class="anchor">LogMessage Notification (:arrow_left:)</a>
 
 The log message notification is sent from the server to the client to ask the client to log a particular message.
@@ -2229,7 +2522,7 @@ interface LogMessageParams {
 	/**
 	 * The message type. See {@link MessageType}
 	 */
-	type: number;
+	type: MessageType;
 
 	/**
 	 * The actual message
@@ -2281,11 +2574,11 @@ export interface WorkDoneProgressCancelParams {
 
 #### <a href="#telemetry_event" name="telemetry_event" class="anchor">Telemetry Notification (:arrow_left:)</a>
 
-The telemetry notification is sent from the server to the client to ask the client to log a telemetry event.
+The telemetry notification is sent from the server to the client to ask the client to log a telemetry event. The protocol doesn't specify the payload since no interpretation of the data happens in the protocol. Most clients even don't handle the event directly but forward them to the extensions owing the corresponding server issuing the event.
 
 _Notification_:
 * method: 'telemetry/event'
-* params: 'any'
+* params: 'object' \| 'number' \| 'boolean' \| 'string';
 
 #### <a href="#client_registerCapability" name="client_registerCapability" class="anchor">Register Capability (:arrow_right_hook:)</a>
 
@@ -2578,13 +2871,13 @@ _Response_:
 
 #### <a href="#workspace_didChangeWatchedFiles" name="workspace_didChangeWatchedFiles" class="anchor">DidChangeWatchedFiles Notification (:arrow_right:)</a>
 
-The watched files notification is sent from the client to the server when the client detects changes to files watched by the language client. It is recommended that servers register for these file events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
+The watched files notification is sent from the client to the server when the client detects changes to files and folders watched by the language client (note although the name suggest that only file events are sent it is about file system events which include folders as well). It is recommended that servers register for these file system events using the registration mechanism. In former implementations clients pushed file events without the server actively asking for it.
 
-Servers are allowed to run their own file watching mechanism and not rely on clients to provide file events. However this is not recommended due to the following reasons:
+Servers are allowed to run their own file system watching mechanism and not rely on clients to provide file system events. However this is not recommended due to the following reasons:
 
-- to our experience getting file watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
-- file watching is not for free especially if the implementation uses some sort of polling and keeps a file tree in memory to compare time stamps (as for example some node modules do)
-- a client usually starts more than one server. If every server runs its own file watching it can become a CPU or memory problem.
+- to our experience getting file system watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
+- file system watching is not for free especially if the implementation uses some sort of polling and keeps a file system tree in memory to compare time stamps (as for example some node modules do)
+- a client usually starts more than one server. If every server runs its own file system watching it can become a CPU or memory problem.
 - in general there are more server than client implementations. So this problem is better solved on the client side.
 
 _Client Capability_:
@@ -2637,7 +2930,7 @@ export interface FileSystemWatcher {
 	 * to WatchKind.Create | WatchKind.Change | WatchKind.Delete
 	 * which is 7.
 	 */
-	kind?: number;
+	kind?: uinteger;
 }
 
 export namespace WatchKind {
@@ -2685,7 +2978,7 @@ interface FileEvent {
 	/**
 	 * The change type.
 	 */
-	type: number;
+	type: uinteger;
 }
 
 /**
@@ -2900,11 +3193,18 @@ export interface ApplyWorkspaceEditResponse {
 
 	/**
 	 * An optional textual description for why the edit was not applied.
-	 * This may be used may be used by the server for diagnostic
-	 * logging or to provide a suitable error for a request that
-	 * triggered the edit.
+	 * This may be used by the server for diagnostic logging or to provide
+	 * a suitable error for a request that triggered the edit.
 	 */
 	failureReason?: string;
+
+	/**
+	 * Depending on the client's failure handling strategy `failedChange`
+	 * might contain the index of the change that failed. This property is
+	 * only available if the client signals a `failureHandlingStrategy`
+	 * in its client capabilities.
+	 */
+	failedChange?: uinteger;
 }
 ```
 * error: code and message set in case an exception happens during the request.
@@ -3285,7 +3585,7 @@ export type TextDocumentContentChangeEvent = {
 	 *
 	 * @deprecated use range instead.
 	 */
-	rangeLength?: number;
+	rangeLength?: uinteger;
 
 	/**
 	 * The new text for the provided range.
@@ -3334,7 +3634,7 @@ export interface WillSaveTextDocumentParams {
 	/**
 	 * The 'TextDocumentSaveReason'.
 	 */
-	reason: number;
+	reason: TextDocumentSaveReason;
 }
 
 /**
@@ -3358,6 +3658,8 @@ export namespace TextDocumentSaveReason {
 	 */
 	export const FocusOut = 3;
 }
+
+export type TextDocumentSaveReason = 1 | 2 | 3;
 ```
 
 #### <a href="#textDocument_willSaveWaitUntil" name="textDocument_willSaveWaitUntil" class="anchor">WillSaveWaitUntilTextDocument Request (:leftwards_arrow_with_hook:)</a>
@@ -3431,7 +3733,7 @@ interface DidSaveTextDocumentParams {
 	/**
 	 * The document that was saved.
 	 */
-	textDocument: TextDocumentIdentifier;
+	textDocument: VersionedTextDocumentIdentifier;
 
 	/**
 	 * Optional the content when saved. Depends on the includeText value
@@ -3517,6 +3819,8 @@ export namespace TextDocumentSyncKind {
 	export const Incremental = 2;
 }
 
+export type TextDocumentSyncKind = 0 | 1 | 2;
+
 export interface TextDocumentSyncOptions {
 	/**
 	 * Open and close notifications are sent to the server. If omitted open
@@ -3529,7 +3833,7 @@ export interface TextDocumentSyncOptions {
 	 * TextDocumentSyncKind.Incremental. If omitted it defaults to
 	 * TextDocumentSyncKind.None.
 	 */
-	change?: number;
+	change?: TextDocumentSyncKind;
 	/**
 	 * If present will save notifications are sent to the server. If omitted
 	 * the notification should not be sent.
@@ -3554,7 +3858,7 @@ Diagnostics notification are sent from the server to the client to signal result
 
 Diagnostics are "owned" by the server so it is the server's responsibility to clear them if necessary. The following rule is used for VS Code servers that generate diagnostics:
 
-* if a language is single file only (for example HTML) then diagnostics are cleared by the server when the file is closed.
+* if a language is single file only (for example HTML) then diagnostics are cleared by the server when the file is closed. Please note that open / close events don't necessarily reflect what the user sees in the user interface. These events are ownership events. So with the current version of the specification it is possible that problems are not cleared although the file is not visible in the user interface since the client has not closed the file yet.
 * if a language has a project system (for example C#) diagnostics are not cleared when a file closes. When a project is opened all diagnostics for all files are recomputed (or read from a cache).
 
 When a file changes it is the server's responsibility to re-compute diagnostics and push them to the client. If the computed set is empty it has to push the empty array to clear former diagnostics. Newly pushed diagnostics always replace previously pushed diagnostics. There is no merging that happens on the client side.
@@ -3628,7 +3932,7 @@ interface PublishDiagnosticsParams {
 	 *
 	 * @since 3.15.0
 	 */
-	version?: number;
+	version?: uinteger;
 
 	/**
 	 * An array of diagnostic information items.
@@ -3725,6 +4029,17 @@ export interface CompletionClientCapabilities {
 			 */
 			properties: string[];
 		};
+
+		/**
+		 * The client supports the `insertTextMode` property on
+		 * a completion item to override the whitespace handling mode
+		 * as defined by the client (see `insertTextMode`).
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		insertTextModeSupport?: {
+			valueSet: InsertTextMode[];
+		}
 	};
 
 	completionItemKind?: {
@@ -3918,6 +4233,58 @@ export namespace CompletionItemTag {
 
 export type CompletionItemTag = 1;
 
+/**
+ * A special text edit to provide an insert and a replace operation.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface InsertReplaceEdit {
+	/**
+	 * The string to be inserted.
+	 */
+	newText: string;
+
+	/**
+	 * The range if the insert is requested
+	 */
+	insert: Range;
+
+	/**
+	 * The range if the replace is requested.
+	 */
+	replace: Range;
+}
+
+/**
+ * How whitespace and indentation is handled during completion
+ * item insertion.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export namespace InsertTextMode {
+	/**
+	 * The insertion or replace strings is taken as it is. If the
+	 * value is multi line the lines below the cursor will be
+	 * inserted using the indentation defined in the string value.
+	 * The client will not apply any kind of adjustments to the
+	 * string.
+	 */
+	export const asIs: 1 = 1;
+
+	/**
+	 * The editor adjusts leading whitespace of new lines so that
+	 * they match the indentation up to the cursor of the line for
+	 * which the item is accepted.
+	 *
+	 * Consider a line like this: <2tabs><cursor><3tabs>foo. Accepting a
+	 * multi line completion item is indented using 2 tabs and all
+	 * following lines inserted will be indented using 2 tabs as well.
+	 */
+	export const adjustIndentation: 2 = 2;
+}
+
+export type InsertTextMode = 1 | 2;
+
 export interface CompletionItem {
 	/**
 	 * The label of this completion item. By default
@@ -3931,7 +4298,7 @@ export interface CompletionItem {
 	 * an icon is chosen by the editor. The standardized set
 	 * of available values is defined in `CompletionItemKind`.
 	 */
-	kind?: number;
+	kind?: CompletionItemKind;
 
 	/**
 	 * Tags for this completion item.
@@ -4001,13 +4368,39 @@ export interface CompletionItem {
 	insertTextFormat?: InsertTextFormat;
 
 	/**
+	 * How whitespace and indentation is handled during completion
+	 * item insertion. If not provided the client's default value depends on
+	 * the `textDocument.completion.insertTextMode` client capability.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	insertTextMode?: InsertTextMode;
+
+	/**
 	 * An edit which is applied to a document when selecting this completion.
 	 * When an edit is provided the value of `insertText` is ignored.
 	 *
 	 * *Note:* The range of the edit must be a single line range and it must
 	 * contain the position at which completion has been requested.
+	 *
+	 * Most editors support two different operations when accepting a completion
+	 * item. One is to insert a completion text and the other is to replace an
+	 * existing text with a completion text. Since this can usually not be
+	 * predetermined by a server it can report both ranges. Clients need to
+	 * signal support for `InsertReplaceEdits` via the
+	 * `textDocument.completion.insertReplaceSupport` client capability
+	 * property.
+	 *
+	 * *Note 1:* The text edit's range as well as both ranges from an insert
+	 * replace edit must be a [single line] and they must contain the position
+	 * at which completion has been requested.
+	 * *Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range
+	 * must be a prefix of the edit's replace range, that means it must be
+	 * contained and starting at the same position.
+	 *
+	 * @since 3.16.0 additional type `InsertReplaceEdit` - proposed state
 	 */
-	textEdit?: TextEdit;
+	textEdit?: TextEdit | InsertReplaceEdit;
 
 	/**
 	 * An optional array of additional text edits that are applied when
@@ -4114,7 +4507,7 @@ The following variables can be used:
 
 Transformations allow you to modify the value of a variable before it is inserted. The definition of a transformation consists of three parts:
 
-1. A regular expression that is matched against the value of a variable, or the empty string when the variable cannot be resolved.
+1. A [regular expression](#regExp) that is matched against the value of a variable, or the empty string when the variable cannot be resolved.
 2. A "format string" that allows to reference matching groups from the regular expression. The format string allows for conditional inserts and simple modifications.
 3. Options that are passed to the regular expression.
 
@@ -4151,8 +4544,8 @@ format      ::= '$' int | '${' int '}'
                 | '${' int ':+' if '}'
                 | '${' int ':?' if ':' else '}'
                 | '${' int ':-' else '}' | '${' int ':' else '}'
-regex       ::= JavaScript Regular Expression value (ctor-string)
-options     ::= JavaScript Regular Expression option (ctor-options)
+regex       ::= Regular Expression value (ctor-string)
+options     ::= Regular Expression option (ctor-options)
 var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
 int         ::= [0-9]+
 text        ::= .*
@@ -4461,7 +4854,7 @@ export interface SignatureHelp {
 	 * In future version of the protocol this property might become
 	 * mandatory to better express this.
 	 */
-	activeSignature?: number;
+	activeSignature?: uinteger;
 
 	/**
 	 * The active parameter of the active signature. If omitted or the value
@@ -4472,7 +4865,7 @@ export interface SignatureHelp {
 	 * mandatory to better express the active parameter if the
 	 * active signature does have any.
 	 */
-	activeParameter?: number;
+	activeParameter?: uinteger;
 }
 
 /**
@@ -4505,7 +4898,7 @@ export interface SignatureInformation {
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	activeParameter?: number;
+	activeParameter?: uinteger;
 }
 
 /**
@@ -4526,7 +4919,7 @@ export interface ParameterInformation {
 	 * signature label. Its intended use case is to highlight the parameter
 	 * label part in the `SignatureInformation.label`.
 	 */
-	label: string | [number, number];
+	label: string | [uinteger, uinteger];
 
 	/**
 	 * The human-readable doc-comment of this parameter. Will be shown
@@ -4898,7 +5291,7 @@ export interface DocumentHighlight {
 	/**
 	 * The highlight kind, default is DocumentHighlightKind.Text.
 	 */
-	kind?: number;
+	kind?: DocumentHighlightKind;
 }
 
 /**
@@ -4920,6 +5313,8 @@ export namespace DocumentHighlightKind {
 	 */
 	export const Write = 3;
 }
+
+export type DocumentHighlightKind = 1 | 2 | 3;
 ```
 
 * partial result: `DocumentHighlight[]`
@@ -4931,6 +5326,8 @@ The document symbol request is sent from the client to the server. The returned 
 
 - `SymbolInformation[]` which is a flat list of all symbols found in a given text document. Then neither the symbol's location range nor the symbol's container name should be used to infer a hierarchy.
 - `DocumentSymbol[]` which is a hierarchy of symbols found in a given text document.
+
+Servers should whenever possible return `DocumentSymbol` since it is the richer data structure.
 
 _Client Capability_:
 * property name (optional): `textDocument.documentSymbol`
@@ -5551,6 +5948,22 @@ export interface CodeAction {
 The request is sent from the client to the server to resolve additional information for a given code action. This is usually used to compute
 the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
 
+Consider the clients announces the `edit` property as a property that can be resolved lazy using the client capability
+
+```typescript
+textDocument.codeAction.resolveSupport = { properties: ['edit']};
+```
+
+then a code action
+
+```typescript
+{
+    "title": "Do Foo"
+}
+```
+
+needs to be resolved using the `codeAction/resolve` request before it can be applied.
+
 _Client Capability_:
 * property name (optional): `textDocument.codeAction.resolveSupport`
 * property type: `{ properties: string[]; }`
@@ -5658,6 +6071,38 @@ _Request_:
 _Response_:
 * result: `CodeLens`
 * error: code and message set in case an exception happens during the code lens resolve request.
+
+#### <a href="#codeLens_refresh" name="codeLens_refresh" class="anchor">Code Lens Refresh Request (:arrow_right_hook:)</a>
+
+> *Since version 3.16.0*
+
+The `workspace/codeLens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the code lenses currently shown in editors. As a result the client should ask the server to recompute the code lenses for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all code lenses. Note that the client still has the freedom to delay the re-calculation of the code lenses if for example an editor is currently not visible.
+
+_Client Capability_:
+
+* property name (optional): `workspace.codeLens`
+* property type: `CodeLensWorkspaceClientCapabilities` defined as follows:
+
+```typescript
+export interface CodeLensWorkspaceClientCapabilities {
+	/**
+	 * Whether the client implementation supports a refresh request sent from the
+	 * server to the client. This is useful if a server detects a change which
+	 * requires a re-calculation of all code lenses.
+	 */
+	refreshSupport?: boolean;
+}
+```
+
+_Request_:
+
+* method: `workspace/codeLens/refresh`
+* params: none
+
+_Response_:
+
+* result: void
+* error: code and message set in case an exception happens during the 'workspace/codeLens/refresh' request
 
 #### <a href="#textDocument_documentLink" name="textDocument_documentLink" class="anchor">Document Link Request (:leftwards_arrow_with_hook:)</a>
 
@@ -5849,22 +6294,22 @@ interface Color {
 	/**
 	 * The red component of this color in the range [0-1].
 	 */
-	readonly red: number;
+	readonly red: decimal;
 
 	/**
 	 * The green component of this color in the range [0-1].
 	 */
-	readonly green: number;
+	readonly green: decimal;
 
 	/**
 	 * The blue component of this color in the range [0-1].
 	 */
-	readonly blue: number;
+	readonly blue: decimal;
 
 	/**
 	 * The alpha component of this color in the range [0-1].
 	 */
-	readonly alpha: number;
+	readonly alpha: decimal;
 }
 ```
 * partial result: `ColorInformation[]`
@@ -5991,7 +6436,7 @@ interface FormattingOptions {
 	/**
 	 * Size of a tab in spaces.
 	 */
-	tabSize: number;
+	tabSize: uinteger;
 
 	/**
 	 * Prefer spaces over tabs.
@@ -6022,7 +6467,7 @@ interface FormattingOptions {
 	/**
 	 * Signature for further properties.
 	 */
-	[key: string]: boolean | number | string;
+	[key: string]: boolean | integer | string;
 }
 ```
 
@@ -6272,7 +6717,7 @@ export interface FoldingRangeClientCapabilities {
 	 * per document. The value serves as a hint, servers are free to follow the
 	 * limit.
 	 */
-	rangeLimit?: number;
+	rangeLimit?: uinteger;
 	/**
 	 * If set, the client signals that it only supports folding complete lines.
 	 * If set, client will ignore specified `startCharacter` and `endCharacter`
@@ -6337,31 +6782,37 @@ export enum FoldingRangeKind {
 }
 
 /**
- * Represents a folding range.
+ * Represents a folding range. To be valid, start and end line must be bigger
+ * than zero and smaller than the number of lines in the document. Clients
+ * are free to ignore invalid ranges.
  */
 export interface FoldingRange {
 
 	/**
-	 * The zero-based line number from where the folded range starts.
+	 * The zero-based start line of the range to fold. The folded area starts
+	 * after the line's last character. To be valid, the end must be zero or
+	 * larger and smaller than the number of lines in the document.
 	 */
-	startLine: number;
+	startLine: uinteger;
 
 	/**
 	 * The zero-based character offset from where the folded range starts. If
 	 * not defined, defaults to the length of the start line.
 	 */
-	startCharacter?: number;
+	startCharacter?: uinteger;
 
 	/**
-	 * The zero-based line number where the folded range ends.
+	 * The zero-based end line of the range to fold. The folded area ends with
+	 * the line's last character. To be valid, the end must be zero or larger
+	 * and smaller than the number of lines in the document.
 	 */
-	endLine: number;
+	endLine: uinteger;
 
 	/**
 	 * The zero-based character offset before the folded range ends. If not
 	 * defined, defaults to the length of the end line.
 	 */
-	endCharacter?: number;
+	endCharacter?: uinteger;
 
 	/**
 	 * Describes the kind of the folding range such as `comment` or `region`.
@@ -6665,6 +7116,10 @@ Tokens are represented using one token type combined with n token modifiers. A t
 ```typescript
 export enum SemanticTokenTypes {
 	namespace = 'namespace',
+	/**
+	 * Represents a generic type. Acts as a fallback for types which
+	 * can't be mapped to a specific type like class or enum.
+	 */
 	type = 'type',
 	class = 'class',
 	enum = 'enum',
@@ -6733,15 +7188,17 @@ export interface SemanticTokensLegend {
 Token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Since a token type can have n modifiers, multiple token modifiers can be set by using bit flags,
 so a `tokenModifier` value of `3` is first viewed as binary `0b00000011`, which means `[tokenModifiers[0], tokenModifiers[1]]` because bits 0 and 1 are set.
 
-There are different way how the position of a token can be expressed in a file. Absolute positions or relative positions. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplifies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
+There are different ways how the position of a token can be expressed in a file. Absolute positions or relative positions. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplifies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
 
 - at index `5*i`   - `deltaLine`: token line number, relative to the previous token
 - at index `5*i+1` - `deltaStart`: token start character, relative to the previous token (relative to 0 or the previous token's start if they are on the same line)
-- at index `5*i+2` - `length`: the length of the token. A token cannot be multiline.
+- at index `5*i+2` - `length`: the length of the token.
 - at index `5*i+3` - `tokenType`: will be looked up in `SemanticTokensLegend.tokenTypes`. We currently ask that `tokenType` < 65536.
 - at index `5*i+4` - `tokenModifiers`: each set bit will be looked up in `SemanticTokensLegend.tokenModifiers`
 
-Lets look at a concrete example for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
+Whether a token can span multiple lines is defined by the client capability `multilineTokenSupport`. The client capability `overlappingTokenSupport` defines whether tokens can overlap each other.
+
+Lets look at a concrete example which uses single line tokens without overlaps for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
 
 ```typescript
 { line: 2, startChar:  5, length: 3, tokenType: "property",
@@ -6858,6 +7315,16 @@ interface SemanticTokensClientCapabilities {
 	 * The formats the clients supports.
 	 */
 	formats: TokenFormat[];
+
+	/**
+	 * Whether the client supports tokens that can overlap each other.
+	 */
+	overlappingTokenSupport?: boolean;
+
+	/**
+	 * Whether the client supports tokens that can span multiple lines.
+	 */
+	multilineTokenSupport?: boolean;
 }
 ```
 
@@ -6939,7 +7406,7 @@ export interface SemanticTokens {
 	/**
 	 * The actual tokens.
 	 */
-	data: number[];
+	data: uinteger[];
 }
 ```
 
@@ -6947,7 +7414,7 @@ export interface SemanticTokens {
 
 ```typescript
 export interface SemanticTokensPartialResult {
-	data: number[];
+	data: uinteger[];
 }
 ```
 
@@ -6994,17 +7461,17 @@ export interface SemanticTokensEdit {
 	/**
 	 * The start offset of the edit.
 	 */
-	start: number;
+	start: uinteger;
 
 	/**
 	 * The count of elements to remove.
 	 */
-	deleteCount: number;
+	deleteCount: uinteger;
 
 	/**
 	 * The elements to insert.
 	 */
-	data?: number[];
+	data?: uinteger[];
 }
 ```
 
@@ -7060,7 +7527,7 @@ _Client Capability_:
 ```typescript
 export interface SemanticTokensWorkspaceClientCapabilities {
 	/**
-	 * Whether the client implementation supports a refresh request send from
+	 * Whether the client implementation supports a refresh request sent from
 	 * the server to the client. This is useful if a server detects a project
 	 * wide configuration change which requires a re-calculation of all semantic
 	 * tokens provided by the server issuing the request.
@@ -7078,6 +7545,81 @@ _Response_:
 
 * result: void
 * error: code and message set in case an exception happens during the 'workspace/semanticTokens/refresh' request
+
+#### <a href="#textDocument_onTypeRename" name="textDocument_onTypeRename" class="anchor">On Type Rename (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.16.0*
+
+The on type rename request is sent from the client to the server to return for a given position in a document the range of the symbol at the position and all ranges that have the same content and can be renamed together. Optionally a word pattern can be returned to describe valid contents. A rename to one of the ranges can be applied to all other ranges if the new content
+is valid. If no result-specific word pattern is provided, the word pattern from the client's language configuration is used.
+
+_Client Capabilities_:
+
+* property name (optional): `textDocument.onTypeRename`
+* property type: `OnTypeRenameClientCapabilities` defined as follows:
+
+```typescript
+export interface OnTypeRenameClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * return value for the corresponding server capability as well.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+
+* property name (optional): `onTypeRenameProvider`
+* property type: `boolean` \| `OnTypeRenameOptions` \| `OnTypeRenameRegistrationOptions` defined as follows:
+
+```typescript
+export interface OnTypeRenameOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `OnTypeRenameRegistrationOptions` defined as follows:
+
+```typescript
+export interface OnTypeRenameRegistrationOptions extends
+	TextDocumentRegistrationOptions, OnTypeRenameOptions,
+	StaticRegistrationOptions {
+}
+```
+
+_Request_:
+
+* method: `textDocument/onTypeRename`
+* params: `OnTypeRenameParams` defined as follows:
+
+```typescript
+export interface OnTypeRenameParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams {
+}
+```
+
+_Response_:
+
+* result: `OnTypeRenameRanges` \| `null` defined as follows:
+
+```typescript
+export interface OnTypeRenameRanges {
+	/**
+	 * A list of ranges that can be renamed together. The ranges must have
+	 * identical length and contain identical text content. The ranges cannot overlap.
+	 */
+	ranges: Range[];
+
+	/**
+	 * An optional word pattern (regular expression) that describes valid contents for
+	 * the given ranges. If no pattern is provided, the client configuration's word
+	 * pattern will be used.
+	 */
+	wordPattern?: string;
+}
+```
+* error: code and message set in case an exception happens during the 'textDocument/onTypeRename' request
 
 #### <a href="#textDocument_moniker" name="textDocument_moniker" class="anchor">Monikers (:leftwards_arrow_with_hook:)</a>
 
@@ -7137,7 +7679,7 @@ _Response_:
 
 * result: `Moniker[] | null`
 * partial result: `Moniker[]`
-* error: code and message set in case an exception happens during the 'textDocument/semanticTokens/range' request
+* error: code and message set in case an exception happens during the 'textDocument/moniker' request
 
 `Moniker` is defined as follows:
 
@@ -7233,13 +7775,20 @@ Language servers usually run in a separate process and client communicate with t
 - if servers end up in an inconsistent state they should log this to the client using the `window/logMessage` request. If they can't recover from this the best they can do right now is to exit themselves. We are considering an [extension to the protocol](https://github.com/Microsoft/language-server-protocol/issues/646) that allows servers to request a restart on the client side.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
+Servers usually support different communication channels (e.g. stdio, pipes, ...). To easy the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
+
+- **stdio**: uses stdio as the communication channel.
+- **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
+- **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
+- **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
+
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (xx/xx/xxxx)</a>
 
-* Add support for tracing
-* Add semantic token support
-* Add call hierarchy support
+* Add support for tracing.
+* Add semantic token support.
+* Add call hierarchy support.
 * Add client capability for resolving text edits on completion items.
 * Add support for client default behavior on renames.
 * Add support for insert and replace ranges on `CompletionItem`.
@@ -7255,6 +7804,11 @@ Language servers usually run in a separate process and client communicate with t
 * Add support for `workspace/didCreateFiles` notifications and `workspace/willCreateFiles` requests.
 * Add support for `workspace/didRenameFiles` notifications and `workspace/willRenameFiles` requests.
 * Add support for `workspace/didDeleteFiles` notifications and `workspace/willDeleteFiles` requests.
+* Add client capability to signal whether the client normalizes line endings.
+* Add support to preserve additional attributes on `MessageActionItem`.
+* Add support to provide the clients locale in the initialize call.
+* Add support for opening and showing a document in the client user interface.
+* Add support for on type rename.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 

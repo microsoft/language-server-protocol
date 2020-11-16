@@ -63,7 +63,7 @@ index: 1
 | [Groovy](http://groovy-lang.org/) | [Prominic.NET](https://moonshine-ide.com/) | [Groovy Language Server](https://github.com/prominic/groovy-language-server) | Java |
 | [Groovy](http://groovy-lang.org/) | [VsCode Groovy Lint](https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint) | [VsCode Groovy Lint Language Server](https://github.com/nvuillam/vscode-groovy-lint/tree/master/server) | TypeScript |
 | HTML | MS | [vscode-html-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/html-language-features/server) | TypeScript |
-| Haskell| [Alan Zimmerman](https://github.com/alanz) | [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine) | Haskell |
+| Haskell| [Alan Zimmerman](https://github.com/alanz) | [Haskell Language Server (HLS)](https://github.com/haskell/haskell-language-server) | Haskell |
 | [Haxe](https://haxe.org/) | [Haxe Foundation](https://github.com/HaxeFoundation/) | [Haxe Language Server](https://github.com/vshaxe/haxe-language-server) | Haxe |
 | [Isabelle](https://www.cl.cam.ac.uk/research/hvg/Isabelle/) | [Makarius Wenzel](https://github.com/makarius) | [sources](https://isabelle.in.tum.de/repos/isabelle/file/tip/src/Tools/VSCode) | Scala |
 | JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) | TypeScript |
@@ -118,6 +118,7 @@ index: 1
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) | Scala |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) | Scala |
 | SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) | TypeScript |
+| Stylable | [Wix.com](https://www.wix.com) | [stylable/language-service](https://github.com/wix/stylable/tree/master/packages/language-service) | TypeScript |
 | Svelte | [UnwrittenFun](https://github.com/UnwrittenFun) | [svelte-language-server](https://github.com/UnwrittenFun/svelte-language-server) | TypeScript |
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
@@ -137,7 +138,7 @@ index: 1
 | WXML| [Qiming Zhao](https://github.com/chemzqm)| [wxml-languageserver](https://github.com/chemzqm/wxml-languageserver) | TypeScript |
 | XML | IBM | [XML Language Server](https://github.com/microclimate-devops/xml-language-server) | Java |
 | XML | [Red Hat Developers](https://github.com/redhat-developer) and [Angelo ZERR](https://github.com/angelozerr/) | [XML Language Server (LemMinX)](https://github.com/eclipse/lemminx) | Java |
-| [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext](https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.xtend)| Java |
+| [Xtext language framework](https://www.eclipse.org/Xtext/) | Eclipse | [Eclipse Xtext](https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/server/LanguageServerImpl.java)| Java |
 | YAML (with JSON schemas)| [Adam Voss](https://github.com/adamvoss) | [vscode-yaml-languageservice](https://github.com/adamvoss/vscode-yaml-languageservice) | TypeScript |
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) | TypeScript |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
