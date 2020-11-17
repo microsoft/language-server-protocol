@@ -1260,7 +1260,7 @@ export interface TextDocumentRegistrationOptions {
 
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
- A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content can contain fenced code blocks like in [GitHub issues](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting)
+ A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/).
 
 ```typescript
 /**
@@ -1321,6 +1321,27 @@ export interface MarkupContent {
 	value: string;
 }
 ```
+
+In addition clients should signal the markdown parser they are using via the client capability `general.markdown` introduced in version 3.16.0 defined as follows:
+
+ ```typescript
+/**
+ * Client capabilities specific to the used markdown parser.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface MarkdownClientCapabilities {
+	/**
+	 * The name of the parser.
+	 */
+	parser: string;
+
+	/**
+	 * The version of the parser.
+	 */
+	version?: string;
+}
+ ```
 
 #### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
 
