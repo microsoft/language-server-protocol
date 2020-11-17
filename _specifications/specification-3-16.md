@@ -1991,6 +1991,8 @@ interface ClientCapabilities {
 
 	/**
 	 * General client capabilities.
+	 *
+	 * @since 3.16.0 - proposed state
 	 */
 	general?: {
 		/**
@@ -1999,6 +2001,13 @@ interface ClientCapabilities {
 		 * @since 3.16.0 - proposed state
 		 */
 		regularExpressions?: RegularExpressionsClientCapabilities;
+
+		/**
+		 * Client capabilities specific to the client's markdown parser.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		markdown?: MarkdownClientCapabilities;
 	}
 
 	/**
