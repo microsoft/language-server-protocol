@@ -359,7 +359,7 @@ export interface RegularExpressionsClientCapabilities {
 
 The following table lists the well known engine values. Please note that the table should be driven by the community which integrates LSP into existing clients. It is not the goal of the spec to list all available regular expression engines.
 
-Engine | version | Documentation
+Engine | Version | Documentation
 ------- | ------- | -------------
 ECMAScript | `ES2020` | [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) & [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
 
@@ -1342,6 +1342,13 @@ export interface MarkdownClientCapabilities {
 	version?: string;
 }
  ```
+
+Known markdown parsers used by clients right now are:
+
+Parser | Version | Documentation
+------ | ------- | -------------
+marked | 1.1.0   | [Marked Documentation](https://marked.js.org/)
+
 
 #### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
 
