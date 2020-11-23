@@ -6980,7 +6980,7 @@ export enum SemanticTokenTypes {
 	enumMember = 'enumMember',
 	event = 'event',
 	function = 'function',
-	member = 'member',
+	method = 'method',
 	macro = 'macro',
 	keyword = 'keyword',
 	modifier = 'modifier',
