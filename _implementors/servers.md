@@ -123,7 +123,8 @@ index: 1
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
-| [Terraform](https://terraform.io) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
+| [Terraform](https://www.terraform.io/) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
+| [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
 | Turtle | [Stardog Union](https://github.com/stardog-union) | [Turtle Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
