@@ -433,10 +433,16 @@ interface Range {
 #### <a href="#location" name="location" class="anchor"> Location </a>
 
 Represents a location inside a resource, such as a line inside a text file.
+The server may optionally hint to the client that a location should be considered readonly.
 ```typescript
 interface Location {
 	uri: DocumentUri;
 	range: Range;
+
+	/**
+	 * @since 3.16.0 - proposed state
+	 */
+	readonly?: boolean;
 }
 ```
 
@@ -474,6 +480,14 @@ interface LocationLink {
 	 * `targetRange`. See also `DocumentSymbol#range`
 	 */
 	targetSelectionRange: Range;
+
+	/**
+	 * Specifies that the target document should be considered readonly by the
+	 * editor.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	targetReadonly?: boolean;
 }
 ```
 
@@ -2017,6 +2031,13 @@ interface ClientCapabilities {
 		 * @since 3.16.0 - proposed state
 		 */
 		markdown?: MarkdownClientCapabilities;
+
+		/**
+		 * Client supports documents in a readonly mode.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		readonlySupport?: boolean
 	}
 
 	/**
@@ -2534,6 +2555,14 @@ export interface ShowDocumentParams {
 	 * file.
 	 */
 	selection?: Range;
+
+	/**
+	 * An optional property to indicate whether the editor
+	 * showing the text document should be readonly.
+	 * Clients might ignore this property if they do not support
+	 * a readonly mode.
+	 */
+	 readonly?: boolean;
 }
 ```
 
