@@ -1825,48 +1825,6 @@ interface ClientCapabilities {
 		workspaceFolders?: boolean;
 
 		/**
-		* The client has support for file requests/notifications.
-		*
-		* Since 3.16.0
-		*/
-		files?: {
-			/**
-			 * Whether the client supports dynamic registration for file requests/notifications.
-			 */
-			dynamicRegistration?: boolean;
-
-			/**
-			 * The client has support for sending didCreateFiles notifications.
-			 */
-			didCreate?: boolean;
-
-			/**
-			 * The client has support for willCreateFiles requests.
-			 */
-			willCreate?: boolean;
-
-			/**
-			 * The client has support for sending didRenameFiles notifications.
-			 */
-			didRename?: boolean;
-
-			/**
-			 * The client has support for willRenameFiles requests.
-			 */
-			willRename?: boolean;
-
-			/**
-			 * The client has support for sending didDeleteFiles notifications.
-			 */
-			didDelete?: boolean;
-
-			/**
-			 * The client has support for willDeleteFiles requests.
-			 */
-			willDelete?: boolean;
-		}
-
-		/**
 		 * The client supports `workspace/configuration` requests.
 		 *
 		 * @since 3.6.0
@@ -1921,6 +1879,48 @@ interface ClientCapabilities {
 		 * @since 3.16.0 - proposed state
 		 */
 		showDocument?: ShowDocumentClientCapabilities;
+
+		/**
+		* The client has support for file requests/notifications.
+		*
+		* Since 3.16.0
+		*/
+		fileOperations?: {
+			/**
+			 * Whether the client supports dynamic registration for file requests/notifications.
+			 */
+			dynamicRegistration?: boolean;
+
+			/**
+			 * The client has support for sending didCreateFiles notifications.
+			 */
+			didCreate?: boolean;
+
+			/**
+			 * The client has support for willCreateFiles requests.
+			 */
+			willCreate?: boolean;
+
+			/**
+			 * The client has support for sending didRenameFiles notifications.
+			 */
+			didRename?: boolean;
+
+			/**
+			 * The client has support for willRenameFiles requests.
+			 */
+			willRename?: boolean;
+
+			/**
+			 * The client has support for sending didDeleteFiles notifications.
+			 */
+			didDelete?: boolean;
+
+			/**
+			 * The client has support for willDeleteFiles requests.
+			 */
+			willDelete?: boolean;
+		}
 	}
 
 	/**
@@ -2190,40 +2190,45 @@ interface ServerCapabilities {
 	}
 
 	/**
-	* The server is interested in file notifications/requests.
-	*
-	* @since 3.16.0
-	*/
-	files?: {
+	 * Window specific server capabilities
+	 */
+	window?: {
 		/**
-		* The server is interested in didCreateFiles notifications.
+		* The server is interested in file notifications/requests.
+		*
+		* @since 3.16.0
 		*/
-		didCreate?: FileOperationRegistrationOptions;
+		fileOperations?: {
+			/**
+			* The server is interested in didCreateFiles notifications.
+			*/
+			didCreate?: FileOperationRegistrationOptions;
 
-		/**
-		* The server is interested in willCreateFiles requests.
-		*/
-		willCreate?: FileOperationRegistrationOptions;
+			/**
+			* The server is interested in willCreateFiles requests.
+			*/
+			willCreate?: FileOperationRegistrationOptions;
 
-		/**
-		* The server is interested in didRenameFiles notifications.
-		*/
-		didRename?: FileOperationRegistrationOptions;
+			/**
+			* The server is interested in didRenameFiles notifications.
+			*/
+			didRename?: FileOperationRegistrationOptions;
 
-		/**
-		* The server is interested in willRenameFiles requests.
-		*/
-		willRename?: FileOperationRegistrationOptions;
+			/**
+			* The server is interested in willRenameFiles requests.
+			*/
+			willRename?: FileOperationRegistrationOptions;
 
-		/**
-		* The server is interested in didDeleteFiles file notifications.
-		*/
-		didDelete?: FileOperationRegistrationOptions;
+			/**
+			* The server is interested in didDeleteFiles file notifications.
+			*/
+			didDelete?: FileOperationRegistrationOptions;
 
-		/**
-		* The server is interested in willDeleteFiles file requests.
-		*/
-		willDelete?: FileOperationRegistrationOptions;
+			/**
+			* The server is interested in willDeleteFiles file requests.
+			*/
+			willDelete?: FileOperationRegistrationOptions;
+		}
 	}
 
 	/**
