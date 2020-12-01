@@ -1865,11 +1865,11 @@ export interface TextDocumentClientCapabilities {
 	selectionRange?: SelectionRangeClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/onTypeRename` request.
+	 * Capabilities specific to the `textDocument/onLinkedEditing` request.
 	 *
 	 * @since 3.16.0
 	 */
-	onTypeRename?: OnTypeRenameClientCapabilities;
+	linkedEditing?: LinkedEditingClientCapabilities;
 
 	/**
 	 * Capabilities specific to the various call hierarchy requests.
@@ -2230,12 +2230,12 @@ interface ServerCapabilities {
 		| SelectionRangeRegistrationOptions;
 
 	/**
-	 * The server provides on type rename support.
+	 * The server provides linked editing support.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	onTypeRenameProvider?: boolean | OnTypeRenameOptions
-		| OnTypeRenameRegistrationOptions;
+	linkedEditingProvider?: boolean | LinkedEditingOptions
+		| LinkedEditingRegistrationOptions;
 
 	/**
 	 * The server provides call hierarchy support.
@@ -7452,7 +7452,7 @@ _Registration Options_: `LinkedEditingRegistrationOptions` defined as follows:
 
 ```typescript
 export interface LinkedEditingRegistrationOptions extends
-	TextDocumentRegistrationOptions, OnTypeRenameOptions,
+	TextDocumentRegistrationOptions, LinkedEditingOptions,
 	StaticRegistrationOptions {
 }
 ```
@@ -7488,7 +7488,7 @@ export interface LinkedEditingRanges {
 	wordPattern?: string;
 }
 ```
-* error: code and message set in case an exception happens during the 'textDocument/onTypeRename' request
+* error: code and message set in case an exception happens during the 'textDocument/linkedEditing' request
 
 #### <a href="#textDocument_moniker" name="textDocument_moniker" class="anchor">Monikers (:leftwards_arrow_with_hook:)</a>
 
@@ -7674,7 +7674,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 * Add support to preserve additional attributes on `MessageActionItem`.
 * Add support to provide the clients locale in the initialize call.
 * Add support for opening and showing a document in the client user interface.
-* Add support for on type rename.
+* Add support for linked editing.
 * Add support for change annotations in text edits as well as in create file, rename file and delete file operations.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
