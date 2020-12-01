@@ -308,6 +308,10 @@ The protocol currently assumes that one server serves one tool. There is current
 
 URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
 
+```typescript
+type URI = string;
+```
+
 ```
   foo://example.com:8042/over/there?name=ferret#nose
   \_/   \______________/\_________/ \_________/ \__/
@@ -359,7 +363,7 @@ export interface RegularExpressionsClientCapabilities {
 
 The following table lists the well known engine values. Please note that the table should be driven by the community which integrates LSP into existing clients. It is not the goal of the spec to list all available regular expression engines.
 
-Engine | version | Documentation
+Engine | Version | Documentation
 ------- | ------- | -------------
 ECMAScript | `ES2020` | [ECMAScript 2020](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) & [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
 
@@ -648,7 +652,9 @@ interface Command {
 }
 ```
 
-#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit </a>
+#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit  & AnnotatedTextEdit </a>
+
+> New in version 3.16: Support for `AnnotatedTextEdit`.
 
 A textual edit applicable to a text document.
 
@@ -668,13 +674,56 @@ interface TextEdit {
 }
 ```
 
+Since 3.16.0 there is also the concept of a annotated text edit which supports to add an annotation to a text edit. The annotation can add information describing the change to the text edit.
+
+```typescript
+/**
+ * Additional information that describes document changes.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface ChangeAnnotation {
+        /**
+         * A human-readable string describing the actual change. The string
+		 * is rendered prominent in the user interface.
+         */
+        label: string;
+
+        /**
+         * A flag which indicates that user confirmation is needed
+		 * before applying the change.
+         */
+        needsConfirmation?: boolean;
+
+        /**
+         * A human-readable string which is rendered less prominent in
+		 * the user interface.
+         */
+        description?: string;
+}
+
+/**
+ * A special text edit with an additional change annotation.
+ *
+ * @since 3.16.0 - proposed state.
+ */
+export interface AnnotatedTextEdit extends TextEdit {
+	/**
+	 * The actual annotation
+	 */
+	annotation: ChangeAnnotation;
+}
+```
+
 #### <a href="#textEditArray" name="textEditArray" class="anchor"> TextEdit[] </a>
 
-Complex text manipulations are described with an array of `TextEdit`'s, representing a single change to the document.
+Complex text manipulations are described with an array of `TextEdit`'s or `AnnotatedTextEdit`'s, representing a single change to the document.
 
 All text edits ranges refer to positions in the document the are computed on. They therefore move a document from state S1 to S2 without describing any intermediate state. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position: multiple inserts, or any number of inserts followed by a single remove or replace edit. If multiple inserts have the same position, the order in the array defines the order in which the inserted strings appear in the resulting text.
 
 #### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
+
+> New in version 3.16: support for `AnnotatedTextEdit`. The support is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`. If a client doesn't signal the capability servers shouldn't send `AnnotatedTextEdit` literals back to the client.
 
 Describes textual changes on a single text document. The text document is referred to as a `OptionalVersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
 
@@ -687,14 +736,17 @@ export interface TextDocumentEdit {
 
 	/**
 	 * The edits to be applied.
+	 *
+	 * @since 3.16.0 - support for AnnotatedTextEdit. This is guarded by the
+	 * client capability `workspace.workspaceEdit.changeAnnotationSupport`
 	 */
-	edits: TextEdit[];
+	edits: (TextEdit | AnnotatedTextEdit)[];
 }
 ```
 
 ### <a href="#resourceChanges" name="resourceChanges" class="anchor"> File Resource changes </a>
 
-> New in version 3.13:
+> New in version 3.13. Since version 3.16 file resource changes can carry an additional property `changeAnnotation` to describe the actual change in more detail. Whether a client has support for change annotations is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`.
 
 File resource changes allow servers to create, rename and delete files and folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
 
@@ -707,6 +759,7 @@ export interface CreateFileOptions {
 	 * Overwrite existing file. Overwrite wins over `ignoreIfExists`
 	 */
 	overwrite?: boolean;
+
 	/**
 	 * Ignore if exists.
 	 */
@@ -721,14 +774,23 @@ export interface CreateFile {
 	 * A create
 	 */
 	kind: 'create';
+
 	/**
 	 * The resource to create.
 	 */
 	uri: DocumentUri;
+
 	/**
 	 * Additional options
 	 */
 	options?: CreateFileOptions;
+
+	/**
+	 * An optional annotation describing the operation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	annotation?: ChangeAnnotation;
 }
 
 /**
@@ -739,6 +801,7 @@ export interface RenameFileOptions {
 	 * Overwrite target if existing. Overwrite wins over `ignoreIfExists`
 	 */
 	overwrite?: boolean;
+
 	/**
 	 * Ignores if target exists.
 	 */
@@ -753,18 +816,28 @@ export interface RenameFile {
 	 * A rename
 	 */
 	kind: 'rename';
+
 	/**
 	 * The old (existing) location.
 	 */
 	oldUri: DocumentUri;
+
 	/**
 	 * The new location.
 	 */
 	newUri: DocumentUri;
+
 	/**
 	 * Rename options.
 	 */
 	options?: RenameFileOptions;
+
+	/**
+	 * An optional annotation describing the operation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	annotation?: ChangeAnnotation;
 }
 
 /**
@@ -775,6 +848,7 @@ export interface DeleteFileOptions {
 	 * Delete the content recursively if a folder is denoted.
 	 */
 	recursive?: boolean;
+
 	/**
 	 * Ignore the operation if the file doesn't exist.
 	 */
@@ -789,14 +863,23 @@ export interface DeleteFile {
 	 * A delete
 	 */
 	kind: 'delete';
+
 	/**
 	 * The file to delete.
 	 */
 	uri: DocumentUri;
+
 	/**
 	 * Delete options.
 	 */
 	options?: DeleteFileOptions;
+
+	/**
+	 * An optional annotation describing the operation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	annotation?: ChangeAnnotation;
 }
 ```
 
@@ -875,6 +958,14 @@ export interface WorkspaceEditClientCapabilities {
 	 * @since 3.16.0 - proposed state
 	 */
 	normalizesLineEndings?: boolean;
+
+	/**
+	 * Whether the client in general supports change annotations on text edits,
+	 * create file, rename file and delete file changes.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	changeAnnotationSupport?: boolean;
 }
 
 /**
@@ -1173,7 +1264,7 @@ export interface TextDocumentRegistrationOptions {
 
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
- A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content can contain fenced code blocks like in [GitHub issues](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting)
+ A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/).
 
 ```typescript
 /**
@@ -1234,6 +1325,34 @@ export interface MarkupContent {
 	value: string;
 }
 ```
+
+In addition clients should signal the markdown parser they are using via the client capability `general.markdown` introduced in version 3.16.0 defined as follows:
+
+ ```typescript
+/**
+ * Client capabilities specific to the used markdown parser.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface MarkdownClientCapabilities {
+	/**
+	 * The name of the parser.
+	 */
+	parser: string;
+
+	/**
+	 * The version of the parser.
+	 */
+	version?: string;
+}
+ ```
+
+Known markdown parsers used by clients right now are:
+
+Parser | Version | Documentation
+------ | ------- | -------------
+marked | 1.1.0   | [Marked Documentation](https://marked.js.org/)
+
 
 #### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
 
@@ -1396,6 +1515,8 @@ A server uses the `workDoneToken` to report progress for the specific `textDocum
 }
 ```
 
+The token received via the `workDoneToken` property in a request's param literal is only valid as long as the request has not send a response back.
+
 There is no specific client capability signaling whether a client will send a progress token per request. The reason for this is that this is in many clients not a static aspect and might even change for every request instance for the same request type. So the capability is signal on every request instance by the presence of a `workDoneToken` property.
 
 To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress a server needs to signal general work done progress reporting support in the corresponding server capability. For the above find references example a server would signal such a support by setting the `referencesProvider` property in the server capabilities as follows:
@@ -1417,7 +1538,7 @@ export interface WorkDoneProgressOptions {
 ```
 ###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
 
-Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The returned token can then be used to report progress using the same notifications used as for client initiated progress.
+Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The returned token can then be used to report progress using the same notifications used as for client initiated progress. A token obtained using the create request should only be used once (e.g. only one begin, many report and one end notification should be sent to it).
 
 To keep the protocol backwards compatible servers are only allowed to use `window/workDoneProgress/create` request if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
 
@@ -1925,6 +2046,8 @@ interface ClientCapabilities {
 
 	/**
 	 * General client capabilities.
+	 *
+	 * @since 3.16.0 - proposed state
 	 */
 	general?: {
 		/**
@@ -1933,6 +2056,13 @@ interface ClientCapabilities {
 		 * @since 3.16.0 - proposed state
 		 */
 		regularExpressions?: RegularExpressionsClientCapabilities;
+
+		/**
+		 * Client capabilities specific to the client's markdown parser.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
+		markdown?: MarkdownClientCapabilities;
 	}
 
 	/**
@@ -3738,7 +3868,7 @@ interface DidSaveTextDocumentParams {
 	/**
 	 * The document that was saved.
 	 */
-	textDocument: VersionedTextDocumentIdentifier;
+	textDocument: TextDocumentIdentifier;
 
 	/**
 	 * Optional the content when saved. Depends on the includeText value
@@ -4584,8 +4714,9 @@ export interface HoverClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Client supports the follow content formats for the content
-	 * property. The order describes the preferred format of the client.
+	 * Client supports the follow content formats if the content
+	 * property refers to a `literal of type MarkupContent`.
+	 * The order describes the preferred format of the client.
 	 */
 	contentFormat?: MarkupKind[];
 }
@@ -5680,6 +5811,17 @@ export interface CodeActionClientCapabilities {
 		*/
 		properties: string[];
 	};
+
+	/**
+	 * Whether th client honors the change annotations in
+	 * text edits and resource operations returned via the
+	 * `CodeAction#edit` property by for example presenting
+	 * the workspace edit in the user interface and asking
+	 * for confirmation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	honorsChangeAnnotations?: boolean;
 }
 ```
 
@@ -6092,8 +6234,12 @@ _Client Capability_:
 export interface CodeLensWorkspaceClientCapabilities {
 	/**
 	 * Whether the client implementation supports a refresh request sent from the
-	 * server to the client. This is useful if a server detects a change which
-	 * requires a re-calculation of all code lenses.
+	 * server to the client.
+	 *
+	 * Note that this event is global and will force the client to refresh all
+	 * code lenses currently shown. It should be used with absolute care and is
+	 * useful for situation where a server for example detect a project wide
+	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;
 }
@@ -6614,6 +6760,13 @@ _Client Capability_:
 * property type: `RenameClientCapabilities` defined as follows:
 
 ```typescript
+export namespace PrepareSupportDefaultBehavior {
+	/**
+	 * The client's default behavior is to select the identifier
+	 * according the to language's syntax rule.
+	 */
+	 export const Identifier: 1 = 1;
+}
 export interface RenameClientCapabilities {
 	/**
 	 * Whether rename supports dynamic registration.
@@ -6632,9 +6785,23 @@ export interface RenameClientCapabilities {
 	 * Client supports the default behavior result
 	 * (`{ defaultBehavior: boolean }`).
 	 *
+	 * The value indicates the default behavior used by the
+	 * client.
+	 *
 	 * @since version 3.16.0
 	 */
-	prepareSupportDefaultBehavior?: boolean;
+	prepareSupportDefaultBehavior?: PrepareSupportDefaultBehavior;
+
+	/**
+	 * Whether th client honors the change annotations in
+	 * text edits and resource operations returned via the
+	 * rename request's workspace edit by for example presenting
+	 * the workspace edit in the user interface and asking
+	 * for confirmation.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	honorsChangeAnnotations?: boolean;
 }
 ```
 
@@ -6695,7 +6862,7 @@ export interface PrepareRenameParams extends TextDocumentPositionParams {
 ```
 
 _Response_:
-* result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `{ defaultBehavior: boolean }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16) the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
+* result: `Range | { range: Range, placeholder: string } | { defaultBehavior: boolean } | null` describing a [`Range`](#range) of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16) the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
 * error: code and message set in case the element can't be renamed. Clients should show the information in their user interface.
 
 #### <a href="#textDocument_foldingRange" name="textDocument_foldingRange" class="anchor">Folding Range Request (:leftwards_arrow_with_hook:)</a>
@@ -7137,7 +7304,7 @@ export enum SemanticTokenTypes {
 	enumMember = 'enumMember',
 	event = 'event',
 	function = 'function',
-	member = 'member',
+	method = 'method',
 	macro = 'macro',
 	keyword = 'keyword',
 	modifier = 'modifier',
@@ -7533,9 +7700,12 @@ _Client Capability_:
 export interface SemanticTokensWorkspaceClientCapabilities {
 	/**
 	 * Whether the client implementation supports a refresh request sent from
-	 * the server to the client. This is useful if a server detects a project
-	 * wide configuration change which requires a re-calculation of all semantic
-	 * tokens provided by the server issuing the request.
+	 * the server to the client.
+	 *
+	 * Note that this event is global and will force the client to refresh all
+	 * semantic tokens currently shown. It should be used with absolute care
+	 * and is useful for situation where a server for example detect a project
+	 * wide change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;
 }
@@ -7566,8 +7736,9 @@ _Client Capabilities_:
 ```typescript
 export interface OnTypeRenameClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to `true`
-	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * Whether implementation supports dynamic registration.
+	 * If this is set to `true` the client supports the new
+	 * `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
@@ -7814,6 +7985,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 * Add support to provide the clients locale in the initialize call.
 * Add support for opening and showing a document in the client user interface.
 * Add support for on type rename.
+* Add support for change annotations in text edits as well as in create file, rename file and delete file operations.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
