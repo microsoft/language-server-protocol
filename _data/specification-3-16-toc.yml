@@ -223,8 +223,8 @@
       anchor: callHierarchy_outgoingCalls
     - title: semantic tokens
       anchor: textDocument_semanticTokens
-    - title: linkedEditing
-      anchor: textDocument_linkedEditing
+    - title: linkedEditingRange
+      anchor: textDocument_linkedEditingRange
     - title: moniker
       anchor: textDocument_moniker
   - title: Change Log
