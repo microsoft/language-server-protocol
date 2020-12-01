@@ -7415,20 +7415,19 @@ _Response_:
 * result: void
 * error: code and message set in case an exception happens during the 'workspace/semanticTokens/refresh' request
 
-#### <a href="#textDocument_onTypeRename" name="textDocument_onTypeRename" class="anchor">On Type Rename (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_linkedEditing" name="textDocument_linkedEditing" class="anchor">Linked Editing (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.16.0*
 
-The on type rename request is sent from the client to the server to return for a given position in a document the range of the symbol at the position and all ranges that have the same content and can be renamed together. Optionally a word pattern can be returned to describe valid contents. A rename to one of the ranges can be applied to all other ranges if the new content
-is valid. If no result-specific word pattern is provided, the word pattern from the client's language configuration is used.
+The linked editing request is sent from the client to the server to return for a given position in a document the range of the symbol at the position and all ranges that have the same content. Optionally a word pattern can be returned to describe valid contents. A rename to one of the ranges can be applied to all other ranges if the new content is valid. If no result-specific word pattern is provided, the word pattern from the client's language configuration is used.
 
 _Client Capabilities_:
 
-* property name (optional): `textDocument.onTypeRename`
-* property type: `OnTypeRenameClientCapabilities` defined as follows:
+* property name (optional): `textDocument.linkedEditing`
+* property type: `LinkedEditingClientCapabilities` defined as follows:
 
 ```typescript
-export interface OnTypeRenameClientCapabilities {
+export interface LinkedEditingClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration.
 	 * If this is set to `true` the client supports the new
@@ -7441,18 +7440,18 @@ export interface OnTypeRenameClientCapabilities {
 
 _Server Capability_:
 
-* property name (optional): `onTypeRenameProvider`
-* property type: `boolean` \| `OnTypeRenameOptions` \| `OnTypeRenameRegistrationOptions` defined as follows:
+* property name (optional): `linkedEditingProvider`
+* property type: `boolean` \| `LinkedEditingOptions` \| `LinkedEditingRegistrationOptions` defined as follows:
 
 ```typescript
-export interface OnTypeRenameOptions extends WorkDoneProgressOptions {
+export interface LinkedEditingOptions extends WorkDoneProgressOptions {
 }
 ```
 
-_Registration Options_: `OnTypeRenameRegistrationOptions` defined as follows:
+_Registration Options_: `LinkedEditingRegistrationOptions` defined as follows:
 
 ```typescript
-export interface OnTypeRenameRegistrationOptions extends
+export interface LinkedEditingRegistrationOptions extends
 	TextDocumentRegistrationOptions, OnTypeRenameOptions,
 	StaticRegistrationOptions {
 }
@@ -7460,21 +7459,21 @@ export interface OnTypeRenameRegistrationOptions extends
 
 _Request_:
 
-* method: `textDocument/onTypeRename`
-* params: `OnTypeRenameParams` defined as follows:
+* method: `textDocument/linkedEditing`
+* params: `LinkedEditingParams` defined as follows:
 
 ```typescript
-export interface OnTypeRenameParams extends TextDocumentPositionParams,
+export interface LinkedEditingParams extends TextDocumentPositionParams,
 	WorkDoneProgressParams {
 }
 ```
 
 _Response_:
 
-* result: `OnTypeRenameRanges` \| `null` defined as follows:
+* result: `LinkedEditingRanges` \| `null` defined as follows:
 
 ```typescript
-export interface OnTypeRenameRanges {
+export interface LinkedEditingRanges {
 	/**
 	 * A list of ranges that can be renamed together. The ranges must have
 	 * identical length and contain identical text content. The ranges cannot overlap.
