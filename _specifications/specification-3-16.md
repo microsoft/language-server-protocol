@@ -3222,7 +3222,7 @@ _Client Capability_:
 * property name (optional): `window.fileOperations.willCreate`
 * property type: `boolean`
 
-The capability indicates that the client supports `window/willCreateFiles` requests.
+The capability indicates that the client supports sending `window/willCreateFiles` requests.
 
 _Server Capability_:
 * property name (optional): `window.fileOperations.willCreate`
@@ -3244,7 +3244,7 @@ interface FileOperationRegistrationOptions {
 }
 ```
 
-The capability indicates that the server is interested in `window/willCreateFiles` requests.
+The capability indicates that the server is interested in receiving `window/willCreateFiles` requests.
 
 _Registration Options_: none
 
@@ -3285,13 +3285,13 @@ _Client Capability_:
 * property name (optional): `window.fileOperations.didCreate`
 * property type: `boolean`
 
-The capability indicates that the client supports `window/didCreateFiles` notifications.
+The capability indicates that the client supports sending `window/didCreateFiles` notifications.
 
 _Server Capability_:
 * property name (optional): `window.fileOperations.didCreate`
 * property type: `FileOperationRegistrationOptions`
 
-The capability indicates that the server is interested in CreateFiles` notifications.
+The capability indicates that the server is interested in receiving `window/didCreateFiles` notifications.
 
 _Notification_:
 * method: 'window/didCreateFiles'
@@ -3305,13 +3305,13 @@ _Client Capability_:
 * property name (optional): `window.fileOperations.willRename`
 * property type: `boolean`
 
-The capability indicates that the client supports `window/willRenameFiles` requests.
+The capability indicates that the client supports sending `window/willRenameFiles` requests.
 
 _Server Capability_:
 * property name (optional): `window.fileOperations.willRename`
 * property type: `FileOperationRegistrationOptions`
 
-The capability indicates that the server is interested in `window/willRenameFiles` requests.
+The capability indicates that the server is interested in receiving `window/willRenameFiles` requests.
 
 _Registration Options_: none
 
@@ -3357,13 +3357,13 @@ _Client Capability_:
 * property name (optional): `window.fileOperations.didRename`
 * property type: `boolean`
 
-The capability indicates that the client supports `window/didRenameFiles` notifications.
+The capability indicates that the client supports sending `window/didRenameFiles` notifications.
 
 _Server Capability_:
 * property name (optional): `window.fileOperations.didRename`
 * property type: `FileOperationRegistrationOptions`
 
-The capability indicates that the server is interested in `window/didRenameFiles` notifications.
+The capability indicates that the server is interested in receiving `window/didRenameFiles` notifications.
 
 _Notification_:
 * method: 'window/didRenameFiles'
@@ -3377,13 +3377,13 @@ _Client Capability_:
 * property name (optional): `window.fileOperations.willDelete`
 * property type: `boolean`
 
-The capability indicates that the client supports `window/willDeleteFiles` requests.
+The capability indicates that the client supports sending `window/willDeleteFiles` requests.
 
 _Server Capability_:
 * property name (optional): `window.fileOperations.willDelete`
 * property type: `FileOperationRegistrationOptions`
 
-The capability indicates that the server is interested in `window/willDeleteFiles` requests.
+The capability indicates that the server is interested in receiving `window/willDeleteFiles` requests.
 
 _Registration Options_: none
 
@@ -3424,13 +3424,13 @@ _Client Capability_:
 * property name (optional): `window.fileOperations.didDelete`
 * property type: `boolean`
 
-The capability indicates that the client supports `window/didDeleteFiles` notifications.
+The capability indicates that the client supports sending `window/didDeleteFiles` notifications.
 
 _Server Capability_:
 * property name (optional): `window.fileOperations.didDelete`
 * property type: `FileOperationRegistrationOptions`
 
-The capability indicates that the server is interested in `window/didDeleteFiles` notifications.
+The capability indicates that the server is interested in receiving `window/didDeleteFiles` notifications.
 
 _Notification_:
 * method: 'window/didDeleteFiles'
