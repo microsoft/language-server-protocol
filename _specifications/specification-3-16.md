@@ -1865,11 +1865,11 @@ export interface TextDocumentClientCapabilities {
 	selectionRange?: SelectionRangeClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/onLinkedEditing` request.
+	 * Capabilities specific to the `textDocument/linkedEditingRange` request.
 	 *
 	 * @since 3.16.0
 	 */
-	linkedEditing?: LinkedEditingClientCapabilities;
+	linkedEditingRange?: LinkedEditingRangeClientCapabilities;
 
 	/**
 	 * Capabilities specific to the various call hierarchy requests.
@@ -2230,12 +2230,12 @@ interface ServerCapabilities {
 		| SelectionRangeRegistrationOptions;
 
 	/**
-	 * The server provides linked editing support.
+	 * The server provides linked editing range support.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	linkedEditingProvider?: boolean | LinkedEditingOptions
-		| LinkedEditingRegistrationOptions;
+	linkedEditingRangeProvider?: boolean | LinkedEditingRangeOptions
+		| LinkedEditingRangeRegistrationOptions;
 
 	/**
 	 * The server provides call hierarchy support.
@@ -7415,7 +7415,7 @@ _Response_:
 * result: void
 * error: code and message set in case an exception happens during the 'workspace/semanticTokens/refresh' request
 
-#### <a href="#textDocument_linkedEditing" name="textDocument_linkedEditing" class="anchor">Linked Editing (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_linkedEditingRange" name="textDocument_linkedEditingRange" class="anchor">Linked Editing Range(:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.16.0*
 
@@ -7423,11 +7423,11 @@ The linked editing request is sent from the client to the server to return for a
 
 _Client Capabilities_:
 
-* property name (optional): `textDocument.linkedEditing`
-* property type: `LinkedEditingClientCapabilities` defined as follows:
+* property name (optional): `textDocument.linkedEditingRange`
+* property type: `LinkedEditingRangeClientCapabilities` defined as follows:
 
 ```typescript
-export interface LinkedEditingClientCapabilities {
+export interface LinkedEditingRangeClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration.
 	 * If this is set to `true` the client supports the new
@@ -7440,30 +7440,30 @@ export interface LinkedEditingClientCapabilities {
 
 _Server Capability_:
 
-* property name (optional): `linkedEditingProvider`
-* property type: `boolean` \| `LinkedEditingOptions` \| `LinkedEditingRegistrationOptions` defined as follows:
+* property name (optional): `linkedEditingRangeProvider`
+* property type: `boolean` \| `LinkedEditingRangeOptions` \| `LinkedEditingRangeRegistrationOptions` defined as follows:
 
 ```typescript
-export interface LinkedEditingOptions extends WorkDoneProgressOptions {
+export interface LinkedEditingRangeOptions extends WorkDoneProgressOptions {
 }
 ```
 
-_Registration Options_: `LinkedEditingRegistrationOptions` defined as follows:
+_Registration Options_: `LinkedEditingRangeRegistrationOptions` defined as follows:
 
 ```typescript
-export interface LinkedEditingRegistrationOptions extends
-	TextDocumentRegistrationOptions, LinkedEditingOptions,
+export interface LinkedEditingRangeRegistrationOptions extends
+	TextDocumentRegistrationOptions, LinkedEditingRangeOptions,
 	StaticRegistrationOptions {
 }
 ```
 
 _Request_:
 
-* method: `textDocument/linkedEditing`
-* params: `LinkedEditingParams` defined as follows:
+* method: `textDocument/linkedEditingRange`
+* params: `LinkedEditingRangeParams` defined as follows:
 
 ```typescript
-export interface LinkedEditingParams extends TextDocumentPositionParams,
+export interface LinkedEditingRangeParams extends TextDocumentPositionParams,
 	WorkDoneProgressParams {
 }
 ```
@@ -7488,7 +7488,7 @@ export interface LinkedEditingRanges {
 	wordPattern?: string;
 }
 ```
-* error: code and message set in case an exception happens during the 'textDocument/linkedEditing' request
+* error: code and message set in case an exception happens during the 'textDocument/linkedEditingRange' request
 
 #### <a href="#textDocument_moniker" name="textDocument_moniker" class="anchor">Monikers (:leftwards_arrow_with_hook:)</a>
 
