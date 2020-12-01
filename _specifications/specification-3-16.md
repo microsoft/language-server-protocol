@@ -1985,7 +1985,7 @@ interface ClientCapabilities {
 			didCreate?: boolean;
 
 			/**
-			 * The client has support for willCreateFiles requests.
+			 * The client has support for sending willCreateFiles requests.
 			 */
 			willCreate?: boolean;
 
@@ -1995,7 +1995,7 @@ interface ClientCapabilities {
 			didRename?: boolean;
 
 			/**
-			 * The client has support for willRenameFiles requests.
+			 * The client has support for sending willRenameFiles requests.
 			 */
 			willRename?: boolean;
 
@@ -2005,7 +2005,7 @@ interface ClientCapabilities {
 			didDelete?: boolean;
 
 			/**
-			 * The client has support for willDeleteFiles requests.
+			 * The client has support for sending willDeleteFiles requests.
 			 */
 			willDelete?: boolean;
 		}
@@ -2325,32 +2325,32 @@ interface ServerCapabilities {
 		*/
 		fileOperations?: {
 			/**
-			* The server is interested in didCreateFiles notifications.
+			* The server is interested in receiving didCreateFiles notifications.
 			*/
 			didCreate?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in willCreateFiles requests.
+			* The server is interested in receiving willCreateFiles requests.
 			*/
 			willCreate?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in didRenameFiles notifications.
+			* The server is interested in receiving didRenameFiles notifications.
 			*/
 			didRename?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in willRenameFiles requests.
+			* The server is interested in receiving willRenameFiles requests.
 			*/
 			willRename?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in didDeleteFiles file notifications.
+			* The server is interested in receiving didDeleteFiles file notifications.
 			*/
 			didDelete?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in willDeleteFiles file requests.
+			* The server is interested in receiving willDeleteFiles file requests.
 			*/
 			willDelete?: FileOperationRegistrationOptions;
 		}
