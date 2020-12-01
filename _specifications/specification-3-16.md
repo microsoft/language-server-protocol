@@ -308,6 +308,10 @@ The protocol currently assumes that one server serves one tool. There is current
 
 URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
 
+```typescript
+type URI = string;
+```
+
 ```
   foo://example.com:8042/over/there?name=ferret#nose
   \_/   \______________/\_________/ \_________/ \__/
@@ -6552,7 +6556,7 @@ export interface PrepareRenameParams extends TextDocumentPositionParams {
 ```
 
 _Response_:
-* result: [`Range`](#range) \| `{ range: Range, placeholder: string }` \| `{ defaultBehavior: boolean }` \| `null` describing the range of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16) the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
+* result: `Range | { range: Range, placeholder: string } | { defaultBehavior: boolean } | null` describing a [`Range`](#range) of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16) the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
 * error: code and message set in case the element can't be renamed. Clients should show the information in their user interface.
 
 #### <a href="#textDocument_foldingRange" name="textDocument_foldingRange" class="anchor">Folding Range Request (:leftwards_arrow_with_hook:)</a>
