@@ -3222,7 +3222,7 @@ _Client Capability_:
 * property name (optional): `window.fileOperations.willCreate`
 * property type: `boolean`
 
-The capability indicates that the client supports `workspace/willCreateFiles` requests.
+The capability indicates that the client supports `window/willCreateFiles` requests.
 
 _Server Capability_:
 * property name (optional): `window.fileOperations.willCreate`
