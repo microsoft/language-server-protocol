@@ -683,23 +683,23 @@ Since 3.16.0 there is also the concept of a annotated text edit which supports t
  * @since 3.16.0 - proposed state
  */
 export interface ChangeAnnotation {
-        /**
-         * A human-readable string describing the actual change. The string
-		 * is rendered prominent in the user interface.
-         */
-        label: string;
+	/**
+	 * A human-readable string describing the actual change. The string
+	 * is rendered prominent in the user interface.
+	 */
+	label: string;
 
-        /**
-         * A flag which indicates that user confirmation is needed
-		 * before applying the change.
-         */
-        needsConfirmation?: boolean;
+	/**
+	 * A flag which indicates that user confirmation is needed
+	 * before applying the change.
+	 */
+	needsConfirmation?: boolean;
 
-        /**
-         * A human-readable string which is rendered less prominent in
-		 * the user interface.
-         */
-        description?: string;
+	/**
+	 * A human-readable string which is rendered less prominent in
+	 * the user interface.
+	 */
+	description?: string;
 }
 
 /**
@@ -723,7 +723,7 @@ All text edits ranges refer to positions in the document the are computed on. Th
 
 #### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
 
-> New in version 3.16: support for `AnnotatedTextEdit`. The support is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`. If a client doesn't signal the capability servers shouldn't send `AnnotatedTextEdit` literals back to the client.
+> New in version 3.16: support for `AnnotatedTextEdit`. The support is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`. If a client doesn't signal the capability, servers shouldn't send `AnnotatedTextEdit` literals back to the client.
 
 Describes textual changes on a single text document. The text document is referred to as a `OptionalVersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
 
