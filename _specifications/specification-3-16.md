@@ -3375,8 +3375,22 @@ interface FileOperationPattern {
 	 *
 	 * Matches both if undefined.
 	 */
-	matches?: 'file' | 'folder';
+	matches?: FileOperationPatternKind;
 }
+
+export namespace FileOperationPatternKind {
+	/**
+	 * The pattern matches a file only.
+	 */
+	export const file: 'file' = 'file';
+
+	/**
+	 * The pattern matches a folder only.
+	 */
+	export const folder: 'folder' = 'folder';
+}
+
+export type FileOperationPatternKind = 'file' | 'folder';
 ```
 
 The capability indicates that the server is interested in receiving `workspace/willCreateFiles` requests.
