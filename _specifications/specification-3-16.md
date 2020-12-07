@@ -674,7 +674,7 @@ interface TextEdit {
 }
 ```
 
-Since 3.16.0 there is also the concept of a annotated text edit which supports to add an annotation to a text edit. The annotation can add information describing the change to the text edit.
+Since 3.16.0 there is also the concept of an annotated text edit which supports to add an annotation to a text edit. The annotation can add information describing the change to the text edit.
 
 ```typescript
 /**
@@ -701,6 +701,20 @@ export interface ChangeAnnotation {
 	 */
 	description?: string;
 }
+```
+
+Usually clients provide options to group the changes along the annotations they are associated with. To support this in the protocol an edit or resource operation refers to a change annotation using an identifier and not the change annotation literal directly. This allows servers to use the identical annotation across multiple edits or resource operations which then allows clients to group the operations under that change annotation. The actual change annotations together with their identifers are managed by the workspace edit via the new property `changeAnnotations`.
+
+```typescript
+
+/**
+ * An identifier referring to a change annotation managed by a workspace
+ * edit.
+ *
+ * @since 3.16.0 - proposed state.
+ */
+export type ChangeAnnotationIdentifier = string;
+
 
 /**
  * A special text edit with an additional change annotation.
@@ -709,9 +723,9 @@ export interface ChangeAnnotation {
  */
 export interface AnnotatedTextEdit extends TextEdit {
 	/**
-	 * The actual annotation
+	 * The actual annotation identifier.
 	 */
-	annotation: ChangeAnnotation;
+	annotationId: ChangeAnnotationIdentifier;
 }
 ```
 
@@ -786,11 +800,11 @@ export interface CreateFile {
 	options?: CreateFileOptions;
 
 	/**
-	 * An optional annotation describing the operation.
+	 * An optional annotation identifer describing the operation.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	annotation?: ChangeAnnotation;
+	annotationId?: ChangeAnnotationIdentifier;
 }
 
 /**
@@ -833,11 +847,11 @@ export interface RenameFile {
 	options?: RenameFileOptions;
 
 	/**
-	 * An optional annotation describing the operation.
+	 * An optional annotation identifer describing the operation.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	annotation?: ChangeAnnotation;
+	annotationId?: ChangeAnnotationIdentifier;
 }
 
 /**
@@ -875,11 +889,11 @@ export interface DeleteFile {
 	options?: DeleteFileOptions;
 
 	/**
-	 * An optional annotation describing the operation.
+	 * An optional annotation identifer describing the operation.
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	annotation?: ChangeAnnotation;
+	annotationId?: ChangeAnnotationIdentifier;
 }
 ```
 
@@ -913,6 +927,20 @@ export interface WorkspaceEdit {
 		TextDocumentEdit[] |
 		(TextDocumentEdit | CreateFile | RenameFile | DeleteFile)[]
 	);
+
+	/**
+	 * A map of change annotations that can be referenced in
+	 * `AnnotatedTextEdit`s or create, rename and delete file / folder
+	 * operations.
+	 *
+	 * Whether clients honor this property depends on the client capability
+	 * `workspace.changeAnnotationSupport`.
+	 *
+	 * @since 3.16.0 - proposed state
+	 */
+	changeAnnotations?: {
+		[id: string /* ChangeAnnotationIdentifier */]: ChangeAnnotation;
+	}
 }
 ```
 
