@@ -1995,6 +1995,48 @@ interface ClientCapabilities {
 		 * @since 3.16.0 - proposed state
 		 */
 		codeLens?: CodeLensWorkspaceClientCapabilities;
+
+		/**
+		* The client has support for file requests/notifications.
+		*
+		* Since 3.16.0
+		*/
+		fileOperations?: {
+			/**
+			 * Whether the client supports dynamic registration for file requests/notifications.
+			 */
+			dynamicRegistration?: boolean;
+
+			/**
+			 * The client has support for sending didCreateFiles notifications.
+			 */
+			didCreate?: boolean;
+
+			/**
+			 * The client has support for sending willCreateFiles requests.
+			 */
+			willCreate?: boolean;
+
+			/**
+			 * The client has support for sending didRenameFiles notifications.
+			 */
+			didRename?: boolean;
+
+			/**
+			 * The client has support for sending willRenameFiles requests.
+			 */
+			willRename?: boolean;
+
+			/**
+			 * The client has support for sending didDeleteFiles notifications.
+			 */
+			didDelete?: boolean;
+
+			/**
+			 * The client has support for sending willDeleteFiles requests.
+			 */
+			willDelete?: boolean;
+		}
 	};
 
 	/**
@@ -2303,6 +2345,43 @@ interface ServerCapabilities {
 		 * @since 3.6.0
 		 */
 		workspaceFolders?: WorkspaceFoldersServerCapabilities;
+
+		/**
+		* The server is interested in file notifications/requests.
+		*
+		* @since 3.16.0
+		*/
+		fileOperations?: {
+			/**
+			* The server is interested in receiving didCreateFiles notifications.
+			*/
+			didCreate?: FileOperationRegistrationOptions;
+
+			/**
+			* The server is interested in receiving willCreateFiles requests.
+			*/
+			willCreate?: FileOperationRegistrationOptions;
+
+			/**
+			* The server is interested in receiving didRenameFiles notifications.
+			*/
+			didRename?: FileOperationRegistrationOptions;
+
+			/**
+			* The server is interested in receiving willRenameFiles requests.
+			*/
+			willRename?: FileOperationRegistrationOptions;
+
+			/**
+			* The server is interested in receiving didDeleteFiles file notifications.
+			*/
+			didDelete?: FileOperationRegistrationOptions;
+
+			/**
+			* The server is interested in receiving willDeleteFiles file requests.
+			*/
+			willDelete?: FileOperationRegistrationOptions;
+		}
 	}
 
 	/**
@@ -3287,6 +3366,252 @@ export interface ApplyWorkspaceEditResponse {
 }
 ```
 * error: code and message set in case an exception happens during the request.
+
+#### <a href="#workspace_willCreateFiles" name="workspace_willCreateFiles" class="anchor">WillCreateFiles Request (:leftwards_arrow_with_hook:)</a>
+
+The will create files request is sent from the client to the server before files are actually created. The request can return a WorkspaceEdit which will be applied to workspace before the files are created. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep creates fast and reliable.
+
+_Client Capability_:
+* property name (optional): `workspace.fileOperations.willCreate`
+* property type: `boolean`
+
+The capability indicates that the client supports sending `workspace/willCreateFiles` requests.
+
+_Server Capability_:
+* property name (optional): `workspace.fileOperations.willCreate`
+* property type: `FileOperationRegistrationOptions` where `FileOperationRegistrationOptions` is defined as follows:
+
+```typescript
+interface FileOperationRegistrationOptions {
+	patterns: FileOperationPattern[];
+}
+
+interface FileOperationPattern {
+	/**
+	 * The glob pattern to match. Glob patterns can have the following syntax:
+	 * - `*` to match one or more characters in a path segment
+	 * - `?` to match on one character in a path segment
+	 * - `**` to match any number of path segments, including none
+	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)
+	 * - `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
+	 * - `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
+	 */
+	glob: string;
+
+	/**
+	 * Whether to match files or folders with this pattern.
+	 *
+	 * Matches both if undefined.
+	 */
+	matches?: FileOperationPatternKind;
+}
+
+export namespace FileOperationPatternKind {
+	/**
+	 * The pattern matches a file only.
+	 */
+	export const file: 'file' = 'file';
+
+	/**
+	 * The pattern matches a folder only.
+	 */
+	export const folder: 'folder' = 'folder';
+}
+
+export type FileOperationPatternKind = 'file' | 'folder';
+```
+
+The capability indicates that the server is interested in receiving `workspace/willCreateFiles` requests.
+
+_Registration Options_: none
+
+_Request_:
+* method: 'workspace/willCreateFiles'
+* params: `CreateFilesParams` defined as follows:
+
+```typescript
+/**
+ * The parameters sent in notifications/requests for user-initiated creation of files.
+ */
+export interface CreateFilesParams {
+	/**
+	 * An array of all files/folders created in this operation.
+	 */
+	files: FileCreate[];
+}
+/**
+ * Represents information on a file/folder create.
+ */
+export interface FileCreate {
+	/**
+	 * A file:// URI for the location of the file/folder being created.
+	 */
+	uri: string;
+}
+```
+
+_Response_:
+* result:`WorkspaceEdit` \| `null`
+* error: code and message set in case an exception happens during the `willCreateFiles` request.
+
+#### <a href="#workspace_didCreateFiles" name="workspace_didCreateFiles" class="anchor">DidCreateFiles Notification (:arrow_right:)</a>
+
+The did create files notification is sent from the client to the server when files were created in the client.
+
+_Client Capability_:
+* property name (optional): `workspace.fileOperations.didCreate`
+* property type: `boolean`
+
+The capability indicates that the client supports sending `workspace/didCreateFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.fileOperations.didCreate`
+* property type: `FileOperationRegistrationOptions`
+
+The capability indicates that the server is interested in receiving `workspace/didCreateFiles` notifications.
+
+_Notification_:
+* method: 'workspace/didCreateFiles'
+* params: `CreateFilesParams`
+
+#### <a href="#workspace_willRenameFiles" name="workspace_willRenameFiles" class="anchor">WillRenameFiles Request (:leftwards_arrow_with_hook:)</a>
+
+The will rename files request is sent from the client to the server before files are actually renamed. The request can return a WorkspaceEdit which will be applied to workspace before the files are renamed. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep renames fast and reliable.
+
+_Client Capability_:
+* property name (optional): `workspace.fileOperations.willRename`
+* property type: `boolean`
+
+The capability indicates that the client supports sending `workspace/willRenameFiles` requests.
+
+_Server Capability_:
+* property name (optional): `workspace.fileOperations.willRename`
+* property type: `FileOperationRegistrationOptions`
+
+The capability indicates that the server is interested in receiving `workspace/willRenameFiles` requests.
+
+_Registration Options_: none
+
+_Request_:
+* method: 'workspace/willRenameFiles'
+* params: `RenameFilesParams` defined as follows:
+
+```typescript
+/**
+ * The parameters sent in notifications/requests for user-initiated renames of files.
+ */
+export interface RenameFilesParams {
+	/**
+	 * An array of all files/folders renamed in this operation. When a folder is renamed, only
+	 * the folder will be included, and not its children.
+	 */
+	files: FileRename[];
+}
+/**
+ * Represents information on a file/folder rename.
+ */
+export interface FileRename {
+	/**
+	 * A file:// URI for the original location of the file/folder being renamed.
+	 */
+	oldUri: string;
+	/**
+	 * A file:// URI for the new location of the file/folder being renamed.
+	 */
+	newUri: string;
+}
+```
+
+_Response_:
+* result:`WorkspaceEdit` \| `null`
+* error: code and message set in case an exception happens during the `willRenameFiles` request.
+
+#### <a href="#workspace_didRenameFiles" name="workspace_didRenameFiles" class="anchor">DidRenameFiles Notification (:arrow_right:)</a>
+
+The did rename files notification is sent from the client to the server when files were renamed in the client.
+
+_Client Capability_:
+* property name (optional): `workspace.fileOperations.didRename`
+* property type: `boolean`
+
+The capability indicates that the client supports sending `workspace/didRenameFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.fileOperations.didRename`
+* property type: `FileOperationRegistrationOptions`
+
+The capability indicates that the server is interested in receiving `workspace/didRenameFiles` notifications.
+
+_Notification_:
+* method: 'workspace/didRenameFiles'
+* params: `RenameFilesParams`
+
+#### <a href="#workspace_willDeleteFiles" name="workspace_willDeleteFiles" class="anchor">WillDeleteFiles Request (:leftwards_arrow_with_hook:)</a>
+
+The will delete files request is sent from the client to the server before files are actually deleted. The request can return a WorkspaceEdit which will be applied to workspace before the files are deleted. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep deletes fast and reliable.
+
+_Client Capability_:
+* property name (optional): `workspace.fileOperations.willDelete`
+* property type: `boolean`
+
+The capability indicates that the client supports sending `workspace/willDeleteFiles` requests.
+
+_Server Capability_:
+* property name (optional): `workspace.fileOperations.willDelete`
+* property type: `FileOperationRegistrationOptions`
+
+The capability indicates that the server is interested in receiving `workspace/willDeleteFiles` requests.
+
+_Registration Options_: none
+
+_Request_:
+* method: 'workspace/willDeleteFiles'
+* params: `DeleteFilesParams` defined as follows:
+
+```typescript
+/**
+ * The parameters sent in notifications/requests for user-initiated deletes of files.
+ */
+export interface DeleteFilesParams {
+	/**
+	 * An array of all files/folders deleted in this operation.
+	 */
+	files: FileDelete[];
+}
+/**
+ * Represents information on a file/folder delete.
+ */
+export interface FileDelete {
+	/**
+	 * A file:// URI for the location of the file/folder being deleted.
+	 */
+	uri: string;
+}
+```
+
+_Response_:
+* result:`WorkspaceEdit` \| `null`
+* error: code and message set in case an exception happens during the `willDeleteFiles` request.
+
+#### <a href="#workspace_didDeleteFiles" name="workspace_didDeleteFiles" class="anchor">DidDeleteFiles Notification (:arrow_right:)</a>
+
+The did delete files notification is sent from the client to the server when files were deleted in the client.
+
+_Client Capability_:
+* property name (optional): `workspace.fileOperations.didDelete`
+* property type: `boolean`
+
+The capability indicates that the client supports sending `workspace/didDeleteFiles` notifications.
+
+_Server Capability_:
+* property name (optional): `workspace.fileOperations.didDelete`
+* property type: `FileOperationRegistrationOptions`
+
+The capability indicates that the server is interested in receiving `workspace/didDeleteFiles` notifications.
+
+_Notification_:
+* method: 'workspace/didDeleteFiles'
+* params: `DeleteFilesParams`
 
 #### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
@@ -7698,6 +8023,9 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 * Add support for code action resolve request.
 * Add support for diagnostic `data` property.
 * Add support for signature information `activeParameter` property.
+* Add support for `workspace/didCreateFiles` notifications and `workspace/willCreateFiles` requests.
+* Add support for `workspace/didRenameFiles` notifications and `workspace/willRenameFiles` requests.
+* Add support for `workspace/didDeleteFiles` notifications and `workspace/willDeleteFiles` requests.
 * Add client capability to signal whether the client normalizes line endings.
 * Add support to preserve additional attributes on `MessageActionItem`.
 * Add support to provide the clients locale in the initialize call.
