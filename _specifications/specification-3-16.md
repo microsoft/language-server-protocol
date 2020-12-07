@@ -1997,13 +1997,14 @@ interface ClientCapabilities {
 		codeLens?: CodeLensWorkspaceClientCapabilities;
 
 		/**
-		* The client has support for file requests/notifications.
-		*
-		* Since 3.16.0
-		*/
+		 * The client has support for file requests/notifications.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
 		fileOperations?: {
 			/**
-			 * Whether the client supports dynamic registration for file requests/notifications.
+			 * Whether the client supports dynamic registration for file
+			 * requests/notifications.
 			 */
 			dynamicRegistration?: boolean;
 
@@ -2347,39 +2348,43 @@ interface ServerCapabilities {
 		workspaceFolders?: WorkspaceFoldersServerCapabilities;
 
 		/**
-		* The server is interested in file notifications/requests.
-		*
-		* @since 3.16.0
-		*/
+		 * The server is interested in file notifications/requests.
+		 *
+		 * @since 3.16.0 - proposed state
+		 */
 		fileOperations?: {
 			/**
-			* The server is interested in receiving didCreateFiles notifications.
-			*/
+			 * The server is interested in receiving didCreateFiles
+			 * notifications.
+			 */
 			didCreate?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in receiving willCreateFiles requests.
-			*/
+			 * The server is interested in receiving willCreateFiles requests.
+			 */
 			willCreate?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in receiving didRenameFiles notifications.
-			*/
+			 * The server is interested in receiving didRenameFiles
+			 * notifications.
+			 */
 			didRename?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in receiving willRenameFiles requests.
-			*/
+			 * The server is interested in receiving willRenameFiles requests.
+			 */
 			willRename?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in receiving didDeleteFiles file notifications.
-			*/
+			 * The server is interested in receiving didDeleteFiles file
+			 * notifications.
+			 */
 			didDelete?: FileOperationRegistrationOptions;
 
 			/**
-			* The server is interested in receiving willDeleteFiles file requests.
-			*/
+			 * The server is interested in receiving willDeleteFiles file
+			 * requests.
+			 */
 			willDelete?: FileOperationRegistrationOptions;
 		}
 	}
@@ -3369,7 +3374,7 @@ export interface ApplyWorkspaceEditResponse {
 
 #### <a href="#workspace_willCreateFiles" name="workspace_willCreateFiles" class="anchor">WillCreateFiles Request (:leftwards_arrow_with_hook:)</a>
 
-The will create files request is sent from the client to the server before files are actually created. The request can return a WorkspaceEdit which will be applied to workspace before the files are created. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep creates fast and reliable.
+The will create files request is sent from the client to the server before files are actually created as long as the creation is trigger from within the client. The request can return a WorkspaceEdit which will be applied to workspace before the files are created. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep creates fast and reliable.
 
 _Client Capability_:
 * property name (optional): `workspace.fileOperations.willCreate`
@@ -3382,19 +3387,34 @@ _Server Capability_:
 * property type: `FileOperationRegistrationOptions` where `FileOperationRegistrationOptions` is defined as follows:
 
 ```typescript
+/**
+ * The options to register for file operations.
+ *
+ * @since 3.16.0 - proposed state
+ */
 interface FileOperationRegistrationOptions {
 	patterns: FileOperationPattern[];
 }
 
+/**
+ * A pattern to describe in which file operation requests or notifications
+ * the server is interested in.
+ *
+ * @since 3.16.0 - proposed state
+ */
 interface FileOperationPattern {
 	/**
 	 * The glob pattern to match. Glob patterns can have the following syntax:
 	 * - `*` to match one or more characters in a path segment
 	 * - `?` to match on one character in a path segment
 	 * - `**` to match any number of path segments, including none
-	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)
-	 * - `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
-	 * - `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
+	 * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript
+	 *   and JavaScript files)
+	 * - `[]` to declare a range of characters to match in a path segment
+	 *   (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
+	 * - `[!...]` to negate a range of characters to match in a path segment
+	 *   (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but
+	 *   not `example.0`)
 	 */
 	glob: string;
 
@@ -3406,6 +3426,12 @@ interface FileOperationPattern {
 	matches?: FileOperationPatternKind;
 }
 
+/**
+ * A pattern kind describing if a glob pattern matches a file a folder or
+ * both.
+ *
+ * @since 3.16.0 - proposed state
+ */
 export namespace FileOperationPatternKind {
 	/**
 	 * The pattern matches a file only.
@@ -3431,9 +3457,13 @@ _Request_:
 
 ```typescript
 /**
- * The parameters sent in notifications/requests for user-initiated creation of files.
+ * The parameters sent in notifications/requests for user-initiated creation
+ * of files.
+ *
+ * @since 3.16.0 - proposed state
  */
 export interface CreateFilesParams {
+
 	/**
 	 * An array of all files/folders created in this operation.
 	 */
@@ -3441,8 +3471,11 @@ export interface CreateFilesParams {
 }
 /**
  * Represents information on a file/folder create.
+ *
+ * @since 3.16.0 - proposed state
  */
 export interface FileCreate {
+
 	/**
 	 * A file:// URI for the location of the file/folder being created.
 	 */
@@ -3456,7 +3489,7 @@ _Response_:
 
 #### <a href="#workspace_didCreateFiles" name="workspace_didCreateFiles" class="anchor">DidCreateFiles Notification (:arrow_right:)</a>
 
-The did create files notification is sent from the client to the server when files were created in the client.
+The did create files notification is sent from the client to the server when files were created from within the client.
 
 _Client Capability_:
 * property name (optional): `workspace.fileOperations.didCreate`
@@ -3476,7 +3509,7 @@ _Notification_:
 
 #### <a href="#workspace_willRenameFiles" name="workspace_willRenameFiles" class="anchor">WillRenameFiles Request (:leftwards_arrow_with_hook:)</a>
 
-The will rename files request is sent from the client to the server before files are actually renamed. The request can return a WorkspaceEdit which will be applied to workspace before the files are renamed. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep renames fast and reliable.
+The will rename files request is sent from the client to the server before files are actually renamed as long as the rename is trigger from within the client. The request can return a WorkspaceEdit which will be applied to workspace before the files are renamed. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep renames fast and reliable.
 
 _Client Capability_:
 * property name (optional): `workspace.fileOperations.willRename`
@@ -3498,23 +3531,31 @@ _Request_:
 
 ```typescript
 /**
- * The parameters sent in notifications/requests for user-initiated renames of files.
+ * The parameters sent in notifications/requests for user-initiated renames
+ * of files.
+ *
+ * @since 3.16.0 - proposed state
  */
 export interface RenameFilesParams {
+
 	/**
-	 * An array of all files/folders renamed in this operation. When a folder is renamed, only
-	 * the folder will be included, and not its children.
+	 * An array of all files/folders renamed in this operation. When a folder
+	 * is renamed, only the folder will be included, and not its children.
 	 */
 	files: FileRename[];
 }
 /**
  * Represents information on a file/folder rename.
+ *
+ * @since 3.16.0 - proposed state
  */
 export interface FileRename {
+
 	/**
 	 * A file:// URI for the original location of the file/folder being renamed.
 	 */
 	oldUri: string;
+
 	/**
 	 * A file:// URI for the new location of the file/folder being renamed.
 	 */
@@ -3528,7 +3569,7 @@ _Response_:
 
 #### <a href="#workspace_didRenameFiles" name="workspace_didRenameFiles" class="anchor">DidRenameFiles Notification (:arrow_right:)</a>
 
-The did rename files notification is sent from the client to the server when files were renamed in the client.
+The did rename files notification is sent from the client to the server when files were renamed from within the client.
 
 _Client Capability_:
 * property name (optional): `workspace.fileOperations.didRename`
@@ -3548,7 +3589,7 @@ _Notification_:
 
 #### <a href="#workspace_willDeleteFiles" name="workspace_willDeleteFiles" class="anchor">WillDeleteFiles Request (:leftwards_arrow_with_hook:)</a>
 
-The will delete files request is sent from the client to the server before files are actually deleted. The request can return a WorkspaceEdit which will be applied to workspace before the files are deleted. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep deletes fast and reliable.
+The will delete files request is sent from the client to the server before files are actually deleted as long as the deletion is trigger from within the client. The request can return a WorkspaceEdit which will be applied to workspace before the files are deleted. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep deletes fast and reliable.
 
 _Client Capability_:
 * property name (optional): `workspace.fileOperations.willDelete`
@@ -3570,9 +3611,13 @@ _Request_:
 
 ```typescript
 /**
- * The parameters sent in notifications/requests for user-initiated deletes of files.
+ * The parameters sent in notifications/requests for user-initiated deletes
+ * of files.
+ *
+ * @since 3.16.0 - proposed state
  */
 export interface DeleteFilesParams {
+
 	/**
 	 * An array of all files/folders deleted in this operation.
 	 */
@@ -3580,8 +3625,11 @@ export interface DeleteFilesParams {
 }
 /**
  * Represents information on a file/folder delete.
+ *
+ * @since 3.16.0 - proposed state
  */
 export interface FileDelete {
+
 	/**
 	 * A file:// URI for the location of the file/folder being deleted.
 	 */
@@ -3595,7 +3643,7 @@ _Response_:
 
 #### <a href="#workspace_didDeleteFiles" name="workspace_didDeleteFiles" class="anchor">DidDeleteFiles Notification (:arrow_right:)</a>
 
-The did delete files notification is sent from the client to the server when files were deleted in the client.
+The did delete files notification is sent from the client to the server when files were deleted from within the client.
 
 _Client Capability_:
 * property name (optional): `workspace.fileOperations.didDelete`

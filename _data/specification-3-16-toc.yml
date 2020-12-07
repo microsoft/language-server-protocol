@@ -136,6 +136,8 @@
       anchor: workspace_executeCommand
     - title: applyEdit
       anchor: workspace_applyEdit
+    - title: file operations events
+      anchor: workspace_willCreateFiles
   - title: Text Synchronization
     anchor: textSynchronization
     children:
