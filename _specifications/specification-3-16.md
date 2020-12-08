@@ -993,7 +993,14 @@ export interface WorkspaceEditClientCapabilities {
 	 *
 	 * @since 3.16.0 - proposed state
 	 */
-	changeAnnotationSupport?: boolean;
+	changeAnnotationSupport?: {
+        /**
+         * Whether the client groups edits with equal labels into tree nodes,
+         * for instance all edits labelled with "Changes in Strings" would
+         * be a tree node.
+         */
+        groupsOnLabel?: boolean;
+	};
 }
 
 /**
