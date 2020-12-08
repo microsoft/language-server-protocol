@@ -3397,6 +3397,39 @@ interface FileOperationRegistrationOptions {
 }
 
 /**
+ * A pattern kind describing if a glob pattern matches a file a folder or
+ * both.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export namespace FileOperationPatternKind {
+	/**
+	 * The pattern matches a file only.
+	 */
+	export const file: 'file' = 'file';
+
+	/**
+	 * The pattern matches a folder only.
+	 */
+	export const folder: 'folder' = 'folder';
+}
+
+export type FileOperationPatternKind = 'file' | 'folder';
+
+/**
+ * Matching options for the file operation pattern.
+ *
+ * @since 3.16.0 - proposed state
+ */
+export interface FileOperationPatternOptions {
+
+	/**
+	 * The pattern should be matched ignoring casing.
+	 */
+	ignoreCase?: boolean;
+}
+
+/**
  * A pattern to describe in which file operation requests or notifications
  * the server is interested in.
  *
@@ -3424,27 +3457,12 @@ interface FileOperationPattern {
 	 * Matches both if undefined.
 	 */
 	matches?: FileOperationPatternKind;
-}
-
-/**
- * A pattern kind describing if a glob pattern matches a file a folder or
- * both.
- *
- * @since 3.16.0 - proposed state
- */
-export namespace FileOperationPatternKind {
-	/**
-	 * The pattern matches a file only.
-	 */
-	export const file: 'file' = 'file';
 
 	/**
-	 * The pattern matches a folder only.
+	 * Additional options used during matching.
 	 */
-	export const folder: 'folder' = 'folder';
+	options?: FileOperationPatternOptions;
 }
-
-export type FileOperationPatternKind = 'file' | 'folder';
 ```
 
 The capability indicates that the server is interested in receiving `workspace/willCreateFiles` requests.
