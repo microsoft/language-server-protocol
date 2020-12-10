@@ -3400,7 +3400,10 @@ _Server Capability_:
  * @since 3.16.0 - proposed state
  */
 interface FileOperationRegistrationOptions {
-	patterns: FileOperationPattern[];
+	/**
+	 * The actual filters.
+	 */
+	filters: FileOperationFilter[];
 }
 
 /**
@@ -3469,6 +3472,25 @@ interface FileOperationPattern {
 	 * Additional options used during matching.
 	 */
 	options?: FileOperationPatternOptions;
+}
+
+/**
+ * A filter to describe in which file operation requests or notifications
+ * the server is interested in.
+ *
+ * @since 3.16.0
+ */
+export interface FileOperationFilter {
+
+	/**
+	 * A Uri like `file` or `untitled`.
+	 */
+	scheme?: string;
+
+	/**
+	 * The actual file operation pattern.
+	 */
+	pattern: FileOperationPattern;
 }
 ```
 
