@@ -7598,11 +7598,14 @@ interface SemanticTokensClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Which requests the client supports and might send to the server. Please
-	 * note that clients might not show semantic tokens or degrade some of the
-	 * user experience if a full request is not provided by a server but
-	 * advertised by the client. A client might for example need all semantic
-	 * tokens to color a minimap correctly.
+	 * Which requests the client supports and might send to the server
+	 * depending on the server's capability. Please note that clients might not
+	 * show semantic tokens or degrade some of the user experience if a range
+	 * or full request is advertised by the client but not provided by the
+	 * server. If for example the client capability `requests.full` and
+	 * `request.range` are both set to true but the server only provides a
+	 * range provider the client might not render a minimap correctly or might
+	 * even decide to not show any semantic tokens at all.
 	 */
 	requests: {
 		/**
