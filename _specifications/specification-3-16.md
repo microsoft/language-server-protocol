@@ -7598,7 +7598,11 @@ interface SemanticTokensClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Which requests the client supports and might send to the server.
+	 * Which requests the client supports and might send to the server. Please
+	 * note that clients might not show semantic tokens or degrade some of the
+	 * user experience if a full request is not provided by a server but
+	 * advertised by the client. A client might for example need all semantic
+	 * tokens to color a minimap correctly.
 	 */
 	requests: {
 		/**
