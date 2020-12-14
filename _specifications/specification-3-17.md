@@ -6,24 +6,19 @@ sectionid: specification-3-16
 toc: specification-3-16-toc
 index: 2
 ---
-# Language Server Protocol Specification - 3.16
+# Language Server Protocol Specification - 3.17
 
-This document describes the 3.16.x version of the language server protocol. An implementation for node of the 3.16.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
+This document describes the upcoming 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-16.md).
 
-## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.16 </a>
+## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.17 </a>
 
-All new 3.16 features are tagged with a corresponding since version 3.16 text or in JSDoc using `@since 3.16.0` annotation. Major new feature are:
+All new 3.16 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are:
 
-- Semantic Token support
-- Call Hierarchy support
-- Linked Editing support
-- Moniker support
-- Events for file operations (create, rename, delete)
-- Change annotation support for text edits and file operations (create, rename, delete)
+- None so far.
 
-A detailed list of the changes can be found in the [change log](#version_3_16_0)
+A detailed list of the changes can be found in the [change log](#version_3_17_0)
 
 The version of the specification is used to group features into a new specification release and to refer to their first appearance. Features in the spec are kept compatible using so called capability flags which are exchanged between the client and the server during initialization.
 
@@ -8115,6 +8110,8 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 - **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
+
+#### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
