@@ -16,7 +16,6 @@ index: 3
 | C# | [Ken Domino](https://github.com/kaby76) | [LspTypes for C#](https://github.com/kaby76/lsp-types) |
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
 | C++17 | [otreblan](https://github.com/otreblan) | [libclsp](https://github.com/otreblan/libclsp) (WIP)|
-| Go | [disposedtrolley](https://github.com/disposedtrolley) | [golsp-sdk](https://github.com/goodgophers/golsp-sdk) (WIP)|
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
 | Haskell | [Luke Lau](https://github.com/Bubba) | [lsp-test](https://github.com/Bubba/lsp-test)|
 | Haxe | @nadako | [language-server-protocol-haxe](https://github.com/vshaxe/language-server-protocol-haxe)|
