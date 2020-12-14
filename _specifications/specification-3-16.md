@@ -310,10 +310,6 @@ The protocol currently assumes that one server serves one tool. There is current
 
 URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
 
-```typescript
-type URI = string;
-```
-
 ```
   foo://example.com:8042/over/there?name=ferret#nose
   \_/   \______________/\_________/ \_________/ \__/
