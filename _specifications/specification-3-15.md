@@ -2915,7 +2915,7 @@ _Request_:
 * params: `WillSaveTextDocumentParams`
 
 _Response_:
-* result:`TextEdit[]` \| `null`
+* result:[`TextEdit[]`](#textEdit) \| `null`
 * error: code and message set in case an exception happens during the `willSaveWaitUntil` request.
 
 #### <a href="#textDocument_didSave" name="textDocument_didSave" class="anchor">DidSaveTextDocument Notification (:arrow_right:)</a>
@@ -3154,7 +3154,7 @@ interface PublishDiagnosticsParams {
 
 #### <a href="#textDocument_completion" name="textDocument_completion" class="anchor">Completion Request (:leftwards_arrow_with_hook:)</a>
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. The request can only delay the computation of the `detail` and `documentation` properties. Other properties like `sortText`, `filterText`, `insertText`, `textEdit` and `additionalTextEdits` must be provided in the `textDocument/completion` response and must not be changed during resolve.
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense). If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the 'textDocument/completion' request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. The request can only delay the computation of the `detail` and `documentation` properties. Other properties like `sortText`, `filterText`, `insertText`, `textEdit` and `additionalTextEdits` must be provided in the `textDocument/completion` response and must not be changed during resolve.
 
 _Client Capability_:
 * property name (optional): `textDocument.completion`
@@ -5352,7 +5352,7 @@ interface FormattingOptions {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
+* result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
 #### <a href="#textDocument_rangeFormatting" name="textDocument_rangeFormatting" class="anchor">Document Range Formatting Request (:leftwards_arrow_with_hook:)</a>
@@ -5413,7 +5413,7 @@ interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
+* result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
 #### <a href="#textDocument_onTypeFormatting" name="textDocument_onTypeFormatting" class="anchor">Document on Type Formatting Request (:leftwards_arrow_with_hook:)</a>
@@ -5477,7 +5477,7 @@ interface DocumentOnTypeFormattingParams extends TextDocumentPositionParams {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document.
+* result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
 #### <a href="#textDocument_rename" name="textDocument_rename" class="anchor">Rename Request (:leftwards_arrow_with_hook:)</a>

@@ -3961,7 +3961,7 @@ _Request_:
 * params: `WillSaveTextDocumentParams`
 
 _Response_:
-* result:`TextEdit[]` \| `null`
+* result:[`TextEdit[]`](#textEdit) \| `null`
 * error: code and message set in case an exception happens during the `willSaveWaitUntil` request.
 
 #### <a href="#textDocument_didSave" name="textDocument_didSave" class="anchor">DidSaveTextDocument Notification (:arrow_right:)</a>
@@ -6764,7 +6764,7 @@ interface FormattingOptions {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
+* result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the formatting request.
 
 #### <a href="#textDocument_rangeFormatting" name="textDocument_rangeFormatting" class="anchor">Document Range Formatting Request (:leftwards_arrow_with_hook:)</a>
@@ -6825,7 +6825,7 @@ interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document to be formatted.
+* result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
 
 #### <a href="#textDocument_onTypeFormatting" name="textDocument_onTypeFormatting" class="anchor">Document on Type Formatting Request (:leftwards_arrow_with_hook:)</a>
@@ -6889,7 +6889,7 @@ interface DocumentOnTypeFormattingParams extends TextDocumentPositionParams {
 ```
 
 _Response_:
-* result: [`TextEdit[]`](#textedit) \| `null` describing the modification to the document.
+* result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document.
 * error: code and message set in case an exception happens during the range formatting request.
 
 #### <a href="#textDocument_rename" name="textDocument_rename" class="anchor">Rename Request (:leftwards_arrow_with_hook:)</a>
