@@ -103,6 +103,7 @@ index: 1
 | Python | MS | [python-language-server](https://github.com/Microsoft/python-language-server) | C# |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
+| Racket | [Jay McCarthy](https://github.com/jeapostrophe) | [racket-langserver](https://github.com/jeapostrophe/racket-langserver) | Racket |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
