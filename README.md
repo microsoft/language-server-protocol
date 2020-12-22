@@ -21,3 +21,4 @@ See the [Web site](https://microsoft.github.io/language-server-protocol/specific
 ## License
 
 [Creative Commons Attribution / MIT](License.txt)
+Luis
