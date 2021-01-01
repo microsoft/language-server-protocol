@@ -1,20 +1,20 @@
 ---
 title: Specification
-shortTitle: 3.16 - Upcoming
+shortTitle: 3.17 - Upcoming
 layout: specifications
-sectionid: specification-3-16
-toc: specification-3-16-toc
+sectionid: specification-3-17
+toc: specification-3-17-toc
 index: 2
 ---
 # Language Server Protocol Specification - 3.17
 
 This document describes the upcoming 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
-**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-16.md).
+**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-17.md).
 
 ## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.17 </a>
 
-All new 3.16 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are:
+All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are:
 
 - None so far.
 
