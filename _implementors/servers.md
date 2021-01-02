@@ -65,6 +65,7 @@ index: 1
 | HTML | MS | [vscode-html-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/html-language-features/server) | TypeScript |
 | Haskell| [Alan Zimmerman](https://github.com/alanz) | [Haskell Language Server (HLS)](https://github.com/haskell/haskell-language-server) | Haskell |
 | [Haxe](https://haxe.org/) | [Haxe Foundation](https://github.com/HaxeFoundation/) | [Haxe Language Server](https://github.com/vshaxe/haxe-language-server) | Haxe |
+| HLSL | [Tim Jones](https://github.com/tgjones) | [HLSL Tools](https://github.com/tgjones/HlslTools/tree/master/src/ShaderTools.LanguageServer) | C# |
 | [Isabelle](https://www.cl.cam.ac.uk/research/hvg/Isabelle/) | [Makarius Wenzel](https://github.com/makarius) | [sources](https://isabelle.in.tum.de/repos/isabelle/file/tip/src/Tools/VSCode) | Scala |
 | JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) | TypeScript |
 | Java (Eclipse)| Eclipse, [RedHat](http://developers.redhat.com/blog/2016/08/01/a-week-of-hacking-the-java-language-server/) |  [Eclipse JDT LS](https://github.com/eclipse/eclipse.jdt.ls/) | Java |
