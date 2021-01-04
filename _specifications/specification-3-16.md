@@ -1,6 +1,6 @@
 ---
 title: Specification
-shortTitle: 3.16 - Upcoming
+shortTitle: 3.16 - Current
 layout: specifications
 sectionid: specification-3-16
 toc: specification-3-16-toc
@@ -715,7 +715,7 @@ Usually clients provide options to group the changes along the annotations they 
  * An identifier referring to a change annotation managed by a workspace
  * edit.
  *
- * @since 3.16.0.
+ * @since 3.16.0
  */
 export type ChangeAnnotationIdentifier = string;
 
@@ -723,7 +723,7 @@ export type ChangeAnnotationIdentifier = string;
 /**
  * A special text edit with an additional change annotation.
  *
- * @since 3.16.0.
+ * @since 3.16.0
  */
 export interface AnnotatedTextEdit extends TextEdit {
 	/**
@@ -5745,7 +5745,7 @@ export namespace SymbolKind {
 /**
  * Symbol tags are extra annotations that tweak the rendering of a symbol.
  *
- * @since 3.16
+ * @since 3.16.0
  */
 export namespace SymbolTag {
 
@@ -5959,7 +5959,7 @@ export interface CodeActionClientCapabilities {
 	};
 
 	/**
-	 * Whether th client honors the change annotations in
+	 * Whether the client honors the change annotations in
 	 * text edits and resource operations returned via the
 	 * `CodeAction#edit` property by for example presenting
 	 * the workspace edit in the user interface and asking
@@ -6923,7 +6923,7 @@ export interface RenameClientCapabilities {
 	 * Client supports testing for validity of rename operations
 	 * before execution.
 	 *
-	 * @since version 3.12.0
+	 * @since 3.12.0
 	 */
 	prepareSupport?: boolean;
 
@@ -6934,7 +6934,7 @@ export interface RenameClientCapabilities {
 	 * The value indicates the default behavior used by the
 	 * client.
 	 *
-	 * @since version 3.16.0
+	 * @since 3.16.0
 	 */
 	prepareSupportDefaultBehavior?: PrepareSupportDefaultBehavior;
 
