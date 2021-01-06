@@ -7518,7 +7518,9 @@ There are different ways how the position of a token can be expressed in a file.
 - at index `5*i+3` - `tokenType`: will be looked up in `SemanticTokensLegend.tokenTypes`. We currently ask that `tokenType` < 65536.
 - at index `5*i+4` - `tokenModifiers`: each set bit will be looked up in `SemanticTokensLegend.tokenModifiers`
 
-Whether a token can span multiple lines is defined by the client capability `multilineTokenSupport`. The client capability `overlappingTokenSupport` defines whether tokens can overlap each other.
+Whether a token can span multiple lines is defined by the client capability `multilineTokenSupport`. If multiline tokens are not supported and a tokens length takes it past the end of the line, it will be treated as if the token ends at the end of the line and will not wrap onto the next line.
+
+The client capability `overlappingTokenSupport` defines whether tokens can overlap each other.
 
 Lets look at a concrete example which uses single line tokens without overlaps for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
 
