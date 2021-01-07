@@ -24,7 +24,7 @@ In version 0.4.0 support was added to dump larger systems project by project (in
 1. support to logical group projects. To support this a `Group` vertex got added.
 1. knowing how unique a moniker is. To support this a `unique` property got added to the `Moniker`.
 1. the `nextMoniker` edge got replaced by a more generic `attach` edge. This was possible since monikers now carry a `unique` property which was before encoded in the direction of the `nextMoniker` edge.
-1. In programming languages supporting polymorphism calls at runtime can be bound to a different type then statically know. An example are overidden methods in object oriented programming languages. Since dumps can be created on a per project basis we need to add additional information to the dumps so that these polymorphic binds can be capture. The general concept of moniker cascades got therefore introduced.
+1. In programming languages supporting polymorphism calls at runtime can be bound to a different type then statically know. An example are overridden methods in object oriented programming languages. Since dumps can be created on a per project basis we need to add additional information to the dumps so that these polymorphic binds can be capture. The general concept of moniker cascades got therefore introduced.
 
 An old 0.4.0 version of the specification is available [here](../../0.4.0/specification)
 
@@ -255,7 +255,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 // The definition result linked to the bar result set
 { id: 22, type: "vertex", label: "definitionResult" }
 { id: 23, type: "edge", label: "textDocument/definition", outV: 6, inV: 22 }
-{ id: 24, type: "edge", label: "item", outV: 22, inVs: [9], document: 4 }
+{ id: 24, type: "edge", label: "item", outV: 22, inVs: [9], shard: 4 }
 ```
 
 <img src="../img/definitionResult.png" alt="Definition Result" style="max-width: 50%; max-height: 50%"/>
@@ -263,7 +263,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 The definition result above has only one value (the range with id '9') and we could have emitted it directly. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
-- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
+- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptually a definition result is an array to which the `item` edge adds items.
 
 Consider the following TypeScript example:
 
@@ -281,10 +281,10 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 
 ```typescript
 { id : 38, type: "vertex", label: "definitionResult" }
-{ id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], document: 4 }
+{ id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], shard: 4 }
 ```
 
-The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `containes` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
+The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
 
 ### <a href="#declaration" name="declaration" class="anchor">Request: `textDocument/declaration`</a>
 
@@ -366,12 +366,12 @@ The relevant JSON output looks like this:
 
 // Add the bar definition as a reference to the reference result
 { id: 27, type: "edge", label: "item",
-  outV: 25, inVs: [9], document: 4, property: "definitions"
+  outV: 25, inVs: [9], shard: 4, property: "definitions"
 }
 
 // Add the bar reference as a reference to the reference result
 { id: 28, type: "edge", label: "item",
-  outV: 25, inVs: [20], document: 4, property: "references"
+  outV: 25, inVs: [20], shard: 4, property: "references"
 }
 ```
 
@@ -451,24 +451,24 @@ The output looks like this:
 
 // The insertion of the ranges into the shared reference result
 { id: 90, type: "edge", label: "item",
-  outV: 30, inVs: [16,34,50], document: 4, property: "definitions"
+  outV: 30, inVs: [16,34,50], shard: 4, property: "definitions"
 }
 { id: 91, type: "edge", label: "item",
-  outV: 30, inVs: [65,78], document: 4, property: "references"
+  outV: 30, inVs: [65,78], shard: 4, property: "references"
 }
 
 // Linking A#foo to I#foo
 { id: 101, type: "vertex", label: "referenceResult" }
 { id: 102, type: "edge", label: "textDocument/references", outV: 29, inV: 101 }
 { id: 103, type: "edge", label: "item",
-  outV: 101, inVs: [30], document: 4, property: "referenceResults"
+  outV: 101, inVs: [30], shard: 4, property: "referenceResults"
 }
 
 // Linking B#foo to I#foo
 { id: 114, type: "vertex", label: "referenceResult" }
 { id: 115, type: "edge", label: "textDocument/references", outV: 47, inV: 114 }
 { id: 116, type: "edge", label: "item",
-  outV: 114, inVs: [30], document: 4, property: "referenceResults"
+  outV: 114, inVs: [30], shard: 4, property: "referenceResults"
 }
 ```
 
@@ -606,7 +606,7 @@ The relevant emitted vertices and edges looks like this:
 // Hook the result to the declaration
 { id: 38, type: "edge", label: "textDocument/typeDefinition", outV: 26, inV:37 }
 // Add the declaration of I as a target range.
-{ id: 51, type: "edge", label: "item", outV: 37, inVs: [9], document: 4 }
+{ id: 51, type: "edge", label: "item", outV: 37, inVs: [9], shard: 4 }
 ```
 
 As with other results ranges get added using a `item` edge. In this case without a `property` since there is only on kind of range.
@@ -709,7 +709,7 @@ export interface DeclarationTag {
 }
 
 /**
- * The range respresents a definition
+ * The range represents a definition
  */
 export interface DefinitionTag {
   /**
@@ -973,7 +973,7 @@ export interface Project extends V {
 
 It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
 
-## <a href="#advancedConcpets" name="advancedConcpets" class="anchor">Advanced Concepts</a>
+## <a href="#advancedConcepts" name="advancedConcepts" class="anchor">Advanced Concepts</a>
 
 ### <a href="#events" name="events" class="anchor">Events</a>
 
@@ -1137,7 +1137,7 @@ w.dispose();
 
 Now if a user search for reference to `Widget#dispose` it is expected that the reference `d.dispose` in P1 is included in the result. However when P1 is process the tools doesn't know about P2. And when P2 is processed it usually doesn't know about the source of P1. It only knows about its API shape (e.g. in TypeScript the corresponding `d.ts` file).
 
-To make this work we first need to group projects into larger units so that we know in which projects `d.dispose` is actually a match. Assume there is a totally unrelated project PX which also uses `Disposable` from P1 but P2 is never linked into one system with PX. So a object of type `Wdiget` can never flow to code in PX hence reference in PX should not be listed. We therefore introduce the notation of a group to logically group projects into larger systems. Projects belong to a group and groups are identified using a URI. Lets look at the concrete dumps for P1 and P2:
+To make this work we first need to group projects into larger units so that we know in which projects `d.dispose` is actually a match. Assume there is a totally unrelated project PX which also uses `Disposable` from P1 but P2 is never linked into one system with PX. So a object of type `Widget` can never flow to code in PX hence reference in PX should not be listed. We therefore introduce the notation of a group to logically group projects into larger systems. Projects belong to a group and groups are identified using a URI. Lets look at the concrete dumps for P1 and P2:
 
 ```typescript
 {id: 2, type: "vertex", label: "group",
@@ -1149,7 +1149,7 @@ To make this work we first need to group projects into larger units so that we k
 {id: 5, type: "edge", label: "belongsTo", outV: 4, inV:2 }
 ```
 
-As a group URI the path in a GitHub repository is used. However the URI could also be something like `lsif-group:://com.microsoft/vscode/lsif-node/samples/ts-cascade` if the URI should be repository independent. This would be useful if a company store code in many differrent repository systems. The edge with the id `5` binds the project to the group.
+As a group URI the path in a GitHub repository is used. However the URI could also be something like `lsif-group:://com.microsoft/vscode/lsif-node/samples/ts-cascade` if the URI should be repository independent. This would be useful if a company store code in many different repository systems. The edge with the id `5` binds the project to the group.
 
 The dump for project P2 looks like this:
 
@@ -1163,7 +1163,7 @@ The dump for project P2 looks like this:
 {id: 5, type: "edge", label: "belongsTo", outV: 4, inV: 2 }
 ```
 
-Note thjat this binds P2 to the same group P1 belongs to. To avoid any kind of group management the group carries a property `conflictResolution` to tell a DB which group information to use if the DB already contains a group with the given URL. `takeDB` indicates to take the one already store in the DB and `takeDump` indicates that the one from the dump should overwrite the DB value.
+Note that this binds P2 to the same group P1 belongs to. To avoid any kind of group management the group carries a property `conflictResolution` to tell a DB which group information to use if the DB already contains a group with the given URL. `takeDB` indicates to take the one already store in the DB and `takeDump` indicates that the one from the dump should overwrite the DB value.
 
 Whenever possible group URIs should be organized hierarchical to allow to group projects into a broader scope. For example a URI `https://github.com/microsoft` should capture all project organized under the GitHub Microsoft organization.
 
@@ -1234,25 +1234,25 @@ When generating the dump for P2 the information for `Widget#dispose` will look l
 { id: 116, type: "vertex", label: "referenceResult" }
 { id: 117, type: "edge", label: "textDocument/references", outV: 78, inV: 116}
 { id: 118, type: "edge", label: "item",
-  outV: 116, inVs: [43], document: 52, property: "referenceResults"
+  outV: 116, inVs: [43], shard: 52, property: "referenceResults"
 }
 // Link the reference result set of Disposable#dispose to this result set
 // using a moniker
 { id: 119, type: "edge", label: "item",
-  outV: 116, inVs: [22], document: 52, property: "referenceLinks"
+  outV: 116, inVs: [22], shard: 52, property: "referenceLinks"
 }
 { id: 120, type: "edge", label: "item",
-  outV: 43, inVs: [81], document: 52, property: "definitions"
+  outV: 43, inVs: [81], shard: 52, property: "definitions"
 }
 { id: 121, type: "edge", label: "item",
-  outV: 43, inVs: [96], document: 52, property: "references"
+  outV: 43, inVs: [96], shard: 52, property: "references"
 }
 ```
 
 The noteworthy parts are:
 
-- the vertex with `id: 22`: is the import moniker for `Disposable#disose` from P1.
-- the edge with `id: 119`: this adds a reference link to the reference result of `Widget#dispose`. Item edges with a `referenceLinks` are conceptuall like imte edges with a `referenceResults` property. They allow for composite reference results. The different is that a `referenceResults` item edge references another result using the vertex id since the reference result is part of the same dump. A `referenceLinks` item edge references another result using a moniker. So the actual resolving needs to happen in a database which has the data for both P1 and P2. As with `referenceResults` item edges a language servers is responsible to de-duplicate the final ranges.
+- the vertex with `id: 22`: is the import moniker for `Disposable#dispose` from P1.
+- the edge with `id: 119`: this adds a reference link to the reference result of `Widget#dispose`. Item edges with a `referenceLinks` are conceptual like item edges with a `referenceResults` property. They allow for composite reference results. The different is that a `referenceResults` item edge references another result using the vertex id since the reference result is part of the same dump. A `referenceLinks` item edge references another result using a moniker. So the actual resolving needs to happen in a database which has the data for both P1 and P2. As with `referenceResults` item edges a language servers is responsible to de-duplicate the final ranges.
 
 ### <a href="#packageManagers" name="packageManagers" class="anchor">Package Managers</a>
 
@@ -1328,7 +1328,7 @@ Things to observe:
 
 - a special `packageInformation` vertex got emitted to point to the corresponding npm package information.
 - the npm moniker refer to the package name.
-- its `unique` value is `scheme` denoting that the monikers indentifier is unique acroos all `npm` monikers.
+- its `unique` value is `scheme` denoting that the monikers identifier is unique across all `npm` monikers.
 - since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were only the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
 - the `attach` edge points from the npm moniker vertex to the tsc moniker vertex.
 
@@ -1387,7 +1387,7 @@ For tools processing the dump and importing it into a database it is sometime us
 For the following example
 
 ```ts
-funciton foo(x: number): void {
+function foo(x: number): void {
 }
 ```
 
@@ -1463,7 +1463,7 @@ export interface MetaData {
 }
 ```
 
-### <a href="#emittingContstraints" name="emittingContstraints" class="anchor">Emitting constraints</a>
+### <a href="#emittingConstraints" name="emittingConstraints" class="anchor">Emitting constraints</a>
 
 The following emitting constraints (some of which have already mean mentioned in the document) exists:
 
