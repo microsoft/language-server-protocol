@@ -24,7 +24,8 @@ In version 0.4.0 support was added to dump larger systems project by project (in
 1. support to logical group projects. To support this a `Group` vertex got added.
 1. knowing how unique a moniker is. To support this a `unique` property got added to the `Moniker`.
 1. the `nextMoniker` edge got replaced by a more generic `attach` edge. This was possible since monikers now carry a `unique` property which was before encoded in the direction of the `nextMoniker` edge.
-1. In programming languages supporting polymorphism calls at runtime can be bound to a different type then statically know. An example are overridden methods in object oriented programming languages. Since dumps can be created on a per project basis we need to add additional information to the dumps so that these polymorphic binds can be capture. The general concept of moniker cascades got therefore introduced.
+1. In programming languages supporting polymorphism calls at runtime can be bound to a different type then statically know. An example are overridden methods in object oriented programming languages. Since dumps can be created on a per project basis we need to add additional information to the dumps so that these polymorphic binds can be capture. The general concept of reference links got therefore introduced (see section [Multiple Project](#multiProjects)). In short it allows a tool to annotate an `item` edge with a property values `referenceLinks`.
+1. To better shard the output into chunks the `items` edge carry an additional property `shard`. This property was named `document` in an early version of the 0.5 specification.
 
 An old 0.4.0 version of the specification is available [here](../../0.4.0/specification)
 
