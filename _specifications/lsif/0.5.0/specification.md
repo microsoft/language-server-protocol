@@ -239,8 +239,10 @@ This will emit the following vertices and edges to model the `textDocument/defin
   uri: "file:///Users/dirkb/sample.ts", languageId: "typescript"
 }
 
-// The bar declaration
+// The result set
 { id: 6, type: "vertex", label: "resultSet" }
+
+// The bar declaration
 { id: 9, type: "vertex", label: "range",
   start: { line: 0, character: 9 }, end: { line: 0, character: 12 }
 }
