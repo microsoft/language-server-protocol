@@ -128,6 +128,7 @@ index: 1
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
 | [Terraform](https://www.terraform.io/) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
 | [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
+| [Tibbo Basic](https://docs.tibbo.com/taiko/) | [Tibbo](https://tibbo.com) | [tibbo-basic](https://github.com/tibbotech/tibbo-basic) | Tibbo Basic |
 | [TTCN-3](http://www.ttcn-3.org) | [Nokia](https://www.nokia.com) | [ntt](https://github.com/nokia/ntt) | Go |
 | Turtle | [Stardog Union](https://github.com/stardog-union) | [Turtle Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
