@@ -4263,7 +4263,7 @@ export interface CompletionClientCapabilities {
 		commitCharactersSupport?: boolean
 
 		/**
-		 * Client supports the follow content formats for the documentation
+		 * Client supports the following content formats for the documentation
 		 * property. The order describes the preferred format of the client.
 		 */
 		documentationFormat?: MarkupKind[];
@@ -4864,7 +4864,7 @@ export interface HoverClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Client supports the follow content formats if the content
+	 * Client supports the following content formats if the content
 	 * property refers to a `literal of type MarkupContent`.
 	 * The order describes the preferred format of the client.
 	 */
@@ -4964,7 +4964,7 @@ export interface SignatureHelpClientCapabilities {
 	 */
 	signatureInformation?: {
 		/**
-		 * Client supports the follow content formats for the documentation
+		 * Client supports the following content formats for the documentation
 		 * property. The order describes the preferred format of the client.
 		 */
 		documentationFormat?: MarkupKind[];
@@ -5131,8 +5131,8 @@ export interface SignatureHelp {
 
 	/**
 	 * The active signature. If omitted or the value lies outside the
-	 * range of `signatures` the value defaults to zero or is ignore if
-	 * the `SignatureHelp` as no signatures.
+	 * range of `signatures` the value defaults to zero or is ignored if
+	 * the `SignatureHelp` has no signatures.
 	 *
 	 * Whenever possible implementors should make an active decision about
 	 * the active signature and shouldn't rely on a default value.
