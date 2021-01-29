@@ -232,6 +232,8 @@
   - title: Change Log
     anchor: changeLog
     children:
+    - title: 3.17.0
+      anchor: version_3_17_0
     - title: 3.16.0
       anchor: version_3_16_0
     - title: 3.15.0
