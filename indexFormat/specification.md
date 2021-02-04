@@ -4,13 +4,13 @@ The 0.4.0 version of LSIF is currently under construction.
 
 ## Language Server Index Format
 
-The purpose of the Language Server Index Format (LSIF) is it to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
+The purpose of the Language Server Index Format (LSIF) is to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
 
 ### Changelog
 
 #### Version 0.4.0
 
-Up to version 0.4.0 the focus of the LSIF format was to ease the generation of the dump for language tool providers. However this made it very hard for consumers of the dump to efficiently import them into a DB unless the DB format one to one mapped to the LSIF format. This version of the specification tries to balance this by requiring tools providers to emit additional events of when certain data is ready to be consumed. It also adds support to partition data per document.
+Up to version 0.4.0, the focus of the LSIF format was to ease the generation of the dump for language tool providers. However, this made it very hard for consumers of the dump to efficiently import them into a DB unless the DB format one to one mapped to the LSIF format. This version of the specification tries to balance this by requiring tools providers to emit additional events when certain data is ready to be consumed. It also adds support to partition data per document.
 
 Since 0.4.0 changes some of the LSIF aspects more deeply an old 0.3.x version of the specification is available [here](./versions/specification-0-3-x.md)
 
@@ -20,7 +20,7 @@ Principal design goals:
 
 - The format should not imply the use of a certain persistence technology.
 - The data defined should be modeled as closely as possible to the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) to make it possible to serve the data through the LSP without further transformation.
-- The data stored is result data usually returned from a LSP request. The dump doesn't contain any program symbol information nor does the LSIF define any symbol semantics (e.g. where a symbol is defined or referenced or when a method overrides another method). The LSIF therefore doesn't define a symbol database. Please note that this is consistent with the LSP itself which doesn't define any symbol semantics either.
+- The data stored is result data usually returned from an LSP request. The dump doesn't contain any program symbol information nor does the LSIF define any symbol semantics (e.g. where a symbol is defined or referenced or when a method overrides another method). The LSIF, therefore, doesn't define a symbol database. Please note that this is consistent with the LSP itself which doesn't define any symbol semantics either.
 - The output format will be based on JSON as with the LSP.
 
 LSP requests that are good candidates to be supported in LSIF are:
@@ -53,7 +53,7 @@ request('file:///Users/dirkb/sample/test.ts', { line: 10, character: 17 }, 'text
 
 The input tuple to a request is either `[uri, method]` or `[uri, position, method]` and the output is some form of result. For the same `uri` and `[uri, position]` tuple, there are many different requests to execute.
 
-The dump format therefore should support the following features:
+The dump format, therefore, should support the following features:
 
 - Input data must be easily queryable (e.g. the document and the position).
 - Each element has a unique id (which may be a string or a number).
@@ -62,7 +62,7 @@ The dump format therefore should support the following features:
 - It should be easy for a tool to consume a dump and for example import it into a database without holding the dump in memory.
 
 
-We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
+We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method, and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
 
 Assume there is a file `/Users/dirkb/sample.ts` and we want to store the folding range information with it then the indexer emits two vertices: one representing the document with its URI `file:///Users/dirkb/sample.ts`, the other representing the folding result. In addition, an edge would be emitted representing the `textDocument/foldingRange` request.
 
@@ -78,14 +78,14 @@ The corresponding graph looks like this
 
 ### Ranges
 
-For requests that take a position as its input, we need to store the position as well. Usually LSP requests return the same result for positions that point to the same word / name in a document. Take the following TypeScript example:
+For requests that take a position as its input, we need to store the position as well. Usually, LSP requests return the same result for positions that point to the same word/name in a document. Take the following TypeScript example:
 
 ```typescript
 function bar() {
 }
 ```
 
-A hover request for a position denoting the `b` in `bar` will return the same result as a position denoting the `a` or `r`. To make the dump more compact, it will use ranges to capture this instead of single positions. The following vertices will be emitted in this case. Note that line, character are zero based as in the LSP:
+A hover request for a position denoting the `b` in `bar` will return the same result as a position denoting the `a` or `r`. To make the dump more compact, it will use ranges to capture this instead of single positions. The following vertices will be emitted in this case. Note that `line` and `character` are zero-based as in the LSP:
 
 ```typescript
 { id: 4, type: "vertex", label: "range", start: { line: 0, character: 9}, end: { line: 0, character: 12 } }
@@ -97,7 +97,7 @@ To bind the range to a document, we use a special edge labeled `contains` which 
 { id: 5, type: "edge", label: "contains", outV: 1, inVs: [4] }
 ```
 
-LSIF supports 1:n edges for the `contains` relationship which in a graph can easily be mapped to n 1:1 edges. LSIF support this for two reasons: (a) to make the output more compact since a document usually contains hundreds of those ranges and (b) to easy the import and batching for consumers of a LSIF dump.
+LSIF supports 1:n edges for the `contains` relationship which, in a graph can easily be mapped to n 1:1 edges. LSIF supports this for two reasons: (a) to make the output more compact since a document usually contains hundreds of those ranges and (b) to easy the import and batching for consumers of an LSIF dump.
 
 To bind the hover result to the range, we use the same pattern as we used for the folding ranges. We emit a vertex representing the hover result and an edge representing the `textDocument/hover` request.
 
@@ -121,7 +121,7 @@ The corresponding graph looks like this
 
 The ranges emitted for a document in the contains relationship must follow these rules:
 
-1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if the have the same start / end value.
+1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if they have the same start/end value.
 1. No two ranges can be equal.
 1. No two ranges can overlap, claiming the same position in a document unless one range is entirely contained by the other.
 
@@ -134,9 +134,9 @@ If a position in a document is mapped to a range and more than one range covers 
 1. end
 1. return `null`
 
-### Result Set
+### ResultSet
 
-Usually the hover result is the same whether you hover over a definition of a function or over a reference of that function. The same is actually true for many LSP requests like `textDocument/definition`, `textDocument/references` or `textDocument/typeDefinition`. In a naïve model, each range would have outgoing edges for all these LSP requests and would point to the corresponding results. To optimize this and to make the graph easier to understand, the concept of a `ResultSet` is introduced. A result set acts as a hub to be able to store information common to a lot of ranges. The `ResultSet` itself doesn't carry any information. So it looks like this:
+Usually, the hover result is the same whether you hover over a definition of a function or over a reference of that function. The same is actually true for many LSP requests like `textDocument/definition`, `textDocument/references` or `textDocument/typeDefinition`. In a naïve model, each range would have outgoing edges for all these LSP requests and would point to the corresponding results. To optimize this and to make the graph easier to understand, the concept of a `ResultSet` is introduced. A result set acts as a hub to be able to store information common to a lot of ranges. The `ResultSet` itself doesn't carry any information. So it looks like this:
 
 ```typescript
 export interface ResultSet {
@@ -170,7 +170,7 @@ The pattern of storing the result with the `ResultSet` will be used for other re
       1. check if out has an outgoing `next` edge. If yes, set out to the target vertex. Else set out to `null`
    1. end
 1. end
-1. otherwise return `null`
+1. otherwise, return `null`
 
 ### Request: `textDocument/definition`
 
@@ -212,7 +212,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 The definition result above has only one value (the range with id '9') and we could have emitted it directly. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
-- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
+- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using a 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
 
 Consider the following TypeScript example:
 
@@ -226,14 +226,14 @@ interface X {
 let x: X;
 ```
 
-Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets the user select between the two definitions of the `interface X`. The emitted JSON in this case looks like this:
+Running **Go to Definition** on `X` in `let x: X` will show a dialog that lets the user select between the two definitions of the `interface X`. The emitted JSON, in this case, looks like this:
 
 ```typescript
 { id : 38, type: "vertex", label: "definitionResult" }
 { id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], document: 4 }
 ```
 
-The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `containes` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
+The `item` edge is an additional property document that indicates which document has the declaration. We added this information to make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specify an order in which data needs to be emitted (e.g. an item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
 
 ### Request: `textDocument/declaration`
 
@@ -313,7 +313,7 @@ The relevant JSON output looks like this:
 
 We tag the `item` edge with id 27 as a definition since the reference result distinguishes between definitions, declarations, and references. This is done since the `textDocument/references` request takes an additional input parameter `includeDeclarations` controlling whether declarations and definitions are included in the result as well. Having three distinct properties allows the server to compute the result accordingly.
 
-The item edge also support linking reference results to other reference results. This is useful when computing references to methods overridden in a type hierarchy.
+The item edge also supports linking reference results to other reference results. This is useful when computing references to methods overridden in a type hierarchy.
 
 Take the following example:
 
@@ -467,7 +467,7 @@ interface ImplementationResult {
 
 ### Request: `textDocument/typeDefinition`
 
-Supporting `textDocument/typeDefinition` is straightforward. The edge is either recorded at the range or at the `ResultSet`.
+Supporting `textDocument/typeDefinition` is straightforward. The edge is either recorded at the range or the `ResultSet`.
 
 The corresponding `TypeDefinitionResult` looks like this:
 
@@ -556,7 +556,7 @@ export interface FoldingRangeResult {
 
 ### Request: `textDocument/documentLink`
 
-Again, for document links, we define a result type and a corresponding edge to link it to a document. Since the link location usually appear in comments, the ranges don't denote any symbol declarations or references. We therefore inline the range into the result like we do with folding ranges.
+Again, for document links, we define a result type and a corresponding edge to link it to a document. Since the link location usually appears in comments, the ranges don't denote any symbol declarations or references. We, therefore, inline the range into the result as we do with folding ranges.
 
 ```typescript
 export interface DocumentLinkResult {
@@ -606,7 +606,7 @@ export interface DeclarationTag {
 }
 
 /**
- * The range respresents a definition
+ * The range represents a definition
  */
 export interface DefinitionTag {
   /**
@@ -737,12 +737,12 @@ Produces the following output:
 
 ### Request: `textDocument/diagnostic`
 
-The only information missing that is useful in a dump are the diagnostics associated with documents. Diagnostics in the LSP are modeled as a push notifications sent from the server to the client. This doesn't work well with a dump modeled on request method names. However, the push notification can be emulated as a request where the request's result is the value sent during the push as a parameter.
+The only information missing that is useful in a dump are the diagnostics associated with documents. Diagnostics in the LSP are modeled as push notifications sent from the server to the client. This doesn't work well with a dump modeled on request method names. However, the push notification can be emulated as a request where the request's result is the value sent during the push as a parameter.
 
 In the dump, we model diagnostics as follows:
 
 - We introduce a pseudo request `textDocument/diagnostic`.
-- We introduce a diagnostic result which contains the diagnostics associated with a document.
+- We introduce a diagnostic result that contains the diagnostics associated with a document.
 
 The result looks like this:
 
@@ -775,7 +775,7 @@ Since diagnostics are not very common in dumps, no effort has been made to reuse
 
 ### The Project vertex
 
-Usually language servers operate in some sort of project context. In TypeScript, a project is defined using a `tsconfig.json` file. C# and C++ have their own means. The project file usually contains information about compile options and other parameters. Having these in the dump can be valuable. The LSIF therefore defines a project vertex. In addition, all documents that belong to that project are connected to the project using a `contains` edge. If there was a `tsconfig.json` in the previous examples, the first emitted edges and vertices would look like this:
+Usually, language servers operate in some sort of project context. In TypeScript, a project is defined using a `tsconfig.json` file. C# and C++ have their own means. The project file usually contains information about compile options and other parameters. Having these in the dump can be valuable. The LSIF, therefore, defines a project vertex. In addition, all documents that belong to that project are connected to the project using a `contains` edge. If there was a `tsconfig.json` in the previous examples, the first emitted edges and vertices would look like this:
 
 ```typescript
 { id: 1, type: "vertex", label: "project", resource: "file:///Users/dirkb/tsconfig.json", kind: "typescript"}
@@ -813,11 +813,11 @@ export interface Project extends V {
 
 ## Embedding contents
 
-It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
+It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format, therefore, supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
 
 ## Events
 
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
+To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example, no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be referenced in a `contains` edge adding the document to a project. The `begin`/`end` events for documents look like this:
 
 ```ts
 // The actual document
@@ -889,9 +889,9 @@ export class Emitter {
 { id: 36, type: "edge", label: "next", outV: 35, inV: 32 }
 ```
 
-This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has two properties: a `scheme` to indicate how the `identifiers` is to be interpreted. And the `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
+This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position-independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker, therefore, has two properties: a `scheme` to indicate how the `identifier` is to be interpreted. And the `identifier` to actually identify the symbol. Its structure is opaque to the scheme owner. In the above example, the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 
-Please also note that the method `Emitter#doEmit` has a moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript cant enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
+Please also note that the method `Emitter#doEmit` has a moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
 
 How these exported elements are visible in other projects in most programming languages depends on how many files are packaged into a library or program. In TypeScript, the standard package manager is npm.
 
@@ -936,7 +936,7 @@ Things to observe:
 - since the file `index.ts` is the npm main file the moniker identifier as no file path. The is comparable to importing this module into TypeScript or JavaScript were only the module name and no file path is used (e.g. `import * as lsif from 'lsif-ts-sample'`).
 - the `nextMoniker` edge points from the tsc moniker vertex to the npm moniker vertex.
 
-For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by a npm specific tool which rewrites the monikers taking the npm package information into account.
+For LSIF we recommend that a second tool is used to make the monikers emitted by the indexer be package manager dependent. This supports the use of different package managers and allows incorporating custom build tools. In the TypeScript implementation, this is done by an npm specific tool that rewrites the monikers taking the npm package information into account.
 
 Reporting importing external symbols is done using the same approach. The LSIF emits monikers of kind `import`. Consider the following typescript example:
 
@@ -970,14 +970,14 @@ However piping this information through the npm tool will generate the following
 
 which made the moniker specific to the npm `mobx` package. In addition information about the `mobx` package itself got emitted. Please note that since this is an import moniker the `nextMoniker` edge points from the `npm` moniker to the `tsc` moniker.
 
-Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
+Usually, monikers are attached to result sets since they are the same for all ranges pointing to the result set. However, for dumps that don't use result sets, monikers can also be emitted on ranges.
 
-For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
+For tools processing the dump and importing it into a database, it is sometimes useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to decide this LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
 
 For the following example
 
 ```ts
-funciton foo(x: number): void {
+function foo(x: number): void {
 }
 ```
 
@@ -991,16 +991,16 @@ The moniker for `x` looks like this:
 { id: 17, type: "edge", label: "next", outV: 16, inV: 13 }
 ```
 
-In addition to this moniker schemes starting with `$` are reserved and shouldn't be used by a LSIF tool.
+In addition to this moniker schemes starting with `$` are reserved and shouldn't be used by an LSIF tool.
 
 ## Result ranges
 
 Ranges in LSIF have currently two meanings:
 
-1. they act as LSP request sensitive areas in a document (e.g. we use them to decided of for a given position a corresponding LSP request result exists)
+1. they act as LSP request sensitive areas in a document (e.g. we use them to decide if for a given position a corresponding LSP request result exists)
 1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
 
-To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
+To fulfill the first LSIF specifies that ranges can't overlap or be the same. However, this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
 
 ## Meta Data Vertex
 
@@ -1017,7 +1017,7 @@ export interface MetaData {
   /**
    * The version of the LSIF format using semver notation. See https://semver.org/. Please note
    * the version numbers starting with 0 don't adhere to semver and adopters have to assume
-   * the each new version is breaking.
+   * that each new version is breaking.
    */
   version: string;
 
@@ -1028,7 +1028,7 @@ export interface MetaData {
 
   /**
    * The string encoding used to compute line and character values in
-   * positions and ranges. Currently only 'utf-16' is support due to the
+   * positions and ranges. Currently only 'utf-16' is supported due to the
    * limitations in LSP.
    */
   positionEncoding: 'utf-16',
@@ -1063,4 +1063,4 @@ The following emitting constraints (some of which have already mean mentioned in
 
 ## Open Questions
 
-While implementing this for TypeScript and npm we collected a list of [open questions](https://github.com/Microsoft/lsif-typescript/labels/discussion) in form of GitHub issues we are already aware of.
+While implementing this for TypeScript and npm we collected a list of [open questions](https://github.com/Microsoft/lsif-typescript/labels/discussion) in the form of GitHub issues we are already aware of.

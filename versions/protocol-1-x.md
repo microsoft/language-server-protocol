@@ -339,7 +339,7 @@ This section documents the actual language server protocol. It uses the followin
 
 * a header describing the request
 * a _Request_ section describing the format of the request send. The method is a string identifying the request and the params are documented using a TypeScript interface
-* a _Response_ section describing the format of the response. The result item describes the returned data in the case of a success. The error.data describes the returned data in the case of an error. Please remember that in the case of a failure the response already contains an error.code and an error.message field. These fields are only speced if the protocol forces the use of certain error codes or messages. The cases where the server can decide on these values freely are not listed here.
+* a _Response_ section describing the format of the response. The result item describes the returned data in the case of a success. The error.data describes the returned data in the case of an error. Please remember that in the case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. The cases where the server can decide on these values freely are not listed here.
 
 #### Initialize Request
 
@@ -1230,7 +1230,7 @@ export interface CodeLens {
 
 #### Code Lens Resolve
 
-The code lens resolve request is sent from the clien to the server to resolve the command for a given code lens item.
+The code lens resolve request is sent from the client to the server to resolve the command for a given code lens item.
 
 _Request_
 * method: 'codeLens/resolve'
@@ -1242,7 +1242,7 @@ _Response_
 
 #### Document Formatting
 
-The document formatting resquest is sent from the server to the client to format a whole document.
+The document formatting request is sent from the server to the client to format a whole document.
 
 _Request_
 * method: 'textDocument/formatting'
