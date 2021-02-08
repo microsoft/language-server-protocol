@@ -4340,12 +4340,12 @@ export interface CompletionClientCapabilities {
 		}
 
 		/**
-		 * The client has support for a detailed completion item
-		 * label (see also `CompletionItemLabel`).
+		 * The client has support for completion item label
+		 * details (see also `CompletionItemLabelDetails`).
 		 *
 		 * @since 3.17.0 - proposed state
 		 */
-		detailedLabelSupport?: boolean;
+		labelDetailsSupport?: boolean;
 	};
 
 	completionItemKind?: {
@@ -4420,13 +4420,13 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 	 */
 	completionItem?: {
 		/**
-		 * The server has support for a detailed completion item
-		 * label (see also `CompletionItemLabel`) when receiving
+		 * The server has support for completion item label
+		 * details (see also `CompletionItemLabelDetails`) when receiving
 		 * a completion item in a resolve call.
 		 *
 		 * @since 3.17.0 - proposed state
 		 */
-		detailedLabelSupport?: boolean;
+		labelDetailsSupport?: boolean;
 	}
 }
 ```
@@ -4609,15 +4609,11 @@ export namespace InsertTextMode {
 export type InsertTextMode = 1 | 2;
 
 /**
- * A more detailed label for a completion item.
+ * Additional details for a completion item label.
  *
  * @since 3.17.0 - proposed state
  */
-export interface CompletionItemLabel {
-	/**
-	 * The name of a function or variable.
-	 */
-	name: string;
+export interface CompletionItemLabelDetails {
 
 	/**
 	 * The parameters without the return type.
@@ -4640,19 +4636,17 @@ export interface CompletionItem {
 	/**
 	 * The label of this completion item.
 	 *
-	 * If the label is of type `string` it is also by
-	 * default the text that is inserted when selecting
-	 * this completion.
-	 *
-	 * If the label is of type `ComnpletionItemLabel`
-	 * the `name` property is also by default the text
-	 * that is inserted when selecting this completion.
-	 *
-	 * @since 3.17.0 - proposed state -  support for CompletionItemLabel. See
-	 *  also the client and server capability
-	 * `completionItem.detailedLabelSupport`
+	 * The label property is also by default the text that
+	 * is inserted when selecting this completion.
 	 */
-	label: string | CompletionItemLabel;
+	label: string;
+
+	/**
+	 * Additional details for the label
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	labelDetails?: CompletionItemLabelDetails;
 
 
 	/**
@@ -8197,7 +8191,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
 
-* Add support for a detailed completion item label.
+* Add support for a completion item label details.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
