@@ -4638,6 +4638,9 @@ export interface CompletionItem {
 	 *
 	 * The label property is also by default the text that
 	 * is inserted when selecting this completion.
+	 *
+	 * If label details are provided the label itself should
+	 * be an unqualified name of the completion item.
 	 */
 	label: string;
 
