@@ -17,7 +17,8 @@ $(function() {
     dataLayer.push(arguments)
   }
   gtag('js', new Date())
-  gtag('config', 'UA-62780441-30', { anonymize_ip: true })
+  // set cookie to expire in 12 x 28 days
+  gtag('config', 'UA-62780441-30', { 'anonymize_ip': true, 'cookie_expires': 29030400 })
 
   window.WcpConsent && WcpConsent.init("en-US", "cookie-banner", function (err, _siteConsent) {
     }, onConsentChanged, WcpConsent.themes.light);
