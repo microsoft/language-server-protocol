@@ -1202,8 +1202,8 @@ Interesting here is line 22 which defines the moniker for `Disposable#dispose`. 
 - `document` to indicate that the moniker is only unique inside a document. Used for example for locals or private members.
 - `project` to indicate that the moniker is only unique inside a project. Used for example for project internal symbols.
 - `group` to indicate that the moniker is unique inside a group of projects. Used for example for exported members.
-- `scheme` to indicate that the moniker is unique inside the monikers scheme.
-- `global` to indicate that the moniker is globally unique.
+- `scheme` to indicate that the moniker is unique inside the moniker's scheme. For example if the moniker is generated for a specific package manager (see npm example below) then these monikers are usually unique inside the moniker's theme (e.g. all moniker generated for npm carry the `npm` scheme and are unique)
+- `global` to indicate that the moniker is globally unique (e.g. its identifer is unique independent of the scheme or kind)
 
 When generating the dump for P2 the information for `Widget#dispose` will look like this:
 
