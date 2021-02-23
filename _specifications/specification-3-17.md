@@ -4747,8 +4747,8 @@ export interface CompletionItem {
 	 * existing text with a completion text. Since this can usually not be
 	 * predetermined by a server it can report both ranges. Clients need to
 	 * signal support for `InsertReplaceEdits` via the
-	 * `textDocument.completion.insertReplaceSupport` client capability
-	 * property.
+	 * `textDocument.completion.completionItem.insertReplaceSupport` client
+	 * capability property.
 	 *
 	 * *Note 1:* The text edit's range as well as both ranges from an insert
 	 * replace edit must be a [single line] and they must contain the position
