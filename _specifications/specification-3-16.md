@@ -1367,7 +1367,7 @@ export interface MarkupContent {
 
 In addition clients should signal the markdown parser they are using via the client capability `general.markdown` introduced in version 3.16.0 defined as follows:
 
- ```typescript
+```typescript
 /**
  * Client capabilities specific to the used markdown parser.
  *
@@ -1384,7 +1384,7 @@ export interface MarkdownClientCapabilities {
 	 */
 	version?: string;
 }
- ```
+```
 
 Known markdown parsers used by clients right now are:
 
