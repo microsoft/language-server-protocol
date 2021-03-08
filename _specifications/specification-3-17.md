@@ -4697,19 +4697,22 @@ export interface CompletionItem {
 
 	/**
 	 * A string that should be used when comparing this item
-	 * with other items. When `falsy` the label is used.
+	 * with other items. When `falsy` the label is used
+	 * as the sort text for this item.
 	 */
 	sortText?: string;
 
 	/**
 	 * A string that should be used when filtering a set of
-	 * completion items. When `falsy` the label is used.
+	 * completion items. When `falsy` the label is used as the
+	 * filter text for this item.
 	 */
 	filterText?: string;
 
 	/**
 	 * A string that should be inserted into a document when selecting
-	 * this completion. When `falsy` the label is used.
+	 * this completion. When `falsy` the label is used as the insert text
+	 * for this item.
 	 *
 	 * The `insertText` is subject to interpretation by the client side.
 	 * Some tools might not take the string literally. For example
