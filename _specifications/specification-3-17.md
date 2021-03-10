@@ -5916,7 +5916,7 @@ export interface SymbolInformation {
 	kind: SymbolKind;
 
 	/**
-	 * Tags for this completion item.
+	 * Tags for this symbol.
 	 *
 	 * @since 3.16.0
 	 */
