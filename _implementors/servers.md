@@ -116,6 +116,7 @@ index: 1
 | [Robot Framework](https://robotframework.org) | [Robocorp](https://robocorp.com) | [robotframework-lsp](https://github.com/robocorp/robotframework-lsp) | Python |
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) | Ruby |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [language_server-ruby](https://github.com/mtsmfm/language_server-ruby) | Ruby |
+| Ruby | [Dmitry Petrashko](https://github.com/DarkDimius) | [sorbet](https://github.com/sorbet/sorbet) | Ruby |
 | Ruby | [Rafał Łasocha](https://github.com/swistak35) | [orbacle](https://github.com/swistak35/orbacle) | Ruby |
 | [Ruby](https://www.ruby-lang.org/en/) | [Kurt Werle](https://github.com/kwerle/) | [ruby_language_server](https://github.com/kwerle/ruby_language_server) | Ruby |
 | Rust | [Jonathan Turner](https://github.com/jonathandturner) | [Rust Language Server](https://github.com/rust-lang-nursery/rls) | Rust |
