@@ -23,7 +23,7 @@ index: 1
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [csharp-language-server-protocol](https://github.com/OmniSharp/csharp-language-server-protocol) | C# |
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) | C++ |
-| [C++/clang](https://clang.llvm.org/extra/clangd.html)| [llvm-project](http://llvm.org/viewvc/llvm-project/) | [clangd](http://llvm.org/viewvc/llvm-project/clang-tools-extra/trunk/clangd/) | C++ |
+| [C++/clang](https://clangd.llvm.org/)| [LLVM Project](https://llvm.org/) | [clangd](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clangd) | C++ |
 | C/C++/Objective-C | [Jacob Dufault](https://github.com/jacobdufault), [MaskRay](https://github.com/MaskRay), [topisani](https://github.com/topisani) | [cquery](https://github.com/jacobdufault/cquery) | C++ |
 | C/C++/Objective-C | [MaskRay](https://github.com/MaskRay) | [ccls](https://github.com/MaskRay/ccls) | C++ |
 | CSS/LESS/SASS | MS | [vscode-css-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/css-language-features/server) | TypeScript |
