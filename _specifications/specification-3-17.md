@@ -574,19 +574,19 @@ export type DiagnosticSeverity = 1 | 2 | 3 | 4;
  * @since 3.15.0
  */
 export namespace DiagnosticTag {
-    /**
-     * Unused or unnecessary code.
-     *
-     * Clients are allowed to render diagnostics with this tag faded out
+	/**
+	 * Unused or unnecessary code.
+	 *
+	 * Clients are allowed to render diagnostics with this tag faded out
 	 * instead of having an error squiggle.
-     */
-    export const Unnecessary: 1 = 1;
-    /**
-     * Deprecated or obsolete code.
-     *
-     * Clients are allowed to rendered diagnostics with this tag strike through.
-     */
-    export const Deprecated: 2 = 2;
+	 */
+	export const Unnecessary: 1 = 1;
+	/**
+	 * Deprecated or obsolete code.
+	 *
+	 * Clients are allowed to rendered diagnostics with this tag strike through.
+	 */
+	export const Deprecated: 2 = 2;
 }
 
 export type DiagnosticTag = 1 | 2;
@@ -651,7 +651,7 @@ interface Command {
 }
 ```
 
-#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit  & AnnotatedTextEdit </a>
+#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit & AnnotatedTextEdit </a>
 
 > New in version 3.16: Support for `AnnotatedTextEdit`.
 
@@ -995,12 +995,12 @@ export interface WorkspaceEditClientCapabilities {
 	 * @since 3.16.0
 	 */
 	changeAnnotationSupport?: {
-        /**
-         * Whether the client groups edits with equal labels into tree nodes,
-         * for instance all edits labelled with "Changes in Strings" would
-         * be a tree node.
-         */
-        groupsOnLabel?: boolean;
+		/**
+		 * Whether the client groups edits with equal labels into tree nodes,
+		 * for instance all edits labelled with "Changes in Strings" would
+		 * be a tree node.
+		 */
+		groupsOnLabel?: boolean;
 	};
 }
 
@@ -1335,14 +1335,14 @@ export type MarkupKind = 'plaintext' | 'markdown';
  * JavaScript / TypeScript:
  * ```typescript
  * let markdown: MarkdownContent = {
- *  kind: MarkupKind.Markdown,
- *	value: [
- *		'# Header',
- *		'Some text',
- *		'```typescript',
- *		'someCode();',
- *		'```'
- *	].join('\n')
+ * 	kind: MarkupKind.Markdown,
+ * 	value: [
+ * 		'# Header',
+ * 		'Some text',
+ * 		'```typescript',
+ * 		'someCode();',
+ * 		'```'
+ * 	].join('\n')
  * };
  * ```
  *
@@ -1452,7 +1452,7 @@ export interface WorkDoneProgressReport {
 
 	/**
 	 * Controls enablement state of a cancel button. This property is only valid
-	 *  if a cancel button got requested in the `WorkDoneProgressStart` payload.
+	 * if a cancel button got requested in the `WorkDoneProgressStart` payload.
 	 *
 	 * Clients that don't support cancellation or don't support control the
 	 * button's enablement state are allowed to ignore the setting.
@@ -2359,7 +2359,7 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-    monikerProvider?: boolean | MonikerOptions | MonikerRegistrationOptions;
+	monikerProvider?: boolean | MonikerOptions | MonikerRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
@@ -3102,7 +3102,7 @@ export interface DidChangeWatchedFilesRegistrationOptions {
 
 export interface FileSystemWatcher {
 	/**
-	 * The  glob pattern to watch.
+	 * The glob pattern to watch.
 	 *
 	 * Glob patterns can have the following syntax:
 	 * - `*` to match one or more characters in a path segment
@@ -4830,7 +4830,7 @@ export namespace CompletionItemKind {
 	export const TypeParameter = 25;
 }
 ```
-* partial result: `CompletionItem[]`  or `CompletionList` followed by `CompletionItem[]`. If the first provided result item is of type `CompletionList` subsequent partial results of `CompletionItem[]` add to the `items` property of the `CompletionList`.
+* partial result: `CompletionItem[]` or `CompletionList` followed by `CompletionItem[]`. If the first provided result item is of type `CompletionList` subsequent partial results of `CompletionItem[]` add to the `items` property of the `CompletionList`.
 * error: code and message set in case an exception happens during the completion request.
 
 Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is as follows:
@@ -5336,7 +5336,7 @@ export interface DeclarationOptions extends WorkDoneProgressOptions {
 _Registration Options_: `DeclarationRegistrationOptions` defined as follows:
 ```typescript
 export interface DeclarationRegistrationOptions extends DeclarationOptions,
-	TextDocumentRegistrationOptions, StaticRegistrationOptions  {
+	TextDocumentRegistrationOptions, StaticRegistrationOptions {
 }
 ```
 
@@ -6327,7 +6327,7 @@ the `edit` property of a code action to avoid its unnecessary computation during
 Consider the clients announces the `edit` property as a property that can be resolved lazy using the client capability
 
 ```typescript
-textDocument.codeAction.resolveSupport = { properties: ['edit']};
+textDocument.codeAction.resolveSupport = { properties: ['edit'] };
 ```
 
 then a code action
@@ -6743,7 +6743,7 @@ interface ColorPresentation {
 	label: string;
 	/**
 	 * An [edit](#TextEdit) which is applied to a document when selecting
-	 * this presentation for the color.  When `falsy` the
+	 * this presentation for the color. When `falsy` the
 	 * [label](#ColorPresentation.label) is used.
 	 */
 	textEdit?: TextEdit;
@@ -7297,15 +7297,15 @@ _Response_:
 
 ```typescript
 export interface SelectionRange {
-    /**
-     * The [range](#Range) of this selection range.
-     */
-    range: Range;
-    /**
-     * The parent selection range containing this range. Therefore
+	/**
+	 * The [range](#Range) of this selection range.
+	 */
+	range: Range;
+	/**
+	 * The parent selection range containing this range. Therefore
 	 * `parent.range` must contain `this.range`.
-     */
-    parent?: SelectionRange;
+	 */
+	parent?: SelectionRange;
 }
 ```
 
@@ -8060,7 +8060,7 @@ interface MonikerClientCapabilities {
 _Server Capability_:
 
 * property name (optional): `monikerProvider`
-* property type: `boolean | MonikerOptions | MonikerRegistrationOptions`  is defined as follows:
+* property type: `boolean | MonikerOptions | MonikerRegistrationOptions` is defined as follows:
 
 ```typescript
 export interface MonikerOptions extends WorkDoneProgressOptions {
@@ -8096,8 +8096,8 @@ _Response_:
 
 ```typescript
 /**
-  * Moniker uniqueness level to define scope of the moniker.
-  */
+ * Moniker uniqueness level to define scope of the moniker.
+ */
 export enum UniquenessLevel {
 	/**
 	 * The moniker is only unique inside a document
@@ -8185,7 +8185,7 @@ Language servers usually run in a separate process and client communicate with t
   - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary the client should resend the request.
   - keep the request running if the client can still make use of the result by for example transforming it to a new result by applying the state change to the result.
 - servers should therefore not decide by themselves to cancel requests simply due to that fact that a state change notification is detected in the queue. As said the result could still be useful for the client.
-- if a server detects an internal state change (for example a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it  might be especially hard for clients to re-craft a request.
+- if a server detects an internal state change (for example a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
 Servers usually support different communication channels (e.g. stdio, pipes, ...). To easy the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
