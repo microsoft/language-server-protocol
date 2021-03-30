@@ -8302,7 +8302,7 @@ export interface TypeHierarchyItem {
 	 * Indicates if this item has subtypes. When `undefined` the subtypes
 	 * of this item have not been resolved yet.
 	 */
-	hasSubtypes?: boolean
+	hasSubtypes?: boolean;
 
 	/**
 	 * A data entry field that is preserved between a call hierarchy prepare and
@@ -8368,11 +8368,11 @@ The request is sent from the client to the server to resolve the inheritance tre
 * `TreeItem<T>` defined as follows:
 ```typescript
 export interface TreeItem<T> {
-	data: T,
+	data: T;
 	/**
 	 * The children of this TreeItem. When `undefined` the children have not been resolved yet.
 	 */
-	children?: TreeItem<T>[],
+	children?: TreeItem<T>[];
 }
 ```
 The result represents the inheritance tree related to the specified type hierarchy item. Only single inheritance can be represented this way. The root type is expected as the return value. The request doesn't define its own client and server capabilities. It is only issued if a server has the capability for `TypeHierarchyOptions/inheritanceTreeSuppport`.
