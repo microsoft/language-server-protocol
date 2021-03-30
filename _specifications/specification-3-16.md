@@ -4321,7 +4321,7 @@ export interface CompletionClientCapabilities {
 		/**
 		 * The client supports the `insertTextMode` property on
 		 * a completion item to override the whitespace handling mode
-		 * as defined by the client (see `insertTextMode`).
+		 * as defined by the client.
 		 *
 		 * @since 3.16.0
 		 */
@@ -4660,8 +4660,7 @@ export interface CompletionItem {
 
 	/**
 	 * How whitespace and indentation is handled during completion
-	 * item insertion. If not provided the client's default value depends on
-	 * the `textDocument.completion.insertTextModeSupport` client capability.
+	 * item insertion. If not provided the client's default value is used.
 	 *
 	 * @since 3.16.0
 	 */

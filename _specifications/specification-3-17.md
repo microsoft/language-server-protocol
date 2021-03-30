@@ -4394,6 +4394,14 @@ export interface CompletionClientCapabilities {
 	 * `textDocument/completion` request.
 	 */
 	contextSupport?: boolean;
+
+	/**
+	 * The client's default when the completion item doesn't provide a
+	 * `insertTextMode` property.
+	 *
+	 * @since 3.17.0
+	 */
+	insertTextMode?: InsertTextMode;
 }
 ```
 
@@ -4759,9 +4767,10 @@ export interface CompletionItem {
 	/**
 	 * How whitespace and indentation is handled during completion
 	 * item insertion. If not provided the client's default value depends on
-	 * the `textDocument.completion.insertTextModeSupport` client capability.
+	 * the `textDocument.completion.insertTextMode` client capability.
 	 *
 	 * @since 3.16.0
+	 * @since 3.17.0 - support for `textDocument.completion.insertTextMode`
 	 */
 	insertTextMode?: InsertTextMode;
 
