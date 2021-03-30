@@ -208,7 +208,32 @@ export namespace ErrorCodes {
 	 */
 	export const lspReservedErrorRangeStart: integer = -32899;
 
+	/**
+	 * The server cancelled the request. This error code should
+	 * only be used for requests that explicitly support being
+	 * server cancellable.
+	 *
+	 * @since 3.17.0
+	 */
+	export const ServerCancelled: integer = -32802;
+
+
+	/**
+	 * The server detected that the content of a document got
+	 * modified outside normal conditions. A server should
+	 * NOT send this error code if it detects a content change
+	 * in it unprocessed messages. The result even computed
+	 * on an older state might still be useful for the client.
+	 *
+	 * If a client decides that a result is not of any use anymore
+	 * the client should cancel the request.
+	 */
 	export const ContentModified: integer = -32801;
+
+	/**
+	 * The client has canceled a request and a server as detected
+	 * the cancel.
+	 */
 	export const RequestCancelled: integer = -32800;
 
 	/**
@@ -4734,7 +4759,7 @@ export interface CompletionItem {
 	/**
 	 * How whitespace and indentation is handled during completion
 	 * item insertion. If not provided the client's default value depends on
-	 * the `textDocument.completion.insertTextMode` client capability.
+	 * the `textDocument.completion.insertTextModeSupport` client capability.
 	 *
 	 * @since 3.16.0
 	 */
