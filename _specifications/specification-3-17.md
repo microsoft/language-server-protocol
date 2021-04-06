@@ -184,9 +184,9 @@ export namespace ErrorCodes {
 	 * are left in the range.
 	 *
 	 * @since 3.16.0
-	*/
+	 */
 	export const jsonrpcReservedErrorRangeStart: integer = -32099;
-	/** @deprecated use  jsonrpcReservedErrorRangeStart */
+	/** @deprecated use jsonrpcReservedErrorRangeStart */
 	export const serverErrorStart: integer = jsonrpcReservedErrorRangeStart;
 
 	export const ServerNotInitialized: integer = -32002;
@@ -195,9 +195,11 @@ export namespace ErrorCodes {
 	/**
 	 * This is the start range of JSON RPC reserved error codes.
 	 * It doesn't denote a real error code.
-	*/
+	 * 
+	 * @since 3.16.0
+	 */
 	export const jsonrpcReservedErrorRangeEnd = -32000;
-	/** @deprecated use  jsonrpcReservedErrorRangeEnd */
+	/** @deprecated use jsonrpcReservedErrorRangeEnd */
 	export const serverErrorEnd: integer = jsonrpcReservedErrorRangeEnd;
 
 	/**
@@ -966,7 +968,7 @@ export interface WorkspaceEdit {
 	 */
 	changeAnnotations?: {
 		[id: string /* ChangeAnnotationIdentifier */]: ChangeAnnotation;
-	}
+	};
 }
 ```
 
@@ -1477,7 +1479,7 @@ export interface WorkDoneProgressReport {
 
 	/**
 	 * Controls enablement state of a cancel button. This property is only valid
-	 * if a cancel button got requested in the `WorkDoneProgressStart` payload.
+	 * if a cancel button got requested in the `WorkDoneProgressBegin` payload.
 	 *
 	 * Clients that don't support cancellation or don't support control the
 	 * button's enablement state are allowed to ignore the setting.
@@ -1613,7 +1615,7 @@ To keep the protocol backwards compatible servers are only allowed to use `windo
 		 * `window/workDoneProgress/create` request.
 		 */
 		workDoneProgress?: boolean;
-	}
+	};
 ```
 
 #### <a href="#partialResults" name="partialResults" class="anchor"> Partial Result Progress </a>
@@ -1670,7 +1672,7 @@ A `TraceValue` represents the level of verbosity with which the server systemati
 The initial trace value is set by the client at initialization and can be modified later using the [$/setTrace](#setTrace) notification.
 
 ```typescript
-export type TraceValue = 'off' | 'message' | 'verbose'
+export type TraceValue = 'off' | 'message' | 'verbose';
 ```
 
 ### Actual Protocol
@@ -2070,7 +2072,7 @@ interface ClientCapabilities {
 			 * The client has support for sending willDeleteFiles requests.
 			 */
 			willDelete?: boolean;
-		}
+		};
 	};
 
 	/**
@@ -2104,7 +2106,7 @@ interface ClientCapabilities {
 		 * @since 3.16.0
 		 */
 		showDocument?: ShowDocumentClientCapabilities;
-	}
+	};
 
 	/**
 	 * General client capabilities.
@@ -2147,7 +2149,7 @@ interface ClientCapabilities {
 		 * @since 3.16.0
 		 */
 		markdown?: MarkdownClientCapabilities;
-	}
+	};
 
 	/**
 	 * Experimental client capabilities.
@@ -2441,8 +2443,8 @@ interface ServerCapabilities {
 			 * requests.
 			 */
 			willDelete?: FileOperationRegistrationOptions;
-		}
-	}
+		};
+	};
 
 	/**
 	 * Experimental server capabilities.
@@ -2600,7 +2602,7 @@ export interface ShowMessageRequestClientCapabilities {
 		 * request's response.
 		 */
 		additionalPropertiesSupport?: boolean;
-	}
+	};
 }
 ```
 
@@ -3249,7 +3251,7 @@ interface WorkspaceSymbolClientCapabilities {
 		 * the initial version of the protocol.
 		 */
 		valueSet?: SymbolKind[];
-	}
+	};
 
 	/**
 	 * The client supports tags on `SymbolInformation`.
@@ -3261,8 +3263,8 @@ interface WorkspaceSymbolClientCapabilities {
 		/**
 		 * The tags supported by the client.
 		 */
-		valueSet: SymbolTag[]
-	}
+		valueSet: SymbolTag[];
+	};
 }
 ```
 
@@ -3331,7 +3333,7 @@ export interface ExecuteCommandOptions extends WorkDoneProgressOptions {
 	/**
 	 * The commands to be executed on the server
 	 */
-	commands: string[]
+	commands: string[];
 }
 ```
 
@@ -3419,7 +3421,7 @@ export interface ApplyWorkspaceEditResponse {
 	/**
 	 * Depending on the client's failure handling strategy `failedChange`
 	 * might contain the index of the change that failed. This property is
-	 * only available if the client signals a `failureHandlingStrategy`
+	 * only available if the client signals a `failureHandling` strategy
 	 * in its client capabilities.
 	 */
 	failedChange?: uinteger;
@@ -3921,7 +3923,7 @@ export type TextDocumentContentChangeEvent = {
 	 * The new text of the whole document.
 	 */
 	text: string;
-}
+};
 ```
 
 #### <a href="#textDocument_willSave" name="textDocument_willSave" class="anchor">WillSaveTextDocument Notification (:arrow_right:)</a>
@@ -4300,7 +4302,7 @@ export interface CompletionClientCapabilities {
 		/**
 		 * Client supports commit characters on a completion item.
 		 */
-		commitCharactersSupport?: boolean
+		commitCharactersSupport?: boolean;
 
 		/**
 		 * Client supports the follow content formats for the documentation
@@ -4330,8 +4332,8 @@ export interface CompletionClientCapabilities {
 			/**
 			 * The tags supported by the client.
 			 */
-			valueSet: CompletionItemTag[]
-		}
+			valueSet: CompletionItemTag[];
+		};
 
 		/**
 		 * Client supports insert replace edit to control different behavior if
@@ -4344,7 +4346,7 @@ export interface CompletionClientCapabilities {
 		/**
 		 * Indicates which properties a client can resolve lazily on a
 		 * completion item. Before version 3.16.0 only the predefined properties
-		 * `documentation` and `details` could be resolved lazily.
+		 * `documentation` and `detail` could be resolved lazily.
 		 *
 		 * @since 3.16.0
 		 */
@@ -4364,7 +4366,7 @@ export interface CompletionClientCapabilities {
 		 */
 		insertTextModeSupport?: {
 			valueSet: InsertTextMode[];
-		}
+		};
 
 		/**
 		 * The client has support for completion item label
@@ -4785,7 +4787,7 @@ export interface CompletionItem {
 	 * item. One is to insert a completion text and the other is to replace an
 	 * existing text with a completion text. Since this can usually not be
 	 * predetermined by a server it can report both ranges. Clients need to
-	 * signal support for `InsertReplaceEdits` via the
+	 * signal support for `InsertReplaceEdit`s via the
 	 * `textDocument.completion.completionItem.insertReplaceSupport` client
 	 * capability property.
 	 *
@@ -4830,7 +4832,7 @@ export interface CompletionItem {
 	 * A data entry field that is preserved on a completion item between
 	 * a completion and a completion resolve request.
 	 */
-	data?: any
+	data?: any;
 }
 
 /**
@@ -5610,7 +5612,7 @@ _Request_:
 ```typescript
 export interface ReferenceParams extends TextDocumentPositionParams,
 	WorkDoneProgressParams, PartialResultParams {
-	context: ReferenceContext
+	context: ReferenceContext;
 }
 
 export interface ReferenceContext {
@@ -5755,7 +5757,7 @@ export interface DocumentSymbolClientCapabilities {
 		 * the initial version of the protocol.
 		 */
 		valueSet?: SymbolKind[];
-	}
+	};
 
 	/**
 	 * The client supports hierarchical document symbols.
@@ -5773,8 +5775,8 @@ export interface DocumentSymbolClientCapabilities {
 		/**
 		 * The tags supported by the client.
 		 */
-		valueSet: SymbolTag[]
-	}
+		valueSet: SymbolTag[];
+	};
 
 	/**
 	 * The client supports an additional label presented in the UI when
@@ -6071,7 +6073,7 @@ export interface CodeActionClientCapabilities {
 	resolveSupport?: {
 		/**
 		 * The properties that a client can resolve lazily.
-		*/
+		 */
 		properties: string[];
 	};
 
@@ -6345,7 +6347,7 @@ export interface CodeAction {
 	 *
 	 * @since 3.16.0
 	 */
-	data?: any
+	data?: any;
 }
 ```
 * partial result: `(Command | CodeAction)[]`
@@ -6464,7 +6466,7 @@ interface CodeLens {
 	 * A data entry field that is preserved on a code lens item between
 	 * a code lens and a code lens resolve request.
 	 */
-	data?: any
+	data?: any;
 }
 ```
 * partial result: `CodeLens[]`
@@ -7738,10 +7740,10 @@ interface SemanticTokensClientCapabilities {
 			/**
 			 * The client will send the `textDocument/semanticTokens/full/delta`
 			 * request if the server provides a corresponding handler.
-			*/
+			 */
 			delta?: boolean
-		}
-	}
+		};
+	};
 
 	/**
 	 * The token types that the client supports.
@@ -7799,7 +7801,7 @@ export interface SemanticTokensOptions extends WorkDoneProgressOptions {
 		 * The server supports deltas for full documents.
 		 */
 		delta?: boolean;
-	}
+	};
 }
 ```
 
@@ -7921,7 +7923,7 @@ export interface SemanticTokensEdit {
 
 ```typescript
 export interface SemanticTokensDeltaPartialResult {
-	edits: SemanticTokensEdit[]
+	edits: SemanticTokensEdit[];
 }
 ```
 
