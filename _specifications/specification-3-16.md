@@ -194,6 +194,10 @@ export namespace ErrorCodes {
 	/** @deprecated use jsonrpcReservedErrorRangeStart */
 	export const serverErrorStart: integer = jsonrpcReservedErrorRangeStart;
 
+	/**
+	 * Error code indicating that a server received a notification or
+	 * request before the server has received the `initialize` request.
+	 */
 	export const ServerNotInitialized: integer = -32002;
 	export const UnknownErrorCode: integer = -32001;
 
