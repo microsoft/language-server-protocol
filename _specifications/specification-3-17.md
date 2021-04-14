@@ -8194,8 +8194,8 @@ export interface Moniker {
 
 The type hierarchy request is sent from the client to the server to return a type hierarchy for the language element of given text document positions. Will return `null` if the server couldn't infer a valid type from the position. The type hierarchy requests are executed in two steps:
 
-  1. first a type hierarchy item is prepared for the given text document position
-  1. the client request the server to resolve the given item with its supertypes or subtypes
+  1. first a type hierarchy item is prepared for the given text document position.
+  1. for a type hierarchy item the supertype or subtype type hierarchy items are resolved.
 
 In the first step, the `textDocument/prepareTypeHierarchy` request could have a unique, constant and optional `transactionId`. The following `typeHierarchy/supertypes` and `typeHierarchy/subtypes` requests in the second step could have the same `transactionId` in their params, which could be used to help indicate some cached data in the server.
 
