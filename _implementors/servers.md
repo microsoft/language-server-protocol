@@ -111,6 +111,7 @@ index: 1
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
+| [REL](https://github.com/sscit/rel) | [Stefan Schlichthärle](https://www.github.com/sscit) | [rel-ls](https://github.com/sscit/rel) | C++ |
 | [ReScript](https://rescript-lang.org) | [rescript-lang](https://github.com/rescript-lang) | [rescript-vscode](https://github.com/rescript-lang/rescript-vscode) | TypeScript |
 | [Robot Framework](https://robotframework.org/) | [Tomi Turtiainen](https://github.com/tomi) | [VSCode RF language server](https://github.com/tomi/vscode-rf-language-server) | TypeScript |
 | [Robot Framework](https://robotframework.org) | [Robocorp](https://robocorp.com) | [robotframework-lsp](https://github.com/robocorp/robotframework-lsp) | Python |
