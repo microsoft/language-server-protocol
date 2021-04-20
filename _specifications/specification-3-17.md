@@ -8217,6 +8217,182 @@ export interface Moniker {
 
 Server implementations of this method should ensure that the moniker calculation matches to those used in the corresponding LSIF implementation to ensure symbols can be associated correctly across IDE sessions and LSIF indexes.
 
+#### <a href="#textDocument_inlayHints" name="textDocument_inlayHints" class="anchor">Inlay hints (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.17.0*
+
+Inlay hints are short textual annotations that are attached to ranges in the source code.
+
+**TODO**: Is "inlay hints" too presentational a name? The protocol allows other UI (e.g. pop-up when cursor is in the target range).
+
+These typically spell out some inferred information, such as the parameter name when passing a value to a function.
+
+```typescript
+/**
+ * Well-known kinds of information conveyed by InlayHints.
+ * This is not an exhaustive list, servers may use other categories as needed.
+ */
+export enum InlayHintCategory {
+	/**
+	 * The range is an expression passed as an argument to a function.
+	 * The label is the name of the parameter.
+	 */
+	'parameter',
+	/**
+	 * The range is an entity whose type is unknown.
+	 * The label is its inferred type.
+	 */
+	'type'
+}
+```
+
+Hints may be grouped into server-defined _classes_.
+Hints in the same class are displayed in similar ways, and the class avoids duplicating this information in each hint.
+
+**TODO**: classes might be useful "subcategories" for users to enable/disable hints. If so, they'd need a description.
+
+**TODO**: are classes actually useful? should we just inline this info into the hints?
+
+```typescript
+export interface InlayHintClass {
+	/**
+	 * The kind of information this hint conveys.
+	 * May be an InlayHintCategory or any other value. 
+	 */
+	category?: string;
+
+	/**
+	 * The placement of the label, when displayed inline.
+	 * "start" and "end" mean insertion at the endpoints of the target range.
+	 * Default is "start".
+	 */
+	position?: "start" | "end";
+ 
+	/**
+	 * Text to be displayed before the label when displayed inline.
+	 * Typically this is punctuation allowing it to read naturally as code.
+	 */
+	prefix?: string;
+	/**
+	 * Text to be displayed after the label when displayed inline.
+	 */
+	suffix?: string;
+}
+```
+
+The `textDocument/inlayHints` request is sent from the client to the server to retrieve inlay hints for a document.
+
+_Client Capabilities_:
+
+* property name (optional): `textDocument.inlayHints`
+* property type: `InlayHintsClientCapabilities` defined as follows:
+
+```typescript
+interface InlayHintsClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to
+	 * `true` the client supports the new `(TextDocumentRegistrationOptions &
+	 * StaticRegistrationOptions)` return value for the corresponding server
+	 * capability as well.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+
+* property name (optional): `inlayHintsProvider`
+* property type: `boolean | InlayHintsOptions | InlayHintsRegistrationOptions` is defined as follows:
+
+```typescript
+export interface InlayHintsOptions extends WorkDoneProgressOptions {
+	/**
+	 * Defines the classes of hints the server will provide.
+	 * Individual hints may reference one of these by index.
+	 */
+	hintClasses?: InlayHintClass[],
+
+	/**
+	 * Whether the server supports retrieving inlay hints for a limited range
+	 * within a document.
+	 */
+	range?: boolean;
+}
+```
+
+_Registration Options_: `InlayHintsRegistrationOptions` defined as follows:
+
+```typescript
+export interface InlayHintsRegistrationOptions extends
+	TextDocumentRegistrationOptions, InlayHintsOptions {
+}
+```
+
+_Request_:
+
+* method: `textDocument/inlayHints`
+* params: `InlayHintsParams` defined as follows:
+
+```typescript
+export interface InlayHintsParams extends WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The range the inlay hints are requested for.
+	 * If unset, returns all hints for the document.
+	 * Servers that do not set InlayHintsOptions.range may ignore this.
+	 * 
+	 * TODO: it's more common in LSP to have a separate request - do we need to?
+	 */
+	range?: Range;
+
+	// TODO: is 'only' useful in practice?
+}
+```
+
+_Response_:
+
+* result: `InlayHint[]`
+* partial result: `InlayHint[]`
+* error: code and message set in case an exception happens during the 'textDocument/inlayHint' request
+
+`InlayHint` is defined as follows:
+
+```typescript
+/**
+ * An inlay hint is a short textual annotation for a range of source code.
+ */
+export interface InlayHint {
+	/**
+	 * The value to be shown.
+	 */
+	label: string;
+
+	/**
+	 * The range of text this hint is attached to.
+	 * May affect when the hint is displayed, and the effect of selecting it.
+	 */
+	target: Range;
+
+	/**
+	 * References an InlayHintClass that provides additional properties.
+	 * This is an index into InlayHintsOptions.hintClasses.
+	 */
+	hintClass?: uinteger
+
+	/**
+	 * The placement of the label, when displayed inline.
+	 * This overrides the default value set by the class.
+	 */ 
+	position?: Position;
+}
+```
+
+**TODO**: Do we need a `/refresh` server->client call, like with SemanticTokens and Code Lens?
+
 ### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
 Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
@@ -8240,6 +8416,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
 
 * Add support for a completion item label details.
+* Add support for inlay hints.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 

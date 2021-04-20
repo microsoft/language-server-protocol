@@ -229,6 +229,8 @@
       anchor: textDocument_linkedEditingRange
     - title: moniker
       anchor: textDocument_moniker
+    - title: inlay hints
+      anchor: textDocument_inlayHints
   - title: Change Log
     anchor: changeLog
     children:
