@@ -1044,6 +1044,131 @@ export interface MetaData {
 }
 ```
 
+## Sourcegraph Extensions
+
+### The Documentation vertex
+
+A Documentation vertex describes hierarchial project-wide documentation.
+
+It represents documentation for a programming construct (variable, function, etc.) or group of programming constructs in a workspace (library, package, crate, module, etc.)
+
+The exact structure of the documentation depends on what makes sense for the specific language and concepts being described.
+
+The `documentation` vertex is attached to a `project` vertex using a `documentation` edge, like this:
+
+```typescript
+{ id: 1, type: "vertex", label: "project", resource: "file:///Users/dirkb/tsconfig.json", kind: "typescript"}
+{ id: 2, type: "vertex", label: "documentation", ... }
+{ id: 3, type: "edge", label: "documentation", outV: 1, inV: 2 }
+```
+
+The definition of the `documentation` vertex looks as follows:
+
+```ts
+export interface Documentation extends V {
+	/**
+	 * The label property.
+	 */
+	label: VertexLabels.documentation;
+
+	/**
+	 * A human-readable URL slug identifier for this documentation. It should be unique relative to
+	 * sibling Documentation.
+	 */
+	slug: string;
+
+	/**
+	 * Whether or not this Documentation is the beginning of a new major section, meaning it and its
+	 * its children should be e.g. displayed on their own dedicate page.
+	 */
+	newPage: boolean;
+
+	/**
+	 * A single-line label to display for this documentation in e.g. the index of a book. For
+	 * example, the name of a group of documentation, the name of a library, the signature of a
+	 * function or class, etc.
+	 */
+	title: InteractiveMarkupContent;
+
+	/**
+	 * A detailed multi-line string that contains detailed documentation for the section described by
+	 * the title.
+	 */
+	detail: InteractiveMarkupContent;
+
+	/**
+	 * Tags about the type of content this documentation contains.
+	 */
+	tags: DocumentationTag[];
+
+	/**
+	 * Documentation that should be logically nested below this documentation itself, expressed as
+	 * "documentation" vertex IDs. For example, this documentation may describe a class and have
+	 * children describing each method of the class.
+	 */
+    children: number[];
+}
+```
+Where `InteractiveMarkupContent` is defined as follows:
+```ts
+export interface InteractiveMarkupContent {
+	/**
+	 * The actual content which should be considered interactive.
+	 */
+	content: MarkupContent;
+
+	/**
+	 * Ranges in the `content` string mapping to an associated "documentation" vertex ID, allowing
+	 * for text in one piece of documentation to link to another.
+	 */
+	documentation: { [{range: Range]: number };
+
+	/**
+	 * Ranges in the `content` string mapping to an associated "hoverResult" vertex ID, allowing
+	 * for text in one piece of documentation to include a hover result.
+	 *
+	 * The hover result could be specific to the documentation itself, or e.g. part of a type
+	 * signature being hovered over.
+	 */
+	hover: { [{range: Range]: number };
+
+	/**
+	 * Ranges in the `content` string mapping to an associated "definitionResult" vertex ID,
+	 * allowing for text in one piece of documentation to include a definition result.
+	 *
+	 * This enables users to e.g. go-to-definition on a type signature inside documentation.
+	 */
+	definition: { [{range: Range]: number };
+
+	/**
+	 * Ranges in the `content` string mapping to an associated "referenceResult" vertex ID,
+	 * allowing for text in one piece of documentation to include a definition result.
+	 *
+	 * This enables users to e.g. find-references on a type signature inside documentation.
+	 */
+	references: { [{range: Range]: number };
+}
+```
+Where `DocumentationTag` is defined as follows:
+```ts
+export enum DocumentationTag {
+	/**
+	 * The documentation describes a concept that is exported externally.
+	 */
+	exported = 'exported',
+
+	/**
+	 * The documentation describes a concept that is unexported / internal.
+	 */
+	unexported = 'unexported',
+
+	/**
+	 * The documentation describes a concept that is deprecated.
+	 */
+	deprecated = 'deprecated',
+}
+```
+
 ## Emitting constraints
 
 The following emitting constraints (some of which have already mean mentioned in the document) exists:
