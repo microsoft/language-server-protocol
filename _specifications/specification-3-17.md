@@ -8222,9 +8222,6 @@ Server implementations of this method should ensure that the moniker calculation
 > *Since version 3.17.0*
 
 Inlay hints are short textual annotations that are attached to ranges in the source code.
-
-**TODO**: Is "inlay hints" too presentational a name? The protocol allows other UI (e.g. pop-up when cursor is in the target range).
-
 These typically spell out some inferred information, such as the parameter name when passing a value to a function.
 
 ```typescript
