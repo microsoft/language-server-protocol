@@ -8227,7 +8227,7 @@ These typically spell out some inferred information, such as the parameter name 
 ```typescript
 /**
  * Well-known kinds of information conveyed by InlayHints.
- * Clients may choose to display hints from some categories but not others.
+ * Clients may choose which categories to display according to user preferences.
  */
 export enum InlayHintCategory {
 	/**
