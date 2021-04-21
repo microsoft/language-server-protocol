@@ -8230,7 +8230,7 @@ These typically spell out some inferred information, such as the parameter name 
 ```typescript
 /**
  * Well-known kinds of information conveyed by InlayHints.
- * This is not an exhaustive list, servers may use other categories as needed.
+ * Clients may choose to display hints from some categories but not others.
  */
 export enum InlayHintCategory {
 	/**
@@ -8257,7 +8257,8 @@ Hints in the same class are displayed in similar ways, and the class avoids dupl
 export interface InlayHintClass {
 	/**
 	 * The kind of information this hint conveys.
-	 * May be an InlayHintCategory or any other value. 
+	 * May be an InlayHintCategory or any other value, clients should treat
+	 * unrecognized values as if missing.
 	 */
 	category?: string;
 
@@ -8349,7 +8350,12 @@ export interface InlayHintsParams extends WorkDoneProgressParams, PartialResultP
 	 */
 	range?: Range;
 
-	// TODO: is 'only' useful in practice?
+	/**
+	 * The categories of inlay hints that are interesting to the client.
+	 * The client should filter out hints of other categories, so the server may
+	 * skip computing them.
+	 */
+	only?: string[];
 }
 ```
 
