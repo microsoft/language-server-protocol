@@ -1657,7 +1657,7 @@ A `TraceValue` represents the level of verbosity with which the server systemati
 The initial trace value is set by the client at initialization and can be modified later using the [$/setTrace](#setTrace) notification.
 
 ```typescript
-export type TraceValue = 'off' | 'message' | 'verbose';
+export type TraceValue = 'off' | 'messages' | 'verbose';
 ```
 
 ### Actual Protocol
@@ -2455,7 +2455,7 @@ _Notification_:
 A notification to log the trace of the server's execution.
 The amount and content of these notifications depends on the current `trace` configuration.
 If `trace` is `'off'`, the server should not send any `logTrace` notification.
-If `trace` is `'message'`, the server should not add the `'verbose'` field in the `LogTraceParams`.
+If `trace` is `'messages'`, the server should not add the `'verbose'` field in the `LogTraceParams`.
 
 `$/logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send [`window/logMessage`](#window_logMessage) notifications.
 
