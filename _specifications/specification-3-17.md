@@ -29,17 +29,14 @@ separated by a '\r\n'.
 
 ### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
-The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conform to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
-
-Currently the following header fields are supported:
+The header part consists of `Content-Length` header field, which follows [HTTP headers](https://tools.ietf.org/html/rfc7230#section-3.2) structure. The field is a name and a value separated by ': ' (a colon and a space) and terminated by '\r\n'.
 
 | Header Field Name | Value Type  | Description |
 |:------------------|:------------|:------------|
-| Content-Length    | number      | The length of the content part in bytes. This header is required. |
-| Content-Type      | string      | The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf-8 |
+| Content-Length    | number      | The length of the content part in bytes. |
 {: .table .table-bordered .table-responsive}
 
-The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
+The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part. Considering the header field itself is  terminated with '\r\n, this means that two '\r\n' sequences always precede the content part of a message.
 
 ### <a href="#contentPart" name="contentPart" class="anchor"> Content Part </a>
 
