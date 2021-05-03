@@ -1882,7 +1882,7 @@ export interface TextDocumentClientCapabilities {
 	 */
 	rangeFormatting?: DocumentRangeFormattingClientCapabilities;
 
-	/** request.
+	/**
 	 * Capabilities specific to the `textDocument/onTypeFormatting` request.
 	 */
 	onTypeFormatting?: DocumentOnTypeFormattingClientCapabilities;
