@@ -8197,8 +8197,6 @@ The type hierarchy request is sent from the client to the server to return a typ
   1. first a type hierarchy item is prepared for the given text document position.
   1. for a type hierarchy item the supertype or subtype type hierarchy items are resolved.
 
-In the first step, the `textDocument/prepareTypeHierarchy` request could have a unique, constant and optional `transactionId`. The following `typeHierarchy/supertypes` and `typeHierarchy/subtypes` requests in the second step could have the same `transactionId` in their params, which could be used to help indicate some cached data in the server.
-
 _Client Capability_:
 
 * property name (optional): `textDocument.typeHierarchy`
@@ -8223,6 +8221,10 @@ _Server Capability_:
 
 ```typescript
 export interface TypeHierarchyOptions extends WorkDoneProgressOptions {
+	/** 
+	 * The server supports for providing an inheritance tree.
+	 */
+	inheritanceTreeSuppport?: boolean;
 }
 ```
 
@@ -8243,7 +8245,6 @@ _Request_:
 ```typescript
 export interface TypeHierarchyPrepareParams extends TextDocumentPositionParams,
 	WorkDoneProgressParams {
-	transactionId?: integer | string;
 }
 ```
 
@@ -8293,7 +8294,9 @@ export interface TypeHierarchyItem {
 
 	/**
 	 * A data entry field that is preserved between a type hierarchy prepare and
-	 * supertypes or subtypes requests.
+	 * supertypes or subtypes requests. It could also be used to identify the 
+	 * type hierarchy in the server, helping improve the performance on 
+	 * resolving supertypes and subtypes.
 	 */
 	data?: unknown;
 }
@@ -8315,8 +8318,11 @@ _Request_:
 ```typescript
 export interface TypeHierarchySupertypesParams extends
 	WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * If this is set to `true`, The request only asks for super class.
+	 */
+	classOnly?: boolean;
 	item: TypeHierarchyItem;
-	transactionId?: integer | string;
 }
 ```
 _Response_:
@@ -8340,7 +8346,6 @@ _Request_:
 export interface TypeHierarchySubtypesParams extends
 	WorkDoneProgressParams, PartialResultParams {
 	item: TypeHierarchyItem;
-	transactionId?: integer | string;
 }
 ```
 _Response_:
