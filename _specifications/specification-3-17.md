@@ -2431,7 +2431,7 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.17.0
 	 */
-	typeHierarchyProvider?: boolean | TypeHierarchyOptions
+	typeHierarchyProvider?: TypeHierarchyOptions
 		| TypeHierarchyRegistrationOptions;
 
 	/**
@@ -8217,7 +8217,7 @@ interface TypeHierarchyClientCapabilities {
 _Server Capability_:
 
 * property name (optional): `typeHierarchyProvider`
-* property type: `boolean | TypeHierarchyOptions | TypeHierarchyRegistrationOptions` where `TypeHierarchyOptions` is defined as follows:
+* property type: `TypeHierarchyOptions | TypeHierarchyRegistrationOptions` where `TypeHierarchyOptions` is defined as follows:
 
 ```typescript
 export interface TypeHierarchyOptions extends WorkDoneProgressOptions {
