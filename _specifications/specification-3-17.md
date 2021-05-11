@@ -1894,7 +1894,7 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the `textDocument/formatting` request.
 	 */
-	formatting?: DocumentFormattingClientCapabilities
+	formatting?: DocumentFormattingClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/rangeFormatting` request.
