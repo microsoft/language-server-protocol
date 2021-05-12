@@ -14,10 +14,12 @@ index: 1
 | 1C Enterprise | [Contributors](https://github.com/1c-syntax/bsl-language-server/graphs/contributors) | [BSL Language Server](https://github.com/1c-syntax/bsl-language-server) | Java |
 | ActionScript 2.0 | [Adam Vernon](https://github.com/admvx) |  [AS2 Language Support](https://github.com/admvx/as2-language-support) | TypeScript |
 | Ada/SPARK | AdaCore |  [ada_language_server](https://github.com/AdaCore/ada_language_server) | Ada |
+| [AML](https://a.ml/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | Antlr | [Ken Domino](https://github.com/kaby76) | [Antlrvsix](https://github.com/kaby76/AntlrVSIX) | C# |
 | [API Elements](http://api-elements.readthedocs.io/en/latest/) | [Vincenzo Chianese(@XVincentX)](https://github.com/XVincentX) | [vscode-apielements](https://github.com/XVincentX/vscode-apielements) | TypeScript |
 | Apache Camel | [Contributors](https://github.com/camel-tooling/camel-language-server/graphs/contributors) | [Apache Camel Language Server](https://github.com/camel-tooling/camel-language-server) | Java |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) | TypeScript |
+| [AsyncAPI](https://www.asyncapi.com/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | Ballerina | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
@@ -87,6 +89,7 @@ index: 1
 | Nim | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
 | OCaml/Reason | [freebroccolo](https://github.com/freebroccolo) | [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server) | TypeScript |
 | OCaml/Reason | [OCaml Labs](http://ocamllabs.io) | [ocamllsp](https://github.com/ocaml/ocaml-lsp) | OCaml |
+| [OpenAPI](https://www.openapis.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | [openVALIDATION](http://openvalidation.io/) | [openVALIDATION](https://github.com/openvalidation) | [ov-language-server](https://github.com/openvalidation/ov-language-server) | TypeScript
 | [Papyrus](https://www.creationkit.com/fallout4/index.php?title=Category:Papyrus) | [Joel Day](https://github.com/joelday) | [papyrus-lang](https://github.com/joelday/papyrus-lang) | C# |
 | Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl |
@@ -109,6 +112,7 @@ index: 1
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
 | Racket | [Jay McCarthy](https://github.com/jeapostrophe) | [racket-langserver](https://github.com/jeapostrophe/racket-langserver) | Racket |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
+| [RAML](https://raml.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
 | [REL](https://github.com/sscit/rel) | [Stefan Schlichthärle](https://www.github.com/sscit) | [rel-ls](https://github.com/sscit/rel) | C++ |
