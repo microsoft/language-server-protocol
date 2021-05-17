@@ -8224,7 +8224,7 @@ export interface TypeHierarchyOptions extends WorkDoneProgressOptions {
 	/** 
 	 * The server supports for providing an inheritance tree.
 	 */
-	inheritanceTreeSuppport?: boolean;
+	inheritanceTreeSupport?: boolean;
 }
 ```
 
