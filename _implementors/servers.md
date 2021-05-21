@@ -70,7 +70,8 @@ index: 1
 | Haskell| [Alan Zimmerman](https://github.com/alanz) | [Haskell Language Server (HLS)](https://github.com/haskell/haskell-language-server) | Haskell |
 | [Haxe](https://haxe.org/) | [Haxe Foundation](https://github.com/HaxeFoundation/) | [Haxe Language Server](https://github.com/vshaxe/haxe-language-server) | Haxe |
 | HLSL | [Tim Jones](https://github.com/tgjones) | [HLSL Tools](https://github.com/tgjones/HlslTools/tree/master/src/ShaderTools.LanguageServer) | C# |
-| [Isabelle](https://www.cl.cam.ac.uk/research/hvg/Isabelle/) | [Makarius Wenzel](https://github.com/makarius) | [sources](https://isabelle.in.tum.de/repos/isabelle/file/tip/src/Tools/VSCode) | Scala |
+| [Isabelle](https://www.cl.cam.ac.uk/research/hvg/Isabelle/) | [Makarius Wenzel](https://github.com/makarius) | [sources](https://isabelle.in.tum.de/repos/isabelle/file/tip/src/Tools/VSCode)  | Scala |
+| [Idris2](https://github.com/idris-lang/Idris2) | [Idris community](https://github.com/idris-community) | [idris2-lsp](https://github.com/idris-community/idris2-lsp)  | Idris2 |
 | JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) | TypeScript |
 | Java (Eclipse)| Eclipse, [RedHat](http://developers.redhat.com/blog/2016/08/01/a-week-of-hacking-the-java-language-server/) |  [Eclipse JDT LS](https://github.com/eclipse/eclipse.jdt.ls/) | Java |
 | Java | [@georgewfraser](https://github.com/georgewfraser) | [Java Compiler (javac) API-based Java support](https://github.com/georgewfraser/vscode-javac) | Java |
