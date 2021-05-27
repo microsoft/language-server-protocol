@@ -8221,7 +8221,7 @@ Server implementations of this method should ensure that the moniker calculation
 
 > *Since version 3.17.0*
 
-Inlay hints are short textual annotations that are attached to ranges in the source code.
+Inlay hints are short textual annotations that are attached to points in the source code.
 These typically spell out some inferred information, such as the parameter name when passing a value to a function.
 
 ```typescript
@@ -8326,10 +8326,9 @@ export interface InlayHint {
 	label: string;
 
 	/**
-	 * The range of text this hint is attached to.
-	 * May affect when the hint is displayed, and the effect of selecting it.
+	 * The position within the code this hint is attached to.
 	 */
-	target: Range;
+	position: Position;
 
 	/**
 	 * The kind of information this hint conveys.
