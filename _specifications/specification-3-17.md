@@ -8269,11 +8269,6 @@ _Server Capability_:
 
 ```typescript
 export interface InlayHintsOptions extends WorkDoneProgressOptions {
-	/**
-	 * Whether the server supports retrieving inlay hints for a limited range
-	 * within a document.
-	 */
-	range?: boolean;
 }
 ```
 
@@ -8300,9 +8295,6 @@ export interface InlayHintsParams extends WorkDoneProgressParams, PartialResultP
 	/**
 	 * The range the inlay hints are requested for.
 	 * If unset, returns all hints for the document.
-	 * Servers that do not set InlayHintsOptions.range may ignore this.
-	 * 
-	 * TODO: it's more common in LSP to have a separate request - do we need to?
 	 */
 	range?: Range;
 
