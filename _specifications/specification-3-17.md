@@ -8243,41 +8243,6 @@ export enum InlayHintCategory {
 }
 ```
 
-Hints may be grouped into server-defined _classes_.
-Hints in the same class are displayed in similar ways, and the class avoids duplicating this information in each hint.
-
-**TODO**: classes might be useful "subcategories" for users to enable/disable hints. If so, they'd need a description.
-
-**TODO**: are classes actually useful? should we just inline this info into the hints?
-
-```typescript
-export interface InlayHintClass {
-	/**
-	 * The kind of information this hint conveys.
-	 * May be an InlayHintCategory or any other value, clients should treat
-	 * unrecognized values as if missing.
-	 */
-	category?: string;
-
-	/**
-	 * The placement of the label, when displayed inline.
-	 * "start" and "end" mean insertion at the endpoints of the target range.
-	 * Default is "start".
-	 */
-	position?: "start" | "end";
- 
-	/**
-	 * Text to be displayed before the label when displayed inline.
-	 * Typically this is punctuation allowing it to read naturally as code.
-	 */
-	prefix?: string;
-	/**
-	 * Text to be displayed after the label when displayed inline.
-	 */
-	suffix?: string;
-}
-```
-
 The `textDocument/inlayHints` request is sent from the client to the server to retrieve inlay hints for a document.
 
 _Client Capabilities_:
@@ -8304,12 +8269,6 @@ _Server Capability_:
 
 ```typescript
 export interface InlayHintsOptions extends WorkDoneProgressOptions {
-	/**
-	 * Defines the classes of hints the server will provide.
-	 * Individual hints may reference one of these by index.
-	 */
-	hintClasses?: InlayHintClass[],
-
 	/**
 	 * Whether the server supports retrieving inlay hints for a limited range
 	 * within a document.
@@ -8370,7 +8329,7 @@ _Response_:
  */
 export interface InlayHint {
 	/**
-	 * The value to be shown.
+	 * The text to be shown.
 	 */
 	label: string;
 
@@ -8381,16 +8340,11 @@ export interface InlayHint {
 	target: Range;
 
 	/**
-	 * References an InlayHintClass that provides additional properties.
-	 * This is an index into InlayHintsOptions.hintClasses.
+	 * The kind of information this hint conveys.
+	 * May be an InlayHintCategory or any other value, clients should treat
+	 * unrecognized values as if missing.
 	 */
-	hintClass?: uinteger
-
-	/**
-	 * The placement of the label, when displayed inline.
-	 * This overrides the default value set by the class.
-	 */ 
-	position?: Position;
+	category?: string;
 }
 ```
 
