@@ -1,15 +1,59 @@
 <script>
-  var baseurl = '{{ site.baseurl }}'
+  var baseurl = '{{ site.baseurl }}';
 </script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
 <!-- Microsoft EU cookie compliance library -->
 <script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62780441-30"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+  integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+  integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="{{ site.baseurl }}/js/page.js"></script>
+
+
+<script type="text/javascript">
+  var linkableTypes = {
+  {% for linkableGroup in site.data.linkableTypes %}
+  {% for linkableType in linkableGroup.children %}
+  "{{ linkableType.type }}": "{{ linkableType.link }}",
+    {% endfor %}
+  {% endfor %}
+  };
+</script>
+
+<script type="text/javascript">
+  function tryGetAssociatedLink(name) {
+    var link = linkableTypes[name];
+
+    if (!link) {
+      return;
+    }
+
+    var anchor = document.createElement("a");
+    var currentSpecification = '/specification-3-17';
+    var hrefUrl = link[0] === '/' ?
+      `${baseurl}/specifications${link}` :
+      `${baseurl}/specifications/${currentSpecification}/${link}`;
+    anchor.setAttribute("href", hrefUrl);
+    anchor.textContent = name;
+    return anchor;
+  }
+
+  var elements = document.querySelectorAll("code .nx, code.highlighter-rouge");
+  for (var element of elements) {
+    var typeName = element.textContent;
+    var link = linkableTypes[typeName];
+    var linkNode = tryGetAssociatedLink(typeName);
+
+    if (linkNode) {
+      element.replaceChildren(linkNode);
+    }
+  }
+</script>

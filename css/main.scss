@@ -457,12 +457,13 @@ pre[class=highlight] {
 	color: #1034a8 !important;
 }
 
-a {
-	color: #2753e3;
+code.highlighter-rouge a {
+	color: #bd4147;
+	font-weight: bold;
 }
 
 a:hover {
-	color: #1034a8
+	color: #1034a8;
 }
 
 .navbar-dark .navbar-nav .nav-link {
