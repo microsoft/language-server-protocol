@@ -8234,12 +8234,12 @@ export enum InlayHintCategory {
 	 * The range is an expression passed as an argument to a function.
 	 * The label is the name of the parameter.
 	 */
-	'parameter',
+	Parameter = 'parameter',
 	/**
 	 * The range is an entity whose type is unknown.
 	 * The label is its inferred type.
 	 */
-	'type'
+	Type = 'type'
 }
 ```
 
