@@ -3362,8 +3362,11 @@ _Response_:
  */
 export interface CompletionList {
 	/**
-	 * This list it not complete. Further typing should result in recomputing
+	 * This list is not complete. Further typing should result in recomputing
 	 * this list.
+	 *
+	 * Recomputed lists have all their items replaced (not appended) in the
+	 * incomplete completion sessions.
 	 */
 	isIncomplete: boolean;
 
