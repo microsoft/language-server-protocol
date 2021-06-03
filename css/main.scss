@@ -476,3 +476,17 @@ a:hover {
 		font-size: 14px;
 	}
 }
+
+.anchorHolder {
+	position: relative;
+}
+
+.linkableAnchor {
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	z-index: -1;
+	top: -60px;
+	left: 0;
+}

@@ -69,6 +69,7 @@ The following TypeScript definitions describe the base [JSON-RPC protocol](http:
 
 The protocol use the following definitions for integers, unsigned integers and decimal numbers:
 
+<div class="anchorHolder"><a href="#integer" name="integer" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Defines an integer number in the range of -2^31 to 2^31 - 1.
@@ -76,6 +77,7 @@ The protocol use the following definitions for integers, unsigned integers and d
 export type integer = number;
 ```
 
+<div class="anchorHolder"><a href="#uinteger" name="uinteger" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Defines an unsigned integer number in the range of 0 to 2^31 - 1.
@@ -83,6 +85,7 @@ export type integer = number;
 export type uinteger = number;
 ```
 
+<div class="anchorHolder"><a href="#decimal" name="decimal" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Defines a decimal number. Since decimal numbers are very
@@ -98,7 +101,7 @@ export type decimal = number;
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
 
-<a href="#message" name="message"></a>
+<div class="anchorHolder"><a href="#message" name="message" class="linkableAnchor"></a></div>
 ```typescript
 interface Message {
 	jsonrpc: string;
@@ -150,7 +153,10 @@ interface ResponseMessage extends Message {
 	 */
 	error?: ResponseError;
 }
+```
 
+<div class="anchorHolder"><a href="#responseError" name="responseError" class="linkableAnchor"></a></div>
+```typescript
 interface ResponseError {
 	/**
 	 * A number indicating the error type that occurred.
@@ -168,7 +174,10 @@ interface ResponseError {
 	 */
 	data?: string | number | boolean | array | object | null;
 }
+```
 
+<div class="anchorHolder"><a href="#errorCodes" name="errorCodes" class="linkableAnchor"></a></div>
+```typescript
 export namespace ErrorCodes {
 	// Defined by JSON RPC
 	export const ParseError: integer = -32700;
@@ -307,7 +316,9 @@ _Notification_:
 
 ```typescript
 type ProgressToken = integer | string;
+```
 
+```typescript
 interface ProgressParams<T> {
 	/**
 	 * The progress token provided by the client or server.
@@ -351,6 +362,7 @@ We also maintain a node module to parse a string into `scheme`, `authority`, `pa
 
 Many of the interfaces contain fields that correspond to the URI of a document. For clarity, the type of such a field is declared as a `DocumentUri`. Over the wire, it will still be transferred as a string, but this guarantees that the contents of that string can be parsed as a valid URI.
 
+<div class="anchorHolder"><a href="#documentUri" name="documentUri" class="linkableAnchor"></a></div>
 ```typescript
 type DocumentUri = string;
 ```
@@ -578,6 +590,7 @@ export interface Diagnostic {
 
 The protocol currently supports the following diagnostic severities and tags:
 
+<div class="anchorHolder"><a href="#diagnosticSeverity" name="diagnosticSeverity" class="linkableAnchor"></a></div>
 ```typescript
 export namespace DiagnosticSeverity {
 	/**
@@ -599,7 +612,10 @@ export namespace DiagnosticSeverity {
 }
 
 export type DiagnosticSeverity = 1 | 2 | 3 | 4;
+```
 
+<div class="anchorHolder"><a href="#diagnosticTag" name="diagnosticTag" class="linkableAnchor"></a></div>
+```typescript
 /**
  * The diagnostic tags.
  *
@@ -626,6 +642,7 @@ export type DiagnosticTag = 1 | 2;
 
 `DiagnosticRelatedInformation` is defined as follows:
 
+<div class="anchorHolder"><a href="#diagnosticRelatedInformation" name="diagnosticRelatedInformation" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Represents a related message and source code location for a diagnostic.
@@ -647,6 +664,7 @@ export interface DiagnosticRelatedInformation {
 
 `CodeDescription` is defined as follows:
 
+<div class="anchorHolder"><a href="#codeDescription" name="codeDescription" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Structure to capture a description for an error code.
@@ -707,6 +725,7 @@ interface TextEdit {
 
 Since 3.16.0 there is also the concept of an annotated text edit which supports to add an annotation to a text edit. The annotation can add information describing the change to the text edit.
 
+<div class="anchorHolder"><a href="#changeAnnotation" name="changeAnnotation" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Additional information that describes document changes.
@@ -736,8 +755,8 @@ export interface ChangeAnnotation {
 
 Usually clients provide options to group the changes along the annotations they are associated with. To support this in the protocol an edit or resource operation refers to a change annotation using an identifier and not the change annotation literal directly. This allows servers to use the identical annotation across multiple edits or resource operations which then allows clients to group the operations under that change annotation. The actual change annotations together with their identifers are managed by the workspace edit via the new property `changeAnnotations`.
 
+<div class="anchorHolder"><a href="#changeAnnotationIdentifier" name="changeAnnotationIdentifier" class="linkableAnchor"></a></div>
 ```typescript
-
 /**
  * An identifier referring to a change annotation managed by a workspace
  * edit.
@@ -745,8 +764,10 @@ Usually clients provide options to group the changes along the annotations they 
  * @since 3.16.0.
  */
 export type ChangeAnnotationIdentifier = string;
+```
 
-
+<div class="anchorHolder"><a href="#annotatedTextEdit" name="annotatedTextEdit" class="linkableAnchor"></a></div>
+```typescript
 /**
  * A special text edit with an additional change annotation.
  *
@@ -795,6 +816,7 @@ export interface TextDocumentEdit {
 
 File resource changes allow servers to create, rename and delete files and folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
 
+<div class="anchorHolder"><a href="#createFileOptions" name="createFileOptions" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Options to create a file.
@@ -810,7 +832,10 @@ export interface CreateFileOptions {
 	 */
 	ignoreIfExists?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#createFile" name="createFile" class="linkableAnchor"></a></div>
+```typescript
 /**
  * Create file operation
  */
@@ -837,7 +862,10 @@ export interface CreateFile {
 	 */
 	annotationId?: ChangeAnnotationIdentifier;
 }
+```
 
+<div class="anchorHolder"><a href="#renameFileOptions" name="renameFileOptions" class="linkableAnchor"></a></div>
+```typescript
 /**
  * Rename file options
  */
@@ -852,7 +880,10 @@ export interface RenameFileOptions {
 	 */
 	ignoreIfExists?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#renameFile" name="renameFile" class="linkableAnchor"></a></div>
+```typescript
 /**
  * Rename file operation
  */
@@ -884,7 +915,10 @@ export interface RenameFile {
 	 */
 	annotationId?: ChangeAnnotationIdentifier;
 }
+```
 
+<div class="anchorHolder"><a href="#deleteFileOptions" name="deleteFileOptions" class="linkableAnchor"></a></div>
+```typescript
 /**
  * Delete file options
  */
@@ -899,7 +933,10 @@ export interface DeleteFileOptions {
 	 */
 	ignoreIfNotExists?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#deleteFile" name="deleteFile" class="linkableAnchor"></a></div>
+```typescript
 /**
  * Delete file operation
  */
@@ -1035,7 +1072,10 @@ export interface WorkspaceEditClientCapabilities {
 		groupsOnLabel?: boolean;
 	};
 }
+```
 
+<div class="anchorHolder"><a href="#resourceOperationKind" name="resourceOperationKind" class="linkableAnchor"></a></div>
+```typescript
 /**
  * The kind of resource operations supported by the client.
  */
@@ -1058,7 +1098,10 @@ export namespace ResourceOperationKind {
 	 */
 	export const Delete: ResourceOperationKind = 'delete';
 }
+```
 
+<div class="anchorHolder"><a href="#failureHandlingKind" name="failureHandlingKind" class="linkableAnchor"></a></div>
+```typescript
 export type FailureHandlingKind = 'abort' | 'transactional' | 'undo'
 	| 'textOnlyTransactional';
 
@@ -1214,6 +1257,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 
 An identifier which optionally denotes a specific version of a text document. This information usually flows from the server to the client.
 
+<div class="anchorHolder"><a href="#optionalVersionedTextDocumentIdentifier" name="optionalVersionedTextDocumentIdentifier" class="linkableAnchor"></a></div>
 ```typescript
 interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	/**
@@ -1292,6 +1336,7 @@ export interface DocumentFilter {
 
 A document selector is the combination of one or more document filters.
 
+<div class="anchorHolder"><a href="#documentSelector" name="documentSelector" class="linkableAnchor"></a></div>
 ```typescript
 export type DocumentSelector = DocumentFilter[];
 ```
@@ -1354,7 +1399,10 @@ export namespace MarkupKind {
 	export const Markdown: 'markdown' = 'markdown';
 }
 export type MarkupKind = 'plaintext' | 'markdown';
+```
 
+<div class="anchorHolder"><a href="#markupContentDefinition" name="markupContentInnerDefinition" class="linkableAnchor"></a></div>
+```typescript
 /**
  * A `MarkupContent` literal represents a string value which content is
  * interpreted base on its kind flag. Currently the protocol supports
@@ -1396,6 +1444,7 @@ export interface MarkupContent {
 
 In addition clients should signal the markdown parser they are using via the client capability `general.markdown` introduced in version 3.16.0 defined as follows:
 
+<div class="anchorHolder"><a href="#markdownClientCapabilities" name="markdownClientCapabilities" class="linkableAnchor"></a></div>
  ```typescript
 /**
  * Client capabilities specific to the used markdown parser.
@@ -1559,6 +1608,8 @@ Consider a client sending a `textDocument/reference` request to a server and the
 
 The corresponding type definition for the parameter property looks like this:
 
+
+<div class="anchorHolder"><a href="#workDoneProgressParams" name="workDoneProgressParams" class="linkableAnchor"></a></div>
 ```typescript
 export interface WorkDoneProgressParams {
 	/**
@@ -1599,6 +1650,7 @@ To avoid that clients set up a progress monitor user interface before sending a 
 
 The corresponding type definition for the server capability looks like this:
 
+<div class="anchorHolder"><a href="#workDoneProgressOptions" name="workDoneProgressOptions" class="linkableAnchor"></a></div>
 ```typescript
 export interface WorkDoneProgressOptions {
 	workDoneProgress?: boolean;
@@ -1716,6 +1768,7 @@ _Request_:
 * method: 'initialize'
 * params: `InitializeParams` defined as follows:
 
+<div class="anchorHolder"><a href="#initializeParams" name="initializeParams" class="linkableAnchor"></a></div>
 ```typescript
 interface InitializeParams extends WorkDoneProgressParams {
 	/**
@@ -1805,6 +1858,7 @@ Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as f
 
 `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
 
+<div class="anchorHolder"><a href="#textDocumentClientCapabilities" name="textDocumentClientCapabilities" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Text document specific client capabilities.
@@ -1966,6 +2020,7 @@ export interface TextDocumentClientCapabilities {
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
+<div class="anchorHolder"><a href="#clientCapabilities" name="clientCapabilities" class="linkableAnchor"></a></div>
 ```typescript
 interface ClientCapabilities {
 	/**
@@ -2166,6 +2221,7 @@ interface ClientCapabilities {
 _Response_:
 * result: `InitializeResult` defined as follows:
 
+<div class="anchorHolder"><a href="#initializeResult" name="initializeResult" class="linkableAnchor"></a></div>
 ```typescript
 interface InitializeResult {
 	/**
@@ -2193,6 +2249,7 @@ interface InitializeResult {
 ```
 * error.code:
 
+<div class="anchorHolder"><a href="#initializeError" name="initializeError" class="linkableAnchor"></a></div>
 ```typescript
 /**
  * Known error codes for an `InitializeError`;
@@ -2225,6 +2282,7 @@ interface InitializeError {
 
 The server can signal the following capabilities:
 
+<div class="anchorHolder"><a href="#serverCapabilities" name="serverCapabilities" class="linkableAnchor"></a></div>
 ```typescript
 interface ServerCapabilities {
 	/**
