@@ -7169,7 +7169,7 @@ export interface FoldingRange {
 
 The selection range request is sent from the client to the server to return suggested selection ranges at an array of given positions. A selection range is a range around the cursor position which the user might be interested in selecting.
 
-A selection range in the return array is for the position in the provided parameters at the same index. Therefore positions[i] must be contained in result[i].range.
+A selection range in the return array is for the position in the provided parameters at the same index. Therefore positions[i] must be contained in result[i].range. To allow for results where some positions have selection ranges and others do not, result[i].range is allowed to be the empty range at positions[i].
 
 Typically, but not necessary, selection ranges correspond to the nodes of the syntax tree.
 
