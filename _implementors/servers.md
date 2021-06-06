@@ -162,5 +162,6 @@ index: 1
 | YAML (with JSON schemas)| [Adam Voss](https://github.com/adamvoss) | [vscode-yaml-languageservice](https://github.com/adamvoss/vscode-yaml-languageservice) | TypeScript |
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) | TypeScript |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
+| Zig | [Zig Developers](https://github.com/orgs/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
 {: .table .table-bordered .table-responsive}
