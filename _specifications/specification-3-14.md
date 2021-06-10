@@ -674,6 +674,7 @@ Git | `git-commit` and `git-rebase`
 Go | `go`
 Groovy | `groovy`
 Handlebars | `handlebars`
+HCL | `hcl` (unknown schemas **only**; see also Terraform)
 HTML | `html`
 Ini | `ini`
 Java | `java`
@@ -703,6 +704,7 @@ ShaderLab | `shaderlab`
 Shell Script (Bash) | `shellscript`
 SQL | `sql`
 Swift | `swift`
+Terraform | `terraform` (`*.tf`), `terraform-vars` (`*.tfvars`)
 TypeScript | `typescript`
 TypeScript React| `typescriptreact`
 TeX | `tex`
