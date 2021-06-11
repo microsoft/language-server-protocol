@@ -6455,6 +6455,8 @@ _Client Capability_:
 * property name (optional): `textDocument.codeAction`
 * property type: `CodeActionClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#codeActionClientCapabilities" name="codeActionClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeActionClientCapabilities {
 	/**
@@ -6539,6 +6541,8 @@ _Server Capability_:
 * property name (optional): `codeActionProvider`
 * property type: `boolean | CodeActionOptions` where `CodeActionOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#codeActionOptions" name="codeActionOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeActionOptions extends WorkDoneProgressOptions {
 	/**
@@ -6560,6 +6564,9 @@ export interface CodeActionOptions extends WorkDoneProgressOptions {
 ```
 
 _Registration Options_: `CodeActionRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#codeActionRegistrationOptions" name="codeActionRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeActionRegistrationOptions extends
 	TextDocumentRegistrationOptions, CodeActionOptions {
@@ -6567,8 +6574,10 @@ export interface CodeActionRegistrationOptions extends
 ```
 
 _Request_:
-* method: 'textDocument/codeAction'
+* method: `textDocument/codeAction`
 * params: `CodeActionParams` defined as follows:
+
+<div class="anchorHolder"><a href="#codeActionParams" name="codeActionParams" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -6591,7 +6600,11 @@ export interface CodeActionParams extends WorkDoneProgressParams,
 	 */
 	context: CodeActionContext;
 }
+```
 
+<div class="anchorHolder"><a href="#codeActionKind" name="codeActionKind" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * The kind of a code action.
  *
@@ -6676,7 +6689,11 @@ export namespace CodeActionKind {
 	export const SourceOrganizeImports: CodeActionKind =
 		'source.organizeImports';
 }
+```
 
+<div class="anchorHolder"><a href="#codeActionContext" name="codeActionContext" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Contains additional diagnostic information about the context in which
  * a code action is run.
@@ -6704,6 +6721,8 @@ export interface CodeActionContext {
 
 _Response_:
 * result: `(Command | CodeAction)[]` \| `null` where `CodeAction` is defined as follows:
+
+<div class="anchorHolder"><a href="#codeAction" name="codeAction" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -6826,7 +6845,7 @@ _Client Capability_:
 * property type: `{ properties: string[]; }`
 
 _Request_:
-* method: 'codeAction/resolve'
+* method: `codeAction/resolve`
 * params: `CodeAction`
 
 _Response_:
@@ -6841,6 +6860,8 @@ _Client Capability_:
 * property name (optional): `textDocument.codeLens`
 * property type: `CodeLensClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#codeLensClientCapabilities" name="codeLensClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeLensClientCapabilities {
 	/**
@@ -6854,6 +6875,8 @@ _Server Capability_:
 * property name (optional): `codeLensProvider`
 * property type: `CodeLensOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#codeLensOptions" name="codeLensOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeLensOptions extends WorkDoneProgressOptions {
 	/**
@@ -6864,6 +6887,9 @@ export interface CodeLensOptions extends WorkDoneProgressOptions {
 ```
 
 _Registration Options_: `CodeLensRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#codeLensRegistrationOptions" name="codeLensRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeLensRegistrationOptions extends
 	TextDocumentRegistrationOptions, CodeLensOptions {
@@ -6871,8 +6897,10 @@ export interface CodeLensRegistrationOptions extends
 ```
 
 _Request_:
-* method: 'textDocument/codeLens'
+* method: `textDocument/codeLens`
 * params: `CodeLensParams` defined as follows:
+
+<div class="anchorHolder"><a href="#codeLensParams" name="codeLensParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface CodeLensParams extends WorkDoneProgressParams, PartialResultParams {
@@ -6885,6 +6913,8 @@ interface CodeLensParams extends WorkDoneProgressParams, PartialResultParams {
 
 _Response_:
 * result: `CodeLens[]` \| `null` defined as follows:
+
+<div class="anchorHolder"><a href="#codeLens" name="codeLens" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -6922,7 +6952,7 @@ interface CodeLens {
 The code lens resolve request is sent from the client to the server to resolve the command for a given code lens item.
 
 _Request_:
-* method: 'codeLens/resolve'
+* method: `codeLens/resolve`
 * params: `CodeLens`
 
 _Response_:
@@ -6939,6 +6969,8 @@ _Client Capability_:
 
 * property name (optional): `workspace.codeLens`
 * property type: `CodeLensWorkspaceClientCapabilities` defined as follows:
+
+<div class="anchorHolder"><a href="#codeLensWorkspaceClientCapabilities" name="codeLensWorkspaceClientCapabilities" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CodeLensWorkspaceClientCapabilities {
@@ -6973,6 +7005,8 @@ _Client Capability_:
 * property name (optional): `textDocument.documentLink`
 * property type: `DocumentLinkClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#documentLinkClientCapabilities" name="documentLinkClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentLinkClientCapabilities {
 	/**
@@ -6993,6 +7027,8 @@ _Server Capability_:
 * property name (optional): `documentLinkProvider`
 * property type: `DocumentLinkOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#documentLinkOptions" name="documentLinkOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentLinkOptions extends WorkDoneProgressOptions {
 	/**
@@ -7003,6 +7039,9 @@ export interface DocumentLinkOptions extends WorkDoneProgressOptions {
 ```
 
 _Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#documentLinkRegistrationOptions" name="documentLinkRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentLinkRegistrationOptions extends
 	TextDocumentRegistrationOptions, DocumentLinkOptions {
@@ -7010,8 +7049,10 @@ export interface DocumentLinkRegistrationOptions extends
 ```
 
 _Request_:
-* method: 'textDocument/documentLink'
+* method: `textDocument/documentLink`
 * params: `DocumentLinkParams` defined as follows:
+
+<div class="anchorHolder"><a href="#documentLinkParams" name="documentLinkParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface DocumentLinkParams extends WorkDoneProgressParams,
@@ -7025,6 +7066,8 @@ interface DocumentLinkParams extends WorkDoneProgressParams,
 
 _Response_:
 * result: `DocumentLink[]` \| `null`.
+
+<div class="anchorHolder"><a href="#documentLink" name="documentLink" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -7069,7 +7112,7 @@ interface DocumentLink {
 The document link resolve request is sent from the client to the server to resolve the target of a given document link.
 
 _Request_:
-* method: 'documentLink/resolve'
+* method: `documentLink/resolve`
 * params: `DocumentLink`
 
 _Response_:
@@ -7090,6 +7133,8 @@ _Client Capability_:
 * property name (optional): `textDocument.colorProvider`
 * property type: `DocumentColorClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#documentColorClientCapabilities" name="documentColorClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentColorClientCapabilities {
 	/**
@@ -7103,12 +7148,17 @@ _Server Capability_:
 * property name (optional): `colorProvider`
 * property type: `boolean | DocumentColorOptions | DocumentColorRegistrationOptions` where `DocumentColorOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#documentColorOptions" name="documentColorOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentColorOptions extends WorkDoneProgressOptions {
 }
 ```
 
 _Registration Options_: `DocumentColorRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#documentColorRegistrationOptions" name="documentColorRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentColorRegistrationOptions extends
 	TextDocumentRegistrationOptions, StaticRegistrationOptions,
@@ -7118,8 +7168,10 @@ export interface DocumentColorRegistrationOptions extends
 
 _Request_:
 
-* method: 'textDocument/documentColor'
+* method: `textDocument/documentColor`
 * params: `DocumentColorParams` defined as follows
+
+<div class="anchorHolder"><a href="#documentColorParams" name="documentColorParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface DocumentColorParams extends WorkDoneProgressParams,
@@ -7134,6 +7186,8 @@ interface DocumentColorParams extends WorkDoneProgressParams,
 _Response_:
 * result: `ColorInformation[]` defined as follows:
 
+<div class="anchorHolder"><a href="#colorInformation" name="colorInformation" class="linkableAnchor"></a></div>
+
 ```typescript
 interface ColorInformation {
 	/**
@@ -7146,7 +7200,11 @@ interface ColorInformation {
 	 */
 	color: Color;
 }
+```
 
+<div class="anchorHolder"><a href="#color" name="color" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents a color in RGBA space.
  */
@@ -7188,8 +7246,10 @@ This request has no special capabilities and registration options since it is se
 
 _Request_:
 
-* method: 'textDocument/colorPresentation'
+* method: `textDocument/colorPresentation`
 * params: `ColorPresentationParams` defined as follows
+
+<div class="anchorHolder"><a href="#colorPresentationParams" name="colorPresentationParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface ColorPresentationParams extends WorkDoneProgressParams,
@@ -7213,6 +7273,8 @@ interface ColorPresentationParams extends WorkDoneProgressParams,
 
 _Response_:
 * result: `ColorPresentation[]` defined as follows:
+
+<div class="anchorHolder"><a href="#colorPresentation" name="colorPresentation" class="linkableAnchor"></a></div>
 
 ```typescript
 interface ColorPresentation {
@@ -7248,6 +7310,8 @@ _Client Capability_:
 * property name (optional): `textDocument.formatting`
 * property type: `DocumentFormattingClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#documentFormattingClientCapabilities" name="documentFormattingClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentFormattingClientCapabilities {
 	/**
@@ -7261,12 +7325,17 @@ _Server Capability_:
 * property name (optional): `documentFormattingProvider`
 * property type: `boolean | DocumentFormattingOptions` where `DocumentFormattingOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#documentFormattingOptions" name="documentFormattingOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentFormattingOptions extends WorkDoneProgressOptions {
 }
 ```
 
 _Registration Options_: `DocumentFormattingRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#documentFormattingRegistrationOptions" name="documentFormattingRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentFormattingRegistrationOptions extends
 	TextDocumentRegistrationOptions, DocumentFormattingOptions {
@@ -7274,8 +7343,10 @@ export interface DocumentFormattingRegistrationOptions extends
 ```
 
 _Request_:
-* method: 'textDocument/formatting'
+* method: `textDocument/formatting`
 * params: `DocumentFormattingParams` defined as follows
+
+<div class="anchorHolder"><a href="#documentFormattingParams" name="documentFormattingParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface DocumentFormattingParams extends WorkDoneProgressParams {
@@ -7289,7 +7360,11 @@ interface DocumentFormattingParams extends WorkDoneProgressParams {
 	 */
 	options: FormattingOptions;
 }
+```
 
+<div class="anchorHolder"><a href="#formattingOptions" name="formattingOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Value-object describing what options formatting should use.
  */
@@ -7344,6 +7419,8 @@ _Client Capability_:
 * property name (optional): `textDocument.rangeFormatting`
 * property type: `DocumentRangeFormattingClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#documentRangeFormattingClientCapabilities" name="documentRangeFormattingClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentRangeFormattingClientCapabilities {
 	/**
@@ -7357,6 +7434,8 @@ _Server Capability_:
 * property name (optional): `documentRangeFormattingProvider`
 * property type: `boolean | DocumentRangeFormattingOptions` where `DocumentRangeFormattingOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#documentRangeFormattingOptions" name="documentRangeFormattingOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentRangeFormattingOptions extends
 	WorkDoneProgressOptions {
@@ -7364,6 +7443,9 @@ export interface DocumentRangeFormattingOptions extends
 ```
 
 _Registration Options_: `DocumentFormattingRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#documentRangeFormattingRegistrationOptions" name="documentRangeFormattingRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentRangeFormattingRegistrationOptions extends
 	TextDocumentRegistrationOptions, DocumentRangeFormattingOptions {
@@ -7371,8 +7453,10 @@ export interface DocumentRangeFormattingRegistrationOptions extends
 ```
 
 _Request_:
-* method: 'textDocument/rangeFormatting',
+* method: `textDocument/rangeFormatting`,
 * params: `DocumentRangeFormattingParams` defined as follows:
+
+<div class="anchorHolder"><a href="#documentRangeFormattingParams" name="documentRangeFormattingParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
