@@ -7489,6 +7489,8 @@ _Client Capability_:
 * property name (optional): `textDocument.onTypeFormatting`
 * property type: `DocumentOnTypeFormattingClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#documentOnTypeFormattingClientCapabilities" name="documentOnTypeFormattingClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentOnTypeFormattingClientCapabilities {
 	/**
@@ -7501,6 +7503,8 @@ export interface DocumentOnTypeFormattingClientCapabilities {
 _Server Capability_:
 * property name (optional): `documentOnTypeFormattingProvider`
 * property type: `DocumentOnTypeFormattingOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#documentOnTypeFormattingOptions" name="documentOnTypeFormattingOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface DocumentOnTypeFormattingOptions {
@@ -7517,6 +7521,9 @@ export interface DocumentOnTypeFormattingOptions {
 ```
 
 _Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#documentOnTypeFormattingRegistrationOptions" name="documentOnTypeFormattingRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentOnTypeFormattingRegistrationOptions extends
 	TextDocumentRegistrationOptions, DocumentOnTypeFormattingOptions {
@@ -7524,8 +7531,10 @@ export interface DocumentOnTypeFormattingRegistrationOptions extends
 ```
 
 _Request_:
-* method: 'textDocument/onTypeFormatting'
+* method: `textDocument/onTypeFormatting`
 * params: `DocumentOnTypeFormattingParams` defined as follows:
+
+<div class="anchorHolder"><a href="#documentOnTypeFormattingParams" name="documentOnTypeFormattingParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface DocumentOnTypeFormattingParams extends TextDocumentPositionParams {
@@ -7553,6 +7562,8 @@ _Client Capability_:
 * property name (optional): `textDocument.rename`
 * property type: `RenameClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#prepareSupportDefaultBehavior" name="prepareSupportDefaultBehavior" class="linkableAnchor"></a></div>
+
 ```typescript
 export namespace PrepareSupportDefaultBehavior {
 	/**
@@ -7561,6 +7572,11 @@ export namespace PrepareSupportDefaultBehavior {
 	 */
 	 export const Identifier: 1 = 1;
 }
+```
+
+<div class="anchorHolder"><a href="#renameClientCapabilities" name="renameClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
 export interface RenameClientCapabilities {
 	/**
 	 * Whether rename supports dynamic registration.
@@ -7605,6 +7621,8 @@ _Server Capability_:
 
 `RenameOptions` may only be specified if the client states that it supports `prepareSupport` in its initial `initialize` request.
 
+<div class="anchorHolder"><a href="#renameOptions" name="renameOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface RenameOptions extends WorkDoneProgressOptions {
 	/**
@@ -7615,6 +7633,9 @@ export interface RenameOptions extends WorkDoneProgressOptions {
 ```
 
 _Registration Options_: `RenameRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#renameRegistrationOptions" name="renameRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface RenameRegistrationOptions extends
 	TextDocumentRegistrationOptions, RenameOptions {
@@ -7622,8 +7643,10 @@ export interface RenameRegistrationOptions extends
 ```
 
 _Request_:
-* method: 'textDocument/rename'
+* method: `textDocument/rename`
 * params: `RenameParams` defined as follows
+
+<div class="anchorHolder"><a href="#renameParams" name="renameParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface RenameParams extends TextDocumentPositionParams,
@@ -7648,8 +7671,11 @@ _Response_:
 The prepare rename request is sent from the client to the server to setup and test the validity of a rename operation at a given location.
 
 _Request_:
-* method: 'textDocument/prepareRename'
+* method: `textDocument/prepareRename`
 * params: `PrepareRenameParams` defined as follows:
+
+<div class="anchorHolder"><a href="#prepareRenameParams" name="prepareRenameParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface PrepareRenameParams extends TextDocumentPositionParams {
 }
@@ -7668,6 +7694,8 @@ The folding range request is sent from the client to the server to return all fo
 _Client Capability_:
 * property name (optional): `textDocument.foldingRange`
 * property type: `FoldingRangeClientCapabilities` defined as follows:
+
+<div class="anchorHolder"><a href="#foldingRangeClientCapabilities" name="foldingRangeClientCapabilities" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface FoldingRangeClientCapabilities {
@@ -7697,12 +7725,17 @@ _Server Capability_:
 * property name (optional): `foldingRangeProvider`
 * property type: `boolean | FoldingRangeOptions | FoldingRangeRegistrationOptions` where `FoldingRangeOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#foldingRangeOptions" name="foldingRangeOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface FoldingRangeOptions extends WorkDoneProgressOptions {
 }
 ```
 
 _Registration Options_: `FoldingRangeRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#foldingRangeRegistrationOptions" name="foldingRangeRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface FoldingRangeRegistrationOptions extends
 	TextDocumentRegistrationOptions, FoldingRangeOptions,
@@ -7712,8 +7745,10 @@ export interface FoldingRangeRegistrationOptions extends
 
 _Request_:
 
-* method: 'textDocument/foldingRange'
+* method: `textDocument/foldingRange`
 * params: `FoldingRangeParams` defined as follows
+
+<div class="anchorHolder"><a href="#foldingRangeParams" name="foldingRangeParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface FoldingRangeParams extends WorkDoneProgressParams,
@@ -7727,6 +7762,8 @@ export interface FoldingRangeParams extends WorkDoneProgressParams,
 
 _Response_:
 * result: `FoldingRange[] | null` defined as follows:
+
+<div class="anchorHolder"><a href="#foldingRangeKind" name="foldingRangeKind" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -7746,7 +7783,11 @@ export enum FoldingRangeKind {
 	 */
 	Region = 'region'
 }
+```
 
+<div class="anchorHolder"><a href="#foldingRange" name="foldingRange" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents a folding range. To be valid, start and end line must be bigger
  * than zero and smaller than the number of lines in the document. Clients
@@ -7807,6 +7848,8 @@ _Client Capability_:
 * property name (optional): `textDocument.selectionRange`
 * property type: `SelectionRangeClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#selectionRangeClientCapabilities" name="selectionRangeClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SelectionRangeClientCapabilities {
 	/**
@@ -7823,12 +7866,17 @@ _Server Capability_:
 * property name (optional): `selectionRangeProvider`
 * property type: `boolean | SelectionRangeOptions | SelectionRangeRegistrationOptions` where `SelectionRangeOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#selectionRangeOptions" name="selectionRangeOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SelectionRangeOptions extends WorkDoneProgressOptions {
 }
 ```
 
 _Registration Options_: `SelectionRangeRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#selectionRangeRegistrationOptions" name="selectionRangeRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SelectionRangeRegistrationOptions extends
 	SelectionRangeOptions, TextDocumentRegistrationOptions,
@@ -7838,8 +7886,10 @@ export interface SelectionRangeRegistrationOptions extends
 
 _Request_:
 
-* method: 'textDocument/selectionRange'
+* method: `textDocument/selectionRange`
 * params: `SelectionRangeParams` defined as follows:
+
+<div class="anchorHolder"><a href="#selectionRangeParams" name="selectionRangeParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SelectionRangeParams extends WorkDoneProgressParams,
@@ -7859,6 +7909,8 @@ export interface SelectionRangeParams extends WorkDoneProgressParams,
 _Response_:
 
 * result: `SelectionRange[] | null` defined as follows:
+
+<div class="anchorHolder"><a href="#selectionRange" name="selectionRange" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SelectionRange {
@@ -7891,6 +7943,8 @@ _Client Capability_:
 * property name (optional): `textDocument.callHierarchy`
 * property type: `CallHierarchyClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#callHierarchyClientCapabilities" name="callHierarchyClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 interface CallHierarchyClientCapabilities {
 	/**
@@ -7908,12 +7962,16 @@ _Server Capability_:
 * property name (optional): `callHierarchyProvider`
 * property type: `boolean | CallHierarchyOptions | CallHierarchyRegistrationOptions` where `CallHierarchyOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#callHierarchyOptions" name="callHierarchyOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CallHierarchyOptions extends WorkDoneProgressOptions {
 }
 ```
 
 _Registration Options_: `CallHierarchyRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#callHierarchyRegistrationOptions" name="callHierarchyRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CallHierarchyRegistrationOptions extends
@@ -7924,8 +7982,10 @@ export interface CallHierarchyRegistrationOptions extends
 
 _Request_:
 
-* method: 'textDocument/prepareCallHierarchy'
+* method: `textDocument/prepareCallHierarchy`
 * params: `CallHierarchyPrepareParams` defined as follows:
+
+<div class="anchorHolder"><a href="#callHierarchyPrepareParams" name="callHierarchyPrepareParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CallHierarchyPrepareParams extends TextDocumentPositionParams,
@@ -7936,6 +7996,8 @@ export interface CallHierarchyPrepareParams extends TextDocumentPositionParams,
 _Response_:
 
 * result: `CallHierarchyItem[] | null` defined as follows:
+
+<div class="anchorHolder"><a href="#callHierarchyItem" name="callHierarchyItem" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CallHierarchyItem {
@@ -7995,8 +8057,10 @@ The request is sent from the client to the server to resolve incoming calls for 
 
 _Request_:
 
-* method: 'callHierarchy/incomingCalls'
+* method: `callHierarchy/incomingCalls`
 * params: `CallHierarchyIncomingCallsParams` defined as follows:
+
+<div class="anchorHolder"><a href="#callHierarchyIncomingCallsParams" name="callHierarchyIncomingCallsParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CallHierarchyIncomingCallsParams extends
@@ -8008,6 +8072,8 @@ export interface CallHierarchyIncomingCallsParams extends
 _Response_:
 
 * result: `CallHierarchyIncomingCall[] | null` defined as follows:
+
+<div class="anchorHolder"><a href="#callHierarchyIncomingCall" name="callHierarchyIncomingCall" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CallHierarchyIncomingCall {
@@ -8036,8 +8102,10 @@ The request is sent from the client to the server to resolve outgoing calls for 
 
 _Request_:
 
-* method: 'callHierarchy/outgoingCalls'
+* method: `callHierarchy/outgoingCalls`
 * params: `CallHierarchyOutgoingCallsParams` defined as follows:
+
+<div class="anchorHolder"><a href="#callHierarchyOutgoingCallsParams" name="callHierarchyOutgoingCallsParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CallHierarchyOutgoingCallsParams extends
@@ -8049,6 +8117,8 @@ export interface CallHierarchyOutgoingCallsParams extends
 _Response_:
 
 * result: `CallHierarchyOutgoingCall[] | null` defined as follows:
+
+<div class="anchorHolder"><a href="#callHierarchyOutgoingCall" name="callHierarchyOutgoingCall" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CallHierarchyOutgoingCall {
@@ -8079,6 +8149,8 @@ _General Concepts_
 
 Tokens are represented using one token type combined with n token modifiers. A token type is something like `class` or `function` and token modifiers are like `static` or `async`. The protocol defines a set of token types and modifiers but clients are allowed to extend these and announce the values they support in the corresponding client capability. The predefined values are:
 
+<div class="anchorHolder"><a href="#semanticTokenTypes" name="semanticTokenTypes" class="linkableAnchor"></a></div>
+
 ```typescript
 export enum SemanticTokenTypes {
 	namespace = 'namespace',
@@ -8108,7 +8180,11 @@ export enum SemanticTokenTypes {
 	regexp = 'regexp',
 	operator = 'operator'
 }
+```
 
+<div class="anchorHolder"><a href="#semanticTokenModifiers" name="semanticTokenModifiers" class="linkableAnchor"></a></div>
+
+```typescript
 export enum SemanticTokenModifiers {
 	declaration = 'declaration',
 	definition = 'definition',
@@ -8125,6 +8201,8 @@ export enum SemanticTokenModifiers {
 
 The protocol defines an additional token format capability to allow future extensions of the format. The only format that is currently specified is `relative` expressing that the tokens are described using relative positions (see Integer Encoding for Tokens below).
 
+<div class="anchorHolder"><a href="#tokenFormat" name="tokenFormat" class="linkableAnchor"></a></div>
+
 ```typescript
 export namespace TokenFormat {
 	export const Relative: 'relative' = 'relative';
@@ -8136,6 +8214,8 @@ export type TokenFormat = 'relative';
 _Integer Encoding for Tokens_
 
 On the capability level types and modifiers are defined using strings. However the real encoding happens using numbers. The server therefore needs to let the client know which numbers it is using for which types and modifiers. They do so using a legend, which is defined as follows:
+
+<div class="anchorHolder"><a href="#semanticTokensLegend" name="semanticTokensLegend" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SemanticTokensLegend {
@@ -8233,6 +8313,8 @@ The following client capabilities are defined for semantic token requests sent f
 * property name (optional): `textDocument.semanticTokens`
 * property type: `SemanticTokensClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#semanticTokensClientCapabilities" name="semanticTokensClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 interface SemanticTokensClientCapabilities {
 	/**
@@ -8308,6 +8390,8 @@ The following server capabilities are defined for semantic tokens:
 * property name (optional): `semanticTokensProvider`
 * property type: `SemanticTokensOptions | SemanticTokensRegistrationOptions` where `SemanticTokensOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#semanticTokensOptions" name="semanticTokensOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SemanticTokensOptions extends WorkDoneProgressOptions {
 	/**
@@ -8336,6 +8420,8 @@ export interface SemanticTokensOptions extends WorkDoneProgressOptions {
 
 _Registration Options_: `SemanticTokensRegistrationOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#semanticTokensRegistrationOptions" name="semanticTokensRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SemanticTokensRegistrationOptions extends
 	TextDocumentRegistrationOptions, SemanticTokensOptions,
@@ -8349,8 +8435,12 @@ Since the registration option handles range, full and delta requests the method 
 
 _Request_:
 
+<div class="anchorHolder"><a href="#semanticTokens_fullRequest" name="semanticTokens_fullRequest" class="linkableAnchor"></a></div>
+
 * method: `textDocument/semanticTokens/full`
 * params: `SemanticTokensParams` defined as follows:
+
+<div class="anchorHolder"><a href="#semanticTokensParams" name="semanticTokensParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SemanticTokensParams extends WorkDoneProgressParams,
@@ -8365,6 +8455,8 @@ export interface SemanticTokensParams extends WorkDoneProgressParams,
 _Response_:
 
 * result: `SemanticTokens | null` where `SemanticTokens` is defined as follows:
+
+<div class="anchorHolder"><a href="#semanticTokens" name="semanticTokens" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SemanticTokens {
@@ -8385,6 +8477,8 @@ export interface SemanticTokens {
 
 * partial result: `SemanticTokensPartialResult` defines as follows:
 
+<div class="anchorHolder"><a href="#semanticTokensPartialResult" name="semanticTokensPartialResult" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SemanticTokensPartialResult {
 	data: uinteger[];
@@ -8397,8 +8491,12 @@ export interface SemanticTokensPartialResult {
 
 _Request_:
 
+<div class="anchorHolder"><a href="#semanticTokens_deltaRequest" name="semanticTokens_deltaRequest" class="linkableAnchor"></a></div>
+
 * method: `textDocument/semanticTokens/full/delta`
 * params: `SemanticTokensDeltaParams` defined as follows:
+
+<div class="anchorHolder"><a href="#semanticTokensDeltaParams" name="semanticTokensDeltaParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SemanticTokensDeltaParams extends WorkDoneProgressParams,
@@ -8420,6 +8518,8 @@ _Response_:
 
 * result: `SemanticTokens | SemanticTokensDelta | null` where `SemanticTokensDelta` is defined as follows:
 
+<div class="anchorHolder"><a href="#semanticTokensDelta" name="semanticTokensDelta" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SemanticTokensDelta {
 	readonly resultId?: string;
@@ -8429,7 +8529,11 @@ export interface SemanticTokensDelta {
 	 */
 	edits: SemanticTokensEdit[];
 }
+```
 
+<div class="anchorHolder"><a href="#semanticTokensEdit" name="semanticTokensEdit" class="linkableAnchor"></a></div>
+
+```typescript
 export interface SemanticTokensEdit {
 	/**
 	 * The start offset of the edit.
@@ -8450,6 +8554,8 @@ export interface SemanticTokensEdit {
 
 * partial result: `SemanticTokensDeltaPartialResult` defines as follows:
 
+<div class="anchorHolder"><a href="#semanticTokensDeltaPartialResult" name="semanticTokensDeltaPartialResult" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SemanticTokensDeltaPartialResult {
 	edits: SemanticTokensEdit[];
@@ -8464,8 +8570,12 @@ When a user opens a file it can be beneficial to only compute the semantic token
 
 _Request_:
 
+<div class="anchorHolder"><a href="#semanticTokens_rangeRequest" name="semanticTokens_rangeRequest" class="linkableAnchor"></a></div>
+
 * method: `textDocument/semanticTokens/range`
 * params: `SemanticTokensRangeParams` defined as follows:
+
+<div class="anchorHolder"><a href="#semanticTokensRangeParams" name="semanticTokensRangeParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SemanticTokensRangeParams extends WorkDoneProgressParams,
@@ -8497,6 +8607,8 @@ _Client Capability_:
 * property name (optional): `workspace.semanticTokens`
 * property type: `SemanticTokensWorkspaceClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#semanticTokensWorkspaceClientCapabilities" name="semanticTokensWorkspaceClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface SemanticTokensWorkspaceClientCapabilities {
 	/**
@@ -8513,6 +8625,8 @@ export interface SemanticTokensWorkspaceClientCapabilities {
 ```
 
 _Request_:
+
+<div class="anchorHolder"><a href="#semanticTokens_refreshRequest" name="semanticTokens_refreshRequest" class="linkableAnchor"></a></div>
 
 * method: `workspace/semanticTokens/refresh`
 * params: none
@@ -8533,6 +8647,8 @@ _Client Capabilities_:
 * property name (optional): `textDocument.linkedEditingRange`
 * property type: `LinkedEditingRangeClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#linkedEditingRangeClientCapabilities" name="linkedEditingRangeClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface LinkedEditingRangeClientCapabilities {
 	/**
@@ -8550,12 +8666,16 @@ _Server Capability_:
 * property name (optional): `linkedEditingRangeProvider`
 * property type: `boolean` \| `LinkedEditingRangeOptions` \| `LinkedEditingRangeRegistrationOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#linkedEditingRangeOptions" name="linkedEditingRangeOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface LinkedEditingRangeOptions extends WorkDoneProgressOptions {
 }
 ```
 
 _Registration Options_: `LinkedEditingRangeRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#linkedEditingRangeRegistrationOptions" name="linkedEditingRangeRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface LinkedEditingRangeRegistrationOptions extends
@@ -8569,6 +8689,8 @@ _Request_:
 * method: `textDocument/linkedEditingRange`
 * params: `LinkedEditingRangeParams` defined as follows:
 
+<div class="anchorHolder"><a href="#linkedEditingRangeParams" name="linkedEditingRangeParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface LinkedEditingRangeParams extends TextDocumentPositionParams,
 	WorkDoneProgressParams {
@@ -8578,6 +8700,8 @@ export interface LinkedEditingRangeParams extends TextDocumentPositionParams,
 _Response_:
 
 * result: `LinkedEditingRanges` \| `null` defined as follows:
+
+<div class="anchorHolder"><a href="#linkedEditingRanges" name="linkedEditingRanges" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface LinkedEditingRanges {
@@ -8610,6 +8734,8 @@ _Client Capabilities_:
 * property name (optional): `textDocument.moniker`
 * property type: `MonikerClientCapabilities` defined as follows:
 
+<div class="anchorHolder"><a href="#monikerClientCapabilities" name="monikerClientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 interface MonikerClientCapabilities {
 	/**
@@ -8627,12 +8753,16 @@ _Server Capability_:
 * property name (optional): `monikerProvider`
 * property type: `boolean | MonikerOptions | MonikerRegistrationOptions` is defined as follows:
 
+<div class="anchorHolder"><a href="#monikerOptions" name="monikerOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface MonikerOptions extends WorkDoneProgressOptions {
 }
 ```
 
 _Registration Options_: `MonikerRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#monikerRegistrationOptions" name="monikerRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface MonikerRegistrationOptions extends
@@ -8644,6 +8774,8 @@ _Request_:
 
 * method: `textDocument/moniker`
 * params: `MonikerParams` defined as follows:
+
+<div class="anchorHolder"><a href="#monikerParams" name="monikerParams" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface MonikerParams extends TextDocumentPositionParams,
@@ -8658,6 +8790,8 @@ _Response_:
 * error: code and message set in case an exception happens during the 'textDocument/moniker' request
 
 `Moniker` is defined as follows:
+
+<div class="anchorHolder"><a href="#uniquenessLevel" name="uniquenessLevel" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -8689,7 +8823,11 @@ export enum UniquenessLevel {
 	 */
 	global = 'global'
 }
+```
 
+<div class="anchorHolder"><a href="#monikerKind" name="monikerKind" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * The moniker kind.
  */
@@ -8710,7 +8848,11 @@ export enum MonikerKind {
 	 */
 	local = 'local'
 }
+```
 
+<div class="anchorHolder"><a href="#moniker" name="moniker" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Moniker definition to match LSIF 0.5 moniker definition.
  */
