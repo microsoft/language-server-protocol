@@ -2431,7 +2431,7 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.17.0
 	 */
-	typeHierarchyProvider?: TypeHierarchyOptions
+	typeHierarchyProvider?: boolean | TypeHierarchyOptions
 		| TypeHierarchyRegistrationOptions;
 
 	/**
@@ -8217,14 +8217,10 @@ interface TypeHierarchyClientCapabilities {
 _Server Capability_:
 
 * property name (optional): `typeHierarchyProvider`
-* property type: `TypeHierarchyOptions | TypeHierarchyRegistrationOptions` where `TypeHierarchyOptions` is defined as follows:
+* property type: `boolean | TypeHierarchyOptions | TypeHierarchyRegistrationOptions` where `TypeHierarchyOptions` is defined as follows:
 
 ```typescript
 export interface TypeHierarchyOptions extends WorkDoneProgressOptions {
-	/** 
-	 * The server supports for providing an inheritance tree.
-	 */
-	inheritanceTreeSupport?: boolean;
 }
 ```
 
@@ -8318,10 +8314,6 @@ _Request_:
 ```typescript
 export interface TypeHierarchySupertypesParams extends
 	WorkDoneProgressParams, PartialResultParams {
-	/**
-	 * If this is set to `true`, The request only asks for super class.
-	 */
-	classOnly?: boolean;
 	item: TypeHierarchyItem;
 }
 ```
