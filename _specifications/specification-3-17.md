@@ -6684,6 +6684,13 @@ export namespace CodeActionKind {
 
 	/**
 	 * Base kind for an organize imports source action:
+	 * `source.organizeImports`.
+	 */
+	export const SourceOrganizeImports: CodeActionKind =
+		'source.organizeImports';
+
+	/**
+	 * Base kind for an organize imports source action:
 	 * `source.fixAll`.
 	 *
 	 * Fix all actions automatically fix errors that have a clear fix that
@@ -6693,13 +6700,6 @@ export namespace CodeActionKind {
 	 * @since 3.17.0
 	 */
 	export const SourceFixAll: CodeActionKind = 'source.fixAll';
-
-	/**
-	 * Base kind for an organize imports source action:
-	 * `source.organizeImports`.
-	 */
-	export const SourceOrganizeImports: CodeActionKind =
-		'source.organizeImports';
 }
 ```
 
