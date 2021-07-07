@@ -8906,7 +8906,7 @@ Language servers usually run in a separate process and client communicate with t
 - if a server detects an internal state change (for example a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
-Servers usually support different communication channels (e.g. stdio, pipes, ...). To easy the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
+Servers usually support different communication channels (e.g. stdio, pipes, ...). To ease the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
 
 - **stdio**: uses stdio as the communication channel.
 - **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
