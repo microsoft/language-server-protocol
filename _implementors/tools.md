@@ -36,6 +36,7 @@ index: 2
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
 | [Brackets](http://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) |
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
+| [CodeLite](https://codelite.org/) | [Eran Ifrah](https://github.com/eranif) | https://github.com/eranif/codelite |
 | [Spyder](http://spyder-ide.org) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
 | [MS Paint IDE](https://ms-paint-i.de/) | [RubbaBoy](https://github.com/RubbaBoy) | [MS Paint IDE](https://github.com/MSPaintIDE/MSPaintIDE) |
 | [Aginity Pro](https://www.aginity.com/products/aginity-pro/) | [Aginity](https://www.aginity.com) | |
