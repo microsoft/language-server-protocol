@@ -2047,6 +2047,8 @@ export interface TextDocumentClientCapabilities {
 
 	/**
 	 * Capabilities specific to the `textDocument/inlineValues` request.
+	 *
+	 * @since 3.17.0
 	 */
 	inlineValues?: InlineValuesClientCapabilities;
 }
@@ -2127,6 +2129,14 @@ interface ClientCapabilities {
 		 * @since 3.16.0
 		 */
 		codeLens?: CodeLensWorkspaceClientCapabilities;
+
+		/**
+		 * Capabilities specific to the inline values requests scoped to the
+		 * workspace.
+		 *
+		 * @since 3.17.0
+		 */
+		inlineValues?: InlineValuesWorkspaceClientCapabilities;
 
 		/**
 		 * The client has support for file requests/notifications.
@@ -8901,6 +8911,10 @@ export interface Moniker {
 }
 ```
 
+##### Notes
+
+Server implementations of this method should ensure that the moniker calculation matches to those used in the corresponding LSIF implementation to ensure symbols can be associated correctly across IDE sessions and LSIF indexes.
+
 #### <a href="#textDocument_inlineValues" name="textDocument_inlineValues" class="anchor">Inline Values Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.17.0*
@@ -9054,9 +9068,43 @@ export class InlineValueEvaluatableExpression {
 ```
 * error: code and message set in case an exception happens during the inline values request.
 
-##### Notes
+#### <a href="#inlineValues_refresh" name="inlineValues_refresh" class="anchor">Inline Values Refresh Request (:arrow_right_hook:)</a>
 
-Server implementations of this method should ensure that the moniker calculation matches to those used in the corresponding LSIF implementation to ensure symbols can be associated correctly across IDE sessions and LSIF indexes.
+> *Since version 3.17.0*
+
+The `workspace/inlineValues/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inline values currently shown in editors. As a result the client should ask the server to recompute the inline values for these editors. This is useful if a server detects a change which requires a re-calculation of all inline values. Note that the client still has the freedom to delay the re-calculation of the inline values if for example an editor is currently not visible.
+
+_Client Capability_:
+
+* property name (optional): `workspace.inlineValues`
+* property type: `InlineValuesWorkspaceClientCapabilities` defined as follows:
+
+<div class="anchorHolder"><a href="#inlineValuesWorkspaceClientCapabilities" name="inlineValuesWorkspaceClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+export interface InlineValuesWorkspaceClientCapabilities {
+	/**
+	 * Whether the client implementation supports a refresh request sent from the
+	 * server to the client.
+	 *
+	 * Note that this event is global and will force the client to refresh all
+	 * inline values currently shown. It should be used with absolute care and is
+	 * useful for situation where a server for example detect a project wide
+	 * change that requires such a calculation.
+	 */
+	refreshSupport?: boolean;
+}
+```
+
+_Request_:
+
+* method: `workspace/inlineValues/refresh`
+* params: none
+
+_Response_:
+
+* result: void
+* error: code and message set in case an exception happens during the 'workspace/inlineValues/refresh' request
 
 ### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
