@@ -8912,6 +8912,8 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 - **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
 - **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
 
+To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id pass on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
+
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
