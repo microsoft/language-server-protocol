@@ -22,6 +22,7 @@ index: 1
 | [AsyncAPI](https://www.asyncapi.com/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
+| [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [csharp-language-server-protocol](https://github.com/OmniSharp/csharp-language-server-protocol) | C# |
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) | C++ |
