@@ -46,4 +46,5 @@ index: 2
 | [JCIDE](https://www.javacardos.com/tools) | [Javacardos](https://www.javacardos.com) | [JCIDE](https://www.javacardos.com/javacardforum/viewtopic.php?f=5&t=2108&p=6175#p6175) |
 | [RAD Studio](https://www.embarcadero.com/products/rad-studio) ([Delphi](https://www.embarcadero.com/products/delphi) and [C++Builder](https://www.embarcadero.com/products/cbuilder)) | [Embarcadero](https://www.embarcadero.com/) | Proprietary |
 | [Nova](https://nova.app) | [Panic Inc](http://panic.com) | Proprietary |
+| [BBEdit](https://www.barebones.com/products/bbedit) | [Bare Bones Software, Inc.](https://www.barebones.com/) | Proprietary |
 {: .table .table-bordered .table-responsive}

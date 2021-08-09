@@ -352,7 +352,7 @@ The protocol currently assumes that one server serves one tool. There is current
 
 #### <a href="#uri" name="uri" class="anchor"> URI </a>
 
-URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
+URI's are transferred as strings. The URI's format is defined in [https://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
 
 ```
   foo://example.com:8042/over/there?name=ferret#nose
@@ -4964,19 +4964,18 @@ export type InsertTextMode = 1 | 2;
 export interface CompletionItemLabelDetails {
 
 	/**
-	 * The parameters without the return type.
+	 * An optional string which is rendered less prominently directly after
+	 * {@link CompletionItemLabel.label label}, without any spacing. Should be
+	 * used for function signatures or type annotations.
 	 */
-	parameters?: string;
+	detail?: string;
 
 	/**
-	 * The fully qualified name, like package name or file path.
+	 * An optional string which is rendered less prominently after
+	 * {@link CompletionItemLabel.detail}. Should be used for fully qualified
+	 * names or file path.
 	 */
-	qualifier?: string;
-
-	/**
-	 * The return-type of a function or type of a property/variable.
-	 */
-	type?: string;
+	description?: string;
 }
 ```
 
@@ -8912,6 +8911,8 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 - **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
 - **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
 - **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
+
+To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id pass on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
