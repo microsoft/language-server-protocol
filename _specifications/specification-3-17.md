@@ -3585,12 +3585,12 @@ export interface ApplyWorkspaceEditParams {
 ```
 
 _Response_:
-* result: `ApplyWorkspaceEditResponse` defined as follows:
+* result: `ApplyWorkspaceEditResult` defined as follows:
 
-<div class="anchorHolder"><a href="#applyWorkspaceEditResponse" name="applyWorkspaceEditResponse" class="linkableAnchor"></a></div>
+<div class="anchorHolder"><a href="#applyWorkspaceEditResult" name="applyWorkspaceEditResult" class="linkableAnchor"></a></div>
 
 ```typescript
-export interface ApplyWorkspaceEditResponse {
+export interface ApplyWorkspaceEditResult {
 	/**
 	 * Indicates whether the edit was applied or not.
 	 */
