@@ -123,6 +123,7 @@ index: 1
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
 | [REL](https://github.com/sscit/rel) | [Stefan Schlichthärle](https://www.github.com/sscit) | [rel-ls](https://github.com/sscit/rel) | C++ |
 | [ReScript](https://rescript-lang.org) | [rescript-lang](https://github.com/rescript-lang) | [rescript-vscode](https://github.com/rescript-lang/rescript-vscode) | TypeScript |
+| [IBM TSO/E **REXX**](https://www.ibm.com/docs/en/zos/2.4.0?topic=tsoe-zos-rexx-reference) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | [Robot Framework](https://robotframework.org/) | [Tomi Turtiainen](https://github.com/tomi) | [VSCode RF language server](https://github.com/tomi/vscode-rf-language-server) | TypeScript |
 | [Robot Framework](https://robotframework.org) | [Robocorp](https://robocorp.com) | [robotframework-lsp](https://github.com/robocorp/robotframework-lsp) | Python |
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) | Ruby |
