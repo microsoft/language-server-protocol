@@ -1,30 +1,49 @@
-$('#small-nav-dropdown').change(function() {
+$('#small-nav-dropdown').change(function () {
   window.location = $(this)
     .find('option:selected')
     .val()
 })
 
-function onConsentChanged() {
-  console.log(WcpConsent.siteConsent.getConsent());
-
-  // Where we would handle non-essential cookies in the future
+const site_tag = 'UA-62780441-30';
+function loadAnalytics(gtag) {
+  // set cookie to expire in 12 x 28 days
+  gtag('config', site_tag, { 'anonymize_ip': true, 'cookie_expires': 29030400 })
 }
 
-$(function() {
+function onConsentChanged() {
+  if (!consentRequired()) {
+    return;
+  }
+  
+  function gtag() {
+    window.dataLayer.push(arguments)
+  }
+
+  // Where we would handle non-essential cookies in the future
+  if (WcpConsent.siteConsent.getConsentFor(WcpConsent.consentCategories.Analytics)) {
+    // Load GA
+    loadAnalytics(gtag)
+  }
+}
+
+function consentRequired() {
+  return WcpConsent.siteConsent.isConsentRequired;
+}
+
+$(function () {
   // Load GA upfront because we classify it as essential cookie
   window.dataLayer = window.dataLayer || []
   function gtag() {
     dataLayer.push(arguments)
   }
+
   gtag('js', new Date())
-  // set cookie to expire in 12 x 28 days
-  gtag('config', 'UA-62780441-30', { 'anonymize_ip': true, 'cookie_expires': 29030400 })
 
   window.WcpConsent && WcpConsent.init("en-US", "cookie-banner", function (err, _siteConsent) {
-    }, onConsentChanged, WcpConsent.themes.light);
+  }, onConsentChanged, WcpConsent.themes.light);
 
   const cookieManager = document.querySelector('#footer-cookie-link');
-  if (WcpConsent.siteConsent.isConsentRequired && cookieManager && cookieManager.parentElement) {
+  if (consentRequired() && cookieManager && cookieManager.parentElement) {
     cookieManager.parentElement.style.display = '';
   }
 
