@@ -11,16 +11,11 @@ function loadAnalytics(gtag) {
 }
 
 function onConsentChanged() {
-  if (!consentRequired()) {
-    return;
-  }
-  
   function gtag() {
     window.dataLayer.push(arguments)
   }
 
-  // Where we would handle non-essential cookies in the future
-  if (WcpConsent.siteConsent.getConsentFor(WcpConsent.consentCategories.Analytics)) {
+  if (!consentRequired() || WcpConsent.siteConsent.getConsentFor(WcpConsent.consentCategories.Analytics)) {
     // Load GA
     loadAnalytics(gtag)
   }
