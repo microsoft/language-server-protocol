@@ -16,7 +16,7 @@ This document describes the upcoming 3.17.x version of the language server proto
 
 All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are:
 
-- None so far.
+- Inlay Hints support
 
 A detailed list of the changes can be found in the [change log](#version_3_17_0)
 
@@ -2044,6 +2044,13 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.16.0
 	 */
 	moniker?: MonikerClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/inlayHints` request.
+	 *
+	 * @since 3.17.0
+	 */
+	inlayHints?: InlayHintsCapabilities;
 }
 ```
 
@@ -2485,6 +2492,14 @@ interface ServerCapabilities {
 	 * @since 3.16.0
 	 */
 	monikerProvider?: boolean | MonikerOptions | MonikerRegistrationOptions;
+
+	/**
+	 * The server provides inlay hints support.
+	 * 
+	 * @since 3.17.0
+	 */
+	inlayHintsProvider?: boolean | InlayHintsOptions
+		| InlayHintsRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
@@ -8915,11 +8930,125 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 
 To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id pass on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
 
+#### <a href="#textDocument_inlayHints" name="textDocument_inlayHints" class="anchor">Inlay Hints Request (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.17.0*
+
+The request is sent from the client to the server to compute inlay hints for a given text document. These hints can provide interstitial information about the code that is not part of the language syntax, like names of arguments, inferred type information, etc.
+
+_Client Capability_:
+* property name (optional): `textDocument.inlayHints`
+* property type: `InlayHintsClientCapabilities` defined as follows:
+
+<div class="anchorHolder"><a href="#inlayHintsClientCapabilities" name="inlayHintsClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+export interface InlayHintsClientCapabilities {
+	/**
+	 * Whether inlay hints supports dynamic registration.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
+_Server Capability_:
+* property name (optional): `inlayHintsProvider`
+* property type: `boolean | InlayHintsProvider | InlayHintsRegistrationOptions` is defined as follows:
+
+<div class="anchorHolder"><a href="#inlayHintsOptions" name="inlayHintsOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export interface InlayHintsOptions extends WorkDoneProgressOptions {
+}
+```
+
+_Registration Options_: `InlayHintsRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#inlayHintsRegistrationOptions" name="inlayHintsRegistrationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export interface InlayHintsRegistrationOptions extends TextDocumentRegistrationOptions, InlayHintsOptions {
+}
+```
+
+_Request_:
+
+* method: `textDocument/inlayHints`
+* params: `InlayHintsParams` defined as follows:
+
+<div class="anchorHolder"><a href="#inlayHintsParams" name="inlayHintsParams" class="linkableAnchor"></a></div>
+
+```typescript
+export interface InlayHintsParams extends WorkDoneProgressParams, PartialResultParams {
+	/**
+	 * The document to request inlay hints for.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The range to request inlay hints for.
+	 */
+	range: Range;
+}
+```
+
+<div class="anchorHolder"><a href="#inlayHintKind" name="inlayHintKind" class="linkableAnchor"></a></div>
+
+```typescript
+export declare namespace InlayHintKind {
+	export const Other = 0;
+	export const Type = 1;
+	export const Parameter = 2;
+}
+
+export type InlayHintKind = 0 | 1 | 2;
+```
+
+_Response_:
+* result: `InlayHint[]` \| `null` defined as follows:
+
+<div class="anchorHolder"><a href="#inlayHint" name="inlayHint" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Inlay hint information.
+ */
+export interface InlayHint {
+	/**
+	 * The text of the hint.
+	 */
+	text: string;
+
+	/**
+	 * The position of this hint.
+	 */
+	position: Position;
+
+	/**
+	 * The kind of this hint.
+	 */
+	kind?: InlayHintKind;
+
+	/**
+	 * Whitespace before the hint.
+	 */
+	whitespaceBefore?: boolean;
+
+	/**
+	 * Whitespace after the hint.
+	 */
+	whitespaceAfter?: boolean;
+}
+```
+* partial result: `InlayHint[]`
+* error: code and message set in case an exception happens during the inlay hints request.
+
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
 
 * Add support for a completion item label details.
+* Add support for inlay hints.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
