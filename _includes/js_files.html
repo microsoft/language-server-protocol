@@ -37,10 +37,9 @@
     }
 
     var anchor = document.createElement("a");
-    var currentSpecification = 'specification-3-17';
     var hrefUrl = link[0] === '/' ?
       `${baseurl}/specifications${link}` :
-      `${baseurl}/specifications/${currentSpecification}/${link}`;
+      `${baseurl}{{ page.url }}${link}`;
     anchor.setAttribute("href", hrefUrl);
     anchor.textContent = name;
     return anchor;
