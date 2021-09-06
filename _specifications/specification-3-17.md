@@ -352,7 +352,7 @@ The protocol currently assumes that one server serves one tool. There is current
 
 #### <a href="#uri" name="uri" class="anchor"> URI </a>
 
-URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
+URI's are transferred as strings. The URI's format is defined in [https://tools.ietf.org/html/rfc3986](https://tools.ietf.org/html/rfc3986)
 
 ```
   foo://example.com:8042/over/there?name=ferret#nose
@@ -428,6 +428,12 @@ The following features from the [ECMAScript 2020](https://tc39.es/ecma262/#sec-r
 
 The only regular expression flag that a client needs to support is 'i' to specify a case insensitive search.
 
+### <a href="#enumerations" name="enumerations" class="anchor"> Enumerations </a>
+
+The protocol supports two kind of enumerations: (a) integer based enumerations and (b) strings based enumerations. Integer based enumerations usually start with `1`. The onces that don't are historical and they were kept to stay backwards compatible. If appropriate the value set of an enumeration is announced by the defining side (e.g. client or server) and transmitted to the other side during the initialize handshake. An example is the `CompletionItemKind` enumeration. It is announced by the client using the `textDocument.completion.completionItemKind` client property.
+
+To support the evolution of enumerations the using side of an enumeration shouldn't fail on a enumeration value it doesn't know. It should simply ignore it as a value it can use and try to do its best to preserve the value on round trips. Lets look at the `CompletionItemKind` enumeration as an example again: if in a future version of the specification an additional completion item kind with the value `n` gets added and announced by a client a (older) server not knowing about the value should not fail but simply ignore the value as a usable item kind.
+
 #### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
@@ -440,7 +446,7 @@ export const EOL: string[] = ['\n', '\r\n', '\r'];
 
 #### <a href="#position" name="position" class="anchor"> Position </a>
 
-Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in a editor. Special values like for example `-1` to denote the end of a line are not supported.
+Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in an editor. Special values like for example `-1` to denote the end of a line are not supported.
 
 ```typescript
 interface Position {
@@ -3597,12 +3603,12 @@ export interface ApplyWorkspaceEditParams {
 ```
 
 _Response_:
-* result: `ApplyWorkspaceEditResponse` defined as follows:
+* result: `ApplyWorkspaceEditResult` defined as follows:
 
-<div class="anchorHolder"><a href="#applyWorkspaceEditResponse" name="applyWorkspaceEditResponse" class="linkableAnchor"></a></div>
+<div class="anchorHolder"><a href="#applyWorkspaceEditResult" name="applyWorkspaceEditResult" class="linkableAnchor"></a></div>
 
 ```typescript
-export interface ApplyWorkspaceEditResponse {
+export interface ApplyWorkspaceEditResult {
 	/**
 	 * Indicates whether the edit was applied or not.
 	 */
@@ -4976,19 +4982,18 @@ export type InsertTextMode = 1 | 2;
 export interface CompletionItemLabelDetails {
 
 	/**
-	 * The parameters without the return type.
+	 * An optional string which is rendered less prominently directly after
+	 * {@link CompletionItemLabel.label label}, without any spacing. Should be
+	 * used for function signatures or type annotations.
 	 */
-	parameters?: string;
+	detail?: string;
 
 	/**
-	 * The fully qualified name, like package name or file path.
+	 * An optional string which is rendered less prominently after
+	 * {@link CompletionItemLabel.detail}. Should be used for fully qualified
+	 * names or file path.
 	 */
-	qualifier?: string;
-
-	/**
-	 * The return-type of a function or type of a property/variable.
-	 */
-	type?: string;
+	description?: string;
 }
 ```
 
@@ -6537,7 +6542,7 @@ export interface CodeActionClientCapabilities {
 	};
 
 	/**
-	 * Whether th client honors the change annotations in
+	 * Whether the client honors the change annotations in
 	 * text edits and resource operations returned via the
 	 * `CodeAction#edit` property by for example presenting
 	 * the workspace edit in the user interface and asking
@@ -8328,6 +8333,7 @@ Running the same transformations as above will result in the following number ar
 
 The delta is now expressed on these number arrays without any form of interpretation what these numbers mean. This is comparable to the text document edits send from the server to the client to modify the content of a file. Those are character based and don't make any assumption about the meaning of the characters. So `[  2,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0 ]` can be transformed into `[  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]` using the following edit description: `{ start:  0, deleteCount: 1, data: [3] }` which tells the client to simply replace the first number (e.g. `2`) in the array with `3`.
 
+Semantic token edits behave conceptually like [text edits](#textEditArray) on documents: if an edit description consists of n edits all n edits are based on the same state Sm of the number array. They will move the number array from state Sm to Sm+1. A client applying the edits must not assume that they are sorted. An easy algorithm to apply them to the number array is to sort the edits and apply them from the back to the front of the number array.
 
 _Client Capability_:
 
@@ -9077,6 +9083,8 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 - **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
 - **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
 - **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
+
+To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id pass on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
