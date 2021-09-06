@@ -6611,6 +6611,27 @@ export interface CodeActionParams extends WorkDoneProgressParams,
 
 ```typescript
 /**
+ * The reason why code actions were requested.
+ * 
+ * @since 3.17.0
+ */
+export namespace CodeActionTriggerKind {
+	/**
+	 * Code actions were explicitly requested by the user or by an extension.
+	 */
+	export const Invoked: 1 = 1;
+
+	/**
+	 * Code actions were requested automatically.
+	 *
+	 * This typically happens when current selection in a file changes, but can
+	 * also be triggered when file content changes.
+	 */
+	export const Automatic: 2 = 2;
+}
+export type CodeActionTriggerKind = 1 | 2;
+
+/**
  * The kind of a code action.
  *
  * Kinds are a hierarchical list of identifiers separated by `.`,
@@ -6715,6 +6736,13 @@ export namespace CodeActionKind {
  * a code action is run.
  */
 export interface CodeActionContext {
+	/**
+	 * The reason why code actions were requested.
+	 * 
+	 * @since 3.17.0
+	 */
+	triggerKind?: CodeActionTriggerKind;
+
 	/**
 	 * An array of diagnostics known on the client side overlapping the range
 	 * provided to the `textDocument/codeAction` request. They are provided so
