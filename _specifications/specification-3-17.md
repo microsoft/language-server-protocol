@@ -2054,7 +2054,7 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the `textDocument/inlineValues` request.
 	 *
-	 * @since 3.17.0
+	 * @since 3.17.0 - proposed state
 	 */
 	inlineValues?: InlineValuesClientCapabilities;
 }
@@ -2501,6 +2501,8 @@ interface ServerCapabilities {
 
 	/**
 	 * The server provides inline values.
+	 *
+	 * @since 3.17.0 - proposed state
 	 */
 	inlineValuesProvider?: InlineValuesOptions;
 
@@ -8926,6 +8928,9 @@ _Client Capability_:
 <div class="anchorHolder"><a href="#inlineValuesClientCapabilities" name="inlineValuesClientCapabilities" class="linkableAnchor"></a></div>
 
 ```typescript
+/**
+ * Client capabilities specific to inline values.
+ */
 export interface InlineValuesClientCapabilities {
 	/**
 	 * Whether inline values supports dynamic registration.
@@ -9091,7 +9096,7 @@ To support the case that the editor starting a server crashes an editor should a
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
 
 * Add support for a completion item label details.
-* Add support for `textDocument/inlineValues` request.
+* Add support for `textDocument/inlineValues` request (proposed).
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
