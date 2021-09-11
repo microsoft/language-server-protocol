@@ -8583,7 +8583,7 @@ export interface SemanticTokensDeltaPartialResult {
 
 **Requesting semantic tokens for a range**
 
-When a user opens a file it can be beneficial to only compute the semantic tokens for the visible range (faster rendering of the tokens in the user interface). If a server can compute these tokens faster than for the whole file it can provide a handler for the `textDocument/semanticTokens/range` request to handle this case special. Please note that if a client also announces that it will send the `textDocument/semanticTokens/range` server should implement this request as well to allow for flicker free scrolling and semantic coloring of a minimap.
+When a user opens a file it can be beneficial to only compute the semantic tokens for the visible range (faster rendering of the tokens in the user interface). If a server can compute these tokens faster than for the whole file it can provide a handler for the `textDocument/semanticTokens/range` request to handle this special case. Please note that if a client also announces that it will send the `textDocument/semanticTokens/range` server should implement this request as well to allow for flicker free scrolling and semantic coloring of a minimap.
 
 _Request_:
 
