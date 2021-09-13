@@ -10,7 +10,7 @@
 - title: LSIF
   anchor: lsif
   children:
-  - title: 0.5.0 (Current)
+  - title: 0.6.0 (Current)
+    url: /specifications/lsif/0.6.0/specification
+  - title: 0.5.0 (Previous)
     url: /specifications/lsif/0.5.0/specification
-  - title: 0.4.0 (Previous)
-    url: /specifications/lsif/0.4.0/specification
