@@ -67,6 +67,8 @@ The following TypeScript definitions describe the base [JSON-RPC protocol](http:
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
 
+<div class="anchorHolder"><a href="#message" name="message" class="linkableAnchor"></a></div>
+
 ```typescript
 interface Message {
 	jsonrpc: string;
@@ -118,7 +120,11 @@ interface ResponseMessage extends Message {
 	 */
 	error?: ResponseError<any>;
 }
+```
 
+<div class="anchorHolder"><a href="#responseError" name="responseError" class="linkableAnchor"></a></div>
+
+```typescript
 interface ResponseError<D> {
 	/**
 	 * A number indicating the error type that occurred.
@@ -136,7 +142,11 @@ interface ResponseError<D> {
 	 */
 	data?: D;
 }
+```
 
+<div class="anchorHolder"><a href="#errorCodes" name="errorCodes" class="linkableAnchor"></a></div>
+
+```typescript
 export namespace ErrorCodes {
 	// Defined by JSON RPC
 	export const ParseError: number = -32700;
@@ -222,6 +232,8 @@ scheme     authority       path        query   fragment
 We also maintain a node module to parse a string into `scheme`, `authority`, `path`, `query`, and `fragment` URI components. The GitHub repository is [https://github.com/Microsoft/vscode-uri](https://github.com/Microsoft/vscode-uri) the npm module is [https://www.npmjs.com/package/vscode-uri](https://www.npmjs.com/package/vscode-uri).
 
 Many of the interfaces contain fields that correspond to the URI of a document. For clarity, the type of such a field is declared as a `DocumentUri`. Over the wire, it will still be transferred as a string, but this guarantees that the contents of that string can be parsed as a valid URI.
+
+<div class="anchorHolder"><a href="#documentUri" name="documentUri" class="linkableAnchor"></a></div>
 
 ```typescript
 type DocumentUri = string;
@@ -371,6 +383,8 @@ interface Diagnostic {
 
 The protocol currently supports the following diagnostic severities:
 
+<div class="anchorHolder"><a href="#diagnosticSeverity" name="diagnosticSeverity" class="linkableAnchor"></a></div>
+
 ```typescript
 namespace DiagnosticSeverity {
 	/**
@@ -391,6 +405,8 @@ namespace DiagnosticSeverity {
 	export const Hint = 4;
 }
 ```
+
+<div class="anchorHolder"><a href="#diagnosticRelatedInformation" name="diagnosticRelatedInformation" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -483,6 +499,8 @@ export interface TextDocumentEdit {
 
 File resource changes allow servers to create, rename and delete files and folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
 
+<div class="anchorHolder"><a href="#createFileOptions" name="createFileOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * Options to create a file.
@@ -497,7 +515,11 @@ export interface CreateFileOptions {
 	 */
 	ignoreIfExists?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#createFile" name="createFile" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Create file operation
  */
@@ -515,7 +537,11 @@ export interface CreateFile {
 	 */
 	options?: CreateFileOptions;
 }
+```
 
+<div class="anchorHolder"><a href="#renameFileOptions" name="renameFileOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Rename file options
  */
@@ -529,7 +555,11 @@ export interface RenameFileOptions {
 	 */
 	ignoreIfExists?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#renameFile" name="renameFile" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Rename file operation
  */
@@ -551,7 +581,11 @@ export interface RenameFile {
 	 */
 	options?: RenameFileOptions;
 }
+```
 
+<div class="anchorHolder"><a href="#deleteFileOptions" name="deleteFileOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Delete file options
  */
@@ -565,7 +599,11 @@ export interface DeleteFileOptions {
 	 */
 	ignoreIfNotExists?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#deleteFile" name="deleteFile" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Delete file operation
  */
@@ -789,6 +827,8 @@ export interface DocumentFilter {
 
 A document selector is the combination of one or more document filters.
 
+<div class="anchorHolder"><a href="#documentSelector" name="documentSelector" class="linkableAnchor"></a></div>
+
 ```typescript
 export type DocumentSelector = DocumentFilter[];
 ```
@@ -817,7 +857,11 @@ export namespace MarkupKind {
 	export const Markdown: 'markdown' = 'markdown';
 }
 export type MarkupKind = 'plaintext' | 'markdown';
+```
 
+<div class="anchorHolder"><a href="#markupContentDefinition" name="markupContentInnerDefinition" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * A `MarkupContent` literal represents a string value which content is interpreted base on its
  * kind flag. Currently the protocol supports `plaintext` and `markdown` as markup kinds.
@@ -889,6 +933,8 @@ _Request_:
 * method: 'initialize'
 * params: `InitializeParams` defined as follows:
 
+<div class="anchorHolder"><a href="#initializeParams" name="initializeParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface InitializeParams {
 	/**
@@ -945,6 +991,8 @@ Where `ClientCapabilities`, `TextDocumentClientCapabilities` and `WorkspaceClien
 
 > New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
 
+<div class="anchorHolder"><a href="#resourceOperationKind" name="resourceOperationKind" class="linkableAnchor"></a></div>
+
 ```typescript
 
 /**
@@ -969,7 +1017,11 @@ export namespace ResourceOperationKind {
 	 */
 	export const Delete: ResourceOperationKind = 'delete';
 }
+```
 
+<div class="anchorHolder"><a href="#failureHandlingKind" name="failureHandlingKind" class="linkableAnchor"></a></div>
+
+```typescript
 export type FailureHandlingKind = 'abort' | 'transactional' | 'undo' | 'textOnlyTransactional';
 
 export namespace FailureHandlingKind {
@@ -1109,6 +1161,8 @@ export interface WorkspaceClientCapabilities {
 ```
 
 ##### `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
+
+<div class="anchorHolder"><a href="#textDocumentClientCapabilities" name="textDocumentClientCapabilities" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -1539,6 +1593,8 @@ export interface TextDocumentClientCapabilities {
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
 
+<div class="anchorHolder"><a href="#clientCapabilities" name="clientCapabilities" class="linkableAnchor"></a></div>
+
 ```typescript
 interface ClientCapabilities {
 	/**
@@ -1561,6 +1617,8 @@ interface ClientCapabilities {
 _Response_:
 * result: `InitializeResult` defined as follows:
 
+<div class="anchorHolder"><a href="#initializeResult" name="initializeResult" class="linkableAnchor"></a></div>
+
 ```typescript
 interface InitializeResult {
 	/**
@@ -1570,6 +1628,8 @@ interface InitializeResult {
 }
 ```
 * error.code:
+
+<div class="anchorHolder"><a href="#initializeError" name="initializeError" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -1601,6 +1661,8 @@ interface InitializeError {
 
 The server can signal the following capabilities:
 
+<div class="anchorHolder"><a href="#textDocumentSyncKind" name="textDocumentSyncKind" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * Defines how the host (editor) should sync document changes to the language server.
@@ -1624,7 +1686,11 @@ export namespace TextDocumentSyncKind {
 	 */
 	export const Incremental = 2;
 }
+```
 
+<div class="anchorHolder"><a href="#completionOptions" name="completionOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Completion options.
  */
@@ -1640,6 +1706,11 @@ export interface CompletionOptions {
 	 */
 	triggerCharacters?: string[];
 }
+```
+
+<div class="anchorHolder"><a href="#signatureHelpOptions" name="signatureHelpOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Signature help options.
  */
@@ -1650,7 +1721,11 @@ export interface SignatureHelpOptions {
 	 */
 	triggerCharacters?: string[];
 }
+```
 
+<div class="anchorHolder"><a href="#codeActionOptions" name="codeActionOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Code Action options.
  */
@@ -1663,7 +1738,11 @@ export interface CodeActionOptions {
 	 */
 	codeActionKinds?: CodeActionKind[];
 }
+```
 
+<div class="anchorHolder"><a href="#codeLensOptions" name="codeLensOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Code Lens options.
  */
@@ -1673,7 +1752,11 @@ export interface CodeLensOptions {
 	 */
 	resolveProvider?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#documentOnTypeFormattingOptions" name="documentOnTypeFormattingOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Format document on type options.
  */
@@ -1688,7 +1771,11 @@ export interface DocumentOnTypeFormattingOptions {
 	 */
 	moreTriggerCharacter?: string[];
 }
+```
 
+<div class="anchorHolder"><a href="#renameOptions" name="renameOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Rename options
  */
@@ -1698,7 +1785,11 @@ export interface RenameOptions {
 	 */
 	prepareProvider?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#documentLinkOptions" name="documentLinkOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Document link options.
  */
@@ -1708,7 +1799,11 @@ export interface DocumentLinkOptions {
 	 */
 	resolveProvider?: boolean;
 }
+```
 
+<div class="anchorHolder"><a href="#executeCommandOptions" name="executeCommandOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Execute command options.
  */
@@ -1718,7 +1813,11 @@ export interface ExecuteCommandOptions {
 	 */
 	commands: string[]
 }
+```
 
+<div class="anchorHolder"><a href="#saveOptions" name="saveOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Save options.
  */
@@ -1740,7 +1839,11 @@ export interface ColorProviderOptions {
  */
 export interface FoldingRangeProviderOptions {
 }
+```
 
+<div class="anchorHolder"><a href="#textDocumentSyncOptions" name="textDocumentSyncOptions" class="linkableAnchor"></a></div>
+
+```typescript
 export interface TextDocumentSyncOptions {
 	/**
 	 * Open and close notifications are sent to the server. If omitted open close notification should not
@@ -1779,7 +1882,11 @@ interface StaticRegistrationOptions {
 	 */
 	id?: string;
 }
+```
 
+<div class="anchorHolder"><a href="#serverCapabilities" name="serverCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
 interface ServerCapabilities {
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure defining each notification or
@@ -1975,6 +2082,8 @@ interface ShowMessageParams {
 
 Where the type is defined as follows:
 
+<div class="anchorHolder"><a href="#messageType" name="messageType" class="linkableAnchor"></a></div>
+
 ```typescript
 export namespace MessageType {
 	/**
@@ -2008,6 +2117,8 @@ _Response_:
 * result: the selected `MessageActionItem` \| `null` if none got selected.
 * error: code and message set in case an exception happens during showing a message.
 
+<div class="anchorHolder"><a href="#showMessageRequestParams" name="showMessageRequestParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface ShowMessageRequestParams {
 	/**
@@ -2029,6 +2140,8 @@ interface ShowMessageRequestParams {
 
 Where the `MessageActionItem` is defined as follows:
 
+<div class="anchorHolder"><a href="#messageActionItem" name="messageActionItem" class="linkableAnchor"></a></div>
+
 ```typescript
 interface MessageActionItem {
 	/**
@@ -2045,6 +2158,8 @@ The log message notification is sent from the server to the client to ask the cl
 _Notification_:
 * method: 'window/logMessage'
 * params: `LogMessageParams` defined as follows:
+
+<div class="anchorHolder"><a href="#logMessageParams" name="logMessageParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface LogMessageParams {
@@ -2080,6 +2195,8 @@ _Request_:
 
 Where `RegistrationParams` are defined as follows:
 
+<div class="anchorHolder"><a href="#registration" name="registration" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * General parameters to register for a capability.
@@ -2101,7 +2218,11 @@ export interface Registration {
 	 */
 	registerOptions?: any;
 }
+```
 
+<div class="anchorHolder"><a href="#registrationParams" name="registrationParams" class="linkableAnchor"></a></div>
+
+```typescript
 export interface RegistrationParams {
 	registrations: Registration[];
 }
@@ -2156,6 +2277,8 @@ _Request_:
 
 Where `UnregistrationParams` are defined as follows:
 
+<div class="anchorHolder"><a href="#unregistration" name="unregistration" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * General parameters to unregister a capability.
@@ -2172,7 +2295,11 @@ export interface Unregistration {
 	 */
 	method: string;
 }
+```
 
+<div class="anchorHolder"><a href="#unregistrationParams" name="unregistrationParams" class="linkableAnchor"></a></div>
+
+```typescript
 export interface UnregistrationParams {
 	unregisterations: Unregistration[];
 }
@@ -2214,6 +2341,8 @@ _Response_:
 
 * result: `WorkspaceFolder[] | null` defined as follows:
 
+<div class="anchorHolder"><a href="#workspaceFolder" name="workspaceFolder" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface WorkspaceFolder {
 	/**
@@ -2247,6 +2376,8 @@ _Notification_:
 * method: 'workspace/didChangeWorkspaceFolders'
 * params: `DidChangeWorkspaceFoldersParams` defined as follows:
 
+<div class="anchorHolder"><a href="#didChangeWorkspaceFoldersParams" name="didChangeWorkspaceFoldersParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DidChangeWorkspaceFoldersParams {
 	/**
@@ -2254,7 +2385,11 @@ export interface DidChangeWorkspaceFoldersParams {
 	 */
 	event: WorkspaceFoldersChangeEvent;
 }
+```
 
+<div class="anchorHolder"><a href="#workspaceFoldersChangeEvent" name="workspaceFoldersChangeEvent" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * The workspace folder change event.
  */
@@ -2279,6 +2414,8 @@ _Notification_:
 * method: 'workspace/didChangeConfiguration',
 * params: `DidChangeConfigurationParams` defined as follows:
 
+<div class="anchorHolder"><a href="#didChangeConfigurationParams" name="didChangeConfigurationParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DidChangeConfigurationParams {
 	/**
@@ -2301,11 +2438,17 @@ _Request_:
 * method: 'workspace/configuration'
 * params: `ConfigurationParams` defined as follows
 
+<div class="anchorHolder"><a href="#configurationParams" name="configurationParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface ConfigurationParams {
 	items: ConfigurationItem[];
 }
+```
 
+<div class="anchorHolder"><a href="#configurationItem" name="configurationItem" class="linkableAnchor"></a></div>
+
+```typescript
 export interface ConfigurationItem {
 	/**
 	 * The scope to get the configuration section for.
@@ -2339,6 +2482,8 @@ _Notification_:
 * method: 'workspace/didChangeWatchedFiles'
 * params: `DidChangeWatchedFilesParams` defined as follows:
 
+<div class="anchorHolder"><a href="#didChangeWatchedFilesParams" name="didChangeWatchedFilesParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DidChangeWatchedFilesParams {
 	/**
@@ -2349,6 +2494,8 @@ interface DidChangeWatchedFilesParams {
 ```
 
 Where FileEvents are described as follows:
+
+<div class="anchorHolder"><a href="#fileEvent" name="fileEvent" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -2364,7 +2511,11 @@ interface FileEvent {
 	 */
 	type: number;
 }
+```
 
+<div class="anchorHolder"><a href="#fileChangeType" name="fileChangeType" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * The file event type.
  */
@@ -2386,6 +2537,8 @@ export namespace FileChangeType {
 
 _Registration Options_: `DidChangeWatchedFilesRegistrationOptions` defined as follows
 
+<div class="anchorHolder"><a href="#didChangeWatchedFilesRegistrationOptions" name="didChangeWatchedFilesRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * Describe options to be used when registering for file system change events.
@@ -2396,7 +2549,11 @@ export interface DidChangeWatchedFilesRegistrationOptions {
 	 */
 	watchers: FileSystemWatcher[];
 }
+```
 
+<div class="anchorHolder"><a href="#fileSystemWatcher" name="fileSystemWatcher" class="linkableAnchor"></a></div>
+
+```typescript
 export interface FileSystemWatcher {
 	/**
 	 * The  glob pattern to watch.
@@ -2418,7 +2575,11 @@ export interface FileSystemWatcher {
 	 */
 	kind?: number;
 }
+```
 
+<div class="anchorHolder"><a href="#watchKind" name="watchKind" class="linkableAnchor"></a></div>
+
+```typescript
 export namespace WatchKind {
 	/**
 	 * Interested in create events.
@@ -2444,6 +2605,8 @@ The workspace symbol request is sent from the client to the server to list proje
 _Request_:
 * method: 'workspace/symbol'
 * params: `WorkspaceSymbolParams` defined as follows:
+
+<div class="anchorHolder"><a href="#workspaceSymbolParams" name="workspaceSymbolParams" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -2474,6 +2637,8 @@ _Request:_
 * method: 'workspace/executeCommand'
 * params: `ExecuteCommandParams` defined as follows:
 
+<div class="anchorHolder"><a href="#executeCommandParams" name="executeCommandParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface ExecuteCommandParams {
 
@@ -2496,6 +2661,8 @@ _Response_:
 
 _Registration Options_: `ExecuteCommandRegistrationOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#executeCommandRegistrationOptions" name="executeCommandRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * Execute command registration options.
@@ -2517,6 +2684,8 @@ _Request_:
 * method: 'workspace/applyEdit'
 * params: `ApplyWorkspaceEditParams` defined as follows:
 
+<div class="anchorHolder"><a href="#applyWorkspaceEditParams" name="applyWorkspaceEditParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface ApplyWorkspaceEditParams {
 	/**
@@ -2535,6 +2704,8 @@ export interface ApplyWorkspaceEditParams {
 
 _Response_:
 * result: `ApplyWorkspaceEditResponse` defined as follows:
+
+<div class="anchorHolder"><a href="#applyWorkspaceEditResult" name="applyWorkspaceEditResponse" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface ApplyWorkspaceEditResponse {
@@ -2565,6 +2736,8 @@ _Notification_:
 * method: 'textDocument/didOpen'
 * params: `DidOpenTextDocumentParams` defined as follows:
 
+<div class="anchorHolder"><a href="#didOpenTextDocumentParams" name="didOpenTextDocumentParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DidOpenTextDocumentParams {
 	/**
@@ -2585,6 +2758,8 @@ _Notification_:
 * method: 'textDocument/didChange'
 * params: `DidChangeTextDocumentParams` defined as follows:
 
+<div class="anchorHolder"><a href="#didChangeTextDocumentParams" name="didChangeTextDocumentParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DidChangeTextDocumentParams {
 	/**
@@ -2601,7 +2776,11 @@ interface DidChangeTextDocumentParams {
 	 */
 	contentChanges: TextDocumentContentChangeEvent[];
 }
+```
 
+<div class="anchorHolder"><a href="#textDocumentContentChangeEvent" name="textDocumentContentChangeEvent" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * An event describing a change to a text document. If range and rangeLength are omitted
  * the new text is considered to be the full content of the document.
@@ -2626,6 +2805,8 @@ interface TextDocumentContentChangeEvent {
 
 _Registration Options_: `TextDocumentChangeRegistrationOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#textDocumentChangeRegistrationOptions" name="textDocumentChangeRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * Describe options to be used when registering for text document change events.
@@ -2648,6 +2829,8 @@ _Notification_:
 * method: 'textDocument/willSave'
 * params: `WillSaveTextDocumentParams` defined as follows:
 
+<div class="anchorHolder"><a href="#willSaveTextDocumentParams" name="willSaveTextDocumentParams" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * The parameters send in a will save text document notification.
@@ -2663,7 +2846,11 @@ export interface WillSaveTextDocumentParams {
 	 */
 	reason: number;
 }
+```
 
+<div class="anchorHolder"><a href="#textDocumentSaveReason" name="textDocumentSaveReason" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents reasons why a text document is saved.
  */
@@ -2711,6 +2898,8 @@ The document save notification is sent from the client to the server when the do
 * method: 'textDocument/didSave'
 * params: `DidSaveTextDocumentParams` defined as follows:
 
+<div class="anchorHolder"><a href="#didSaveTextDocumentParams" name="didSaveTextDocumentParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DidSaveTextDocumentParams {
 	/**
@@ -2728,6 +2917,8 @@ interface DidSaveTextDocumentParams {
 
 _Registration Options_: `TextDocumentSaveRegistrationOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#textDocumentSaveRegistrationOptions" name="textDocumentSaveRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface TextDocumentSaveRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
@@ -2744,6 +2935,8 @@ The document close notification is sent from the client to the server when the d
 _Notification_:
 * method: 'textDocument/didClose'
 * params: `DidCloseTextDocumentParams` defined as follows:
+
+<div class="anchorHolder"><a href="#didCloseTextDocumentParams" name="didCloseTextDocumentParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface DidCloseTextDocumentParams {
@@ -2772,6 +2965,8 @@ _Notification_:
 * method: 'textDocument/publishDiagnostics'
 * params: `PublishDiagnosticsParams` defined as follows:
 
+<div class="anchorHolder"><a href="#publishDiagnosticsParams" name="publishDiagnosticsParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface PublishDiagnosticsParams {
 	/**
@@ -2794,6 +2989,8 @@ _Request_:
 * method: 'textDocument/completion'
 * params: `CompletionParams` defined as follows:
 
+<div class="anchorHolder"><a href="#completionParams" name="completionParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CompletionParams extends TextDocumentPositionParams {
 
@@ -2803,7 +3000,11 @@ export interface CompletionParams extends TextDocumentPositionParams {
 	 */
 	context?: CompletionContext;
 }
+```
 
+<div class="anchorHolder"><a href="#completionTriggerKind" name="completionTriggerKind" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * How a completion was triggered
  */
@@ -2826,8 +3027,11 @@ export namespace CompletionTriggerKind {
 	export const TriggerForIncompleteCompletions: 3 = 3;
 }
 export type CompletionTriggerKind = 1 | 2 | 3;
+```
 
+<div class="anchorHolder"><a href="#completionContext" name="completionContext" class="linkableAnchor"></a></div>
 
+```typescript
 /**
  * Contains additional information about the context in which a completion request is triggered.
  */
@@ -2847,6 +3051,8 @@ export interface CompletionContext {
 
 _Response_:
 * result: `CompletionItem[]` \| `CompletionList` \| `null`. If a `CompletionItem[]` is provided it is interpreted to be complete. So it is the same as `{ isIncomplete: false, items }`
+
+<div class="anchorHolder"><a href="#completionList" name="completionList" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -2868,7 +3074,11 @@ interface CompletionList {
 	 */
 	items: CompletionItem[];
 }
+```
 
+<div class="anchorHolder"><a href="#insertTextFormat" name="insertTextFormat" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Defines whether the insert text in a completion item should be interpreted as
  * plain text or a snippet.
@@ -3004,7 +3214,11 @@ interface CompletionItem {
 	 */
 	data?: any
 }
+```
 
+<div class="anchorHolder"><a href="#completionItemKind" name="completionItemKind" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * The kind of a completion entry.
  */
@@ -3039,6 +3253,8 @@ namespace CompletionItemKind {
 * error: code and message set in case an exception happens during the completion request.
 
 _Registration Options_: `CompletionRegistrationOptions` options defined as follows:
+
+<div class="anchorHolder"><a href="#completionRegistrationOptions" name="completionRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface CompletionRegistrationOptions extends TextDocumentRegistrationOptions {
@@ -3179,6 +3395,8 @@ _Request_:
 _Response_:
 * result: `Hover` \| `null` defined as follows:
 
+<div class="anchorHolder"><a href="#hover" name="hover" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * The result of a hover request.
@@ -3198,6 +3416,8 @@ interface Hover {
 ```
 
 Where `MarkedString` is defined as follows:
+
+<div class="anchorHolder"><a href="#markedString" name="markedString" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -3231,6 +3451,8 @@ _Request_:
 
 _Response_:
 * result: `SignatureHelp` \| `null` defined as follows:
+
+<div class="anchorHolder"><a href="#signatureHelp" name="signatureHelp" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -3266,7 +3488,11 @@ interface SignatureHelp {
 	 */
 	activeParameter?: number;
 }
+```
 
+<div class="anchorHolder"><a href="#signatureInformation" name="signatureInformation" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents the signature of something callable. A signature
  * can have a label, like a function-name, a doc-comment, and
@@ -3290,7 +3516,11 @@ interface SignatureInformation {
 	 */
 	parameters?: ParameterInformation[];
 }
+```
 
+<div class="anchorHolder"><a href="#parameterInformation" name="parameterInformation" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents a parameter of a callable-signature. A parameter can
  * have a label and a doc-comment.
@@ -3320,6 +3550,8 @@ interface ParameterInformation {
 * error: code and message set in case an exception happens during the signature help request.
 
 _Registration Options_: `SignatureHelpRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#signatureHelpRegistrationOptions" name="signatureHelpRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface SignatureHelpRegistrationOptions extends TextDocumentRegistrationOptions {
@@ -3410,11 +3642,17 @@ _Request_:
 * method: 'textDocument/references'
 * params: `ReferenceParams` defined as follows:
 
+<div class="anchorHolder"><a href="#referenceParams" name="referenceParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface ReferenceParams extends TextDocumentPositionParams {
 	context: ReferenceContext
 }
+```
 
+<div class="anchorHolder"><a href="#referenceContext" name="referenceContext" class="linkableAnchor"></a></div>
+
+```typescript
 interface ReferenceContext {
 	/**
 	 * Include the declaration of the current symbol.
@@ -3442,6 +3680,8 @@ _Request_:
 _Response_:
 * result: `DocumentHighlight[]` \| `null` defined as follows:
 
+<div class="anchorHolder"><a href="#documentHighlight" name="documentHighlight" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * A document highlight is a range inside a text document which deserves
@@ -3460,7 +3700,11 @@ interface DocumentHighlight {
 	 */
 	kind?: number;
 }
+```
 
+<div class="anchorHolder"><a href="#documentHighlightKind" name="documentHighlightKind" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * A document highlight kind.
  */
@@ -3497,6 +3741,8 @@ _Request_:
 * method: 'textDocument/documentSymbol'
 * params: `DocumentSymbolParams` defined as follows:
 
+<div class="anchorHolder"><a href="#documentSymbolParams" name="documentSymbolParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DocumentSymbolParams {
 	/**
@@ -3508,6 +3754,8 @@ interface DocumentSymbolParams {
 
 _Response_:
 * result: `DocumentSymbol[]` \| `SymbolInformation[]` \| `null` defined as follows:
+
+<div class="anchorHolder"><a href="#symbolKind" name="symbolKind" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -3588,7 +3836,11 @@ export class DocumentSymbol {
 	 */
 	children?: DocumentSymbol[];
 }
+```
 
+<div class="anchorHolder"><a href="#symbolInformation" name="symbolInformation" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents information about programming constructs like variables, classes,
  * interfaces etc.
@@ -3654,6 +3906,8 @@ _Request_:
 * method: 'textDocument/codeAction'
 * params: `CodeActionParams` defined as follows:
 
+<div class="anchorHolder"><a href="#codeActionParams" name="codeActionParams" class="linkableAnchor"></a></div>
+
 ```typescript
 /**
  * Params for the CodeActionRequest
@@ -3674,7 +3928,11 @@ interface CodeActionParams {
 	 */
 	context: CodeActionContext;
 }
+```
 
+<div class="anchorHolder"><a href="#codeActionKind" name="codeActionKind" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * The kind of a code action.
  *
@@ -3756,7 +4014,11 @@ export namespace CodeActionKind {
 	 */
 	export const SourceOrganizeImports: CodeActionKind = 'source.organizeImports';
 }
+```
 
+<div class="anchorHolder"><a href="#codeActionContext" name="codeActionContext" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Contains additional diagnostic information about the context in which
  * a code action is run.
@@ -3779,6 +4041,8 @@ interface CodeActionContext {
 
 _Response_:
 * result: `(Command | CodeAction)[]` \| `null` where `CodeAction` is defined as follows:
+
+<div class="anchorHolder"><a href="#codeAction" name="codeAction" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -3824,6 +4088,8 @@ export interface CodeAction {
 
 _Registration Options_: `CodeActionRegistrationOptions`  defined as follows:
 
+<div class="anchorHolder"><a href="#codeActionRegistrationOptions" name="codeActionRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeActionRegistrationOptions extends TextDocumentRegistrationOptions, CodeActionOptions {
 }
@@ -3838,6 +4104,8 @@ _Request_:
 * method: 'textDocument/codeLens'
 * params: `CodeLensParams` defined as follows:
 
+<div class="anchorHolder"><a href="#codeLensParams" name="codeLensParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface CodeLensParams {
 	/**
@@ -3849,6 +4117,8 @@ interface CodeLensParams {
 
 _Response_:
 * result: `CodeLens[]` \| `null` defined as follows:
+
+<div class="anchorHolder"><a href="#codeLens" name="codeLens" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -3880,6 +4150,8 @@ interface CodeLens {
 
 _Registration Options_: `CodeLensRegistrationOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#codeLensRegistrationOptions" name="codeLensRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface CodeLensRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
@@ -3909,6 +4181,8 @@ _Request_:
 * method: 'textDocument/documentLink'
 * params: `DocumentLinkParams`, defined as follows:
 
+<div class="anchorHolder"><a href="#documentLinkParams" name="documentLinkParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DocumentLinkParams {
 	/**
@@ -3920,6 +4194,8 @@ interface DocumentLinkParams {
 
 _Response_:
 * result: An array of `DocumentLink` \| `null`.
+
+<div class="anchorHolder"><a href="#documentLink" name="documentLink" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -3945,6 +4221,8 @@ interface DocumentLink {
 * error: code and message set in case an exception happens during the document link request.
 
 _Registration Options_: `DocumentLinkRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#documentLinkRegistrationOptions" name="documentLinkRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface DocumentLinkRegistrationOptions extends TextDocumentRegistrationOptions {
@@ -3982,6 +4260,8 @@ _Request_:
 * method: 'textDocument/documentColor'
 * params: `DocumentColorParams` defined as follows
 
+<div class="anchorHolder"><a href="#documentColorParams" name="documentColorParams" class="linkableAnchor"></a></div>
+
 ```ts
 interface DocumentColorParams {
 	/**
@@ -3993,6 +4273,8 @@ interface DocumentColorParams {
 
 _Response_:
 * result: `ColorInformation[]` defined as follows:
+
+<div class="anchorHolder"><a href="#colorInformation" name="colorInformation" class="linkableAnchor"></a></div>
 
 ```typescript
 interface ColorInformation {
@@ -4006,7 +4288,11 @@ interface ColorInformation {
 	 */
 	color: Color;
 }
+```
 
+<div class="anchorHolder"><a href="#color" name="color" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents a color in RGBA space.
  */
@@ -4049,6 +4335,8 @@ _Request_:
 * method: 'textDocument/colorPresentation'
 * params: `ColorPresentationParams` defined as follows
 
+<div class="anchorHolder"><a href="#colorPresentationParams" name="colorPresentationParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface ColorPresentationParams {
 	/**
@@ -4070,6 +4358,8 @@ interface ColorPresentationParams {
 
 _Response_:
 * result: `ColorPresentation[]` defined as follows:
+
+<div class="anchorHolder"><a href="#colorPresentation" name="colorPresentation" class="linkableAnchor"></a></div>
 
 ```typescript
 interface ColorPresentation {
@@ -4103,6 +4393,8 @@ _Request_:
 * method: 'textDocument/formatting'
 * params: `DocumentFormattingParams` defined as follows
 
+<div class="anchorHolder"><a href="#documentFormattingParams" name="documentFormattingParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DocumentFormattingParams {
 	/**
@@ -4115,7 +4407,11 @@ interface DocumentFormattingParams {
 	 */
 	options: FormattingOptions;
 }
+```
 
+<div class="anchorHolder"><a href="#formattingOptions" name="formattingOptions" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Value-object describing what options formatting should use.
  */
@@ -4151,6 +4447,8 @@ _Request_:
 * method: 'textDocument/rangeFormatting',
 * params: `DocumentRangeFormattingParams` defined as follows:
 
+<div class="anchorHolder"><a href="#documentRangeFormattingParams" name="documentRangeFormattingParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DocumentRangeFormattingParams {
 	/**
@@ -4184,6 +4482,8 @@ _Request_:
 * method: 'textDocument/onTypeFormatting'
 * params: `DocumentOnTypeFormattingParams` defined as follows:
 
+<div class="anchorHolder"><a href="#documentOnTypeFormattingParams" name="documentOnTypeFormattingParams" class="linkableAnchor"></a></div>
+
 ```typescript
 interface DocumentOnTypeFormattingParams {
 	/**
@@ -4214,6 +4514,8 @@ _Response_:
 
 _Registration Options_: `DocumentOnTypeFormattingRegistrationOptions` defined as follows:
 
+<div class="anchorHolder"><a href="#documentOnTypeFormattingRegistrationOptions" name="documentOnTypeFormattingRegistrationOptions" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface DocumentOnTypeFormattingRegistrationOptions extends TextDocumentRegistrationOptions {
 	/**
@@ -4233,6 +4535,8 @@ The rename request is sent from the client to the server to ask the server to co
 _Request_:
 * method: 'textDocument/rename'
 * params: `RenameParams` defined as follows
+
+<div class="anchorHolder"><a href="#renameParams" name="renameParams" class="linkableAnchor"></a></div>
 
 ```typescript
 interface RenameParams {
@@ -4260,6 +4564,8 @@ _Response_:
 * error: code and message set in case an exception happens during the rename request.
 
 _Registration Options_: `RenameRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#renameRegistrationOptions" name="renameRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
 export interface RenameRegistrationOptions extends TextDocumentRegistrationOptions {
@@ -4295,6 +4601,8 @@ _Request_:
 * method: 'textDocument/foldingRange'
 * params: `FoldingRangeParams` defined as follows
 
+<div class="anchorHolder"><a href="#foldingRangeParams" name="foldingRangeParams" class="linkableAnchor"></a></div>
+
 ```typescript
 export interface FoldingRangeParams {
 	/**
@@ -4307,6 +4615,8 @@ export interface FoldingRangeParams {
 
 _Response_:
 * result: `FoldingRange[] | null` defined as follows:
+
+<div class="anchorHolder"><a href="#foldingRangeKind" name="foldingRangeKind" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -4326,7 +4636,11 @@ export enum FoldingRangeKind {
 	 */
 	Region = 'region'
 }
+```
 
+<div class="anchorHolder"><a href="#foldingRange" name="foldingRange" class="linkableAnchor"></a></div>
+
+```typescript
 /**
  * Represents a folding range.
  */
