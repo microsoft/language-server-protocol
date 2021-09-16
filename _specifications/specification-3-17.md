@@ -8620,7 +8620,7 @@ export interface SemanticTokensRangeParams extends WorkDoneProgressParams,
 
 _Response_:
 
-* result: `SemanticTokens | null` where `SemanticTokensDelta`
+* result: `SemanticTokens | null`
 * partial result: `SemanticTokensPartialResult`
 * error: code and message set in case an exception happens during the 'textDocument/semanticTokens/range' request
 
