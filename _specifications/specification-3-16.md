@@ -5692,6 +5692,14 @@ export interface DocumentSymbolClientCapabilities {
 	 * @since 3.16.0
 	 */
 	labelSupport?: boolean;
+
+	/**
+     * The client supports the following content formats for `DocumentSymbol.detail?`.
+     * If this is unspecified, the client expects that field to be a plaintext string.
+     *
+     * @since 3.16.0
+	 */
+	detailMarkupFormat?: MarkupKind[];
 }
 ```
 
@@ -5801,8 +5809,12 @@ export interface DocumentSymbol {
 
 	/**
 	 * More detail for this symbol, e.g the signature of a function.
+     *
+     * @since 3.16.0 Can be `MarkupContent` if the client specifies
+     * `DocumentSymbolClientCapabilities.detailMarkupFormat?`. Supported markup
+     * types are also limited by that capability.
 	 */
-	detail?: string;
+	detail?: string | MarkupContent;
 
 	/**
 	 * The kind of this symbol.
