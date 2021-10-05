@@ -41,6 +41,7 @@ index: 2
 | vim8 and [neovim](https://neovim.io/) | [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
 | vim8 and neovim | [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
 | vim8 and neovim | [Qiming Zhao](https://github.com/chemzqm) | [coc.nvim](https://github.com/neoclide/coc.nvim) |
+| vim8 and neovim | [Jayli](https://github.com/Jayli) | [vim-easycomplete](https://github.com/jayli/vim-easycomplete) |
 | vim8 and neovim| [Jimmy Huang](https://github.com/JimmyHuang454) | [EasyCompleteYou](https://github.com/JimmyHuang454/EasyCompleteYou) |
 | vim8 and neovim| [Nate Bosch](https://github.com/natebosch) | [vim-lsc](https://github.com/natebosch/vim-lsc) |
 | vim8 and neovim| [w0rp](https://github.com/w0rp) | [ALE (Asynchronous Lint Engine) ](https://github.com/w0rp/ale) |
