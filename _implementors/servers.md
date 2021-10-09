@@ -114,7 +114,8 @@ index: 1
 | PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) | PureScript |
 | Puppet| [Lingua Pupuli](https://github.com/lingua-pupuli) | [puppet language server](https://github.com/lingua-pupuli/puppet-editor-services) | Ruby |
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) | Java, Python |
-| Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) | Python |
+| Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) (unmaintained, use python-lsp-server instead) | Python |
+| Python| [Spyder IDE team and the community](https://github.com/python-lsp) | [python-lsp-server](https://github.com/python-lsp/python-lsp-server) | Python |
 | Python | MS | [python-language-server](https://github.com/Microsoft/python-language-server) | C# |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
