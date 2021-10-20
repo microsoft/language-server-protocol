@@ -57,8 +57,8 @@ index: 1
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
 | F# | [@Krzysztof-Cieslak](https://github.com/Krzysztof-Cieslak) & Contributors | [FsAutoComplete](https://github.com/fsharp/FsAutoComplete) | F# |
-| [Fuzion](https://flang.dev) | [Tokiwa Software GmbH](https://tokiwa.software) | [Fuzion Language Server](https://github.com/tokiwa-software/fuzion-lsp-server) | Java, Fuzion |
 | Fortran | [Chris Hansen](https://github.com/hansec) | [fortran-language-server](https://github.com/hansec/fortran-language-server) | Python |
+| [Fuzion](https://flang.dev) | [Tokiwa Software GmbH](https://tokiwa.software) | [Fuzion Language Server](https://github.com/tokiwa-software/fuzion-lsp-server) | Java, Fuzion |
 | GLSL | [Sven-Hendrik Haase (@svenstaro)](https://github.com/svenstaro) | [glsl-language-server](https://github.com/svenstaro/glsl-language-server) | C++ |
 | Gauge | [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) | Go |
 | GDScript | [GodotEngine](https://github.com/godotengine) | [Godot](https://github.com/godotengine/godot) | C++ |
