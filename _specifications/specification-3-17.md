@@ -780,7 +780,7 @@ export interface ChangeAnnotation {
 }
 ```
 
-Usually clients provide options to group the changes along the annotations they are associated with. To support this in the protocol an edit or resource operation refers to a change annotation using an identifier and not the change annotation literal directly. This allows servers to use the identical annotation across multiple edits or resource operations which then allows clients to group the operations under that change annotation. The actual change annotations together with their identifers are managed by the workspace edit via the new property `changeAnnotations`.
+Usually clients provide options to group the changes along the annotations they are associated with. To support this in the protocol an edit or resource operation refers to a change annotation using an identifier and not the change annotation literal directly. This allows servers to use the identical annotation across multiple edits or resource operations which then allows clients to group the operations under that change annotation. The actual change annotations together with their identifiers are managed by the workspace edit via the new property `changeAnnotations`.
 
 <div class="anchorHolder"><a href="#changeAnnotationIdentifier" name="changeAnnotationIdentifier" class="linkableAnchor"></a></div>
 
@@ -887,7 +887,7 @@ export interface CreateFile {
 	options?: CreateFileOptions;
 
 	/**
-	 * An optional annotation identifer describing the operation.
+	 * An optional annotation identifier describing the operation.
 	 *
 	 * @since 3.16.0
 	 */
@@ -942,7 +942,7 @@ export interface RenameFile {
 	options?: RenameFileOptions;
 
 	/**
-	 * An optional annotation identifer describing the operation.
+	 * An optional annotation identifier describing the operation.
 	 *
 	 * @since 3.16.0
 	 */
@@ -992,7 +992,7 @@ export interface DeleteFile {
 	options?: DeleteFileOptions;
 
 	/**
-	 * An optional annotation identifer describing the operation.
+	 * An optional annotation identifier describing the operation.
 	 *
 	 * @since 3.16.0
 	 */
@@ -8409,6 +8409,16 @@ interface SemanticTokensClientCapabilities {
 	 * Whether the client supports tokens that can span multiple lines.
 	 */
 	multilineTokenSupport?: boolean;
+
+	/**
+	 * Whether the client allows the server to actively cancel a
+	 * semantic token request, e.g. supports returning
+	 * LSPErrorCodes.ServerCancelled. If a server does the client
+	 * needs to retrigger the request.
+	 *
+	 * @since 3.17.0
+	 */
+	serverCancelSupport?: boolean;
 }
 ```
 
