@@ -4558,6 +4558,17 @@ interface PublishDiagnosticsParams {
 The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the `textDocument/completion` request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. By default the request can only delay the computation of the `detail` and `documentation` properties. Since 3.16.0 the client
 can signal that it can resolve more properties lazily. This is done using the `completionItem#resolveSupport` client capability which lists all properties that can be filled in during a 'completionItem/resolve' request. All other properties (usually `sortText`, `filterText`, `insertText` and `textEdit`) must be provided in the `textDocument/completion` response and must not be changed during resolve.
 
+The language server protocol uses the following model around completions:
+
+- to achieve consistency across languages and to honor different clients usually the client is responsible for filtering and sorting. This has also the advantage that client can experiment with different filter and sorting models. However servers can enforce different behavior by setting a `filterText` / `sortText`
+- for speed clients should be able to filter an already received completion list if the user continues typing. Servers can opt out of this using a `CompletionList` and mark it as `isIncomplete`.
+
+The server has additional means to influence filtering and sorting. They are expressed by either creating a `CompletionItem` with a `insertText` or with a `textEdit`. The two modes differ as follows:
+
+- **Completion item provides an insertText / label without a text edit**: in the model the client should filter against what the user has already typed using the word boundary rules of the language (e.g. resolving the word under the cursor position). The reason for this mode is that it makes it extremely easy for a server to implement a basic completion list and get it filtered on the client.
+
+- **Completion Item with text edits**: in this mode the server tells the client that it actually knows what it is doing. If you create a completion item with a text edit at the current cursor position no word guessing takes place and no filtering should happen. This mode can be combined with a sort text and filter text to customize two things. If the text edit is a replace edit then the range denotes the word used for filtering. If the replace changes the text it most likely makes sense to specify a filter text to be used.
+
 _Client Capability_:
 * property name (optional): `textDocument.completion`
 * property type: `CompletionClientCapabilities` defined as follows:
