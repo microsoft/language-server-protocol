@@ -4563,7 +4563,7 @@ The language server protocol uses the following model around completions:
 - to achieve consistency across languages and to honor different clients usually the client is responsible for filtering and sorting. This has also the advantage that client can experiment with different filter and sorting models. However servers can enforce different behavior by setting a `filterText` / `sortText`
 - for speed clients should be able to filter an already received completion list if the user continues typing. Servers can opt out of this using a `CompletionList` and mark it as `isIncomplete`.
 
-The server has additional means to influence filtering and sorting. They are expressed by either creating a `CompletionItem` with a `insertText` or with a `textEdit`. The two modes differ as follows:
+A completion item provides additional means to influence filtering and sorting. They are expressed by either creating a `CompletionItem` with a `insertText` or with a `textEdit`. The two modes differ as follows:
 
 - **Completion item provides an insertText / label without a text edit**: in the model the client should filter against what the user has already typed using the word boundary rules of the language (e.g. resolving the word under the cursor position). The reason for this mode is that it makes it extremely easy for a server to implement a basic completion list and get it filtered on the client.
 
