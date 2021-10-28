@@ -8413,7 +8413,7 @@ interface SemanticTokensClientCapabilities {
 	/**
 	 * Whether the client allows the server to actively cancel a
 	 * semantic token request, e.g. supports returning
-	 * LSPErrorCodes.ServerCancelled. If a server does the client
+	 * ErrorCodes.ServerCancelled. If a server does the client
 	 * needs to retrigger the request.
 	 *
 	 * @since 3.17.0
