@@ -31,8 +31,12 @@
                     <li>
                         <div class="copyright">
                             <a id="footer-microsoft-link" class="logo" href="https://www.microsoft.com">
-                                <img src="{{site.baseurl}}/img/microsoft.svg" alt="Microsoft">
+                                <picture>
+                                    <source srcset="{{site.baseurl}}/img/microsoft-logo.png" media="(prefers-color-scheme: dark)"></source>
+                                    <img src="{{site.baseurl}}/img/microsoft-logo-inverted.png" height="20" alt="Microsoft">
+                                </picture>
                             </a>
+                            <span>© 2021 Microsoft</span>
                         </div>
                     </li>
                 </ul>
