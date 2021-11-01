@@ -8430,6 +8430,20 @@ interface SemanticTokensClientCapabilities {
 	 * @since 3.17.0
 	 */
 	serverCancelSupport?: boolean;
+
+	/**
+	 * Whether the client uses semantic tokens to augment existing
+	 * syntax tokens. If set to `true` client side created syntax
+	 * tokens and semantic tokens are both used for colorization. If
+	 * set to `false` the client only uses the returned semantic tokens
+	 * for colorization.
+	 *
+	 * If the value is `undefined` then the client behavior is not
+	 * specified.
+	 *
+	 * @since 3.17.0
+	 */
+	augmentsSyntaxTokens?: boolean;
 }
 ```
 
