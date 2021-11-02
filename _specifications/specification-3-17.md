@@ -4742,9 +4742,29 @@ export interface CompletionClientCapabilities {
 	 * The client's default when the completion item doesn't provide a
 	 * `insertTextMode` property.
 	 *
-	 * @since 3.17.0
+	 * @since 3.17.0 - proposed state
 	 */
 	insertTextMode?: InsertTextMode;
+
+	/**
+	 * The client supports the following `CompletionList` specific
+	 * capabilities.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	completionList?: {
+		/**
+		 * The client supports the the following itemDefaults on
+		 * a completion list.
+		 *
+		 * The value lists the supported property names of the
+		 * `CompletionList.itemDefaults` object. If omitted
+		 * no properties are supported.
+		 *
+		 * @since 3.17.0 - proposed state
+		 */
+		itemDefaults?: string[];
+	}
 }
 ```
 
@@ -4908,6 +4928,54 @@ export interface CompletionList {
 	 * incomplete completion sessions.
 	 */
 	isIncomplete: boolean;
+
+	/**
+	 * In many cases the items of an actual completion result share the same
+	 * value for properties like `commitCharacters` or the range of a text
+	 * edit. A completion list can therefore define item defaults which will
+	 * be used if a completion item itself doesn't specify the value.
+	 *
+	 * If a completion list specifies a default value and a completion item
+	 * also specifies a corresponding value the one from the item is used.
+	 *
+	 * Servers are only allowed to return default values if the client
+	 * signals support for this via the `completionList.itemDefaults`
+	 * capability.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	itemDefaults?: {
+		/**
+		 * A default commit character set.
+		 *
+		 * @since 3.17.0 - proposed state
+		 */
+		commitCharacters?: string[];
+
+		/**
+		 * A default edit range
+		 *
+		 * @since 3.17.0 - proposed state
+		 */
+		editRange?: Range | {
+			insert: Range;
+			replace: Range;
+		};
+
+		/**
+		 * A default insert text format
+		 *
+		 * @since 3.17.0 - proposed state
+		 */
+		insertTextFormat?: InsertTextFormat;
+
+		/**
+		 * A default insert text mode
+		 *
+		 * @since 3.17.0 - proposed state
+		 */
+		insertTextMode?: InsertTextMode;
+	}
 
 	/**
 	 * The completion items.
