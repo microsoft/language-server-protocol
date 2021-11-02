@@ -1502,6 +1502,14 @@ export interface MarkdownClientCapabilities {
 	 * The version of the parser.
 	 */
 	version?: string;
+
+	/**
+	 * A list of HTML tags that the client allows / supports in
+	 * Markdown.
+	 *
+	 * @since 3.17.0
+	 */
+	allowedTags?: string[];
 }
  ```
 
