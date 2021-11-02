@@ -67,7 +67,7 @@ The following TypeScript definitions describe the base [JSON-RPC protocol](http:
 
 #### <a href="#number" name="number" class="anchor"> Numbers </a>
 
-The protocol use the following definitions for integers, unsigned integers and decimal numbers:
+The protocol use the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
 <div class="anchorHolder"><a href="#integer" name="integer" class="linkableAnchor"></a></div>
 
@@ -98,6 +98,39 @@ export type uinteger = number;
  * 0 <= d <= 1.
  */
 export type decimal = number;
+```
+
+<div class="anchorHolder"><a href="#lspAny" name="lspAny" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * The LSP any type
+ *
+ * @since 3.17.0
+ */
+export type LSPAny = LSPObject | LSPArray | string | integer | uinteger | decimal | boolean | null;
+```
+
+<div class="anchorHolder"><a href="#lspObject" name="lspObject" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * LSP object definition.
+ *
+ * @since 3.17.0
+ */
+export type LSPObject = { [key: string]: LSPAny };
+```
+
+<div class="anchorHolder"><a href="#lspArray" name="lspArray" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * LSP arrays.
+ *
+ * @since 3.17.0
+ */
+export type LSPArray = LSPAny[];
 ```
 
 #### Abstract Message
@@ -725,7 +758,7 @@ interface Command {
 	 * Arguments that the command handler should be
 	 * invoked with.
 	 */
-	arguments?: any[];
+	arguments?: LSPAny[];
 }
 ```
 
@@ -1883,7 +1916,7 @@ interface InitializeParams extends WorkDoneProgressParams {
 	/**
 	 * User provided initialization options.
 	 */
-	initializationOptions?: any;
+	initializationOptions?: LSPAny;
 
 	/**
 	 * The capabilities provided by the client (editor or tool)
@@ -2271,7 +2304,7 @@ interface ClientCapabilities {
 	/**
 	 * Experimental client capabilities.
 	 */
-	experimental?: any;
+	experimental?: LSPAny;
 }
 ```
 
@@ -2572,7 +2605,7 @@ interface ServerCapabilities {
 	/**
 	 * Experimental server capabilities.
 	 */
-	experimental?: any;
+	experimental?: LSPAny;
 }
 ```
 
@@ -2970,7 +3003,7 @@ export interface Registration {
 	/**
 	 * Options necessary for the registration.
 	 */
-	registerOptions?: any;
+	registerOptions?: LSPAny;
 }
 ```
 
@@ -3210,7 +3243,7 @@ interface DidChangeConfigurationParams {
 	/**
 	 * The actual changed settings
 	 */
-	settings: any;
+	settings: LSPAny;
 }
 ```
 
@@ -3255,7 +3288,7 @@ export interface ConfigurationItem {
 ```
 
 _Response_:
-* result: any[]
+* result: LSPAny[]
 * error: code and message set in case an exception happens during the 'workspace/configuration' request
 
 #### <a href="#workspace_didChangeWatchedFiles" name="workspace_didChangeWatchedFiles" class="anchor">DidChangeWatchedFiles Notification (:arrow_right:)</a>
@@ -3567,14 +3600,14 @@ export interface ExecuteCommandParams extends WorkDoneProgressParams {
 	/**
 	 * Arguments that the command should be invoked with.
 	 */
-	arguments?: any[];
+	arguments?: LSPAny[];
 }
 ```
 
 The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
 
 _Response_:
-* result: `any` \| `null`
+* result: `LSPAny` \| `null`
 * error: code and message set in case an exception happens during the request.
 
 #### <a href="#workspace_applyEdit" name="workspace_applyEdit" class="anchor">Applies a WorkspaceEdit (:arrow_right_hook:)</a>
@@ -5185,7 +5218,7 @@ export interface CompletionItem {
 	 * A data entry field that is preserved on a completion item between
 	 * a completion and a completion resolve request.
 	 */
-	data?: any;
+	data?: LSPAny;
 }
 ```
 
@@ -6860,7 +6893,7 @@ export interface CodeAction {
 	 *
 	 * @since 3.16.0
 	 */
-	data?: any;
+	data?: LSPAny;
 }
 ```
 * partial result: `(Command | CodeAction)[]`
@@ -6990,7 +7023,7 @@ interface CodeLens {
 	 * A data entry field that is preserved on a code lens item between
 	 * a code lens and a code lens resolve request.
 	 */
-	data?: any;
+	data?: LSPAny;
 }
 ```
 * partial result: `CodeLens[]`
@@ -7150,7 +7183,7 @@ interface DocumentLink {
 	 * A data entry field that is preserved on a document link between a
 	 * DocumentLinkRequest and a DocumentLinkResolveRequest.
 	 */
-	data?: any;
+	data?: LSPAny;
 }
 ```
 * partial result: `DocumentLink[]`
