@@ -33,4 +33,5 @@ index: 3
 | Rust | [Eyal Kalderon](https://github.com/ebkalderon) | [tower-lsp](https://github.com/ebkalderon/tower-lsp)
 | Swift | [Chime](https://twitter.com/chimehq) | [SwiftLSPClient](https://github.com/chimehq/SwiftLSPClient)|
 | TypeScript | [TypeFox](https://www.typefox.io/) | [langium](https://github.com/langium/langium)|
+| Go | [TobiasYin](https://github.com/TobiasYin/) | [go-lsp](https://github.com/TobiasYin/go-lsp/)|
 {: .table .table-bordered .table-responsive}
