@@ -6867,7 +6867,40 @@ export interface CodeActionContext {
 	 * shown. So servers can omit computing them.
 	 */
 	only?: CodeActionKind[];
+
+	/**
+	 * The reason why code actions were requested.
+	 *
+	 * @since 3.17.0
+	 */
+	triggerKind?: CodeActionTriggerKind;
 }
+```
+
+<div class="anchorHolder"><a href="#codeActionTriggerKind" name="codeActionTriggerKind" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * The reason why code actions were requested.
+ *
+ * @since 3.17.0 - proposed state
+ */
+export namespace CodeActionTriggerKind {
+	/**
+	 * Code actions were explicitly requested by the user or by an extension.
+	 */
+	export const Invoked: 1 = 1;
+
+	/**
+	 * Code actions were requested automatically.
+	 *
+	 * This typically happens when current selection in a file changes, but can
+	 * also be triggered when file content changes.
+	 */
+	export const Automatic: 2 = 2;
+}
+
+export type CodeActionTriggerKind = 1 | 2;
 ```
 
 _Response_:
