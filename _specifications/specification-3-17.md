@@ -1091,6 +1091,7 @@ export interface WorkspaceEdit {
 
 The capabilities of a workspace edit has evolved over the time. Clients can describe their support using the following client capability:
 
+_Client Capability_:
 * property path (optional): `workspace.workspaceEdit`
 * property type: `WorkspaceEditClientCapabilities` defined as follows:
 
@@ -3584,7 +3585,7 @@ export interface ExecuteCommandRegistrationOptions
 }
 ```
 
-_Request:_
+_Request_:
 * method: 'workspace/executeCommand'
 * params: `ExecuteCommandParams` defined as follows:
 
@@ -4518,7 +4519,7 @@ See also the [Diagnostic](#diagnostic) section.
 
 _Client Capability_:
 * property name (optional): `textDocument.publishDiagnostics`
-* property type `PublishDiagnosticsClientCapabilities` defined as follows:
+* property type: `PublishDiagnosticsClientCapabilities` defined as follows:
 
 <div class="anchorHolder"><a href="#publishDiagnosticsClientCapabilities" name="publishDiagnosticsClientCapabilities" class="linkableAnchor"></a></div>
 
