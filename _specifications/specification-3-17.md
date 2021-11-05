@@ -7845,8 +7845,8 @@ interface RenameParams extends TextDocumentPositionParams,
 ```
 
 _Response_:
-* result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace.
-* error: code and message set in case an exception happens during the rename request.
+* result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace. `null` should be treated the same was as [`WorkspaceEdit`](#workspaceedit) with no changes (no change was required).
+* error: code and message set in case when rename could not be performed for any reason. Examples include: there is nothing at given `position` to rename (like a space), given symbol does not support renaming by the server or the code is invalid (e.g. does not compile).
 
 #### <a href="#textDocument_prepareRename" name="textDocument_prepareRename" class="anchor">Prepare Rename Request (:leftwards_arrow_with_hook:)</a>
 
