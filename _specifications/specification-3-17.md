@@ -4228,7 +4228,7 @@ export type TextDocumentContentChangeEvent = {
 
 #### <a href="#textDocument_willSave" name="textDocument_willSave" class="anchor">WillSaveTextDocument Notification (:arrow_right:)</a>
 
-The document will save notification is sent from the client to the server before the document is actually saved.
+The document will save notification is sent from the client to the server before the document is actually saved. If a server has registered for open / close events clients should ensure that the document is open before a `willSave` notification is sent since clients can't change the content of a file without ownership transferal.
 
 _Client Capability_:
 * property name (optional): `textDocument.synchronization.willSave`
@@ -4297,7 +4297,7 @@ export type TextDocumentSaveReason = 1 | 2 | 3;
 
 #### <a href="#textDocument_willSaveWaitUntil" name="textDocument_willSaveWaitUntil" class="anchor">WillSaveWaitUntilTextDocument Request (:leftwards_arrow_with_hook:)</a>
 
-The document will save request is sent from the client to the server before the document is actually saved. The request can return an array of TextEdits which will be applied to the text document before it is saved. Please note that clients might drop results if computing the text edits took too long or if a server constantly fails on this request. This is done to keep the save fast and reliable.
+The document will save request is sent from the client to the server before the document is actually saved. The request can return an array of TextEdits which will be applied to the text document before it is saved. Please note that clients might drop results if computing the text edits took too long or if a server constantly fails on this request. This is done to keep the save fast and reliable.  If a server has registered for open / close events clients should ensure that the document is open before a `willSaveWaitUntil` notification is sent since clients can't change the content of a file without ownership transferal.
 
 _Client Capability_:
 * property name (optional): `textDocument.synchronization.willSaveWaitUntil`
