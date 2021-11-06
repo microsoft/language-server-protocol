@@ -23,6 +23,7 @@ index: 1
 | IBM High Level **Assembler** | [Broadcom](https://www.broadcom.com/) | [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) | C++ |
 | [IBM High Level **Assembler**](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.2.0/com.ibm.zos.v2r2.e0zc100/hlasm.htm) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | [AsyncAPI](https://www.asyncapi.com/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
+| AWK | [Stanislav Chernov](https://github.com/Beaglefoot) | [AWK Language Server](https://github.com/Beaglefoot/awk-language-server) | TypeScript |
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
