@@ -17,6 +17,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="{{ site.baseurl }}/js/page.js"></script>
 
+
 <script type="text/javascript">
   var linkableTypes = {
   {% for linkableGroup in site.data.linkableTypes %}
@@ -28,11 +29,6 @@
 </script>
 
 <script type="text/javascript">
-  if (window.location.pathname.indexOf("3-17") === -1) {
-    // Currently we don't support linking on other versions of the document.
-    return;
-  }
-
   function tryGetAssociatedLink(name) {
     var link = linkableTypes[name];
 
