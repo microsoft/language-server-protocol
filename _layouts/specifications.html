@@ -4,7 +4,7 @@ layout: default
 
 <div class="container">
     <div class="row single-page">
-        <div class="col-lg-2 d-none d-lg-block lsp-sidebar">
+        <div class="col-12 col-lg-2 d-block lsp-sidebar">
             <div class="card">
                 <div class="outlineAccordion" data-children=".item">
                     {% for spec-group in site.data.specifications %}
@@ -29,11 +29,11 @@ layout: default
             </div>
         </div>
 
-        <div class="col-lg-8">
+        <div class="col-12 col-lg-8 order-3 order-lg-2">
             <div id="markdown-content-container" role="navigation" aria-label="Main">{{ content }}</div>
         </div>
 
-        <div class="col-lg-3 col-xl-2 d-none d-lg-block lsp-sidebar">
+        <div class="col-12 col-lg-2 order-2 order-lg-3 d-block lsp-sidebar">
             {% for toc-l1 in site.data[page.toc] %}
             <div class="card">
                 <div id="outlineAccordion" data-children=".item">

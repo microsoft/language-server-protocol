@@ -383,10 +383,10 @@ pre[class=highlight] {
 
 	img {
 		width: 100px;
-	}
 
-	a#footer-microsoft-link {
-		display: block;
+		@media (min-width: 576px) {
+			float: right;
+		}
 	}
 
 	ul {
@@ -423,7 +423,7 @@ pre[class=highlight] {
 	}
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
 	.lsp-navbar {
 		position: -webkit-sticky;
 		position: sticky;

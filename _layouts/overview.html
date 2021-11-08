@@ -4,7 +4,7 @@ layout: default
 
 <div class="container">
     <div class="row single-page">
-        <div class="col-lg-2 d-none d-lg-block lsp-sidebar">
+        <div class="col-12 col-lg-2 d-block lsp-sidebar">
             <div class="card">
                 <ul class="nav flex-column list-unstyled">
                     {% for overview in site.data.overviews %}
@@ -18,11 +18,11 @@ layout: default
             </div>
         </div>
 
-        <div class="col-lg-8">
+        <div class="col-12 col-lg-8">
             <div id="markdown-content-container">{{ content }}</div>
         </div>
 
-        <div class="col-lg-2 d-none d-xl-block">
+        <div class="d-none col-lg-2 d-lg-block">
 
         </div>
     </div>
