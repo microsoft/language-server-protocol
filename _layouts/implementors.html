@@ -4,7 +4,7 @@ layout: default
 
 <div class="container">
     <div class="row single-page">
-        <div class="col-12 col-lg-2 d-block lsp-sidebar">
+        <div class="d-none col-lg-2 d-lg-block lsp-sidebar">
             <div class="card">
                 <ul class="nav flex-column list-unstyled">
                     {% assign sorted = site.implementors | sort: 'index' %}
@@ -21,8 +21,8 @@ layout: default
 
         <div class="col-12 col-lg-8" role="navigation" aria-label="Main">
             <nav id="small-nav" class="docs-nav d-lg-none">
-                <h4>Topics</h4>
-                <select id="small-nav-dropdown">
+                <label for="small-nav-dropdown"><h4>Topics</h4></label>
+                <select name="implementors" id="small-nav-dropdown">
                     {% assign sorted = site.implementors | sort: 'index' %}
                     {% for post in sorted %}
                     <option value="{{ post.url | prepend: site.baseurl }}" {% if page.title==post.title %}selected{% endif %} >{{ post.shortTitle }}</option>
