@@ -1,6 +1,6 @@
 ---
 title: Specification
-shortTitle: 3.15 - Previous
+shortTitle: 3.15 (Previous)
 layout: specifications
 sectionid: specification-3-15
 toc: specification-3-15-toc

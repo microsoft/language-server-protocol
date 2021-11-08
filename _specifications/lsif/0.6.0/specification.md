@@ -1,13 +1,12 @@
 ---
 title: LSIF Specification
-shortTitle: 0.6.0 pre-release
+shortTitle: 0.6.0 (Current)
 layout: specifications
 sectionid: lsif-0-6-0
 toc: lsif-0-6-0-toc
 index: 2
+fullTitle: Language Server Index Format Specification - 0.6.0
 ---
-
-# Under Construction
 
 The 0.6.0 version of LSIF is currently under construction.
 

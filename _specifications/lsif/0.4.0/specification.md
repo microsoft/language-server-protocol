@@ -1,10 +1,11 @@
 ---
 title: LSIF Specification
-shortTitle: 0.4.0 pre-release
+shortTitle: 0.4.0 (Previous)
 layout: specifications
 sectionid: lsif-0-4-0
 toc: lsif-0-4-0-toc
 index: 2
+fullTitle: Language Server Index Format Specification - 0.4.0
 ---
 
 ## <a href="#lsifIntro" name="lsifIntro" class="anchor">Language Server Index Format</a>

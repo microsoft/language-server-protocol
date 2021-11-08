@@ -1,6 +1,6 @@
 ---
 title: Specification
-shortTitle: 3.17 - Upcoming
+shortTitle: 3.17 (Upcoming)
 layout: specifications
 sectionid: specification-3-17
 toc: specification-3-17-toc
