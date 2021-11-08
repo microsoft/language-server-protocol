@@ -4,7 +4,7 @@ layout: default
 
 <div class="container">
     <div class="row single-page">
-        <div class="col-12 col-lg-2 d-block lsp-sidebar">
+        <div class="d-none col-lg-2 d-lg-block lsp-sidebar">
             <div class="card">
                 <ul class="nav flex-column list-unstyled">
                     {% for overview in site.data.overviews %}
@@ -18,12 +18,20 @@ layout: default
             </div>
         </div>
 
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-8" role="navigation" aria-label="Main">
+            <nav id="small-nav" class="docs-nav d-lg-none">
+                <label for="small-nav-dropdown"><h4>Topics</h4></label>
+                <select name="topics" id="small-nav-dropdown">
+                    {% for overview in site.data.overviews %}
+                    <option value="{{ overview.url | prepend: site.baseurl }}" {% if page.title==overview.title %}selected{% endif %} >{{ overview.title }}</option>
+                    {% endfor %}
+                </select>
+            </nav>
+
             <div id="markdown-content-container">{{ content }}</div>
         </div>
 
         <div class="d-none col-lg-2 d-lg-block">
-
         </div>
     </div>
 </div>
