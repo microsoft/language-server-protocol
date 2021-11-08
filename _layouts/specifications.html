@@ -15,7 +15,7 @@ layout: default
                         <div id="{{ spec-group.anchor }}" class="show" role="tabpanel">
                             <ul class="nav toc flex-column" style="padding-left: 0.5rem">
                                 {% for spec in spec-group.children %}
-                                <li {% if page.title==spec.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                                <li {% if page.shortTitle==spec.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                                     <a class="nav-link toc-link" href="{{ spec.url | prepend: site.baseurl }}">
                                         {{ spec.title }}
                                     </a>
@@ -36,7 +36,7 @@ layout: default
                     {% for spec-group in site.data.specifications %}
                     <optgroup class="item" label="{{ spec-group.title }}">
                         {% for spec in spec-group.children %}
-                        <option value="{{ spec.url | prepend: site.baseurl }}" {% if page.shortTitle==spec.shortTitle %}selected{% endif %} >{{ spec.title }}</option>
+                        <option value="{{ spec.url | prepend: site.baseurl }}" {% if page.shortTitle==spec.title %}selected{% endif %} >{{ spec.title }}</option>
                         {% endfor %}
                     </optgroup>
                     {% endfor %}
