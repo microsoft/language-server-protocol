@@ -4,9 +4,9 @@ shortTitle: 3.17 - Upcoming
 layout: specifications
 sectionid: specification-3-17
 toc: specification-3-17-toc
+fullTitle: Language Server Protocol Specification - 3.17
 index: 2
 ---
-# Language Server Protocol Specification - 3.17
 
 This document describes the upcoming 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 

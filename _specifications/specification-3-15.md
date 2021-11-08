@@ -4,9 +4,9 @@ shortTitle: 3.15 - Previous
 layout: specifications
 sectionid: specification-3-15
 toc: specification-3-15-toc
+fullTitle: Language Server Protocol Specification - 3.15
 index: 2
 ---
-# Language Server Protocol Specification - 3.15
 
 This document describes the 3.15.x version of the language server protocol. An implementation for node of the 3.15.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 

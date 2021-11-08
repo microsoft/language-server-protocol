@@ -4,12 +4,12 @@ layout: default
 
 <div class="container">
     <div class="row single-page">
-        <div class="col-12 col-lg-2 d-block lsp-sidebar">
+        <div class="d-none col-lg-2 d-lg-block lsp-sidebar">
             <div class="card">
                 <div class="outlineAccordion" data-children=".item">
                     {% for spec-group in site.data.specifications %}
                     <div class="item">
-                        <a class="nav-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ spec-group.anchor }}"aria-expanded="true">
+                        <a class="nav-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ spec-group.anchor }}" aria-expanded="true">
                             {{ spec-group.title }}
                         </a>
                         <div id="{{ spec-group.anchor }}" class="show" role="tabpanel">
@@ -29,11 +29,53 @@ layout: default
             </div>
         </div>
 
-        <div class="col-12 col-lg-8 order-3 order-lg-2">
-            <div id="markdown-content-container" role="navigation" aria-label="Main">{{ content }}</div>
+        <div class="col-12 col-lg-8" role="navigation" aria-label="Main">
+            <nav id="small-nav" class="docs-nav d-lg-none">
+                <h4>Topics</h4>
+                <select id="small-nav-dropdown">
+                    {% for spec-group in site.data.specifications %}
+                    <optgroup class="item" label="{{ spec-group.title }}">
+                        {% for spec in spec-group.children %}
+                        <option value="{{ spec.url | prepend: site.baseurl }}" {% if page.fullTitle==spec.fullTitle %}selected{% endif %} >{{ spec.title }}</option>
+                        {% endfor %}
+                    </optgroup>
+                    {% endfor %}
+                </select>
+            </nav>
+
+            <h1>{{ page.fullTitle }}</h1>
+
+            <div class="d-block d-lg-none lsp-sidebar">
+                {% for toc-l1 in site.data[page.toc] %}
+                <div class="card">
+                    <div id="outlineAccordion" data-children=".item">
+                        {% for toc-l2 in toc-l1.children %}
+                        <div class="item">
+                            <a class="nav-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ toc-l2.anchor }}" aria-expanded="true">
+                                {{ toc-l2.title }}
+                            </a>
+                            <div id="{{ toc-l2.anchor }}" class="collapse {% if toc-l2.anchor==toc-l1.reveal %}show{% endif%}" role="tabpanel">
+                                <ul class="nav toc flex-column" style="padding-left: 0.5rem">
+                                    {% for toc-l3 in toc-l2.children %}
+                                    <li class="nav-item">
+                                        <a class="nav-link toc-link" href="#{{ toc-l3.anchor }}">
+                                            {{ toc-l3.title }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div id="markdown-content-container">{{ content }}</div>
         </div>
 
-        <div class="col-12 col-lg-2 order-2 order-lg-3 d-block lsp-sidebar">
+        <div class="d-none col-lg-2 d-lg-block lsp-sidebar">
             {% for toc-l1 in site.data[page.toc] %}
             <div class="card">
                 <div id="outlineAccordion" data-children=".item">

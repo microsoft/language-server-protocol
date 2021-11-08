@@ -4,9 +4,9 @@ shortTitle: 3.16 - Current
 layout: specifications
 sectionid: specification-3-16
 toc: specification-3-16-toc
+fullTitle: Language Server Protocol Specification - 3.16
 index: 2
 ---
-# Language Server Protocol Specification - 3.16
 
 This document describes the 3.16.x version of the language server protocol. An implementation for node of the 3.16.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 

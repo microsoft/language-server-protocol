@@ -4,9 +4,9 @@ shortTitle: 3.14 - Previous
 layout: specifications
 sectionid: specification-3-14
 toc: specification-3-14-toc
+fullTitle: Language Server Protocol Specification - 3.14
 index: 1
 ---
-# Language Server Protocol Specification - 3.14
 
 This document describes version 3.14.x of the language server protocol. An implementation for node of the 3.14.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
