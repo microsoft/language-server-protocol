@@ -8,7 +8,7 @@ layout: default
             <div class="card">
                 <ul class="nav flex-column list-unstyled">
                     {% for overview in site.data.overviews %}
-                    <li {% if page.title==overview.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <li {% if page.topic==overview.title %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                         <a class="nav-link" href="{{ overview.url | prepend: site.baseurl }}">
                             {{ overview.title }}
                         </a>
@@ -23,7 +23,7 @@ layout: default
                 <label for="small-nav-dropdown"><h4>Topics</h4></label>
                 <select name="topics" id="small-nav-dropdown">
                     {% for overview in site.data.overviews %}
-                    <option value="{{ overview.url | prepend: site.baseurl }}" {% if page.title==overview.title %}selected{% endif %} >{{ overview.title }}</option>
+                    <option value="{{ overview.url | prepend: site.baseurl }}" {% if page.topic==overview.title %}selected{% endif %} >{{ overview.title }}</option>
                     {% endfor %}
                 </select>
             </nav>
