@@ -6,10 +6,10 @@ layout: default
     <div class="row single-page">
         <div class="d-none col-lg-2 d-lg-block lsp-sidebar">
             <div class="card">
-                <div class="outlineAccordion" data-children=".item">
+                <div id="spec-group-accordion" data-children=".item">
                     {% for spec-group in site.data.specifications %}
                     <div class="item">
-                        <a class="nav-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ spec-group.anchor }}" aria-expanded="true">
+                        <a class="nav-link" data-toggle="collapse" data-parent="#spec-group-accordion" href="#{{ spec-group.anchor }}" aria-expanded="true">
                             {{ spec-group.title }}
                         </a>
                         <div id="{{ spec-group.anchor }}" class="show" role="tabpanel">
@@ -48,13 +48,13 @@ layout: default
             <div class="d-block d-lg-none lsp-sidebar">
                 {% for toc-l1 in site.data[page.toc] %}
                 <div class="card">
-                    <div id="outlineAccordion" data-children=".item">
+                    <div id="inline-sections-accordion" data-children=".item">
                         {% for toc-l2 in toc-l1.children %}
                         <div class="item">
-                            <a class="nav-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ toc-l2.anchor }}" aria-expanded="true">
+                            <a class="nav-link" data-toggle="collapse" data-parent="#inline-sections-accordion" href="#{{ toc-l2.anchor }}-inline" aria-expanded="true">
                                 {{ toc-l2.title }}
                             </a>
-                            <div id="{{ toc-l2.anchor }}" class="collapse {% if toc-l2.anchor==toc-l1.reveal %}show{% endif%}" role="tabpanel">
+                            <div id="{{ toc-l2.anchor }}-inline" class="collapse" role="tabpanel">
                                 <ul class="nav toc flex-column" style="padding-left: 0.5rem">
                                     {% for toc-l3 in toc-l2.children %}
                                     <li class="nav-item">
@@ -78,13 +78,13 @@ layout: default
         <div class="d-none col-lg-2 d-lg-block lsp-sidebar">
             {% for toc-l1 in site.data[page.toc] %}
             <div class="card">
-                <div id="outlineAccordion" data-children=".item">
+                <div id="side-sections-accordion" data-children=".item">
                     {% for toc-l2 in toc-l1.children %}
                     <div class="item">
-                        <a class="nav-link" data-toggle="collapse" data-parent="#outlineAccordion" href="#{{ toc-l2.anchor }}" aria-expanded="true">
+                        <a class="nav-link" data-toggle="collapse" data-parent="#side-sections-accordion" href="#{{ toc-l2.anchor }}-side" aria-expanded="true">
                             {{ toc-l2.title }}
                         </a>
-                        <div id="{{ toc-l2.anchor }}" class="collapse {% if toc-l2.anchor==toc-l1.reveal %}show{% endif%}" role="tabpanel">
+                        <div id="{{ toc-l2.anchor }}-side" class="collapse" role="tabpanel">
                             <ul class="nav toc flex-column" style="padding-left: 0.5rem">
                                 {% for toc-l3 in toc-l2.children %}
                                 <li class="nav-item">
