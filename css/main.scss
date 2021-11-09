@@ -441,6 +441,13 @@ pre[class=highlight] {
 	}
 }
 
+@media (max-width: 991px) {
+	.lsp-sidebar {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+}
+
 .navbar-brand h1 {
     font-size: 18px;
     font-weight: bold;
