@@ -29,7 +29,7 @@ layout: default
             </div>
         </div>
 
-        <div class="col-12 col-lg-7 col-xl-8" role="navigation" aria-label="Main">
+        <div class="col-12 col-lg-7" role="navigation" aria-label="Main">
             <nav id="small-nav" class="docs-nav d-lg-none">
                 <label for="small-nav-dropdown"><h4>Topics</h4></label>
                 <select name="specifications" id="small-nav-dropdown">
@@ -75,7 +75,7 @@ layout: default
             <div id="markdown-content-container">{{ content }}</div>
         </div>
 
-        <div class="d-none col-lg-3 col-xl-2 d-lg-block lsp-sidebar">
+        <div class="d-none col-lg-3 d-lg-block lsp-sidebar">
             {% for toc-l1 in site.data[page.toc] %}
             <div class="card">
                 <div id="side-sections-accordion" data-children=".item">
