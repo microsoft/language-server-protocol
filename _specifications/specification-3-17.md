@@ -1264,6 +1264,7 @@ C | `c`
 C++ | `cpp`
 C# | `csharp`
 CSS | `css`
+D | `d`
 Diff | `diff`
 Dart | `dart`
 Dockerfile | `dockerfile`
