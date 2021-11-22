@@ -131,7 +131,7 @@
     link: '#partialResultParams'
   - type: 'TraceValue'
     link: '#traceValue'
- 
+
 - name: "Actual Protocol"
   children:
   - type: 'InitializeParams'
@@ -224,6 +224,8 @@
     link: '#workspaceSymbolRegistrationOptions'
   - type: 'WorkspaceSymbolParams'
     link: '#workspaceSymbolParams'
+  - type: 'WorkspaceSymbol'
+    link: '#workspaceSymbol'
   - type: 'workspace/executeCommand'
     link: '#workspace_executeCommand'
   - type: 'ExecuteCommandClientCapabilities'

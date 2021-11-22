@@ -3446,7 +3446,7 @@ export namespace FileChangeType {
 
 #### <a href="#workspace_symbol" name="workspace_symbol" class="anchor">Workspace Symbols Request (:leftwards_arrow_with_hook:)</a>
 
-The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string.
+The workspace symbol request is sent from the client to the server to list project-wide symbols matching the query string. Since 3.17.0 servers can also provider a handler for `workspaceSymbol/resolve` requests. This allows servers to return workspace symbols without a range for a `workspace/symbol` request. Clients then need to resolve the range when necessary using the `workspaceSymbol/resolve` request. Servers can only use this new model if clients advertise support for it via the `workspace.symbol.resolveSupport` capability.
 
 _Client Capability_:
 * property path (optional): `workspace.symbol`
@@ -3489,6 +3489,21 @@ interface WorkspaceSymbolClientCapabilities {
 		 */
 		valueSet: SymbolTag[];
 	};
+
+	/**
+	 * The client support partial workspace symbols. The client will send the
+	 * request `workspaceSymbol/resolve` to the server to resolve additional
+	 * properties.
+	 *
+	 * @since 3.17.0 - proposedState
+	 */
+	resolveSupport?: {
+		/**
+		 * The properties that a client can resolve lazily. Usually
+		 * `location.range`
+		 */
+		properties: string[];
+	};
 }
 ```
 
@@ -3500,6 +3515,13 @@ _Server Capability_:
 
 ```typescript
 export interface WorkspaceSymbolOptions extends WorkDoneProgressOptions {
+	/**
+	 * The server provides support to resolve additional
+	 * information for a workspace symbol.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	resolveProvider?: boolean;
 }
 ```
 
@@ -3534,9 +3556,63 @@ interface WorkspaceSymbolParams extends WorkDoneProgressParams,
 ```
 
 _Response_:
-* result: `SymbolInformation[]` \| `null` as defined above.
-* partial result: `SymbolInformation[]` as defined above.
+* result: `SymbolInformation[]` \| `WorkspaceSymbol[]` \| `null`. See above for the definition of `SymbolInformation`. `WorkspaceSymbol` is defined as follows:
+
+<div class="anchorHolder"><a href="#workspaceSymbol" name="workspaceSymbol" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * A special workspace symbol that supports locations without a range
+ *
+ * @since 3.17.0 - proposed state
+ */
+export interface WorkspaceSymbol {
+	/**
+	 * The name of this symbol.
+	 */
+	name: string;
+
+	/**
+	 * The kind of this symbol.
+	 */
+	kind: SymbolKind;
+
+	/**
+	 * Tags for this completion item.
+	 */
+	tags?: SymbolTag[];
+
+	/**
+	 * The location of this symbol.
+	 *
+	 * See also `SymbolInformation.location`.
+	 */
+	location: Location | { uri: DocumentUri };
+
+	/**
+	 * The name of the symbol containing this symbol. This information is for
+	 * user interface purposes (e.g. to render a qualifier in the user interface
+	 * if necessary). It can't be used to re-infer a hierarchy for the document
+	 * symbols.
+	 */
+	containerName?: string;
+}
+```
+* partial result: `SymbolInformation[]` \| `WorkspaceSymbol[]` as defined above.
 * error: code and message set in case an exception happens during the workspace symbol request.
+
+#### <a href="#workspace_symbolResolve" name="workspace_symbolResolve" class="anchor">Workspace Symbol Resolve Request (:leftwards_arrow_with_hook:)</a>
+
+The request is sent from the client to the server to resolve additional information for a given workspace symbol.
+
+_Request_:
+* method: 'workspaceSymbol/resolve'
+* params: `WorkspaceSymbol`
+
+_Response_:
+* result: `WorkspaceSymbol`
+* error: code and message set in case an exception happens during the workspace symbol resolve request.
+
 
 #### <a href="#workspace_executeCommand" name="workspace_executeCommand" class="anchor">Execute a command (:leftwards_arrow_with_hook:)</a>
 
@@ -9123,6 +9199,7 @@ To support the case that the editor starting a server crashes an editor should a
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
 
 * Add support for a completion item label details.
+* Add support for workspace symbol resolve request.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 

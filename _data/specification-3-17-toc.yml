@@ -132,6 +132,8 @@
       anchor: workspace_didChangeWatchedFiles
     - title: symbol
       anchor: workspace_symbol
+    - title: symbol resolve
+      anchor: workspace_symbolResolve
     - title: executeCommand
       anchor: workspace_executeCommand
     - title: applyEdit
