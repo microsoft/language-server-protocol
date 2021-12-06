@@ -9200,6 +9200,9 @@ To support the case that the editor starting a server crashes an editor should a
 
 * Add support for a completion item label details.
 * Add support for workspace symbol resolve request.
+* Add support for shared values on CompletionItemList.
+* Add support for HTML tags in Markdown.
+* Specify how clients will handle stale requests.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
