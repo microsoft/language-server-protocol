@@ -5179,14 +5179,14 @@ export interface CompletionItemLabelDetails {
 
 	/**
 	 * An optional string which is rendered less prominently directly after
-	 * {@link CompletionItemLabel.label label}, without any spacing. Should be
+	 * {@link CompletionItem.label label}, without any spacing. Should be
 	 * used for function signatures or type annotations.
 	 */
 	detail?: string;
 
 	/**
 	 * An optional string which is rendered less prominently after
-	 * {@link CompletionItemLabel.detail}. Should be used for fully qualified
+	 * {@link CompletionItemLabelDetails.detail}. Should be used for fully qualified
 	 * names or file path.
 	 */
 	description?: string;
