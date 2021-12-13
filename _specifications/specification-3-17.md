@@ -6600,6 +6600,8 @@ export interface DocumentSymbol {
 /**
  * Represents information about programming constructs like variables, classes,
  * interfaces etc.
+ *
+ * @deprecated use DocumentSymbol or WorkspaceSymbol instead.
  */
 export interface SymbolInformation {
 	/**
