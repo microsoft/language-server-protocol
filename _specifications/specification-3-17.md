@@ -1242,7 +1242,7 @@ interface TextDocumentItem {
 	 * The version number of this document (it will increase after each
 	 * change, including undo/redo).
 	 */
-	version: integer;
+	version: uinteger;
 
 	/**
 	 * The content of the opened text document.
@@ -1324,7 +1324,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	 * The version number of a document will increase after each change,
 	 * including undo/redo. The number doesn't need to be consecutive.
 	 */
-	version: integer;
+	version: uinteger;
 }
 ```
 
@@ -1345,7 +1345,7 @@ interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier
 	 * The version number of a document will increase after each change,
 	 * including undo/redo. The number doesn't need to be consecutive.
 	 */
-	version: integer | null;
+	version: uinteger | null;
 }
 ```
 
