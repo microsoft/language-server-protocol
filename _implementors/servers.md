@@ -79,6 +79,7 @@ index: 1
 | [Idris2](https://github.com/idris-lang/Idris2) | [Idris community](https://github.com/idris-community) | [idris2-lsp](https://github.com/idris-community/idris2-lsp)  | Idris2 |
 | Java (Eclipse)| Eclipse, [RedHat](http://developers.redhat.com/blog/2016/08/01/a-week-of-hacking-the-java-language-server/) |  [Eclipse JDT LS](https://github.com/eclipse/eclipse.jdt.ls/) | Java |
 | Java | [@georgewfraser](https://github.com/georgewfraser) | [Java Compiler (javac) API-based Java support](https://github.com/georgewfraser/vscode-javac) | Java |
+| JavaScript | [quick-lint-js](https://quick-lint-js.com/) | [quick-lint-js](https://github.com/quick-lint/quick-lint-js) | C++ |
 | Javascript Flow| [Facebook, Inc.](https://flow.org/) | [flow](https://github.com/facebook/flow) | OCaml, JavaScript |
 | Javascript Flow| [flowtype](https://github.com/flowtype/) | [flow-language-server](https://github.com/flowtype/flow-language-server)(deprecated) | JavaScript, Flow |
 | Javascript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) | TypeScript |
