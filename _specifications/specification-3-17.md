@@ -4664,7 +4664,7 @@ interface PublishDiagnosticsParams {
 	 *
 	 * @since 3.15.0
 	 */
-	version?: uinteger;
+	version?: integer;
 
 	/**
 	 * An array of diagnostic information items.
