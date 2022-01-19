@@ -2546,6 +2546,13 @@ interface ServerCapabilities {
 	monikerProvider?: boolean | MonikerOptions | MonikerRegistrationOptions;
 
 	/**
+	 * The server provides breakable range support.
+	 *
+	 * @since 3.17.0
+	 */
+	breakableRangeProvider?: boolean;
+
+	/**
 	 * The server provides workspace symbol support.
 	 */
 	workspaceSymbolProvider?: boolean | WorkspaceSymbolOptions;
@@ -9176,6 +9183,42 @@ export interface Moniker {
 
 Server implementations of this method should ensure that the moniker calculation matches to those used in the corresponding LSIF implementation to ensure symbols can be associated correctly across IDE sessions and LSIF indexes.
 
+#### <a href="#textDocument_validateBreakableRange" name="textDocument_validateBreakableRange" class="anchor">Validate Breakable Range (:leftwards_arrow_with_hook:)</a>
+
+> *Since version 3.17.0*
+
+The `textDocument/validateBreakableRange` request is sent from the client to the server to adjust a breakpoint or active statement range. The server response is the best corresponding range for the client to use. `null` should be returned if a breakpoint should not be placed near the requested range. If the server is not able to determine a precise range (e.g. due to the range being in a disabled preprocessor block), the server can return a 0 width range located at the beginning of the line.
+
+_Server Capability_:
+
+* property name (optional): `breakableRangeProvider`
+* property type: `boolean`
+
+_Request_:
+
+* method: `textDocument/validateBreakableRange`
+* params: `ValidateBreakableRangeParams` defined as follows:
+
+<div class="anchorHolder"><a href="#validateBreakableRangeParams" name="validateBreakableRangeParams" class="linkableAnchor"></a></div>
+
+```typescript
+export interface ValidateBreakableRangeParams {
+	/**
+	 * The text document.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The range inside the text document.
+	 */
+	range: Range;
+}
+```
+
+_Response_:
+
+* result: `Range` \| `null`
+
 ### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
 Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
@@ -9205,6 +9248,7 @@ To support the case that the editor starting a server crashes an editor should a
 * Add support for shared values on CompletionItemList.
 * Add support for HTML tags in Markdown.
 * Specify how clients will handle stale requests.
+* Add support for `textDocument/validateBreakableRange`.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
