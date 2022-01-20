@@ -2103,6 +2103,13 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.16.0
 	 */
 	moniker?: MonikerClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/validateBreakableRange` request.
+	 *
+	 * @since 3.17.0
+	 */
+	breakableRange?: BreakableRangeClientCapabilities;
 }
 ```
 
@@ -2550,7 +2557,8 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.17.0
 	 */
-	breakableRangeProvider?: boolean;
+	breakableRangeProvider?: boolean | BreakableRangeOptions
+		| BreakableRangeRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
@@ -9189,10 +9197,46 @@ Server implementations of this method should ensure that the moniker calculation
 
 The `textDocument/validateBreakableRange` request is sent from the client to the server to adjust a breakpoint or active statement range. The server response is the best corresponding range for the client to use. `null` should be returned if a breakpoint should not be placed near the requested range. If the server is not able to determine a precise range (e.g. due to the range being in a disabled preprocessor block), the server can return a 0 width range located at the beginning of the line.
 
+_Client Capabilities_:
+
+* property name (optional): `textDocument.breakableRange`
+* property type: `BreakableRangeClientCapabilities` defined as follows:
+
+<div class="anchorHolder"><a href="#breakableRangeClientCapabilities" name="breakableRangeClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+interface BreakableRangeClientCapabilities {
+	/**
+	 * Whether implementation supports dynamic registration. If this is set to
+	 * `true` the client supports the new `(TextDocumentRegistrationOptions &
+	 * StaticRegistrationOptions)` return value for the corresponding server
+	 * capability as well.
+	 */
+	dynamicRegistration?: boolean;
+}
+```
+
 _Server Capability_:
 
 * property name (optional): `breakableRangeProvider`
-* property type: `boolean`
+* property type: `boolean` \| `BreakableRangeOptions` \| `BreakableRangeRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#breakableRangeOptions" name="breakableRangeOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export interface BreakableRangeOptions {
+}
+```
+
+_Registration Options_: `BreakableRangeRegistrationOptions` defined as follows:
+
+<div class="anchorHolder"><a href="#breakableRangeRegistrationOptions" name="breakableRangeRegistrationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export interface BreakableRangeRegistrationOptions extends BreakableRangeOptions,
+	TextDocumentRegistrationOptions, StaticRegistrationOptions  {
+}
+```
 
 _Request_:
 
