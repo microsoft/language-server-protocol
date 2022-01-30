@@ -69,6 +69,7 @@ index: 1
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
 | [GraphQL](http://graphql.org/) | [GraphQL Foundation](https://foundation.graphql.org/) | [Official GraphQL Language Server](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-server) |  TypeScript |
 | [GraphQL](http://graphql.org/) | [Mayank Agarwal (@Mayank1791989)](https://github.com/Mayank1791989) | [GQL Language Server](https://github.com/Mayank1791989/gql-language-server) | JavaScript |
+| [Grapviz](https://graphviz.org/)/DOT | [Niklas Mollenhauer](https://github.com/nikeee) | [dot-language-server](https://github.com/nikeee/dot-language-server) | TypeScript |
 | Groovy | [Palantir](https://github.com/palantir) | [groovy-language-server](https://github.com/palantir/groovy-language-server/) | Java |
 | [Groovy](http://groovy-lang.org/) | [Prominic.NET](https://moonshine-ide.com/) | [Groovy Language Server](https://github.com/prominic/groovy-language-server) | Java |
 | [Groovy](http://groovy-lang.org/) | [VsCode Groovy Lint](https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint) | [VsCode Groovy Lint Language Server](https://github.com/nvuillam/vscode-groovy-lint/tree/master/server) | TypeScript |
