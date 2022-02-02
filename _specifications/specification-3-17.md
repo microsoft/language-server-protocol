@@ -9195,7 +9195,9 @@ Server implementations of this method should ensure that the moniker calculation
 
 > *Since version 3.17.0*
 
-The `textDocument/validateBreakableRange` request is sent from the client to the server to adjust a breakpoint or active statement range. The server response is the best corresponding range for the client to use. `null` should be returned if a breakpoint should not be placed near the requested range. If the server is not able to determine a precise range (e.g. due to the range being in a disabled preprocessor block), the server can return a 0 width range located at the beginning of the line.
+The `textDocument/validateBreakableRange` request is sent from the client to the server to validate a breakpoint or active statement range. The server response is the best corresponding range for the client to use based on the syntactic context. `null` should be returned if a breakpoint should not be placed near the requested range. If the server is not able to determine a precise range (e.g. due to the range being in a disabled preprocessor block), the server can return a 0 width range located at the beginning of the line.
+
+Typically, the client will send this request when the user is adding a breakpoint at the caret location or at a specific line in the document. After the breakpoint is placed, the debugger is responsible for binding the breakpoint. From the user's perspective, this means the debugger could move the breakpoint to a different range in the document when it is attached (e.g. due to optimized code).
 
 _Client Capabilities_:
 
