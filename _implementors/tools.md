@@ -33,6 +33,7 @@ index: 2
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
 | [Nova](https://nova.app) | [Panic Inc](http://panic.com) | Proprietary |
 | [Oni](https://www.onivim.io) | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
+| [OpenSumi](https://opensumi.com) | [opensumi](https://github.com/opensumi) | [opensumi](https://github.com/opensumi/core) |
 | [Qt Creator](https://doc-snapshots.qt.io/qtcreator-4.9/creator-language-servers.html) | [The Qt Company](http://qt.io/) | [qtcreator](https://github.com/qt-creator/qt-creator)
 | [RAD Studio](https://www.embarcadero.com/products/rad-studio) ([Delphi](https://www.embarcadero.com/products/delphi) and [C++Builder](https://www.embarcadero.com/products/cbuilder)) | [Embarcadero](https://www.embarcadero.com/) | Proprietary |
 | [RJ TextEd](https://www.rj-texted.se/) | [Rickard Johansson](https://github.com/rickard67) | [lsp](https://github.com/rickard67/LSP-Pascal-Library) |
