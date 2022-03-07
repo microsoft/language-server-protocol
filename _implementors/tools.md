@@ -31,6 +31,7 @@ index: 2
 | [MS Monaco Editor](https://github.com/Microsoft/monaco-editor) | [TypeFox](https://github.com/TypeFox) | [monaco-languageclient](https://www.npmjs.com/package/monaco-languageclient) |
 | [MS Paint IDE](https://ms-paint-i.de/) | [RubbaBoy](https://github.com/RubbaBoy) | [MS Paint IDE](https://github.com/MSPaintIDE/MSPaintIDE) |
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
+| [Neovim](https://neovim.io/) | [Neovim Team](https://github.com/neovim) | [native support since 0.5](https://neovim.io/doc/lsp/) |
 | [Nova](https://nova.app) | [Panic Inc](http://panic.com) | Proprietary |
 | [Oni](https://www.onivim.io) | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 | [OpenSumi](https://opensumi.com) | [opensumi](https://github.com/opensumi) | [opensumi](https://github.com/opensumi/core) |
