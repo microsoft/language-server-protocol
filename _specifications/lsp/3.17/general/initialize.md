@@ -1,4 +1,4 @@
-##### <a href="#initialize" name="initialize" class="anchor">Initialize Request (:leftwards_arrow_with_hook:)</a>
+#### <a href="#initialize" name="initialize" class="anchor">Initialize Request (:leftwards_arrow_with_hook:)</a>
 
 The initialize request is sent as the first request from the client to the server. If the server receives a request or notification before the `initialize` request it should act as follows:
 

@@ -1,4 +1,4 @@
-#### <a href="#window_workDoneProgress_create" name="window_workDoneProgress_create" class="anchor"> Creating Work Done Progress (:arrow_right_hook:)</a>
+#### <a href="#window_workDoneProgress_create" name="window_workDoneProgress_create" class="anchor"> Create Work Done Progress (:arrow_right_hook:)</a>
 
 The `window/workDoneProgress/create` request is sent from the server to the client to ask the client to create a work done progress.
 
