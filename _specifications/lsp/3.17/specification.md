@@ -65,7 +65,7 @@ Content-Length: ...\r\n
 
 The following TypeScript definitions describe the base [JSON-RPC protocol](http://www.jsonrpc.org/specification):
 
-#### <a href="#number" name="number" class="anchor"> Numbers </a>
+#### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
 
 The protocol use the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
@@ -133,7 +133,7 @@ export type LSPObject = { [key: string]: LSPAny };
 export type LSPArray = LSPAny[];
 ```
 
-#### Abstract Message
+#### <a href="#abstractMessage" name="abstractMessage" class="anchor"> Abstract Message </a>
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
 
@@ -382,7 +382,7 @@ interface ProgressParams<T> {
 
 Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
 
-## Language Server Protocol
+## <a href="#languageServerProtocol" name="languageServerProtocol" class="anchor"> Language Server Protocol </a>
 
 The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means for example that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsify value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
 
@@ -392,7 +392,7 @@ In general, the language server protocol supports JSON-RPC messages, however the
 
 The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such a sharing would require additional protocol e.g. to lock a document to support concurrent editing.
 
-### Basic JSON Structures
+### <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> Basic JSON Structures </a>
 
 #### <a href="#uri" name="uri" class="anchor"> URI </a>
 
@@ -472,7 +472,7 @@ The following features from the [ECMAScript 2020](https://tc39.es/ecma262/#sec-r
 
 The only regular expression flag that a client needs to support is 'i' to specify a case insensitive search.
 
-### <a href="#enumerations" name="enumerations" class="anchor"> Enumerations </a>
+#### <a href="#enumerations" name="enumerations" class="anchor"> Enumerations </a>
 
 The protocol supports two kind of enumerations: (a) integer based enumerations and (b) strings based enumerations. Integer based enumerations usually start with `1`. The onces that don't are historical and they were kept to stay backwards compatible. If appropriate the value set of an enumeration is announced by the defining side (e.g. client or server) and transmitted to the other side during the initialize handshake. An example is the `CompletionItemKind` enumeration. It is announced by the client using the `textDocument.completion.completionItemKind` client property.
 

@@ -8,23 +8,32 @@
       anchor: headerPart
     - title: Content Part
       anchor: contentPart
+    - title: Base Types
+      anchor: baseTypes
     - title: Request Message
       anchor: requestMessage
     - title: Response Message
       anchor: responseMessage
     - title: Notification Message
       anchor: notificationMessage
-    - title: $/cancelRequest
+    - title: Cancellation Support
       anchor: cancelRequest
-    - title: $/progress
+    - title: Progress Support
       anchor: progress
-  - title: Basic Structures
-    anchor: dataTypes
+  - title: Language Server Protocol
+    anchor: languageServerProtocol
+    children:
+    - title: Overview
+      anchor: languageServerProtocol
+  - title: Basic JSON Structures
+    anchor: basicJsonStructures
     children:
     - title: URI
       anchor: uri
     - title: Regular Expression
       anchor: regExp
+    - title: Enumerations
+      anchor: enumerations
     - title: Text Documents
       anchor: textDocuments
     - title: Position
