@@ -8,29 +8,60 @@
       anchor: headerPart
     - title: Content Part
       anchor: contentPart
+    - title: Base Types
+      anchor: baseTypes
     - title: Request Message
       anchor: requestMessage
     - title: Response Message
       anchor: responseMessage
     - title: Notification Message
       anchor: notificationMessage
-    - title: $/cancelRequest
+    - title: Cancellation Support
       anchor: cancelRequest
-    - title: $/progress
+    - title: Progress Support
       anchor: progress
-  - title: Basic Structures
-    anchor: dataTypes
+  - title: Language Server Protocol
+    anchor: languageServerProtocol
+    children:
+    - title: Overview
+      anchor: languageServerProtocol
+    - title: Capabilities
+      anchor: capabilities
+    - title: Message Ordering
+      anchor: messageOrdering
+    - title: Message Documentation
+      anchor: messageDocumentation
+  - title: Basic JSON Structures
+    anchor: basicJsonStructures
     children:
     - title: URI
       anchor: uri
     - title: Regular Expression
       anchor: regExp
+    - title: Enumerations
+      anchor: enumerations
     - title: Text Documents
       anchor: textDocuments
     - title: Position
       anchor: position
     - title: Range
       anchor: range
+    - title: Text Document Item
+      anchor: textDocumentItem
+    - title: Text Document Identifier
+      anchor: textDocumentIdentifier
+    - title: Versioned Text Document Identifier
+      anchor: versionedTextDocumentIdentifier
+    - title: Text Document Position Params
+      anchor: textDocumentPositionParams
+    - title: Document Filter
+      anchor: documentFilter
+    - title: Text Edit
+      anchor: textEdit
+    - title: Text Edit Array
+      anchor: textEditArray
+    - title: Text Document Edit
+      anchor: textDocumentEdit
     - title: Location
       anchor: location
     - title: Location Link
@@ -39,30 +70,12 @@
       anchor: diagnostic
     - title: Command
       anchor: command
-    - title: Text Edit
-      anchor: textEdit
-    - title: Text Document Edit
-      anchor: textDocumentEdit
+    - title: Markup Content
+      anchor: markupContent
     - title: File Resource Changes
       anchor: resourceChanges
     - title: Workspace Edit
       anchor: workspaceEdit
-    - title: Text Document Identifier
-      anchor: textDocumentIdentifier
-    - title: Text Document Item
-      anchor: textDocumentItem
-    - title: Versioned Text Document Identifier
-      anchor: versionedTextDocumentIdentifier
-    - title: Text Document Position Params
-      anchor: textDocumentPositionParams
-    - title: Document Filter
-      anchor: documentFilter
-    - title: Static Registration Options
-      anchor: staticRegistrationOptions
-    - title: Text Document Registration Options
-      anchor: textDocumentRegistrationOptions
-    - title: Markup Content
-      anchor: markupContent
     - title: Work Done Progress
       anchor: workDoneProgress
     - title: Client Initiated Progress
@@ -75,162 +88,170 @@
       anchor: partialResultParams
     - title: Trace Value
       anchor: traceValue
-  - title: General Messages
-    anchor: general
+  - title: Lifecycle Messages
+    anchor: lifeCycleMessages
     children:
-    - title: initialize
+    - title: Overview
+      anchor: lifeCycleMessages
+    - title: Initialize
       anchor: initialize
-    - title: initialized
+    - title: Initialized
       anchor: initialized
-    - title: shutdown
-      anchor: shutdown
-    - title: exit
-      anchor: exit
-    - title: logTrace
-      anchor: logTrace
-    - title: setTrace
-      anchor: setTrace
-  - title: Window
-    anchor: window
-    children:
-    - title: showMessage
-      anchor: window_showMessage
-    - title: showMessageRequest
-      anchor: window_showMessageRequest
-    - title: showDocument
-      anchor: window_showDocument
-    - title: logMessage
-      anchor: window_logMessage
-    - title: progress/create
-      anchor: window_workDoneProgress_create
-    - title: progress/cancel
-      anchor: window_workDoneProgress_cancel
-  - title: Telemetry
-    anchor: telemetry
-    children:
-    - title: event
-      anchor: telemetry_event
-  - title: Client
-    anchor: client
-    children:
-    - title: registerCapability
+    - title: Register Capability
       anchor: client_registerCapability
-    - title: unregisterCapability
+    - title: Unregister Capability
       anchor: client_unregisterCapability
-  - title: Workspace
-    anchor: workspace
-    children:
-    - title: workspaceFolders
-      anchor: workspace_workspaceFolders
-    - title: didChangeWorkspaceFolders
-      anchor: workspace_didChangeWorkspaceFolders
-    - title: didChangeConfiguration
-      anchor: workspace_didChangeConfiguration
-    - title: configuration
-      anchor: workspace_configuration
-    - title: didChangeWatchedFiles
-      anchor: workspace_didChangeWatchedFiles
-    - title: symbol
-      anchor: workspace_symbol
-    - title: symbol resolve
-      anchor: workspace_symbolResolve
-    - title: executeCommand
-      anchor: workspace_executeCommand
-    - title: applyEdit
-      anchor: workspace_applyEdit
-    - title: file operations events
-      anchor: workspace_willCreateFiles
-  - title: Text Synchronization
+    - title: Set Trace
+      anchor: setTrace
+    - title: Log Trace
+      anchor: logTrace
+    - title: Shutdown
+      anchor: shutdown
+    - title: Exit
+      anchor: exit
+  - title: Document Synchronization
     anchor: textSynchronization
     children:
-    - title: General Capabilities
+    - title: Overview
       anchor: textDocument_synchronization
-    - title: didOpen
+    - title: Did Open Document
       anchor: textDocument_didOpen
-    - title: didChange
+    - title: Did Change Document
       anchor: textDocument_didChange
-    - title: willSave
+    - title: Will Save Document
       anchor: textDocument_willSave
-    - title: willSaveWaitUntil
+    - title: Will Save Document Wait Until
       anchor: textDocument_willSaveWaitUntil
-    - title: didSave
+    - title: Did Save Document
       anchor: textDocument_didSave
-    - title: didClose
+    - title: Did Close Document
       anchor: textDocument_didClose
-  - title: Diagnostics
-    anchor: diagnostics
-    children:
-    - title: publishDiagnostics
-      anchor: textDocument_publishDiagnostics
   - title: Language Features
     anchor: languageFeatures
     children:
-    - title: completion
-      anchor: textDocument_completion
-    - title: completion resolve
-      anchor: completionItem_resolve
-    - title: hover
-      anchor: textDocument_hover
-    - title: signatureHelp
-      anchor: textDocument_signatureHelp
-    - title: declaration
+    - title: Overview
+      anchor: languageFeatures
+    - title: Go to Declaration
       anchor: textDocument_declaration
-    - title: definition
+    - title: Go to Definition
       anchor: textDocument_definition
-    - title: typeDefinition
+    - title: Go to Type Definition
       anchor: textDocument_typeDefinition
-    - title: implementation
+    - title: Go to Implementation
       anchor: textDocument_implementation
-    - title: references
+    - title: Find References
       anchor: textDocument_references
-    - title: documentHighlight
-      anchor: textDocument_documentHighlight
-    - title: documentSymbol
-      anchor: textDocument_documentSymbol
-    - title: codeAction
-      anchor: textDocument_codeAction
-    - title: codeAction resolve
-      anchor: codeAction_resolve
-    - title: codeLens
-      anchor: textDocument_codeLens
-    - title: codeLens resolve
-      anchor: codeLens_resolve
-    - title: codeLens refresh
-      anchor: codeLens_refresh
-    - title: documentLink
-      anchor: textDocument_documentLink
-    - title: documentLink resolve
-      anchor: documentLink_resolve
-    - title: documentColor
-      anchor: textDocument_documentColor
-    - title: colorPresentation
-      anchor: textDocument_colorPresentation
-    - title: formatting
-      anchor: textDocument_formatting
-    - title: rangeFormatting
-      anchor: textDocument_rangeFormatting
-    - title: onTypeFormatting
-      anchor: textDocument_onTypeFormatting
-    - title: rename
-      anchor: textDocument_rename
-    - title: prepareRename
-      anchor: textDocument_prepareRename
-    - title: foldingRange
-      anchor: textDocument_foldingRange
-    - title: selectionRange
-      anchor: textDocument_selectionRange
-    - title: prepareCallHierarchy
+    - title: Prepare Call Hierarchy
       anchor: textDocument_prepareCallHierarchy
-    - title: callHierarchy incoming
+    - title: Call Hierarchy incoming calls
       anchor: callHierarchy_incomingCalls
-    - title: callHierarchy outgoing
+    - title: Call Hierarchy outgoing calls
       anchor: callHierarchy_outgoingCalls
-    - title: semantic tokens
+    - title: Document Highlight
+      anchor: textDocument_documentHighlight
+    - title: Document Link
+      anchor: textDocument_documentLink
+    - title: Document Link Resolve
+      anchor: documentLink_resolve
+    - title: Hover
+      anchor: textDocument_hover
+    - title: Code Lens
+      anchor: textDocument_codeLens
+    - title: Code Lens Refresh
+      anchor: codeLens_refresh
+    - title: Folding Range
+      anchor: textDocument_foldingRange
+    - title: Selection Range
+      anchor: textDocument_selectionRange
+    - title: Document Symbols
+      anchor: textDocument_documentSymbol
+    - title: Semantic Tokens
       anchor: textDocument_semanticTokens
-    - title: linkedEditingRange
-      anchor: textDocument_linkedEditingRange
-    - title: moniker
+    - title: Moniker
       anchor: textDocument_moniker
+    - title: Completion Proposals
+      anchor: textDocument_completion
+    - title: Completion Item Resolve
+      anchor: completionItem_resolve
+    - title: Publish Diagnostics
+      anchor: textDocument_publishDiagnostics
+    - title: Signature Help
+      anchor: textDocument_signatureHelp
+    - title: Code Action
+      anchor: textDocument_codeAction
+    - title: Code Action Resolve
+      anchor: codeAction_resolve
+    - title: Document Color
+      anchor: textDocument_documentColor
+    - title: Color Presentation
+      anchor: textDocument_colorPresentation
+    - title: Formatting
+      anchor: textDocument_formatting
+    - title: Range Formatting
+      anchor: textDocument_rangeFormatting
+    - title: On type Formatting
+      anchor: textDocument_onTypeFormatting
+    - title: Rename
+      anchor: textDocument_rename
+    - title: Prepare Rename
+      anchor: textDocument_prepareRename
+    - title: Linked Editing Range
+      anchor: textDocument_linkedEditingRange
+  - title: Workspace Features
+    anchor: workspaceFeatures
+    children:
+    - title: Workspace Symbols
+      anchor: workspace_symbol
+    - title: Workspace Symbol Resolve
+      anchor: workspace_symbolResolve
+    - title: Get Configuration
+      anchor: workspace_configuration
+    - title: Did Change Configuration
+      anchor: workspace_didChangeConfiguration
+    - title: Workspace Folders
+      anchor: workspace_workspaceFolders
+    - title: Did Change Workspace Folders
+      anchor: workspace_didChangeWorkspaceFolders
+    - title: Will Create Files
+      anchor: workspace_willCreateFiles
+    - title: Did Create Files
+      anchor: workspace_didCreateFiles
+    - title: Will Rename Files
+      anchor: workspace_willRenameFiles
+    - title: Did Rename Files
+      anchor: workspace_didRenameFiles
+    - title: Will Delete Files
+      anchor: workspace_willDeleteFiles
+    - title: Did Delete Files
+      anchor: workspace_didDeleteFiles
+    - title: Did Change Watched Files
+      anchor: workspace_didChangeWatchedFiles
+    - title: Execute Command
+      anchor: workspace_executeCommand
+    - title: Apply Edit
+      anchor: workspace_applyEdit
+  - title: Window Features
+    anchor: windowFeatures
+    children:
+    - title: Show Message Notification
+      anchor: window_showMessage
+    - title: Show Message Request
+      anchor: window_showMessageRequest
+    - title: Log Message
+      anchor: window_logMessage
+    - title: Show Document
+      anchor: window_showDocument
+    - title: Create Work Done Progress
+      anchor: window_workDoneProgress_create
+    - title: Cancel a Work Done Progress
+      anchor: window_workDoneProgress_cancel
+    - title: Sent Telemetry
+      anchor: telemetry_event
+  - title: Miscellaneous
+    anchor: miscellaneous
+    children:
+    - title: Implementation Considerations
+      anchor: implementationConsiderations
   - title: Change Log
     anchor: changeLog
     children:

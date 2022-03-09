@@ -71,3 +71,37 @@ This message is sent from the server to the client and after the client has succ
 _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
+
+`StaticRegistrationOptions` can be used to register a feature in the initialize result with a given server control ID to be able to un-register the feature later on.
+
+<div class="anchorHolder"><a href="#staticRegistrationOptions" name="staticRegistrationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Static registration options to be returned in the initialize request.
+ */
+export interface StaticRegistrationOptions {
+	/**
+	 * The id used to register the request. The id can be used to deregister
+	 * the request again. See also Registration#id.
+	 */
+	id?: string;
+}
+```
+
+`TextDocumentRegistrationOptions` can be used to dynamically register for requests for a set of text documents.
+
+<div class="anchorHolder"><a href="#textDocumentRegistrationOptions" name="textDocumentRegistrationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * General text document registration options.
+ */
+export interface TextDocumentRegistrationOptions {
+	/**
+	 * A document selector to identify the scope of the registration. If set to
+	 * null the document selector provided on the client side will be used.
+	 */
+	documentSelector: DocumentSelector | null;
+}
+```
