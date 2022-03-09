@@ -30,6 +30,7 @@ index: 1
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) | C# |
+| C# | [Saulius Menkevičius](https://github.com/razzmatazz) | [csharp-ls](https://github.com/razzmatazz/csharp-language-server) | F# |
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) | C++ |
 | [C++/clang](https://clangd.llvm.org/)| [LLVM Project](https://llvm.org/) | [clangd](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clangd) | C++ |
 | C/C++/Objective-C | [Jacob Dufault](https://github.com/jacobdufault), [MaskRay](https://github.com/MaskRay), [topisani](https://github.com/topisani) | [cquery](https://github.com/jacobdufault/cquery) | C++ |
