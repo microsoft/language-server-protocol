@@ -143,10 +143,16 @@
       anchor: textDocument_references
     - title: Prepare Call Hierarchy
       anchor: textDocument_prepareCallHierarchy
-    - title: Call Hierarchy incoming calls
+    - title: Call Hierarchy Incoming Calls
       anchor: callHierarchy_incomingCalls
-    - title: Call Hierarchy outgoing calls
+    - title: Call Hierarchy Outgoing Calls
       anchor: callHierarchy_outgoingCalls
+    - title: Prepare Type Hierarchy
+      anchor: textDocument_prepareTypeHierarchy
+    - title: Type Hierarchy Super Types
+      anchor: typeHierarchy_supertypes
+    - title: Type Hierarchy Sub Types
+      anchor: typeHierarchy_subtypes
     - title: Document Highlight
       anchor: textDocument_documentHighlight
     - title: Document Link

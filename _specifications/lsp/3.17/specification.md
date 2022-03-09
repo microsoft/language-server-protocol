@@ -655,6 +655,7 @@ Language Feature provide the actual smarts in the language server protocol. The 
 {% include_relative language/implementation.md %}
 {% include_relative language/references.md %}
 {% include_relative language/callHierarchy.md %}
+{% include_relative language/typeHierarchy.md %}
 {% include_relative language/documentHighlight.md %}
 {% include_relative language/documentLink.md %}
 {% include_relative language/hover.md %}
