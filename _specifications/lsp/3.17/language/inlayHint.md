@@ -250,6 +250,8 @@ export namespace InlayHintKind {
 
 #### <a href="#inlayHint_resolve" name="inlayHint_resolve" class="anchor">Inlay Hint Resolve Request (:leftwards_arrow_with_hook:)</a>
 
+> *Since version 3.17.0*
+
 The request is sent from the client to the server to resolve additional information for a given inlay hint. This is usually used to compute
 the `tooltip`, `location` or `command` properties of a inlay hint's label part to avoid its unnecessary computation during the `textDocument/inlayHint` request.
 
