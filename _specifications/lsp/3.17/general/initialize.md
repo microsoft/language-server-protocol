@@ -260,6 +260,27 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.16.0
 	 */
 	moniker?: MonikerClientCapabilities;
+
+	/**
+	 * Capabilities specific to the various type hierarchy requests.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	typeHierarchy?: TypeHierarchyClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/inlineValue` request.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	inlineValue?: InlineValueClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/inlayHint` request.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	inlayHint?: InlayHintClientCapabilities;
 }
 ```
 
@@ -393,9 +414,13 @@ interface ClientCapabilities {
 	 */
 	window?: {
 		/**
-		 * Whether client supports handling progress notifications. If set
-		 * servers are allowed to report in `workDoneProgress` property in the
-		 * request specific server capabilities.
+		 * It indicates whether the client supports server initiated
+		 * progress using the `window/workDoneProgress/create` request.
+		 *
+		 * The capability also controls Whether client supports handling
+		 * of progress notifications. If set servers are allowed to report a
+		 * `workDoneProgress` property in the request specific server
+		 * capabilities.
 		 *
 		 * @since 3.15.0
 		 */
@@ -701,6 +726,27 @@ interface ServerCapabilities {
 	 * @since 3.16.0
 	 */
 	monikerProvider?: boolean | MonikerOptions | MonikerRegistrationOptions;
+
+	/**
+	 * The server provides type hierarchy support.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	typeHierarchyProvider?: boolean | TypeHierarchyOptions | TypeHierarchyRegistrationOptions;
+
+	/**
+	 * The server provides inline values.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	inlineValueProvider?: boolean | InlineValueOptions | InlineValueRegistrationOptions;
+
+	/**
+	 * The server provides inlay hints.
+	 *
+	 * @since 3.17.0 - proposed state
+	 */
+	inlayHintProvider?: boolean | InlayHintOptions | InlayHintRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.

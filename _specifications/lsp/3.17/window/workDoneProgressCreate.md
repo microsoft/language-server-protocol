@@ -2,6 +2,10 @@
 
 The `window/workDoneProgress/create` request is sent from the server to the client to ask the client to create a work done progress.
 
+_Client Capability_:
+* property name (optional): `window.workDoneProgress`
+* property type: `boolean`
+
 _Request_:
 
 * method: 'window/workDoneProgress/create'
