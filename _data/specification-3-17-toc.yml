@@ -167,6 +167,12 @@
       anchor: textDocument_documentSymbol
     - title: Semantic Tokens
       anchor: textDocument_semanticTokens
+    - title: Inlay Hint
+      anchor: textDocument_inlayHint
+    - title: Inlay Hint Resolve
+      anchor: inlayHint_resolve
+    - title: Inlay Hint Refresh
+      anchor: workspace_inlayHint_refresh
     - title: Moniker
       anchor: textDocument_moniker
     - title: Completion Proposals
