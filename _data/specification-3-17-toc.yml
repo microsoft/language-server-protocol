@@ -167,6 +167,10 @@
       anchor: textDocument_documentSymbol
     - title: Semantic Tokens
       anchor: textDocument_semanticTokens
+    - title: Inline Value
+      anchor: textDocument_inlineValue
+    - title: Inline Value Refresh
+      anchor: workspace_inlineValue_refresh
     - title: Inlay Hint
       anchor: textDocument_inlayHint
     - title: Inlay Hint Resolve

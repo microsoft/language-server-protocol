@@ -664,6 +664,7 @@ Language Feature provide the actual smarts in the language server protocol. The 
 {% include_relative language/documentSymbol.md %}
 {% include_relative language/semanticTokens.md %}
 {% include_relative language/inlayHint.md %}
+{% include_relative language/inlineValue.md %}
 {% include_relative language/moniker.md %}
 {% include_relative language/completion.md %}
 {% include_relative language/publishDiagnostics.md %}
