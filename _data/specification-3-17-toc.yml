@@ -76,10 +76,6 @@
       anchor: resourceChanges
     - title: Workspace Edit
       anchor: workspaceEdit
-    - title: Static Registration Options
-      anchor: staticRegistrationOptions
-    - title: Text Document Registration Options
-      anchor: textDocumentRegistrationOptions
     - title: Work Done Progress
       anchor: workDoneProgress
     - title: Client Initiated Progress

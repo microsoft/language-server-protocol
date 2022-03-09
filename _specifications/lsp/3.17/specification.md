@@ -461,8 +461,6 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/resourceChanges.md %}
 {% include_relative types/workspaceEdit.md %}
 
-{% include_relative types/staticRegistrationOptions.md %}
-{% include_relative types/textDocumentRegistrationOptions.md %}
 {% include_relative types/workDoneProgress.md %}
 {% include_relative types/partialResults.md %}
 {% include_relative types/partialResultParams.md %}
