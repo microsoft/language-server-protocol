@@ -68,7 +68,7 @@ _Registration Options_: `InlayHintRegistrationOptions` defined as follows:
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHintRegistrationOptions = InlayHintsOptions
+export type InlayHintRegistrationOptions = InlayHintOptions
 	& TextDocumentRegistrationOptions & StaticRegistrationOptions;
 ```
 
