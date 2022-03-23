@@ -110,7 +110,7 @@ interface WorkspaceSymbolParams extends WorkDoneProgressParams,
 ```
 
 _Response_:
-* result: `SymbolInformation[]` \| `WorkspaceSymbol[]` \| `null`. See above for the definition of `SymbolInformation`. `WorkspaceSymbol` is defined as follows:
+* result: `SymbolInformation[]` \| `WorkspaceSymbol[]` \| `null`. See above for the definition of `SymbolInformation`. It is recommended that you use `WorkspaceSymbol`, which is defined as follows:
 
 <div class="anchorHolder"><a href="#workspaceSymbol" name="workspaceSymbol" class="linkableAnchor"></a></div>
 
