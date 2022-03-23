@@ -402,6 +402,13 @@ interface ClientCapabilities {
 			 */
 			willDelete?: boolean;
 		};
+
+		/**
+		 * Client workspace capabilities specific to inlay hints.
+		 *
+		 * @since 3.17.0 - proposed state
+		 */
+		inlayHint?: InlayHintWorkspaceClientCapabilities;
 	};
 
 	/**
