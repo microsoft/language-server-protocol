@@ -547,6 +547,7 @@ export interface TextDocumentSyncOptions {
 {% include_relative textDocument/willSaveWaitUntil.md %}
 {% include_relative textDocument/didSave.md %}
 {% include_relative textDocument/didClose.md %}
+{% include_relative textDocument/didRename.md %}
 
 The final structure of the `TextDocumentSyncClientCapabilities` and the `TextDocumentSyncOptions` server options look like this
 

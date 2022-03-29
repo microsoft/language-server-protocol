@@ -126,6 +126,8 @@
       anchor: textDocument_didSave
     - title: Did Close Document
       anchor: textDocument_didClose
+    - title: Rename a Document
+      anchor: textDocument_didRename
   - title: Language Features
     anchor: languageFeatures
     children:
