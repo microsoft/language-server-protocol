@@ -26,7 +26,7 @@ _Server Capability_:
 ```typescript
 export interface DocumentOnTypeFormattingOptions {
 	/**
-	 * A character on which formatting should be triggered, like `}`.
+	 * A character on which formatting should be triggered, like `{`.
 	 */
 	firstTriggerCharacter: string;
 
@@ -54,14 +54,30 @@ _Request_:
 <div class="anchorHolder"><a href="#documentOnTypeFormattingParams" name="documentOnTypeFormattingParams" class="linkableAnchor"></a></div>
 
 ```typescript
-interface DocumentOnTypeFormattingParams extends TextDocumentPositionParams {
+interface DocumentOnTypeFormattingParams {
+
 	/**
-	 * The character that has been typed.
+	 * The document to format.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The position around which the on type formatting should happen.
+	 * This is not necessarily the exact position where the character denoted
+	 * by the property `ch` got typed.
+	 */
+	position: Position;
+
+	/**
+	 * The character that has been typed that triggered the formatting
+	 * on type request. That is not necessarily the last character that
+	 * got inserted into the document since the client could auto insert
+	 * characters as well (e.g. like automatic brace completion).
 	 */
 	ch: string;
 
 	/**
-	 * The format options.
+	 * The formatting options.
 	 */
 	options: FormattingOptions;
 }
