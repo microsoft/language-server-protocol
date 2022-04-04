@@ -498,7 +498,7 @@ interface ClientCapabilities {
 		 *
 		 * To keep the protocol backwards compatible the following applies: if
 		 * the value 'utf-16' is missing from the array of position encodings
-		 * server can assume that the client supports UTF-16. UTF-16 is
+		 * servers can assume that the client supports UTF-16. UTF-16 is
 		 * therefore a mandatory encoding.
 		 *
 		 * If omitted it defaults to ['utf-16'].
@@ -508,6 +508,7 @@ interface ClientCapabilities {
 		 *
 		 * UTF-8: 'utf-8'
 		 * UTF-16: 'utf-16'
+		 * UTF-32: 'utf-32'
 		 *
 		 * Implementation considerations: since the conversion from one encoding
 		 * into another requires the content of the file / line the conversion
@@ -517,7 +518,7 @@ interface ClientCapabilities {
 		 * @since 3.17.0
 		 * @proposed
 		 */
-		positionEncodings?: ('utf-16' | string)[];
+		positionEncodings?: ('utf-16' | 'utf-8' | 'utf-32' | string)[];
 	};
 
 	/**
@@ -613,7 +614,7 @@ interface ServerCapabilities {
 	 * @since 3.17.0
 	 * @proposed
 	 */
-	positionEncoding?: 'utf-16' | string;
+	positionEncoding?: 'utf-16' | 'utf-8' | 'utf-32' | string;
 
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure
