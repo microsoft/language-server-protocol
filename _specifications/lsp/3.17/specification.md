@@ -10,7 +10,7 @@ index: 2
 
 This document describes the upcoming 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
-**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-17.md).
+**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.17/specification.md).
 
 ## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.17 </a>
 
