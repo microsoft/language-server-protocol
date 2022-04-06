@@ -158,6 +158,7 @@ index: 1
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
+| SystemVerilog | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
 | [Tads3](http://www.tads.org/tads3.htm) | [Tomas Öberg](https://github.com/toerob) | [tads3tools](https://github.com/toerob/vscode-tads3tools) | Tads3 |
 | [Terraform](https://www.terraform.io/) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
@@ -171,6 +172,7 @@ index: 1
 | Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
 | VDM-SL, VDM++, VDM-RT | [Nick Battle](https://github.com/nickbattle)| [VDMJ-LSP](https://github.com/nickbattle/vdmj/tree/master/lsp) | Java |
 | VHDL | [Olof Kraigher](https://github.com/kraigher) | [vhdl_ls](https://github.com/kraigher/rust_hdl) | Rust |
+| VHDL | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | Viml | [iamcco](https://github.com/iamcco) | [vim-language-server](https://github.com/iamcco/vim-language-server) | Typescript |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) | |
 | Vue| [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) | TypeScript |
