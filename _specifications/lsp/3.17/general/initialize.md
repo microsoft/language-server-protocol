@@ -404,6 +404,13 @@ interface ClientCapabilities {
 		};
 
 		/**
+		 * Client workspace capabilities specific to inline values.
+		 *
+		 * @since 3.17.0 - proposed state
+		 */
+		inlineValue?: InlineValueWorkspaceClientCapabilities;
+
+		/**
 		 * Client workspace capabilities specific to inlay hints.
 		 *
 		 * @since 3.17.0 - proposed state
