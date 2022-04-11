@@ -567,7 +567,7 @@ interface InitializeResult {
 ```
 * error.code:
 
-<div class="anchorHolder"><a href="#initializeError" name="initializeError" class="linkableAnchor"></a></div>
+<div class="anchorHolder"><a href="#initializeErrorCodes" name="initializeErrorCodes" class="linkableAnchor"></a></div>
 
 ```typescript
 /**
@@ -589,6 +589,8 @@ export type InitializeErrorCodes = 1;
 ```
 
 * error.data:
+
+<div class="anchorHolder"><a href="#initializeError" name="initializeError" class="linkableAnchor"></a></div>
 
 ```typescript
 interface InitializeError {
