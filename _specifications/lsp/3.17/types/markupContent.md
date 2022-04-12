@@ -1,6 +1,6 @@
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
- A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/).
+ A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/). `MarkupContent` in returned in responses to requests that are scoped to a document may contain relative links, which will be resolved relative to that document.
 
 ```typescript
 /**
