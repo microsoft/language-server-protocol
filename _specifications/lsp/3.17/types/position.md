@@ -21,7 +21,7 @@ interface Position {
 ```
 
 When describing positions the protocol needs to specify how offsets (specifically character offsets) should be interpreted.
-The corresponding `PostionEncodingKind` is negotiated between the server and client and server during initialization.
+The corresponding `PostionEncodingKind` is negotiated between the client and the server during initialization.
 
 ```typscript
 /**
