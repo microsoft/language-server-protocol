@@ -510,13 +510,6 @@ interface ClientCapabilities {
 		 *
 		 * If omitted it defaults to ['utf-16'].
 		 *
-		 * For the following standard Unicode encodings these values should be
-		 * used:
-		 *
-		 * UTF-8: 'utf-8'
-		 * UTF-16: 'utf-16'
-		 * UTF-32: 'utf-32'
-		 *
 		 * Implementation considerations: since the conversion from one encoding
 		 * into another requires the content of the file / line the conversion
 		 * is best done where the file is read which is usually on the server
@@ -525,7 +518,7 @@ interface ClientCapabilities {
 		 * @since 3.17.0
 		 * @proposed
 		 */
-		positionEncodings?: ('utf-16' | 'utf-8' | 'utf-32' | string)[];
+		positionEncodings?: PositionEncodingKind[];
 	};
 
 	/**
@@ -623,7 +616,7 @@ interface ServerCapabilities {
 	 * @since 3.17.0
 	 * @proposed
 	 */
-	positionEncoding?: 'utf-16' | 'utf-8' | 'utf-32' | string;
+	positionEncoding?: PositionEncodingKind;
 
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure
