@@ -21,9 +21,12 @@ interface Position {
 ```
 
 When describing positions the protocol needs to specify how offsets (specifically character offsets) should be interpreted.
-The corresponding `PostionEncodingKind` is negotiated between the client and the server during initialization.
+The corresponding `PositionEncodingKind` is negotiated between the client and the server during initialization.
 
-```typscript
+<div class="anchorHolder"><a href="#positionEncodingKind" name="positionEncodingKind" class="linkableAnchor"></a></div>
+
+
+```typescript
 /**
  * A type indicating how positions are encoded,
  * specifically what column offsets mean.
@@ -49,10 +52,10 @@ export namespace PositionEncodingKind {
 	export const UTF16: PositionEncodingKind = 'utf-16';
 
 	/**
-	 * Character offsets count UTF-32 code units. 
+	 * Character offsets count UTF-32 code units.
 	 *
 	 * Implementation note: these are the same as Unicode code points,
-	 * so this `PositionEncodingKind` may also be used for an 
+	 * so this `PositionEncodingKind` may also be used for an
 	 * encoding-agnostic representation of character offsets.
 	 */
 	export const UTF32: PositionEncodingKind = 'utf-32';

@@ -1,4 +1,4 @@
-- name: "Base Protocol JSON structures"
+- name: "Linkable Types"
   children:
   - type: 'integer'
     link: '#integer'
@@ -24,17 +24,12 @@
     link: '#errorCodes'
   - type: 'NotificationMessage'
     link: '#notificationMessage'
-- name: "$ Notifications and Requests"
-  children:
   - type: 'CancelParams'
     link: '#cancelRequest'
   - type: 'ProgressParams'
     link: '#progress'
   - type: 'ProgressToken'
     link: '#progress'
-
-- name: "Basic JSON Structures"
-  children:
   - type: 'Uri'
     link: '#uri'
   - type: 'URI'
@@ -49,6 +44,8 @@
     link: '#textDocuments'
   - type: 'Position'
     link: '#position'
+  - type: 'PositionEncodingKind'
+    link: '#positionEncodingKind'
   - type: 'Range'
     link: '#range'
   - type: 'Location'
@@ -137,9 +134,6 @@
     link: '#partialResultParams'
   - type: 'TraceValue'
     link: '#traceValue'
-
-- name: "Actual Protocol"
-  children:
   - type: 'InitializeParams'
     link: '#initializeParams'
   - type: 'InitializeResult'
