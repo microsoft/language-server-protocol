@@ -141,6 +141,13 @@ export interface FoldingRange {
 	 * enumeration of standardized kinds.
 	 */
 	kind?: string;
+
+	/**
+	 * The text that the client should show when the specified range is collapsed.
+	 * If not defined, a default will be chosen by the client.
+	 * @since 3.17.0 - proposed
+	 */
+	collapsedText?: string;
 }
 ```
 
