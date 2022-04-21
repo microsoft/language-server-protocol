@@ -31,6 +31,12 @@ export interface FoldingRangeClientCapabilities {
 	 * properties in a FoldingRange.
 	 */
 	lineFoldingOnly?: boolean;
+	/**
+	 * If set, the client signals that it supports setting collapsedText on
+	 * folding ranges to display instead of the default text.
+	 * @since 3.17.0 - proposed
+	 */
+	collapsedText?: boolean;
 }
 ```
 
