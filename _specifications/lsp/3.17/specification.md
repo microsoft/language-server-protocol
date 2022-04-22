@@ -14,9 +14,7 @@ This document describes the upcoming 3.17.x version of the language server proto
 
 ## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.17 </a>
 
-All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are:
-
-- None so far.
+All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are: type hierarchy, inline values, inlay hints and notebook document support.
 
 A detailed list of the changes can be found in the [change log](#version_3_17_0)
 
