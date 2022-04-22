@@ -31,7 +31,7 @@ index: 3
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
 | Rust | Bruno Medeiros and Markus Westerlind | [lsp-types](https://github.com/gluon-lang/lsp-types)
 | Rust | [Eyal Kalderon](https://github.com/ebkalderon) | [tower-lsp](https://github.com/ebkalderon/tower-lsp)
-| Swift | [Chime](https://twitter.com/chimehq) | [SwiftLSPClient](https://github.com/chimehq/SwiftLSPClient)|
+| Swift | [Chime](https://github.com/chimehq) | [LanguageServerProtocol](https://github.com/chimehq/LanguageServerProtocol)|
 | TypeScript | [TypeFox](https://www.typefox.io/) | [langium](https://github.com/langium/langium)|
 | Go | [TobiasYin](https://github.com/TobiasYin/) | [go-lsp](https://github.com/TobiasYin/go-lsp/)|
 {: .table .table-bordered .table-responsive}
