@@ -108,7 +108,8 @@ export type decimal = number;
  *
  * @since 3.17.0
  */
-export type LSPAny = LSPObject | LSPArray | string | integer | uinteger | decimal | boolean | null;
+export type LSPAny = LSPObject | LSPArray | string | integer | uinteger |
+	decimal | boolean | null;
 ```
 
 <div class="anchorHolder"><a href="#lspObject" name="lspObject" class="linkableAnchor"></a></div>
@@ -643,6 +644,8 @@ export interface TextDocumentSyncOptions {
 }
 ```
 
+{% include_relative notebookDocument/notebook.md %}
+
 ### <a href="#languageFeatures" name="languageFeatures" class="anchor">Language Features</a>
 
 Language Feature provide the actual smarts in the language server protocol. The are usually executed on a [text document, position] tuple. The main language feature categories are:
@@ -670,6 +673,7 @@ Language Feature provide the actual smarts in the language server protocol. The 
 {% include_relative language/moniker.md %}
 {% include_relative language/completion.md %}
 {% include_relative language/publishDiagnostics.md %}
+{% include_relative language/pullDiagnostics.md %}
 {% include_relative language/signatureHelp.md %}
 {% include_relative language/codeAction.md %}
 {% include_relative language/documentColor.md %}
@@ -733,11 +737,25 @@ To support the case that the editor starting a server crashes an editor should a
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
 
+* Specify how clients will handle stale requests.
 * Add support for a completion item label details.
 * Add support for workspace symbol resolve request.
+* Add support for label details and insert text mode on completion items.
 * Add support for shared values on CompletionItemList.
 * Add support for HTML tags in Markdown.
-* Specify how clients will handle stale requests.
+* Add support for collapsed text in folding.
+* Add support for trigger kinds on code action requests.
+* Add the following support to semantic tokens:
+  - server cancelable
+  - augmentation of syntax tokens
+* Add support to negotiate the position encoding.
+* Add support for HTML tags in markdown.
+* Add support for relative patterns in file watchers.
+* Add support for type hierarchies
+* Add support for inline values.
+* Add support for inlay hints.
+* Add support for notebook documents.
+* Add support for diagnostic pull model.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 

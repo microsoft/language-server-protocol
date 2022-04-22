@@ -281,8 +281,40 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.17.0 - proposed state
 	 */
 	inlayHint?: InlayHintClientCapabilities;
+
+	/**
+	 * Capabilities specific to the diagnostic pull model.
+	 *
+	 * @since 3.17.0
+	 */
+	diagnostic?: DiagnosticClientCapabilities;
 }
 ```
+
+##### NotebookDocumentClientCapabilities
+
+`NotebookDocumentClientCapabilities` define capabilities the editor / tool provides on notebook documents.
+
+<div class="anchorHolder"><a href="#notebookDocumentClientCapabilities" name="notebookDocumentClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Capabilities specific to the notebook document support.
+ *
+ * @since 3.17.0
+ * @proposed
+ */
+export interface NotebookDocumentClientCapabilities {
+	/**
+	 * Capabilities specific to notebook document synchronization
+	 *
+	 * @since 3.17.0
+	 * @proposed
+	 */
+	synchronization: NotebookDocumentSyncClientCapabilities;
+}
+```
+
 
 `ClientCapabilities` define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
 
@@ -422,6 +454,14 @@ interface ClientCapabilities {
 	 * Text document specific client capabilities.
 	 */
 	textDocument?: TextDocumentClientCapabilities;
+
+	/**
+	 * Capabilities specific to the notebook document support.
+	 *
+	 * @since 3.17.0
+	 * @proposed
+	 */
+	notebookDocument?: NotebookDocumentClientCapabilities;
 
 	/**
 	 * Window specific client capabilities.
@@ -627,6 +667,15 @@ interface ServerCapabilities {
 	textDocumentSync?: TextDocumentSyncOptions | TextDocumentSyncKind;
 
 	/**
+	 * Defines how notebook documents are synced.
+	 *
+	 * @since 3.17.0
+	 * @proposed
+	 */
+	notebookDocumentSync?: NotebookDocumentSyncOptions
+		| NotebookDocumentSyncRegistrationOptions;
+
+	/**
 	 * The server provides completion support.
 	 */
 	completionProvider?: CompletionOptions;
@@ -789,21 +838,32 @@ interface ServerCapabilities {
 	 *
 	 * @since 3.17.0 - proposed state
 	 */
-	typeHierarchyProvider?: boolean | TypeHierarchyOptions | TypeHierarchyRegistrationOptions;
+	typeHierarchyProvider?: boolean | TypeHierarchyOptions
+		 | TypeHierarchyRegistrationOptions;
 
 	/**
 	 * The server provides inline values.
 	 *
 	 * @since 3.17.0 - proposed state
 	 */
-	inlineValueProvider?: boolean | InlineValueOptions | InlineValueRegistrationOptions;
+	inlineValueProvider?: boolean | InlineValueOptions
+		 | InlineValueRegistrationOptions;
 
 	/**
 	 * The server provides inlay hints.
 	 *
 	 * @since 3.17.0 - proposed state
 	 */
-	inlayHintProvider?: boolean | InlayHintOptions | InlayHintRegistrationOptions;
+	inlayHintProvider?: boolean | InlayHintOptions
+		 | InlayHintRegistrationOptions;
+
+	/**
+	 * The server has support for pull model diagnostics.
+	 *
+	 * @since 3.17.0
+	 * @proposed
+	 */
+	diagnosticProvider?: DiagnosticOptions | DiagnosticRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.
