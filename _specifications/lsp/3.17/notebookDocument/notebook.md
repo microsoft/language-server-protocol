@@ -240,7 +240,7 @@ The protocol will therefore support two modes when it comes to synchronizing cel
 
 To request the cell content only a normal document selector can be used. For example the selector `[{ language: 'python' }]` will synchronize Python notebook document cells to the server. However since this might synchronize unwanted documents as well a document filter can also be a `NotebookCellTextDocumentFilter`. So `{ notebook: { scheme: 'file', notebookType: 'jupyter-notebook' }, language: 'python' }` synchronizes all Python cells in a Jupyter notebook stored on disk.
 
-To synchronize the whole notebook document a server provider a `notebookDocumentSync` in its server capabilities. For example
+To synchronize the whole notebook document a server provides a `notebookDocumentSync` in its server capabilities. For example:
 
 ```typescript
 {
