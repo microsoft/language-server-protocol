@@ -32,7 +32,7 @@ export interface FoldingRangeClientCapabilities {
 	 */
 	lineFoldingOnly?: boolean;
 	/**
-	 * If set, the client signals that it supports setting collapsedText on
+	 * If set, the client signals that it supports setting `collapsedText` on
 	 * folding ranges to display instead of the default text.
 	 *
 	 * @since 3.17.0 - proposed
@@ -147,7 +147,7 @@ export interface FoldingRange {
 	 * 'Fold all comments'. See [FoldingRangeKind](#FoldingRangeKind) for an
 	 * enumeration of standardized kinds.
 	 */
-	kind?: string;
+	kind?: FoldingRangeKind;
 
 	/**
 	 * The text that the client should show when the specified range is
