@@ -12,14 +12,15 @@ _Client Capability_:
 
 ```typescript
 /**
+ * Client capabilities specific to diagnostic pull requests.
+ *
  * @since 3.17.0
  * @proposed
  */
 export type DiagnosticClientCapabilities = {
 	/**
-	 * Whether implementation supports dynamic registration. If this is
-	 * set to `true` the client supports the new
-	 * `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * Whether implementation supports dynamic registration. If this is set to `true`
+	 * the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
@@ -469,6 +470,45 @@ export type WorkspaceDiagnosticReportPartialResult = {
 ##### <a href="#diagnostic_refresh" name="diagnostic_refresh" class="anchor">Diagnostics Refresh(:arrow_right_hook:)</a>
 
 The `workspace/diagnostic/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh all needed document and workspace diagnostics. This is useful if a server detects a project wide configuration change which requires a re-calculation of all diagnostics.
+
+_Client Capability_:
+
+* property name (optional): `workspace.diagnostics`
+* property type: `DiagnosticWorkspaceClientCapabilities` defined as follows:
+
+<div class="anchorHolder"><a href="#diagnosticWorkspaceClientCapabilities" name="diagnosticWorkspaceClientCapabilities" class="linkableAnchor"></a></div>
+
+
+```typescript
+/**
+ * Workspace client capabilities specific to diagnostic pull requests.
+ *
+ * @since 3.17.0
+ * @proposed
+ */
+export type DiagnosticWorkspaceClientCapabilities = {
+	/**
+	 * Whether the client implementation supports a refresh request sent from
+	 * the server to the client.
+	 *
+	 * Note that this event is global and will force the client to refresh all
+	 * inlay hints currently shown. It should be used with absolute care and
+	 * is useful for situation where a server for example detects a project wide
+	 * change that requires such a calculation.
+	 */
+	refreshSupport?: boolean;
+};
+```
+
+_Request_:
+* method: `workspace/diagnostic/refresh`
+* params: none
+
+_Response_:
+
+* result: void
+* error: code and message set in case an exception happens during the 'workspace/diagnostic/refresh' request
+
 
 ##### Implementation Considerations
 
