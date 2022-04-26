@@ -146,19 +146,21 @@ export type DocumentDiagnosticReport = RelatedFullDocumentDiagnosticReport
  * @since 3.17.0
  * @proposed
  */
-export enum DocumentDiagnosticReportKind {
+export namespace DocumentDiagnosticReportKind {
 	/**
 	 * A diagnostic report with a full
 	 * set of problems.
 	 */
-	full = 'full',
+	export const full = 'full';
 
 	/**
 	 * A report indicating that the last
 	 * returned report is still accurate.
 	 */
-	unChanged = 'unChanged'
+	export const unchanged = 'unchanged';
 }
+
+export type DocumentDiagnosticReportKind = 'full' | 'unchanged';
 ```
 
 <div class="anchorHolder"><a href="#fullDocumentDiagnosticReport" name="fullDocumentDiagnosticReport" class="linkableAnchor"></a></div>
