@@ -659,6 +659,21 @@ export interface CompletionItem {
 	textEdit?: TextEdit | InsertReplaceEdit;
 
 	/**
+	 * The edit text used if the completion item is part of a CompletionList and
+	 * CompletionList defines an item default for the text edit range.
+	 *
+	 * Clients will only honor this property if they opt into completion list
+	 * item defaults using the capability `completionList.itemDefaults`.
+	 *
+	 * If not provided and a list's default range is provided the label
+	 * property is used as a text.
+	 *
+	 * @since 3.17.0
+	 * @proposed
+	 */
+	textEditText?: string;
+
+	/**
 	 * An optional array of additional text edits that are applied when
 	 * selecting this completion. Edits must not overlap (including the same
 	 * insert position) with the main edit nor with themselves.
