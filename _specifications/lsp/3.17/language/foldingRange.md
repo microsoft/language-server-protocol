@@ -19,25 +19,52 @@ export interface FoldingRangeClientCapabilities {
 	 * server capability as well.
 	 */
 	dynamicRegistration?: boolean;
+
 	/**
 	 * The maximum number of folding ranges that the client prefers to receive
 	 * per document. The value serves as a hint, servers are free to follow the
 	 * limit.
 	 */
 	rangeLimit?: uinteger;
+
 	/**
 	 * If set, the client signals that it only supports folding complete lines.
 	 * If set, client will ignore specified `startCharacter` and `endCharacter`
 	 * properties in a FoldingRange.
 	 */
 	lineFoldingOnly?: boolean;
+
 	/**
-	 * If set, the client signals that it supports setting `collapsedText` on
-	 * folding ranges to display instead of the default text.
+	 * Specific options for the folding range kind.
 	 *
-	 * @since 3.17.0 - proposed
+	 * @since 3.17.0
+	 * @proposed
 	 */
-	collapsedText?: boolean;
+	foldingRangeKind? : {
+		/**
+		 * The folding range kind values the client supports. When this
+		 * property exists the client also guarantees that it will
+		 * handle values outside its set gracefully and falls back
+		 * to a default value when unknown.
+		 */
+		valueSet?: FoldingRangeKind[];
+	};
+
+	/**
+	 * Specific options for the folding range.
+	 * @since 3.17.0
+	 * @proposed
+	 */
+	foldingRange?: {
+		/**
+		* If set, the client signals that it supports setting collapsedText on
+		* folding ranges to display custom labels instead of the default text.
+		*
+		* @since 3.17.0
+		* @proposed
+		*/
+		collapsedText?: boolean;
+	};
 }
 ```
 
@@ -87,22 +114,29 @@ _Response_:
 
 ```typescript
 /**
- * Enum of known range kinds
+ * A set of predefined range kinds.
  */
-export enum FoldingRangeKind {
+export namespace FoldingRangeKind {
 	/**
 	 * Folding range for a comment
 	 */
-	Comment = 'comment',
+	export const Comment = 'comment';
+
 	/**
 	 * Folding range for a imports or includes
 	 */
-	Imports = 'imports',
+	export const Imports = 'imports';
+
 	/**
 	 * Folding range for a region (e.g. `#region`)
 	 */
-	Region = 'region'
+	export const Region = 'region';
 }
+
+/**
+ * The type is a string since the value set is extensible
+ */
+export type FoldingRangeKind = string;
 ```
 
 <div class="anchorHolder"><a href="#foldingRange" name="foldingRange" class="linkableAnchor"></a></div>
