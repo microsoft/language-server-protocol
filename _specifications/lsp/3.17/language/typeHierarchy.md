@@ -35,7 +35,8 @@ _Server Capability_:
 <div class="anchorHolder"><a href="#typeHierarchyOptions" name="typeHierarchyOptions" class="linkableAnchor"></a></div>
 
 ```typescript
-export type TypeHierarchyOptions = WorkDoneProgressOptions;
+export interface TypeHierarchyOptions extends WorkDoneProgressOptions {
+}
 ```
 
 _Registration Options_: `TypeHierarchyRegistrationOptions` defined as follows:
@@ -43,9 +44,10 @@ _Registration Options_: `TypeHierarchyRegistrationOptions` defined as follows:
 <div class="anchorHolder"><a href="#typeHierarchyRegistrationOptions" name="typeHierarchyRegistrationOptions" class="linkableAnchor"></a></div>
 
 ```typescript
-export type TypeHierarchyRegistrationOptions =
-	TextDocumentRegistrationOptions & TypeHierarchyOptions &
-	StaticRegistrationOptions;
+export interface TypeHierarchyRegistrationOptions extends
+	TextDocumentRegistrationOptions, TypeHierarchyOptions,
+	StaticRegistrationOptions {
+}
 ```
 
 _Request_:
@@ -56,8 +58,9 @@ _Request_:
 <div class="anchorHolder"><a href="#typeHierarchyPrepareParams" name="typeHierarchyPrepareParams" class="linkableAnchor"></a></div>
 
 ```typescript
-export type TypeHierarchyPrepareParams = TextDocumentPositionParams &
-	WorkDoneProgressParams;
+export interface TypeHierarchyPrepareParams extends TextDocumentPositionParams,
+	WorkDoneProgressParams {
+}
 ```
 
 _Response_:
@@ -67,7 +70,7 @@ _Response_:
 <div class="anchorHolder"><a href="#typeHierarchyItem" name="typeHierarchyItem" class="linkableAnchor"></a></div>
 
 ```typescript
-export type TypeHierarchyItem = {
+export interface TypeHierarchyItem {
 	/**
 	 * The name of this item.
 	 */
@@ -113,7 +116,7 @@ export type TypeHierarchyItem = {
 	 * resolving supertypes and subtypes.
 	 */
 	data?: LSPAny;
-};
+}
 ```
 
 * error: code and message set in case an exception happens during the 'textDocument/prepareTypeHierarchy' request
@@ -132,10 +135,10 @@ _Request_:
 <div class="anchorHolder"><a href="#typeHierarchySupertypesParams" name="typeHierarchySupertypesParams" class="linkableAnchor"></a></div>
 
 ```typescript
-export type TypeHierarchySupertypesParams =
-	WorkDoneProgressParams & PartialResultParams & {
+export interface TypeHierarchySupertypesParams extends
+	WorkDoneProgressParams, PartialResultParams {
 	item: TypeHierarchyItem;
-};
+}
 ```
 _Response_:
 
@@ -157,33 +160,13 @@ _Request_:
 <div class="anchorHolder"><a href="#typeHierarchySubtypesParams" name="typeHierarchySubtypesParams" class="linkableAnchor"></a></div>
 
 ```typescript
-export type TypeHierarchySubtypesParams =
-	WorkDoneProgressParams & PartialResultParams & {
+export interface TypeHierarchySubtypesParams extends
+	WorkDoneProgressParams, PartialResultParams {
 	item: TypeHierarchyItem;
-};
+}
 ```
 _Response_:
 
 * result: `TypeHierarchyItem[] | null`
 * partial result: `TypeHierarchyItem[]`
 * error: code and message set in case an exception happens during the 'typeHierarchy/subtypes' request
-
-
-<!--- linable types addition
-
-  - type: 'TypeHierarchyClientCapabilities'
-    link: '#typeHierarchyClientCapabilities'
-  - type: 'TypeHierarchyOptions'
-    link: '#typeHierarchyOptions'
-  - type: 'TypeHierarchyRegistrationOptions'
-    link: '#typeHierarchyRegistrationOptions'
-  - type: 'TypeHierarchyPrepareParams'
-    link: '#typeHierarchyPrepareParams'
-  - type: 'TypeHierarchyItem'
-    link: '#typeHierarchyItem'
-  - type: 'TypeHierarchySupertypesParams'
-    link: '#typeHierarchySupertypesParams'
-  - type: 'TypeHierarchySubtypesParams'
-    link: '#typeHierarchySubtypesParams'
-
---->

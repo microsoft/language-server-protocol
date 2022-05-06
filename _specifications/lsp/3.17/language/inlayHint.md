@@ -16,7 +16,7 @@ _Client Capability_:
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHintClientCapabilities = {
+export interface InlayHintClientCapabilities {
 
 	/**
 	 * Whether inlay hints support dynamic registration.
@@ -34,7 +34,7 @@ export type InlayHintClientCapabilities = {
 		 */
 		properties: string[];
 	};
-};
+}
 ```
 
 _Server Capability_:
@@ -49,13 +49,13 @@ _Server Capability_:
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHintOptions = WorkDoneProgressOptions & {
+export interface InlayHintOptions extends WorkDoneProgressOptions {
 	/**
 	 * The server provides support to resolve additional
 	 * information for an inlay hint item.
 	 */
 	resolveProvider?: boolean;
-};
+}
 ```
 
 _Registration Options_: `InlayHintRegistrationOptions` defined as follows:
@@ -68,8 +68,10 @@ _Registration Options_: `InlayHintRegistrationOptions` defined as follows:
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHintRegistrationOptions = InlayHintOptions
-	& TextDocumentRegistrationOptions & StaticRegistrationOptions;
+export interface InlayHintRegistrationOptions extends InlayHintOptions,
+	TextDocumentRegistrationOptions, StaticRegistrationOptions {
+
+}
 ```
 
 _Request_:
@@ -84,7 +86,7 @@ _Request_:
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHintParams = WorkDoneProgressParams & {
+export interface InlayHintParams extends WorkDoneProgressParams {
 	/**
 	 * The text document.
 	 */
@@ -94,7 +96,7 @@ export type InlayHintParams = WorkDoneProgressParams & {
 	 * The visible document range for which inlay hints should be computed.
 	 */
 	range: Range;
-};
+}
 ```
 
 _Response_:
@@ -108,7 +110,7 @@ _Response_:
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHint = {
+export interface InlayHint {
 
 	/**
 	 * The position of this hint.
@@ -173,7 +175,7 @@ export type InlayHint = {
 	 * a `textDocument/inlayHint` and a `inlayHint/resolve` request.
 	 */
 	data?: LSPAny;
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#inlayHintLabelPart" name="inlayHintLabelPart" class="linkableAnchor"></a></div>
@@ -185,7 +187,7 @@ export type InlayHint = {
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHintLabelPart = {
+export interface InlayHintLabelPart {
 
 	/**
 	 * The value of this label part.
@@ -221,7 +223,7 @@ export type InlayHintLabelPart = {
 	 * might resolve this property late using the resolve request.
 	 */
 	command?: Command;
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#inlayHintKind" name="inlayHintKind" class="linkableAnchor"></a></div>
@@ -294,7 +296,7 @@ _Client Capability_:
  *
  * @since 3.17.0 - proposed state
  */
-export type InlayHintWorkspaceClientCapabilities = {
+export interface InlayHintWorkspaceClientCapabilities {
 	/**
 	 * Whether the client implementation supports a refresh request sent from
 	 * the server to the client.
@@ -305,7 +307,7 @@ export type InlayHintWorkspaceClientCapabilities = {
 	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;
-};
+}
 ```
 
 _Request_:

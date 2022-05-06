@@ -15,7 +15,7 @@ The two concepts are defined as follows:
  *
  * @since 3.17.0
  */
-export type NotebookDocument = {
+export interface NotebookDocument {
 
 	/**
 	 * The notebook document's uri.
@@ -43,7 +43,7 @@ export type NotebookDocument = {
 	 * The cells of a notebook.
 	 */
 	cells: NotebookCell[];
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#notebookCell" name="notebookCell" class="linkableAnchor"></a></div>
@@ -60,7 +60,7 @@ export type NotebookDocument = {
  * @since 3.17.0
  * @proposed
  */
-export type NotebookCell = {
+export interface NotebookCell {
 
 	/**
 	 * The cell's kind
@@ -83,7 +83,7 @@ export type NotebookCell = {
 	 * if supported by the client.
 	 */
 	executionSummary?: ExecutionSummary;
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#notebookCellKind" name="notebookCellKind" class="linkableAnchor"></a></div>
@@ -112,7 +112,7 @@ export namespace NotebookCellKind {
 <div class="anchorHolder"><a href="#executionSummary" name="executionSummary" class="linkableAnchor"></a></div>
 
 ```typescript
-export type ExecutionSummary = {
+export interface ExecutionSummary {
 	/**
 	 * A strict monotonically increasing value
 	 * indicating the execution order of a cell
@@ -125,7 +125,7 @@ export type ExecutionSummary = {
 	 * not if known by the client.
 	 */
 	success?: boolean;
-};
+}
 ```
 
 Next we describe how notebooks, notebook cells and the content of a notebook cell should be synchronized to a language server.
@@ -142,7 +142,7 @@ Syncing the text content of a cell is relatively easy since clients should model
  * @since 3.17.0
  * @proposed.
  */
-export type NotebookCellTextDocumentFilter = {
+export interface NotebookCellTextDocumentFilter {
 	/**
 	 * A filter that matches against the notebook
 	 * containing the notebook cell. If a string
@@ -158,7 +158,7 @@ export type NotebookCellTextDocumentFilter = {
 	 * notebook cell document. '*' matches every language.
 	 */
 	language?: string;
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#notebookDocumentFilter" name="notebookDocumentFilter" class="linkableAnchor"></a></div>
@@ -270,7 +270,7 @@ The following client capabilities are defined for notebook documents:
  * @since 3.17.0
  * @proposed
  */
-export type NotebookDocumentSyncClientCapabilities = {
+export interface NotebookDocumentSyncClientCapabilities {
 
 	/**
 	 * Whether implementation supports dynamic registration. If this is
@@ -279,7 +279,7 @@ export type NotebookDocumentSyncClientCapabilities = {
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
-};
+}
 ```
 
 _Server Capability_:
@@ -308,7 +308,7 @@ The following server capabilities are defined for notebook documents:
  * @since 3.17.0
  * @proposed
  */
-export type NotebookDocumentSyncOptions = {
+export interface NotebookDocumentSyncOptions {
 	/**
 	 * The notebooks to be synced
 	 */
@@ -339,24 +339,11 @@ export type NotebookDocumentSyncOptions = {
 	})[];
 
 	/**
-	 * Determines how the notebook is synchronized.
-	 *
-	 * If set to 'notebook' the notebook document,
-	 * its meta data, cell structure and the cell's
-	 * text documents are synchronized.
-	 *
-	 * If set to 'cellContent' only the cell content
-	 * is synchronized using the available
-	 * `textDocument/did*` notifications.
-	 */
-	mode: 'notebook' | 'cellContent';
-
-	/**
 	 * Whether save notification should be forwarded to
 	 * the server. Will only be honored if mode === `notebook`.
 	 */
 	save?: boolean;
-};
+}
 ```
 
 _Registration Options_: `NotebookDocumentRegistrationOptions` defined as follows:
@@ -370,8 +357,9 @@ _Registration Options_: `NotebookDocumentRegistrationOptions` defined as follows
  * @since 3.17.0
  * @proposed
  */
-export type NotebookDocumentSyncRegistrationOptions =
-	NotebookDocumentSyncOptions & StaticRegistrationOptions;
+export interface NotebookDocumentSyncRegistrationOptions extends
+	NotebookDocumentSyncOptions, StaticRegistrationOptions {
+}
 ```
 
 #### <a href="#notebookDocument_didOpen" name="notebookDocument_didOpen" class="anchor">DidOpenNotebookDocument Notification (:arrow_right:)</a>
@@ -392,7 +380,7 @@ _Notification_:
  * @since 3.17.0
  * @proposed
  */
-export type DidOpenNotebookDocumentParams = {
+export interface DidOpenNotebookDocumentParams {
 
 	/**
 	 * The notebook document that got opened.
@@ -404,7 +392,7 @@ export type DidOpenNotebookDocumentParams = {
 	 * of a notebook cell.
 	 */
 	cellTextDocuments: TextDocumentItem[];
-};
+}
 ```
 
 #### <a href="#notebookDocument_didChange" name="notebookDocument_didChange" class="anchor">DidChangeNotebookDocument Notification (:arrow_right:)</a>
@@ -425,7 +413,7 @@ _Notification_:
  * @since 3.17.0
  * @proposed
  */
-export type DidChangeNotebookDocumentParams = {
+export interface DidChangeNotebookDocumentParams {
 
 	/**
 	 * The notebook document that did change. The version number points
@@ -447,7 +435,7 @@ export type DidChangeNotebookDocumentParams = {
 	 *   you receive them.
 	 */
 	change: NotebookDocumentChangeEvent;
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#notebookDocumentChangeEvent" name="notebookDocumentChangeEvent" class="linkableAnchor"></a></div>
@@ -459,7 +447,7 @@ export type DidChangeNotebookDocumentParams = {
  * @since 3.17.0
  * @proposed
  */
-export type NotebookDocumentChangeEvent = {
+export interface NotebookDocumentChangeEvent {
 	/**
 	 * The changed meta data if any.
 	 */
@@ -504,7 +492,7 @@ export type NotebookDocumentChangeEvent = {
 			changes: TextDocumentContentChangeEvent[];
 		}[];
 	};
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#notebookCellArrayChange" name="notebookCellArrayChange" class="linkableAnchor"></a></div>
@@ -517,7 +505,7 @@ export type NotebookDocumentChangeEvent = {
  * @since 3.17.0
  * @proposed
  */
-export type NotebookCellArrayChange = {
+export interface NotebookCellArrayChange {
 	/**
 	 * The start oftest of the cell that changed.
 	 */
@@ -532,7 +520,7 @@ export type NotebookCellArrayChange = {
 	 * The new cells, if any
 	 */
 	cells?: NotebookCell[];
-};
+}
 ```
 
 #### <a href="#notebookDocument_didSave" name="notebookDocument_didSave" class="anchor">DidSaveNotebookDocument Notification (:arrow_right:)</a>
@@ -555,12 +543,12 @@ _Notification_:
  * @since 3.17.0
  * @proposed
  */
-export type DidSaveNotebookDocumentParams = {
+export interface DidSaveNotebookDocumentParams {
 	/**
 	 * The notebook document that got saved.
 	 */
 	notebookDocument: NotebookDocumentIdentifier;
-};
+}
 ```
 
 #### <a href="#notebookDocument_didClose" name="notebookDocument_didClose" class="anchor">DidCloseNotebookDocument Notification (:arrow_right:)</a>
@@ -583,7 +571,7 @@ _Notification_:
  * @since 3.17.0
  * @proposed
  */
-export type DidCloseNotebookDocumentParams = {
+export interface DidCloseNotebookDocumentParams {
 
 	/**
 	 * The notebook document that got closed.
@@ -595,7 +583,7 @@ export type DidCloseNotebookDocumentParams = {
 	 * of a notebook cell that got closed.
 	 */
 	cellTextDocuments: TextDocumentIdentifier[];
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#notebookDocumentIdentifier" name="notebookDocumentIdentifier" class="linkableAnchor"></a></div>
@@ -607,16 +595,10 @@ export type DidCloseNotebookDocumentParams = {
  * @since 3.17.0
  * @proposed
  */
-export type NotebookDocumentIdentifier = {
+export interface NotebookDocumentIdentifier {
 	/**
 	 * The notebook document's uri.
 	 */
 	uri: URI;
-};
+}
 ```
-
-
-<!--- linable types addition
-
-
---->
