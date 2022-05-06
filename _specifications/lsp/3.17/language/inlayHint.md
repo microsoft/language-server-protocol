@@ -70,7 +70,6 @@ _Registration Options_: `InlayHintRegistrationOptions` defined as follows:
  */
 export interface InlayHintRegistrationOptions extends InlayHintOptions,
 	TextDocumentRegistrationOptions, StaticRegistrationOptions {
-
 }
 ```
 
