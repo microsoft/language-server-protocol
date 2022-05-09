@@ -305,7 +305,7 @@ export interface CodeActionContext {
 /**
  * The reason why code actions were requested.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export namespace CodeActionTriggerKind {
 	/**

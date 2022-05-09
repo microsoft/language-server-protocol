@@ -14,7 +14,7 @@ _Client Capability_:
 /**
  * Inlay hint client capabilities.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlayHintClientCapabilities {
 
@@ -47,7 +47,7 @@ _Server Capability_:
 /**
  * Inlay hint options used during static registration.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlayHintOptions extends WorkDoneProgressOptions {
 	/**
@@ -66,7 +66,7 @@ _Registration Options_: `InlayHintRegistrationOptions` defined as follows:
 /**
  * Inlay hint options used during static or dynamic registration.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlayHintRegistrationOptions extends InlayHintOptions,
 	TextDocumentRegistrationOptions, StaticRegistrationOptions {
@@ -83,7 +83,7 @@ _Request_:
 /**
  * A parameter literal used in inlay hint requests.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlayHintParams extends WorkDoneProgressParams {
 	/**
@@ -107,7 +107,7 @@ _Response_:
 /**
  * Inlay hint information.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlayHint {
 
@@ -184,7 +184,7 @@ export interface InlayHint {
  * An inlay hint label part allows for interactive and composite labels
  * of inlay hints.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlayHintLabelPart {
 
@@ -231,7 +231,7 @@ export interface InlayHintLabelPart {
 /**
  * Inlay hint kinds.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export namespace InlayHintKind {
 
@@ -293,7 +293,7 @@ _Client Capability_:
 /**
  * Client workspace capabilities specific to inlay hints.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlayHintWorkspaceClientCapabilities {
 	/**

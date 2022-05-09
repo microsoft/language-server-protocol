@@ -264,21 +264,21 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the various type hierarchy requests.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	typeHierarchy?: TypeHierarchyClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/inlineValue` request.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlineValue?: InlineValueClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/inlayHint` request.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlayHint?: InlayHintClientCapabilities;
 
@@ -438,7 +438,7 @@ interface ClientCapabilities {
 		/**
 		 * Client workspace capabilities specific to inline values.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 * @proposed
 		 */
 		inlineValue?: InlineValueWorkspaceClientCapabilities;
@@ -446,7 +446,7 @@ interface ClientCapabilities {
 		/**
 		 * Client workspace capabilities specific to inlay hints.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 * @proposed
 		 */
 		inlayHint?: InlayHintWorkspaceClientCapabilities;
@@ -846,7 +846,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides type hierarchy support.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	typeHierarchyProvider?: boolean | TypeHierarchyOptions
 		 | TypeHierarchyRegistrationOptions;
@@ -854,7 +854,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides inline values.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlineValueProvider?: boolean | InlineValueOptions
 		 | InlineValueRegistrationOptions;
@@ -862,7 +862,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides inlay hints.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlayHintProvider?: boolean | InlayHintOptions
 		 | InlayHintRegistrationOptions;

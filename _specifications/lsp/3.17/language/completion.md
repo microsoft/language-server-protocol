@@ -115,7 +115,7 @@ export interface CompletionClientCapabilities {
 		 * The client has support for completion item label
 		 * details (see also `CompletionItemLabelDetails`).
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		labelDetailsSupport?: boolean;
 	};
@@ -144,7 +144,7 @@ export interface CompletionClientCapabilities {
 	 * The client's default when the completion item doesn't provide a
 	 * `insertTextMode` property.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	insertTextMode?: InsertTextMode;
 
@@ -152,7 +152,7 @@ export interface CompletionClientCapabilities {
 	 * The client supports the following `CompletionList` specific
 	 * capabilities.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	completionList?: {
 		/**
@@ -163,7 +163,7 @@ export interface CompletionClientCapabilities {
 		 * `CompletionList.itemDefaults` object. If omitted
 		 * no properties are supported.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		itemDefaults?: string[];
 	}
@@ -218,7 +218,7 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 	 * The server supports the following `CompletionItem` specific
 	 * capabilities.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	completionItem?: {
 		/**
@@ -226,7 +226,7 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 		 * details (see also `CompletionItemLabelDetails`) when receiving
 		 * a completion item in a resolve call.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		labelDetailsSupport?: boolean;
 	}
@@ -344,20 +344,20 @@ export interface CompletionList {
 	 * signals support for this via the `completionList.itemDefaults`
 	 * capability.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	itemDefaults?: {
 		/**
 		 * A default commit character set.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		commitCharacters?: string[];
 
 		/**
 		 * A default edit range
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		editRange?: Range | {
 			insert: Range;
@@ -367,14 +367,14 @@ export interface CompletionList {
 		/**
 		 * A default insert text format
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		insertTextFormat?: InsertTextFormat;
 
 		/**
 		 * A default insert text mode
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		insertTextMode?: InsertTextMode;
 	}
@@ -498,7 +498,7 @@ export type InsertTextMode = 1 | 2;
 /**
  * Additional details for a completion item label.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface CompletionItemLabelDetails {
 
@@ -537,7 +537,7 @@ export interface CompletionItem {
 	/**
 	 * Additional details for the label
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	labelDetails?: CompletionItemLabelDetails;
 
