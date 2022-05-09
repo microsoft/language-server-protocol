@@ -15,7 +15,6 @@ _Client Capability_:
  * Client capabilities specific to diagnostic pull requests.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DiagnosticClientCapabilities {
 	/**
@@ -43,7 +42,6 @@ _Server Capability_:
  * Diagnostic options.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DiagnosticOptions extends WorkDoneProgressOptions {
 	/**
@@ -76,7 +74,6 @@ _Registration Options_: `DiagnosticRegistrationOptions` options defined as follo
  * Diagnostic registration options.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DiagnosticRegistrationOptions extends
 	TextDocumentRegistrationOptions, DiagnosticOptions,
@@ -99,7 +96,6 @@ _Request_:
  * Parameters of the document diagnostic request.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DocumentDiagnosticParams extends WorkDoneProgressParams,
 	PartialResultParams {
@@ -134,7 +130,6 @@ _Response_:
  * pull request.
  *
  * @since 3.17.0
- * @proposed
  */
 export type DocumentDiagnosticReport = RelatedFullDocumentDiagnosticReport
 	| RelatedUnchangedDocumentDiagnosticReport;
@@ -147,7 +142,6 @@ export type DocumentDiagnosticReport = RelatedFullDocumentDiagnosticReport
  * The document diagnostic report kinds.
  *
  * @since 3.17.0
- * @proposed
  */
 export namespace DocumentDiagnosticReportKind {
 	/**
@@ -173,7 +167,6 @@ export type DocumentDiagnosticReportKind = 'full' | 'unchanged';
  * A diagnostic report with a full set of problems.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface FullDocumentDiagnosticReport {
 	/**
@@ -203,7 +196,6 @@ export interface FullDocumentDiagnosticReport {
  * report is still accurate.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface UnchangedDocumentDiagnosticReport {
 	/**
@@ -229,7 +221,6 @@ export interface UnchangedDocumentDiagnosticReport {
  * A full diagnostic report with a set of related documents.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface RelatedFullDocumentDiagnosticReport extends
 	FullDocumentDiagnosticReport {
@@ -241,7 +232,6 @@ export interface RelatedFullDocumentDiagnosticReport extends
 	 * a.cpp and result in errors in a header file b.hpp.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	relatedDocuments?: {
 		[uri: string /** DocumentUri */]:
@@ -257,7 +247,6 @@ export interface RelatedFullDocumentDiagnosticReport extends
  * An unchanged diagnostic report with a set of related documents.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface RelatedUnchangedDocumentDiagnosticReport extends
 	UnchangedDocumentDiagnosticReport {
@@ -269,7 +258,6 @@ export interface RelatedUnchangedDocumentDiagnosticReport extends
 	 * a.cpp and result in errors in a header file b.hpp.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	relatedDocuments?: {
 		[uri: string /** DocumentUri */]:
@@ -286,7 +274,6 @@ export interface RelatedUnchangedDocumentDiagnosticReport extends
  * A partial result for a document diagnostic report.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DocumentDiagnosticReportPartialResult {
 	relatedDocuments: {
@@ -304,7 +291,6 @@ export interface DocumentDiagnosticReportPartialResult {
  * Cancellation data returned from a diagnostic request.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DiagnosticServerCancellationData {
 	retriggerRequest: boolean;
@@ -331,7 +317,6 @@ _Request_:
  * Parameters of the workspace diagnostic request.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface WorkspaceDiagnosticParams extends WorkDoneProgressParams,
 	PartialResultParams {
@@ -355,7 +340,6 @@ export interface WorkspaceDiagnosticParams extends WorkDoneProgressParams,
  * A previous result id in a workspace pull request.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface PreviousResultId {
 	/**
@@ -381,7 +365,6 @@ _Response_:
  * A workspace diagnostic report.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface WorkspaceDiagnosticReport {
 	items: WorkspaceDocumentDiagnosticReport[];
@@ -395,7 +378,6 @@ export interface WorkspaceDiagnosticReport {
  * A full document diagnostic report for a workspace diagnostic result.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface WorkspaceFullDocumentDiagnosticReport extends
 	FullDocumentDiagnosticReport {
@@ -420,7 +402,6 @@ export interface WorkspaceFullDocumentDiagnosticReport extends
  * An unchanged document diagnostic report for a workspace diagnostic result.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface WorkspaceUnchangedDocumentDiagnosticReport extends
 	UnchangedDocumentDiagnosticReport {
@@ -445,7 +426,6 @@ export interface WorkspaceUnchangedDocumentDiagnosticReport extends
  * A workspace diagnostic document report.
  *
  * @since 3.17.0
- * @proposed
  */
 export type WorkspaceDocumentDiagnosticReport =
 	WorkspaceFullDocumentDiagnosticReport
@@ -461,7 +441,6 @@ export type WorkspaceDocumentDiagnosticReport =
  * A partial result for a workspace diagnostic report.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface WorkspaceDiagnosticReportPartialResult {
 	items: WorkspaceDocumentDiagnosticReport[];
@@ -487,7 +466,6 @@ _Client Capability_:
  * Workspace client capabilities specific to diagnostic pull requests.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DiagnosticWorkspaceClientCapabilities {
 	/**

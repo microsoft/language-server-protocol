@@ -32,7 +32,6 @@ The corresponding `PositionEncodingKind` is negotiated between the client and th
  * specifically what column offsets mean.
  *
  * @since 3.17.0
- * @proposed
  */
 export type PositionEncodingKind = string;
 
@@ -40,7 +39,6 @@ export type PositionEncodingKind = string;
  * A set of predefined position encoding kinds.
  *
  * @since 3.17.0
- * @proposed
  */
 export namespace PositionEncodingKind {
 

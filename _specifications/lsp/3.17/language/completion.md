@@ -669,7 +669,6 @@ export interface CompletionItem {
 	 * property is used as a text.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	textEditText?: string;
 
