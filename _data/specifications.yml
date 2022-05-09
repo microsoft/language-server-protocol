@@ -1,12 +1,10 @@
 - title: LSP
   anchor: lsp
   children:
-  - title: 3.16 (Current)
-    url: /specifications/specification-current
-  - title: 3.17 (Upcoming)
+  - title: 3.17 (Current)
     url: /specifications/lsp/3.17/specification
-  - title: 3.15 (Previous)
-    url: /specifications/specification-3-15
+  - title: 3.16 (Previous)
+    url: /specifications/specification-3-16
 - title: LSIF
   anchor: lsif
   children:

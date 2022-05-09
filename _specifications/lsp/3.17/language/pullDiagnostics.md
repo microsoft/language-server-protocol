@@ -1,4 +1,4 @@
-#### <a href="#textDocument_pull_diagnostics" name="textDocument_pull_diagnostics" class="anchor">Pull Diagnostics</a>
+#### <a href="#textDocument_pullDiagnostics" name="textDocument_pullDiagnostics" class="anchor">Pull Diagnostics</a>
 
 Diagnostics are currently published by the server to the client using a notification. This model has the advantage that for workspace wide diagnostics the server has the freedom to compute them at a server preferred point in time. On the other hand the approach has the disadvantage that the server can't prioritize the computation for the file in which the user types or which are visible in the editor. Inferring the client's UI state from the `textDocument/didOpen` and `textDocument/didChange` notifications might lead to false positives since these notifications are ownership transfer notifications.
 
