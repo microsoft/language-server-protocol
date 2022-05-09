@@ -1967,6 +1967,20 @@
 				"kind": "reference",
 				"name": "LogTraceParams"
 			}
+		},
+		{
+			"method": "$/cancelRequest",
+			"params": {
+				"kind": "reference",
+				"name": "CancelParams"
+			}
+		},
+		{
+			"method": "$/progress",
+			"params": {
+				"kind": "reference",
+				"name": "ProgressParams"
+			}
 		}
 	],
 	"structures": [
@@ -6004,6 +6018,49 @@
 			]
 		},
 		{
+			"name": "CancelParams",
+			"properties": [
+				{
+					"name": "id",
+					"type": {
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "integer"
+							},
+							{
+								"kind": "base",
+								"name": "string"
+							}
+						]
+					},
+					"documentation": "The request id to cancel."
+				}
+			]
+		},
+		{
+			"name": "ProgressParams",
+			"properties": [
+				{
+					"name": "token",
+					"type": {
+						"kind": "reference",
+						"name": "ProgressToken"
+					},
+					"documentation": "The progress token provided by the client or server."
+				},
+				{
+					"name": "value",
+					"type": {
+						"kind": "reference",
+						"name": "LSPAny"
+					},
+					"documentation": "The progress data."
+				}
+			]
+		},
+		{
 			"name": "TextDocumentPositionParams",
 			"properties": [
 				{
@@ -8310,8 +8367,8 @@
 				{
 					"name": "kind",
 					"type": {
-						"kind": "base",
-						"name": "uinteger"
+						"kind": "reference",
+						"name": "WatchKind"
 					},
 					"optional": true,
 					"documentation": "The kind of events of interest. If omitted it defaults\nto WatchKind.Create | WatchKind.Change | WatchKind.Delete\nwhich is 7."
@@ -12506,6 +12563,70 @@
 			"since": "3.16.0"
 		},
 		{
+			"name": "ErrorCodes",
+			"type": {
+				"kind": "base",
+				"name": "integer"
+			},
+			"values": [
+				{
+					"name": "ParseError",
+					"value": -32700
+				},
+				{
+					"name": "InvalidRequest",
+					"value": -32600
+				},
+				{
+					"name": "MethodNotFound",
+					"value": -32601
+				},
+				{
+					"name": "InvalidParams",
+					"value": -32602
+				},
+				{
+					"name": "InternalError",
+					"value": -32603
+				},
+				{
+					"name": "jsonrpcReservedErrorRangeStart",
+					"value": -32099,
+					"since": "3.16.0"
+				},
+				{
+					"name": "serverErrorStart",
+					"value": -32099
+				},
+				{
+					"name": "MessageWriteError",
+					"value": -32099
+				},
+				{
+					"name": "MessageReadError",
+					"value": -32098
+				},
+				{
+					"name": "ServerNotInitialized",
+					"value": -32002
+				},
+				{
+					"name": "UnknownErrorCode",
+					"value": -32001
+				},
+				{
+					"name": "jsonrpcReservedErrorRangeEnd",
+					"value": -32000,
+					"since": "3.16.0"
+				},
+				{
+					"name": "serverErrorEnd",
+					"value": -32000
+				}
+			],
+			"supportsCustomValues": true
+		},
+		{
 			"name": "LSPErrorCodes",
 			"type": {
 				"kind": "base",
@@ -13113,6 +13234,28 @@
 					"value": 3
 				}
 			]
+		},
+		{
+			"name": "WatchKind",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "Create",
+					"value": 1
+				},
+				{
+					"name": "Change",
+					"value": 2
+				},
+				{
+					"name": "Delete",
+					"value": 4
+				}
+			],
+			"supportsCustomValues": true
 		},
 		{
 			"name": "DiagnosticSeverity",
