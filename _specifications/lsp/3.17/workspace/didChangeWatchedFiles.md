@@ -124,7 +124,7 @@ export interface FileSystemWatcher {
 	 * to WatchKind.Create | WatchKind.Change | WatchKind.Delete
 	 * which is 7.
 	 */
-	kind?: uinteger;
+	kind?: WatchKind;
 }
 ```
 
@@ -147,6 +147,7 @@ export namespace WatchKind {
 	 */
 	export const Delete = 4;
 }
+export type WatchKind = uinteger;
 ```
 
 _Notification_:
