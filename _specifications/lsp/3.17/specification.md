@@ -169,7 +169,7 @@ interface RequestMessage extends Message {
 
 #### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
 
-A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
+A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON-RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -217,7 +217,7 @@ interface ResponseError {
 
 ```typescript
 export namespace ErrorCodes {
-	// Defined by JSON RPC
+	// Defined by JSON-RPC
 	export const ParseError: integer = -32700;
 	export const InvalidRequest: integer = -32600;
 	export const MethodNotFound: integer = -32601;
@@ -225,7 +225,7 @@ export namespace ErrorCodes {
 	export const InternalError: integer = -32603;
 
 	/**
-	 * This is the start range of JSON RPC reserved error codes.
+	 * This is the start range of JSON-RPC reserved error codes.
 	 * It doesn't denote a real error code. No LSP error codes should
 	 * be defined between the start and end range. For backwards
 	 * compatibility the `ServerNotInitialized` and the `UnknownErrorCode`
@@ -245,7 +245,7 @@ export namespace ErrorCodes {
 	export const UnknownErrorCode: integer = -32001;
 
 	/**
-	 * This is the end range of JSON RPC reserved error codes.
+	 * This is the end range of JSON-RPC reserved error codes.
 	 * It doesn't denote a real error code.
 	 *
 	 * @since 3.16.0
@@ -347,7 +347,7 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON-RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
 #### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
 

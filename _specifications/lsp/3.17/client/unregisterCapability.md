@@ -39,7 +39,7 @@ export interface UnregistrationParams {
 }
 ```
 
-An example JSON RPC message to unregister the above registered `textDocument/willSaveWaitUntil` feature looks like this:
+An example JSON-RPC message to unregister the above registered `textDocument/willSaveWaitUntil` feature looks like this:
 
 ```json
 {
