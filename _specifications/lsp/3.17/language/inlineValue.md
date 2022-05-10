@@ -200,7 +200,8 @@ export interface InlineValueEvaluatableExpression {
  *
  * @since 3.17.0
  */
-export type InlineValue = InlineValueText | InlineValueVariableLookup | InlineValueEvaluatableExpression;
+export type InlineValue = InlineValueText | InlineValueVariableLookup
+	| InlineValueEvaluatableExpression;
 ```
 * error: code and message set in case an exception happens during the inline values request.
 

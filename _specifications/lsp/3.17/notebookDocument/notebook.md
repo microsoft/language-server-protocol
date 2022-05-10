@@ -138,7 +138,6 @@ Syncing the text content of a cell is relatively easy since clients should model
  * document by different properties.
  *
  * @since 3.17.0
- * @proposed.
  */
 export interface NotebookCellTextDocumentFilter {
 	/**
@@ -167,7 +166,6 @@ export interface NotebookCellTextDocumentFilter {
  * different properties.
  *
  * @since 3.17.0
- * @proposed.
  */
 export type NotebookDocumentFilter = {
 	/** The type of the enclosing notebook. */
