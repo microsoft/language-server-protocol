@@ -14,7 +14,7 @@ _Client Capability_:
 /**
  * Client capabilities specific to inline values.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueClientCapabilities {
 	/**
@@ -35,7 +35,7 @@ _Server Capability_:
 /**
  * Inline value options used during static registration.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueOptions extends WorkDoneProgressOptions {
 }
@@ -49,7 +49,7 @@ _Registration Options_: `InlineValueRegistrationOptions` defined as follows:
 /**
  * Inline value options used during static or dynamic registration.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueRegistrationOptions extends InlineValueOptions,
 	TextDocumentRegistrationOptions, StaticRegistrationOptions {
@@ -66,7 +66,7 @@ _Request_:
 /**
  * A parameter literal used in inline value requests.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueParams extends WorkDoneProgressParams {
 	/**
@@ -91,7 +91,7 @@ export interface InlineValueParams extends WorkDoneProgressParams {
 
 ```typescript
 /**
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueContext {
 	/**
@@ -112,7 +112,7 @@ _Response_:
 /**
  * Provide inline value as text.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueText {
 	/**
@@ -138,7 +138,7 @@ export interface InlineValueText {
  *
  * An optional variable name can be used to override the extracted name.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueVariableLookup {
 	/**
@@ -171,7 +171,7 @@ export interface InlineValueVariableLookup {
  *
  * An optional expression can be used to override the extracted expression.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueEvaluatableExpression {
 	/**
@@ -198,9 +198,10 @@ export interface InlineValueEvaluatableExpression {
  * - as an evaluatable expression (class InlineValueEvaluatableExpression)
  * The InlineValue types combines all inline value types into one type.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlineValue = InlineValueText | InlineValueVariableLookup | InlineValueEvaluatableExpression;
+export type InlineValue = InlineValueText | InlineValueVariableLookup
+	| InlineValueEvaluatableExpression;
 ```
 * error: code and message set in case an exception happens during the inline values request.
 
@@ -221,7 +222,7 @@ _Client Capability_:
 /**
  * Client workspace capabilities specific to inline values.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface InlineValueWorkspaceClientCapabilities {
 	/**

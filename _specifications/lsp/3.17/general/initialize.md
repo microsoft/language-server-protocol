@@ -264,21 +264,21 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the various type hierarchy requests.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	typeHierarchy?: TypeHierarchyClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/inlineValue` request.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlineValue?: InlineValueClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/inlayHint` request.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlayHint?: InlayHintClientCapabilities;
 
@@ -302,14 +302,12 @@ export interface TextDocumentClientCapabilities {
  * Capabilities specific to the notebook document support.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to notebook document synchronization
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	synchronization: NotebookDocumentSyncClientCapabilities;
 }
@@ -438,16 +436,14 @@ interface ClientCapabilities {
 		/**
 		 * Client workspace capabilities specific to inline values.
 		 *
-		 * @since 3.17.0 - proposed state
-		 * @proposed
+		 * @since 3.17.0
 		 */
 		inlineValue?: InlineValueWorkspaceClientCapabilities;
 
 		/**
 		 * Client workspace capabilities specific to inlay hints.
 		 *
-		 * @since 3.17.0 - proposed state
-		 * @proposed
+		 * @since 3.17.0
 		 */
 		inlayHint?: InlayHintWorkspaceClientCapabilities;
 
@@ -455,7 +451,6 @@ interface ClientCapabilities {
 		 * Client workspace capabilities specific to diagnostics.
 		 *
 		 * @since 3.17.0.
-		 * @proposed
 		 */
 		diagnostics?: DiagnosticWorkspaceClientCapabilities;
 	};
@@ -469,7 +464,6 @@ interface ClientCapabilities {
 	 * Capabilities specific to the notebook document support.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	notebookDocument?: NotebookDocumentClientCapabilities;
 
@@ -566,7 +560,6 @@ interface ClientCapabilities {
 		 * side.
 		 *
 		 * @since 3.17.0
-		 * @proposed
 		 */
 		positionEncodings?: PositionEncodingKind[];
 	};
@@ -664,7 +657,6 @@ interface ServerCapabilities {
 	 * If omitted it defaults to 'utf-16'.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	positionEncoding?: PositionEncodingKind;
 
@@ -680,7 +672,6 @@ interface ServerCapabilities {
 	 * Defines how notebook documents are synced.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	notebookDocumentSync?: NotebookDocumentSyncOptions
 		| NotebookDocumentSyncRegistrationOptions;
@@ -846,7 +837,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides type hierarchy support.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	typeHierarchyProvider?: boolean | TypeHierarchyOptions
 		 | TypeHierarchyRegistrationOptions;
@@ -854,7 +845,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides inline values.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlineValueProvider?: boolean | InlineValueOptions
 		 | InlineValueRegistrationOptions;
@@ -862,7 +853,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides inlay hints.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlayHintProvider?: boolean | InlayHintOptions
 		 | InlayHintRegistrationOptions;
@@ -871,7 +862,6 @@ interface ServerCapabilities {
 	 * The server has support for pull model diagnostics.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
 	diagnosticProvider?: DiagnosticOptions | DiagnosticRegistrationOptions;
 

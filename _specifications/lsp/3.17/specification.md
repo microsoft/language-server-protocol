@@ -6,6 +6,9 @@ sectionid: specification-3-17
 toc: specification-3-17-toc
 fullTitle: Language Server Protocol Specification - 3.17
 index: 2
+redirect_from:
+  - /specification
+  - /specifications/specification-current
 ---
 
 This document describes the upcoming 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
@@ -14,7 +17,7 @@ This document describes the upcoming 3.17.x version of the language server proto
 
 ## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.17 </a>
 
-All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are: type hierarchy, inline values, inlay hints and notebook document support.
+All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are: type hierarchy, inline values, inlay hints, notebook document support and a meta model that describes the 3.17 LSP version.
 
 A detailed list of the changes can be found in the [change log](#version_3_17_0)
 
@@ -709,9 +712,9 @@ Language Feature provide the actual smarts in the language server protocol. The 
 {% include_relative window/workDoneProgressCancel.md %}
 {% include_relative telemetry/event.md %}
 
-miscellaneous
+#### <a href="#miscellaneous" name="miscellaneous" class="anchor">Miscellaneous</a>
 
-### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
+#### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
 Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
@@ -731,9 +734,17 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 
 To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id pass on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
 
+#### <a href="#metaModel" name="metaModel" class="anchor">Meta Model</a>
+
+Since 3.17 there is a meta model describing the LSP protocol:
+
+- [metaModel.json](../metaModel/metaModel.json): The actual meta model for the LSP 3.17 specification
+- [metaModel.ts](../metaModel/metaModel.ts): A TypeScript file defining the data types that make up the meta model.
+- [metaModel.schema.json](../metaModel/metaModel.schema.json): A JSON schema file defining the data types that make up the meta model. Can be used to generate code to read the meta model JSON file.
+
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
-#### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
+#### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (05/10/2022)</a>
 
 * Specify how clients will handle stale requests.
 * Add support for a completion item label details.

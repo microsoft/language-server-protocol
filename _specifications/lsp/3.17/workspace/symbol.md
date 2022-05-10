@@ -73,7 +73,7 @@ export interface WorkspaceSymbolOptions extends WorkDoneProgressOptions {
 	 * The server provides support to resolve additional
 	 * information for a workspace symbol.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	resolveProvider?: boolean;
 }
@@ -118,7 +118,7 @@ _Response_:
 /**
  * A special workspace symbol that supports locations without a range
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface WorkspaceSymbol {
 	/**

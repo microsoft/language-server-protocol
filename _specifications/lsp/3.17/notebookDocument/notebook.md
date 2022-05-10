@@ -58,7 +58,6 @@ export interface NotebookDocument {
  * notebook cell or the cell's text document.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookCell {
 
@@ -93,7 +92,6 @@ export interface NotebookCell {
  * A notebook cell kind.
  *
  * @since 3.17.0
- * @proposed
  */
 export namespace NotebookCellKind {
 
@@ -140,7 +138,6 @@ Syncing the text content of a cell is relatively easy since clients should model
  * document by different properties.
  *
  * @since 3.17.0
- * @proposed.
  */
 export interface NotebookCellTextDocumentFilter {
 	/**
@@ -169,7 +166,6 @@ export interface NotebookCellTextDocumentFilter {
  * different properties.
  *
  * @since 3.17.0
- * @proposed.
  */
 export type NotebookDocumentFilter = {
 	/** The type of the enclosing notebook. */
@@ -268,7 +264,6 @@ The following client capabilities are defined for notebook documents:
  * Notebook specific client capabilities.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookDocumentSyncClientCapabilities {
 
@@ -306,7 +301,6 @@ The following server capabilities are defined for notebook documents:
  * cell will be synced.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookDocumentSyncOptions {
 	/**
@@ -355,7 +349,6 @@ _Registration Options_: `NotebookDocumentRegistrationOptions` defined as follows
  * Registration options specific to a notebook.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookDocumentSyncRegistrationOptions extends
 	NotebookDocumentSyncOptions, StaticRegistrationOptions {
@@ -378,7 +371,6 @@ _Notification_:
  * The params sent in a open notebook document notification.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DidOpenNotebookDocumentParams {
 
@@ -411,7 +403,6 @@ _Notification_:
  * The params sent in a change notebook document notification.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DidChangeNotebookDocumentParams {
 
@@ -438,6 +429,28 @@ export interface DidChangeNotebookDocumentParams {
 }
 ```
 
+<div class="anchorHolder"><a href="#versionedNotebookDocumentIdentifier" name="versionedNotebookDocumentIdentifier" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * A versioned notebook document identifier.
+ *
+ * @since 3.17.0
+ */
+export interface VersionedNotebookDocumentIdentifier {
+
+	/**
+	 * The version number of this notebook document.
+	 */
+	version: integer;
+
+	/**
+	 * The notebook document's uri.
+	 */
+	uri: URI;
+}
+```
+
 <div class="anchorHolder"><a href="#notebookDocumentChangeEvent" name="notebookDocumentChangeEvent" class="linkableAnchor"></a></div>
 
 ```typescript
@@ -445,7 +458,6 @@ export interface DidChangeNotebookDocumentParams {
  * A change event for a notebook document.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookDocumentChangeEvent {
 	/**
@@ -503,7 +515,6 @@ export interface NotebookDocumentChangeEvent {
  * array from state S to S'.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookCellArrayChange {
 	/**
@@ -541,7 +552,6 @@ _Notification_:
  * The params sent in a save notebook document notification.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DidSaveNotebookDocumentParams {
 	/**
@@ -569,7 +579,6 @@ _Notification_:
  * The params sent in a close notebook document notification.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface DidCloseNotebookDocumentParams {
 
@@ -593,7 +602,6 @@ export interface DidCloseNotebookDocumentParams {
  * A literal to identify a notebook document in the client.
  *
  * @since 3.17.0
- * @proposed
  */
 export interface NotebookDocumentIdentifier {
 	/**
