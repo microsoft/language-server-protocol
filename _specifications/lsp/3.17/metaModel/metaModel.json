@@ -719,9 +719,8 @@
 				"kind": "reference",
 				"name": "TypeHierarchyRegistrationOptions"
 			},
-			"documentation": "A request to result a `TypeHierarchyItem` in a document at a given position.\nCan be used as an input to a subtypes or supertypes type hierarchy.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A request to result a `TypeHierarchyItem` in a document at a given position.\nCan be used as an input to a subtypes or supertypes type hierarchy.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "typeHierarchy/supertypes",
@@ -752,9 +751,8 @@
 					"name": "TypeHierarchyItem"
 				}
 			},
-			"documentation": "A request to resolve the supertypes for a given `TypeHierarchyItem`.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A request to resolve the supertypes for a given `TypeHierarchyItem`.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "typeHierarchy/subtypes",
@@ -785,9 +783,8 @@
 					"name": "TypeHierarchyItem"
 				}
 			},
-			"documentation": "A request to resolve the subtypes for a given `TypeHierarchyItem`.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A request to resolve the subtypes for a given `TypeHierarchyItem`.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "textDocument/inlineValue",
@@ -822,9 +819,8 @@
 				"kind": "reference",
 				"name": "InlineValueRegistrationOptions"
 			},
-			"documentation": "A request to provide inline values in a document. The request's parameter is of\ntype [InlineValueParams](#InlineValueParams), the response is of type\n[InlineValue[]](#InlineValue[]) or a Thenable that resolves to such.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A request to provide inline values in a document. The request's parameter is of\ntype [InlineValueParams](#InlineValueParams), the response is of type\n[InlineValue[]](#InlineValue[]) or a Thenable that resolves to such.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "workspace/inlineValue/refresh",
@@ -832,9 +828,8 @@
 				"kind": "base",
 				"name": "null"
 			},
-			"documentation": "@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "textDocument/inlayHint",
@@ -869,9 +864,8 @@
 				"kind": "reference",
 				"name": "InlayHintRegistrationOptions"
 			},
-			"documentation": "A request to provide inlay hints in a document. The request's parameter is of\ntype [InlayHintsParams](#InlayHintsParams), the response is of type\n[InlayHint[]](#InlayHint[]) or a Thenable that resolves to such.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A request to provide inlay hints in a document. The request's parameter is of\ntype [InlayHintsParams](#InlayHintsParams), the response is of type\n[InlayHint[]](#InlayHint[]) or a Thenable that resolves to such.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "inlayHint/resolve",
@@ -883,9 +877,8 @@
 				"kind": "reference",
 				"name": "InlayHint"
 			},
-			"documentation": "A request to resolve additional properties for a inlay hint.\nThe request's parameter is of type [InlayHint](#InlayHint), the response is\nof type [InlayHint](#InlayHint) or a Thenable that resolves to such.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A request to resolve additional properties for a inlay hint.\nThe request's parameter is of type [InlayHint](#InlayHint), the response is\nof type [InlayHint](#InlayHint) or a Thenable that resolves to such.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "workspace/inlayHint/refresh",
@@ -893,9 +886,8 @@
 				"kind": "base",
 				"name": "null"
 			},
-			"documentation": "@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "textDocument/diagnostic",
@@ -919,9 +911,8 @@
 				"kind": "reference",
 				"name": "DiagnosticRegistrationOptions"
 			},
-			"documentation": "The document diagnostic request definition.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The document diagnostic request definition.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "workspace/diagnostic",
@@ -941,9 +932,8 @@
 				"kind": "reference",
 				"name": "DiagnosticServerCancellationData"
 			},
-			"documentation": "The workspace diagnostic request definition.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The workspace diagnostic request definition.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "workspace/diagnostic/refresh",
@@ -951,9 +941,8 @@
 				"kind": "base",
 				"name": "null"
 			},
-			"documentation": "The diagnostic refresh request definition.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The diagnostic refresh request definition.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "client/registerCapability",
@@ -1457,9 +1446,8 @@
 				"kind": "reference",
 				"name": "WorkspaceSymbol"
 			},
-			"documentation": "A request to resolve the range inside the workspace\nsymbol's location.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A request to resolve the range inside the workspace\nsymbol's location.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "textDocument/codeLens",
@@ -1795,9 +1783,8 @@
 				"kind": "reference",
 				"name": "DidOpenNotebookDocumentParams"
 			},
-			"documentation": "A notification sent when a notebook opens.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A notification sent when a notebook opens.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "notebookDocument/didChange",
@@ -1812,9 +1799,8 @@
 				"kind": "reference",
 				"name": "DidSaveNotebookDocumentParams"
 			},
-			"documentation": "A notification sent when a notebook document is saved.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A notification sent when a notebook document is saved.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "notebookDocument/didClose",
@@ -1822,9 +1808,8 @@
 				"kind": "reference",
 				"name": "DidCloseNotebookDocumentParams"
 			},
-			"documentation": "A notification sent when a notebook closes.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A notification sent when a notebook closes.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"method": "initialized",
@@ -2403,9 +2388,8 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "The text that the client should show when the specified range is\ncollapsed. If not defined or not supported by the client, a default\nwill be chosen by the client.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The text that the client should show when the specified range is\ncollapsed. If not defined or not supported by the client, a default\nwill be chosen by the client.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"documentation": "Represents a folding range. To be valid, start and end line must be bigger than zero and smaller\nthan the number of lines in the document. Clients are free to ignore invalid ranges."
@@ -3343,9 +3327,8 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "The parameter of a `textDocument/prepareTypeHierarchy` request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The parameter of a `textDocument/prepareTypeHierarchy` request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "TypeHierarchyItem",
@@ -3421,9 +3404,8 @@
 					"documentation": "A data entry field that is preserved between a type hierarchy prepare and\nsupertypes or subtypes requests. It could also be used to identify the\ntype hierarchy in the server, helping improve the performance on\nresolving supertypes and subtypes."
 				}
 			],
-			"documentation": "@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "TypeHierarchyRegistrationOptions",
@@ -3444,9 +3426,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Type hierarchy options used during static or dynamic registration.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Type hierarchy options used during static or dynamic registration.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "TypeHierarchySupertypesParams",
@@ -3469,9 +3450,8 @@
 					"name": "PartialResultParams"
 				}
 			],
-			"documentation": "The parameter of a `typeHierarchy/supertypes` request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The parameter of a `typeHierarchy/supertypes` request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "TypeHierarchySubtypesParams",
@@ -3494,9 +3474,8 @@
 					"name": "PartialResultParams"
 				}
 			],
-			"documentation": "The parameter of a `typeHierarchy/subtypes` request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The parameter of a `typeHierarchy/subtypes` request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueParams",
@@ -3532,9 +3511,8 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "A parameter literal used in inline value requests.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A parameter literal used in inline value requests.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueRegistrationOptions",
@@ -3555,9 +3533,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Inline value options used during static or dynamic registration.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Inline value options used during static or dynamic registration.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlayHintParams",
@@ -3585,9 +3562,8 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "A parameter literal used in inlay hints requests.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A parameter literal used in inlay hints requests.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlayHint",
@@ -3687,9 +3663,8 @@
 					"documentation": "A data entry field that is preserved on a inlay hint between\na `textDocument/inlayHint` and a `inlayHint/resolve` request."
 				}
 			],
-			"documentation": "Inlay hint information.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Inlay hint information.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlayHintRegistrationOptions",
@@ -3710,9 +3685,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Inlay hint options used during static or dynamic registration.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Inlay hint options used during static or dynamic registration.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DocumentDiagnosticParams",
@@ -3754,9 +3728,8 @@
 					"name": "PartialResultParams"
 				}
 			],
-			"documentation": "Parameters of the document diagnostic request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Parameters of the document diagnostic request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DocumentDiagnosticReportPartialResult",
@@ -3785,9 +3758,8 @@
 					}
 				}
 			],
-			"documentation": "A partial result for a document diagnostic report.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A partial result for a document diagnostic report.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DiagnosticServerCancellationData",
@@ -3800,9 +3772,8 @@
 					}
 				}
 			],
-			"documentation": "Cancellation data returned from a diagnostic request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Cancellation data returned from a diagnostic request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DiagnosticRegistrationOptions",
@@ -3823,9 +3794,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Diagnostic registration options.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Diagnostic registration options.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceDiagnosticParams",
@@ -3861,9 +3831,8 @@
 					"name": "PartialResultParams"
 				}
 			],
-			"documentation": "Parameters of the workspace diagnostic request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Parameters of the workspace diagnostic request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceDiagnosticReport",
@@ -3879,9 +3848,8 @@
 					}
 				}
 			],
-			"documentation": "A workspace diagnostic report.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A workspace diagnostic report.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceDiagnosticReportPartialResult",
@@ -3897,9 +3865,8 @@
 					}
 				}
 			],
-			"documentation": "A partial result for a workspace diagnostic report.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A partial result for a workspace diagnostic report.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DidOpenNotebookDocumentParams",
@@ -3924,9 +3891,8 @@
 					"documentation": "The text documents that represent the content\nof a notebook cell."
 				}
 			],
-			"documentation": "The params sent in a open notebook document notification.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The params sent in a open notebook document notification.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DidChangeNotebookDocumentParams",
@@ -3948,9 +3914,8 @@
 					"documentation": "The actual changes to the notebook document.\nThe changes describe single state changes to the notebook document.\nSo if there are two changes c1 (at array index 0) and c2 (at array\nindex 1) for a notebook in state S then c1 moves the notebook from\nS to S' and c2 from S' to S''. So c1 is computed on the state S and\nc2 is computed on the state S'.\nTo mirror the content of a notebook using change events use the following approach:\n- start with the same initial content\n- apply the 'notebookDocument/didChange' notifications in the order you receive them.\n- apply the `NotebookChangeEvent`s in a single notification in the order\n  you receive them."
 				}
 			],
-			"documentation": "The params sent in a change notebook document notification.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The params sent in a change notebook document notification.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DidSaveNotebookDocumentParams",
@@ -3964,9 +3929,8 @@
 					"documentation": "The notebook document that got saved."
 				}
 			],
-			"documentation": "The params sent in a save notebook document notification.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The params sent in a save notebook document notification.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DidCloseNotebookDocumentParams",
@@ -3991,9 +3955,8 @@
 					"documentation": "The text documents that represent the content\nof a notebook cell that got closed."
 				}
 			],
-			"documentation": "The params sent in a close notebook document notification.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The params sent in a close notebook document notification.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "RegistrationParams",
@@ -4501,9 +4464,8 @@
 						"name": "CompletionItemLabelDetails"
 					},
 					"optional": true,
-					"documentation": "Additional details for the label\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Additional details for the label\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "kind",
@@ -4644,9 +4606,8 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "The edit text used if the completion item is part of a CompletionList and\nCompletionList defines an item default for the text edit range.\nClients will only honor this property if they opt into completion list\nitem defaults using the capability `completionList.itemDefaults`.\nIf not provided and a list's default range is provided the label\nproperty is used as a text.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The edit text used if the completion item is part of a CompletionList and\nCompletionList defines an item default for the text edit range.\nClients will only honor this property if they opt into completion list\nitem defaults using the capability `completionList.itemDefaults`.\nIf not provided and a list's default range is provided the label\nproperty is used as a text.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "additionalTextEdits",
@@ -4783,9 +4744,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "In many cases the items of an actual completion result share the same\nvalue for properties like `commitCharacters` or the range of a text\nedit. A completion list can therefore define item defaults which will\nbe used if a completion item itself doesn't specify the value.\nIf a completion list specifies a default value and a completion item\nalso specifies a corresponding value the one from the item is used.\nServers are only allowed to return default values if the client\nsignals support for this via the `completionList.itemDefaults`\ncapability.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "In many cases the items of an actual completion result share the same\nvalue for properties like `commitCharacters` or the range of a text\nedit. A completion list can therefore define item defaults which will\nbe used if a completion item itself doesn't specify the value.\nIf a completion list specifies a default value and a completion item\nalso specifies a corresponding value the one from the item is used.\nServers are only allowed to return default values if the client\nsignals support for this via the `completionList.itemDefaults`\ncapability.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "items",
@@ -5505,9 +5465,8 @@
 					"name": "BaseSymbolInformation"
 				}
 			],
-			"documentation": "A special workspace symbol that supports locations without a range.\nSee also SymbolInformation.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A special workspace symbol that supports locations without a range.\nSee also SymbolInformation.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceSymbolRegistrationOptions",
@@ -6768,9 +6727,8 @@
 				}
 			],
 			"properties": [],
-			"documentation": "Type hierarchy options used during static registration.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Type hierarchy options used during static registration.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueContext",
@@ -6792,9 +6750,8 @@
 					"documentation": "The document range where execution has stopped.\nTypically the end position of the range denotes the line where the inline values are shown."
 				}
 			],
-			"documentation": "@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueText",
@@ -6816,9 +6773,8 @@
 					"documentation": "The text of the inline value."
 				}
 			],
-			"documentation": "Provide inline value as text.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Provide inline value as text.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueVariableLookup",
@@ -6849,9 +6805,8 @@
 					"documentation": "How to perform the lookup."
 				}
 			],
-			"documentation": "Provide inline value through a variable lookup.\nIf only a range is specified, the variable name will be extracted from the underlying document.\nAn optional variable name can be used to override the extracted name.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Provide inline value through a variable lookup.\nIf only a range is specified, the variable name will be extracted from the underlying document.\nAn optional variable name can be used to override the extracted name.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueEvaluatableExpression",
@@ -6874,9 +6829,8 @@
 					"documentation": "If specified the expression overrides the extracted expression."
 				}
 			],
-			"documentation": "Provide an inline value through an expression evaluation.\nIf only a range is specified, the expression will be extracted from the underlying document.\nAn optional expression can be used to override the extracted expression.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Provide an inline value through an expression evaluation.\nIf only a range is specified, the expression will be extracted from the underlying document.\nAn optional expression can be used to override the extracted expression.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueOptions",
@@ -6887,9 +6841,8 @@
 				}
 			],
 			"properties": [],
-			"documentation": "Inline value options used during static registration.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Inline value options used during static registration.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlayHintLabelPart",
@@ -6939,9 +6892,8 @@
 					"documentation": "An optional command for this label part.\nDepending on the client capability `inlayHint.resolveSupport` clients\nmight resolve this property late using the resolve request."
 				}
 			],
-			"documentation": "An inlay hint label part allows for interactive and composite labels\nof inlay hints.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "An inlay hint label part allows for interactive and composite labels\nof inlay hints.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "MarkupContent",
@@ -6984,9 +6936,8 @@
 					"name": "WorkDoneProgressOptions"
 				}
 			],
-			"documentation": "Inlay hint options used during static registration.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Inlay hint options used during static registration.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "RelatedFullDocumentDiagnosticReport",
@@ -7014,9 +6965,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Diagnostics of related documents. This information is useful\nin programming languages where code in a file A can generate\ndiagnostics in a file B which A depends on. An example of\nsuch a language is C/C++ where marco definitions in a file\na.cpp and result in errors in a header file b.hpp.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Diagnostics of related documents. This information is useful\nin programming languages where code in a file A can generate\ndiagnostics in a file B which A depends on. An example of\nsuch a language is C/C++ where marco definitions in a file\na.cpp and result in errors in a header file b.hpp.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"extends": [
@@ -7025,9 +6975,8 @@
 					"name": "FullDocumentDiagnosticReport"
 				}
 			],
-			"documentation": "A full diagnostic report with a set of related documents.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A full diagnostic report with a set of related documents.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "RelatedUnchangedDocumentDiagnosticReport",
@@ -7055,9 +7004,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Diagnostics of related documents. This information is useful\nin programming languages where code in a file A can generate\ndiagnostics in a file B which A depends on. An example of\nsuch a language is C/C++ where marco definitions in a file\na.cpp and result in errors in a header file b.hpp.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Diagnostics of related documents. This information is useful\nin programming languages where code in a file A can generate\ndiagnostics in a file B which A depends on. An example of\nsuch a language is C/C++ where marco definitions in a file\na.cpp and result in errors in a header file b.hpp.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"extends": [
@@ -7066,9 +7014,8 @@
 					"name": "UnchangedDocumentDiagnosticReport"
 				}
 			],
-			"documentation": "An unchanged diagnostic report with a set of related documents.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "An unchanged diagnostic report with a set of related documents.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "FullDocumentDiagnosticReport",
@@ -7102,9 +7049,8 @@
 					"documentation": "The actual items."
 				}
 			],
-			"documentation": "A diagnostic report with a full set of problems.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A diagnostic report with a full set of problems.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "UnchangedDocumentDiagnosticReport",
@@ -7126,9 +7072,8 @@
 					"documentation": "A result id which will be sent on the next\ndiagnostic request for the same document."
 				}
 			],
-			"documentation": "A diagnostic report indicating that the last returned\nreport is still accurate.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A diagnostic report indicating that the last returned\nreport is still accurate.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DiagnosticOptions",
@@ -7165,9 +7110,8 @@
 					"name": "WorkDoneProgressOptions"
 				}
 			],
-			"documentation": "Diagnostic options.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Diagnostic options.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "PreviousResultId",
@@ -7189,9 +7133,8 @@
 					"documentation": "The value of the previous result id."
 				}
 			],
-			"documentation": "A previous result id in a workspace pull request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A previous result id in a workspace pull request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "NotebookDocument",
@@ -7241,9 +7184,8 @@
 					"documentation": "The cells of a notebook."
 				}
 			],
-			"documentation": "A notebook document.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A notebook document.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "TextDocumentItem",
@@ -7303,9 +7245,8 @@
 					"documentation": "The notebook document's uri."
 				}
 			],
-			"documentation": "A versioned notebook document identifier.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A versioned notebook document identifier.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "NotebookDocumentChangeEvent",
@@ -7414,9 +7355,8 @@
 					"documentation": "Changes to cells"
 				}
 			],
-			"documentation": "A change event for a notebook document.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A change event for a notebook document.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "NotebookDocumentIdentifier",
@@ -7430,9 +7370,8 @@
 					"documentation": "The notebook document's uri."
 				}
 			],
-			"documentation": "A literal to identify a notebook document in the client.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A literal to identify a notebook document in the client.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "Registration",
@@ -7667,9 +7606,8 @@
 						"name": "PositionEncodingKind"
 					},
 					"optional": true,
-					"documentation": "The position encoding the server picked from the encodings offered\nby the client via the client capability `general.positionEncodings`.\nIf the client didn't provide any position encodings the only valid\nvalue that a server can return is 'utf-16'.\nIf omitted it defaults to 'utf-16'.\nIf for some reason\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The position encoding the server picked from the encodings offered\nby the client via the client capability `general.positionEncodings`.\nIf the client didn't provide any position encodings the only valid\nvalue that a server can return is 'utf-16'.\nIf omitted it defaults to 'utf-16'.\nIf for some reason\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "textDocumentSync",
@@ -7705,9 +7643,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "Defines how notebook documents are synced.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Defines how notebook documents are synced.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "completionProvider",
@@ -8183,9 +8120,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The server provides type hierarchy support.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The server provides type hierarchy support.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "inlineValueProvider",
@@ -8207,9 +8143,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The server provides inline values.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The server provides inline values.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "inlayHintProvider",
@@ -8231,9 +8166,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The server provides inlay hints.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The server provides inlay hints.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "diagnosticProvider",
@@ -8251,9 +8185,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The server has support for pull model diagnostics.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The server has support for pull model diagnostics.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "workspace",
@@ -8523,9 +8456,8 @@
 					"documentation": "An optional string which is rendered less prominently after {@link CompletionItem.detail}. Should be used\nfor fully qualified names or file path."
 				}
 			],
-			"documentation": "Additional details for a completion item label.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Additional details for a completion item label.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InsertReplaceEdit",
@@ -8613,9 +8545,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "The server supports the following `CompletionItem` specific\ncapabilities.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The server supports the following `CompletionItem` specific\ncapabilities.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"mixins": [
@@ -8965,9 +8896,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The server provides support to resolve additional\ninformation for a workspace symbol.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The server provides support to resolve additional\ninformation for a workspace symbol.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"mixins": [
@@ -9408,9 +9338,8 @@
 					"name": "FullDocumentDiagnosticReport"
 				}
 			],
-			"documentation": "A full document diagnostic report for a workspace diagnostic result.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A full document diagnostic report for a workspace diagnostic result.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceUnchangedDocumentDiagnosticReport",
@@ -9447,9 +9376,8 @@
 					"name": "UnchangedDocumentDiagnosticReport"
 				}
 			],
-			"documentation": "An unchanged document diagnostic report for a workspace diagnostic result.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "An unchanged document diagnostic report for a workspace diagnostic result.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "LSPObject",
@@ -9495,9 +9423,8 @@
 					"documentation": "Additional execution summary information\nif supported by the client."
 				}
 			],
-			"documentation": "A notebook cell.\nA cell's document URI must be unique across ALL notebook\ncells and can therefore be used to uniquely identify a\nnotebook cell or the cell's text document.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A notebook cell.\nA cell's document URI must be unique across ALL notebook\ncells and can therefore be used to uniquely identify a\nnotebook cell or the cell's text document.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "NotebookCellArrayChange",
@@ -9531,9 +9458,8 @@
 					"documentation": "The new cells, if any"
 				}
 			],
-			"documentation": "A change describing how to move a `NotebookCell`\narray from state S to S'.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A change describing how to move a `NotebookCell`\narray from state S to S'.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "ClientCapabilities",
@@ -9563,9 +9489,8 @@
 						"name": "NotebookDocumentClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the notebook document support.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the notebook document support.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "window",
@@ -9770,9 +9695,8 @@
 					"documentation": "Whether save notification should be forwarded to\nthe server. Will only be honored if mode === `notebook`."
 				}
 			],
-			"documentation": "Options specific to a notebook plus its cells\nto be synced to the server.\nIf a selector provide a notebook document\nfilter but no cell selector all cells of a\nmatching notebook document will be synced.\nIf a selector provides no notebook document\nfilter but only a cell selector all notebook\ndocument that contain at least one matching\ncell will be synced.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Options specific to a notebook plus its cells\nto be synced to the server.\nIf a selector provide a notebook document\nfilter but no cell selector all cells of a\nmatching notebook document will be synced.\nIf a selector provides no notebook document\nfilter but only a cell selector all notebook\ndocument that contain at least one matching\ncell will be synced.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "NotebookDocumentSyncRegistrationOptions",
@@ -9789,9 +9713,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Registration options specific to a notebook.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Registration options specific to a notebook.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceFoldersServerCapabilities",
@@ -10007,9 +9930,8 @@
 					"documentation": "A language id like `python`.\nWill be matched against the language id of the\nnotebook cell document. '*' matches every language."
 				}
 			],
-			"documentation": "A notebook cell text document filter denotes a cell text\ndocument by different properties.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A notebook cell text document filter denotes a cell text\ndocument by different properties.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "FileOperationPatternOptions",
@@ -10162,9 +10084,8 @@
 						"name": "InlineValueWorkspaceClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the inline values requests scoped to the\nworkspace.\n@since 3.17.0.\n@proposed",
-					"since": "3.17.0.",
-					"proposed": true
+					"documentation": "Capabilities specific to the inline values requests scoped to the\nworkspace.\n@since 3.17.0.",
+					"since": "3.17.0."
 				},
 				{
 					"name": "inlayHint",
@@ -10173,9 +10094,8 @@
 						"name": "InlayHintWorkspaceClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the inlay hints requests scoped to the\nworkspace.\n@since 3.17.0.\n@proposed",
-					"since": "3.17.0.",
-					"proposed": true
+					"documentation": "Capabilities specific to the inlay hints requests scoped to the\nworkspace.\n@since 3.17.0.",
+					"since": "3.17.0."
 				},
 				{
 					"name": "diagnostics",
@@ -10184,9 +10104,8 @@
 						"name": "DiagnosticWorkspaceClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the diagnostic requests scoped to the\nworkspace.\n@since 3.17.0.\n@proposed",
-					"since": "3.17.0.",
-					"proposed": true
+					"documentation": "Capabilities specific to the diagnostic requests scoped to the\nworkspace.\n@since 3.17.0.",
+					"since": "3.17.0."
 				}
 			],
 			"documentation": "Workspace specific client capabilities."
@@ -10444,9 +10363,8 @@
 						"name": "TypeHierarchyClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the various type hierarchy requests.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the various type hierarchy requests.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "inlineValue",
@@ -10455,9 +10373,8 @@
 						"name": "InlineValueClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/inlineValue` request.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the `textDocument/inlineValue` request.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "inlayHint",
@@ -10466,9 +10383,8 @@
 						"name": "InlayHintClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/inlayHint` request.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the `textDocument/inlayHint` request.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "diagnostic",
@@ -10477,9 +10393,8 @@
 						"name": "DiagnosticClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the diagnostic pull model.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the diagnostic pull model.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"documentation": "Text document specific client capabilities."
@@ -10493,14 +10408,12 @@
 						"kind": "reference",
 						"name": "NotebookDocumentSyncClientCapabilities"
 					},
-					"documentation": "Capabilities specific to notebook document synchronization\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Capabilities specific to notebook document synchronization\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
-			"documentation": "Capabilities specific to the notebook document support.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Capabilities specific to the notebook document support.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WindowClientCapabilities",
@@ -10567,9 +10480,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Client capability that signals how the client\nhandles stale requests (e.g. a request\nfor which the client will not process the response\nanymore since the information is outdated).\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Client capability that signals how the client\nhandles stale requests (e.g. a request\nfor which the client will not process the response\nanymore since the information is outdated).\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "regularExpressions",
@@ -10601,9 +10513,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "The position encodings supported by the client. Client and server\nhave to agree on the same position encoding to ensure that offsets\n(e.g. character position in a line) are interpreted the same on both\nside.\nTo keep the protocol backwards compatible the following applies: if\nthe value 'utf-16' is missing from the array of position encodings\nservers can assume that the client supports UTF-16. UTF-16 is\ntherefore a mandatory encoding.\nIf omitted it defaults to ['utf-16'].\nImplementation considerations: since the conversion from one encoding\ninto another requires the content of the file / line the conversion\nis best done where the file is read which is usually on the server\nside.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The position encodings supported by the client. Client and server\nhave to agree on the same position encoding to ensure that offsets\n(e.g. character position in a line) are interpreted the same on both\nside.\nTo keep the protocol backwards compatible the following applies: if\nthe value 'utf-16' is missing from the array of position encodings\nservers can assume that the client supports UTF-16. UTF-16 is\ntherefore a mandatory encoding.\nIf omitted it defaults to ['utf-16'].\nImplementation considerations: since the conversion from one encoding\ninto another requires the content of the file / line the conversion\nis best done where the file is read which is usually on the server\nside.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"documentation": "General client capabilities.\n@since 3.16.0",
@@ -10825,9 +10736,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "The client support partial workspace symbols. The client will send the\nrequest `workspaceSymbol/resolve` to the server to resolve additional\nproperties.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The client support partial workspace symbols. The client will send the\nrequest `workspaceSymbol/resolve` to the server to resolve additional\nproperties.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"documentation": "Client capabilities for a [WorkspaceSymbolRequest](#WorkspaceSymbolRequest)."
@@ -10962,9 +10872,8 @@
 					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\nNote that this event is global and will force the client to refresh all\ninline values currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation."
 				}
 			],
-			"documentation": "Client workspace capabilities specific to inline values.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Client workspace capabilities specific to inline values.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlayHintWorkspaceClientCapabilities",
@@ -10979,9 +10888,8 @@
 					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\nNote that this event is global and will force the client to refresh all\ninlay hints currently shown. It should be used with absolute care and\nis useful for situation where a server for example detects a project wide\nchange that requires such a calculation."
 				}
 			],
-			"documentation": "Client workspace capabilities specific to inlay hints.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Client workspace capabilities specific to inlay hints.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DiagnosticWorkspaceClientCapabilities",
@@ -10996,9 +10904,8 @@
 					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\nNote that this event is global and will force the client to refresh all\npulled diagnostics currently shown. It should be used with absolute care and\nis useful for situation where a server for example detects a project wide\nchange that requires such a calculation."
 				}
 			],
-			"documentation": "Workspace client capabilities specific to diagnostic pull requests.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Workspace client capabilities specific to diagnostic pull requests.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "TextDocumentSyncClientCapabilities",
@@ -11216,9 +11123,8 @@
 						"name": "InsertTextMode"
 					},
 					"optional": true,
-					"documentation": "Defines how the client handles whitespace and indentation\nwhen accepting a completion item that uses multi line\ntext in either `insertText` or `textEdit`.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Defines how the client handles whitespace and indentation\nwhen accepting a completion item that uses multi line\ntext in either `insertText` or `textEdit`.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "contextSupport",
@@ -11250,9 +11156,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "The client supports the following `CompletionList` specific\ncapabilities.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "The client supports the following `CompletionList` specific\ncapabilities.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			],
 			"documentation": "Completion client capabilities"
@@ -11873,9 +11778,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Specific options for the folding range kind.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Specific options for the folding range kind.\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "foldingRange",
@@ -11895,9 +11799,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Specific options for the folding range.\n@since 3.17.0\n@proposed",
-					"since": "3.17.0",
-					"proposed": true
+					"documentation": "Specific options for the folding range.\n@since 3.17.0",
+					"since": "3.17.0"
 				}
 			]
 		},
@@ -12189,9 +12092,8 @@
 					"documentation": "Whether implementation supports dynamic registration. If this is set to `true`\nthe client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
 				}
 			],
-			"documentation": "@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlineValueClientCapabilities",
@@ -12206,9 +12108,8 @@
 					"documentation": "Whether implementation supports dynamic registration for inline value providers."
 				}
 			],
-			"documentation": "Client capabilities specific to inline values.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Client capabilities specific to inline values.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "InlayHintClientCapabilities",
@@ -12245,9 +12146,8 @@
 					"documentation": "Indicates which properties a client can resolve lazily on a inlay\nhint."
 				}
 			],
-			"documentation": "Inlay hint client capabilities\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Inlay hint client capabilities\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DiagnosticClientCapabilities",
@@ -12271,9 +12171,8 @@
 					"documentation": "Whether the clients supports related documents for document diagnostic pulls."
 				}
 			],
-			"documentation": "Client capabilities specific to diagnostic pull requests.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Client capabilities specific to diagnostic pull requests.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "NotebookDocumentSyncClientCapabilities",
@@ -12297,9 +12196,8 @@
 					"documentation": "The client supports sending execution summary data per cell."
 				}
 			],
-			"documentation": "Notebook specific client capabilities.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Notebook specific client capabilities.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "ShowMessageRequestClientCapabilities",
@@ -13210,9 +13108,8 @@
 				}
 			],
 			"supportsCustomValues": true,
-			"documentation": "A type indicating how positions are encoded,\nspecifically what column offsets mean.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A type indicating how positions are encoded,\nspecifically what column offsets mean.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "FileChangeType",
@@ -13596,9 +13493,8 @@
 					}
 				]
 			},
-			"documentation": "Inline value information can be provided by different means:\n- directly as a text value (class InlineValueText).\n- as a name to use for a variable lookup (class InlineValueVariableLookup)\n- as an evaluatable expression (class InlineValueEvaluatableExpression)\nThe InlineValue types combines all inline value types into one type.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "Inline value information can be provided by different means:\n- directly as a text value (class InlineValueText).\n- as a name to use for a variable lookup (class InlineValueVariableLookup)\n- as an evaluatable expression (class InlineValueEvaluatableExpression)\nThe InlineValue types combines all inline value types into one type.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "DocumentDiagnosticReport",
@@ -13615,9 +13511,8 @@
 					}
 				]
 			},
-			"documentation": "The result of a document diagnostic pull request. A report can\neither be a full report containing all diagnostics for the\nrequested document or a unchanged report indicating that nothing\nhas changed in terms of diagnostics in comparison to the last\npull request.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "The result of a document diagnostic pull request. A report can\neither be a full report containing all diagnostics for the\nrequested document or a unchanged report indicating that nothing\nhas changed in terms of diagnostics in comparison to the last\npull request.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "PrepareRenameResult",
@@ -13735,9 +13630,8 @@
 					}
 				]
 			},
-			"documentation": "A workspace diagnostic document report.\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A workspace diagnostic document report.\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "TextDocumentContentChangeEvent",
@@ -13982,9 +13876,8 @@
 					}
 				]
 			},
-			"documentation": "A document filter denotes a document by different properties like\nthe [language](#TextDocument.languageId), the [scheme](#Uri.scheme) of\nits resource, or a glob-pattern that is applied to the [path](#TextDocument.fileName).\nGlob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n@sample A language filter that applies to typescript files on disk: `{ language: 'typescript', scheme: 'file' }`\n@sample A language filter that applies to all package.json paths: `{ language: 'json', pattern: '**package.json' }`\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A document filter denotes a document by different properties like\nthe [language](#TextDocument.languageId), the [scheme](#Uri.scheme) of\nits resource, or a glob-pattern that is applied to the [path](#TextDocument.fileName).\nGlob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n@sample A language filter that applies to typescript files on disk: `{ language: 'typescript', scheme: 'file' }`\n@sample A language filter that applies to all package.json paths: `{ language: 'json', pattern: '**package.json' }`\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "NotebookDocumentFilter",
@@ -14083,9 +13976,8 @@
 					}
 				]
 			},
-			"documentation": "A notebook document filter denotes a notebook document by\ndifferent properties. The properties will be match\nagainst the notebook's URI (same as with documents)\n@since 3.17.0\n@proposed",
-			"since": "3.17.0",
-			"proposed": true
+			"documentation": "A notebook document filter denotes a notebook document by\ndifferent properties. The properties will be match\nagainst the notebook's URI (same as with documents)\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "Pattern",
