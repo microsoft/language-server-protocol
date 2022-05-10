@@ -431,6 +431,28 @@ export interface DidChangeNotebookDocumentParams {
 }
 ```
 
+<div class="anchorHolder"><a href="#versionedNotebookDocumentIdentifier" name="versionedNotebookDocumentIdentifier" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * A versioned notebook document identifier.
+ *
+ * @since 3.17.0
+ */
+export interface VersionedNotebookDocumentIdentifier {
+
+	/**
+	 * The version number of this notebook document.
+	 */
+	version: integer;
+
+	/**
+	 * The notebook document's uri.
+	 */
+	uri: URI;
+}
+```
+
 <div class="anchorHolder"><a href="#notebookDocumentChangeEvent" name="notebookDocumentChangeEvent" class="linkableAnchor"></a></div>
 
 ```typescript

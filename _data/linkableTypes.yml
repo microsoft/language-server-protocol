@@ -816,6 +816,8 @@
     link: '#didCloseNotebookDocumentParams'
   - type: 'NotebookDocumentIdentifier'
     link: '#notebookDocumentIdentifier'
+  - type: 'VersionedNotebookDocumentIdentifier'
+    link: '#versionedNotebookDocumentIdentifier'
   - type: 'DiagnosticClientCapabilities'
     link: '#diagnosticClientCapabilities'
   - type: 'DiagnosticOptions'
