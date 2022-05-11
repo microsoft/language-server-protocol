@@ -95,6 +95,11 @@ export interface InlineValueParams extends WorkDoneProgressParams {
  */
 export interface InlineValueContext {
 	/**
+	 * The stack frame (as a DAP Id) where the execution has stopped.
+	 */
+	frameId: number;
+
+	/**
 	 * The document range where execution has stopped.
 	 * Typically the end position of the range denotes the line where the
 	 * inline values are shown.
