@@ -12505,6 +12505,14 @@
 					"value": -32098
 				},
 				{
+					"name": "PendingResponseRejected",
+					"value": -32097
+				},
+				{
+					"name": "ConnectionInactive",
+					"value": -32096
+				},
+				{
 					"name": "ServerNotInitialized",
 					"value": -32002
 				},
