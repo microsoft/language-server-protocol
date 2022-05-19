@@ -377,6 +377,13 @@ export interface CompletionList {
 		 * @since 3.17.0
 		 */
 		insertTextMode?: InsertTextMode;
+
+		/**
+		 * A default data value.
+		 *
+		 * @since 3.17.0
+		 */
+		data?: LSPAny;
 	}
 
 	/**
