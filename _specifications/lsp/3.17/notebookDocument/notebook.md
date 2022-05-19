@@ -274,6 +274,11 @@ export interface NotebookDocumentSyncClientCapabilities {
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
+
+	/**
+	 * The client supports sending execution summary data per cell.
+	 */
+	executionSummarySupport?: boolean;
 }
 ```
 
