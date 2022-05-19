@@ -121,7 +121,7 @@ _Request_:
 <div class="anchorHolder"><a href="#prepareRenameParams" name="prepareRenameParams" class="linkableAnchor"></a></div>
 
 ```typescript
-export interface PrepareRenameParams extends TextDocumentPositionParams {
+export interface PrepareRenameParams extends TextDocumentPositionParams, WorkDoneProgressParams {
 }
 ```
 
