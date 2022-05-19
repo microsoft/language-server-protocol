@@ -4024,7 +4024,8 @@
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "The name of the server as defined by the server."
 								},
 								{
 									"name": "version",
@@ -4032,7 +4033,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The server's version as defined by the server."
 								}
 							]
 						}
@@ -4680,7 +4682,9 @@
 											"name": "string"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A default commit character set.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								},
 								{
 									"name": "editRange",
@@ -4714,7 +4718,9 @@
 											}
 										]
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A default edit range.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								},
 								{
 									"name": "insertTextFormat",
@@ -4722,7 +4728,9 @@
 										"kind": "reference",
 										"name": "InsertTextFormat"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A default insert text format.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								},
 								{
 									"name": "insertTextMode",
@@ -4730,7 +4738,9 @@
 										"kind": "reference",
 										"name": "InsertTextMode"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A default insert text mode.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								},
 								{
 									"name": "data",
@@ -4738,7 +4748,9 @@
 										"kind": "reference",
 										"name": "LSPAny"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A default data value.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								}
 							]
 						}
@@ -5340,7 +5352,8 @@
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "Human readable description of why the code action is currently disabled.\n\nThis is displayed in the code actions UI."
 								}
 							]
 						}
@@ -6486,7 +6499,8 @@
 												"kind": "base",
 												"name": "boolean"
 											},
-											"optional": true
+											"optional": true,
+											"documentation": "The server supports deltas for full documents."
 										}
 									]
 								}
@@ -7384,7 +7398,8 @@
 													"type": {
 														"kind": "reference",
 														"name": "NotebookCellArrayChange"
-													}
+													},
+													"documentation": "The change to the cell array."
 												},
 												{
 													"name": "didOpen",
@@ -7395,7 +7410,8 @@
 															"name": "TextDocumentItem"
 														}
 													},
-													"optional": true
+													"optional": true,
+													"documentation": "Additional opened cell text documents."
 												},
 												{
 													"name": "didClose",
@@ -7406,12 +7422,14 @@
 															"name": "TextDocumentIdentifier"
 														}
 													},
-													"optional": true
+													"optional": true,
+													"documentation": "Additional closed cell text documents."
 												}
 											]
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Changes to the cell structure to add or\nremove cells."
 								},
 								{
 									"name": "data",
@@ -7422,7 +7440,8 @@
 											"name": "NotebookCell"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Changes to notebook cells properties like its\nkind, execution summary or metadata."
 								},
 								{
 									"name": "textContent",
@@ -7453,7 +7472,8 @@
 											}
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Changes to the text content of notebook cells."
 								}
 							]
 						}
@@ -7564,7 +7584,8 @@
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "The name of the client as defined by the client."
 								},
 								{
 									"name": "version",
@@ -7572,7 +7593,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The client's version as defined by the client."
 								}
 							]
 						}
@@ -7699,6 +7721,7 @@
 							}
 						]
 					},
+					"optional": true,
 					"documentation": "The actual configured workspace folders."
 				}
 			]
@@ -8307,7 +8330,9 @@
 										"kind": "reference",
 										"name": "WorkspaceFoldersServerCapabilities"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The server supports workspace folder.\n\n@since 3.6.0",
+									"since": "3.6.0"
 								},
 								{
 									"name": "fileOperations",
@@ -8315,7 +8340,9 @@
 										"kind": "reference",
 										"name": "FileOperationOptions"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The server is interested in notifications/requests for operations on files.\n\n@since 3.16.0",
+									"since": "3.16.0"
 								}
 							]
 						}
@@ -8646,7 +8673,9 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The server has support for completion item label\ndetails (see also `CompletionItemLabelDetails`) when\nreceiving a completion item in a resolve call.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								}
 							]
 						}
@@ -9717,7 +9746,8 @@
 															"name": "NotebookDocumentFilter"
 														}
 													]
-												}
+												},
+												"documentation": "The notebook to be synced If a string\nvalue is provided it matches against the\nnotebook type. '*' matches every notebook."
 											},
 											{
 												"name": "cells",
@@ -9738,7 +9768,8 @@
 														}
 													}
 												},
-												"optional": true
+												"optional": true,
+												"documentation": "The cells of the matching notebook to be synced."
 											}
 										]
 									}
@@ -9762,7 +9793,8 @@
 														}
 													]
 												},
-												"optional": true
+												"optional": true,
+												"documentation": "The notebook to be synced If a string\nvalue is provided it matches against the\nnotebook type. '*' matches every notebook."
 											},
 											{
 												"name": "cells",
@@ -9782,7 +9814,8 @@
 															]
 														}
 													}
-												}
+												},
+												"documentation": "The cells of the matching notebook to be synced."
 											}
 										]
 									}
@@ -10571,7 +10604,8 @@
 									"type": {
 										"kind": "base",
 										"name": "boolean"
-									}
+									},
+									"documentation": "The client will actively cancel the request."
 								},
 								{
 									"name": "retryOnContentModified",
@@ -10581,7 +10615,8 @@
 											"kind": "base",
 											"name": "string"
 										}
-									}
+									},
+									"documentation": "The list of requests for which the client\nwill retry the request if it receives a\nresponse with error code `ContentModified`"
 								}
 							]
 						}
@@ -10716,7 +10751,8 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Whether the client groups edits with equal labels into tree nodes,\nfor instance all edits labelled with \"Changes in Strings\" would\nbe a tree node."
 								}
 							]
 						}
@@ -10792,7 +10828,8 @@
 											"name": "SymbolKind"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The symbol kind values the client supports. When this\nproperty exists the client also guarantees that it will\nhandle values outside its set gracefully and falls back\nto a default value when unknown.\n\nIf this property is not present the client only supports\nthe symbol kinds from `File` to `Array` as defined in\nthe initial version of the protocol."
 								}
 							]
 						}
@@ -10814,7 +10851,8 @@
 											"kind": "reference",
 											"name": "SymbolTag"
 										}
-									}
+									},
+									"documentation": "The tags supported by the client."
 								}
 							]
 						}
@@ -10837,7 +10875,8 @@
 											"kind": "base",
 											"name": "string"
 										}
-									}
+									},
+									"documentation": "The properties that a client can resolve lazily. Usually\n`location.range`"
 								}
 							]
 						}
@@ -11079,7 +11118,8 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client supports snippets as insert text.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Placeholders with equal identifiers are linked,\nthat is typing in one will update others too."
 								},
 								{
 									"name": "commitCharactersSupport",
@@ -11087,7 +11127,8 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client supports commit characters on a completion item."
 								},
 								{
 									"name": "documentationFormat",
@@ -11098,7 +11139,8 @@
 											"name": "MarkupKind"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client supports the follow content formats for the documentation\nproperty. The order describes the preferred format of the client."
 								},
 								{
 									"name": "deprecatedSupport",
@@ -11106,7 +11148,8 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client supports the deprecated property on a completion item."
 								},
 								{
 									"name": "preselectSupport",
@@ -11114,7 +11157,8 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client supports the preselect property on a completion item."
 								},
 								{
 									"name": "tagSupport",
@@ -11130,12 +11174,15 @@
 															"kind": "reference",
 															"name": "CompletionItemTag"
 														}
-													}
+													},
+													"documentation": "The tags supported by the client."
 												}
 											]
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client supports the tag property on a completion item. Clients supporting\ntags have to handle unknown tags gracefully. Clients especially need to\npreserve unknown tags when sending a completion item back to the server in\na resolve call.\n\n@since 3.15.0",
+									"since": "3.15.0"
 								},
 								{
 									"name": "insertReplaceSupport",
@@ -11143,7 +11190,9 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client support insert replace edit to control different behavior if a\ncompletion item is inserted in the text or should replace text.\n\n@since 3.16.0",
+									"since": "3.16.0"
 								},
 								{
 									"name": "resolveSupport",
@@ -11159,12 +11208,15 @@
 															"kind": "base",
 															"name": "string"
 														}
-													}
+													},
+													"documentation": "The properties that a client can resolve lazily."
 												}
 											]
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Indicates which properties a client can resolve lazily on a completion\nitem. Before version 3.16.0 only the predefined properties `documentation`\nand `details` could be resolved lazily.\n\n@since 3.16.0",
+									"since": "3.16.0"
 								},
 								{
 									"name": "insertTextModeSupport",
@@ -11185,7 +11237,9 @@
 											]
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The client supports the `insertTextMode` property on\na completion item to override the whitespace handling mode\nas defined by the client (see `insertTextMode`).\n\n@since 3.16.0",
+									"since": "3.16.0"
 								},
 								{
 									"name": "labelDetailsSupport",
@@ -11193,7 +11247,9 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The client has support for completion item label\ndetails (see also `CompletionItemLabelDetails`).\n\n@since 3.17.0",
+									"since": "3.17.0"
 								}
 							]
 						}
@@ -11216,7 +11272,8 @@
 											"name": "CompletionItemKind"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The completion item kind values the client supports. When this\nproperty exists the client also guarantees that it will\nhandle values outside its set gracefully and falls back\nto a default value when unknown.\n\nIf this property is not present the client only supports\nthe completion items kinds from `Text` to `Reference` as defined in\nthe initial version of the protocol."
 								}
 							]
 						}
@@ -11257,7 +11314,9 @@
 											"name": "string"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The client supports the the following itemDefaults on\na completion list.\n\nThe value lists the supported property names of the\n`CompletionList.itemDefaults` object. If omitted\nno properties are supported.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								}
 							]
 						}
@@ -11322,7 +11381,8 @@
 											"name": "MarkupKind"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client supports the follow content formats for the documentation\nproperty. The order describes the preferred format of the client."
 								},
 								{
 									"name": "parameterInformation",
@@ -11336,12 +11396,15 @@
 														"kind": "base",
 														"name": "boolean"
 													},
-													"optional": true
+													"optional": true,
+													"documentation": "The client supports processing label offsets instead of a\nsimple label string.\n\n@since 3.14.0",
+													"since": "3.14.0"
 												}
 											]
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Client capabilities specific to parameter information."
 								},
 								{
 									"name": "activeParameterSupport",
@@ -11349,7 +11412,9 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The client support the `activeParameter` property on `SignatureInformation`\nliteral.\n\n@since 3.16.0",
+									"since": "3.16.0"
 								}
 							]
 						}
@@ -11527,7 +11592,8 @@
 											"name": "SymbolKind"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The symbol kind values the client supports. When this\nproperty exists the client also guarantees that it will\nhandle values outside its set gracefully and falls back\nto a default value when unknown.\n\nIf this property is not present the client only supports\nthe symbol kinds from `File` to `Array` as defined in\nthe initial version of the protocol."
 								}
 							]
 						}
@@ -11558,7 +11624,8 @@
 											"kind": "reference",
 											"name": "SymbolTag"
 										}
-									}
+									},
+									"documentation": "The tags supported by the client."
 								}
 							]
 						}
@@ -11612,11 +11679,13 @@
 															"kind": "reference",
 															"name": "CodeActionKind"
 														}
-													}
+													},
+													"documentation": "The code action kind values the client supports. When this\nproperty exists the client also guarantees that it will\nhandle values outside its set gracefully and falls back\nto a default value when unknown."
 												}
 											]
 										}
-									}
+									},
+									"documentation": "The code action kind is support with the following value\nset."
 								}
 							]
 						}
@@ -11669,7 +11738,8 @@
 											"kind": "base",
 											"name": "string"
 										}
-									}
+									},
+									"documentation": "The properties that a client can resolve lazily."
 								}
 							]
 						}
@@ -11879,7 +11949,8 @@
 											"name": "FoldingRangeKind"
 										}
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The folding range kind values the client supports. When this\nproperty exists the client also guarantees that it will\nhandle values outside its set gracefully and falls back\nto a default value when unknown."
 								}
 							]
 						}
@@ -11900,7 +11971,9 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "If set, the client signals that it supports setting collapsedText on\nfolding ranges to display custom labels instead of the default text.\n\n@since 3.17.0",
+									"since": "3.17.0"
 								}
 							]
 						}
@@ -11951,7 +12024,8 @@
 											"kind": "reference",
 											"name": "DiagnosticTag"
 										}
-									}
+									},
+									"documentation": "The tags supported by the client."
 								}
 							]
 						}
@@ -12044,7 +12118,8 @@
 											}
 										]
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The client will send the `textDocument/semanticTokens/range` request if\nthe server provides a corresponding handler."
 								},
 								{
 									"name": "full",
@@ -12065,14 +12140,16 @@
 																"kind": "base",
 																"name": "boolean"
 															},
-															"optional": true
+															"optional": true,
+															"documentation": "The client will send the `textDocument/semanticTokens/full/delta` request if\nthe server provides a corresponding handler."
 														}
 													]
 												}
 											}
 										]
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The client will send the `textDocument/semanticTokens/full` request if\nthe server provides a corresponding handler."
 								}
 							]
 						}
@@ -12244,7 +12321,8 @@
 											"kind": "base",
 											"name": "string"
 										}
-									}
+									},
+									"documentation": "The properties that a client can resolve lazily."
 								}
 							]
 						}
@@ -12321,7 +12399,8 @@
 										"kind": "base",
 										"name": "boolean"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "Whether the client supports additional attributes which\nare preserved and send back to the server in the\nrequest's response."
 								}
 							]
 						}
@@ -12596,31 +12675,19 @@
 				},
 				{
 					"name": "jsonrpcReservedErrorRangeStart",
-					"value": -32099
+					"value": -32099,
+					"documentation": "This is the start range of JSON RPC reserved error codes.\nIt doesn't denote a real error code. No application error codes should\nbe defined between the start and end range. For backwards\ncompatibility the `ServerNotInitialized` and the `UnknownErrorCode`\nare left in the range.\n\n@since 3.16.0",
+					"since": "3.16.0"
 				},
 				{
 					"name": "serverErrorStart",
-					"value": -32099
-				},
-				{
-					"name": "MessageWriteError",
-					"value": -32099
-				},
-				{
-					"name": "MessageReadError",
-					"value": -32098
-				},
-				{
-					"name": "PendingResponseRejected",
-					"value": -32097
-				},
-				{
-					"name": "ConnectionInactive",
-					"value": -32096
+					"value": -32099,
+					"documentation": "@deprecated use  jsonrpcReservedErrorRangeStart */"
 				},
 				{
 					"name": "ServerNotInitialized",
-					"value": -32002
+					"value": -32002,
+					"documentation": "Error code indicating that a server received a notification or\nrequest before the server has received the `initialize` request."
 				},
 				{
 					"name": "UnknownErrorCode",
@@ -12628,14 +12695,18 @@
 				},
 				{
 					"name": "jsonrpcReservedErrorRangeEnd",
-					"value": -32000
+					"value": -32000,
+					"documentation": "This is the end range of JSON RPC reserved error codes.\nIt doesn't denote a real error code.\n\n@since 3.16.0",
+					"since": "3.16.0"
 				},
 				{
 					"name": "serverErrorEnd",
-					"value": -32000
+					"value": -32000,
+					"documentation": "@deprecated use  jsonrpcReservedErrorRangeEnd */"
 				}
 			],
-			"supportsCustomValues": true
+			"supportsCustomValues": true,
+			"documentation": "Predefined error codes."
 		},
 		{
 			"name": "LSPErrorCodes",
@@ -12646,27 +12717,37 @@
 			"values": [
 				{
 					"name": "lspReservedErrorRangeStart",
-					"value": -32899
+					"value": -32899,
+					"documentation": "This is the start range of LSP reserved error codes.\nIt doesn't denote a real error code.\n\n@since 3.16.0",
+					"since": "3.16.0"
 				},
 				{
 					"name": "RequestFailed",
-					"value": -32803
+					"value": -32803,
+					"documentation": "A request failed but it was syntactically correct, e.g the\nmethod name was known and the parameters were valid. The error\nmessage should contain human readable information about why\nthe request failed.\n\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "ServerCancelled",
-					"value": -32802
+					"value": -32802,
+					"documentation": "The server cancelled the request. This error code should\nonly be used for requests that explicitly support being\nserver cancellable.\n\n@since 3.17.0",
+					"since": "3.17.0"
 				},
 				{
 					"name": "ContentModified",
-					"value": -32801
+					"value": -32801,
+					"documentation": "The server detected that the content of a document got\nmodified outside normal conditions. A server should\nNOT send this error code if it detects a content change\nin it unprocessed messages. The result even computed\non an older state might still be useful for the client.\n\nIf a client decides that a result is not of any use anymore\nthe client should cancel the request."
 				},
 				{
 					"name": "RequestCancelled",
-					"value": -32800
+					"value": -32800,
+					"documentation": "The client has canceled a request and a server as detected\nthe cancel."
 				},
 				{
 					"name": "lspReservedErrorRangeEnd",
-					"value": -32800
+					"value": -32800,
+					"documentation": "This is the end range of LSP reserved error codes.\nIt doesn't denote a real error code.\n\n@since 3.16.0",
+					"since": "3.16.0"
 				}
 			],
 			"supportsCustomValues": true
@@ -12680,19 +12761,22 @@
 			"values": [
 				{
 					"name": "Comment",
-					"value": "comment"
+					"value": "comment",
+					"documentation": "Folding range for a comment"
 				},
 				{
 					"name": "Imports",
-					"value": "imports"
+					"value": "imports",
+					"documentation": "Folding range for a imports or includes"
 				},
 				{
 					"name": "Region",
-					"value": "region"
+					"value": "region",
+					"documentation": "Folding range for a region (e.g. `#region`)"
 				}
 			],
 			"supportsCustomValues": true,
-			"documentation": "The type is a string since the value set is extensible"
+			"documentation": "A set of predefined range kinds."
 		},
 		{
 			"name": "SymbolKind",
@@ -12805,7 +12889,8 @@
 					"name": "TypeParameter",
 					"value": 26
 				}
-			]
+			],
+			"documentation": "A symbol kind."
 		},
 		{
 			"name": "SymbolTag",
@@ -12816,9 +12901,12 @@
 			"values": [
 				{
 					"name": "Deprecated",
-					"value": 1
+					"value": 1,
+					"documentation": "Render a symbol as obsolete, usually using a strike-out."
 				}
-			]
+			],
+			"documentation": "Symbol tags are extra annotations that tweak the rendering of a symbol.\n@since 3.16",
+			"since": "3.16"
 		},
 		{
 			"name": "UniquenessLevel",
@@ -12829,25 +12917,32 @@
 			"values": [
 				{
 					"name": "document",
-					"value": "document"
+					"value": "document",
+					"documentation": "The moniker is only unique inside a document"
 				},
 				{
 					"name": "project",
-					"value": "project"
+					"value": "project",
+					"documentation": "The moniker is unique inside a project for which a dump got created"
 				},
 				{
 					"name": "group",
-					"value": "group"
+					"value": "group",
+					"documentation": "The moniker is unique inside the group to which a project belongs"
 				},
 				{
 					"name": "scheme",
-					"value": "scheme"
+					"value": "scheme",
+					"documentation": "The moniker is unique inside the moniker scheme."
 				},
 				{
 					"name": "global",
-					"value": "global"
+					"value": "global",
+					"documentation": "The moniker is globally unique"
 				}
-			]
+			],
+			"documentation": "Moniker uniqueness level to define scope of the moniker.\n\n@since 3.16.0",
+			"since": "3.16.0"
 		},
 		{
 			"name": "MonikerKind",
@@ -12857,18 +12952,23 @@
 			},
 			"values": [
 				{
-					"name": "$import",
-					"value": "import"
+					"name": "import",
+					"value": "import",
+					"documentation": "The moniker represent a symbol that is imported into a project"
 				},
 				{
-					"name": "$export",
-					"value": "export"
+					"name": "export",
+					"value": "export",
+					"documentation": "The moniker represents a symbol that is exported from a project"
 				},
 				{
 					"name": "local",
-					"value": "local"
+					"value": "local",
+					"documentation": "The moniker represents a symbol that is local to a project (e.g. a local\nvariable of a function, a class not visible outside the project, ...)"
 				}
-			]
+			],
+			"documentation": "The moniker kind.\n\n@since 3.16.0",
+			"since": "3.16.0"
 		},
 		{
 			"name": "InlayHintKind",
@@ -12879,13 +12979,17 @@
 			"values": [
 				{
 					"name": "Type",
-					"value": 1
+					"value": 1,
+					"documentation": "An inlay hint that for a type annotation."
 				},
 				{
 					"name": "Parameter",
-					"value": 2
+					"value": 2,
+					"documentation": "An inlay hint that is for a parameter."
 				}
-			]
+			],
+			"documentation": "Inlay hint kinds.\n\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "MessageType",
@@ -12896,21 +13000,26 @@
 			"values": [
 				{
 					"name": "Error",
-					"value": 1
+					"value": 1,
+					"documentation": "An error message."
 				},
 				{
 					"name": "Warning",
-					"value": 2
+					"value": 2,
+					"documentation": "A warning message."
 				},
 				{
 					"name": "Info",
-					"value": 3
+					"value": 3,
+					"documentation": "An information message."
 				},
 				{
 					"name": "Log",
-					"value": 4
+					"value": 4,
+					"documentation": "A log message."
 				}
-			]
+			],
+			"documentation": "The message type"
 		},
 		{
 			"name": "TextDocumentSyncKind",
@@ -12921,17 +13030,21 @@
 			"values": [
 				{
 					"name": "None",
-					"value": 0
+					"value": 0,
+					"documentation": "Documents should not be synced at all."
 				},
 				{
 					"name": "Full",
-					"value": 1
+					"value": 1,
+					"documentation": "Documents are synced by always sending the full content\nof the document."
 				},
 				{
 					"name": "Incremental",
-					"value": 2
+					"value": 2,
+					"documentation": "Documents are synced by sending the full content on open.\nAfter that only incremental updates to the document are\nsend."
 				}
-			]
+			],
+			"documentation": "Defines how the host (editor) should sync\ndocument changes to the language server."
 		},
 		{
 			"name": "TextDocumentSaveReason",
@@ -12942,17 +13055,21 @@
 			"values": [
 				{
 					"name": "Manual",
-					"value": 1
+					"value": 1,
+					"documentation": "Manually triggered, e.g. by the user pressing save, by starting debugging,\nor by an API call."
 				},
 				{
 					"name": "AfterDelay",
-					"value": 2
+					"value": 2,
+					"documentation": "Automatic after a delay."
 				},
 				{
 					"name": "FocusOut",
-					"value": 3
+					"value": 3,
+					"documentation": "When the editor lost focus."
 				}
-			]
+			],
+			"documentation": "Represents reasons why a text document is saved."
 		},
 		{
 			"name": "CompletionItemKind",
@@ -13061,7 +13178,8 @@
 					"name": "TypeParameter",
 					"value": 25
 				}
-			]
+			],
+			"documentation": "The kind of a completion entry."
 		},
 		{
 			"name": "CompletionItemTag",
@@ -13072,9 +13190,12 @@
 			"values": [
 				{
 					"name": "Deprecated",
-					"value": 1
+					"value": 1,
+					"documentation": "Render a completion as obsolete, usually using a strike-out."
 				}
-			]
+			],
+			"documentation": "Completion item tags are extra annotations that tweak the rendering of a completion\nitem.\n\n@since 3.15.0",
+			"since": "3.15.0"
 		},
 		{
 			"name": "InsertTextFormat",
@@ -13085,13 +13206,16 @@
 			"values": [
 				{
 					"name": "PlainText",
-					"value": 1
+					"value": 1,
+					"documentation": "The primary text to be inserted is treated as a plain string."
 				},
 				{
 					"name": "Snippet",
-					"value": 2
+					"value": 2,
+					"documentation": "The primary text to be inserted is treated as a snippet.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Placeholders with equal identifiers are linked,\nthat is typing in one will update others too.\n\nSee also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax"
 				}
-			]
+			],
+			"documentation": "Defines whether the insert text in a completion item should be interpreted as\nplain text or a snippet."
 		},
 		{
 			"name": "InsertTextMode",
@@ -13102,13 +13226,17 @@
 			"values": [
 				{
 					"name": "asIs",
-					"value": 1
+					"value": 1,
+					"documentation": "The insertion or replace strings is taken as it is. If the\nvalue is multi line the lines below the cursor will be\ninserted using the indentation defined in the string value.\nThe client will not apply any kind of adjustments to the\nstring."
 				},
 				{
 					"name": "adjustIndentation",
-					"value": 2
+					"value": 2,
+					"documentation": "The editor adjusts leading whitespace of new lines so that\nthey match the indentation up to the cursor of the line for\nwhich the item is accepted.\n\nConsider a line like this: <2tabs><cursor><3tabs>foo. Accepting a\nmulti line completion item is indented using 2 tabs and all\nfollowing lines inserted will be indented using 2 tabs as well."
 				}
-			]
+			],
+			"documentation": "How whitespace and indentation is handled during completion\nitem insertion.\n\n@since 3.16.0",
+			"since": "3.16.0"
 		},
 		{
 			"name": "DocumentHighlightKind",
@@ -13119,17 +13247,21 @@
 			"values": [
 				{
 					"name": "Text",
-					"value": 1
+					"value": 1,
+					"documentation": "A textual occurrence."
 				},
 				{
 					"name": "Read",
-					"value": 2
+					"value": 2,
+					"documentation": "Read-access of a symbol, like reading a variable."
 				},
 				{
 					"name": "Write",
-					"value": 3
+					"value": 3,
+					"documentation": "Write-access of a symbol, like writing to a variable."
 				}
-			]
+			],
+			"documentation": "A document highlight kind."
 		},
 		{
 			"name": "CodeActionKind",
@@ -13140,43 +13272,53 @@
 			"values": [
 				{
 					"name": "Empty",
-					"value": ""
+					"value": "",
+					"documentation": "Empty kind."
 				},
 				{
 					"name": "QuickFix",
-					"value": "quickfix"
+					"value": "quickfix",
+					"documentation": "Base kind for quickfix actions: 'quickfix'"
 				},
 				{
 					"name": "Refactor",
-					"value": "refactor"
+					"value": "refactor",
+					"documentation": "Base kind for refactoring actions: 'refactor'"
 				},
 				{
 					"name": "RefactorExtract",
-					"value": "refactor.extract"
+					"value": "refactor.extract",
+					"documentation": "Base kind for refactoring extraction actions: 'refactor.extract'\n\nExample extract actions:\n\n- Extract method\n- Extract function\n- Extract variable\n- Extract interface from class\n- ..."
 				},
 				{
 					"name": "RefactorInline",
-					"value": "refactor.inline"
+					"value": "refactor.inline",
+					"documentation": "Base kind for refactoring inline actions: 'refactor.inline'\n\nExample inline actions:\n\n- Inline function\n- Inline variable\n- Inline constant\n- ..."
 				},
 				{
 					"name": "RefactorRewrite",
-					"value": "refactor.rewrite"
+					"value": "refactor.rewrite",
+					"documentation": "Base kind for refactoring rewrite actions: 'refactor.rewrite'\n\nExample rewrite actions:\n\n- Convert JavaScript function to class\n- Add or remove parameter\n- Encapsulate field\n- Make method static\n- Move method to base class\n- ..."
 				},
 				{
 					"name": "Source",
-					"value": "source"
+					"value": "source",
+					"documentation": "Base kind for source actions: `source`\n\nSource code actions apply to the entire file."
 				},
 				{
 					"name": "SourceOrganizeImports",
-					"value": "source.organizeImports"
+					"value": "source.organizeImports",
+					"documentation": "Base kind for an organize imports source action: `source.organizeImports`"
 				},
 				{
 					"name": "SourceFixAll",
-					"value": "source.fixAll"
+					"value": "source.fixAll",
+					"documentation": "Base kind for auto-fix source actions: `source.fixAll`.\n\nFix all actions automatically fix errors that have a clear fix that do not require user input.\nThey should not suppress errors or perform unsafe fixes such as generating new types or classes.\n\n@since 3.15.0",
+					"since": "3.15.0"
 				}
 			],
 			"supportsCustomValues": true,
-			"documentation": "The kind of a code action.\n\nKinds are a hierarchical list of identifiers separated by `.`, e.g. `\"refactor.extract.function\"`.\n\nThe set of kinds is open and client needs to announce the kinds it supports to the server during\ninitialization."
+			"documentation": "A set of predefined code action kinds"
 		},
 		{
 			"name": "TraceValues",
@@ -13187,19 +13329,18 @@
 			"values": [
 				{
 					"name": "Off",
-					"value": "off"
+					"value": "off",
+					"documentation": "Turn tracing off."
 				},
 				{
 					"name": "Messages",
-					"value": "messages"
-				},
-				{
-					"name": "Compact",
-					"value": "compact"
+					"value": "messages",
+					"documentation": "Trace messages only."
 				},
 				{
 					"name": "Verbose",
-					"value": "verbose"
+					"value": "verbose",
+					"documentation": "Verbose message tracing."
 				}
 			]
 		},
@@ -13212,13 +13353,16 @@
 			"values": [
 				{
 					"name": "PlainText",
-					"value": "plaintext"
+					"value": "plaintext",
+					"documentation": "Plain text is supported as a content format"
 				},
 				{
 					"name": "Markdown",
-					"value": "markdown"
+					"value": "markdown",
+					"documentation": "Markdown is supported as a content format"
 				}
-			]
+			],
+			"documentation": "Describes the content type that a client supports in various\nresult literals like `Hover`, `ParameterInfo` or `CompletionItem`.\n\nPlease note that `MarkupKinds` must not start with a `$`. This kinds\nare reserved for internal usage."
 		},
 		{
 			"name": "PositionEncodingKind",
@@ -13229,19 +13373,22 @@
 			"values": [
 				{
 					"name": "UTF8",
-					"value": "utf-8"
+					"value": "utf-8",
+					"documentation": "Character offsets count UTF-8 code units."
 				},
 				{
 					"name": "UTF16",
-					"value": "utf-16"
+					"value": "utf-16",
+					"documentation": "Character offsets count UTF-16 code units.\n\nThis is the default and must always be supported\nby servers"
 				},
 				{
 					"name": "UTF32",
-					"value": "utf-32"
+					"value": "utf-32",
+					"documentation": "Character offsets count UTF-32 code units.\n\nImplementation note: these are the same as Unicode code points,\nso this `PositionEncodingKind` may also be used for an\nencoding-agnostic representation of character offsets."
 				}
 			],
 			"supportsCustomValues": true,
-			"documentation": "A type indicating how positions are encoded,\nspecifically what column offsets mean.\n\n@since 3.17.0",
+			"documentation": "A set of predefined position encoding kinds.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -13253,17 +13400,21 @@
 			"values": [
 				{
 					"name": "Created",
-					"value": 1
+					"value": 1,
+					"documentation": "The file got created."
 				},
 				{
 					"name": "Changed",
-					"value": 2
+					"value": 2,
+					"documentation": "The file got changed."
 				},
 				{
 					"name": "Deleted",
-					"value": 3
+					"value": 3,
+					"documentation": "The file got deleted."
 				}
-			]
+			],
+			"documentation": "The file event type"
 		},
 		{
 			"name": "WatchKind",
@@ -13274,15 +13425,18 @@
 			"values": [
 				{
 					"name": "Create",
-					"value": 1
+					"value": 1,
+					"documentation": "Interested in create events."
 				},
 				{
 					"name": "Change",
-					"value": 2
+					"value": 2,
+					"documentation": "Interested in change events"
 				},
 				{
 					"name": "Delete",
-					"value": 4
+					"value": 4,
+					"documentation": "Interested in delete events"
 				}
 			],
 			"supportsCustomValues": true
@@ -13296,21 +13450,26 @@
 			"values": [
 				{
 					"name": "Error",
-					"value": 1
+					"value": 1,
+					"documentation": "Reports an error."
 				},
 				{
 					"name": "Warning",
-					"value": 2
+					"value": 2,
+					"documentation": "Reports a warning."
 				},
 				{
 					"name": "Information",
-					"value": 3
+					"value": 3,
+					"documentation": "Reports an information."
 				},
 				{
 					"name": "Hint",
-					"value": 4
+					"value": 4,
+					"documentation": "Reports a hint."
 				}
-			]
+			],
+			"documentation": "The diagnostic's severity."
 		},
 		{
 			"name": "DiagnosticTag",
@@ -13321,13 +13480,17 @@
 			"values": [
 				{
 					"name": "Unnecessary",
-					"value": 1
+					"value": 1,
+					"documentation": "Unused or unnecessary code.\n\nClients are allowed to render diagnostics with this tag faded out instead of having\nan error squiggle."
 				},
 				{
 					"name": "Deprecated",
-					"value": 2
+					"value": 2,
+					"documentation": "Deprecated or obsolete code.\n\nClients are allowed to rendered diagnostics with this tag strike through."
 				}
-			]
+			],
+			"documentation": "The diagnostic tags.\n\n@since 3.15.0",
+			"since": "3.15.0"
 		},
 		{
 			"name": "CompletionTriggerKind",
@@ -13338,17 +13501,21 @@
 			"values": [
 				{
 					"name": "Invoked",
-					"value": 1
+					"value": 1,
+					"documentation": "Completion was triggered by typing an identifier (24x7 code\ncomplete), manual invocation (e.g Ctrl+Space) or via API."
 				},
 				{
 					"name": "TriggerCharacter",
-					"value": 2
+					"value": 2,
+					"documentation": "Completion was triggered by a trigger character specified by\nthe `triggerCharacters` properties of the `CompletionRegistrationOptions`."
 				},
 				{
 					"name": "TriggerForIncompleteCompletions",
-					"value": 3
+					"value": 3,
+					"documentation": "Completion was re-triggered as current completion list is incomplete"
 				}
-			]
+			],
+			"documentation": "How a completion was triggered"
 		},
 		{
 			"name": "SignatureHelpTriggerKind",
@@ -13359,17 +13526,22 @@
 			"values": [
 				{
 					"name": "Invoked",
-					"value": 1
+					"value": 1,
+					"documentation": "Signature help was invoked manually by the user or by a command."
 				},
 				{
 					"name": "TriggerCharacter",
-					"value": 2
+					"value": 2,
+					"documentation": "Signature help was triggered by a trigger character."
 				},
 				{
 					"name": "ContentChange",
-					"value": 3
+					"value": 3,
+					"documentation": "Signature help was triggered by the cursor moving or by the document content changing."
 				}
-			]
+			],
+			"documentation": "How a signature help was triggered.\n\n@since 3.15.0",
+			"since": "3.15.0"
 		},
 		{
 			"name": "CodeActionTriggerKind",
@@ -13380,13 +13552,17 @@
 			"values": [
 				{
 					"name": "Invoked",
-					"value": 1
+					"value": 1,
+					"documentation": "Code actions were explicitly requested by the user or by an extension."
 				},
 				{
 					"name": "Automatic",
-					"value": 2
+					"value": 2,
+					"documentation": "Code actions were requested automatically.\n\nThis typically happens when current selection in a file changes, but can\nalso be triggered when file content changes."
 				}
-			]
+			],
+			"documentation": "The reason why code actions were requested.\n\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "FileOperationPatternKind",
@@ -13397,13 +13573,17 @@
 			"values": [
 				{
 					"name": "file",
-					"value": "file"
+					"value": "file",
+					"documentation": "The pattern matches a file only."
 				},
 				{
 					"name": "folder",
-					"value": "folder"
+					"value": "folder",
+					"documentation": "The pattern matches a folder only."
 				}
-			]
+			],
+			"documentation": "A pattern kind describing if a glob pattern matches a file a folder or\nboth.\n\n@since 3.16.0",
+			"since": "3.16.0"
 		},
 		{
 			"name": "NotebookCellKind",
@@ -13414,13 +13594,17 @@
 			"values": [
 				{
 					"name": "Markup",
-					"value": 1
+					"value": 1,
+					"documentation": "A markup-cell is formatted source that is used for display."
 				},
 				{
 					"name": "Code",
-					"value": 2
+					"value": 2,
+					"documentation": "A code-cell is source code."
 				}
-			]
+			],
+			"documentation": "A notebook cell kind.\n\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "ResourceOperationKind",
@@ -13431,18 +13615,20 @@
 			"values": [
 				{
 					"name": "Create",
-					"value": "create"
+					"value": "create",
+					"documentation": "Supports creating new files and folders."
 				},
 				{
 					"name": "Rename",
-					"value": "rename"
+					"value": "rename",
+					"documentation": "Supports renaming existing files and folders."
 				},
 				{
 					"name": "Delete",
-					"value": "delete"
+					"value": "delete",
+					"documentation": "Supports deleting existing files and folders."
 				}
-			],
-			"documentation": "The kind of resource operations supported by the client."
+			]
 		},
 		{
 			"name": "FailureHandlingKind",
@@ -13453,19 +13639,23 @@
 			"values": [
 				{
 					"name": "Abort",
-					"value": "abort"
+					"value": "abort",
+					"documentation": "Applying the workspace change is simply aborted if one of the changes provided\nfails. All operations executed before the failing operation stay executed."
 				},
 				{
 					"name": "Transactional",
-					"value": "transactional"
+					"value": "transactional",
+					"documentation": "All operations are executed transactional. That means they either all\nsucceed or no changes at all are applied to the workspace."
 				},
 				{
 					"name": "TextOnlyTransactional",
-					"value": "textOnlyTransactional"
+					"value": "textOnlyTransactional",
+					"documentation": "If the workspace edit contains only textual file changes they are executed transactional.\nIf resource changes (create, rename or delete file) are part of the change the failure\nhandling strategy is abort."
 				},
 				{
 					"name": "Undo",
-					"value": "undo"
+					"value": "undo",
+					"documentation": "The client tries to undo the operations already executed. But there is no\nguarantee that this is succeeding."
 				}
 			]
 		},
@@ -13478,7 +13668,8 @@
 			"values": [
 				{
 					"name": "Identifier",
-					"value": 1
+					"value": 1,
+					"documentation": "The client's default behavior is to select the identifier\naccording the to language's syntax rule."
 				}
 			]
 		},
@@ -13780,7 +13971,8 @@
 									"type": {
 										"kind": "reference",
 										"name": "Range"
-									}
+									},
+									"documentation": "The range of the document that changed."
 								},
 								{
 									"name": "rangeLength",
@@ -13788,14 +13980,16 @@
 										"kind": "base",
 										"name": "uinteger"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The optional length of the range that got replaced.\n\n@deprecated use range instead."
 								},
 								{
 									"name": "text",
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "The new text for the provided range."
 								}
 							]
 						}
@@ -13809,7 +14003,8 @@
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "The new text of the whole document."
 								}
 							]
 						}
@@ -13902,7 +14097,8 @@
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "A language id, like `typescript`. */"
 								},
 								{
 									"name": "scheme",
@@ -13910,7 +14106,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
 								},
 								{
 									"name": "pattern",
@@ -13918,7 +14115,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A glob pattern, like `*.{ts,js}`. */"
 								}
 							]
 						}
@@ -13933,14 +14131,16 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A language id, like `typescript`. */"
 								},
 								{
 									"name": "scheme",
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
 								},
 								{
 									"name": "pattern",
@@ -13948,7 +14148,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A glob pattern, like `*.{ts,js}`. */"
 								}
 							]
 						}
@@ -13963,7 +14164,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A language id, like `typescript`. */"
 								},
 								{
 									"name": "scheme",
@@ -13971,14 +14173,16 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
 								},
 								{
 									"name": "pattern",
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "A glob pattern, like `*.{ts,js}`. */"
 								}
 							]
 						}
@@ -14002,7 +14206,8 @@
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "The type of the enclosing notebook. */"
 								},
 								{
 									"name": "scheme",
@@ -14010,7 +14215,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
 								},
 								{
 									"name": "pattern",
@@ -14018,7 +14224,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A glob pattern. */"
 								}
 							]
 						}
@@ -14033,14 +14240,16 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The type of the enclosing notebook. */"
 								},
 								{
 									"name": "scheme",
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`.*/"
 								},
 								{
 									"name": "pattern",
@@ -14048,7 +14257,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A glob pattern. */"
 								}
 							]
 						}
@@ -14063,7 +14273,8 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "The type of the enclosing notebook. */"
 								},
 								{
 									"name": "scheme",
@@ -14071,14 +14282,16 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"optional": true
+									"optional": true,
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
 								},
 								{
 									"name": "pattern",
 									"type": {
 										"kind": "base",
 										"name": "string"
-									}
+									},
+									"documentation": "A glob pattern. */"
 								}
 							]
 						}
