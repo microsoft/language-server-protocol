@@ -38,6 +38,10 @@ export enum SemanticTokenTypes {
 	number = 'number',
 	regexp = 'regexp',
 	operator = 'operator'
+	/**
+	 * @since 3.17.0
+	 */
+	decorator = 'decorator'
 }
 ```
 
