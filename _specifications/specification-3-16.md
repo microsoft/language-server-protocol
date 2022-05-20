@@ -6935,7 +6935,7 @@ _Client Capability_:
 export namespace PrepareSupportDefaultBehavior {
 	/**
 	 * The client's default behavior is to select the identifier
-	 * according the to language's syntax rule.
+	 * according to the language's syntax rule.
 	 */
 	 export const Identifier: 1 = 1;
 }
