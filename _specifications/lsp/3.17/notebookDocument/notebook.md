@@ -317,7 +317,7 @@ export interface NotebookDocumentSyncOptions {
 	 	 * value is provided it matches against the
 	     * notebook type. '*' matches every notebook.
 		 */
-		notebookDocument: string | NotebookDocumentFilter;
+		notebook: string | NotebookDocumentFilter;
 
 		/**
 		 * The cells of the matching notebook to be synced.
@@ -329,7 +329,7 @@ export interface NotebookDocumentSyncOptions {
 	 	 * value is provided it matches against the
 	     * notebook type. '*' matches every notebook.
 		 */
-		notebookDocument?: string | NotebookDocumentFilter;
+		notebook?: string | NotebookDocumentFilter;
 
 		/**
 		 * The cells of the matching notebook to be synced.
