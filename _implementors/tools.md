@@ -24,6 +24,7 @@ index: 2
 | Emacs | [João Távora](https://github.com/joaotavora) | [Eglot](https://github.com/joaotavora/eglot) |
 | Emacs | [Andy Stewart](https://github.com/manateelazycat/) | [lsp-bridge](https://github.com/manateelazycat/lsp-bridge/) | 
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
+| [Helix Editor](https://helix-editor.com/) | [Blaž Hrastnik](https://github.com/archseer) | [helix](https://github.com/helix-editor/helix) |
 | [JCIDE](https://www.javacardos.com/tools) | [Javacardos](https://www.javacardos.com) | [JCIDE](https://www.javacardos.com/javacardforum/viewtopic.php?f=5&t=2108&p=6175#p6175) |
 | [JupyterLab](https://github.com/jupyterlab/jupyterlab) | [krassowski](https://github.com/krassowski) | [jupyterlab-lsp](https://github.com/krassowski/jupyterlab-lsp) |
 | [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
