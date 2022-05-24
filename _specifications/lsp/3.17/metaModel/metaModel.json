@@ -5185,7 +5185,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The range enclosing this symbol not including leading/trailing whitespace but everything else\nlike comments. This information is typically used to determine if the the clients cursor is\ninside the symbol to reveal in the symbol in the UI."
+					"documentation": "The range enclosing this symbol not including leading/trailing whitespace but everything else\nlike comments. This information is typically used to determine if the clients cursor is\ninside the symbol to reveal in the symbol in the UI."
 				},
 				{
 					"name": "selectionRange",
@@ -5193,7 +5193,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.\nMust be contained by the the `range`."
+					"documentation": "The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.\nMust be contained by the `range`."
 				},
 				{
 					"name": "children",
@@ -6209,7 +6209,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The range that should be selected and revealed when this link is being followed, e.g the name of a function.\nMust be contained by the the `targetRange`. See also `DocumentSymbol#range`"
+					"documentation": "The range that should be selected and revealed when this link is being followed, e.g the name of a function.\nMust be contained by the `targetRange`. See also `DocumentSymbol#range`"
 				}
 			],
 			"documentation": "Represents the connection of two locations. Provides additional metadata over normal [locations](#Location),\nincluding an origin range."
@@ -11315,7 +11315,7 @@
 										}
 									},
 									"optional": true,
-									"documentation": "The client supports the the following itemDefaults on\na completion list.\n\nThe value lists the supported property names of the\n`CompletionList.itemDefaults` object. If omitted\nno properties are supported.\n\n@since 3.17.0",
+									"documentation": "The client supports the following itemDefaults on\na completion list.\n\nThe value lists the supported property names of the\n`CompletionList.itemDefaults` object. If omitted\nno properties are supported.\n\n@since 3.17.0",
 									"since": "3.17.0"
 								}
 							]
