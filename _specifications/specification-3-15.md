@@ -353,7 +353,7 @@ interface LocationLink {
 	/**
 	 * The range that should be selected and revealed when this link is being
 	 * followed, for example, the name of a function.
-	 * Must be contained by the the `targetRange`.
+	 * Must be contained by the `targetRange`.
 	 * See also `DocumentSymbol#range`
 	 */
 	targetSelectionRange: Range;
