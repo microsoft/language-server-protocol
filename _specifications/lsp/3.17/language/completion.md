@@ -156,7 +156,7 @@ export interface CompletionClientCapabilities {
 	 */
 	completionList?: {
 		/**
-		 * The client supports the the following itemDefaults on
+		 * The client supports the following itemDefaults on
 		 * a completion list.
 		 *
 		 * The value lists the supported property names of the
