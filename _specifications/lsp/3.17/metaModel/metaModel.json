@@ -366,7 +366,7 @@
 				"kind": "reference",
 				"name": "CallHierarchyRegistrationOptions"
 			},
-			"documentation": "A request to result a `CallHierarchyItem` in a document at a given position.\nCan be used as an input to a incoming or outgoing call hierarchy.\n\n@since 3.16.0",
+			"documentation": "A request to result a `CallHierarchyItem` in a document at a given position.\nCan be used as an input to an incoming or outgoing call hierarchy.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -877,7 +877,7 @@
 				"kind": "reference",
 				"name": "InlayHint"
 			},
-			"documentation": "A request to resolve additional properties for a inlay hint.\nThe request's parameter is of type [InlayHint](#InlayHint), the response is\nof type [InlayHint](#InlayHint) or a Thenable that resolves to such.\n\n@since 3.17.0",
+			"documentation": "A request to resolve additional properties for an inlay hint.\nThe request's parameter is of type [InlayHint](#InlayHint), the response is\nof type [InlayHint](#InlayHint) or a Thenable that resolves to such.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -3002,7 +3002,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "An optional property to indicate whether the editor\nshowing the document should take focus or not.\nClients might ignore this property if an external\nprogram in started."
+					"documentation": "An optional property to indicate whether the editor\nshowing the document should take focus or not.\nClients might ignore this property if an external\nprogram is started."
 				},
 				{
 					"name": "selection",
@@ -3029,7 +3029,7 @@
 					"documentation": "A boolean indicating if the show was successful."
 				}
 			],
-			"documentation": "The result of an show document request.\n\n@since 3.16.0",
+			"documentation": "The result of a showDocument request.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -3110,7 +3110,7 @@
 					"documentation": "An array of all files/folders created in this operation."
 				}
 			],
-			"documentation": "The parameters sent in file create requests/notifications.\n\n@since 3.16.0",
+			"documentation": "The parameters sent in notifications/requests for user-initiated creation of\nfiles.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -3217,7 +3217,7 @@
 					"documentation": "An array of all files/folders renamed in this operation. When a folder is renamed, only\nthe folder will be included, and not its children."
 				}
 			],
-			"documentation": "The parameters sent in file rename requests/notifications.\n\n@since 3.16.0",
+			"documentation": "The parameters sent in notifications/requests for user-initiated renames of\nfiles.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -3235,7 +3235,7 @@
 					"documentation": "An array of all files/folders deleted in this operation."
 				}
 			],
-			"documentation": "The parameters sent in file delete requests/notifications.\n\n@since 3.16.0",
+			"documentation": "The parameters sent in notifications/requests for user-initiated deletes of\nfiles.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -3562,7 +3562,7 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "A parameter literal used in inlay hints requests.\n\n@since 3.17.0",
+			"documentation": "A parameter literal used in inlay hint requests.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -3891,7 +3891,7 @@
 					"documentation": "The text documents that represent the content\nof a notebook cell."
 				}
 			],
-			"documentation": "The params sent in a open notebook document notification.\n\n@since 3.17.0",
+			"documentation": "The params sent in an open notebook document notification.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -4120,7 +4120,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The actual message"
+					"documentation": "The actual message."
 				}
 			],
 			"documentation": "The parameters of a notification message."
@@ -4142,7 +4142,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The actual message"
+					"documentation": "The actual message."
 				},
 				{
 					"name": "actions",
@@ -4188,7 +4188,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The actual message"
+					"documentation": "The actual message."
 				}
 			],
 			"documentation": "The log message parameters."
@@ -4205,7 +4205,7 @@
 					"documentation": "The document that was opened."
 				}
 			],
-			"documentation": "The parameters send in a open text document notification"
+			"documentation": "The parameters sent in an open text document notification"
 		},
 		{
 			"name": "DidChangeTextDocumentParams",
@@ -4264,7 +4264,7 @@
 					"documentation": "The document that was closed."
 				}
 			],
-			"documentation": "The parameters send in a close text document notification"
+			"documentation": "The parameters sent in a close text document notification"
 		},
 		{
 			"name": "DidSaveTextDocumentParams",
@@ -4275,7 +4275,7 @@
 						"kind": "reference",
 						"name": "TextDocumentIdentifier"
 					},
-					"documentation": "The document that was closed."
+					"documentation": "The document that was saved."
 				},
 				{
 					"name": "text",
@@ -4287,7 +4287,7 @@
 					"documentation": "Optional the content when saved. Depends on the includeText value\nwhen the save notification was requested."
 				}
 			],
-			"documentation": "The parameters send in a save text document notification"
+			"documentation": "The parameters sent in a save text document notification"
 		},
 		{
 			"name": "TextDocumentSaveRegistrationOptions",
@@ -4324,7 +4324,7 @@
 					"documentation": "The 'TextDocumentSaveReason'."
 				}
 			],
-			"documentation": "The parameters send in a will save text document notification."
+			"documentation": "The parameters sent in a will save text document notification."
 		},
 		{
 			"name": "TextEdit",
@@ -5661,7 +5661,7 @@
 						"kind": "reference",
 						"name": "FormattingOptions"
 					},
-					"documentation": "The format options"
+					"documentation": "The format options."
 				}
 			],
 			"mixins": [
@@ -5771,7 +5771,7 @@
 						"kind": "reference",
 						"name": "FormattingOptions"
 					},
-					"documentation": "The format options."
+					"documentation": "The formatting options."
 				}
 			],
 			"documentation": "The parameters of a [DocumentOnTypeFormattingRequest](#DocumentOnTypeFormattingRequest)."
@@ -6777,7 +6777,7 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "A Uri like `file` or `untitled`."
+					"documentation": "A Uri scheme like `file` or `untitled`."
 				},
 				{
 					"name": "pattern",
@@ -6788,7 +6788,7 @@
 					"documentation": "The actual file operation pattern."
 				}
 			],
-			"documentation": "A filter to describe in which file operation requests or notifications\nthe server is interested in.\n\n@since 3.16.0",
+			"documentation": "A filter to describe in which file operation requests or notifications\nthe server is interested in receiving.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -7517,7 +7517,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The method to register for."
+					"documentation": "The method / capability to register for."
 				},
 				{
 					"name": "registerOptions",
@@ -7571,7 +7571,7 @@
 							}
 						]
 					},
-					"documentation": "The process Id of the parent process that started\nthe server."
+					"documentation": "The process Id of the parent process that started\nthe server.\n\nIs `null` if the process has not been started by another process.\nIf the parent process is not alive then the server should exit."
 				},
 				{
 					"name": "clientInfo",
@@ -7722,7 +7722,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The actual configured workspace folders."
+					"documentation": "The workspace folders configured in the client when the server starts.\n\nThis property is only available if the client supports workspace folders.\nIt can be `null` if the client supports workspace folders but none are\nconfigured.\n\n@since 3.6.0",
+					"since": "3.6.0"
 				}
 			]
 		},
@@ -7736,7 +7737,7 @@
 						"name": "PositionEncodingKind"
 					},
 					"optional": true,
-					"documentation": "The position encoding the server picked from the encodings offered\nby the client via the client capability `general.positionEncodings`.\n\nIf the client didn't provide any position encodings the only valid\nvalue that a server can return is 'utf-16'.\n\nIf omitted it defaults to 'utf-16'.\n\nIf for some reason\n\n@since 3.17.0",
+					"documentation": "The position encoding the server picked from the encodings offered\nby the client via the client capability `general.positionEncodings`.\n\nIf the client didn't provide any position encodings the only valid\nvalue that a server can return is 'utf-16'.\n\nIf omitted it defaults to 'utf-16'.\n\n@since 3.17.0",
 					"since": "3.17.0"
 				},
 				{
@@ -8730,7 +8731,7 @@
 						"kind": "base",
 						"name": "boolean"
 					},
-					"documentation": "`true` if signature help was already showing when it was triggered.\n\nRetrigger occurs when the signature help is already active and can be caused by actions such as\ntyping a trigger character, a cursor move, or document content changes."
+					"documentation": "`true` if signature help was already showing when it was triggered.\n\nRetriggers occurs when the signature help is already active and can be caused by actions such as\ntyping a trigger character, a cursor move, or document content changes."
 				},
 				{
 					"name": "activeSignatureHelp",
@@ -8812,7 +8813,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "List of characters that trigger signature help."
+					"documentation": "List of characters that trigger signature help automatically."
 				},
 				{
 					"name": "retriggerCharacters",
@@ -9169,7 +9170,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "A character on which formatting should be triggered, like `{}`."
+					"documentation": "A character on which formatting should be triggered, like `{`."
 				},
 				{
 					"name": "moreTriggerCharacter",
@@ -9436,7 +9437,7 @@
 					"documentation": "Additional options used during matching."
 				}
 			],
-			"documentation": "A pattern to describe in which file operation requests or notifications\nthe server is interested in.\n\n@since 3.16.0",
+			"documentation": "A pattern to describe in which file operation requests or notifications\nthe server is interested in receiving.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -9835,7 +9836,7 @@
 					"documentation": "Whether save notification should be forwarded to\nthe server. Will only be honored if mode === `notebook`."
 				}
 			],
-			"documentation": "Options specific to a notebook plus its cells\nto be synced to the server.\n\nIf a selector provide a notebook document\nfilter but no cell selector all cells of a\nmatching notebook document will be synced.\n\nIf a selector provides no notebook document\nfilter but only a cell selector all notebook\ndocument that contain at least one matching\ncell will be synced.\n\n@since 3.17.0",
+			"documentation": "Options specific to a notebook plus its cells\nto be synced to the server.\n\nIf a selector provides a notebook document\nfilter but no cell selector all cells of a\nmatching notebook document will be synced.\n\nIf a selector provides no notebook document\nfilter but only a cell selector all notebook\ndocument that contain at least one matching\ncell will be synced.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -9866,7 +9867,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The Server has support for workspace folders"
+					"documentation": "The server has support for workspace folders"
 				},
 				{
 					"name": "changeNotifications",
@@ -9884,7 +9885,7 @@
 						]
 					},
 					"optional": true,
-					"documentation": "Whether the server wants to receive workspace folder\nchange notifications.\n\nIf a strings is provided the string is treated as a ID\nunder which the notification is registered on the client\nside. The ID can be used to unregister for these events\nusing the `client/unregisterCapability` request."
+					"documentation": "Whether the server wants to receive workspace folder\nchange notifications.\n\nIf a string is provided the string is treated as an ID\nunder which the notification is registered on the client\nside. The ID can be used to unregister for these events\nusing the `client/unregisterCapability` request."
 				}
 			]
 		},
@@ -9898,7 +9899,7 @@
 						"name": "FileOperationRegistrationOptions"
 					},
 					"optional": true,
-					"documentation": "The server is interested in didCreateFiles notifications."
+					"documentation": "The server is interested in receiving didCreateFiles notifications."
 				},
 				{
 					"name": "willCreate",
@@ -9907,7 +9908,7 @@
 						"name": "FileOperationRegistrationOptions"
 					},
 					"optional": true,
-					"documentation": "The server is interested in willCreateFiles requests."
+					"documentation": "The server is interested in receiving willCreateFiles requests."
 				},
 				{
 					"name": "didRename",
@@ -9916,7 +9917,7 @@
 						"name": "FileOperationRegistrationOptions"
 					},
 					"optional": true,
-					"documentation": "The server is interested in didRenameFiles notifications."
+					"documentation": "The server is interested in receiving didRenameFiles notifications."
 				},
 				{
 					"name": "willRename",
@@ -9925,7 +9926,7 @@
 						"name": "FileOperationRegistrationOptions"
 					},
 					"optional": true,
-					"documentation": "The server is interested in willRenameFiles requests."
+					"documentation": "The server is interested in receiving willRenameFiles requests."
 				},
 				{
 					"name": "didDelete",
@@ -9934,7 +9935,7 @@
 						"name": "FileOperationRegistrationOptions"
 					},
 					"optional": true,
-					"documentation": "The server is interested in didDeleteFiles file notifications."
+					"documentation": "The server is interested in receiving didDeleteFiles file notifications."
 				},
 				{
 					"name": "willDelete",
@@ -9943,7 +9944,7 @@
 						"name": "FileOperationRegistrationOptions"
 					},
 					"optional": true,
-					"documentation": "The server is interested in willDeleteFiles file requests."
+					"documentation": "The server is interested in receiving willDeleteFiles file requests."
 				}
 			],
 			"documentation": "Options for notifications/requests for user operations on files.\n\n@since 3.16.0",
@@ -10130,7 +10131,7 @@
 						"name": "WorkspaceEditClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to `WorkspaceEdit`s"
+					"documentation": "Capabilities specific to `WorkspaceEdit`s."
 				},
 				{
 					"name": "didChangeConfiguration",
@@ -10175,7 +10176,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The client has support for workspace folders\n\n@since 3.6.0",
+					"documentation": "The client has support for workspace folders.\n\n@since 3.6.0",
 					"since": "3.6.0"
 				},
 				{
@@ -10234,7 +10235,7 @@
 						"name": "InlayHintWorkspaceClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the inlay hints requests scoped to the\nworkspace.\n\n@since 3.17.0.",
+					"documentation": "Capabilities specific to the inlay hint requests scoped to the\nworkspace.\n\n@since 3.17.0.",
 					"since": "3.17.0."
 				},
 				{
@@ -10269,7 +10270,7 @@
 						"name": "CompletionClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/completion`"
+					"documentation": "Capabilities specific to the `textDocument/completion` request."
 				},
 				{
 					"name": "hover",
@@ -10278,7 +10279,7 @@
 						"name": "HoverClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/hover`"
+					"documentation": "Capabilities specific to the `textDocument/hover` request."
 				},
 				{
 					"name": "signatureHelp",
@@ -10287,7 +10288,7 @@
 						"name": "SignatureHelpClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/signatureHelp`"
+					"documentation": "Capabilities specific to the `textDocument/signatureHelp` request."
 				},
 				{
 					"name": "declaration",
@@ -10296,7 +10297,7 @@
 						"name": "DeclarationClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/declaration`\n\n@since 3.14.0",
+					"documentation": "Capabilities specific to the `textDocument/declaration` request.\n\n@since 3.14.0",
 					"since": "3.14.0"
 				},
 				{
@@ -10306,7 +10307,7 @@
 						"name": "DefinitionClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/definition`"
+					"documentation": "Capabilities specific to the `textDocument/definition` request."
 				},
 				{
 					"name": "typeDefinition",
@@ -10315,7 +10316,7 @@
 						"name": "TypeDefinitionClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/typeDefinition`\n\n@since 3.6.0",
+					"documentation": "Capabilities specific to the `textDocument/typeDefinition` request.\n\n@since 3.6.0",
 					"since": "3.6.0"
 				},
 				{
@@ -10325,7 +10326,7 @@
 						"name": "ImplementationClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/implementation`\n\n@since 3.6.0",
+					"documentation": "Capabilities specific to the `textDocument/implementation` request.\n\n@since 3.6.0",
 					"since": "3.6.0"
 				},
 				{
@@ -10335,7 +10336,7 @@
 						"name": "ReferenceClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/references`"
+					"documentation": "Capabilities specific to the `textDocument/references` request."
 				},
 				{
 					"name": "documentHighlight",
@@ -10344,7 +10345,7 @@
 						"name": "DocumentHighlightClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/documentHighlight`"
+					"documentation": "Capabilities specific to the `textDocument/documentHighlight` request."
 				},
 				{
 					"name": "documentSymbol",
@@ -10353,7 +10354,7 @@
 						"name": "DocumentSymbolClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/documentSymbol`"
+					"documentation": "Capabilities specific to the `textDocument/documentSymbol` request."
 				},
 				{
 					"name": "codeAction",
@@ -10362,7 +10363,7 @@
 						"name": "CodeActionClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/codeAction`"
+					"documentation": "Capabilities specific to the `textDocument/codeAction` request."
 				},
 				{
 					"name": "codeLens",
@@ -10371,7 +10372,7 @@
 						"name": "CodeLensClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/codeLens`"
+					"documentation": "Capabilities specific to the `textDocument/codeLens` request."
 				},
 				{
 					"name": "documentLink",
@@ -10380,7 +10381,7 @@
 						"name": "DocumentLinkClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/documentLink`"
+					"documentation": "Capabilities specific to the `textDocument/documentLink` request."
 				},
 				{
 					"name": "colorProvider",
@@ -10389,7 +10390,8 @@
 						"name": "DocumentColorClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/documentColor`"
+					"documentation": "Capabilities specific to the `textDocument/documentColor` and the\n`textDocument/colorPresentation` request.\n\n@since 3.6.0",
+					"since": "3.6.0"
 				},
 				{
 					"name": "formatting",
@@ -10398,7 +10400,7 @@
 						"name": "DocumentFormattingClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/formatting`"
+					"documentation": "Capabilities specific to the `textDocument/formatting` request."
 				},
 				{
 					"name": "rangeFormatting",
@@ -10407,7 +10409,7 @@
 						"name": "DocumentRangeFormattingClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/rangeFormatting`"
+					"documentation": "Capabilities specific to the `textDocument/rangeFormatting` request."
 				},
 				{
 					"name": "onTypeFormatting",
@@ -10416,7 +10418,7 @@
 						"name": "DocumentOnTypeFormattingClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/onTypeFormatting`"
+					"documentation": "Capabilities specific to the `textDocument/onTypeFormatting` request."
 				},
 				{
 					"name": "rename",
@@ -10425,7 +10427,7 @@
 						"name": "RenameClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `textDocument/rename`"
+					"documentation": "Capabilities specific to the `textDocument/rename` request."
 				},
 				{
 					"name": "foldingRange",
@@ -10434,7 +10436,7 @@
 						"name": "FoldingRangeClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to `textDocument/foldingRange` request.\n\n@since 3.10.0",
+					"documentation": "Capabilities specific to the `textDocument/foldingRange` request.\n\n@since 3.10.0",
 					"since": "3.10.0"
 				},
 				{
@@ -10444,7 +10446,7 @@
 						"name": "SelectionRangeClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to `textDocument/selectionRange` request.\n\n@since 3.15.0",
+					"documentation": "Capabilities specific to the `textDocument/selectionRange` request.\n\n@since 3.15.0",
 					"since": "3.15.0"
 				},
 				{
@@ -10454,7 +10456,7 @@
 						"name": "PublishDiagnosticsClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to `textDocument/publishDiagnostics` notification."
+					"documentation": "Capabilities specific to the `textDocument/publishDiagnostics` notification."
 				},
 				{
 					"name": "callHierarchy",
@@ -10463,7 +10465,7 @@
 						"name": "CallHierarchyClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the various call hierarchy request.\n\n@since 3.16.0",
+					"documentation": "Capabilities specific to the various call hierarchy requests.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -10483,7 +10485,7 @@
 						"name": "LinkedEditingRangeClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the linked editing range request.\n\n@since 3.16.0",
+					"documentation": "Capabilities specific to the `textDocument/linkedEditingRange` request.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -10493,7 +10495,7 @@
 						"name": "MonikerClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Client capabilities specific to the moniker request.\n\n@since 3.16.0",
+					"documentation": "Client capabilities specific to the `textDocument/moniker` request.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -10655,7 +10657,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "The position encodings supported by the client. Client and server\nhave to agree on the same position encoding to ensure that offsets\n(e.g. character position in a line) are interpreted the same on both\nside.\n\nTo keep the protocol backwards compatible the following applies: if\nthe value 'utf-16' is missing from the array of position encodings\nservers can assume that the client supports UTF-16. UTF-16 is\ntherefore a mandatory encoding.\n\nIf omitted it defaults to ['utf-16'].\n\nImplementation considerations: since the conversion from one encoding\ninto another requires the content of the file / line the conversion\nis best done where the file is read which is usually on the server\nside.\n\n@since 3.17.0",
+					"documentation": "The position encodings supported by the client. Client and server\nhave to agree on the same position encoding to ensure that offsets\n(e.g. character position in a line) are interpreted the same on both\nsides.\n\nTo keep the protocol backwards compatible the following applies: if\nthe value 'utf-16' is missing from the array of position encodings\nservers can assume that the client supports UTF-16. UTF-16 is\ntherefore a mandatory encoding.\n\nIf omitted it defaults to ['utf-16'].\n\nImplementation considerations: since the conversion from one encoding\ninto another requires the content of the file / line the conversion\nis best done where the file is read which is usually on the server\nside.\n\n@since 3.17.0",
 					"since": "3.17.0"
 				}
 			],
@@ -10736,7 +10738,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client normalizes line endings to the client specific\nsetting.\nIf set to `true` the client will normalize line ending characters\nin a workspace edit containing to the client specific new line\ncharacter.\n\n@since 3.16.0",
+					"documentation": "Whether the client normalizes line endings to the client specific\nsetting.\nIf set to `true` the client will normalize line ending characters\nin a workspace edit to the client-specified new line\ncharacter.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -10963,7 +10965,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The client has support for willCreateFiles requests."
+					"documentation": "The client has support for sending willCreateFiles requests."
 				},
 				{
 					"name": "didRename",
@@ -10981,7 +10983,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The client has support for willRenameFiles requests."
+					"documentation": "The client has support for sending willRenameFiles requests."
 				},
 				{
 					"name": "didDelete",
@@ -10999,7 +11001,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The client has support for willDeleteFiles requests."
+					"documentation": "The client has support for sending willDeleteFiles requests."
 				}
 			],
 			"documentation": "Capabilities relating to events from file operations by the user in the client.\n\nThese events do not come from the file system, they come from user operations\nlike renaming a file in the UI.\n\n@since 3.16.0",
@@ -11140,7 +11142,7 @@
 										}
 									},
 									"optional": true,
-									"documentation": "Client supports the follow content formats for the documentation\nproperty. The order describes the preferred format of the client."
+									"documentation": "Client supports the following content formats for the documentation\nproperty. The order describes the preferred format of the client."
 								},
 								{
 									"name": "deprecatedSupport",
@@ -11350,7 +11352,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Client supports the follow content formats for the content\nproperty. The order describes the preferred format of the client."
+					"documentation": "Client supports the following content formats for the content\nproperty. The order describes the preferred format of the client."
 				}
 			]
 		},
@@ -11382,7 +11384,7 @@
 										}
 									},
 									"optional": true,
-									"documentation": "Client supports the follow content formats for the documentation\nproperty. The order describes the preferred format of the client."
+									"documentation": "Client supports the following content formats for the documentation\nproperty. The order describes the preferred format of the client."
 								},
 								{
 									"name": "parameterInformation",
@@ -11413,7 +11415,7 @@
 										"name": "boolean"
 									},
 									"optional": true,
-									"documentation": "The client support the `activeParameter` property on `SignatureInformation`\nliteral.\n\n@since 3.16.0",
+									"documentation": "The client supports the `activeParameter` property on `SignatureInformation`\nliteral.\n\n@since 3.16.0",
 									"since": "3.16.0"
 								}
 							]
@@ -11599,7 +11601,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Specific capabilities for the `SymbolKind`."
+					"documentation": "Specific capabilities for the `SymbolKind` in the\n`textDocument/documentSymbol` request."
 				},
 				{
 					"name": "hierarchicalDocumentSymbolSupport",
@@ -11608,7 +11610,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The client support hierarchical document symbols."
+					"documentation": "The client supports hierarchical document symbols."
 				},
 				{
 					"name": "tagSupport",
@@ -11745,7 +11747,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Whether the client support resolving additional code action\nproperties via a separate `codeAction/resolve` request.\n\n@since 3.16.0",
+					"documentation": "Whether the client supports resolving additional code action\nproperties via a separate `codeAction/resolve` request.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -11755,7 +11757,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether th client honors the change annotations in\ntext edits and resource operations returned via the\n`CodeAction#edit` property by for example presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
+					"documentation": "Whether the client honors the change annotations in\ntext edits and resource operations returned via the\n`CodeAction#edit` property by for example presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				}
 			],
@@ -11795,7 +11797,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client support the `tooltip` property on `DocumentLink`.\n\n@since 3.15.0",
+					"documentation": "Whether the client supports the `tooltip` property on `DocumentLink`.\n\n@since 3.15.0",
 					"since": "3.15.0"
 				}
 			],
@@ -11899,7 +11901,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether th client honors the change annotations in\ntext edits and resource operations returned via the\nrename request's workspace edit by for example presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
+					"documentation": "Whether the client honors the change annotations in\ntext edits and resource operations returned via the\nrename request's workspace edit by for example presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				}
 			]
@@ -11979,7 +11981,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Specific options for the folding range.\n@since 3.17.0",
+					"documentation": "Specific options for the folding range.\n\n@since 3.17.0",
 					"since": "3.17.0"
 				}
 			]
@@ -12041,7 +12043,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client interprets the version property of the\n`textDocument/publishDiagnostics` notification`s parameter.\n\n@since 3.15.0",
+					"documentation": "Whether the client interprets the version property of the\n`textDocument/publishDiagnostics` notification's parameter.\n\n@since 3.15.0",
 					"since": "3.15.0"
 				},
 				{
@@ -12328,10 +12330,10 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Indicates which properties a client can resolve lazily on a inlay\nhint."
+					"documentation": "Indicates which properties a client can resolve lazily on an inlay\nhint."
 				}
 			],
-			"documentation": "Inlay hint client capabilities\n\n@since 3.17.0",
+			"documentation": "Inlay hint client capabilities.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -12420,10 +12422,10 @@
 						"kind": "base",
 						"name": "boolean"
 					},
-					"documentation": "The client has support for the show document\nrequest."
+					"documentation": "The client has support for the showDocument\nrequest."
 				}
 			],
-			"documentation": "Client capabilities for the show document request.\n\n@since 3.16.0",
+			"documentation": "Client capabilities for the showDocument request.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -13835,7 +13837,7 @@
 					}
 				]
 			},
-			"documentation": "The result of a document diagnostic pull request. A report can\neither be a full report containing all diagnostics for the\nrequested document or a unchanged report indicating that nothing\nhas changed in terms of diagnostics in comparison to the last\npull request.\n\n@since 3.17.0",
+			"documentation": "The result of a document diagnostic pull request. A report can\neither be a full report containing all diagnostics for the\nrequested document or an unchanged report indicating that nothing\nhas changed in terms of diagnostics in comparison to the last\npull request.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
