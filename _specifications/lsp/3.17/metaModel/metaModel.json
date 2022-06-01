@@ -13422,7 +13422,7 @@
 			"name": "WatchKind",
 			"type": {
 				"kind": "base",
-				"name": "uinteger"
+				"name": "integer"
 			},
 			"values": [
 				{
