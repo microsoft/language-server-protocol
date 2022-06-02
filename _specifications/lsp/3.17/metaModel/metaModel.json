@@ -2379,7 +2379,7 @@
 						"name": "FoldingRangeKind"
 					},
 					"optional": true,
-					"documentation": "Describes the kind of the folding range such as `comment' or 'region'. The kind\nis used to categorize folding ranges. See [FoldingRangeKind](#FoldingRangeKind)\nfor an enumeration of standardized kinds."
+					"documentation": "Describes the kind of the folding range such as `comment' or 'region'. The kind\nis used to categorize folding ranges and used by commands like 'Fold all comments'.\nSee [FoldingRangeKind](#FoldingRangeKind) for an enumeration of standardized kinds."
 				},
 				{
 					"name": "collapsedText",
@@ -3660,7 +3660,7 @@
 						"name": "LSPAny"
 					},
 					"optional": true,
-					"documentation": "A data entry field that is preserved on a inlay hint between\na `textDocument/inlayHint` and a `inlayHint/resolve` request."
+					"documentation": "A data entry field that is preserved on an inlay hint between\na `textDocument/inlayHint` and a `inlayHint/resolve` request."
 				}
 			],
 			"documentation": "Inlay hint information.\n\n@since 3.17.0",
@@ -4579,7 +4579,7 @@
 						"name": "InsertTextMode"
 					},
 					"optional": true,
-					"documentation": "How whitespace and indentation is handled during completion\nitem insertion. If ignored the clients default value depends on\nthe `textDocument.completion.insertTextMode` client capability.\n\n@since 3.16.0",
+					"documentation": "How whitespace and indentation is handled during completion\nitem insertion. If not provided the clients default value depends on\nthe `textDocument.completion.insertTextMode` client capability.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -4598,7 +4598,7 @@
 						]
 					},
 					"optional": true,
-					"documentation": "An [edit](#TextEdit) which is applied to a document when selecting\nthis completion. When an edit is provided the value of\n[insertText](#CompletionItem.insertText) is ignored.\n\nMost editors support two different operation when accepting a completion\nitem. One is to insert a completion text and the other is to replace an\nexisting text with a completion text. Since this can usually not\npredetermined by a server it can report both ranges. Clients need to\nsignal support for `InsertReplaceEdits` via the\n`textDocument.completion.insertReplaceSupport` client capability\nproperty.\n\n*Note 1:* The text edit's range as well as both ranges from a insert\nreplace edit must be a [single line] and they must contain the position\nat which completion has been requested.\n*Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range\nmust be a prefix of the edit's replace range, that means it must be\ncontained and starting at the same position.\n\n@since 3.16.0 additional type `InsertReplaceEdit`",
+					"documentation": "An [edit](#TextEdit) which is applied to a document when selecting\nthis completion. When an edit is provided the value of\n[insertText](#CompletionItem.insertText) is ignored.\n\nMost editors support two different operations when accepting a completion\nitem. One is to insert a completion text and the other is to replace an\nexisting text with a completion text. Since this can usually not be\npredetermined by a server it can report both ranges. Clients need to\nsignal support for `InsertReplaceEdits` via the\n`textDocument.completion.insertReplaceSupport` client capability\nproperty.\n\n*Note 1:* The text edit's range as well as both ranges from an insert\nreplace edit must be a [single line] and they must contain the position\nat which completion has been requested.\n*Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range\nmust be a prefix of the edit's replace range, that means it must be\ncontained and starting at the same position.\n\n@since 3.16.0 additional type `InsertReplaceEdit`",
 					"since": "3.16.0 additional type `InsertReplaceEdit`"
 				},
 				{
@@ -4665,7 +4665,7 @@
 						"kind": "base",
 						"name": "boolean"
 					},
-					"documentation": "This list it not complete. Further typing results in recomputing this list."
+					"documentation": "This list it not complete. Further typing results in recomputing this list.\n\nRecomputed lists have all their items replaced (not appended) in the\nincomplete completion sessions."
 				},
 				{
 					"name": "itemDefaults",
@@ -4839,7 +4839,7 @@
 						"name": "Range"
 					},
 					"optional": true,
-					"documentation": "An optional range"
+					"documentation": "An optional range inside the text document that is used to\nvisualize the hover, e.g. by changing the background color."
 				}
 			],
 			"documentation": "The result of a hover request."
@@ -5118,7 +5118,7 @@
 						"kind": "reference",
 						"name": "Location"
 					},
-					"documentation": "The location of this symbol. The location's range is used by a tool\nto reveal the location in the editor. If the symbol is selected in the\ntool the range's start information is used to position the cursor. So\nthe range usually spans more than the actual symbol's name and does\nnormally include thinks like visibility modifiers.\n\nThe range doesn't have to denote a node range in the sense of a abstract\nsyntax tree. It can therefore not be used to re-construct a hierarchy of\nthe symbols."
+					"documentation": "The location of this symbol. The location's range is used by a tool\nto reveal the location in the editor. If the symbol is selected in the\ntool the range's start information is used to position the cursor. So\nthe range usually spans more than the actual symbol's name and does\nnormally include things like visibility modifiers.\n\nThe range doesn't have to denote a node range in the sense of an abstract\nsyntax tree. It can therefore not be used to re-construct a hierarchy of\nthe symbols."
 				}
 			],
 			"extends": [
@@ -5359,7 +5359,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Marks that the code action cannot currently be applied.\n\nClients should follow the following guidelines regarding disabled code actions:\n\n  - Disabled code actions are not shown in automatic [lightbulb](https://code.visualstudio.com/docs/editor/editingevolved#_code-action)\n    code action menu.\n\n  - Disabled actions are shown as faded out in the code action menu when the user request a more specific type\n    of code action, such as refactorings.\n\n  - If the user has a [keybinding](https://code.visualstudio.com/docs/editor/refactoring#_keybindings-for-code-actions)\n    that auto applies a code action and only a disabled code actions are returned, the client should show the user an\n    error message with `reason` in the editor.\n\n@since 3.16.0",
+					"documentation": "Marks that the code action cannot currently be applied.\n\nClients should follow the following guidelines regarding disabled code actions:\n\n  - Disabled code actions are not shown in automatic [lightbulbs](https://code.visualstudio.com/docs/editor/editingevolved#_code-action)\n    code action menus.\n\n  - Disabled actions are shown as faded out in the code action menu when the user requests a more specific type\n    of code action, such as refactorings.\n\n  - If the user has a [keybinding](https://code.visualstudio.com/docs/editor/refactoring#_keybindings-for-code-actions)\n    that auto applies a code action and only disabled code actions are returned, the client should show the user an\n    error message with `reason` in the editor.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -5378,7 +5378,7 @@
 						"name": "Command"
 					},
 					"optional": true,
-					"documentation": "A command this code action executes. If a code action\nprovides a edit and a command, first the edit is\nexecuted and then the command."
+					"documentation": "A command this code action executes. If a code action\nprovides an edit and a command, first the edit is\nexecuted and then the command."
 				},
 				{
 					"name": "data",
@@ -5546,7 +5546,7 @@
 					"documentation": "A data entry field that is preserved on a code lens item between\na [CodeLensRequest](#CodeLensRequest) and a [CodeLensResolveRequest]\n(#CodeLensResolveRequest)"
 				}
 			],
-			"documentation": "A code lens represents a [command](#Command) that should be shown along with\nsource text, like the number of references, a way to run tests, etc.\n\nA code lens is _unresolved_ when no command is associated to it. For performance\nreasons the creation of a code lens and resolving should be done to two stages."
+			"documentation": "A code lens represents a [command](#Command) that should be shown along with\nsource text, like the number of references, a way to run tests, etc.\n\nA code lens is _unresolved_ when no command is associated to it. For performance\nreasons the creation of a code lens and resolving should be done in two stages."
 		},
 		{
 			"name": "CodeLensRegistrationOptions",
@@ -5605,7 +5605,7 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "The uri this link points to."
+					"documentation": "The uri this link points to. If missing a resolve request is sent later."
 				},
 				{
 					"name": "tooltip",
@@ -6185,7 +6185,7 @@
 						"name": "Range"
 					},
 					"optional": true,
-					"documentation": "Span of the origin of this link.\n\nUsed as the underlined span for mouse definition hover. Defaults to the word range at\nthe definition position."
+					"documentation": "Span of the origin of this link.\n\nUsed as the underlined span for mouse interaction. Defaults to the word range at\nthe definition position."
 				},
 				{
 					"name": "targetUri",
@@ -6223,7 +6223,7 @@
 						"kind": "reference",
 						"name": "Position"
 					},
-					"documentation": "The range's start position"
+					"documentation": "The range's start position."
 				},
 				{
 					"name": "end",
@@ -6413,7 +6413,7 @@
 						"kind": "base",
 						"name": "uinteger"
 					},
-					"documentation": "Line position in a document (zero-based)."
+					"documentation": "Line position in a document (zero-based).\n\nIf a line number is greater than the number of lines in a document, it defaults back to the number of lines in the document.\nIf a line number is negative, it defaults to 0."
 				},
 				{
 					"name": "character",
@@ -6421,7 +6421,7 @@
 						"kind": "base",
 						"name": "uinteger"
 					},
-					"documentation": "Character offset on a line in a document (zero-based). Assuming that the line is\nrepresented as a string, the `character` value represents the gap between the\n`character` and `character + 1`.\n\nIf the character value is greater than the line length it defaults back to the\nline length."
+					"documentation": "Character offset on a line in a document (zero-based).\n\nThe meaning of this offset is determined by the negotiated\n`PositionEncodingKind`.\n\nIf the character value is greater than the line length it defaults back to the\nline length."
 				}
 			],
 			"documentation": "Position in a text document expressed as zero-based line and character\noffset. Prior to 3.17 the offsets were always based on a UTF-16 string\nrepresentation. So a string of the form `a𐐀b` the character offset of the\ncharacter `a` is 0, the character offset of `𐐀` is 1 and the character\noffset of b is 3 since `𐐀` is represented using two code units in UTF-16.\nSince 3.17 clients and servers can agree on a different string encoding\nrepresentation (e.g. UTF-8). The client announces it's supported encoding\nvia the client capability [`general.positionEncodings`](#clientCapabilities).\nThe value is an array of position encodings the client supports, with\ndecreasing preference (e.g. the encoding at index `0` is the most preferred\none). To stay backwards compatible the only mandatory encoding is UTF-16\nrepresented via the string `utf-16`. The server can pick one of the\nencodings offered by the client and signals that encoding back to the\nclient via the initialize result's property\n[`capabilities.positionEncoding`](#serverCapabilities). If the string value\n`utf-16` is missing from the client's capability `general.positionEncodings`\nservers can safely assume that the client supports UTF-16. If the server\nomits the position encoding in its initialize result the encoding defaults\nto the string value `utf-16`. Implementation considerations: since the\nconversion from one encoding into another requires the content of the\nfile / line the conversion is best done where the file is read which is\nusually on the server side.\n\nPositions are line end character agnostic. So you can not specify a position\nthat denotes `\\r|\\n` or `\\n|` where `|` represents the character offset.\n\n@since 3.17.0 - support for negotiated position encoding.",
@@ -7325,7 +7325,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The text document's language identifier"
+					"documentation": "The text document's language identifier."
 				},
 				{
 					"name": "version",
@@ -8579,7 +8579,7 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "An optional string which is rendered less prominently directly after {@link CompletionItem.label label},\nwithout any spacing. Should be used for function signatures or type annotations."
+					"documentation": "An optional string which is rendered less prominently directly after {@link CompletionItem.label label},\nwithout any spacing. Should be used for function signatures and type annotations."
 				},
 				{
 					"name": "description",
@@ -8588,7 +8588,7 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "An optional string which is rendered less prominently after {@link CompletionItem.detail}. Should be used\nfor fully qualified names or file path."
+					"documentation": "An optional string which is rendered less prominently after {@link CompletionItem.detail}. Should be used\nfor fully qualified names and file paths."
 				}
 			],
 			"documentation": "Additional details for a completion item label.\n\n@since 3.17.0",
@@ -8913,7 +8913,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Tags for this completion item.\n\n@since 3.16.0",
+					"documentation": "Tags for this symbol.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				},
 				{
@@ -9113,7 +9113,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Trim trailing whitespaces on a line.\n\n@since 3.15.0",
+					"documentation": "Trim trailing whitespace on a line.\n\n@since 3.15.0",
 					"since": "3.15.0"
 				},
 				{
@@ -10036,7 +10036,7 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The human-readable doc-comment of this signature. Will be shown\nin the UI but can be omitted."
+					"documentation": "The human-readable doc-comment of this parameter. Will be shown\nin the UI but can be omitted."
 				}
 			],
 			"documentation": "Represents a parameter of a callable-signature. A parameter can\nhave a label and a doc-comment."
@@ -12769,7 +12769,7 @@
 				{
 					"name": "Imports",
 					"value": "imports",
-					"documentation": "Folding range for a imports or includes"
+					"documentation": "Folding range for an import or include"
 				},
 				{
 					"name": "Region",
@@ -12784,7 +12784,7 @@
 			"name": "SymbolKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -12898,7 +12898,7 @@
 			"name": "SymbolTag",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -12907,7 +12907,7 @@
 					"documentation": "Render a symbol as obsolete, usually using a strike-out."
 				}
 			],
-			"documentation": "Symbol tags are extra annotations that tweak the rendering of a symbol.\n@since 3.16",
+			"documentation": "Symbol tags are extra annotations that tweak the rendering of a symbol.\n\n@since 3.16",
 			"since": "3.16"
 		},
 		{
@@ -12976,7 +12976,7 @@
 			"name": "InlayHintKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -12997,7 +12997,7 @@
 			"name": "MessageType",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13027,7 +13027,7 @@
 			"name": "TextDocumentSyncKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13052,7 +13052,7 @@
 			"name": "TextDocumentSaveReason",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13077,7 +13077,7 @@
 			"name": "CompletionItemKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13187,7 +13187,7 @@
 			"name": "CompletionItemTag",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13203,7 +13203,7 @@
 			"name": "InsertTextFormat",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13223,7 +13223,7 @@
 			"name": "InsertTextMode",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13244,7 +13244,7 @@
 			"name": "DocumentHighlightKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13397,7 +13397,7 @@
 			"name": "FileChangeType",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13440,14 +13440,13 @@
 					"value": 4,
 					"documentation": "Interested in delete events"
 				}
-			],
-			"supportsCustomValues": true
+			]
 		},
 		{
 			"name": "DiagnosticSeverity",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13477,7 +13476,7 @@
 			"name": "DiagnosticTag",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13498,7 +13497,7 @@
 			"name": "CompletionTriggerKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13523,7 +13522,7 @@
 			"name": "SignatureHelpTriggerKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13549,7 +13548,7 @@
 			"name": "CodeActionTriggerKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13591,7 +13590,7 @@
 			"name": "NotebookCellKind",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
@@ -13665,7 +13664,7 @@
 			"name": "PrepareSupportDefaultBehavior",
 			"type": {
 				"kind": "base",
-				"name": "integer"
+				"name": "uinteger"
 			},
 			"values": [
 				{
