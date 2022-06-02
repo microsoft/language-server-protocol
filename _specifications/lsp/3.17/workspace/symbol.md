@@ -137,6 +137,14 @@ export interface WorkspaceSymbol {
 	tags?: SymbolTag[];
 
 	/**
+	 * The name of the symbol containing this symbol. This information is for
+	 * user interface purposes (e.g. to render a qualifier in the user interface
+	 * if necessary). It can't be used to re-infer a hierarchy for the document
+	 * symbols.
+	 */
+	containerName?: string;
+
+	/**
 	 * The location of this symbol. Whether a server is allowed to
 	 * return a location without a range depends on the client
 	 * capability `workspace.symbol.resolveSupport`.
@@ -146,12 +154,10 @@ export interface WorkspaceSymbol {
 	location: Location | { uri: DocumentUri };
 
 	/**
-	 * The name of the symbol containing this symbol. This information is for
-	 * user interface purposes (e.g. to render a qualifier in the user interface
-	 * if necessary). It can't be used to re-infer a hierarchy for the document
-	 * symbols.
+	 * A data entry field that is preserved on a workspace symbol between a
+	 * workspace symbol request and a workspace symbol resolve request.
 	 */
-	containerName?: string;
+	data?: LSPAny;
 }
 ```
 * partial result: `SymbolInformation[]` \| `WorkspaceSymbol[]` as defined above.
