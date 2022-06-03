@@ -13440,7 +13440,8 @@
 					"value": 4,
 					"documentation": "Interested in delete events"
 				}
-			]
+			],
+			"supportsCustomValues": true
 		},
 		{
 			"name": "DiagnosticSeverity",
