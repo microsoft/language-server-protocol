@@ -18,6 +18,7 @@ index: 2
 | [Brackets](http://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) |
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
 | [CodeLite](https://codelite.org/) | [Eran Ifrah](https://github.com/eranif) | https://github.com/eranif/codelite |
+| [CodeMirror](https://codemirror.net/6/) | [Furqan Software](https://github.com/furqansoftware) | [codemirror-languageserver](https://github.com/furqansoftware/codemirror-languageserver) |
 | [Eclipse Che](https://www.eclipse.org/che/) | Eclipse,Codenvy/TypeFox | [Che](https://github.com/eclipse/che/issues/1287) |
 | Eclipse IDE | Eclipse,Red Hat | [Eclipse community](https://projects.eclipse.org/projects/technology.lsp4e/who), [Eclipse LSP4E](https://projects.eclipse.org/projects/technology.lsp4e) |
 | Emacs | [Vibhav Pant](https://github.com/vibhavp) | [emacs language server client](https://github.com/emacs-lsp/lsp-mode/) |
