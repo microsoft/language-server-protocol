@@ -103,3 +103,4 @@ Parser          | Version | Documentation
 --------------- | ------- | -------------
 marked          | 1.1.0   | [Marked Documentation](https://marked.js.org/)
 Python-Markdown | 3.2.2   | [Python-Markdown Documentation](https://python-markdown.github.io)
+
