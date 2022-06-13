@@ -345,7 +345,7 @@ export interface WorkspaceDiagnosticParams extends WorkDoneProgressParams,
  */
 export interface PreviousResultId {
 	/**
-	 * The URI for which the client knowns a
+	 * The URI for which the client knows a
 	 * result id.
 	 */
 	uri: DocumentUri;

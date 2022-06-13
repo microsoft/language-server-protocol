@@ -100,7 +100,7 @@
 				"kind": "reference",
 				"name": "TypeDefinitionRegistrationOptions"
 			},
-			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositioParams]\n(#TextDocumentPositionParams) the response is of type [Definition](#Definition) or a\nThenable that resolves to such."
+			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositionParams]\n(#TextDocumentPositionParams) the response is of type [Definition](#Definition) or a\nThenable that resolves to such."
 		},
 		{
 			"method": "workspace/workspaceFolders",
@@ -7243,7 +7243,7 @@
 						"kind": "base",
 						"name": "DocumentUri"
 					},
-					"documentation": "The URI for which the client knowns a\nresult id."
+					"documentation": "The URI for which the client knows a\nresult id."
 				},
 				{
 					"name": "value",
