@@ -519,7 +519,7 @@ export namespace TextDocumentSyncKind {
 	/**
 	 * Documents are synced by sending the full content on open.
 	 * After that only incremental updates to the document are
-	 * send.
+	 * sent.
 	 */
 	export const Incremental = 2;
 }
@@ -531,7 +531,7 @@ export namespace TextDocumentSyncKind {
 export interface TextDocumentSyncOptions {
 	/**
 	 * Open and close notifications are sent to the server. If omitted open
-	 * close notification should not be sent.
+	 * close notifications should not be sent.
 	 */
 	openClose?: boolean;
 

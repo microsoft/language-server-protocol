@@ -21,5 +21,5 @@ _Request_:
 * params: `WillSaveTextDocumentParams`
 
 _Response_:
-* result:[`TextEdit[]`](#textEdit) \| `null`
+* result: [`TextEdit[]`](#textEdit) \| `null`
 * error: code and message set in case an exception happens during the `textDocument/willSaveWaitUntil` request.

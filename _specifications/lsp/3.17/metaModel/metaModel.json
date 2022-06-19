@@ -9670,7 +9670,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Open and close notifications are sent to the server. If omitted open close notification should not\nbe sent."
+					"documentation": "Open and close notifications are sent to the server. If omitted open close notifications should not\nbe sent."
 				},
 				{
 					"name": "change",
@@ -13043,7 +13043,7 @@
 				{
 					"name": "Incremental",
 					"value": 2,
-					"documentation": "Documents are synced by sending the full content on open.\nAfter that only incremental updates to the document are\nsend."
+					"documentation": "Documents are synced by sending the full content on open.\nAfter that only incremental updates to the document are\nsent."
 				}
 			],
 			"documentation": "Defines how the host (editor) should sync\ndocument changes to the language server."
