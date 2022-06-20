@@ -85,12 +85,12 @@ export interface SemanticTokensLegend {
 	/**
 	 * The token types a server uses.
 	 */
-	tokenTypes: string[];
+	tokenTypes: SemanticTokenTypes[];
 
 	/**
 	 * The token modifiers a server uses.
 	 */
-	tokenModifiers: string[];
+	tokenModifiers: SemanticTokenModifiers[];
 }
 ```
 
