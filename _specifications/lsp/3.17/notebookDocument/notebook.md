@@ -18,7 +18,7 @@ The two concepts are defined as follows:
 export interface NotebookDocument {
 
 	/**
-	 * The notebook document's uri.
+	 * The notebook document's URI.
 	 */
 	uri: URI;
 
@@ -96,13 +96,13 @@ export interface NotebookCell {
 export namespace NotebookCellKind {
 
 	/**
-     * A markup-cell is formatted source that is used for display.
-     */
+	 * A markup-cell is formatted source that is used for display.
+	 */
 	export const Markup: 1 = 1;
 
 	/**
-     * A code-cell is source code.
-     */
+	 * A code-cell is source code.
+	 */
 	export const Code: 2 = 2;
 }
 ```
@@ -296,13 +296,13 @@ The following server capabilities are defined for notebook documents:
  * Options specific to a notebook plus its cells
  * to be synced to the server.
  *
- * If a selector provider a notebook document
+ * If a selector provides a notebook document
  * filter but no cell selector all cells of a
  * matching notebook document will be synced.
  *
  * If a selector provides no notebook document
  * filter but only a cell selector all notebook
- * document that contain at least one matching
+ * documents that contain at least one matching
  * cell will be synced.
  *
  * @since 3.17.0
@@ -313,9 +313,9 @@ export interface NotebookDocumentSyncOptions {
 	 */
 	notebookSelector: ({
 		/**
-		 * The notebook to be synced If a string
-	 	 * value is provided it matches against the
-	     * notebook type. '*' matches every notebook.
+		 * The notebook to be synced. If a string
+		 * value is provided it matches against the
+		 * notebook type. '*' matches every notebook.
 		 */
 		notebook: string | NotebookDocumentFilter;
 
@@ -325,9 +325,9 @@ export interface NotebookDocumentSyncOptions {
 		cells?: { language: string }[];
 	} | {
 		/**
-		 * The notebook to be synced If a string
-	 	 * value is provided it matches against the
-	     * notebook type. '*' matches every notebook.
+		 * The notebook to be synced. If a string
+		 * value is provided it matches against the
+		 * notebook type. '*' matches every notebook.
 		 */
 		notebook?: string | NotebookDocumentFilter;
 
@@ -373,7 +373,7 @@ _Notification_:
 
 ```typescript
 /**
- * The params sent in a open notebook document notification.
+ * The params sent in an open notebook document notification.
  *
  * @since 3.17.0
  */
@@ -450,7 +450,7 @@ export interface VersionedNotebookDocumentIdentifier {
 	version: integer;
 
 	/**
-	 * The notebook document's uri.
+	 * The notebook document's URI.
 	 */
 	uri: URI;
 }
@@ -502,8 +502,8 @@ export interface NotebookDocumentChangeEvent {
 		data?: NotebookCell[];
 
 		/**
-    	 * Changes to the text content of notebook cells.
-     	 */
+		 * Changes to the text content of notebook cells.
+		 */
 		textContent?: {
 			document: VersionedTextDocumentIdentifier;
 			changes: TextDocumentContentChangeEvent[];
@@ -523,7 +523,7 @@ export interface NotebookDocumentChangeEvent {
  */
 export interface NotebookCellArrayChange {
 	/**
-	 * The start oftest of the cell that changed.
+	 * The start offset of the cell that changed.
 	 */
 	start: uinteger;
 
@@ -610,7 +610,7 @@ export interface DidCloseNotebookDocumentParams {
  */
 export interface NotebookDocumentIdentifier {
 	/**
-	 * The notebook document's uri.
+	 * The notebook document's URI.
 	 */
 	uri: URI;
 }
