@@ -244,7 +244,9 @@ export namespace InlayHintKind {
 	 * An inlay hint that is for a parameter.
 	 */
 	export const Parameter = 2;
-};
+}
+
+export type InlayHintKind = 1 | 2;
 ```
 
 * error: code and message set in case an exception happens during the inlay hint request.
