@@ -16,6 +16,8 @@ export namespace PrepareSupportDefaultBehavior {
 	 */
 	 export const Identifier: 1 = 1;
 }
+
+export type PrepareSupportDefaultBehavior = 1;
 ```
 
 <div class="anchorHolder"><a href="#renameClientCapabilities" name="renameClientCapabilities" class="linkableAnchor"></a></div>

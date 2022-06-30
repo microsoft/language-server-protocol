@@ -205,4 +205,6 @@ export namespace FileChangeType {
 	 */
 	export const Deleted = 3;
 }
+
+export type FileChangeType = 1 | 2 | 3;
 ```

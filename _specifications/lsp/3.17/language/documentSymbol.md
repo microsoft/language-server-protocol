@@ -148,6 +148,8 @@ export namespace SymbolKind {
 	export const Operator = 25;
 	export const TypeParameter = 26;
 }
+
+export type SymbolKind = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
 ```
 
 <div class="anchorHolder"><a href="#symbolTag" name="symbolTag" class="linkableAnchor"></a></div>
