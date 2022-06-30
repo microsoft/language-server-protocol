@@ -116,6 +116,7 @@ index: 1
 | [Papyrus](https://www.creationkit.com/fallout4/index.php?title=Category:Papyrus) | [Joel Day](https://github.com/joelday) | [papyrus-lang](https://github.com/joelday/papyrus-lang) | C# |
 | Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl |
 | Perl | [Marc Reisner](https://github.com/FractalBoy) | [PLS](https://github.com/FractalBoy/perl-language-server)| Perl |
+| Perl | [Brian Scannell](https://github.com/bscan) | [Perl Navigator](https://github.com/bscan/PerlNavigator)| Perl |
 | Crane **PHP** | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) | TypeScript |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [intelephense](https://github.com/bmewburn/vscode-intelephense) | TypeScript |
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server) | PHP |
@@ -137,6 +138,7 @@ index: 1
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
 | Racket | [Jay McCarthy](https://github.com/jeapostrophe) | [racket-langserver](https://github.com/jeapostrophe/racket-langserver) | Racket |
+| Raku | [Brian Scannell](https://github.com/bscan) | [Raku Navigator](https://github.com/bscan/RakuNavigator) | TypeScript |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
 | [RAML](https://raml.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
