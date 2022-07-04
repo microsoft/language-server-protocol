@@ -820,6 +820,8 @@
     link: '#versionedNotebookDocumentIdentifier'
   - type: 'DiagnosticClientCapabilities'
     link: '#diagnosticClientCapabilities'
+  - type: 'DiagnosticWorkspaceClientCapabilities'
+    link: '#diagnosticWorkspaceClientCapabilities'
   - type: 'DiagnosticOptions'
     link: '#diagnosticOptions'
   - type: 'DiagnosticRegistrationOptions'
