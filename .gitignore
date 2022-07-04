@@ -1,2 +1,4 @@
 npm-debug.log
-_site
+_site/
+.bundle/
+vendor/
