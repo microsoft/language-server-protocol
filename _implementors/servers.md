@@ -134,6 +134,7 @@ index: 1
 | Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) (unmaintained, use python-lsp-server instead) | Python |
 | Python| [Spyder IDE team and the community](https://github.com/python-lsp) | [python-lsp-server](https://github.com/python-lsp/python-lsp-server) | Python |
 | Python | MS | [python-language-server](https://github.com/Microsoft/python-language-server) | C# |
+| [Pony](https://www.ponylang.io/) | [Mahan Bakhshi](https://github.com/MahanBi) | [PonyLS](https://github.com/MahanBi/PonyLS) | Pony |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
 | R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
