@@ -37,6 +37,8 @@ export interface DocumentFilter {
 }
 ```
 
+Please note that for a document filter to be valid at least one of the properties for `language`, `scheme`, or `pattern` must be set. To keep the type definition simply all properties are marked as optional.
+
 A document selector is the combination of one or more document filters.
 
 <div class="anchorHolder"><a href="#documentSelector" name="documentSelector" class="linkableAnchor"></a></div>
