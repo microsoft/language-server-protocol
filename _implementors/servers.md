@@ -106,6 +106,7 @@ index: 1
 | [Lua](http://www.lua.org/)| [Tencent](https://github.com/Tencent/LuaHelper) | [LuaHelper](https://github.com/Tencent/LuaHelper) | Go |
 | [Liquid](https://shopify.github.io/liquid/) | [Shopify](https://github.com/Shopify/theme-check) | [theme-check](https://github.com/Shopify/theme-check) | Ruby |
 | [IBM **LALR** Parser Generator language](https://sourceforge.net/projects/lpg/)| [kuafuwang](https://github.com/kuafuwang) | [LPG-language-server](https://github.com/kuafuwang/LPG-language-server) | C++ |
+| [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features/server) | TypeScript |
 | Motorola 68000 Assembly | [Graham Bates](https://github.com/grahambates) | [m68k-lsp](https://github.com/grahambates/m68k-lsp) | TypeScript |
 | [MSBuild](https://github.com/Microsoft/msbuild) | [Adam Friedman](https://github.com/tintoy) | [msbuild-project-tools-vscode](https://github.com/tintoy/msbuild-project-tools-vscode) | TypeScript |
 | Nim | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
