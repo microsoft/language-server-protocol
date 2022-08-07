@@ -1,12 +1,12 @@
 # Site settings
-title: Official page for Language Server Protocol
+title: Official page for Plugin Server Protocol
 description: >
-  Language Server Protocol documentation and specification page.
+  Plugin Server Protocol documentation and specification page.
 
-baseurl: /language-server-protocol # the subpath of your site, e.g. /blog/
-url: https://microsoft.github.io # the base hostname & protocol for your site
-git_address: https://github.com/Microsoft/language-server-protocol
-git_edit_address: https://github.com/Microsoft/language-server-protocol/blob/gh-pages
+baseurl: /plugin-server-protocol # the subpath of your site, e.g. /blog/
+url: https://lapce.dev # the base hostname & protocol for your site
+git_address: https://github.com/lapce/plugin-server-protocol
+git_edit_address: https://github.com/lapce/plugin-server-protocol/blob/gh-pages
 
 # Build settings
 markdown: kramdown
@@ -17,7 +17,6 @@ plugins:
   - jemoji
   - jekyll-redirect-from
 
-
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -27,30 +26,29 @@ exclude:
   - resources/
   - vendor/
 
-timezone: Europe/Zurich
+timezone: Europe/Paris
 
 defaults:
+  - scope:
+      path: _implementors
+      type: implementors
+    values:
+      layout: implementors
+      sectionid: implementors
 
-- scope:
-    path: _implementors
-    type: implementors
-  values:
-    layout: implementors
-    sectionid: implementors
+  - scope:
+      path: _specifications
+      type: specifications
+    values:
+      layout: specifications
+      sectionid: specifications
 
-- scope:
-    path: _specifications
-    type: specifications
-  values:
-    layout: specifications
-    sectionid: specifications
-
-- scope:
-    path: _overviews
-    type: overviews
-  values:
-    layout: overviews
-    sectionid: overviews
+  - scope:
+      path: _overviews
+      type: overviews
+    values:
+      layout: overviews
+      sectionid: overviews
 
 collections:
   implementors:
@@ -62,4 +60,3 @@ collections:
   overviews:
     permalink: /:collection/:path/
     output: true
-

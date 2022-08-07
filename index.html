@@ -8,10 +8,14 @@ layout: default
 <div class="header-container bg-primary jumbotron">
     <div class="container">
         <div class="intro" role="navigation" aria-label="Main">
-            <h1>Language Server Protocol</h1>
+            <h1>Plugin Server Protocol</h1>
         </div>
         <p class="intro-text">
-            The Language Server Protocol (LSP) defines the protocol used between an editor or IDE and a language server that provides language features like auto complete, go to definition, find all references etc. The goal of the Language Server Index Format (LSIF, pronounced like "else if") is to support rich code navigation in development tools or a Web UI without needing a local copy of the source code.
+            The Plugin Server Protocol (PSP) defines the protocol used between an editor or IDE and a plugin server that provides features extending or communicating with said IDE. The goal of the Plugin Server Protocol is to declare a generalized superset of the Language Server Protocol (LSP) for plugin contexts.
+        </p>
+        <br />
+        <p class="intro-text">
+            The plugin Server Protocol is directly based on the Language Server protocol (LSP), created by Microsoft for Visual Studio Code.
         </p>
 
         <br />
@@ -25,12 +29,14 @@ layout: default
 <div class="container">
     <div class="row align-items-center">
         <div class="col-lg-7">
-            <h2 class="header-light regular-pad">What is the Language Server Protocol?</h2>
+            <h2 class="header-light regular-pad">What is the Plugin Server Protocol?</h2>
 
-            <p>Adding features like auto complete, go to definition, or documentation on hover for a programming language takes significant effort. Traditionally this work had to be repeated for each development tool, as each tool provides different APIs for implementing the same feature.</p>
-            <p>A <i>Language Server</i> is meant to provide the language-specific smarts and communicate with development tools over a protocol that enables inter-process communication.</p>
-            <p>The idea behind the <i>Language Server Protocol (LSP)</i> is to standardize the protocol for how such servers and development tools communicate. This way, a single <i>Language Server</i> can be re-used in multiple development tools, which in turn can support multiple languages with minimal effort.</p>
-            <p>LSP is a win for both language providers and tooling vendors!</p>
+            <p>Extending IDEs and editors such as VsCode, Atom, Vim or Emacs can be a hassle. While there is a common denominator for language servers using the Language Server Procol (LSP), there is no consensus for plugins. Traditionally once a plugin is done for a specific editor, the work has to be repeated for each development tool, as each tool provides different APIs for implementing the same feature.</p>
+            <p>A <i>Plugin Server</i> is meant to provide the fancy cool features and communicate with development tools over a protocol that enables inter-process communication geared toward plugin needs, based on LSP.</p>
+
+            <p>The idea behind the <i>Plugin Server Protocol (PSP)</i> is to standardize the protocol for how such servers and development tools communicate. This way, a single <i>Plugin Server</i> can be re-used in multiple development tools with minimal effort.</p>
+            <p>The idea behind using LSP as a basis is to extend an already successfull generalized approach to language server, and bring the benefits to all plugins. </p>
+            <p>PSP is a win for both language providers and tooling vendors!</p>
         </div>
         <div class="col-lg-5">
             <div id="carouselOne" class="carousel slide" data-ride="carousel">
