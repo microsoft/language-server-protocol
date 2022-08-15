@@ -195,6 +195,7 @@ index: 1
 | [Mini**YAML**](https://github.com/OpenRA/MiniYAML.tmbundle) | [Pavel Penev](https://github.com/penev92) | [ORAIDE](https://github.com/penev92/Oraide.LanguageServer) | C# |
 | YAML (with JSON schemas)| [Adam Voss](https://github.com/adamvoss) | [vscode-yaml-languageservice](https://github.com/adamvoss/vscode-yaml-languageservice) | TypeScript |
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) | TypeScript |
+| [YARA](https://github.com/virusTotal/yara) | [Avast](https://github.com/avast) | [YARA Language Server](https://github.com/avast/yls) | Python |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
 | Zig | [Zig Developers](https://github.com/orgs/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
