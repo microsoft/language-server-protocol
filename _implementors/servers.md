@@ -160,6 +160,7 @@ index: 1
 | Rust | [Aleksey Kladov](https://github.com/matklad) | [Rust Analyzer](https://github.com/rust-analyzer/rust-analyzer) | Rust |
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) | Scala |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) | Scala |
+| [Slint](https://slint-ui.com) | Slint | [slint-lsp](https://github.com/slint-ui/slint/tree/HEAD/tools/lsp) | Rust |
 | [Smalltalk/Pharo](https://pharo.org/) | [Benoît Verhaeghe](https://github.com/badetitou) | [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) | Pharo |
 | SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) | TypeScript |
 | SQL | [Toshikazu Ohashi](https://github.com/lighttiger2505) | [sqls](https://github.com/lighttiger2505/sqls) | Go |
