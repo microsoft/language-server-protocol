@@ -37,6 +37,7 @@ index: 1
 | C/C++/Objective-C | [MaskRay](https://github.com/MaskRay) | [ccls](https://github.com/MaskRay/ccls) | C++ |
 | CSS/LESS/SASS | MS | [vscode-css-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/css-language-features/server) | TypeScript |
 | [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) | Ceylon |
+| [Clarity](https://docs.stacks.co/docs/write-smart-contracts/) | [Hiro](https://hiro.so) | [clarity-lsp](https://github.com/hirosystems/clarity-lsp) | TypeScript |
 | [Clojure](https://clojure.org/) | [Case Nelson](https://github.com/snoe) | [clojure-lsp](https://github.com/snoe/clojure-lsp) | Clojure |
 | [CMake](https://cmake.org/) | [regen100](https://github.com/regen100) | [cmake-language-server](https://github.com/regen100/cmake-language-server) | Python |
 | IBM Enterprise **COBOL** for z/OS | [Broadcom](https://www.broadcom.com/) | [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol) | Java |
