@@ -1,4 +1,7 @@
 {
+	"metaData": {
+		"version": "3.17.0"
+	},
 	"requests": [
 		{
 			"method": "textDocument/implementation",
@@ -22,6 +25,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "ImplementationParams"
@@ -73,6 +77,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "TypeDefinitionParams"
@@ -120,6 +125,7 @@
 					}
 				]
 			},
+			"messageDirection": "serverToClient",
 			"documentation": "The `workspace/workspaceFolders` is sent from the server to the client to fetch the open workspace folders."
 		},
 		{
@@ -131,6 +137,7 @@
 					"name": "LSPAny"
 				}
 			},
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "and",
 				"items": [
@@ -155,6 +162,7 @@
 					"name": "ColorInformation"
 				}
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentColorParams"
@@ -181,6 +189,7 @@
 					"name": "ColorPresentation"
 				}
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "ColorPresentationParams"
@@ -225,6 +234,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "FoldingRangeParams"
@@ -264,6 +274,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DeclarationParams"
@@ -311,6 +322,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "SelectionRangeParams"
@@ -334,6 +346,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "WorkDoneProgressCreateParams"
@@ -358,6 +371,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CallHierarchyPrepareParams"
@@ -387,6 +401,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CallHierarchyIncomingCallsParams"
@@ -419,6 +434,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CallHierarchyOutgoingCallsParams"
@@ -448,6 +464,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "SemanticTokensParams"
@@ -456,6 +473,7 @@
 				"kind": "reference",
 				"name": "SemanticTokensPartialResult"
 			},
+			"registrationMethod": "textDocument/semanticTokens",
 			"registrationOptions": {
 				"kind": "reference",
 				"name": "SemanticTokensRegistrationOptions"
@@ -482,6 +500,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "SemanticTokensDeltaParams"
@@ -499,6 +518,7 @@
 					}
 				]
 			},
+			"registrationMethod": "textDocument/semanticTokens",
 			"registrationOptions": {
 				"kind": "reference",
 				"name": "SemanticTokensRegistrationOptions"
@@ -521,6 +541,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "SemanticTokensRangeParams"
@@ -529,6 +550,7 @@
 				"kind": "reference",
 				"name": "SemanticTokensPartialResult"
 			},
+			"registrationMethod": "textDocument/semanticTokens",
 			"documentation": "@since 3.16.0",
 			"since": "3.16.0"
 		},
@@ -538,6 +560,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "clientToServer",
 			"documentation": "@since 3.16.0",
 			"since": "3.16.0"
 		},
@@ -547,6 +570,7 @@
 				"kind": "reference",
 				"name": "ShowDocumentResult"
 			},
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "ShowDocumentParams"
@@ -569,6 +593,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "LinkedEditingRangeParams"
@@ -595,6 +620,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CreateFilesParams"
@@ -621,6 +647,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "RenameFilesParams"
@@ -647,6 +674,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DeleteFilesParams"
@@ -676,6 +704,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "MonikerParams"
@@ -711,6 +740,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "TypeHierarchyPrepareParams"
@@ -740,6 +770,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "TypeHierarchySupertypesParams"
@@ -772,6 +803,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "TypeHierarchySubtypesParams"
@@ -804,6 +836,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "InlineValueParams"
@@ -828,6 +861,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "clientToServer",
 			"documentation": "@since 3.17.0",
 			"since": "3.17.0"
 		},
@@ -849,6 +883,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "InlayHintParams"
@@ -873,6 +908,7 @@
 				"kind": "reference",
 				"name": "InlayHint"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "InlayHint"
@@ -886,6 +922,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "clientToServer",
 			"documentation": "@since 3.17.0",
 			"since": "3.17.0"
 		},
@@ -895,6 +932,7 @@
 				"kind": "reference",
 				"name": "DocumentDiagnosticReport"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentDiagnosticParams"
@@ -920,6 +958,7 @@
 				"kind": "reference",
 				"name": "WorkspaceDiagnosticReport"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "WorkspaceDiagnosticParams"
@@ -941,6 +980,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "clientToServer",
 			"documentation": "The diagnostic refresh request definition.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
@@ -950,6 +990,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "RegistrationParams"
@@ -962,6 +1003,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "UnregistrationParams"
@@ -974,6 +1016,7 @@
 				"kind": "reference",
 				"name": "InitializeResult"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "InitializeParams"
@@ -990,6 +1033,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "clientToServer",
 			"documentation": "A shutdown request is sent from the client to the server.\nIt is sent once when the client decides to shutdown the\nserver. The only notification that is sent after a shutdown request\nis the exit event."
 		},
 		{
@@ -1007,6 +1051,7 @@
 					}
 				]
 			},
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "ShowMessageRequestParams"
@@ -1031,6 +1076,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "WillSaveTextDocumentParams"
@@ -1063,6 +1109,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CompletionParams"
@@ -1086,6 +1133,7 @@
 				"kind": "reference",
 				"name": "CompletionItem"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CompletionItem"
@@ -1107,6 +1155,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "HoverParams"
@@ -1132,6 +1181,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "SignatureHelpParams"
@@ -1163,6 +1213,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DefinitionParams"
@@ -1210,6 +1261,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "ReferenceParams"
@@ -1245,6 +1297,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentHighlightParams"
@@ -1287,6 +1340,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentSymbolParams"
@@ -1343,6 +1397,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CodeActionParams"
@@ -1375,6 +1430,7 @@
 				"kind": "reference",
 				"name": "CodeAction"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CodeAction"
@@ -1406,6 +1462,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "WorkspaceSymbolParams"
@@ -1442,6 +1499,7 @@
 				"kind": "reference",
 				"name": "WorkspaceSymbol"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "WorkspaceSymbol"
@@ -1467,6 +1525,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CodeLensParams"
@@ -1490,6 +1549,7 @@
 				"kind": "reference",
 				"name": "CodeLens"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CodeLens"
@@ -1502,6 +1562,7 @@
 				"kind": "base",
 				"name": "null"
 			},
+			"messageDirection": "serverToClient",
 			"documentation": "A request to refresh all code actions\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
@@ -1523,6 +1584,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentLinkParams"
@@ -1546,6 +1608,7 @@
 				"kind": "reference",
 				"name": "DocumentLink"
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentLink"
@@ -1570,6 +1633,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentFormattingParams"
@@ -1598,6 +1662,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentRangeFormattingParams"
@@ -1626,6 +1691,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentOnTypeFormattingParams"
@@ -1651,6 +1717,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "RenameParams"
@@ -1676,6 +1743,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "PrepareRenameParams"
@@ -1698,6 +1766,7 @@
 					}
 				]
 			},
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "ExecuteCommandParams"
@@ -1714,6 +1783,7 @@
 				"kind": "reference",
 				"name": "ApplyWorkspaceEditResult"
 			},
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "ApplyWorkspaceEditParams"
@@ -1724,6 +1794,7 @@
 	"notifications": [
 		{
 			"method": "workspace/didChangeWorkspaceFolders",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidChangeWorkspaceFoldersParams"
@@ -1732,6 +1803,7 @@
 		},
 		{
 			"method": "window/workDoneProgress/cancel",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "WorkDoneProgressCancelParams"
@@ -1740,6 +1812,7 @@
 		},
 		{
 			"method": "workspace/didCreateFiles",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "CreateFilesParams"
@@ -1753,6 +1826,7 @@
 		},
 		{
 			"method": "workspace/didRenameFiles",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "RenameFilesParams"
@@ -1766,6 +1840,7 @@
 		},
 		{
 			"method": "workspace/didDeleteFiles",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DeleteFilesParams"
@@ -1779,40 +1854,49 @@
 		},
 		{
 			"method": "notebookDocument/didOpen",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidOpenNotebookDocumentParams"
 			},
+			"registrationMethod": "notebookDocument/sync",
 			"documentation": "A notification sent when a notebook opens.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
 			"method": "notebookDocument/didChange",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidChangeNotebookDocumentParams"
-			}
+			},
+			"registrationMethod": "notebookDocument/sync"
 		},
 		{
 			"method": "notebookDocument/didSave",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidSaveNotebookDocumentParams"
 			},
+			"registrationMethod": "notebookDocument/sync",
 			"documentation": "A notification sent when a notebook document is saved.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
 			"method": "notebookDocument/didClose",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidCloseNotebookDocumentParams"
 			},
+			"registrationMethod": "notebookDocument/sync",
 			"documentation": "A notification sent when a notebook closes.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
 			"method": "initialized",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "InitializedParams"
@@ -1821,10 +1905,12 @@
 		},
 		{
 			"method": "exit",
+			"messageDirection": "clientToServer",
 			"documentation": "The exit event is sent from the client to the server to\nask the server to exit its process."
 		},
 		{
 			"method": "workspace/didChangeConfiguration",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidChangeConfigurationParams"
@@ -1837,6 +1923,7 @@
 		},
 		{
 			"method": "window/showMessage",
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "ShowMessageParams"
@@ -1845,6 +1932,7 @@
 		},
 		{
 			"method": "window/logMessage",
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "LogMessageParams"
@@ -1853,6 +1941,7 @@
 		},
 		{
 			"method": "telemetry/event",
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "LSPAny"
@@ -1861,6 +1950,7 @@
 		},
 		{
 			"method": "textDocument/didOpen",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidOpenTextDocumentParams"
@@ -1873,6 +1963,7 @@
 		},
 		{
 			"method": "textDocument/didChange",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidChangeTextDocumentParams"
@@ -1885,6 +1976,7 @@
 		},
 		{
 			"method": "textDocument/didClose",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidCloseTextDocumentParams"
@@ -1897,6 +1989,7 @@
 		},
 		{
 			"method": "textDocument/didSave",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidSaveTextDocumentParams"
@@ -1909,6 +2002,7 @@
 		},
 		{
 			"method": "textDocument/willSave",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "WillSaveTextDocumentParams"
@@ -1921,6 +2015,7 @@
 		},
 		{
 			"method": "workspace/didChangeWatchedFiles",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "DidChangeWatchedFilesParams"
@@ -1933,6 +2028,7 @@
 		},
 		{
 			"method": "textDocument/publishDiagnostics",
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "PublishDiagnosticsParams"
@@ -1941,6 +2037,7 @@
 		},
 		{
 			"method": "$/setTrace",
+			"messageDirection": "clientToServer",
 			"params": {
 				"kind": "reference",
 				"name": "SetTraceParams"
@@ -1948,6 +2045,7 @@
 		},
 		{
 			"method": "$/logTrace",
+			"messageDirection": "serverToClient",
 			"params": {
 				"kind": "reference",
 				"name": "LogTraceParams"
@@ -1955,6 +2053,7 @@
 		},
 		{
 			"method": "$/cancelRequest",
+			"messageDirection": "both",
 			"params": {
 				"kind": "reference",
 				"name": "CancelParams"
@@ -1962,6 +2061,7 @@
 		},
 		{
 			"method": "$/progress",
+			"messageDirection": "both",
 			"params": {
 				"kind": "reference",
 				"name": "ProgressParams"
@@ -2075,7 +2175,7 @@
 				{
 					"name": "uri",
 					"type": {
-						"kind": "reference",
+						"kind": "base",
 						"name": "URI"
 					},
 					"documentation": "The associated URI for this workspace folder."
@@ -2981,7 +3081,7 @@
 				{
 					"name": "uri",
 					"type": {
-						"kind": "reference",
+						"kind": "base",
 						"name": "URI"
 					},
 					"documentation": "The document uri to show."
@@ -7243,7 +7343,7 @@
 						"kind": "base",
 						"name": "DocumentUri"
 					},
-					"documentation": "The URI for which the client knows a\nresult id."
+					"documentation": "The URI for which the client knowns a\nresult id."
 				},
 				{
 					"name": "value",
@@ -7263,7 +7363,7 @@
 				{
 					"name": "uri",
 					"type": {
-						"kind": "reference",
+						"kind": "base",
 						"name": "URI"
 					},
 					"documentation": "The notebook document's uri."
@@ -7360,7 +7460,7 @@
 				{
 					"name": "uri",
 					"type": {
-						"kind": "reference",
+						"kind": "base",
 						"name": "URI"
 					},
 					"documentation": "The notebook document's uri."
@@ -7491,7 +7591,7 @@
 				{
 					"name": "uri",
 					"type": {
-						"kind": "reference",
+						"kind": "base",
 						"name": "URI"
 					},
 					"documentation": "The notebook document's uri."
@@ -8355,7 +8455,7 @@
 					"name": "experimental",
 					"type": {
 						"kind": "reference",
-						"name": "T"
+						"name": "LSPAny"
 					},
 					"optional": true,
 					"documentation": "Experimental server capabilities."
@@ -9670,7 +9770,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Open and close notifications are sent to the server. If omitted open close notifications should not\nbe sent."
+					"documentation": "Open and close notifications are sent to the server. If omitted open close notification should not\nbe sent."
 				},
 				{
 					"name": "change",
@@ -9951,16 +10051,12 @@
 			"since": "3.16.0"
 		},
 		{
-			"name": "T",
-			"properties": []
-		},
-		{
 			"name": "CodeDescription",
 			"properties": [
 				{
 					"name": "href",
 					"type": {
-						"kind": "reference",
+						"kind": "base",
 						"name": "URI"
 					},
 					"documentation": "An URI to open with more information about the diagnostic error."
@@ -10677,7 +10773,7 @@
 								"name": "WorkspaceFolder"
 							},
 							{
-								"kind": "reference",
+								"kind": "base",
 								"name": "URI"
 							}
 						]
@@ -12594,6 +12690,7 @@
 					"since": "3.17.0"
 				}
 			],
+			"supportsCustomValues": true,
 			"documentation": "A set of predefined token types. This set is not fixed\nan clients can specify additional token types via the\ncorresponding client capabilities.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
@@ -12645,8 +12742,30 @@
 					"value": "defaultLibrary"
 				}
 			],
+			"supportsCustomValues": true,
 			"documentation": "A set of predefined token modifiers. This set is not fixed\nan clients can specify additional token types via the\ncorresponding client capabilities.\n\n@since 3.16.0",
 			"since": "3.16.0"
+		},
+		{
+			"name": "DocumentDiagnosticReportKind",
+			"type": {
+				"kind": "base",
+				"name": "string"
+			},
+			"values": [
+				{
+					"name": "Full",
+					"value": "full",
+					"documentation": "A diagnostic report with a full\nset of problems."
+				},
+				{
+					"name": "Unchanged",
+					"value": "unchanged",
+					"documentation": "A report indicating that the last\nreturned report is still accurate."
+				}
+			],
+			"documentation": "The document diagnostic report kinds.\n\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "ErrorCodes",
@@ -12676,17 +12795,6 @@
 					"value": -32603
 				},
 				{
-					"name": "jsonrpcReservedErrorRangeStart",
-					"value": -32099,
-					"documentation": "This is the start range of JSON RPC reserved error codes.\nIt doesn't denote a real error code. No application error codes should\nbe defined between the start and end range. For backwards\ncompatibility the `ServerNotInitialized` and the `UnknownErrorCode`\nare left in the range.\n\n@since 3.16.0",
-					"since": "3.16.0"
-				},
-				{
-					"name": "serverErrorStart",
-					"value": -32099,
-					"documentation": "@deprecated use  jsonrpcReservedErrorRangeStart */"
-				},
-				{
 					"name": "ServerNotInitialized",
 					"value": -32002,
 					"documentation": "Error code indicating that a server received a notification or\nrequest before the server has received the `initialize` request."
@@ -12694,17 +12802,6 @@
 				{
 					"name": "UnknownErrorCode",
 					"value": -32001
-				},
-				{
-					"name": "jsonrpcReservedErrorRangeEnd",
-					"value": -32000,
-					"documentation": "This is the end range of JSON RPC reserved error codes.\nIt doesn't denote a real error code.\n\n@since 3.16.0",
-					"since": "3.16.0"
-				},
-				{
-					"name": "serverErrorEnd",
-					"value": -32000,
-					"documentation": "@deprecated use  jsonrpcReservedErrorRangeEnd */"
 				}
 			],
 			"supportsCustomValues": true,
@@ -12717,12 +12814,6 @@
 				"name": "integer"
 			},
 			"values": [
-				{
-					"name": "lspReservedErrorRangeStart",
-					"value": -32899,
-					"documentation": "This is the start range of LSP reserved error codes.\nIt doesn't denote a real error code.\n\n@since 3.16.0",
-					"since": "3.16.0"
-				},
 				{
 					"name": "RequestFailed",
 					"value": -32803,
@@ -12744,12 +12835,6 @@
 					"name": "RequestCancelled",
 					"value": -32800,
 					"documentation": "The client has canceled a request and a server as detected\nthe cancel."
-				},
-				{
-					"name": "lspReservedErrorRangeEnd",
-					"value": -32800,
-					"documentation": "This is the end range of LSP reserved error codes.\nIt doesn't denote a real error code.\n\n@since 3.16.0",
-					"since": "3.16.0"
 				}
 			],
 			"supportsCustomValues": true
@@ -13043,7 +13128,7 @@
 				{
 					"name": "Incremental",
 					"value": 2,
-					"documentation": "Documents are synced by sending the full content on open.\nAfter that only incremental updates to the document are\nsent."
+					"documentation": "Documents are synced by sending the full content on open.\nAfter that only incremental updates to the document are\nsend."
 				}
 			],
 			"documentation": "Defines how the host (editor) should sync\ndocument changes to the language server."
@@ -13888,15 +13973,6 @@
 			}
 		},
 		{
-			"name": "URI",
-			"type": {
-				"kind": "base",
-				"name": "string"
-			},
-			"documentation": "A tagging type for string properties that are actually URIs\n\n@since 3.16.0",
-			"since": "3.16.0"
-		},
-		{
 			"name": "ProgressToken",
 			"type": {
 				"kind": "or",
@@ -13917,17 +13993,8 @@
 			"type": {
 				"kind": "array",
 				"element": {
-					"kind": "or",
-					"items": [
-						{
-							"kind": "base",
-							"name": "string"
-						},
-						{
-							"kind": "reference",
-							"name": "DocumentFilter"
-						}
-					]
+					"kind": "reference",
+					"name": "DocumentFilter"
 				}
 			},
 			"documentation": "A document selector is the combination of one or many document filters.\n\n@sample `let sel:DocumentSelector = [{ language: 'typescript' }, { language: 'json', pattern: '**∕tsconfig.json' }]`;\n\nThe use of a string as a document filter is deprecated @since 3.16.0.",
@@ -14100,7 +14167,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "A language id, like `typescript`. */"
+									"documentation": "A language id, like `typescript`."
 								},
 								{
 									"name": "scheme",
@@ -14109,7 +14176,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`."
 								},
 								{
 									"name": "pattern",
@@ -14118,7 +14185,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern, like `*.{ts,js}`. */"
+									"documentation": "A glob pattern, like `*.{ts,js}`."
 								}
 							]
 						}
@@ -14134,7 +14201,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A language id, like `typescript`. */"
+									"documentation": "A language id, like `typescript`."
 								},
 								{
 									"name": "scheme",
@@ -14142,7 +14209,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`."
 								},
 								{
 									"name": "pattern",
@@ -14151,7 +14218,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern, like `*.{ts,js}`. */"
+									"documentation": "A glob pattern, like `*.{ts,js}`."
 								}
 							]
 						}
@@ -14167,7 +14234,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A language id, like `typescript`. */"
+									"documentation": "A language id, like `typescript`."
 								},
 								{
 									"name": "scheme",
@@ -14176,7 +14243,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`."
 								},
 								{
 									"name": "pattern",
@@ -14184,7 +14251,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "A glob pattern, like `*.{ts,js}`. */"
+									"documentation": "A glob pattern, like `*.{ts,js}`."
 								}
 							]
 						}
@@ -14209,7 +14276,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "The type of the enclosing notebook. */"
+									"documentation": "The type of the enclosing notebook."
 								},
 								{
 									"name": "scheme",
@@ -14218,7 +14285,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`."
 								},
 								{
 									"name": "pattern",
@@ -14227,7 +14294,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern. */"
+									"documentation": "A glob pattern."
 								}
 							]
 						}
@@ -14243,7 +14310,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "The type of the enclosing notebook. */"
+									"documentation": "The type of the enclosing notebook."
 								},
 								{
 									"name": "scheme",
@@ -14251,7 +14318,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`.*/"
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`."
 								},
 								{
 									"name": "pattern",
@@ -14260,7 +14327,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern. */"
+									"documentation": "A glob pattern."
 								}
 							]
 						}
@@ -14276,7 +14343,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "The type of the enclosing notebook. */"
+									"documentation": "The type of the enclosing notebook."
 								},
 								{
 									"name": "scheme",
@@ -14285,7 +14352,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */"
+									"documentation": "A Uri [scheme](#Uri.scheme), like `file` or `untitled`."
 								},
 								{
 									"name": "pattern",
@@ -14293,7 +14360,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "A glob pattern. */"
+									"documentation": "A glob pattern."
 								}
 							]
 						}
