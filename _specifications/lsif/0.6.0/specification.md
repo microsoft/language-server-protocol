@@ -50,15 +50,15 @@ Principal design goals:
 
 LSP requests that are good candidates to be supported in LSIF are:
 
-- [`textDocument/documentSymbol`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_documentSymbol)
-- [`textDocument/foldingRange`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_foldingRange)
-- [`textDocument/documentLink`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_documentLink)
-- [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_definition)
-- [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_declaration)
-- [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_typeDefinition)
-- [`textDocument/hover`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_hover)
-- [`textDocument/references`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_references)
-- [`textDocument/implementation`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_implementation)
+- `textDocument/documentSymbol`
+- `textDocument/foldingRange`
+- `textDocument/documentLink`
+- `textDocument/definition`
+- `textDocument/declaration`
+- `textDocument/typeDefinition`
+- `textDocument/hover`
+- `textDocument/references`
+- `textDocument/implementation`
 
 The corresponding LSP requests have one of the following two forms:
 
