@@ -28,6 +28,17 @@
   };
 </script>
 
+{% comment %}
+// Get the current LSP spec base url from the site data
+{% endcomment %}
+{% for spec in site.data.specifications %}
+{%  for child in spec.children %}
+{%   if spec.anchor == 'lsp' and child.version == page.lspVersion %}
+{%    assign currentSpecification = child.url %}
+{%   endif %}
+{%  endfor %}
+{% endfor %}
+
 <script type="text/javascript">
   function tryGetAssociatedLink(name) {
     var link = linkableTypes[name];
@@ -37,10 +48,13 @@
     }
 
     var anchor = document.createElement("a");
-    var currentSpecification = 'lsp/3.17/specification';
     var hrefUrl = link[0] === '/' ?
       `${baseurl}/specifications${link}` :
-      `${baseurl}/specifications/${currentSpecification}/${link}`;
+{% if currentSpecification %}
+      `${baseurl}{{ currentSpecification }}/${link}`;
+{% else %}
+      link;
+{% endif %}
     anchor.setAttribute("href", hrefUrl);
     anchor.textContent = name;
     return anchor;
@@ -49,7 +63,6 @@
   var elements = document.querySelectorAll("code .nx, code.highlighter-rouge");
   for (var element of elements) {
     var typeName = element.textContent;
-    var link = linkableTypes[typeName];
     var linkNode = tryGetAssociatedLink(typeName);
 
     if (linkNode) {
