@@ -19,13 +19,13 @@
 
 
 <script type="text/javascript">
-  var linkableTypes = {
-  {% for linkableGroup in site.data.linkableTypes %}
-  {% for linkableType in linkableGroup.children %}
-  "{{ linkableType.type }}": "{{ linkableType.link }}",
-    {% endfor %}
-  {% endfor %}
-  };
+  var linkableTypes = new Map([
+  {% for linkableGroup in site.data.linkableTypes -%}
+  {% for linkableType in linkableGroup.children -%}
+    ["{{ linkableType.type }}", "{{ linkableType.link }}"],
+    {% endfor -%}
+  {% endfor -%}
+  ]);
 </script>
 
 {% comment %}
@@ -41,7 +41,7 @@
 
 <script type="text/javascript">
   function tryGetAssociatedLink(name) {
-    var link = linkableTypes[name];
+    var link = linkableTypes.get(name);
 
     if (!link) {
       return;
