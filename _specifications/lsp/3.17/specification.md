@@ -358,7 +358,7 @@ A request that got canceled still needs to return from the server and send a res
 
 > *Since version 3.15.0*
 
-The base protocol offers also support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including work done progress (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
+The base protocol offers also support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including [work done progress](#workDoneProgress) (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
 
 A progress notification has the following properties:
 
