@@ -65,7 +65,7 @@ interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 	/**
 	 * The list of ranges to format
 	 */
-	range?: Range[];
+	ranges?: Range[];
 
 	/**
 	 * The format options
