@@ -1,6 +1,7 @@
 #### <a href="#textDocument_rangeFormatting" name="textDocument_rangeFormatting" class="anchor">Document Range Formatting Request (:leftwards_arrow_with_hook:)</a>
 
-The document range formatting request is sent from the client to the server to format a given range in a document.
+The document range formatting request is sent from the client to the server to format a given range or list of ranges in a document.
+The request should either provide `range` or, if the server can handle them, `ranges`.
 
 _Client Capability_:
 * property name (optional): `textDocument.rangeFormatting`
@@ -26,6 +27,10 @@ _Server Capability_:
 ```typescript
 export interface DocumentRangeFormattingOptions extends
 	WorkDoneProgressOptions {
+	/**
+	 * The server supports formatting multiple ranges at once.
+	 */
+	multiRange?: boolean;
 }
 ```
 
@@ -55,7 +60,12 @@ interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 	/**
 	 * The range to format
 	 */
-	range: Range;
+	range?: Range;
+
+	/**
+	 * The list of ranges to format
+	 */
+	range?: Range[];
 
 	/**
 	 * The format options
