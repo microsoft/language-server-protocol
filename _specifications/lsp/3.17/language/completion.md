@@ -182,16 +182,17 @@ _Server Capability_:
  */
 export interface CompletionOptions extends WorkDoneProgressOptions {
 	/**
-	 * Most tools trigger completion request automatically without explicitly
+	 * The additional characters, beyond the defaults provided by the client (typically
+	 * [a-zA-Z]), that should automatically trigger a completion request. For example
+	 * `.` in JavaScript represents the beginning of an object property or method and is
+	 * thus a good candidate for triggering a completion request.
+	 *
+	 * Most tools trigger a completion request automatically without explicitly
 	 * requesting it using a keyboard shortcut (e.g. Ctrl+Space). Typically they
 	 * do so when the user starts to type an identifier. For example if the user
 	 * types `c` in a JavaScript file code complete will automatically pop up
 	 * present `console` besides others as a completion item. Characters that
 	 * make up identifiers don't need to be listed here.
-	 *
-	 * If code complete should automatically be trigger on characters not being
-	 * valid inside an identifier (for example `.` in JavaScript) list them in
-	 * `triggerCharacters`.
 	 */
 	triggerCharacters?: string[];
 
