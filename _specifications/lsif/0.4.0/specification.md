@@ -517,7 +517,7 @@ The relevant emitted vertices and edges looks like this:
 { id: 51, type: "edge", label: "item", outV: 37, inVs: [9], document: 4 }
 ```
 
-As with other results ranges get added using a `item` edge. In this case without a `property` since there is only on kind of range.
+As with other results ranges get added using a `item` edge. In this case without a `property` since there is only one kind of range.
 
 ## Document requests
 
