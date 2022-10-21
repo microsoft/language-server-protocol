@@ -224,6 +224,20 @@ export namespace CodeActionKind {
 	export const RefactorInline: CodeActionKind = 'refactor.inline';
 
 	/**
+	 * Base kind for refactoring move actions: 'refactor.move'
+	 *
+	 * Example move actions:
+	 *
+	 * - Move a function to a new file
+	 * - Move a property between classes
+	 * - Move method to base class
+	 * - ...
+	 * 
+	 * @since 3.18.0 - proposed
+	 */
+	export const RefactorMove: CodeActionKind = 'refactor.move';
+
+	/**
 	 * Base kind for refactoring rewrite actions: 'refactor.rewrite'.
 	 *
 	 * Example rewrite actions:
@@ -232,7 +246,6 @@ export namespace CodeActionKind {
 	 * - Add or remove parameter
 	 * - Encapsulate field
 	 * - Make method static
-	 * - Move method to base class
 	 * - ...
 	 */
 	export const RefactorRewrite: CodeActionKind = 'refactor.rewrite';
