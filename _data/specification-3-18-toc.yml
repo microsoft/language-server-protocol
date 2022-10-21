@@ -1,0 +1,327 @@
+- title: Message Overview
+  reveal: baseProtocol
+  children:
+  - title: Base Protocol
+    anchor: baseProtocol
+    children:
+    - title: Header Part
+      anchor: headerPart
+    - title: Content Part
+      anchor: contentPart
+    - title: Base Types
+      anchor: baseTypes
+    - title: Request Message
+      anchor: requestMessage
+    - title: Response Message
+      anchor: responseMessage
+    - title: Notification Message
+      anchor: notificationMessage
+    - title: Cancellation Support
+      anchor: cancelRequest
+    - title: Progress Support
+      anchor: progress
+  - title: Language Server Protocol
+    anchor: languageServerProtocol
+    children:
+    - title: Overview
+      anchor: languageServerProtocol
+    - title: Capabilities
+      anchor: capabilities
+    - title: Message Ordering
+      anchor: messageOrdering
+    - title: Message Documentation
+      anchor: messageDocumentation
+  - title: Basic JSON Structures
+    anchor: basicJsonStructures
+    children:
+    - title: URI
+      anchor: uri
+    - title: Regular Expression
+      anchor: regExp
+    - title: Enumerations
+      anchor: enumerations
+    - title: Text Documents
+      anchor: textDocuments
+    - title: Position
+      anchor: position
+    - title: Range
+      anchor: range
+    - title: Text Document Item
+      anchor: textDocumentItem
+    - title: Text Document Identifier
+      anchor: textDocumentIdentifier
+    - title: Versioned Text Document Identifier
+      anchor: versionedTextDocumentIdentifier
+    - title: Text Document Position Params
+      anchor: textDocumentPositionParams
+    - title: Document Filter
+      anchor: documentFilter
+    - title: Text Edit
+      anchor: textEdit
+    - title: Text Edit Array
+      anchor: textEditArray
+    - title: Text Document Edit
+      anchor: textDocumentEdit
+    - title: Location
+      anchor: location
+    - title: Location Link
+      anchor: locationLink
+    - title: Diagnostic
+      anchor: diagnostic
+    - title: Command
+      anchor: command
+    - title: Markup Content
+      anchor: markupContent
+    - title: File Resource Changes
+      anchor: resourceChanges
+    - title: Workspace Edit
+      anchor: workspaceEdit
+    - title: Work Done Progress
+      anchor: workDoneProgress
+    - title: Client Initiated Progress
+      anchor: clientInitiatedProgress
+    - title: Server Initiated Progress
+      anchor: serverInitiatedProgress
+    - title: Partial Results
+      anchor: partialResults
+    - title: Partial Result Params
+      anchor: partialResultParams
+    - title: Trace Value
+      anchor: traceValue
+  - title: Lifecycle Messages
+    anchor: lifeCycleMessages
+    children:
+    - title: Overview
+      anchor: lifeCycleMessages
+    - title: Initialize
+      anchor: initialize
+    - title: Initialized
+      anchor: initialized
+    - title: Register Capability
+      anchor: client_registerCapability
+    - title: Unregister Capability
+      anchor: client_unregisterCapability
+    - title: Set Trace
+      anchor: setTrace
+    - title: Log Trace
+      anchor: logTrace
+    - title: Shutdown
+      anchor: shutdown
+    - title: Exit
+      anchor: exit
+  - title: Document Synchronization
+    anchor: textSynchronization
+    children:
+    - title: Overview - Text Document
+      anchor: textDocument_synchronization
+    - title: Did Open Text Document
+      anchor: textDocument_didOpen
+    - title: Did Change Text Document
+      anchor: textDocument_didChange
+    - title: Will Save Text Document
+      anchor: textDocument_willSave
+    - title: Will Save Document Wait Until
+      anchor: textDocument_willSaveWaitUntil
+    - title: Did Save Text Document
+      anchor: textDocument_didSave
+    - title: Did Close Text Document
+      anchor: textDocument_didClose
+    - title: Rename a Text Document
+      anchor: textDocument_didRename
+    - title: Overview - Notebook Document
+      anchor: notebookDocument_synchronization
+    - title: Did Open Notebook Document
+      anchor: notebookDocument_didOpen
+    - title: Did Change Notebook Document
+      anchor: notebookDocument_didChange
+    - title: Did Save Notebook Document
+      anchor: notebookDocument_didSave
+    - title: Did Close Notebook Document
+      anchor: notebookDocument_didClose
+  - title: Language Features
+    anchor: languageFeatures
+    children:
+    - title: Overview
+      anchor: languageFeatures
+    - title: Go to Declaration
+      anchor: textDocument_declaration
+    - title: Go to Definition
+      anchor: textDocument_definition
+    - title: Go to Type Definition
+      anchor: textDocument_typeDefinition
+    - title: Go to Implementation
+      anchor: textDocument_implementation
+    - title: Find References
+      anchor: textDocument_references
+    - title: Prepare Call Hierarchy
+      anchor: textDocument_prepareCallHierarchy
+    - title: Call Hierarchy Incoming Calls
+      anchor: callHierarchy_incomingCalls
+    - title: Call Hierarchy Outgoing Calls
+      anchor: callHierarchy_outgoingCalls
+    - title: Prepare Type Hierarchy
+      anchor: textDocument_prepareTypeHierarchy
+    - title: Type Hierarchy Super Types
+      anchor: typeHierarchy_supertypes
+    - title: Type Hierarchy Sub Types
+      anchor: typeHierarchy_subtypes
+    - title: Document Highlight
+      anchor: textDocument_documentHighlight
+    - title: Document Link
+      anchor: textDocument_documentLink
+    - title: Document Link Resolve
+      anchor: documentLink_resolve
+    - title: Hover
+      anchor: textDocument_hover
+    - title: Code Lens
+      anchor: textDocument_codeLens
+    - title: Code Lens Refresh
+      anchor: codeLens_refresh
+    - title: Folding Range
+      anchor: textDocument_foldingRange
+    - title: Selection Range
+      anchor: textDocument_selectionRange
+    - title: Document Symbols
+      anchor: textDocument_documentSymbol
+    - title: Semantic Tokens
+      anchor: textDocument_semanticTokens
+    - title: Inline Value
+      anchor: textDocument_inlineValue
+    - title: Inline Value Refresh
+      anchor: workspace_inlineValue_refresh
+    - title: Inlay Hint
+      anchor: textDocument_inlayHint
+    - title: Inlay Hint Resolve
+      anchor: inlayHint_resolve
+    - title: Inlay Hint Refresh
+      anchor: workspace_inlayHint_refresh
+    - title: Moniker
+      anchor: textDocument_moniker
+    - title: Completion Proposals
+      anchor: textDocument_completion
+    - title: Completion Item Resolve
+      anchor: completionItem_resolve
+    - title: Publish Diagnostics
+      anchor: textDocument_publishDiagnostics
+    - title: Pull Diagnostics
+      anchor: textDocument_pullDiagnostics
+    - title: Signature Help
+      anchor: textDocument_signatureHelp
+    - title: Code Action
+      anchor: textDocument_codeAction
+    - title: Code Action Resolve
+      anchor: codeAction_resolve
+    - title: Document Color
+      anchor: textDocument_documentColor
+    - title: Color Presentation
+      anchor: textDocument_colorPresentation
+    - title: Formatting
+      anchor: textDocument_formatting
+    - title: Range Formatting
+      anchor: textDocument_rangeFormatting
+    - title: On type Formatting
+      anchor: textDocument_onTypeFormatting
+    - title: Rename
+      anchor: textDocument_rename
+    - title: Prepare Rename
+      anchor: textDocument_prepareRename
+    - title: Linked Editing Range
+      anchor: textDocument_linkedEditingRange
+  - title: Workspace Features
+    anchor: workspaceFeatures
+    children:
+    - title: Workspace Symbols
+      anchor: workspace_symbol
+    - title: Workspace Symbol Resolve
+      anchor: workspace_symbolResolve
+    - title: Get Configuration
+      anchor: workspace_configuration
+    - title: Did Change Configuration
+      anchor: workspace_didChangeConfiguration
+    - title: Workspace Folders
+      anchor: workspace_workspaceFolders
+    - title: Did Change Workspace Folders
+      anchor: workspace_didChangeWorkspaceFolders
+    - title: Will Create Files
+      anchor: workspace_willCreateFiles
+    - title: Did Create Files
+      anchor: workspace_didCreateFiles
+    - title: Will Rename Files
+      anchor: workspace_willRenameFiles
+    - title: Did Rename Files
+      anchor: workspace_didRenameFiles
+    - title: Will Delete Files
+      anchor: workspace_willDeleteFiles
+    - title: Did Delete Files
+      anchor: workspace_didDeleteFiles
+    - title: Did Change Watched Files
+      anchor: workspace_didChangeWatchedFiles
+    - title: Execute Command
+      anchor: workspace_executeCommand
+    - title: Apply Edit
+      anchor: workspace_applyEdit
+  - title: Window Features
+    anchor: windowFeatures
+    children:
+    - title: Show Message Notification
+      anchor: window_showMessage
+    - title: Show Message Request
+      anchor: window_showMessageRequest
+    - title: Log Message
+      anchor: window_logMessage
+    - title: Show Document
+      anchor: window_showDocument
+    - title: Create Work Done Progress
+      anchor: window_workDoneProgress_create
+    - title: Cancel a Work Done Progress
+      anchor: window_workDoneProgress_cancel
+    - title: Sent Telemetry
+      anchor: telemetry_event
+  - title: Miscellaneous
+    anchor: miscellaneous
+    children:
+    - title: Implementation Considerations
+      anchor: implementationConsiderations
+    - title: Meta Model
+      anchor: metaModel
+  - title: Change Log
+    anchor: changeLog
+    children:
+    - title: 3.18.0
+      anchor: version_3_18_0
+    - title: 3.17.0
+      anchor: version_3_17_0
+    - title: 3.16.0
+      anchor: version_3_16_0
+    - title: 3.15.0
+      anchor: version_3_15_0
+    - title: 3.14.0
+      anchor: version_3_14_0
+    - title: 3.13.0
+      anchor: version_3_13_0
+    - title: 3.12.0
+      anchor: version_3_12_0
+    - title: 3.11.0
+      anchor: version_3_11_0
+    - title: 3.10.0
+      anchor: version_3_10_0
+    - title: 3.9.0
+      anchor: version_3_9_0
+    - title: 3.8.0
+      anchor: version_3_8_0
+    - title: 3.7.0
+      anchor: version_3_7_0
+    - title: 3.6.0
+      anchor: version_3_6_0
+    - title: 3.5.0
+      anchor: version_3_5_0
+    - title: 3.4.0
+      anchor: version_3_4_0
+    - title: 3.3.0
+      anchor: version_3_3_0
+    - title: 3.2.0
+      anchor: version_3_2_0
+    - title: 3.1.0
+      anchor: version_3_1_0
+    - title: 3.0
+      anchor: version_3_0_0
