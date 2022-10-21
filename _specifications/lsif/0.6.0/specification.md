@@ -159,7 +159,7 @@ The corresponding graph looks like this
 
 The ranges emitted for a document in the contains relationship must follow these rules:
 
-1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if the have the same start / end value.
+1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if they have the same start / end value.
 1. No two ranges can be equal.
 1. No two ranges can overlap, claiming the same position in a document unless one range is entirely contained by the other.
 
