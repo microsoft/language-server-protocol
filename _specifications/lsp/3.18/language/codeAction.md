@@ -469,4 +469,4 @@ _Request_:
 
 _Response_:
 * result: `CodeAction`
-* error: code and message set in case an exception happens during the completion resolve request.
+* error: code and message set in case an exception happens during the code action resolve request.
