@@ -980,7 +980,7 @@ It can be valuable to embed the contents of a document or project file into the 
 
 ### <a href="#events" name="events" class="anchor">Events</a>
 
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
+To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be referenced in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
 
 ```ts
 // The actual document
@@ -1097,11 +1097,11 @@ export class Emitter {
 This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has the following properties:
 
 - `scheme` to indicate how the `identifiers` is to be interpreted.
-- `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
+- `identifier` to actually identify the symbol. Its structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 - `kind` to indicate whether the moniker is exported, imported or local to the project.
 - `unique` to indicate how unique the moniker is. See the multi project section for more information on this.
 
-Please also note that the method `Emitter#doEmit` has a export moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
+Please also note that the method `Emitter#doEmit` has an export moniker although the method is private. If private elements do have monikers depends on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
 
 ### <a href="#multiProjects" name="multiProjects" class="anchor">Systems with multiple Projects</a>
 
@@ -1421,7 +1421,7 @@ In addition to this moniker schemes starting with `$` are reserved and shouldn't
 
 Ranges in LSIF have currently two meanings:
 
-1. they act as LSP request sensitive areas in a document (e.g. we use them to decided of for a given position a corresponding LSP request result exists)
+1. they act as LSP request sensitive areas in a document (e.g. we use them to decide if for a given position a corresponding LSP request result exists)
 1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
 
 To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
@@ -1468,7 +1468,7 @@ export interface MetaData {
 
 ### <a href="#emittingConstraints" name="emittingConstraints" class="anchor">Emitting constraints</a>
 
-The following emitting constraints (some of which have already mean mentioned in the document) exists:
+The following emitting constraints (some of which have already been mentioned in the document) exist:
 
 - a vertex needs to be emitted before it can be referenced in an edge.
 - a `range` and `resultRange` can only be contained in one document.
