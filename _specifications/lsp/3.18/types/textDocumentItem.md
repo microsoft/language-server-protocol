@@ -82,6 +82,7 @@ Swift | `swift`
 TypeScript | `typescript`
 TypeScript React| `typescriptreact`
 TeX | `tex`
+Text (plain) | `plaintext`
 Visual Basic | `vb`
 XML | `xml`
 XSL | `xsl`
