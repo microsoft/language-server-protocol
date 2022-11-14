@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION;TYPE=WORK:3.0
+FN;CHARSET=UTF-8:Matthew Cone
+N;CHARSET=UTF-8:Matthew Cone;;;;
+PROFILE:VCARD
+ADR;CHARSET=UTF-8:;;2008 Larrazolo Rd SW;Albuquerque;NM;87105-3140;USA
+EMAIL:matt@markdownguide.org
+ORG;CHARSET=UTF-8:Markdown Guide
+URL:https://www.markdownguide.org
+END:VCARD
