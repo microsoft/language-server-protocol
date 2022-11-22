@@ -163,6 +163,7 @@ index: 1
 | Rust | [Aleksey Kladov](https://github.com/matklad) | [Rust Analyzer](https://github.com/rust-analyzer/rust-analyzer) | Rust |
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) | Scala |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) | Scala |
+| Scheme| [ufo5260987423](https://github.com/ufo5260987423) | [scheme-langserver](https://github.com/ufo5260987423/scheme-langserver) | Chez Scheme|
 | [Slint](https://slint-ui.com) | Slint | [slint-lsp](https://github.com/slint-ui/slint/tree/HEAD/tools/lsp) | Rust |
 | [Smalltalk/Pharo](https://pharo.org/) | [Benoît Verhaeghe](https://github.com/badetitou) | [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) | Pharo |
 | Snyk | [Snyk](https://snyk.io) | [Snyk Language Server](https://github.com/snyk/snyk-ls) | Snyk SCA / SAST / IaC findings |
