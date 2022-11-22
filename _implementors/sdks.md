@@ -14,7 +14,6 @@ index: 3
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
 | C# | MS | work in progress by [David Wilson](https://github.com/daviwil)  |
 | C# | [Ken Domino](https://github.com/kaby76) | [LspTypes for C#](https://github.com/kaby76/lsp-types) |
-| C/C++/Objective-C | [MaskRay](https://github.com/MaskRay) | [ccls](https://github.com/MaskRay/ccls)|
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
 | C++17 | [otreblan](https://github.com/otreblan) | [libclsp](https://github.com/otreblan/libclsp) (WIP)|
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
