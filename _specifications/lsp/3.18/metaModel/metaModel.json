@@ -11486,6 +11486,16 @@
 									"optional": true,
 									"documentation": "The client supports the `activeParameter` property on `SignatureInformation`\nliteral.\n\n@since 3.16.0",
 									"since": "3.16.0"
+								},
+								{
+									"name": "noActiveParameterSupport",
+									"type": {
+										"kind": "base",
+										"name": "boolean"
+									},
+									"optional": true,
+									"documentation": "The client supports the `activeParameter` property on\n`SignatureInformation` being set to `null` to indicate that no\nparameter should be active.\n\n@since 3.18.0",
+									"since": "3.18.0"
 								}
 							]
 						}
