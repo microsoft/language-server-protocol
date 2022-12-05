@@ -12339,7 +12339,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether implementation supports dynamic registration. If this is set to `true`\nthe client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
+					"documentation": "Whether the implementation supports dynamic registration. If this is set to `true`\nthe client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
 				}
 			],
 			"documentation": "Client capabilities for the linked editing range request.\n\n@since 3.16.0",
