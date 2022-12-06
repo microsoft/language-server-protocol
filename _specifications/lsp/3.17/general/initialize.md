@@ -871,6 +871,12 @@ interface ServerCapabilities {
 	workspaceSymbolProvider?: boolean | WorkspaceSymbolOptions;
 
 	/**
+	 * The server has support for evaluable expression.
+	 *
+	 * @since 3.18.0
+	 */
+
+	/**
 	 * Workspace specific server capabilities
 	 */
 	workspace?: {
