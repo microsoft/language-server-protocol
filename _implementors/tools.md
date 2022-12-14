@@ -11,11 +11,11 @@ index: 2
 | Editor/IDE | Maintainer | Repository |
 |------|--------|----------|
 | [Acme](https://en.wikipedia.org/wiki/Acme_(text_editor)) | [Fazlul Shahriar](https://github.com/fhs) | [acme-lsp](https://github.com/fhs/acme-lsp) |
-| [Aginity Pro](https://www.aginity.com/products/aginity-pro/) | [Aginity](https://www.aginity.com) | |
-| [Aginity Team](https://www.aginity.com/products/aginity-team/) | [Aginity](https://www.aginity.com) | |
 | [Atom](https://atom.io/) | [GitHub](https://github.com/) | [atom-languageclient](https://www.npmjs.com/package/atom-languageclient) |
 | [BBEdit](https://www.barebones.com/products/bbedit) | [Bare Bones Software, Inc.](https://www.barebones.com/) | Proprietary |
 | [Brackets](http://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) |
+| [Coginiti Pro](https://www.coginiti.co/products/coginiti-pro/) | [Coginiti](https://www.coginiti.co) | |
+| [Coginiti Premium](https://www.coginiti.co/products/coginiti-premium/) | [Coginiti](https://www.coginiti.co) | |
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
 | [CodeLite](https://codelite.org/) | [Eran Ifrah](https://github.com/eranif) | https://github.com/eranif/codelite |
 | [CodeMirror](https://codemirror.net/6/) | [Furqan Software](https://github.com/furqansoftware) | [codemirror-languageserver](https://github.com/furqansoftware/codemirror-languageserver) |
