@@ -427,7 +427,7 @@ However, the server may decide to use a parallel execution strategy and may wish
 
 ### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
 
-As said LSP defines a set of requests, responses and notifications. Each of those are document using the following format:
+As said LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
 
 * a header describing the request
 * an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
@@ -439,7 +439,7 @@ As said LSP defines a set of requests, responses and notifications. Each of thos
 
 ### <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> Basic JSON Structures </a>
 
-There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are document in this section.
+There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are documented in this section.
 
 {% include_relative types/uri.md %}
 {% include_relative types/regexp.md %}
