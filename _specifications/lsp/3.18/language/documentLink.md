@@ -84,7 +84,7 @@ interface DocumentLink {
 	/**
 	 * The uri this link points to. If missing a resolve request is sent later.
 	 */
-	target?: DocumentUri;
+	target?: URI;
 
 	/**
 	 * The tooltip text when you hover over this link.
