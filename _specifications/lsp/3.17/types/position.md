@@ -43,7 +43,7 @@ export type PositionEncodingKind = string;
 export namespace PositionEncodingKind {
 
 	/**
-	 * Character offsets count UTF-8 code units.
+	 * Character offsets count UTF-8 code units (e.g bytes).
 	 */
 	export const UTF8: PositionEncodingKind = 'utf-8';
 
