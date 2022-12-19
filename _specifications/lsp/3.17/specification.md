@@ -523,6 +523,8 @@ export namespace TextDocumentSyncKind {
 	 */
 	export const Incremental = 2;
 }
+
+export type TextDocumentSyncKind = 0 | 1 | 2;
 ```
 
 <div class="anchorHolder"><a href="#textDocumentSyncOptions" name="textDocumentSyncOptions" class="linkableAnchor"></a></div>
@@ -581,36 +583,6 @@ export interface TextDocumentSyncClientCapabilities {
 	 */
 	didSave?: boolean;
 }
-```
-
-<div class="anchorHolder"><a href="#textDocumentSyncKind" name="textDocumentSyncKind" class="linkableAnchor"></a></div>
-
-```typescript
-/**
- * Defines how the host (editor) should sync document changes to the language
- * server.
- */
-export namespace TextDocumentSyncKind {
-	/**
-	 * Documents should not be synced at all.
-	 */
-	export const None = 0;
-
-	/**
-	 * Documents are synced by always sending the full content
-	 * of the document.
-	 */
-	export const Full = 1;
-
-	/**
-	 * Documents are synced by sending the full content on open.
-	 * After that only incremental updates to the document are
-	 * send.
-	 */
-	export const Incremental = 2;
-}
-
-export type TextDocumentSyncKind = 0 | 1 | 2;
 ```
 
 <div class="anchorHolder"><a href="#textDocumentSyncOptions" name="textDocumentSyncOptions" class="linkableAnchor"></a></div>
