@@ -94,6 +94,10 @@
       "additionalProperties": false,
       "description": "Defines an enumeration.",
       "properties": {
+        "deprecated": {
+          "description": "Whether the enumeration is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation.",
           "type": "string"
@@ -137,6 +141,10 @@
       "additionalProperties": false,
       "description": "Defines an enumeration entry.",
       "properties": {
+        "deprecated": {
+          "description": "Whether the enum entry is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation.",
           "type": "string"
@@ -340,6 +348,10 @@
       "additionalProperties": false,
       "description": "Represents a LSP notification",
       "properties": {
+        "deprecated": {
+          "description": "Whether the notification is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation;",
           "type": "string"
@@ -414,6 +426,10 @@
       "additionalProperties": false,
       "description": "Represents an object property.",
       "properties": {
+        "deprecated": {
+          "description": "Whether the property is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation.",
           "type": "string"
@@ -467,6 +483,10 @@
       "additionalProperties": false,
       "description": "Represents a LSP request",
       "properties": {
+        "deprecated": {
+          "description": "Whether the request is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation;",
           "type": "string"
@@ -551,6 +571,10 @@
       "additionalProperties": false,
       "description": "Defines the structure of an object literal.",
       "properties": {
+        "deprecated": {
+          "description": "Whether the structure is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation;",
           "type": "string"
@@ -599,6 +623,10 @@
       "additionalProperties": false,
       "description": "Defines a unnamed structure of an object literal.",
       "properties": {
+        "deprecated": {
+          "description": "Whether the literal is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation.",
           "type": "string"
@@ -704,6 +732,10 @@
       "additionalProperties": false,
       "description": "Defines a type alias. (e.g. `type Definition = Location | LocationLink`)",
       "properties": {
+        "deprecated": {
+          "description": "Whether the type alias is deprecated or not. If deprecated the property contains the deprecation message.",
+          "type": "string"
+        },
         "documentation": {
           "description": "An optional documentation.",
           "type": "string"

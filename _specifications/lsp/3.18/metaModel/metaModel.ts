@@ -185,6 +185,12 @@ export type Request = {
 	 * the feature is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the request is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 /**
@@ -235,6 +241,12 @@ export type Notification = {
 	 * the notification is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the notification is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 /**
@@ -273,6 +285,12 @@ export type Property = {
 	 * the structure is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the property is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 /**
@@ -319,6 +337,12 @@ export type Structure = {
 	 * the structure is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the structure is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 /**
@@ -347,6 +371,12 @@ export type StructureLiteral = {
 	 * the structure is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the literal is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 /**
@@ -380,6 +410,12 @@ export type TypeAlias = {
 	 * the type alias is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the type alias is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 /**
@@ -412,6 +448,12 @@ export type EnumerationEntry = {
 	 * the enumeration entry is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the enum entry is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 export type EnumerationType = { kind: 'base'; name: 'string' | 'integer' | 'uinteger' };
@@ -458,6 +500,12 @@ export type Enumeration = {
 	 * the enumeration is final.
 	 */
 	proposed?: boolean;
+
+	/**
+	 * Whether the enumeration is deprecated or not. If deprecated
+	 * the property contains the deprecation message.
+	 */
+	deprecated?: string;
 };
 
 export type MetaData = {
