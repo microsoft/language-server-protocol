@@ -184,13 +184,13 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 	/**
 	 * Most tools trigger completion request automatically without explicitly
 	 * requesting it using a keyboard shortcut (e.g. Ctrl+Space). Typically they
-	 * do so when the user starts to type an identifier. For example if the user
+	 * do so when the user starts to type an identifier. For example, if the user
 	 * types `c` in a JavaScript file code complete will automatically pop up
 	 * present `console` besides others as a completion item. Characters that
 	 * make up identifiers don't need to be listed here.
 	 *
 	 * If code complete should automatically be trigger on characters not being
-	 * valid inside an identifier (for example `.` in JavaScript) list them in
+	 * valid inside an identifier (for example, `.` in JavaScript) list them in
 	 * `triggerCharacters`.
 	 */
 	triggerCharacters?: string[];
@@ -685,7 +685,7 @@ export interface CompletionItem {
 	 * insert position) with the main edit nor with themselves.
 	 *
 	 * Additional text edits should be used to change text unrelated to the
-	 * current cursor position (for example adding an import statement at the
+	 * current cursor position (for example, adding an import statement at the
 	 * top of the file if the completion item will insert an unqualified type).
 	 */
 	additionalTextEdits?: TextEdit[];
@@ -768,7 +768,7 @@ Placeholders are tab stops with values, like `${1:foo}`. The placeholder text wi
 
 ##### Choice
 
-Placeholders can have choices as values. The syntax is a comma separated enumeration of values, enclosed with the pipe-character, for example `${1|one,two,three|}`. When the snippet is inserted and the placeholder selected, choices will prompt the user to pick one of the values.
+Placeholders can have choices as values. The syntax is a comma separated enumeration of values, enclosed with the pipe-character, for example, `${1|one,two,three|}`. When the snippet is inserted and the placeholder selected, choices will prompt the user to pick one of the values.
 
 ##### Variables
 

@@ -214,7 +214,7 @@ export type InlineValue = InlineValueText | InlineValueVariableLookup
 
 > *Since version 3.17.0*
 
-The `workspace/inlineValue/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inline values currently shown in editors. As a result the client should ask the server to recompute the inline values for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inline values. Note that the client still has the freedom to delay the re-calculation of the inline values if for example an editor is currently not visible.
+The `workspace/inlineValue/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inline values currently shown in editors. As a result the client should ask the server to recompute the inline values for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inline values. Note that the client still has the freedom to delay the re-calculation of the inline values if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -236,7 +236,7 @@ export interface InlineValueWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * inline values currently shown. It should be used with absolute care and
-	 * is useful for situation where a server for example detect a project wide
+	 * is useful for situation where a server, for example, detect a project wide
 	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;
