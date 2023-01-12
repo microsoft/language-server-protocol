@@ -91,7 +91,7 @@ The dump format therefore should support the following features:
 - Each element has a unique id (which may be a string or a number).
 - It should be possible to emit data as soon as it is available to allow streaming rather than large memory requirements. For example, emitting data based on document syntax should be done for each file as parsing progresses.
 - It should be easy to add additional requests later on.
-- It should be easy for a tool to consume a dump and for example import it into a database without holding the dump in memory.
+- It should be easy for a tool to consume a dump and, for example, import it into a database without holding the dump in memory.
 
 
 We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
@@ -984,7 +984,7 @@ It can be valuable to embed the contents of a document or project file into the 
 
 ### <a href="#events" name="events" class="anchor">Events</a>
 
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be referenced in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
+To ease the processing of an LSIF dump to, for example, import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example, no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be referenced in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
 
 ```ts
 // The actual document
@@ -1173,7 +1173,7 @@ The dump for project P2 includes the same source vertex:
 }
 ```
 
-Note that P1 and P2 have the same source information which is a good indication for the storage backend to resolve references across these two projects. However project grouping might not be limited to source repositories. Therefore a storage backend should define a way to group projects in a hierarchal way. This will for example allow searches like: find all references to function `foo` in the organization O.
+Note that P1 and P2 have the same source information which is a good indication for the storage backend to resolve references across these two projects. However project grouping might not be limited to source repositories. Therefore a storage backend should define a way to group projects in a hierarchal way. This will, for example, allow searches like: find all references to function `foo` in the organization O.
 
 Now lets look how we ensure that searching for references for `Widget#dispose` find the `d.dispose()` match in P1 as well. First lets look what kind of information will be in the dump of P1 for `Disposable#dispose`:
 
@@ -1203,10 +1203,10 @@ Now lets look how we ensure that searching for references for `Widget#dispose` f
 
 Interesting here is line 22 which defines the moniker for `Disposable#dispose`. It has new a property `unique` telling that the moniker is unique inside a `workspace` of projects but not necessarily outside. Other possible values for `unique` are:
 
-- `document` to indicate that the moniker is only unique inside a document. Used for example for locals or private members.
-- `project` to indicate that the moniker is only unique inside a project. Used for example for project internal symbols.
-- `workspace` to indicate that the moniker is unique inside a workspace of projects. Used for example for exported members.
-- `scheme` to indicate that the moniker is unique inside the moniker's scheme. For example if the moniker is generated for a specific package manager (see npm example below) then these monikers are usually unique inside the moniker's theme (e.g. all moniker generated for npm carry the `npm` scheme and are unique)
+- `document` to indicate that the moniker is only unique inside a document. Used, for example, for locals or private members.
+- `project` to indicate that the moniker is only unique inside a project. Used, for example, for project internal symbols.
+- `workspace` to indicate that the moniker is unique inside a workspace of projects. Used, for example, for exported members.
+- `scheme` to indicate that the moniker is unique inside the moniker's scheme. For example, if the moniker is generated for a specific package manager (see npm example below) then these monikers are usually unique inside the moniker's theme (e.g. all moniker generated for npm carry the `npm` scheme and are unique)
 - `global` to indicate that the moniker is globally unique (e.g. its identifer is unique independent of the scheme or kind)
 
 When generating the dump for P2 the information for `Widget#dispose` will look like this:
@@ -1389,7 +1389,7 @@ which made the moniker specific to the npm `mobx` package. In addition informati
 
 Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
 
-For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to efficiently decide this, LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
+For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example, function arguments can only be navigated inside the file). To help postprocessing tools to efficiently decide this, LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
 
 For the following example
 
@@ -1479,7 +1479,7 @@ The following emitting constraints (some of which have already been mentioned in
 - a vertex needs to be emitted before it can be referenced in an edge.
 - a `range` and `resultRange` can only be contained in one document.
 - a `resultRange` can not be used as a target in a `contains` edge.
-- after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
+- after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is, for example, not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 - if ranges point to result sets and monikers are emitted, they must be emitted on the result set and can't be emitted on individual ranges.
 - if a range is references in a items edge the range must have been attached to a document using the contains edge. This ensures that that target document of a range is known. (@since 0.6.0)
 

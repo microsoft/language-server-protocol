@@ -197,7 +197,7 @@ interface SemanticTokensClientCapabilities {
 	 * depending on the server's capability. Please note that clients might not
 	 * show semantic tokens or degrade some of the user experience if a range
 	 * or full request is advertised by the client but not provided by the
-	 * server. If for example the client capability `requests.full` and
+	 * server. If, for example, the client capability `requests.full` and
 	 * `request.range` are both set to true but the server only provides a
 	 * range provider the client might not render a minimap correctly or might
 	 * even decide to not show any semantic tokens at all.
@@ -496,7 +496,7 @@ _Response_:
 
 **Requesting a refresh of all semantic tokens**
 
-The `workspace/semanticTokens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the editors for which this server provides semantic tokens. As a result the client should ask the server to recompute the semantic tokens for these editors. This is useful if a server detects a project wide configuration change which requires a re-calculation of all semantic tokens. Note that the client still has the freedom to delay the re-calculation of the semantic tokens if for example an editor is currently not visible.
+The `workspace/semanticTokens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the editors for which this server provides semantic tokens. As a result the client should ask the server to recompute the semantic tokens for these editors. This is useful if a server detects a project wide configuration change which requires a re-calculation of all semantic tokens. Note that the client still has the freedom to delay the re-calculation of the semantic tokens if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -513,7 +513,7 @@ export interface SemanticTokensWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * semantic tokens currently shown. It should be used with absolute care
-	 * and is useful for situation where a server for example detect a project
+	 * and is useful for situation where a server, for example, detect a project
 	 * wide change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;

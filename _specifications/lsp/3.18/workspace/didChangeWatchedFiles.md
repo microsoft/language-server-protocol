@@ -5,7 +5,7 @@ The watched files notification is sent from the client to the server when the cl
 Servers are allowed to run their own file system watching mechanism and not rely on clients to provide file system events. However this is not recommended due to the following reasons:
 
 - to our experience getting file system watching on disk right is challenging, especially if it needs to be supported across multiple OSes.
-- file system watching is not for free especially if the implementation uses some sort of polling and keeps a file system tree in memory to compare time stamps (as for example some node modules do)
+- file system watching is not for free especially if the implementation uses some sort of polling and keeps a file system tree in memory to compare time stamps (as, for example, some node modules do)
 - a client usually starts more than one server. If every server runs its own file system watching it can become a CPU or memory problem.
 - in general there are more server than client implementations. So this problem is better solved on the client side.
 

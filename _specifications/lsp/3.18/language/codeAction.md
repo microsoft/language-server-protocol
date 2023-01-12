@@ -4,12 +4,12 @@ The code action request is sent from the client to the server to compute command
 
 *Since version 3.16.0:* a client can offer a server to delay the computation of code action properties during a 'textDocument/codeAction' request:
 
-This is useful for cases where it is expensive to compute the value of a property (for example the `edit` property). Clients signal this through the `codeAction.resolveSupport` capability which lists all properties a client can resolve lazily. The server capability `codeActionProvider.resolveProvider` signals that a server will offer a `codeAction/resolve` route. To help servers to uniquely identify a code action in the resolve request, a code action literal can optional carry a data property. This is also guarded by an additional client capability `codeAction.dataSupport`. In general, a client should offer data support if it offers resolve support. It should also be noted that servers shouldn't alter existing attributes of a code action in a codeAction/resolve request.
+This is useful for cases where it is expensive to compute the value of a property (for example, the `edit` property). Clients signal this through the `codeAction.resolveSupport` capability which lists all properties a client can resolve lazily. The server capability `codeActionProvider.resolveProvider` signals that a server will offer a `codeAction/resolve` route. To help servers to uniquely identify a code action in the resolve request, a code action literal can optional carry a data property. This is also guarded by an additional client capability `codeAction.dataSupport`. In general, a client should offer data support if it offers resolve support. It should also be noted that servers shouldn't alter existing attributes of a code action in a codeAction/resolve request.
 
 > *Since version 3.8.0:* support for CodeAction literals to enable the following scenarios:
 
 - the ability to directly return a workspace edit from the code action request. This avoids having another server roundtrip to execute an actual code action. However server providers should be aware that if the code action is expensive to compute or the edits are huge it might still be beneficial if the result is simply a command and the actual edit is only computed when needed.
-- the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action for example into corresponding menus (e.g. all refactor code actions into a refactor menu).
+- the ability to group code actions using a kind. Clients are allowed to ignore that information. However it allows them to better group code action, for example, into corresponding menus (e.g. all refactor code actions into a refactor menu).
 
 Clients need to announce their support for code action literals (e.g. literals of type `CodeAction`) and code action kinds via the corresponding client capability `codeAction.codeActionLiteralSupport`.
 
@@ -89,7 +89,7 @@ export interface CodeActionClientCapabilities {
 	/**
 	 * Whether the client honors the change annotations in
 	 * text edits and resource operations returned via the
-	 * `CodeAction#edit` property by for example presenting
+	 * `CodeAction#edit` property by, for example, presenting
 	 * the workspace edit in the user interface and asking
 	 * for confirmation.
 	 *
@@ -232,7 +232,7 @@ export namespace CodeActionKind {
 	 * - Move a property between classes
 	 * - Move method to base class
 	 * - ...
-	 * 
+	 *
 	 * @since 3.18.0 - proposed
 	 */
 	export const RefactorMove: CodeActionKind = 'refactor.move';
