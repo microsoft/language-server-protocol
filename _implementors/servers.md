@@ -207,7 +207,7 @@ index: 1
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) | TypeScript |
 | [YARA](https://github.com/virusTotal/yara) | [Avast](https://github.com/avast) | [YARA Language Server](https://github.com/avast/yls) | Python |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
-| Zig | [Zig Developers](https://github.com/orgs/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
+| Zig | [zigtools](https://github.com/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
 | * | [iamcco](https://github.com/iamcco) | [diagnostic-languageserver](https://github.com/iamcco/diagnostic-languageserver) | TypeScript |
 | * | [daquexian](https://github.com/daquexian) | [tagls](https://github.com/daquexian/tagls) | Python |
