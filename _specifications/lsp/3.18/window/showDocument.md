@@ -2,7 +2,7 @@
 
 > New in version 3.16.0
 
-The show document request is sent from a server to a client to ask the client to display a particular document in the user interface.
+The show document request is sent from a server to a client to ask the client to display a particular resource referenced by a URI in the user interface.
 
 _Client Capability_:
 * property path (optional): `window.showDocument`
@@ -31,13 +31,13 @@ _Request_:
 
 ```typescript
 /**
- * Params to show a document.
+ * Params to show a resource.
  *
  * @since 3.16.0
  */
 export interface ShowDocumentParams {
 	/**
-	 * The document uri to show.
+	 * The uri to show.
 	 */
 	uri: URI;
 
