@@ -109,7 +109,7 @@ _Response_:
 
 > *Since version 3.16.0*
 
-The `workspace/codeLens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the code lenses currently shown in editors. As a result the client should ask the server to recompute the code lenses for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all code lenses. Note that the client still has the freedom to delay the re-calculation of the code lenses if for example an editor is currently not visible.
+The `workspace/codeLens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the code lenses currently shown in editors. As a result the client should ask the server to recompute the code lenses for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all code lenses. Note that the client still has the freedom to delay the re-calculation of the code lenses if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -126,7 +126,7 @@ export interface CodeLensWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * code lenses currently shown. It should be used with absolute care and is
-	 * useful for situation where a server for example detect a project wide
+	 * useful for situation where a server, for example, detect a project wide
 	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;

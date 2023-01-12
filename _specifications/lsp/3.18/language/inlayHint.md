@@ -282,7 +282,7 @@ _Response_:
 
 > *Since version 3.17.0*
 
-The `workspace/inlayHint/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inlay hints currently shown in editors. As a result the client should ask the server to recompute the inlay hints for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inlay hints. Note that the client still has the freedom to delay the re-calculation of the inlay hints if for example an editor is currently not visible.
+The `workspace/inlayHint/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inlay hints currently shown in editors. As a result the client should ask the server to recompute the inlay hints for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inlay hints. Note that the client still has the freedom to delay the re-calculation of the inlay hints if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -304,7 +304,7 @@ export interface InlayHintWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * inlay hints currently shown. It should be used with absolute care and
-	 * is useful for situation where a server for example detects a project wide
+	 * is useful for situation where a server, for example, detects a project wide
 	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;
