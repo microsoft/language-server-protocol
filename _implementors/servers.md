@@ -189,6 +189,7 @@ index: 1
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
 | Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
 | VDM-SL, VDM++, VDM-RT | [Nick Battle](https://github.com/nickbattle)| [VDMJ-LSP](https://github.com/nickbattle/vdmj/tree/master/lsp) | Java |
+| [Veryl](https://github.com/dalance/veryl) | [dalance](https://github.com/dalance) | [Veryl Language Server](https://github.com/dalance/veryl/tree/master/crates/languageserver) | Rust |
 | VHDL | [Olof Kraigher](https://github.com/kraigher) | [vhdl_ls](https://github.com/kraigher/rust_hdl) | Rust |
 | VHDL | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | VHDL | [ViDE-Software](https://www.vide-software.at) | Proprietary ([VHDL for Professionals](https://marketplace.visualstudio.com/items?itemName=ViDE-Software.v4pvhdlforprofessionals)) | C# |
