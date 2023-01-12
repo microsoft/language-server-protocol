@@ -135,7 +135,7 @@ export enum MonikerKind {
  */
 export interface Moniker {
 	/**
-	 * The scheme of the moniker. For example tsc or .Net
+	 * The scheme of the moniker. For example, `tsc` or `.Net`
 	 */
 	scheme: string;
 

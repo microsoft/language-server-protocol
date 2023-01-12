@@ -43,7 +43,7 @@ export interface ShowDocumentParams {
 
 	/**
 	 * Indicates to show the resource in an external program.
-	 * To show for example `https://code.visualstudio.com/`
+	 * To show, for example, `https://code.visualstudio.com/`
 	 * in the default WEB browser set `external` to `true`.
 	 */
 	external?: boolean;
