@@ -30,6 +30,7 @@ index: 2
 | [JupyterLab](https://github.com/jupyterlab/jupyterlab) | [krassowski](https://github.com/krassowski) | [jupyterlab-lsp](https://github.com/jupyter-lsp/jupyterlab-lsp) |
 | [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
 | [Kate](https://kate-editor.org) | [Kate Team](https://kate-editor.org) | [kate](https://invent.kde.org/kde/kate) |
+| [Lite XL](https://lite-xl.com) | [Lite XL Team](https://lite-xl.com) | [LSP Plugin](https://github.com/lite-xl/lite-xl-lsp) |
 | [Moonshine IDE](https://moonshine-ide.com) | [Prominic.NET](https://github.com/prominic) | [Moonshine-IDE](https://github.com/prominic/Moonshine-IDE) |
 | [MS Monaco Editor](https://github.com/Microsoft/monaco-editor) | [TypeFox](https://github.com/TypeFox) | [monaco-languageclient](https://www.npmjs.com/package/monaco-languageclient) |
 | [MS Paint IDE](https://ms-paint-i.de/) | [RubbaBoy](https://github.com/RubbaBoy) | [MS Paint IDE](https://github.com/MSPaintIDE/MSPaintIDE) |
