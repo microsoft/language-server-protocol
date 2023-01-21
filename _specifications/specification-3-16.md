@@ -392,7 +392,7 @@ The only regular expression flag that a client needs to support is 'i' to specif
 
 The protocol supports two kind of enumerations: (a) integer based enumerations and (b) strings based enumerations. Integer based enumerations usually start with `1`. The ones that don't are historical and they were kept to stay backwards compatible. If appropriate the value set of an enumeration is announced by the defining side (e.g. client or server) and transmitted to the other side during the initialize handshake. An example is the `CompletionItemKind` enumeration. It is announced by the client using the `textDocument.completion.completionItemKind` client property.
 
-To support the evolution of enumerations the using side of an enumeration shouldn't fail on a enumeration value it doesn't know. It should simply ignore it as a value it can use and try to do its best to preserve the value on round trips. Lets look at the `CompletionItemKind` enumeration as an example again: if in a future version of the specification an additional completion item kind with the value `n` gets added and announced by a client a (older) server not knowing about the value should not fail but simply ignore the value as a usable item kind.
+To support the evolution of enumerations the using side of an enumeration shouldn't fail on an enumeration value it doesn't know. It should simply ignore it as a value it can use and try to do its best to preserve the value on round trips. Lets look at the `CompletionItemKind` enumeration as an example again: if in a future version of the specification an additional completion item kind with the value `n` gets added and announced by a client a (older) server not knowing about the value should not fail but simply ignore the value as a usable item kind.
 
 #### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
 
@@ -5879,7 +5879,7 @@ export interface SymbolInformation {
 	 * the range usually spans more then the actual symbol's name and does
 	 * normally include things like visibility modifiers.
 	 *
-	 * The range doesn't have to denote a node range in the sense of a abstract
+	 * The range doesn't have to denote a node range in the sense of an abstract
 	 * syntax tree. It can therefore not be used to re-construct a hierarchy of
 	 * the symbols.
 	 */
@@ -7116,7 +7116,7 @@ export enum FoldingRangeKind {
 	 */
 	Comment = 'comment',
 	/**
-	 * Folding range for a imports or includes
+	 * Folding range for imports or includes
 	 */
 	Imports = 'imports',
 	/**

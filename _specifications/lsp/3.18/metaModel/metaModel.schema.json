@@ -621,7 +621,7 @@
     },
     "StructureLiteral": {
       "additionalProperties": false,
-      "description": "Defines a unnamed structure of an object literal.",
+      "description": "Defines an unnamed structure of an object literal.",
       "properties": {
         "deprecated": {
           "description": "Whether the literal is deprecated or not. If deprecated the property contains the deprecation message.",
