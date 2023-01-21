@@ -1481,7 +1481,7 @@ The following emitting constraints (some of which have already been mentioned in
 - a `resultRange` can not be used as a target in a `contains` edge.
 - after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is, for example, not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 - if ranges point to result sets and monikers are emitted, they must be emitted on the result set and can't be emitted on individual ranges.
-- if a range is references in a items edge the range must have been attached to a document using the contains edge. This ensures that that target document of a range is known. (@since 0.6.0)
+- if a range is references in a items edge the range must have been attached to a document using the contains edge. This ensures that target document of a range is known. (@since 0.6.0)
 
 ## <a href="#additionalInformation" name="additionalInformation" class="anchor">Additional Information </a>
 
