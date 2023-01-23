@@ -1633,7 +1633,7 @@
 				"kind": "reference",
 				"name": "DocumentFormattingRegistrationOptions"
 			},
-			"documentation": "A request to to format a whole document."
+			"documentation": "A request to format a whole document."
 		},
 		{
 			"method": "textDocument/rangeFormatting",
@@ -1662,7 +1662,7 @@
 				"kind": "reference",
 				"name": "DocumentRangeFormattingRegistrationOptions"
 			},
-			"documentation": "A request to to format a range in a document."
+			"documentation": "A request to format a range in a document."
 		},
 		{
 			"method": "textDocument/onTypeFormatting",
@@ -7623,7 +7623,7 @@
 					"documentation": "Options necessary for the registration."
 				}
 			],
-			"documentation": "General parameters to to register for an notification or to register a provider."
+			"documentation": "General parameters to register for a notification or to register a provider."
 		},
 		{
 			"name": "Unregistration",
