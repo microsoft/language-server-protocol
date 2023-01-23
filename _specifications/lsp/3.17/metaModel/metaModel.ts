@@ -346,7 +346,7 @@ export type Structure = {
 };
 
 /**
- * Defines a unnamed structure of an object literal.
+ * Defines an unnamed structure of an object literal.
  */
 export type StructureLiteral = {
 

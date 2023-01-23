@@ -120,7 +120,7 @@ export namespace FoldingRangeKind {
 	export const Comment = 'comment';
 
 	/**
-	 * Folding range for a imports or includes
+	 * Folding range for imports or includes
 	 */
 	export const Imports = 'imports';
 
