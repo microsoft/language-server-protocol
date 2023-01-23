@@ -287,7 +287,7 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 { id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], shard: 4 }
 ```
 
-The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
+The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. an item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
 
 ### <a href="#declaration" name="declaration" class="anchor">Request: `textDocument/declaration`</a>
 
@@ -1140,7 +1140,7 @@ w.dispose();
 
 Now if a user search for reference to `Widget#dispose` it is expected that the reference `d.dispose` in P1 is included in the result. However when P1 is process the tools doesn't know about P2. And when P2 is processed it usually doesn't know about the source of P1. It only knows about its API shape (e.g. in TypeScript the corresponding `d.ts` file).
 
-To make this work we first need to group projects into larger units so that we know in which projects `d.dispose` is actually a match. Assume there is a totally unrelated project PX which also uses `Disposable` from P1 but P2 is never linked into one system with PX. So a object of type `Widget` can never flow to code in PX hence reference in PX should not be listed. We therefore introduce the notation of a group to logically group projects into larger systems. Projects belong to a group and groups are identified using a URI. Lets look at the concrete dumps for P1 and P2:
+To make this work we first need to group projects into larger units so that we know in which projects `d.dispose` is actually a match. Assume there is a totally unrelated project PX which also uses `Disposable` from P1 but P2 is never linked into one system with PX. So an object of type `Widget` can never flow to code in PX hence reference in PX should not be listed. We therefore introduce the notation of a group to logically group projects into larger systems. Projects belong to a group and groups are identified using a URI. Lets look at the concrete dumps for P1 and P2:
 
 ```typescript
 {id: 2, type: "vertex", label: "group",

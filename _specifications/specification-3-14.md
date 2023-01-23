@@ -1902,7 +1902,7 @@ interface ServerCapabilities {
 			* Whether the server wants to receive workspace folder
 			* change notifications.
 			*
-			* If a strings is provided the string is treated as a ID
+			* If a strings is provided the string is treated as an ID
 			* under which the notification is registered on the client
 			* side. The ID can be used to unregister for these events
 			* using the `client/unregisterCapability` request.
@@ -3616,7 +3616,7 @@ interface SymbolInformation {
 	 * the range usually spans more then the actual symbol's name and does
 	 * normally include things like visibility modifiers.
 	 *
-	 * The range doesn't have to denote a node range in the sense of a abstract
+	 * The range doesn't have to denote a node range in the sense of an abstract
 	 * syntax tree. It can therefore not be used to re-construct a hierarchy of
 	 * the symbols.
 	 */
@@ -4318,7 +4318,7 @@ export enum FoldingRangeKind {
 	 */
 	Comment = 'comment',
 	/**
-	 * Folding range for a imports or includes
+	 * Folding range for imports or includes
 	 */
 	Imports = 'imports',
 	/**

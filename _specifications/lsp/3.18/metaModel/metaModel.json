@@ -6002,7 +6002,7 @@
 					"documentation": "The edits to apply."
 				}
 			],
-			"documentation": "The parameters passed via a apply workspace edit request."
+			"documentation": "The parameters passed via an apply workspace edit request."
 		},
 		{
 			"name": "ApplyWorkspaceEditResult",

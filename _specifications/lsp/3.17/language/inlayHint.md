@@ -24,7 +24,7 @@ export interface InlayHintClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Indicates which properties a client can resolve lazily on a inlay
+	 * Indicates which properties a client can resolve lazily on an inlay
 	 * hint.
 	 */
 	resolveSupport?: {
@@ -170,7 +170,7 @@ export interface InlayHint {
 
 
 	/**
-	 * A data entry field that is preserved on a inlay hint between
+	 * A data entry field that is preserved on an inlay hint between
 	 * a `textDocument/inlayHint` and a `inlayHint/resolve` request.
 	 */
 	data?: LSPAny;
@@ -256,7 +256,7 @@ export type InlayHintKind = 1 | 2;
 > *Since version 3.17.0*
 
 The request is sent from the client to the server to resolve additional information for a given inlay hint. This is usually used to compute
-the `tooltip`, `location` or `command` properties of a inlay hint's label part to avoid its unnecessary computation during the `textDocument/inlayHint` request.
+the `tooltip`, `location` or `command` properties of an inlay hint's label part to avoid its unnecessary computation during the `textDocument/inlayHint` request.
 
 Consider the clients announces the `label.location` property as a property that can be resolved lazy using the client capability
 

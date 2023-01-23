@@ -291,7 +291,7 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 { id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], shard: 4 }
 ```
 
-The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
+The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. an item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
 
 ### <a href="#declaration" name="declaration" class="anchor">Request: `textDocument/declaration`</a>
 
@@ -1481,7 +1481,7 @@ The following emitting constraints (some of which have already been mentioned in
 - a `resultRange` can not be used as a target in a `contains` edge.
 - after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is, for example, not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 - if ranges point to result sets and monikers are emitted, they must be emitted on the result set and can't be emitted on individual ranges.
-- if a range is references in a items edge the range must have been attached to a document using the contains edge. This ensures that target document of a range is known. (@since 0.6.0)
+- if a range is references in items edge the range must have been attached to a document using the contains edge. This ensures that target document of a range is known. (@since 0.6.0)
 
 ## <a href="#additionalInformation" name="additionalInformation" class="anchor">Additional Information </a>
 
