@@ -61,7 +61,9 @@ Content-Length: ...\r\n
 ```
 ### Base Protocol JSON structures
 
-The following TypeScript definitions describe the base [JSON-RPC protocol](http://www.jsonrpc.org/specification):
+The protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](http://www.jsonrpc.org/specification). The protocol currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
+
+The following TypeScript definitions describe the base JSON-RPC protocol:
 
 #### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
 
