@@ -99,6 +99,7 @@ index: 1
 | [Jsonnet](https://jsonnet.org/) | [Grafana Labs](https://grafana.com/) | [jsonnet-language-server](https://github.com/grafana/jsonnet-language-server) | Go |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) | Julia |
 | [Kerboscript (kOS)](https://ksp-kos.github.io/KOS/) | [John Chabot](https://github.com/jonnyboyC) | [kos-language-server](https://github.com/jonnyboyC/kos-language-server) | Typescript
+| [KerML](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | [Kotlin](https://kotlinlang.org) | [@fwcd](https://github.com/fwcd) | [kotlin-language-server](https://github.com/fwcd/kotlin-language-server) | Kotlin |
 | [Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot) | [TypeCobolTeam](https://github.com/TypeCobolTeam) | [TypeCobol Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot/wiki) | C# |
 | [LanguageTool](https://languagetool.org/)| [Adam Voss](https://github.com/adamvoss) | [languagetool](https://github.com/adamvoss/languagetool-languageserver) | Java |
@@ -175,6 +176,7 @@ index: 1
 | Stylable | [Wix.com](https://www.wix.com) | [stylable/language-service](https://github.com/wix/stylable/tree/master/packages/language-service) | TypeScript |
 | Svelte | [UnwrittenFun](https://github.com/UnwrittenFun) | [svelte-language-server](https://github.com/UnwrittenFun/svelte-language-server) | TypeScript |
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
+| [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
 | SystemVerilog | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
