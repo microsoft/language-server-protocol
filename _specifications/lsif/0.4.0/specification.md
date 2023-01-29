@@ -614,7 +614,7 @@ export interface DeclarationTag {
 }
 
 /**
- * The range respresents a definition
+ * The range represents a definition
  */
 export interface DefinitionTag {
   /**
