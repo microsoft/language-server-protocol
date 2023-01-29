@@ -40,7 +40,7 @@
     - title: Embedding Contents
       anchor: embeddingContents
   - title: Advanced Concepts
-    anchor: _advancedConcpets
+    anchor: _advancedConcepts
     children:
     - title: Events
       anchor: events

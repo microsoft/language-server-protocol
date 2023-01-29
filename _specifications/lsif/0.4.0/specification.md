@@ -823,7 +823,7 @@ export interface Project extends V {
 
 It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
 
-## <a href="#advancedConcpets" name="advancedConcpets" class="anchor">Advanced Concepts</a>
+## <a href="#advancedConcepts" name="advancedConcepts" class="anchor">Advanced Concepts</a>
 
 ### <a href="#events" name="events" class="anchor">Events</a>
 
