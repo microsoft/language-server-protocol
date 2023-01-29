@@ -987,7 +987,7 @@ For tools processing the dump and importing it into a database it is sometime us
 For the following example
 
 ```ts
-funciton foo(x: number): void {
+function foo(x: number): void {
 }
 ```
 
