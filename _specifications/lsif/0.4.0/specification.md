@@ -1054,7 +1054,7 @@ export interface MetaData {
 }
 ```
 
-### <a href="#emittingContstraints" name="emittingContstraints" class="anchor">Emitting constraints</a>
+### <a href="#emittingConstraints" name="emittingConstraints" class="anchor">Emitting constraints</a>
 
 The following emitting constraints (some of which have already been mentioned in the document) exist:
 

@@ -50,8 +50,8 @@
       anchor: resultRanges
     - title: Meta Data
       anchor: metaData
-    - title: Emitting Contstraints
-      anchor: emittingContstraints
+    - title: Emitting Constraints
+      anchor: emittingConstraints
   - title: Additional Information
     anchor: _additionalInformation
     children:
