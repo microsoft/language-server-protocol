@@ -1239,7 +1239,7 @@ interface TextDocumentPositionParams {
 
 #### <a href="#documentFilter" name="documentFilter" class="anchor"> DocumentFilter </a>
 
-A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter the applies to JSON files with name `package.json`:
+A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter that applies to JSON files with name `package.json`:
 ```typescript
 { language: 'typescript', scheme: 'file' }
 { language: 'json', pattern: '**/package.json' }
@@ -8129,7 +8129,7 @@ Server implementations of this method should ensure that the moniker calculation
 
 ### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
-Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
+Language servers usually run in a separate process and clients communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
 - if a client sends a request to the server and the client state changes in a way that it invalidates the response it should do the following:
   - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary the client should resend the request.
@@ -8144,7 +8144,7 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 - **stdio**: uses stdio as the communication channel.
 - **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
 - **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
-- **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
+- **node-ipc**: use node IPC communication between the client and the server. This is only supported if both client and server run under node.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 

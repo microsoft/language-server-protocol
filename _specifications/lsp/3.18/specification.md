@@ -620,7 +620,7 @@ export interface TextDocumentSyncOptions {
 
 ### <a href="#languageFeatures" name="languageFeatures" class="anchor">Language Features</a>
 
-Language Feature provide the actual smarts in the language server protocol. The are usually executed on a [text document, position] tuple. The main language feature categories are:
+Language Features provide the actual smarts in the language server protocol. They are usually executed on a [text document, position] tuple. The main language feature categories are:
 
 - code comprehension features like Hover or Goto Definition.
 - coding features like diagnostics, code complete or code actions.
@@ -687,7 +687,7 @@ Language Feature provide the actual smarts in the language server protocol. The 
 
 #### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
-Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
+Language servers usually run in a separate process and clients communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
 - if a client sends a request to the server and the client state changes in a way that it invalidates the response it should do the following:
   - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary the client should resend the request.
@@ -701,9 +701,9 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 - **stdio**: uses stdio as the communication channel.
 - **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
 - **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
-- **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
+- **node-ipc**: use node IPC communication between the client and the server. This is only supported if both client and server run under node.
 
-To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id pass on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
+To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id passed on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
 
 #### <a href="#metaModel" name="metaModel" class="anchor">Meta Model</a>
 
@@ -731,7 +731,6 @@ Since 3.17 there is a meta model describing the LSP protocol:
   - server cancelable
   - augmentation of syntax tokens
 * Add support to negotiate the position encoding.
-* Add support for HTML tags in markdown.
 * Add support for relative patterns in file watchers.
 * Add support for type hierarchies
 * Add support for inline values.
