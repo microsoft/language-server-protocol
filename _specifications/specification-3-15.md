@@ -922,7 +922,7 @@ interface TextDocumentPositionParams {
 
 #### <a href="#documentFilter" name="documentFilter" class="anchor"> DocumentFilter </a>
 
-A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter the applies to JSON files with name `package.json`:
+A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter that applies to JSON files with name `package.json`:
 ```typescript
 { language: 'typescript', scheme: 'file' }
 { language: 'json', pattern: '**/package.json' }
@@ -5786,7 +5786,7 @@ export interface SelectionRange {
 
 ### Implementation considerations
 
-Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
+Language servers usually run in a separate process and clients communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
 - if a client sends a request to the server and the client state changes in a way that the result will be invalid it should cancel the server request and ignore the result. If necessary it can resend the request to receive an up to date result.
 - if a server detects a state change that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if appropriate.
