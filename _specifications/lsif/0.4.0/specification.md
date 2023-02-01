@@ -220,7 +220,7 @@ This will emit the following vertices and edges to model the `textDocument/defin
 The definition result above has only one value (the range with id '9') and we could have emitted it directly. However, we introduced the definition result vertex for two reasons:
 
 - To have consistency with all other requests that point to a result.
-- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptionally a definition result is an array to which the `item` edge adds items.
+- To have support for languages where a definition can be spread over multiple ranges or even multiple documents. To support multiple documents ranges are added to a definition result using an 1:N `item` edge. Conceptually a definition result is an array to which the `item` edge adds items.
 
 Consider the following TypeScript example:
 
@@ -241,7 +241,7 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 { id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], document: 4 }
 ```
 
-The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. an item edge and only refer to a range that got already added to a document using a `containes` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
+The `item` edge as an additional property document which indicate in which document these declaration are. We added this information to still make it easy to emit the data but also make it easy to process the data to store it in a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. an item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `document` property looks like a fair balance.
 
 ### <a href="#declaration" name="declaration" class="anchor">Request: `textDocument/declaration`</a>
 
@@ -614,7 +614,7 @@ export interface DeclarationTag {
 }
 
 /**
- * The range respresents a definition
+ * The range represents a definition
  */
 export interface DefinitionTag {
   /**
@@ -823,7 +823,7 @@ export interface Project extends V {
 
 It can be valuable to embed the contents of a document or project file into the dump as well. For example, if the content of the document is a virtual document generated from program meta data. The index format therefore supports an optional `contents` property on the `document` and `project` vertex. If used the content needs to be `base64` encoded.
 
-## <a href="#advancedConcpets" name="advancedConcpets" class="anchor">Advanced Concepts</a>
+## <a href="#advancedConcepts" name="advancedConcepts" class="anchor">Advanced Concepts</a>
 
 ### <a href="#events" name="events" class="anchor">Events</a>
 
@@ -987,7 +987,7 @@ For tools processing the dump and importing it into a database it is sometime us
 For the following example
 
 ```ts
-funciton foo(x: number): void {
+function foo(x: number): void {
 }
 ```
 
@@ -1054,7 +1054,7 @@ export interface MetaData {
 }
 ```
 
-### <a href="#emittingContstraints" name="emittingContstraints" class="anchor">Emitting constraints</a>
+### <a href="#emittingConstraints" name="emittingConstraints" class="anchor">Emitting constraints</a>
 
 The following emitting constraints (some of which have already been mentioned in the document) exist:
 

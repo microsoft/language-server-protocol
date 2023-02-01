@@ -78,7 +78,7 @@ index: 1
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
 | [GraphQL](http://graphql.org/) | [GraphQL Foundation](https://foundation.graphql.org/) | [Official GraphQL Language Server](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-server) |  TypeScript |
 | [GraphQL](http://graphql.org/) | [Mayank Agarwal (@Mayank1791989)](https://github.com/Mayank1791989) | [GQL Language Server](https://github.com/Mayank1791989/gql-language-server) | JavaScript |
-| [Grapviz](https://graphviz.org/)/DOT | [Niklas Mollenhauer](https://github.com/nikeee) | [dot-language-server](https://github.com/nikeee/dot-language-server) | TypeScript |
+| [Graphviz](https://graphviz.org/)/DOT | [Niklas Mollenhauer](https://github.com/nikeee) | [dot-language-server](https://github.com/nikeee/dot-language-server) | TypeScript |
 | [Grain](https://grain-lang.org/) | [Grain Team](https://github.com/grain-lang/grain) | [grain](https://github.com/grain-lang/grain) | ReasonML |
 | Groovy | [Palantir](https://github.com/palantir) | [groovy-language-server](https://github.com/palantir/groovy-language-server/) | Java |
 | [Groovy](http://groovy-lang.org/) | [Prominic.NET](https://moonshine-ide.com/) | [Groovy Language Server](https://github.com/prominic/groovy-language-server) | Java |
@@ -92,9 +92,9 @@ index: 1
 | Java (Eclipse)| Eclipse, [RedHat](http://developers.redhat.com/blog/2016/08/01/a-week-of-hacking-the-java-language-server/) |  [Eclipse JDT LS](https://github.com/eclipse/eclipse.jdt.ls/) | Java |
 | Java | [@georgewfraser](https://github.com/georgewfraser) | [Java Compiler (javac) API-based Java support](https://github.com/georgewfraser/vscode-javac) | Java |
 | JavaScript | [quick-lint-js](https://quick-lint-js.com/) | [quick-lint-js](https://github.com/quick-lint/quick-lint-js) | C++ |
-| Javascript Flow| [Facebook, Inc.](https://flow.org/) | [flow](https://github.com/facebook/flow) | OCaml, JavaScript |
-| Javascript Flow| [flowtype](https://github.com/flowtype/) | [flow-language-server](https://github.com/flowtype/flow-language-server)(deprecated) | JavaScript, Flow |
-| Javascript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) | TypeScript |
+| JavaScript Flow| [Facebook, Inc.](https://flow.org/) | [flow](https://github.com/facebook/flow) | OCaml, JavaScript |
+| JavaScript Flow| [flowtype](https://github.com/flowtype/) | [flow-language-server](https://github.com/flowtype/flow-language-server)(deprecated) | JavaScript, Flow |
+| JavaScript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) | TypeScript |
 | JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) | TypeScript |
 | [Jsonnet](https://jsonnet.org/) | [Grafana Labs](https://grafana.com/) | [jsonnet-language-server](https://github.com/grafana/jsonnet-language-server) | Go |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) | Julia |
