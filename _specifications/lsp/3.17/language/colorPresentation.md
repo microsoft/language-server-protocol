@@ -50,7 +50,7 @@ interface ColorPresentation {
 	label: string;
 	/**
 	 * An [edit](#TextEdit) which is applied to a document when selecting
-	 * this presentation for the color. When `falsy` the
+	 * this presentation for the color. When omitted the
 	 * [label](#ColorPresentation.label) is used.
 	 */
 	textEdit?: TextEdit;
