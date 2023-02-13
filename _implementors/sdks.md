@@ -12,7 +12,6 @@ index: 3
 |------|--------|----------|
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
-| C# | MS | work in progress by [David Wilson](https://github.com/daviwil)  |
 | C# | [Ken Domino](https://github.com/kaby76) | [LspTypes for C#](https://github.com/kaby76/lsp-types) |
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
 | C++17 | [otreblan](https://github.com/otreblan) | [libclsp](https://github.com/otreblan/libclsp) (WIP)|
