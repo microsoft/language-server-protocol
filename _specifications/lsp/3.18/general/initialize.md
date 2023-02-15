@@ -288,6 +288,13 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.17.0
 	 */
 	diagnostic?: DiagnosticClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/inlineCompletion` request.
+	 * 
+	 * @since 3.18.0
+	 */
+	inlineCompletion?: InlineCompletionClientCapabilities;
 }
 ```
 
@@ -869,6 +876,13 @@ interface ServerCapabilities {
 	 * The server provides workspace symbol support.
 	 */
 	workspaceSymbolProvider?: boolean | WorkspaceSymbolOptions;
+
+	/**
+	 * The server provides inline completions.
+	 * 
+	 * @since 3.18.0
+	 */
+	inlineCompletionProvider?: boolean | InlineCompletionOptions;
 
 	/**
 	 * Workspace specific server capabilities

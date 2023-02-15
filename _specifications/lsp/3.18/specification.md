@@ -655,6 +655,7 @@ Language Features provide the actual smarts in the language server protocol. The
 {% include_relative language/onTypeFormatting.md %}
 {% include_relative language/rename.md %}
 {% include_relative language/linkedEditingRange.md %}
+{% include_relative language/inlineCompletion.md %}
 
 ### <a href="#workspaceFeatures" name="workspaceFeatures" class="anchor">Workspace Features</a>
 

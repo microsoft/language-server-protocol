@@ -1,6 +1,6 @@
 {
 	"metaData": {
-		"version": "3.17.0"
+		"version": "3.18.0"
 	},
 	"requests": [
 		{
@@ -845,6 +845,40 @@
 			},
 			"documentation": "A request to provide inline values in a document. The request's parameter is of\ntype {@link InlineValueParams}, the response is of type\n{@link InlineValue InlineValue[]} or a Thenable that resolves to such.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"method": "textDocument/inlineCompletion",
+			"result": {
+				"kind": "or",
+				"items": [
+					{
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "InlineCompletionItem"
+						}
+					},
+					{
+						"kind": "reference",
+						"name": "InlineCompletionList"
+					},
+					{
+						"kind": "base",
+						"name": "null"
+					}
+				]
+			},
+			"messageDirection": "clientToServer",
+			"params": {
+				"kind": "reference",
+				"name": "InlineCompletionParams"
+			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "InlineCompletionRegistrationOptions"
+			},
+			"documentation": "The inline completion request is sent from the client to the server to compute inline completions for a given text document either explicitly by a user gesture or implicitly when typing.",
+			"since": "3.18.0"
 		},
 		{
 			"method": "workspace/inlineValue/refresh",
@@ -8438,6 +8472,25 @@
 					},
 					"optional": true,
 					"documentation": "Experimental server capabilities."
+				},
+				{
+					"name": "InlineCompletionProvider",
+					"type": {
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "boolean"
+							},
+							{
+								"kind": "reference",
+								"name": "InlineCompletionOptions"
+							}
+						]
+					},
+					"optional": true,
+					"documentation": "The server provides inline completions.",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Defines the capabilities provided by a language\nserver."
@@ -10606,6 +10659,16 @@
 					"optional": true,
 					"documentation": "Capabilities specific to the diagnostic pull model.\n\n@since 3.17.0",
 					"since": "3.17.0"
+				},
+				{
+					"name": "inlineCompletion",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionClientCapabilities"
+					},
+					"optional": true,
+					"documentation": "Capabilities specific to the `textDocument/inlineCompletion` request.",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Text document specific client capabilities."
@@ -12557,6 +12620,114 @@
 			],
 			"documentation": "Client capabilities specific to the used markdown parser.\n\n@since 3.16.0",
 			"since": "3.16.0"
+		},
+		{
+			"name": "InlineCompletionParams",
+			"properties": [
+				{
+					"name": "context",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionContext"
+					},
+					"documentation": "Additional information about the context in which inline completions were requested."
+				}
+			],
+			"extends": [
+				{
+					"kind": "reference",
+					"name": "TextDocumentPositionParams"
+				}
+			],
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "WorkDoneProgressParams"
+				}
+			],
+			"documentation": "Inline completion parameters",
+			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionContext",
+			"properties": [
+				{
+					"name": "triggerKind",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionTriggerKind"
+					},
+					"documentation": "Describes how the inline completion was triggered."
+				},
+				{
+					"name": "selectedCompletionInfo",
+					"type": {
+						"kind": "reference",
+						"name": "SelectedCompletionInfo"
+					},
+					"optional": true,
+					"documentation": "Provides information about the currently selected item in the autocomplete widget if it is visible."
+				}
+			],
+			"documentation": "Provides information about the context in which an inline completion was requested.",
+			"since": "3.18.0"
+		},
+		{
+			"name": "SelectedCompletionInfo",
+			"properties": [
+				{
+					"name": "range",
+					"type": {
+						"kind": "reference",
+						"name": "Range"
+					},
+					"documentation": "The range that will be replaced if this completion item is accepted."
+				},
+				{
+					"name": "text",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "The text the range will be replaced with if this completion is accepted."
+				}
+			],
+			"documentation": "Describes the currently selected completion item.",
+			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionRegistrationOptions",
+			"properties": [],
+			"extends": [
+				{
+					"kind": "reference",
+					"name": "InlineCompletionOptions"
+				}
+			],
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "TextDocumentRegistrationOptions"
+				},
+				{
+					"kind": "reference",
+					"name": "StaticRegistrationOptions"
+				}
+			],
+			"documentation": "Inline completion options used during static or dynamic registration.",
+			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionOptions",
+			"properties": [],
+			"extends": [
+				{
+					"kind": "reference",
+					"name": "WorkDoneProgressOptions"
+				}
+			],
+			"documentation": "Inline completion options used during static registration.",
+			"since": "3.18.0"
 		}
 	],
 	"enumerations": [
@@ -13745,6 +13916,27 @@
 					"value": "relative"
 				}
 			]
+		},
+		{
+			"name": "InlineCompletionTriggerKind",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "Invoke",
+					"value": 0,
+					"documentation": "Completion was triggered explicitly by a user gesture."
+				},
+				{
+					"name": "Automatic",
+					"value": 1,
+					"documentation": "Completion was triggered automatically while editing."
+				}
+			],
+			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.",
+			"since": "3.18.0"
 		}
 	],
 	"typeAliases": [
