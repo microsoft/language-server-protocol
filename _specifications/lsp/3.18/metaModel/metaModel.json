@@ -12728,6 +12728,75 @@
 			],
 			"documentation": "Inline completion options used during static registration.",
 			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionItem",
+			"properties": [
+				{
+					"name": "insertText",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "The text to replace the range with. Must be set."
+				},
+				{
+					"name": "filterText",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A text that is used to decide if this inline completion should be shown. When `falsy` the {@link InlineCompletionItem.insertText} is used."
+				},
+				{
+					"name": "range",
+					"type": {
+						"kind": "reference",
+						"name": "Range"
+					},
+					"optional": true,
+					"documentation": "The range to replace. Must begin and end on the same line."
+				},
+				{
+					"name": "command",
+					"type": {
+						"kind": "reference",
+						"name": "Command"
+					},
+					"optional": true,
+					"documentation": "An optional {@link Command} that is executed *after* inserting this completion."
+				},
+				{
+					"name": "insertTextFormat",
+					"type": {
+						"kind": "reference",
+						"name": "InsertTextFormat"
+					},
+					"optional": true,
+					"documentation": "The format of the insert text. The format applies to the `insertText`. If omitted defaults to `InsertTextFormat.PlainText`."
+				}
+			],
+			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.",
+			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionList",
+			"properties": [
+				{
+					"name": "items",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "InlineCompletionItem"
+						}
+					},
+					"documentation": "The inline completion items"
+				}
+			],
+			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.",
+			"since": "3.18.0"
 		}
 	],
 	"enumerations": [
