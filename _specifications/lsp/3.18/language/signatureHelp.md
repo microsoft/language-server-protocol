@@ -49,8 +49,8 @@ export interface SignatureHelpClientCapabilities {
 
 		/**
 		 * The client supports the `activeParameter` property on
-		 * `SignatureInformation` being set to `null` to indicate that no
-		 * parameter should be active.
+		 * `SignatureHelp`/`SignatureInformation` being set to `null` to
+		 * indicate that no parameter should be active.
 		 *
 		 * @since 3.18.0
 		 */
@@ -277,11 +277,17 @@ export interface SignatureInformation {
 	/**
 	 * The index of the active parameter.
 	 *
-	 * If provided, this is used in place of `SignatureHelp.activeParameter`.
+	 * If `null`, no parameter of the signature is active (for example a named
+	 * argument that does not match any declared parameters). This is only valid
+	 * if the client specifies the client capability
+	 * `textDocument.signatureHelp.noActiveParameterSupport === true`
+	 *
+	 * If provided (or `null`), this is used in place of
+	 * `SignatureHelp.activeParameter`.
 	 *
 	 * @since 3.16.0
 	 */
-	activeParameter?: uinteger;
+	activeParameter?: uinteger | null;
 }
 ```
 
