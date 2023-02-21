@@ -27,3 +27,5 @@ There is also a tagging interface for normal non document URIs. It maps to a `st
 ```typescript
 type URI = string;
 ```
+
+Please note that a URI with a scheme of `file` represents a file that is written on disk. Documents that exist in the editor but are not written on disk, sometimes called untitled or scratch files, must used a different scheme which can be decided by the client. If a document is deleted on disk but still present in the editor, the URI may retain the scheme of `file` as some editors allow the user to save the document on disk using the same name.
