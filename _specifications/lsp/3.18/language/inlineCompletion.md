@@ -2,7 +2,25 @@
 
 > *Since version 3.18.0*
 
-The inline completion request is sent from the client to the server to compute inline completions for a given text document either explicitly by a user gesture or implicitly when typing.
+The inline completion request is sent from the client to the server to compute
+inline completions for a given text document either explicitly by a user gesture
+or implicitly when typing. Inline completion items are presented directly in the
+editor with the user's text. The portion of the inline completion item's text
+that isn't in the document receives a slightly different UI treatment e.g. lower
+contrast. With only one item being displayed at a time, the server may use this
+feature for visible edits where it is relatively confident the user would like
+this edit in particular. The context property also provides allowance for this
+feature to work *with* completions presented in the IntelliSense interface.
+
+When multiple inline completion items are returned, the client may decide
+whether the user can cycle through them or if they, along with their
+`filterText`, are merely for filtering if the user continues to type without yet
+accepting the inline completion item.
+
+Clients may choose to send information about the user's current completion
+selection via context if completions are visible at the same time. In this case,
+returned inline completions should extend the text of the provided completion.
+
 
 _Client Capability_:
 * property name (optional): `textDocument.inlineCompletion`
