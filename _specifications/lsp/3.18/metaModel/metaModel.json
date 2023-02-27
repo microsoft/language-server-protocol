@@ -3651,7 +3651,7 @@
 						"kind": "reference",
 						"name": "Position"
 					},
-					"documentation": "The position of this hint."
+					"documentation": "The position of this hint.\n\nIf multiple hints have the same position, they will be shown in the order\nthey appear in the response."
 				},
 				{
 					"name": "label",
