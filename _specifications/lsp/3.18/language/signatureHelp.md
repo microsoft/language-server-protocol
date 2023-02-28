@@ -231,7 +231,7 @@ export interface SignatureHelp {
 	 * 
 	 * If `null`, no parameter of the signature is active (for example a named
 	 * argument that does not match any declared parameters). This is only valid
-	 * if the client specifies the client capability
+	 * since 3.18.0 and if the client specifies the client capability
 	 * `textDocument.signatureHelp.noActiveParameterSupport === true`
 	 * 
 	 * If omitted or the value lies outside the range of
@@ -279,7 +279,7 @@ export interface SignatureInformation {
 	 *
 	 * If `null`, no parameter of the signature is active (for example a named
 	 * argument that does not match any declared parameters). This is only valid
-	 * if the client specifies the client capability
+	 * since 3.18.0 and if the client specifies the client capability
 	 * `textDocument.signatureHelp.noActiveParameterSupport === true`
 	 *
 	 * If provided (or `null`), this is used in place of
