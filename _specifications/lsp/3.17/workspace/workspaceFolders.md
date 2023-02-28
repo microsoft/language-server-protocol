@@ -50,7 +50,7 @@ export interface WorkspaceFolder {
 	/**
 	 * The associated URI for this workspace folder.
 	 */
-	uri: DocumentUri;
+	uri: URI;
 
 	/**
 	 * The name of the workspace folder. Used to refer to this
