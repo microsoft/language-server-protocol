@@ -58,7 +58,7 @@ Content-Length: ...\r\n
 {
 	"jsonrpc": "2.0",
 	"id": 1,
-	"method": "textDocument/didOpen",
+	"method": "textDocument/completion",
 	"params": {
 		...
 	}
