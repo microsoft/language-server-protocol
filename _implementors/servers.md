@@ -124,6 +124,7 @@ index: 1
 | Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl |
 | Perl | [Marc Reisner](https://github.com/FractalBoy) | [PLS](https://github.com/FractalBoy/perl-language-server)| Perl |
 | Perl | [Brian Scannell](https://github.com/bscan) | [Perl Navigator](https://github.com/bscan/PerlNavigator)| Perl |
+ | Pest | [Pest Maintainers](https://github.com/orgs/pest-parser/teams/pest-ide-tools) | [Pest IDE Tools](https://github.com/pest-parser/pest-ide-tools) | Rust |
 | Crane **PHP** | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) | TypeScript |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [intelephense](https://github.com/bmewburn/vscode-intelephense) | TypeScript |
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server) | PHP |
