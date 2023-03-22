@@ -34,7 +34,9 @@
 {% for spec in site.data.specifications %}
 {%  for child in spec.children %}
 {%   if spec.anchor == 'lsp' and child.version == page.lspVersion %}
-{%    assign currentSpecification = child.url %}
+{%    assign currentLspSpecification = child.url %}
+{%   elsif spec.anchor == 'base' and child.version == page.baseVersion %}
+{%    assign currentBaseSpecification = child.url %}
 {%   endif %}
 {%  endfor %}
 {% endfor %}
@@ -50,8 +52,10 @@
     var anchor = document.createElement("a");
     var hrefUrl = link[0] === '/' ?
       `${baseurl}/specifications${link}` :
-{% if currentSpecification %}
-      `${baseurl}{{ currentSpecification }}/${link}`;
+{% if currentLspSpecification %}
+      `${baseurl}{{ currentLspSpecification }}/${link}`;
+{% elsif currentBaseSpecification %}
+    `${baseurl}{{ currentBaseSpecification }}/${link}`;
 {% else %}
       link;
 {% endif %}

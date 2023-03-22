@@ -1,0 +1,60 @@
+- title: Table of Contents
+  reveal: baseProtocol
+  children:
+  - title: Base Protocol
+    anchor: baseProtocol
+    children:
+    - title: Header Part
+      anchor: headerPart
+    - title: Content Part
+      anchor: contentPart
+  - title: JSON Structures
+    anchor: basicJsonStructures
+    children:
+    - title: Base Types
+      anchor: baseTypes
+    - title: Abstract Message
+      anchor: abstractMessage
+    - title: Request Message
+      anchor: requestMessage
+    - title: Response Message
+      anchor: responseMessage
+    - title: Notification Message
+      anchor: notificationMessage
+    - title: Cancellation Support
+      anchor: cancelRequest
+    - title: Progress Support
+      anchor: progress
+  - title: Capability Model
+    anchor: capabilityModel
+    children:
+    - title: Capabilities
+      anchor: capabilities
+  - title: Lifecycle Messages
+    anchor: lifecycle
+    children:
+    - title: Initialize
+      anchor: initialize
+    - title: Initialized
+      anchor: initialized
+    - title: Register Capability
+      anchor: client_registerCapability
+    - title: Unregister Capability
+      anchor: client_unregisterCapability
+    - title: Set Trace
+      anchor: setTrace
+    - title: Log Trace
+      anchor: logTrace
+    - title: Shutdown
+      anchor: shutdown
+    - title: Exit
+      anchor: exit
+  - title: Window Features
+    anchor: windowFeatures
+    children:
+    - title: Show Message Notification
+      anchor: window_showMessage
+    - title: Show Message Request
+      anchor: window_showMessageRequest
+    - title: Log Message
+      anchor: window_logMessage
