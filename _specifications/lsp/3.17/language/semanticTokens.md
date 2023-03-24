@@ -37,7 +37,7 @@ export enum SemanticTokenTypes {
 	string = 'string',
 	number = 'number',
 	regexp = 'regexp',
-	operator = 'operator'
+	operator = 'operator',
 	/**
 	 * @since 3.17.0
 	 */
