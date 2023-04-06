@@ -47,6 +47,29 @@ Content-Length: ...\r\n
 }
 ```
 
+### <a href="#capabilities" name="capabilities" class="anchor"> Capabilities </a>
+
+Not every server can support all features defined by the protocol. The base protocol therefore provides ‘capabilities’. A capability groups a set of features. A development tool and the server announce their supported features using capabilities. As an example, an LSP server announces that it can handle the `textDocument/hover` request, but it might not handle the `workspace/symbol` request. Similarly, a development tool announces its ability to provide `about to save` LSP notifications before a document is saved, so that a server can compute textual edits to format the edited document before it is saved.
+
+The set of capabilities is exchanged between the client and server during the [initialize](#initialize) request.
+
+### <a href="#messageOrdering" name= "messageOrdering" class="anchor"> Request, Notification and Response Ordering </a>
+
+Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So, for example, if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
+
+However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since executing the latter may affect the result of the former.
+
+### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
+
+As said LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
+
+* a header describing the request
+* an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
+* an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure. Clients should ignore server capabilities they don't understand (e.g. the initialize request shouldn't fail in this case).
+* an optional _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration. See the [register](#client_registerCapability) and [unregister](#client_unregisterCapability) request for how this works in detail.
+* a _Request_ section describing the format of the request sent. The method is a string identifying the request, the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+
 ## <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> JSON structures </a>
 
 The protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](http://www.jsonrpc.org/specification). The protocol currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
@@ -113,6 +136,9 @@ export type BaseObject = { [key: string]: BaseAny };
  */
 export type BaseArray = BaseAny[];
 ```
+
+{% include types/uri.md %}
+{% include types/enumerations.md %}
 
 #### <a href="#abstractMessage" name="abstractMessage" class="anchor"> Abstract Message </a>
 
@@ -349,14 +375,6 @@ interface ProgressParams<T> {
 
 Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
 
-## <a href="#capabilities" name="capabilityModel" class="anchor"> Capability Model </a>
-
-### <a href="#capabilities" name="capabilities" class="anchor"> Capabilities </a>
-
-Not every server can support all features defined by the protocol. The base protocol therefore provides ‘capabilities’. A capability groups a set of features. A development tool and the server announce their supported features using capabilities. As an example, an LSP server announces that it can handle the `textDocument/hover` request, but it might not handle the `workspace/symbol` request. Similarly, a development tool announces its ability to provide `about to save` LSP notifications before a document is saved, so that a server can compute textual edits to format the edited document before it is saved.
-
-The set of capabilities is exchanged between the client and server during the [initialize](#initialize) request.
-
 ## <a href="#lifecycle" name="lifecycle" class="anchor"> Lifecycle Messages </a>
 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
@@ -457,395 +475,17 @@ interface InitializeParams extends WorkDoneProgressParams {
 }
 ```
 
-#### <a href="#initialized" name="initialized" class="anchor">Initialized Notification (:arrow_right:)</a>
-
-The initialized notification is sent from the client to the server after the client received the result of the `initialize` request but before the client is sending any other request or notification to the server. The server can use the `initialized` notification, for example, to dynamically register capabilities. The `initialized` notification may only be sent once.
-
-_Notification_:
-* method: 'initialized'
-* params: `InitializedParams` defined as follows:
-
-```typescript
-interface InitializedParams {
-}
-```
-
-#### <a href="#client_registerCapability" name="client_registerCapability" class="anchor">Register Capability (:arrow_right_hook:)</a>
-
-The `client/registerCapability` request is sent from the server to the client to register for a new capability on the client side. Not all clients need to support dynamic capability registration. A client opts in via the `dynamicRegistration` property on the specific client capabilities. A client can even provide dynamic registration for capability A but not for capability B (see `TextDocumentClientCapabilities` as an example).
-
-Server must not register the same capability both statically through the initialize result and dynamically for the same document selector. If a server wants to support both static and dynamic registration it needs to check the client capability in the initialize request and only register the capability statically if the client doesn't support dynamic registration for that capability.
-
-_Request_:
-* method: 'client/registerCapability'
-* params: `RegistrationParams`
-
-Where `RegistrationParams` are defined as follows:
-
-<div class="anchorHolder"><a href="#registration" name="registration" class="linkableAnchor"></a></div>
-
-```typescript
-/**
- * General parameters to register for a capability.
- */
-export interface Registration {
-	/**
-	 * The id used to register the request. The id can be used to deregister
-	 * the request again.
-	 */
-	id: string;
-
-	/**
-	 * The method / capability to register for.
-	 */
-	method: string;
-
-	/**
-	 * Options necessary for the registration.
-	 */
-	registerOptions?: LSPAny;
-}
-```
-
-<div class="anchorHolder"><a href="#registrationParams" name="registrationParams" class="linkableAnchor"></a></div>
-
-```typescript
-export interface RegistrationParams {
-	registrations: Registration[];
-}
-```
-
-Since most of the registration options require to specify a document selector there is a base interface that can be used. See `TextDocumentRegistrationOptions`.
-
-An example JSON-RPC message to register dynamically for the `textDocument/willSaveWaitUntil` feature on the client side is as follows (only details shown):
-
-```json
-{
-	"method": "client/registerCapability",
-	"params": {
-		"registrations": [
-			{
-				"id": "79eee87c-c409-4664-8102-e03263673f6f",
-				"method": "textDocument/willSaveWaitUntil",
-				"registerOptions": {
-					"documentSelector": [
-						{ "language": "javascript" }
-					]
-				}
-			}
-		]
-	}
-}
-```
-
-This message is sent from the server to the client and after the client has successfully executed the request further `textDocument/willSaveWaitUntil` requests for JavaScript text documents are sent from the client to the server.
-
-_Response_:
-* result: void.
-* error: code and message set in case an exception happens during the request.
-
-`StaticRegistrationOptions` can be used to register a feature in the initialize result with a given server control ID to be able to un-register the feature later on.
-
-<div class="anchorHolder"><a href="#staticRegistrationOptions" name="staticRegistrationOptions" class="linkableAnchor"></a></div>
-
-```typescript
-/**
- * Static registration options to be returned in the initialize request.
- */
-export interface StaticRegistrationOptions {
-	/**
-	 * The id used to register the request. The id can be used to deregister
-	 * the request again. See also Registration#id.
-	 */
-	id?: string;
-}
-```
-
-`TextDocumentRegistrationOptions` can be used to dynamically register for requests for a set of text documents.
-
-<div class="anchorHolder"><a href="#textDocumentRegistrationOptions" name="textDocumentRegistrationOptions" class="linkableAnchor"></a></div>
-
-```typescript
-/**
- * General text document registration options.
- */
-export interface TextDocumentRegistrationOptions {
-	/**
-	 * A document selector to identify the scope of the registration. If set to
-	 * null the document selector provided on the client side will be used.
-	 */
-	documentSelector: DocumentSelector | null;
-}
-```
-
-#### <a href="#client_unregisterCapability" name="client_unregisterCapability" class="anchor">Unregister Capability (:arrow_right_hook:)</a>
-
-The `client/unregisterCapability` request is sent from the server to the client to unregister a previously registered capability.
-
-_Request_:
-* method: 'client/unregisterCapability'
-* params: `UnregistrationParams`
-
-Where `UnregistrationParams` are defined as follows:
-
-<div class="anchorHolder"><a href="#unregistration" name="unregistration" class="linkableAnchor"></a></div>
-
-```typescript
-/**
- * General parameters to unregister a capability.
- */
-export interface Unregistration {
-	/**
-	 * The id used to unregister the request or notification. Usually an id
-	 * provided during the register request.
-	 */
-	id: string;
-
-	/**
-	 * The method / capability to unregister for.
-	 */
-	method: string;
-}
-```
-
-<div class="anchorHolder"><a href="#unregistrationParams" name="unregistrationParams" class="linkableAnchor"></a></div>
-
-```typescript
-export interface UnregistrationParams {
-	// This should correctly be named `unregistrations`. However changing this
-	// is a breaking change and needs to wait until we deliver a 4.x version
-	// of the specification.
-	unregisterations: Unregistration[];
-}
-```
-
-An example JSON-RPC message to unregister the above registered `textDocument/willSaveWaitUntil` feature looks like this:
-
-```json
-{
-	"method": "client/unregisterCapability",
-	"params": {
-		"unregisterations": [
-			{
-				"id": "79eee87c-c409-4664-8102-e03263673f6f",
-				"method": "textDocument/willSaveWaitUntil"
-			}
-		]
-	}
-}
-```
-_Response_:
-* result: void.
-* error: code and message set in case an exception happens during the request.
-
-#### <a href="#setTrace" name="setTrace" class="anchor">SetTrace Notification (:arrow_right:)</a>
-
-A notification that should be used by the client to modify the trace setting of the server.
-
-_Notification_:
-* method: '$/setTrace'
-* params: `SetTraceParams` defined as follows:
-
-```typescript
-interface SetTraceParams {
-	/**
-	 * The new value that should be assigned to the trace setting.
-	 */
-	value: TraceValue;
-}
-```
-
-#### <a href="#logTrace" name="logTrace" class="anchor">LogTrace Notification (:arrow_left:)</a>
-
-A notification to log the trace of the server's execution.
-The amount and content of these notifications depends on the current `trace` configuration.
-If `trace` is `'off'`, the server should not send any `logTrace` notification.
-If `trace` is `'messages'`, the server should not add the `'verbose'` field in the `LogTraceParams`.
-
-`$/logTrace` should be used for systematic trace reporting. For single debugging messages, the server should send [`window/logMessage`](#window_logMessage) notifications.
-
-
-_Notification_:
-* method: '$/logTrace'
-* params: `LogTraceParams` defined as follows:
-
-```typescript
-interface LogTraceParams {
-	/**
-	 * The message to be logged.
-	 */
-	message: string;
-	/**
-	 * Additional information that can be computed if the `trace` configuration
-	 * is set to `'verbose'`
-	 */
-	verbose?: string;
-}
-```
-
-#### <a href="#shutdown" name="shutdown" class="anchor">Shutdown Request (:leftwards_arrow_with_hook:)</a>
-
-The shutdown request is sent from the client to the server. It asks the server to shut down, but to not exit (otherwise the response might not be delivered correctly to the client). There is a separate exit notification that asks the server to exit. Clients must not send any notifications other than `exit` or requests to a server to which they have sent a shutdown request. Clients should also wait with sending the `exit` notification until they have received a response from the `shutdown` request.
-
-If a server receives requests after a shutdown request those requests should error with `InvalidRequest`.
-
-_Request_:
-* method: 'shutdown'
-* params: void
-
-_Response_:
-* result: null
-* error: code and message set in case an exception happens during shutdown request.
-
-#### <a href="#exit" name="exit" class="anchor">Exit Notification (:arrow_right:)</a>
-
-A notification to ask the server to exit its process.
-The server should exit with `success` code 0 if the shutdown request has been received before; otherwise with `error` code 1.
-
-_Notification_:
-* method: 'exit'
-* params: void
+{% include messages/initialized.md %}
+{% include messages/registerCapability.md anyType="BaseAny" %}
+{% include messages/unregisterCapability.md %}
+{% include messages/setTrace.md %}
+{% include messages/logTrace.md %}
+{% include messages/shutdown.md %}
+{% include messages/exit.md %}
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
-#### <a href="#window_showMessage" name="window_showMessage" class="anchor">Show Message Notification (:arrow_left:)</a>
-
-The show message notification is sent from a server to a client to ask the client to display a particular message in the user interface.
-
-_Notification_:
-* method: 'window/showMessage'
-* params: `ShowMessageParams` defined as follows:
-
-```typescript
-interface ShowMessageParams {
-	/**
-	 * The message type. See {@link MessageType}.
-	 */
-	type: MessageType;
-
-	/**
-	 * The actual message.
-	 */
-	message: string;
-}
-```
-
-Where the type is defined as follows:
-
-<div class="anchorHolder"><a href="#messageType" name="messageType" class="linkableAnchor"></a></div>
-
-```typescript
-export namespace MessageType {
-	/**
-	 * An error message.
-	 */
-	export const Error = 1;
-	/**
-	 * A warning message.
-	 */
-	export const Warning = 2;
-	/**
-	 * An information message.
-	 */
-	export const Info = 3;
-	/**
-	 * A log message.
-	 */
-	export const Log = 4;
-}
-
-export type MessageType = 1 | 2 | 3 | 4;
-```
-
-#### <a href="#window_showMessageRequest" name="window_showMessageRequest" class="anchor">ShowMessage Request (:arrow_right_hook:)</a>
-
-The show message request is sent from a server to a client to ask the client to display a particular message in the user interface. In addition to the show message notification the request allows to pass actions and to wait for an answer from the client.
-
-_Client Capability_:
-* property path (optional): `window.showMessage`
-* property type: `ShowMessageRequestClientCapabilities` defined as follows:
-
-```typescript
-/**
- * Show message request client capabilities
- */
-export interface ShowMessageRequestClientCapabilities {
-	/**
-	 * Capabilities specific to the `MessageActionItem` type.
-	 */
-	messageActionItem?: {
-		/**
-		 * Whether the client supports additional attributes which
-		 * are preserved and sent back to the server in the
-		 * request's response.
-		 */
-		additionalPropertiesSupport?: boolean;
-	};
-}
-```
-
-_Request_:
-* method: 'window/showMessageRequest'
-* params: `ShowMessageRequestParams` defined as follows:
-
-<div class="anchorHolder"><a href="#showMessageRequestParams" name="showMessageRequestParams" class="linkableAnchor"></a></div>
-
-```typescript
-interface ShowMessageRequestParams {
-	/**
-	 * The message type. See {@link MessageType}
-	 */
-	type: MessageType;
-
-	/**
-	 * The actual message
-	 */
-	message: string;
-
-	/**
-	 * The message action items to present.
-	 */
-	actions?: MessageActionItem[];
-}
-```
-
-Where the `MessageActionItem` is defined as follows:
-
-<div class="anchorHolder"><a href="#messageActionItem" name="messageActionItem" class="linkableAnchor"></a></div>
-
-```typescript
-interface MessageActionItem {
-	/**
-	 * A short title like 'Retry', 'Open Log' etc.
-	 */
-	title: string;
-}
-```
-
-_Response_:
-* result: the selected `MessageActionItem` \| `null` if none got selected.
-* error: code and message set in case an exception happens during showing a message.
-
-#### <a href="#window_logMessage" name="window_logMessage" class="anchor">LogMessage Notification (:arrow_left:)</a>
-
-The log message notification is sent from the server to the client to ask the client to log a particular message.
-
-_Notification_:
-* method: 'window/logMessage'
-* params: `LogMessageParams` defined as follows:
-
-<div class="anchorHolder"><a href="#logMessageParams" name="logMessageParams" class="linkableAnchor"></a></div>
-
-```typescript
-interface LogMessageParams {
-	/**
-	 * The message type. See {@link MessageType}
-	 */
-	type: MessageType;
-
-	/**
-	 * The actual message
-	 */
-	message: string;
-}
-```
+{% include messages/showMessage.md %}
+{% include messages/showMessageRequest.md %}
+{% include messages/logMessage.md %}
+{% include messages/telemetryEvent.md %}

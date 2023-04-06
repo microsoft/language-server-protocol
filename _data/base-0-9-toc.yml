@@ -8,11 +8,21 @@
       anchor: headerPart
     - title: Content Part
       anchor: contentPart
+    - title: Capabilities
+      anchor: capabilities
+    - title: Message Ordering
+      anchor: messageOrdering
+    - title: Message Documentation
+      anchor: messageDocumentation
   - title: JSON Structures
     anchor: basicJsonStructures
     children:
     - title: Base Types
       anchor: baseTypes
+    - title: URI
+      anchor: uri
+    - title: Enumerations
+      anchor: enumerations
     - title: Abstract Message
       anchor: abstractMessage
     - title: Request Message
@@ -25,11 +35,6 @@
       anchor: cancelRequest
     - title: Progress Support
       anchor: progress
-  - title: Capability Model
-    anchor: capabilityModel
-    children:
-    - title: Capabilities
-      anchor: capabilities
   - title: Lifecycle Messages
     anchor: lifecycle
     children:
@@ -58,3 +63,5 @@
       anchor: window_showMessageRequest
     - title: Log Message
       anchor: window_logMessage
+    - title: Sent Telemetry
+      anchor: telemetry_event
