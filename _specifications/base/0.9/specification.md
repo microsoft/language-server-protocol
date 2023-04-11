@@ -138,6 +138,38 @@ export type BaseArray = BaseAny[];
 ```
 
 {% include types/uri.md %}
+
+#### <a href="#regExp" name="regExp" class="anchor"> Regular Expressions </a>
+
+Regular expressions are a powerful tool and there are actual use cases for them in protocols like LSP. However the downside with them is that almost every programming language has its own set of regular expression features so the base specification can not simply refer to them as a regular expression.
+
+For example, LSP uses a two step approach to support regular expressions:
+
+* the client will announce which regular expression engine it will use. This will allow servers that are written for a very specific client make full use of the regular expression capabilities of the client.
+* the specification will define a set of regular expression features that should be supported by a client. Instead of writing a new specification LSP will refer to the [ECMAScript Regular Expression specification](https://tc39.es/ecma262/#sec-regexp-regular-expression-objects) and remove features from it that are not necessary in the context of LSP or hard to implement for other clients.
+
+The following client capability is used to announce a client's regular expression engine
+
+* property path (optional): `general.regularExpressions`
+* property type: `RegularExpressionsClientCapabilities` defined as follows:
+
+```typescript
+/**
+ * Client capabilities specific to regular expressions.
+ */
+export interface RegularExpressionsClientCapabilities {
+	/**
+	 * The engine's name.
+	 */
+	engine: string;
+
+	/**
+	 * The engine's version.
+	 */
+	version?: string;
+}
+```
+
 {% include types/enumerations.md %}
 
 #### <a href="#abstractMessage" name="abstractMessage" class="anchor"> Abstract Message </a>

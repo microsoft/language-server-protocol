@@ -21,6 +21,8 @@
       anchor: baseTypes
     - title: URI
       anchor: uri
+    - title: Regular Expression
+      anchor: regExp
     - title: Enumerations
       anchor: enumerations
     - title: Abstract Message
