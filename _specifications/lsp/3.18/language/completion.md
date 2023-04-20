@@ -644,7 +644,8 @@ export interface CompletionItem {
 	 * When an edit is provided the value of `insertText` is ignored.
 	 *
 	 * *Note:* The range of the edit must be a single line range and it must
-	 * contain the position at which completion has been requested.
+	 * contain the position at which completion has been requested. Despite this
+	 * limitation, your edit can write multiple lines.
 	 *
 	 * Most editors support two different operations when accepting a completion
 	 * item. One is to insert a completion text and the other is to replace an
@@ -656,7 +657,8 @@ export interface CompletionItem {
 	 *
 	 * *Note 1:* The text edit's range as well as both ranges from an insert
 	 * replace edit must be a [single line] and they must contain the position
-	 * at which completion has been requested.
+	 * at which completion has been requested. In both case the new text can
+	 * have multiple lines.
 	 * *Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range
 	 * must be a prefix of the edit's replace range, that means it must be
 	 * contained and starting at the same position.
