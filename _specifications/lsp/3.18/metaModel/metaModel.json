@@ -566,7 +566,7 @@
 				"kind": "reference",
 				"name": "ShowDocumentParams"
 			},
-			"documentation": "A request to show a document. This request might open an\nexternal program depending on the value of the URI to open.\nFor example, a request to open `https://code.visualstudio.com/`\nwill very likely open the URI in a WEB browser.\n\n@since 3.16.0",
+			"documentation": "A request to show a document. This request might open an\nexternal program depending on the value of the URI to open.\nFor example a request to open `https://code.visualstudio.com/`\nwill very likely open the URI in a WEB browser.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -620,7 +620,7 @@
 				"kind": "reference",
 				"name": "FileOperationRegistrationOptions"
 			},
-			"documentation": "The will create files request is sent from the client to the server before files are actually\ncreated as long as the creation is triggered from within the client.\n\n@since 3.16.0",
+			"documentation": "The will create files request is sent from the client to the server before files are actually\ncreated as long as the creation is triggered from within the client.\n\nThe request can return a `WorkspaceEdit` which will be applied to workspace before the\nfiles are created. Hence the `WorkspaceEdit` can not manipulate the content of the file\nto be created.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -1633,7 +1633,7 @@
 				"kind": "reference",
 				"name": "DocumentFormattingRegistrationOptions"
 			},
-			"documentation": "A request to format a whole document."
+			"documentation": "A request to to format a whole document."
 		},
 		{
 			"method": "textDocument/rangeFormatting",
@@ -1662,7 +1662,7 @@
 				"kind": "reference",
 				"name": "DocumentRangeFormattingRegistrationOptions"
 			},
-			"documentation": "A request to format a range in a document."
+			"documentation": "A request to to format a range in a document."
 		},
 		{
 			"method": "textDocument/onTypeFormatting",
@@ -3061,7 +3061,7 @@
 						"kind": "base",
 						"name": "URI"
 					},
-					"documentation": "The document uri to show."
+					"documentation": "The uri to show."
 				},
 				{
 					"name": "external",
@@ -3091,7 +3091,7 @@
 					"documentation": "An optional selection range if the document is a text\ndocument. Clients might ignore the property if an\nexternal program is started or the file is not a text\nfile."
 				}
 			],
-			"documentation": "Params to show a document.\n\n@since 3.16.0",
+			"documentation": "Params to show a resource in the UI.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -3259,7 +3259,7 @@
 					"since": "3.16.0"
 				}
 			],
-			"documentation": "A workspace edit represents changes to many resources managed in the workspace. The edit\nshould either provide `changes` or `documentChanges`. If documentChanges are present\nthey are preferred over `changes` if the client can handle versioned document edits.\n\nSince version 3.13.0 a workspace edit can contain resource operations as well. If resource\noperations are present clients need to execute the operations in the order in which they\nare provided. So a workspace edit, for example, can consist of the following two changes:\n(1) a create file a.txt and (2) a text document edit which insert text into file a.txt.\n\nAn invalid sequence (e.g. (1) delete file a.txt and (2) insert text into file a.txt) will\ncause failure of the operation. How the client recovers from the failure is described by\nthe client capability: `workspace.workspaceEdit.failureHandling`"
+			"documentation": "A workspace edit represents changes to many resources managed in the workspace. The edit\nshould either provide `changes` or `documentChanges`. If documentChanges are present\nthey are preferred over `changes` if the client can handle versioned document edits.\n\nSince version 3.13.0 a workspace edit can contain resource operations as well. If resource\noperations are present clients need to execute the operations in the order in which they\nare provided. So a workspace edit for example can consist of the following two changes:\n(1) a create file a.txt and (2) a text document edit which insert text into file a.txt.\n\nAn invalid sequence (e.g. (1) delete file a.txt and (2) insert text into file a.txt) will\ncause failure of the operation. How the client recovers from the failure is described by\nthe client capability: `workspace.workspaceEdit.failureHandling`"
 		},
 		{
 			"name": "FileOperationRegistrationOptions",
@@ -3344,7 +3344,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The scheme of the moniker. For example, `tsc` or `.Net`"
+					"documentation": "The scheme of the moniker. For example tsc or .Net"
 				},
 				{
 					"name": "identifier",
@@ -4639,7 +4639,7 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "A string that should be inserted into a document when selecting\nthis completion. When `falsy` the {@link CompletionItem.label label}\nis used.\n\nThe `insertText` is subject to interpretation by the client side.\nSome tools might not take the string literally. For example,\nVS Code when code complete is requested in this example\n`con<cursor position>` and a completion item with an `insertText` of\n`console` is provided it will only insert `sole`. Therefore it is\nrecommended to use `textEdit` instead since it avoids additional client\nside interpretation."
+					"documentation": "A string that should be inserted into a document when selecting\nthis completion. When `falsy` the {@link CompletionItem.label label}\nis used.\n\nThe `insertText` is subject to interpretation by the client side.\nSome tools might not take the string literally. For example\nVS Code when code complete is requested in this example\n`con<cursor position>` and a completion item with an `insertText` of\n`console` is provided it will only insert `sole`. Therefore it is\nrecommended to use `textEdit` instead since it avoids additional client\nside interpretation."
 				},
 				{
 					"name": "insertTextFormat",
@@ -4699,7 +4699,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "An optional array of additional {@link TextEdit text edits} that are applied when\nselecting this completion. Edits must not overlap (including the same insert position)\nwith the main {@link CompletionItem.textEdit edit} nor with themselves.\n\nAdditional text edits should be used to change text unrelated to the current cursor position\n(for example, adding an import statement at the top of the file if the completion item will\ninsert an unqualified type)."
+					"documentation": "An optional array of additional {@link TextEdit text edits} that are applied when\nselecting this completion. Edits must not overlap (including the same insert position)\nwith the main {@link CompletionItem.textEdit edit} nor with themselves.\n\nAdditional text edits should be used to change text unrelated to the current cursor position\n(for example adding an import statement at the top of the file if the completion item will\ninsert an unqualified type)."
 				},
 				{
 					"name": "commitCharacters",
@@ -5682,7 +5682,7 @@
 					"name": "target",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "URI"
 					},
 					"optional": true,
 					"documentation": "The uri this link points to. If missing a resolve request is sent later."
@@ -5991,7 +5991,7 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "An optional label of the workspace edit. This label is\npresented in the user interface, for example, on an undo\nstack to undo the workspace edit."
+					"documentation": "An optional label of the workspace edit. This label is\npresented in the user interface for example on an undo\nstack to undo the workspace edit."
 				},
 				{
 					"name": "edit",
@@ -6140,7 +6140,7 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "Optional, a final message indicating to, for example, indicate the outcome\nof the operation."
+					"documentation": "Optional, a final message indicating to for example indicate the outcome\nof the operation."
 				}
 			]
 		},
@@ -6295,7 +6295,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The full target range of this link. If the target, for example, is a symbol then target range is the\nrange enclosing this symbol not including leading/trailing whitespace but everything else\nlike comments. This information is typically used to highlight the range in the editor."
+					"documentation": "The full target range of this link. If the target for example is a symbol then target range is the\nrange enclosing this symbol not including leading/trailing whitespace but everything else\nlike comments. This information is typically used to highlight the range in the editor."
 				},
 				{
 					"name": "targetSelectionRange",
@@ -7623,7 +7623,7 @@
 					"documentation": "Options necessary for the registration."
 				}
 			],
-			"documentation": "General parameters to register for a notification or to register a provider."
+			"documentation": "General parameters to to register for an notification or to register a provider."
 		},
 		{
 			"name": "Unregistration",
@@ -8717,7 +8717,7 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Most tools trigger completion request automatically without explicitly requesting\nit using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user\nstarts to type an identifier. For example, if the user types `c` in a JavaScript file\ncode complete will automatically pop up present `console` besides others as a\ncompletion item. Characters that make up identifiers don't need to be listed here.\n\nIf code complete should automatically be trigger on characters not being valid inside\nan identifier (for example, `.` in JavaScript) list them in `triggerCharacters`."
+					"documentation": "Most tools trigger completion request automatically without explicitly requesting\nit using a keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user\nstarts to type an identifier. For example if the user types `c` in a JavaScript file\ncode complete will automatically pop up present `console` besides others as a\ncompletion item. Characters that make up identifiers don't need to be listed here.\n\nIf code complete should automatically be trigger on characters not being valid inside\nan identifier (for example `.` in JavaScript) list them in `triggerCharacters`."
 				},
 				{
 					"name": "allCommitCharacters",
@@ -10984,7 +10984,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\n\nNote that this event is global and will force the client to refresh all\nsemantic tokens currently shown. It should be used with absolute care\nand is useful for situation where a server, for example, detects a project\nwide change that requires such a calculation."
+					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\n\nNote that this event is global and will force the client to refresh all\nsemantic tokens currently shown. It should be used with absolute care\nand is useful for situation where a server for example detects a project\nwide change that requires such a calculation."
 				}
 			],
 			"documentation": "@since 3.16.0",
@@ -11000,7 +11000,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\ncode lenses currently shown. It should be used with absolute care and is\nuseful for situation where a server, for example, detect a project wide\nchange that requires such a calculation."
+					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\ncode lenses currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detect a project wide\nchange that requires such a calculation."
 				}
 			],
 			"documentation": "@since 3.16.0",
@@ -11086,7 +11086,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\ninline values currently shown. It should be used with absolute care and is\nuseful for situation where a server, for example, detects a project wide\nchange that requires such a calculation."
+					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\ninline values currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation."
 				}
 			],
 			"documentation": "Client workspace capabilities specific to inline values.\n\n@since 3.17.0",
@@ -11102,7 +11102,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\n\nNote that this event is global and will force the client to refresh all\ninlay hints currently shown. It should be used with absolute care and\nis useful for situation where a server, for example, detects a project wide\nchange that requires such a calculation."
+					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\n\nNote that this event is global and will force the client to refresh all\ninlay hints currently shown. It should be used with absolute care and\nis useful for situation where a server for example detects a project wide\nchange that requires such a calculation."
 				}
 			],
 			"documentation": "Client workspace capabilities specific to inlay hints.\n\n@since 3.17.0",
@@ -11118,7 +11118,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\n\nNote that this event is global and will force the client to refresh all\npulled diagnostics currently shown. It should be used with absolute care and\nis useful for situation where a server, for example, detects a project wide\nchange that requires such a calculation."
+					"documentation": "Whether the client implementation supports a refresh request sent from\nthe server to the client.\n\nNote that this event is global and will force the client to refresh all\npulled diagnostics currently shown. It should be used with absolute care and\nis useful for situation where a server for example detects a project wide\nchange that requires such a calculation."
 				}
 			],
 			"documentation": "Workspace client capabilities specific to diagnostic pull requests.\n\n@since 3.17.0",
@@ -11826,7 +11826,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client honors the change annotations in\ntext edits and resource operations returned via the\n`CodeAction#edit` property by, for example, presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
+					"documentation": "Whether the client honors the change annotations in\ntext edits and resource operations returned via the\n`CodeAction#edit` property by for example presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				}
 			],
@@ -11970,7 +11970,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client honors the change annotations in\ntext edits and resource operations returned via the\nrename request's workspace edit by, for example, presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
+					"documentation": "Whether the client honors the change annotations in\ntext edits and resource operations returned via the\nrename request's workspace edit by for example presenting\nthe workspace edit in the user interface and asking\nfor confirmation.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				}
 			]
@@ -12225,7 +12225,7 @@
 							]
 						}
 					},
-					"documentation": "Which requests the client supports and might send to the server\ndepending on the server's capability. Please note that clients might not\nshow semantic tokens or degrade some of the user experience if a range\nor full request is advertised by the client but not provided by the\nserver. If, for example, the client capability `requests.full` and\n`request.range` are both set to true but the server only provides a\nrange provider the client might not render a minimap correctly or might\neven decide to not show any semantic tokens at all."
+					"documentation": "Which requests the client supports and might send to the server\ndepending on the server's capability. Please note that clients might not\nshow semantic tokens or degrade some of the user experience if a range\nor full request is advertised by the client but not provided by the\nserver. If for example the client capability `requests.full` and\n`request.range` are both set to true but the server only provides a\nrange provider the client might not render a minimap correctly or might\neven decide to not show any semantic tokens at all."
 				},
 				{
 					"name": "tokenTypes",
@@ -13434,7 +13434,7 @@
 				{
 					"name": "UTF8",
 					"value": "utf-8",
-					"documentation": "Character offsets count UTF-8 code units."
+					"documentation": "Character offsets count UTF-8 code units (e.g. bytes)."
 				},
 				{
 					"name": "UTF16",
@@ -13444,7 +13444,7 @@
 				{
 					"name": "UTF32",
 					"value": "utf-32",
-					"documentation": "Character offsets count UTF-32 code units.\n\nImplementation note: these are the same as Unicode code points,\nso this `PositionEncodingKind` may also be used for an\nencoding-agnostic representation of character offsets."
+					"documentation": "Character offsets count UTF-32 code units.\n\nImplementation note: these are the same as Unicode codepoints,\nso this `PositionEncodingKind` may also be used for an\nencoding-agnostic representation of character offsets."
 				}
 			],
 			"supportsCustomValues": true,
