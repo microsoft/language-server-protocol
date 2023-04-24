@@ -6,7 +6,7 @@ If a server receives requests after a shutdown request those requests should err
 
 _Request_:
 * method: 'shutdown'
-* params: void
+* params: none
 
 _Response_:
 * result: null

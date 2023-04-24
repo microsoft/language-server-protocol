@@ -620,7 +620,7 @@
 				"kind": "reference",
 				"name": "FileOperationRegistrationOptions"
 			},
-			"documentation": "The will create files request is sent from the client to the server before files are actually\ncreated as long as the creation is triggered from within the client.\n\n@since 3.16.0",
+			"documentation": "The will create files request is sent from the client to the server before files are actually\ncreated as long as the creation is triggered from within the client.\n\nThe request can return a `WorkspaceEdit` which will be applied to workspace before the\nfiles are created. Hence the `WorkspaceEdit` can not manipulate the content of the file\nto be created.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -2456,7 +2456,7 @@
 						"name": "FoldingRangeKind"
 					},
 					"optional": true,
-					"documentation": "Describes the kind of the folding range such as 'comment' or 'region'. The kind\nis used to categorize folding ranges and used by commands like 'Fold all comments'.\nSee {@link FoldingRangeKind} for an enumeration of standardized kinds."
+					"documentation": "Describes the kind of the folding range such as `comment' or 'region'. The kind\nis used to categorize folding ranges and used by commands like 'Fold all comments'.\nSee {@link FoldingRangeKind} for an enumeration of standardized kinds."
 				},
 				{
 					"name": "collapsedText",
@@ -3061,7 +3061,7 @@
 						"kind": "base",
 						"name": "URI"
 					},
-					"documentation": "The document uri to show."
+					"documentation": "The uri to show."
 				},
 				{
 					"name": "external",
@@ -3070,7 +3070,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Indicates to show the resource in an external program.\nTo show for example `https://code.visualstudio.com/`\nin the default WEB browser set `external` to `true`."
+					"documentation": "Indicates to show the resource in an external program.\nTo show, for example, `https://code.visualstudio.com/`\nin the default WEB browser set `external` to `true`."
 				},
 				{
 					"name": "takeFocus",
@@ -3091,7 +3091,7 @@
 					"documentation": "An optional selection range if the document is a text\ndocument. Clients might ignore the property if an\nexternal program is started or the file is not a text\nfile."
 				}
 			],
-			"documentation": "Params to show a document.\n\n@since 3.16.0",
+			"documentation": "Params to show a resource in the UI.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -5682,7 +5682,7 @@
 					"name": "target",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "URI"
 					},
 					"optional": true,
 					"documentation": "The uri this link points to. If missing a resolve request is sent later."
@@ -13434,7 +13434,7 @@
 				{
 					"name": "UTF8",
 					"value": "utf-8",
-					"documentation": "Character offsets count UTF-8 code units."
+					"documentation": "Character offsets count UTF-8 code units (e.g. bytes)."
 				},
 				{
 					"name": "UTF16",
@@ -13444,7 +13444,7 @@
 				{
 					"name": "UTF32",
 					"value": "utf-32",
-					"documentation": "Character offsets count UTF-32 code units.\n\nImplementation note: these are the same as Unicode code points,\nso this `PositionEncodingKind` may also be used for an\nencoding-agnostic representation of character offsets."
+					"documentation": "Character offsets count UTF-32 code units.\n\nImplementation note: these are the same as Unicode codepoints,\nso this `PositionEncodingKind` may also be used for an\nencoding-agnostic representation of character offsets."
 				}
 			],
 			"supportsCustomValues": true,
