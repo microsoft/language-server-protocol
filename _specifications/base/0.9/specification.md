@@ -40,7 +40,7 @@ Content-Length: ...\r\n
 {
 	"jsonrpc": "2.0",
 	"id": 1,
-	"method": "textDocument/completion",
+	"method": "initialize",
 	"params": {
 		...
 	}
@@ -49,34 +49,75 @@ Content-Length: ...\r\n
 
 ### <a href="#capabilities" name="capabilities" class="anchor"> Capabilities </a>
 
-Not every server can support all features defined by the protocol. The base protocol therefore provides ‘capabilities’. A capability groups a set of features. A development tool and the server announce their supported features using capabilities. As an example, an LSP server announces that it can handle the `textDocument/hover` request, but it might not handle the `workspace/symbol` request. Similarly, a development tool announces its ability to provide `about to save` LSP notifications before a document is saved, so that a server can compute textual edits to format the edited document before it is saved.
+Not every server can support all features defined by a protocol. The base protocol therefore provides "capabilities". A capability groups a set of features. A development tool and the server announce their supported features using capabilities. As an example, a development tool could announce support for document creation notifications, so that servers can perform their corresponding document synchronizations tasks.
 
 The set of capabilities is exchanged between the client and server during the [initialize](#initialize) request.
 
+Note that the following list of capability identifiers are already used by the language server protocol and hence cannot be used in other protocols:
+- `callHierarchyProvider`
+- `codeActionProvider`
+- `codeLensProvider`
+- `colorProvider`
+- `completionProvider`
+- `declarationProvider`
+- `definitionProvider`
+- `diagnosticProvider`
+- `documentFormattingProvider`
+- `documentHighlightProvider`
+- `documentLinkProvider`
+- `documentOnTypeFormattingProvider`
+- `documentRangeFormattingProvider`
+- `documentSymbolProvider`
+- `executeCommandProvider`
+- `experimental`
+- `foldingRangeProvider`
+- `general`
+- `hoverProvider`
+- `implementationProvider`
+- `inlayHintProvider`
+- `inlineValueProvider`
+- `linkedEditingRangeProvider`
+- `monikerProvider`
+- `notebookDocument`
+- `notebookDocumentSync`
+- `positionEncoding`
+- `referencesProvider`
+- `renameProvider`
+- `selectionRangeProvider`
+- `semanticTokensProvider`
+- `signatureHelpProvider`
+- `textDocument`
+- `textDocumentSync`
+- `typeDefinitionProvider`
+- `typeHierarchyProvider`
+- `window`
+- `workspace`
+- `workspaceSymbolProvider`
+
 ### <a href="#messageOrdering" name= "messageOrdering" class="anchor"> Request, Notification and Response Ordering </a>
 
-Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So, for example, if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
+Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So, for example, if a server providing unit testing features receives a `testing/configureFramework` request and then a `testing/configureProject` request, it will usually first return the response for the `testing/configureFramework` and then the response for `testing/configureProject`.
 
-However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since executing the latter may affect the result of the former.
+However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `testing/configureFramework` and `testing/configureProject` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `testing/testCreated` and `testing/executeTest` requests, since test creation should happen before their execution.
 
 ### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
 
-As said LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
+As mentioned previously, the base protocol defines a set of requests, responses and notifications. Each of those are documented using the following format:
 
 * a header describing the request
 * an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
 * an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure. Clients should ignore server capabilities they don't understand (e.g. the initialize request shouldn't fail in this case).
 * an optional _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration. See the [register](#client_registerCapability) and [unregister](#client_unregisterCapability) request for how this works in detail.
-* a _Request_ section describing the format of the request sent. The method is a string identifying the request, the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
-* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
+* a _Request_ section describing the format of the request sent. The method is a string identifying the request, the parameters are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
+* a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The `error.data` describes the returned data in case of an error. Please remember that in case of a failure the response already contains an `error.code` and an `error.message` field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
 ## <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> JSON structures </a>
 
-The protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](http://www.jsonrpc.org/specification). The protocol currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
+The base protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](http://www.jsonrpc.org/specification). It currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
 
 #### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
 
-The protocol use the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
+The base protocol uses the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
 <div class="anchorHolder"><a href="#integer" name="integer" class="linkableAnchor"></a></div>
 
@@ -104,7 +145,7 @@ export type uinteger = number;
  * rare in the base protocol specification, we denote the
  * exact range with every decimal using the mathematics
  * interval notation (e.g. [0, 1] denotes all decimals d with
- * 0 <= d <= 1.
+ * 0 <= d <= 1).
  */
 export type decimal = number;
 ```
