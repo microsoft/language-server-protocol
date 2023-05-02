@@ -20,7 +20,7 @@ index: 3
 | Haxe | @nadako | [language-server-protocol-haxe](https://github.com/vshaxe/language-server-protocol-haxe)|
 | Java | [Eclipse LSP4J committers](https://projects.eclipse.org/projects/technology.lsp4j/who) |  [lsp4j](https://github.com/eclipse/lsp4j) |
 | Java | [lxtk.org](https://github.com/lxtk-org) | [LXTK](https://github.com/lxtk-org/lxtk) |
-| Java | [Eclipse Xtext committers](https://projects.eclipse.org/projects/modeling.tmf.xtext/who) |  [xtext-core](https://github.com/eclipse/xtext-core) |
+| Java | [Eclipse Xtext committers](https://projects.eclipse.org/projects/modeling.tmf.xtext/who) |  [xtext](https://github.com/eclipse/xtext) |
 | node.js | MS | [vscode-languageserver-node](https://github.com/Microsoft/vscode-languageserver-node)  |
 | Objective-C | [Christopher Atlan](https://twitter.com/catlan) | [LSPKit](https://github.com/catlan/LSPKit)|
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server)|
