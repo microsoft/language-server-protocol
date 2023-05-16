@@ -730,13 +730,52 @@ interface InitializeParams extends WorkDoneProgressParams {
 }
 ```
 
-Note that `capabilities` is specified as an empty object, and left open for each implementation of the base protocol to define accordingly. However, in order to avoid conflicts with properties used by LSP, the following property names cannot be used:
-- `experimental`
-- `general`
-- `notebookDocument`
-- `textDocument`
-- `window`
-- `workspace`
+_Response_:
+* result: `InitializeResult` defined as follows:
+
+<div class="anchorHolder"><a href="#initializeResult" name="initializeResult" class="linkableAnchor"></a></div>
+
+```typescript
+interface InitializeResult {
+	/**
+	 * The capabilities the server provides.
+	 */
+	capabilities: {};
+
+	/**
+	 * Information about the server.
+	 */
+	serverInfo?: {
+		/**
+		 * The name of the server as defined by the server.
+		 */
+		name: string;
+
+		/**
+		 * The server's version as defined by the server.
+		 */
+		version?: string;
+	};
+}
+```
+
+* error.data:
+
+<div class="anchorHolder"><a href="#initializeError" name="initializeError" class="linkableAnchor"></a></div>
+
+```typescript
+interface InitializeError {
+	/**
+	 * Indicates whether the client execute the following retry logic:
+	 * (1) show the message provided by the ResponseError to the user
+	 * (2) user selects retry or cancel
+	 * (3) if user selected retry the initialize method is sent again.
+	 */
+	retry: boolean;
+}
+```
+
+Note that `capabilities` is specified as an empty object in both `InitializeParams` and `InitializeResult`, and are left open for each implementation of the base protocol to define accordingly. However, in order to avoid conflicts with properties used by LSP, these cannot include any of the property names listed in the above [capabilities section](#capabilities).
 
 {% include messages/initialized.md %}
 {% include messages/registerCapability.md anyType="BaseAny" %}
