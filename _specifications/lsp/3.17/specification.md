@@ -476,7 +476,7 @@ The current protocol specification defines that the lifecycle of a server is man
 
 {% include_relative general/initialize.md %}
 {% include messages/initialized.md %}
-{% include messages/registerCapability.md anyType="LSPAny" %}
+{% include messages/registerCapability.md %}
 {% include messages/unregisterCapability.md %}
 {% include messages/setTrace.md %}
 {% include messages/logTrace.md %}

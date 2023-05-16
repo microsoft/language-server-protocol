@@ -31,7 +31,7 @@ export interface Registration {
 	/**
 	 * Options necessary for the registration.
 	 */
-	registerOptions?: {{ include.anyType }};
+	registerOptions?: LSPAny;
 }
 ```
 

@@ -778,8 +778,115 @@ interface InitializeError {
 Note that `capabilities` is specified as an empty object in both `InitializeParams` and `InitializeResult`, and are left open for each implementation of the base protocol to define accordingly. However, in order to avoid conflicts with properties used by LSP, these cannot include any of the property names listed in the above [capabilities section](#capabilities).
 
 {% include messages/initialized.md %}
-{% include messages/registerCapability.md anyType="BaseAny" %}
-{% include messages/unregisterCapability.md %}
+
+#### <a href="#client_registerCapability" name="client_registerCapability" class="anchor">Register Capability (:arrow_right_hook:)</a>
+
+The `client/registerCapability` request is sent from the server to the client to register for a new capability on the client side. Not all clients need to support dynamic capability registration. A client opts in via the `dynamicRegistration` property on the specific client capabilities. A client can even provide dynamic registration for capability A but not for capability B.
+
+The server must not register the same capability both statically through the initialize result and dynamically for the same document selector. If a server wants to support both static and dynamic registration it needs to check the client capability in the initialize request and only register the capability statically if the client doesn't support dynamic registration for that capability.
+
+_Request_:
+* method: 'client/registerCapability'
+* params: `RegistrationParams`
+
+Where `RegistrationParams` are defined as follows:
+
+<div class="anchorHolder"><a href="#registration" name="registration" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * General parameters to register for a capability.
+ */
+export interface Registration {
+	/**
+	 * The id used to register the request. The id can be used to deregister
+	 * the request again.
+	 */
+	id: string;
+
+	/**
+	 * The method / capability to register for.
+	 */
+	method: string;
+
+	/**
+	 * Options necessary for the registration.
+	 */
+	registerOptions?: BaseAny;
+}
+```
+
+<div class="anchorHolder"><a href="#registrationParams" name="registrationParams" class="linkableAnchor"></a></div>
+
+```typescript
+export interface RegistrationParams {
+	registrations: Registration[];
+}
+```
+
+_Response_:
+* result: void.
+* error: code and message set in case an exception happens during the request.
+
+`StaticRegistrationOptions` can be used to register a feature in the initialize result with a given server control ID to be able to un-register the feature later on.
+
+<div class="anchorHolder"><a href="#staticRegistrationOptions" name="staticRegistrationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Static registration options to be returned in the initialize request.
+ */
+export interface StaticRegistrationOptions {
+	/**
+	 * The id used to register the request. The id can be used to deregister
+	 * the request again. See also Registration#id.
+	 */
+	id?: string;
+}
+```
+
+#### <a href="#client_unregisterCapability" name="client_unregisterCapability" class="anchor">Unregister Capability (:arrow_right_hook:)</a>
+
+The `client/unregisterCapability` request is sent from the server to the client to unregister a previously registered capability.
+
+_Request_:
+* method: 'client/unregisterCapability'
+* params: `UnregistrationParams`
+
+Where `UnregistrationParams` are defined as follows:
+
+<div class="anchorHolder"><a href="#unregistration" name="unregistration" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * General parameters to unregister a capability.
+ */
+export interface Unregistration {
+	/**
+	 * The id used to unregister the request or notification. Usually an id
+	 * provided during the register request.
+	 */
+	id: string;
+
+	/**
+	 * The method / capability to unregister for.
+	 */
+	method: string;
+}
+```
+
+<div class="anchorHolder"><a href="#unregistrationParams" name="unregistrationParams" class="linkableAnchor"></a></div>
+
+```typescript
+export interface UnregistrationParams {
+	unregistrations: Unregistration[];
+}
+```
+
+_Response_:
+* result: void.
+* error: code and message set in case an exception happens during the request.
+
 {% include messages/setTrace.md %}
 {% include messages/logTrace.md %}
 {% include messages/shutdown.md %}
