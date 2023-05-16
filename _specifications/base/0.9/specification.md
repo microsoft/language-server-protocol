@@ -721,22 +721,22 @@ interface InitializeParams extends WorkDoneProgressParams {
 	/**
 	 * The capabilities provided by the client (editor or tool)
 	 */
-	capabilities: ClientCapabilities;
+	capabilities: {};
 
 	/**
 	 * The initial trace setting. If omitted trace is disabled ('off').
 	 */
 	trace?: TraceValue;
-
-	/**
-	 * The workspace folders configured in the client when the server starts.
-	 * This property is only available if the client supports workspace folders.
-	 * It can be `null` if the client supports workspace folders but none are
-	 * configured.
-	 */
-	workspaceFolders?: WorkspaceFolder[] | null;
 }
 ```
+
+Note that `capabilities` is specified as an empty object, and left open for each implementation of the base protocol to define accordingly. However, in order to avoid conflicts with properties used by LSP, the following property names cannot be used:
+- `experimental`
+- `general`
+- `notebookDocument`
+- `textDocument`
+- `window`
+- `workspace`
 
 {% include messages/initialized.md %}
 {% include messages/registerCapability.md anyType="BaseAny" %}
