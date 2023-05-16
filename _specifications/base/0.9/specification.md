@@ -211,7 +211,21 @@ export interface RegularExpressionsClientCapabilities {
 }
 ```
 
-{% include types/enumerations.md %}
+#### <a href="#enumerations" name="enumerations" class="anchor"> Enumerations </a>
+
+The base protocol supports two kind of enumerations: (a) integer based enumerations and (b) strings based enumerations. Integer based enumerations usually start with `1`. If appropriate the value set of an enumeration is announced by the defining side (e.g. client or server) and transmitted to the other side during the initialize handshake.
+As an example, consider a `printSymbol` request that uses a `PrintFormat` enumeration. The client could announce its supported printing formats via `printing.format` property:
+```typescript
+/**
+ * Capabilities specific to the `printSymbol` request.
+ */
+print: {
+    format: [ "json", "compact", "checkstyle" ]
+    ...
+}
+```
+
+To support the evolution of enumerations the using side of an enumeration shouldn't fail on an enumeration value it doesn't know. It should simply ignore it as a value it can use and try to do its best to preserve the value on round trips. Lets look at the `PrintFormat` enumeration as an example again: if in a future version of the protocol an additional `"html"` format is added and is now announced by a client, an (older) server not knowing about the value should not fail but simply ignore the value as a usable printing format.
 
 #### <a href="#abstractMessage" name="abstractMessage" class="anchor"> Abstract Message </a>
 
