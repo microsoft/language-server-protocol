@@ -63,6 +63,7 @@ index: 1
 | [Erlang](https://www.erlang.org) | [Roberto Aloi](https://github.com/robertoaloi) and [Contributors](https://github.com/erlang-ls/erlang_ls/graphs/contributors) | [erlang_ls](https://github.com/erlang-ls/erlang_ls) | Erlang |
 | Elixir| [Elixir LSP](https://github.com/elixir-lsp) | [elixir-ls](https://github.com/elixir-lsp/elixir-ls) | Elixir |
 | Elm| [Kolja Lampe](https://github.com/razzeee) | [elmLS](https://github.com/elm-tooling/elm-language-server) | Typescript |
+| [Ember](https://emberjs.com/) | [Alex Kanunnikov](https://github.com/lifeart) and [contributors](https://github.com/lifeart/ember-language-server/graphs/contributors) | [Ember Language Server](https://github.com/lifeart/ember-language-server) | TypeScript |
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
 | F# | [@Krzysztof-Cieslak](https://github.com/Krzysztof-Cieslak) & Contributors | [FsAutoComplete](https://github.com/fsharp/FsAutoComplete) | F# |
@@ -74,6 +75,7 @@ index: 1
 | Gauge | [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) | Go |
 | GDScript | [GodotEngine](https://github.com/godotengine) | [Godot](https://github.com/godotengine/godot) | C++ |
 | [Gleam](https://gleam.run/) | [Gleam](https://github.com/gleam-lang/gleam) | [gleam](https://github.com/gleam-lang/gleam) | Rust |
+| [Glimmer templates](https://typed-ember.gitbook.io/glint) | [Contributors](https://github.com/typed-ember/glint/graphs/contributors) | [Glint](https://github.com/typed-ember/glint) | TypeScript |
 | Gluon | [Gluon](https://github.com/gluon-lang/gluon) | [Gluon Language Server](https://github.com/gluon-lang/gluon_language-server) | Rust |
 | Go | [Go Team](https://github.com/golang/tools) | [gopls](https://github.com/golang/tools/tree/master/gopls) | Go |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
@@ -106,6 +108,7 @@ index: 1
 | [LanguageTool](https://languagetool.org/)| [Adam Voss](https://github.com/adamvoss) | [languagetool](https://github.com/adamvoss/languagetool-languageserver) | Java |
 | [LanguageTool](https://languagetool.org/)| [Julian Valentin](https://github.com/valentjn) | [ltex-ls](https://github.com/valentjn/ltex-ls) | Kotlin |
 | [LaTeX](https://www.latex-project.org/)| [Eric Förster](https://github.com/efoerster) | [texlab](https://github.com/efoerster/texlab) |
+| [Lox](https://craftinginterpreters.com/appendix-i.html) | [Ajeet D'Souza](https://github.com/ajeetdsouza) | [loxcraft](https://github.com/ajeetdsouza/loxcraft) | Rust |
 | [Lua](http://www.lua.org/)| [Kyle McLamb](https://github.com/Alloyed) | [lua-lsp](https://github.com/Alloyed/lua-lsp) | Lua |
 | [Lua](http://www.lua.org/)| [最萌小汐](https://github.com/sumneko) | [lua-language-server](https://github.com/sumneko/lua-language-server) | Lua |
 | [Lua](http://www.lua.org/)| [Tencent](https://github.com/Tencent/LuaHelper) | [LuaHelper](https://github.com/Tencent/LuaHelper) | Go |
@@ -170,6 +173,7 @@ index: 1
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) | Scala |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) | Scala |
 | Scheme| [ufo5260987423](https://github.com/ufo5260987423) | [scheme-langserver](https://github.com/ufo5260987423/scheme-langserver) | Chez Scheme|
+| Shader | [Jen-Chieh Shen](https://github.com/jcs090218) | [shader-language-server](https://github.com/shader-ls/shader-language-server) | C# |
 | [Slint](https://slint-ui.com) | Slint | [slint-lsp](https://github.com/slint-ui/slint/tree/HEAD/tools/lsp) | Rust |
 | [Smalltalk/Pharo](https://pharo.org/) | [Benoît Verhaeghe](https://github.com/badetitou) | [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) | Pharo |
 | Snyk | [Snyk](https://snyk.io) | [Snyk Language Server](https://github.com/snyk/snyk-ls) | Snyk SCA / SAST / IaC findings |
@@ -181,6 +185,7 @@ index: 1
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
+| [Systemtap](https://sourceware.org/systemtap/) | [Red Hat](https://www.redhat.com/) | [Systemtap LSP](https://sourceware.org/git/?p=systemtap.git;a=tree;f=language-server) | C++ |
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
 | SystemVerilog | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
