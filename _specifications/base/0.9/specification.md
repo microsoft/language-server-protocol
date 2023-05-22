@@ -11,10 +11,14 @@ toolsVersion: 0.9
 
 ## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
 
-The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
-separated by a '\r\n'.
+The purpose of the base protocol is to create an abstraction of common editor extensibility patterns into its own specification, independently of the presence of a language server powering such extension. In particular, concepts such as server and client capabilities, the initialization and shutdown request, and the structure of requests and notifications, were originally part of the language server protocol, but there is nothing about them that should be exclusive to language service extensions.
+
+A motivating example is the [Build Server Protocol](https://build-server-protocol.github.io/). As its specification describes, all notifications and requests are defined using [the base definitions](#basicJsonStructures) of LSP, and messages such `InitializeBuild`, `OnBuildInitialized`, and `OnBuildExit` all match almost exactly with their LSP counterparts. By implementing the base protocol, a server can support multiple protocol specifications without having to reimplement the "common boilerplate" that all of them share.
 
 ### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
+
+The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
+separated by a '\r\n'.
 
 The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conform to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
 
