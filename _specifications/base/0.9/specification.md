@@ -15,6 +15,8 @@ The purpose of the base protocol is to create an abstraction of common editor ex
 
 A motivating example is the [Build Server Protocol](https://build-server-protocol.github.io/). As its specification describes, all notifications and requests are defined using [the base definitions](#basicJsonStructures) of LSP, and messages such `InitializeBuild`, `OnBuildInitialized`, and `OnBuildExit` all match almost exactly with their LSP counterparts. By implementing the base protocol, a server can support multiple protocol specifications without having to reimplement the "common boilerplate" that all of them share.
 
+Do remarks that the base protocol is currently under experimental construction and subject to breaking changes. Its future development will depend on feedback from the community and initial implementors of the protocol.
+
 ### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
