@@ -4,7 +4,8 @@
 - do not use WE use the LSP
 - Terminology
   - Development Tool instead of client
-  - implementations instead of implementors? 
+  - implementations instead of implementors?
+- Add a `CONTRIBUTING.md` doc that explains the necessary development dependencies for working in this repo.
 
 ### Contents
 - needs link back to the language server repo for filing issues etc. Add a contributing section with links to the repo
