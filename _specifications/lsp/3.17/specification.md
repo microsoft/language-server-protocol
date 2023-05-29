@@ -468,7 +468,7 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/workDoneProgress.md %}
 {% include_relative types/partialResults.md %}
 {% include_relative types/partialResultParams.md %}
-{% include_relative types/traceValue.md %}
+{% include types/traceValue.md %}
 
 ### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor"> Server lifecycle </a>
 

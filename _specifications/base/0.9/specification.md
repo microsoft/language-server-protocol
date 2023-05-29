@@ -662,6 +662,7 @@ To keep the protocol backwards compatible servers are only allowed to use `windo
 	};
 ```
 
+{% include types/traceValue.md %}
 
 ## <a href="#lifecycle" name="lifecycle" class="anchor"> Lifecycle Messages </a>
 
