@@ -17,3 +17,9 @@
     url: /specifications/lsif/0.6.0/specification
   - title: 0.5.0 (Previous)
     url: /specifications/lsif/0.5.0/specification
+- title: Base Protocol
+  anchor: base
+  children:
+  - title: 0.9 (Upcoming)
+    version: 0.9
+    url: /specifications/base/0.9/specification

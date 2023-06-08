@@ -438,9 +438,9 @@ As said LSP defines a set of requests, responses and notifications. Each of thos
 
 There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are documented in this section.
 
-{% include_relative types/uri.md %}
+{% include types/uri.md %}
 {% include_relative types/regexp.md %}
-{% include_relative types/enumerations.md %}
+{% include types/enumerations.md %}
 
 {% include_relative types/textDocuments.md %}
 {% include_relative types/position.md %}
@@ -472,13 +472,13 @@ There are quite some JSON structures that are shared between different requests 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
 {% include_relative general/initialize.md %}
-{% include_relative general/initialized.md %}
-{% include_relative client/registerCapability.md %}
-{% include_relative client/unregisterCapability.md %}
-{% include_relative general/setTrace.md %}
-{% include_relative general/logTrace.md %}
-{% include_relative general/shutdown.md %}
-{% include_relative general/exit.md %}
+{% include messages/initialized.md %}
+{% include messages/registerCapability.md %}
+{% include messages/unregisterCapability.md %}
+{% include messages/setTrace.md %}
+{% include messages/logTrace.md %}
+{% include messages/shutdown.md %}
+{% include messages/exit.md %}
 
 ### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
@@ -675,13 +675,13 @@ Language Features provide the actual smarts in the language server protocol. The
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
-{% include_relative window/showMessage.md %}
-{% include_relative window/showMessageRequest.md %}
+{% include messages/showMessage.md %}
+{% include messages/showMessageRequest.md %}
 {% include_relative window/showDocument.md %}
-{% include_relative window/logMessage.md %}
+{% include messages/logMessage.md %}
 {% include_relative window/workDoneProgressCreate.md %}
 {% include_relative window/workDoneProgressCancel.md %}
-{% include_relative telemetry/event.md %}
+{% include messages/telemetryEvent.md %}
 
 #### <a href="#miscellaneous" name="miscellaneous" class="anchor">Miscellaneous</a>
 

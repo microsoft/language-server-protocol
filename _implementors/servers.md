@@ -12,6 +12,7 @@ index: 1
 | Language | Maintainer | Repository | Implementation Language |
 |------|--------|----------|---------------|
 | 1C Enterprise | [Contributors](https://github.com/1c-syntax/bsl-language-server/graphs/contributors) | [BSL Language Server](https://github.com/1c-syntax/bsl-language-server) | Java |
+| ABAP | [Lars Hvam](https://github.com/larshp) | [abaplint](https://github.com/abaplint/abaplint) | TypeScript |
 | ActionScript 2.0 | [Adam Vernon](https://github.com/admvx) |  [AS2 Language Support](https://github.com/admvx/as2-language-support) | TypeScript |
 | Ada/SPARK | AdaCore |  [ada_language_server](https://github.com/AdaCore/ada_language_server) | Ada |
 | [AML](https://a.ml/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
@@ -185,6 +186,7 @@ index: 1
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
+| [Systemtap](https://sourceware.org/systemtap/) | [Red Hat](https://www.redhat.com/) | [Systemtap LSP](https://sourceware.org/git/?p=systemtap.git;a=tree;f=language-server) | C++ |
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
 | SystemVerilog | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
