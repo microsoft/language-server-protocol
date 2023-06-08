@@ -37,6 +37,8 @@
       anchor: cancelRequest
     - title: Progress Support
       anchor: progress
+    - title: Trace Value
+      anchor: traceValue
   - title: Lifecycle Messages
     anchor: lifecycle
     children:
