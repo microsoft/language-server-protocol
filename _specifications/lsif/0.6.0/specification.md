@@ -21,6 +21,8 @@ The purpose of the Language Server Index Format (LSIF) is it to define a standar
 
 Feedback from store implementors showed that the concept of grouping projects into larger storage units is nothing that should be defined in LSIF itself. It should be left to the storage backend. Due to this the `Group` vertex introduced in 0.5.0 got removed again. Since some information captured in the `Group` vertex is useful in general a `Source` vertex got introduce to store this information.
 
+1. Support for Semantic Colorization of files via LSIF. To support this, 'textDocument/semanticTokens/full' request was added.
+
 #### Version 0.5.0
 
 In version 0.4.0 support was added to dump larger systems project by project (in their reverse dependency order) and then combine the dumps again in a database by linking result sets using their corresponding monikers. Use of the format has shown that a couple of features are missing to make this work nicely:
@@ -620,7 +622,7 @@ As with other results ranges get added using a `item` edge. In this case without
 
 ## Document requests
 
-The Language Server Protocol also supports requests for documents only (without any position information). These requests are `textDocument/foldingRange`, `textDocument/documentLink`, and `textDocument/documentSymbol`. We follow the same pattern as before to model these, the difference being that the result is linked to the document instead of to a range.
+The Language Server Protocol also supports requests for documents only (without any position information). These requests are `textDocument/foldingRange`, `textDocument/documentLink`, `textDocument/documentSymbol`, and `textDocument/semanticTokens/full`. We follow the same pattern as before to model these, the difference being that the result is linked to the document instead of to a range.
 
 ### <a href="#foldingRange" name="foldingRange" class="anchor">Request: `textDocument/foldingRange`</a>
 
@@ -932,6 +934,60 @@ Produces the following output:
 ```
 
 Since diagnostics are not very common in dumps, no effort has been made to reuse ranges in diagnostics.
+
+### <a href="#semanticTokens" name="semanticTokens" class="anchor">Request: `textDocument/semanticTokens/full`</a>
+
+Finally, the `textDocument/semanticTokens/full` edge and `SemanticTokensResult` type define a means for
+exporting information about the semantics of ranges in the text. This mechanism is primarily a means of
+classifying points of interest to enable additional, richer, semantic code colorization that indicates information
+about the code that cannot be determined via syntax parsers alone (colorizing resolved types, formatting by visibility, etc.)
+
+```typescript
+function hello() {
+  console.log('Hello');
+}
+```
+
+```typescript
+{ id: 2, type: "vertex", label: "document",
+  uri: "file:///Users/dirkb/sample.ts", languageId: "typescript"
+}
+{ id: 112, type: "vertex", label: "semanticTokensResult", result: {"data": [1, 2, 7, 0, 0] } }
+{ id: 113, type: "edge", label: "textDocument/semanticTokens", outV: 2, inV: 112 }
+```
+
+The corresponding `SemanticTokensResult` is defined as follows:
+
+```typescript
+export interface SemanticTokensResult {
+  label: 'semanticTokensResult';
+
+  result: lsp.SemanticTokens;
+}
+```
+
+The above example defines a single 5-integer-encoded range at 'console'.
+
+The `SemanticTokens` type, its `data` member, and the encoding of the integers within
+are all consistent with the Language Server Protocol representations of these same concepts.
+
+The 4th and 5th integer in every 5 integer encoded token represent the SemanticTokensType and SemanticTokensModifiers, respectively.
+Much like LSP, these integers are mapped to token type names and token modifiers names via entries in the capabilities vertex.
+
+For example, the `object` semantic token type declared below maps to `0`. Any tokens with integer number 4 of 5 set to 0
+will be considered `object` for the purposes of colorization.
+
+```typescript
+{
+    "semanticTokensProvider": {
+      "tokenTypes": [ "object" ],
+      "tokenModifiers": [ "static" ]
+  },
+  "label": "capabilities"
+}
+```
+
+See [LSP Semantic Tokens Protocol]("..\..\lsp\3.18\language\semanticTokens.md") for more information.
 
 ### <a href="#projectContext" name="projectContext" class="anchor">The Project vertex</a>
 
