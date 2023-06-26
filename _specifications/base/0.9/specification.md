@@ -15,7 +15,7 @@ The purpose of the base protocol is to create an abstraction of common editor ex
 
 A motivating example is the [Build Server Protocol](https://build-server-protocol.github.io/). As its specification describes, all notifications and requests are defined using [the base definitions](#basicJsonStructures) of LSP, and messages such `InitializeBuild`, `OnBuildInitialized`, and `OnBuildExit` all match almost exactly with their LSP counterparts. By implementing the base protocol, a server can support multiple protocol specifications without having to reimplement the "common boilerplate" that all of them share.
 
-Do remarks that the base protocol is currently under experimental construction and subject to breaking changes. Its future development will depend on feedback from the community and initial implementors of the protocol.
+Do remark that the base protocol is currently under experimental construction and subject to breaking changes. Its future development will depend on feedback from the community and initial implementors of the protocol.
 
 ### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
@@ -662,6 +662,7 @@ To keep the protocol backwards compatible servers are only allowed to use `windo
 	};
 ```
 
+{% include types/traceValue.md %}
 
 ## <a href="#lifecycle" name="lifecycle" class="anchor"> Lifecycle Messages </a>
 
