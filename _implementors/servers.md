@@ -27,6 +27,7 @@ index: 1
 | [ASN.1](https://www.itu.int/en/ITU-T/asn1/Pages/introduction.aspx) | [Eclipse Titan](https://projects.eclipse.org/projects/tools.titan) | [Titan Language Server](https://gitlab.eclipse.org/eclipse/titan/titan.language-server) | Java |
 | [AsyncAPI](https://www.asyncapi.com/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | AWK | [Stanislav Chernov](https://github.com/Beaglefoot) | [AWK Language Server](https://github.com/Beaglefoot/awk-language-server) | TypeScript |
+| [B/ProB](https://prob.hhu.de/w/) | [STUPS](https://github.com/hhu-stups/prob-issues/issues) | [B-language-server](https://github.com/hhu-stups/b-language-server) | Kotlin/Prolog |
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
