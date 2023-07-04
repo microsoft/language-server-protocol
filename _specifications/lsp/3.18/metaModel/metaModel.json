@@ -1,6 +1,6 @@
 {
 	"metaData": {
-		"version": "3.17.0"
+		"version": "3.18.0"
 	},
 	"requests": [
 		{
@@ -974,6 +974,47 @@
 			"messageDirection": "serverToClient",
 			"documentation": "The diagnostic refresh request definition.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"method": "textDocument/inlineCompletion",
+			"result": {
+				"kind": "or",
+				"items": [
+					{
+						"kind": "reference",
+						"name": "InlineCompletionList"
+					},
+					{
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "InlineCompletionItem"
+						}
+					},
+					{
+						"kind": "base",
+						"name": "null"
+					}
+				]
+			},
+			"messageDirection": "clientToServer",
+			"params": {
+				"kind": "reference",
+				"name": "InlineCompletionParams"
+			},
+			"partialResult": {
+				"kind": "array",
+				"element": {
+					"kind": "reference",
+					"name": "InlineCompletionItem"
+				}
+			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "InlineCompletionRegistrationOptions"
+			},
+			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "client/registerCapability",
@@ -4034,6 +4075,123 @@
 			],
 			"documentation": "The params sent in a close notebook document notification.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "InlineCompletionParams",
+			"properties": [
+				{
+					"name": "context",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionContext"
+					},
+					"documentation": "Additional information about the context in which inline completions were\nrequested."
+				}
+			],
+			"extends": [
+				{
+					"kind": "reference",
+					"name": "TextDocumentPositionParams"
+				}
+			],
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "WorkDoneProgressParams"
+				}
+			],
+			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionList",
+			"properties": [
+				{
+					"name": "items",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "InlineCompletionItem"
+						}
+					},
+					"documentation": "The inline completion items"
+				}
+			],
+			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor."
+		},
+		{
+			"name": "InlineCompletionItem",
+			"properties": [
+				{
+					"name": "insertText",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "The text to replace the range with. Must be set."
+				},
+				{
+					"name": "insertTextFormat",
+					"type": {
+						"kind": "reference",
+						"name": "InsertTextFormat"
+					},
+					"optional": true,
+					"documentation": "The format of the insert text. The format applies to the `insertText`. If omitted defaults to `InsertTextFormat.PlainText`."
+				},
+				{
+					"name": "filterText",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A text that is used to decide if this inline completion should be shown. When `falsy` the {@link InlineCompletionItem.insertText} is used."
+				},
+				{
+					"name": "range",
+					"type": {
+						"kind": "reference",
+						"name": "Range"
+					},
+					"optional": true,
+					"documentation": "The range to replace. Must begin and end on the same line."
+				},
+				{
+					"name": "command",
+					"type": {
+						"kind": "reference",
+						"name": "Command"
+					},
+					"optional": true,
+					"documentation": "An optional {@link Command} that is executed *after* inserting this completion."
+				}
+			],
+			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionRegistrationOptions",
+			"properties": [],
+			"extends": [
+				{
+					"kind": "reference",
+					"name": "InlineCompletionOptions"
+				},
+				{
+					"kind": "reference",
+					"name": "TextDocumentRegistrationOptions"
+				}
+			],
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "StaticRegistrationOptions"
+				}
+			],
+			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "RegistrationParams",
@@ -7595,6 +7753,42 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "InlineCompletionContext",
+			"properties": [
+				{
+					"name": "triggerKind",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionTriggerKind"
+					},
+					"documentation": "Describes how the inline completion was triggered."
+				},
+				{
+					"name": "selectedCompletionInfo",
+					"type": {
+						"kind": "reference",
+						"name": "SelectedCompletionInfo"
+					},
+					"optional": true,
+					"documentation": "Provides information about the currently selected item in the autocomplete widget if it is visible."
+				}
+			],
+			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
+			"name": "InlineCompletionOptions",
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "WorkDoneProgressOptions"
+				}
+			],
+			"properties": [],
+			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
 			"name": "Registration",
 			"properties": [
 				{
@@ -8397,6 +8591,25 @@
 					"optional": true,
 					"documentation": "The server has support for pull model diagnostics.\n\n@since 3.17.0",
 					"since": "3.17.0"
+				},
+				{
+					"name": "inlineCompletionProvider",
+					"type": {
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "boolean"
+							},
+							{
+								"kind": "reference",
+								"name": "InlineCompletionOptions"
+							}
+						]
+					},
+					"optional": true,
+					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "workspace",
@@ -9672,6 +9885,29 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "SelectedCompletionInfo",
+			"properties": [
+				{
+					"name": "range",
+					"type": {
+						"kind": "reference",
+						"name": "Range"
+					},
+					"documentation": "The range that will be replaced if this completion item is accepted."
+				},
+				{
+					"name": "text",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "The text the range will be replaced with if this completion is accepted."
+				}
+			],
+			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
 			"name": "ClientCapabilities",
 			"properties": [
 				{
@@ -10606,6 +10842,16 @@
 					"optional": true,
 					"documentation": "Capabilities specific to the diagnostic pull model.\n\n@since 3.17.0",
 					"since": "3.17.0"
+				},
+				{
+					"name": "inlineCompletion",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionClientCapabilities"
+					},
+					"optional": true,
+					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Text document specific client capabilities."
@@ -12431,6 +12677,22 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "InlineCompletionClientCapabilities",
+			"properties": [
+				{
+					"name": "dynamicRegistration",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether implementation supports dynamic registration for inline completion providers."
+				}
+			],
+			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
 			"name": "NotebookDocumentSyncClientCapabilities",
 			"properties": [
 				{
@@ -13052,6 +13314,26 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "InsertTextFormat",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "PlainText",
+					"value": 1,
+					"documentation": "The primary text to be inserted is treated as a plain string."
+				},
+				{
+					"name": "Snippet",
+					"value": 2,
+					"documentation": "The primary text to be inserted is treated as a snippet.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Placeholders with equal identifiers are linked,\nthat is typing in one will update others too.\n\nSee also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax"
+				}
+			],
+			"documentation": "Defines whether the insert text in a completion item should be interpreted as\nplain text or a snippet."
+		},
+		{
 			"name": "MessageType",
 			"type": {
 				"kind": "base",
@@ -13258,26 +13540,6 @@
 			"since": "3.15.0"
 		},
 		{
-			"name": "InsertTextFormat",
-			"type": {
-				"kind": "base",
-				"name": "uinteger"
-			},
-			"values": [
-				{
-					"name": "PlainText",
-					"value": 1,
-					"documentation": "The primary text to be inserted is treated as a plain string."
-				},
-				{
-					"name": "Snippet",
-					"value": 2,
-					"documentation": "The primary text to be inserted is treated as a snippet.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Placeholders with equal identifiers are linked,\nthat is typing in one will update others too.\n\nSee also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax"
-				}
-			],
-			"documentation": "Defines whether the insert text in a completion item should be interpreted as\nplain text or a snippet."
-		},
-		{
 			"name": "InsertTextMode",
 			"type": {
 				"kind": "base",
@@ -13423,6 +13685,27 @@
 				}
 			],
 			"documentation": "Describes the content type that a client supports in various\nresult literals like `Hover`, `ParameterInfo` or `CompletionItem`.\n\nPlease note that `MarkupKinds` must not start with a `$`. This kinds\nare reserved for internal usage."
+		},
+		{
+			"name": "InlineCompletionTriggerKind",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "Invoked",
+					"value": 0,
+					"documentation": "Completion was triggered explicitly by a user gesture."
+				},
+				{
+					"name": "Automatic",
+					"value": 1,
+					"documentation": "Completion was triggered automatically while editing."
+				}
+			],
+			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "PositionEncodingKind",
