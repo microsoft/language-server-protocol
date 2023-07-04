@@ -2,9 +2,9 @@
 
 > *Since version 3.18.0*
 
-The inline completion request is sent from the client to the server to compute inline completions for a given text document either explicitly by a user gesture or implicitly when typing. 
+The inline completion request is sent from the client to the server to compute inline completions for a given text document either explicitly by a user gesture or implicitly when typing.
 
-Inline completion items usually complete bigger portions of text (e.g. whole methods, ...) and in contrast to completions items can complete code that might be syntactically or semantically incorrect. 
+Inline completion items usually complete bigger portions of text (e.g. whole methods, ...) and in contrast to completions items can complete code that might be syntactically or semantically incorrect.
 
 Due to this inline completion items are usually not suited to be presented in normal code completion widgets like a list of items. One possible approach can be to present the information inline in the editor with lower contrast.
 
@@ -61,8 +61,8 @@ _Registration Options_: `InlineCompletionRegistrationOptions` defined as follows
  * @since 3.18.0
  */
 export interface InlineCompletionRegistrationOptions extends
-    InlineCompletionOptions, TextDocumentRegistrationOptions,
-    StaticRegistrationOptions {
+	InlineCompletionOptions, TextDocumentRegistrationOptions,
+	StaticRegistrationOptions {
 }
 ```
 
@@ -79,10 +79,10 @@ _Request_:
  * @since 3.18.0
  */
 export interface InlineCompletionParams extends TextDocumentPositionParams,
-    WorkDoneProgressParams {
+	WorkDoneProgressParams {
 	/**
 	 * Additional information about the context in which inline completions
-     * were requested.
+	 * were requested.
 	 */
 	context: InlineCompletionContext;
 }
@@ -94,7 +94,7 @@ export interface InlineCompletionParams extends TextDocumentPositionParams,
 /**
  * Provides information about the context in which an inline completion was
  * requested.
- * 
+ *
  * @since 3.18.0
  */
 export interface InlineCompletionContext {
@@ -104,18 +104,18 @@ export interface InlineCompletionContext {
 	triggerKind: InlineCompletionTriggerKind;
 
 	/**
-     * Provides information about the currently selected item in the
-     * autocomplete widget if it is visible.
-     *
-     * If set, provided inline completions must extend the text of the
-     * selected item and use the same range, otherwise they are not shown as
-     * preview.
-     * As an example, if the document text is `console.` and the selected item
-     * is `.log` replacing the `.` in the document, the inline completion must
-     * also replace `.` and start with `.log`, for example `.log()`.
-     *
-     * Inline completion providers are requested again whenever the selected
-     * item changes.
+	 * Provides information about the currently selected item in the
+	 * autocomplete widget if it is visible.
+	 *
+	 * If set, provided inline completions must extend the text of the
+	 * selected item and use the same range, otherwise they are not shown as
+	 * preview.
+	 * As an example, if the document text is `console.` and the selected item
+	 * is `.log` replacing the `.` in the document, the inline completion must
+	 * also replace `.` and start with `.log`, for example `.log()`.
+	 *
+	 * Inline completion providers are requested again whenever the selected
+	 * item changes.
 	 */
 	selectedCompletionInfo?: SelectedCompletionInfo;
 }
@@ -127,21 +127,21 @@ export interface InlineCompletionContext {
 /**
  * Describes how an {@link InlineCompletionItemProvider inline completion
  * provider} was triggered.
- * 
+ *
  * @since 3.18.0
  */
 export namespace InlineCompletionTriggerKind {
-    /**
-     * Completion was triggered explicitly by a user gesture.
-     * Return multiple completion items to enable cycling through them.
-     */
-    export const Invoke: 0 = 0;
+	/**
+	 * Completion was triggered explicitly by a user gesture.
+	 * Return multiple completion items to enable cycling through them.
+	 */
+	export const Invoke: 0 = 0;
 
-    /**
-     * Completion was triggered automatically while editing.
-     * It is sufficient to return a single completion item in this case.
-     */
-    export const Automatic: 1 = 1;
+	/**
+	 * Completion was triggered automatically while editing.
+	 * It is sufficient to return a single completion item in this case.
+	 */
+	export const Automatic: 1 = 1;
 }
 
 export type InlineCompletionTriggerKind = 0 | 1;
@@ -152,20 +152,20 @@ export type InlineCompletionTriggerKind = 0 | 1;
 ```typescript
 /**
  * Describes the currently selected completion item.
- * 
+ *
  * @since 3.18.0
  */
 export interface SelectedCompletionInfo {
-    /**
-     * The range that will be replaced if this completion item is accepted.
-     */
-    range: Range;
+	/**
+	 * The range that will be replaced if this completion item is accepted.
+	 */
+	range: Range;
 
-    /**
-     * The text the range will be replaced with if this completion is
-     * accepted.
-     */
-    text: string;
+	/**
+	 * The text the range will be replaced with if this completion is
+	 * accepted.
+	 */
+	text: string;
 }
 ```
 
@@ -199,40 +199,40 @@ export interface InlineCompletionList {
  * @since 3.18.0
  */
 export interface InlineCompletionItem {
-    /**
-     * The text to replace the range with. Must be set.
-     * Is used both for the preview and the accept operation.
-     */
-    insertText: string;
+	/**
+	 * The text to replace the range with. Must be set.
+	 * Is used both for the preview and the accept operation.
+	 */
+	insertText: string;
 
-    /**
-     * A text that is used to decide if this inline completion should be
-     * shown. When `falsy` the {@link InlineCompletionItem.insertText} is
-     * used.
-     *
-     * An inline completion is shown if the text to replace is a prefix of the
-     * filter text.
-     */
-    filterText?: string;
+	/**
+	 * A text that is used to decide if this inline completion should be
+	 * shown. When `falsy` the {@link InlineCompletionItem.insertText} is
+	 * used.
+	 *
+	 * An inline completion is shown if the text to replace is a prefix of the
+	 * filter text.
+	 */
+	filterText?: string;
 
-    /**
-     * The range to replace.
-     * Must begin and end on the same line.
-     *
-     * Prefer replacements over insertions to provide a better experience when
-     * the user deletes typed text.
-     */
-    range?: Range;
+	/**
+	 * The range to replace.
+	 * Must begin and end on the same line.
+	 *
+	 * Prefer replacements over insertions to provide a better experience when
+	 * the user deletes typed text.
+	 */
+	range?: Range;
 
-    /**
-     * An optional {@link Command} that is executed *after* inserting this
-     * completion.
-     */
-    command?: Command;
+	/**
+	 * An optional {@link Command} that is executed *after* inserting this
+	 * completion.
+	 */
+	command?: Command;
 
 	/**
 	 * The format of the insert text. The format applies to the `insertText`.
-     * If omitted defaults to `InsertTextFormat.PlainText`.
+	 * If omitted defaults to `InsertTextFormat.PlainText`.
 	 */
 	insertTextFormat?: InsertTextFormat;
 }
