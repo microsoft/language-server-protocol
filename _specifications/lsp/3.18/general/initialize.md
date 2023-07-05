@@ -199,11 +199,12 @@ export interface TextDocumentClientCapabilities {
 	formatting?: DocumentFormattingClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/rangeFormatting` request.
+	 * Capabilities specific to the `textDocument/rangeFormatting` and
+	 * `textDocument/rangesFormatting requests.
 	 */
 	rangeFormatting?: DocumentRangeFormattingClientCapabilities;
 
-	/** request.
+	/**
 	 * Capabilities specific to the `textDocument/onTypeFormatting` request.
 	 */
 	onTypeFormatting?: DocumentOnTypeFormattingClientCapabilities;

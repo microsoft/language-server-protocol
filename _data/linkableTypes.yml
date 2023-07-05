@@ -588,6 +588,8 @@
     link: '#documentRangeFormattingRegistrationOptions'
   - type: 'DocumentRangeFormattingParams'
     link: '#documentRangeFormattingParams'
+  - type: 'DocumentRangesFormattingParams'
+    link: '#documentRangesFormattingParams'
   - type: 'DocumentOnTypeFormattingClientCapabilities'
     link: '#documentOnTypeFormattingClientCapabilities'
   - type: 'textDocument/onTypeFormatting'
