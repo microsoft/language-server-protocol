@@ -202,6 +202,7 @@ index: 1
 | Turtle | [Stardog Union](https://github.com/stardog-union) | [Turtle Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
+| [V](https://vlang.io) | [Contributors](https://github.com/v-analyzer/v-analyzer/graphs/contributors) | [v-analyzer](https://github.com/v-analyzer/v-analyzer) | V
 | Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
 | VDM-SL, VDM++, VDM-RT | [Nick Battle](https://github.com/nickbattle)| [VDMJ-LSP](https://github.com/nickbattle/vdmj/tree/master/lsp) | Java |
 | [Veryl](https://github.com/dalance/veryl) | [dalance](https://github.com/dalance) | [Veryl Language Server](https://github.com/dalance/veryl/tree/master/crates/languageserver) | Rust |
