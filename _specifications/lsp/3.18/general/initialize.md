@@ -199,11 +199,12 @@ export interface TextDocumentClientCapabilities {
 	formatting?: DocumentFormattingClientCapabilities;
 
 	/**
-	 * Capabilities specific to the `textDocument/rangeFormatting` request.
+	 * Capabilities specific to the `textDocument/rangeFormatting` and
+	 * `textDocument/rangesFormatting requests.
 	 */
 	rangeFormatting?: DocumentRangeFormattingClientCapabilities;
 
-	/** request.
+	/**
 	 * Capabilities specific to the `textDocument/onTypeFormatting` request.
 	 */
 	onTypeFormatting?: DocumentOnTypeFormattingClientCapabilities;
@@ -288,6 +289,13 @@ export interface TextDocumentClientCapabilities {
 	 * @since 3.17.0
 	 */
 	diagnostic?: DiagnosticClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `textDocument/inlineCompletion` request.
+	 * 
+	 * @since 3.18.0
+	 */
+	inlineCompletion?: InlineCompletionClientCapabilities;
 }
 ```
 
@@ -869,6 +877,13 @@ interface ServerCapabilities {
 	 * The server provides workspace symbol support.
 	 */
 	workspaceSymbolProvider?: boolean | WorkspaceSymbolOptions;
+
+	/**
+	 * The server provides inline completions.
+	 * 
+	 * @since 3.18.0
+	 */
+	inlineCompletionProvider?: boolean | InlineCompletionOptions;
 
 	/**
 	 * Workspace specific server capabilities
