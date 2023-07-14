@@ -987,7 +987,7 @@ will be considered `object` for the purposes of colorization.
 }
 ```
 
-See [LSP Semantic Tokens Protocol]("..\..\lsp\3.18\language\semanticTokens.md") for more information.
+See [LSP Semantic Tokens Protocol](#textDocument_semanticTokens) for more information.
 
 ### <a href="#projectContext" name="projectContext" class="anchor">The Project vertex</a>
 
