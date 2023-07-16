@@ -54,7 +54,7 @@ index: 1
 | [Cucumber/Gherkin](https://cucumber.io/)| [Cucumber core team](https://github.com/cucumber) | [Cucumber Language Server](https://github.com/cucumber/language-server) | TypeScript |
 | [D](https://dlang.org) | [Jan Jurzitza](https://github.com/WebFreak001) | [serve-d](https://github.com/Pure-D/serve-d) | D |
 | [D](https://dlang.org) | [Laurent Tréguier](https://github.com/LaurentTreguier) | [D Language Server](https://github.com/d-language-server/dls) | D |
-| Dart | [Dart Team](https://dart.dev/) | [Dart SDK](https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md) | Dart |
+| [Dart](https://dart.dev/) | [Dart Team](https://dart.dev/) | [Dart SDK](https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md) | Dart |
 | [Data Pack](https://minecraft.gamepedia.com/Data_Pack) | [SPGoding](https://github.com/SPGoding) | [Data-pack Language Server](https://github.com/SPGoding/datapack-language-server) | TypeScript |
 | [Delphi](https://www.embarcadero.com/products/delphi) | [Embarcadero](https://www.embarcadero.com/) | Proprietary ([DelphiLSP](http://docwiki.embarcadero.com/RADStudio/en/Code_Insight_References)) | Delphi and C |
 | [DenizenScript](https://denizenscript.com/) | [DenizenScript Team](https://github.com/DenizenScript/) | [DenizenVSCode](https://github.com/DenizenScript/DenizenVSCode) | C# |
@@ -63,8 +63,8 @@ index: 1
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
 | Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) | Erlang |
 | [Erlang](https://www.erlang.org) | [Roberto Aloi](https://github.com/robertoaloi) and [Contributors](https://github.com/erlang-ls/erlang_ls/graphs/contributors) | [erlang_ls](https://github.com/erlang-ls/erlang_ls) | Erlang |
-| Elixir| [Elixir LSP](https://github.com/elixir-lsp) | [elixir-ls](https://github.com/elixir-lsp/elixir-ls) | Elixir |
-| Elm| [Kolja Lampe](https://github.com/razzeee) | [elmLS](https://github.com/elm-tooling/elm-language-server) | Typescript |
+| [Elixir](https://elixir-lang.org/)| [Elixir LSP](https://github.com/elixir-lsp) | [elixir-ls](https://github.com/elixir-lsp/elixir-ls) | Elixir |
+| [Elm](https://elm-lang.org/)| [Kolja Lampe](https://github.com/razzeee) | [elmLS](https://github.com/elm-tooling/elm-language-server) | Typescript |
 | [Ember](https://emberjs.com/) | [Alex Kanunnikov](https://github.com/lifeart) and [contributors](https://github.com/lifeart/ember-language-server/graphs/contributors) | [Ember Language Server](https://github.com/lifeart/ember-language-server) | TypeScript |
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
@@ -120,7 +120,7 @@ index: 1
 | [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features/server) | TypeScript |
 | Motorola 68000 Assembly | [Graham Bates](https://github.com/grahambates) | [m68k-lsp](https://github.com/grahambates/m68k-lsp) | TypeScript |
 | [MSBuild](https://github.com/Microsoft/msbuild) | [Adam Friedman](https://github.com/tintoy) | [msbuild-project-tools-vscode](https://github.com/tintoy/msbuild-project-tools-vscode) | TypeScript |
-| Nim | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
+| [Nim](https://nim-lang.org/) | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
 | OCaml/Reason | [freebroccolo](https://github.com/freebroccolo) | [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server) | TypeScript |
 | OCaml/Reason | [OCaml Labs](http://ocamllabs.io) | [ocamllsp](https://github.com/ocaml/ocaml-lsp) | OCaml |
 | [OpenAPI](https://www.openapis.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
@@ -152,7 +152,7 @@ index: 1
 | [Pony](https://www.ponylang.io/) | [Mahan Bakhshi](https://github.com/MahanBi) | [PonyLS](https://github.com/MahanBi/PonyLS) | Pony |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
-| R | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
+| [R](https://www.r-project.org/) | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
 | Racket | [Jay McCarthy](https://github.com/jeapostrophe) | [racket-langserver](https://github.com/jeapostrophe/racket-langserver) | Racket |
 | Raku | [Brian Scannell](https://github.com/bscan) | [Raku Navigator](https://github.com/bscan/RakuNavigator) | TypeScript |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
@@ -184,7 +184,7 @@ index: 1
 | SQL | [Toshikazu Ohashi](https://github.com/lighttiger2505) | [sqls](https://github.com/lighttiger2505/sqls) | Go |
 | Standard ML | [azdavis](https://azdavis.net) | [Millet](https://github.com/azdavis/millet) | Rust |
 | Stylable | [Wix.com](https://www.wix.com) | [stylable/language-service](https://github.com/wix/stylable/tree/master/packages/language-service) | TypeScript |
-| Svelte | [Contributors](https://github.com/sveltejs/language-tools/graphs/contributors) | [svelte-language-server](https://github.com/sveltejs/language-tools) | TypeScript |
+| [Svelte](https://svelte.dev/) | [Contributors](https://github.com/sveltejs/language-tools/graphs/contributors) | [svelte-language-server](https://github.com/sveltejs/language-tools) | TypeScript |
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
@@ -211,7 +211,7 @@ index: 1
 | VHDL | [ViDE-Software](https://www.vide-software.at) | Proprietary ([VHDL for Professionals](https://marketplace.visualstudio.com/items?itemName=ViDE-Software.v4pvhdlforprofessionals)) | C# |
 | Viml | [iamcco](https://github.com/iamcco) | [vim-language-server](https://github.com/iamcco/vim-language-server) | Typescript |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) | |
-| Vue| [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) | TypeScript |
+| [Vue](https://vuejs.org/) | [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) | TypeScript |
 | [WebAssembly](https://webassembly.org/) | [Darin Morrison](https://github.com/darinmorrison) | [wasm-language-server](https://github.com/wasm-lsp/wasm-language-server) | Rust |
 | [WebGPU Shading Language](https://gpuweb.github.io/gpuweb/wgsl/) | [WGSL-Analyzer Team](https://github.com/wgsl-analyzer) | [wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) | Rust |
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
@@ -224,7 +224,7 @@ index: 1
 | YAML| [Red Hat Developers](https://github.com/redhat-developer) | [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) | TypeScript |
 | [YARA](https://github.com/virusTotal/yara) | [Avast](https://github.com/avast) | [YARA Language Server](https://github.com/avast/yls) | Python |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
-| Zig | [zigtools](https://github.com/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
+| [Zig](https://ziglang.org/) | [zigtools](https://github.com/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
 | * | [iamcco](https://github.com/iamcco) | [diagnostic-languageserver](https://github.com/iamcco/diagnostic-languageserver) | TypeScript |
 | * | [daquexian](https://github.com/daquexian) | [tagls](https://github.com/daquexian/tagls) | Python |
