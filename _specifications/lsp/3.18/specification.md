@@ -472,13 +472,13 @@ There are quite some JSON structures that are shared between different requests 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
 {% include_relative general/initialize.md %}
-{% include messages/initialized.md %}
-{% include messages/registerCapability.md %}
-{% include messages/unregisterCapability.md %}
-{% include messages/setTrace.md %}
-{% include messages/logTrace.md %}
-{% include messages/shutdown.md %}
-{% include messages/exit.md %}
+{% include messages/3.18/initialized.md %}
+{% include messages/3.18/registerCapability.md %}
+{% include messages/3.18/unregisterCapability.md %}
+{% include messages/3.18/setTrace.md %}
+{% include messages/3.18/logTrace.md %}
+{% include messages/3.18/shutdown.md %}
+{% include messages/3.18/exit.md %}
 
 ### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
@@ -676,13 +676,13 @@ Language Features provide the actual smarts in the language server protocol. The
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
-{% include messages/showMessage.md %}
-{% include messages/showMessageRequest.md %}
+{% include messages/3.18/showMessage.md %}
+{% include messages/3.18/showMessageRequest.md %}
 {% include_relative window/showDocument.md %}
-{% include messages/logMessage.md %}
+{% include messages/3.18/logMessage.md %}
 {% include_relative window/workDoneProgressCreate.md %}
 {% include_relative window/workDoneProgressCancel.md %}
-{% include messages/telemetryEvent.md %}
+{% include messages/3.18/telemetryEvent.md %}
 
 #### <a href="#miscellaneous" name="miscellaneous" class="anchor">Miscellaneous</a>
 
