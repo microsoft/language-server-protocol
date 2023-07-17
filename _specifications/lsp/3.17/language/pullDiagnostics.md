@@ -434,7 +434,7 @@ export type WorkspaceDocumentDiagnosticReport =
 	| WorkspaceUnchangedDocumentDiagnosticReport;
 ```
 
-* partial result: The first literal send need to be a `WorkspaceDiagnosticReport` followed by n `DocumentDiagnosticReportPartialResult` literals defined as follows:
+* partial result: The first literal send need to be a `WorkspaceDiagnosticReport` followed by n `WorkspaceDiagnosticReportPartialResult` literals defined as follows:
 
 <div class="anchorHolder"><a href="#workspaceDiagnosticReportPartialResult" name="workspaceDiagnosticReportPartialResult" class="linkableAnchor"></a></div>
 
