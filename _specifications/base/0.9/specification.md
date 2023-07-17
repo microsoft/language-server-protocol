@@ -784,7 +784,7 @@ interface InitializeError {
 
 Note that `capabilities` is specified as an empty object in both `InitializeParams` and `InitializeResult`, and are left open for each implementation of the base protocol to define accordingly. However, in order to avoid conflicts with properties used by LSP, these cannot include any of the property names listed in the above [capabilities section](#capabilities).
 
-{% include messages/initialized.md %}
+{% include messages/3.17/initialized.md %}
 
 #### <a href="#client_registerCapability" name="client_registerCapability" class="anchor">Register Capability (:arrow_right_hook:)</a>
 
@@ -894,14 +894,14 @@ _Response_:
 * result: void.
 * error: code and message set in case an exception happens during the request.
 
-{% include messages/setTrace.md %}
-{% include messages/logTrace.md %}
-{% include messages/shutdown.md %}
-{% include messages/exit.md %}
+{% include messages/3.17/setTrace.md %}
+{% include messages/3.17/logTrace.md %}
+{% include messages/3.17/shutdown.md %}
+{% include messages/3.17/exit.md %}
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
-{% include messages/showMessage.md %}
-{% include messages/showMessageRequest.md %}
-{% include messages/logMessage.md %}
-{% include messages/telemetryEvent.md %}
+{% include messages/3.17/showMessage.md %}
+{% include messages/3.17/showMessageRequest.md %}
+{% include messages/3.17/logMessage.md %}
+{% include messages/3.17/telemetryEvent.md %}
