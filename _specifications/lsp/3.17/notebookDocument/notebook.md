@@ -1,6 +1,6 @@
 ### <a href="#notebookDocument_synchronization" name="notebookDocument_synchronization" class="anchor">Notebook Document Synchronization</a>
 
-Notebooks are becoming more and more popular. Adding support for them to the language server protocol allows notebook editors to reused language smarts provided by the server inside a notebook or a notebook cell, respectively. To reuse protocol parts and therefore server implementations notebooks are modeled in the following way in LSP:
+Notebooks are becoming more and more popular. Adding support for them to the language server protocol allows notebook editors to reuse language smarts provided by the server inside a notebook or a notebook cell, respectively. To reuse protocol parts and therefore server implementations notebooks are modeled in the following way in LSP:
 
 - *notebook document*: a collection of notebook cells typically stored in a file on disk. A notebook document has a type and can be uniquely identified using a resource URI.
 - *notebook cell*: holds the actual text content. Cells have a kind (either code or markdown). The actual text content of the cell is stored in a text document which can be synced to the server like all other text documents. Cell text documents have an URI however servers should not rely on any format for this URI since it is up to the client on how it will create these URIs. The URIs must be unique across ALL notebook cells and can therefore be used to uniquely identify a notebook cell or the cell's text document.
