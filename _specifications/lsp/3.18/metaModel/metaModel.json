@@ -1674,7 +1674,7 @@
 				"kind": "reference",
 				"name": "DocumentFormattingRegistrationOptions"
 			},
-			"documentation": "A request to to format a whole document."
+			"documentation": "A request to format a whole document."
 		},
 		{
 			"method": "textDocument/rangeFormatting",
