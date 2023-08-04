@@ -118,6 +118,7 @@ index: 1
 | [IBM **LALR** Parser Generator language](https://sourceforge.net/projects/lpg/)| [kuafuwang](https://github.com/kuafuwang) | [LPG-language-server](https://github.com/kuafuwang/LPG-language-server) | C++ |
 | [Markdown](https://commonmark.org) | [Artem Pianykh](https://github.com/artempyanykh) | [Marksman](https://github.com/artempyanykh/marksman) | F# |
 | [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features/server) | TypeScript |
+| MATLAB | mathworks | [MATLAB-language-server](https://github.com/mathworks/MATLAB-language-server) | TypeScript, MATLAB |
 | Motorola 68000 Assembly | [Graham Bates](https://github.com/grahambates) | [m68k-lsp](https://github.com/grahambates/m68k-lsp) | TypeScript |
 | [MSBuild](https://github.com/Microsoft/msbuild) | [Adam Friedman](https://github.com/tintoy) | [msbuild-project-tools-vscode](https://github.com/tintoy/msbuild-project-tools-vscode) | TypeScript |
 | [Nim](https://nim-lang.org/) | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
@@ -129,7 +130,7 @@ index: 1
 | Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl |
 | Perl | [Marc Reisner](https://github.com/FractalBoy) | [PLS](https://github.com/FractalBoy/perl-language-server)| Perl |
 | Perl | [Brian Scannell](https://github.com/bscan) | [Perl Navigator](https://github.com/bscan/PerlNavigator)| Perl |
- | Pest | [Pest Maintainers](https://github.com/orgs/pest-parser/teams/pest-ide-tools) | [Pest IDE Tools](https://github.com/pest-parser/pest-ide-tools) | Rust |
+| Pest | [Pest Maintainers](https://github.com/orgs/pest-parser/teams/pest-ide-tools) | [Pest IDE Tools](https://github.com/pest-parser/pest-ide-tools) | Rust |
 | Crane **PHP** | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) | TypeScript |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [intelephense](https://github.com/bmewburn/vscode-intelephense) | TypeScript |
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server) | PHP |
