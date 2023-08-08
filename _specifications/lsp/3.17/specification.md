@@ -658,6 +658,8 @@ Language Features provide the actual smarts in the language server protocol. The
 {% include_relative language/onTypeFormatting.md %}
 {% include_relative language/rename.md %}
 {% include_relative language/linkedEditingRange.md %}
+{% include_relative language/inlineCompletion.md %}
+
 
 ### <a href="#workspaceFeatures" name="workspaceFeatures" class="anchor">Workspace Features</a>
 
@@ -694,9 +696,10 @@ Language servers usually run in a separate process and clients communicate with 
 
 - if a client sends a request to the server and the client state changes in a way that it invalidates the response it should do the following:
   - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary the client should resend the request.
-  - keep the request running if the client can still make use of the result by for example transforming it to a new result by applying the state change to the result.
+  - keep the request running if the client can still make use of the result by, for example, transforming it to a new result by applying the state change to the result.
 - servers should therefore not decide by themselves to cancel requests simply due to that fact that a state change notification is detected in the queue. As said the result could still be useful for the client.
-- if a server detects an internal state change (for example a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- if a server detects an internal state change (for example, a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- a client should not send resolve requests for out of date objects (for example, code lenses, ...). If a server receives a resolve request for an out of date object the server can error these requests with `ContentModified`.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
 Servers usually support different communication channels (e.g. stdio, pipes, ...). To ease the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
