@@ -16,6 +16,13 @@ We also maintain a node module to parse a string into `scheme`, `authority`, `pa
 
 Many of the interfaces contain fields that correspond to the URI of a document. For clarity, the type of such a field is declared as a `DocumentUri`. Over the wire, it will still be transferred as a string, but this guarantees that the contents of that string can be parsed as a valid URI.
 
+Care should be taken to handle encoded in URIs. Some clients (such as VS Code) may encode colons in drive letters while others do not. The following URIs should be considered equivalent and are both valid for clients and servers to use:
+
+```
+file:///c:/project/readme.md
+file:///c%3A/project/readme.md
+```
+
 <div class="anchorHolder"><a href="#documentUri" name="documentUri" class="linkableAnchor"></a></div>
 
 ```typescript
