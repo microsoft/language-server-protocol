@@ -628,6 +628,8 @@ Language Features provide the actual smarts in the language server protocol. The
 - code comprehension features like Hover or Goto Definition.
 - coding features like diagnostics, code complete or code actions.
 
+The language features should be computed on the [synchronized state](#textDocument_synchronization) of the document.
+
 {% include_relative language/declaration.md %}
 {% include_relative language/definition.md %}
 {% include_relative language/typeDefinition.md %}
