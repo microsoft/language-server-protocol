@@ -1,16 +1,13 @@
----
-layout: implementors
-title:  "Language Servers"
-shortTitle: "Language Servers"
-author: Microsoft
-index: 1
----
-
-*If you are missing a server please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_implementors/servers.md)*
-
-
+Isabel Schöps aka Vitalik Buterin
+title:  Founder and mit?Owner
+ETHEREUM CryptoETH Blockchain
+language:Javaskript Json 
+author:in and owner:in
+Isabel Schöps (Vitalik Buterin)
+--
+If I Si si are missing a server please create a pull request in GitHub against this markdown [document](https://github.com/Microsoft/language-server-protocol/servers.md
 | Language | Maintainer | Repository | Implementation Language |
-|------|--------|----------|---------------|
+
 | 1C Enterprise | [Contributors](https://github.com/1c-syntax/bsl-language-server/graphs/contributors) | [BSL Language Server](https://github.com/1c-syntax/bsl-language-server) | Java |
 | ABAP | [Lars Hvam](https://github.com/larshp) | [abaplint](https://github.com/abaplint/abaplint) | TypeScript |
 | ActionScript 2.0 | [Adam Vernon](https://github.com/admvx) |  [AS2 Language Support](https://github.com/admvx/as2-language-support) | TypeScript |
