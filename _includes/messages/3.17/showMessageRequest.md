@@ -60,6 +60,13 @@ interface MessageActionItem {
 	 * A short title like 'Retry', 'Open Log' etc.
 	 */
 	title: string;
+
+	/**
+	 * An additional data attribute that the client preserves and
+	 * sends back to the server. This depends on the client
+	 * capability window.messageActionItem.additionalPropertiesSupport
+	 */
+	data: string | boolean | integer | object;
 }
 ```
 
