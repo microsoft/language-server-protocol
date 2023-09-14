@@ -179,12 +179,16 @@
       anchor: codeLens_refresh
     - title: Folding Range
       anchor: textDocument_foldingRange
+    - title: Folding Range Refresh
+      anchor: workspace_foldingRange_refresh
     - title: Selection Range
       anchor: textDocument_selectionRange
     - title: Document Symbols
       anchor: textDocument_documentSymbol
     - title: Semantic Tokens
       anchor: textDocument_semanticTokens
+    - title: Semantic Tokens Refresh
+      anchor: semanticTokens_refreshRequest
     - title: Inline Value
       anchor: textDocument_inlineValue
     - title: Inline Value Refresh
@@ -205,6 +209,8 @@
       anchor: textDocument_publishDiagnostics
     - title: Pull Diagnostics
       anchor: textDocument_pullDiagnostics
+    - title: Diagnostics Refresh
+      anchor: diagnostic_refresh
     - title: Signature Help
       anchor: textDocument_signatureHelp
     - title: Code Action
