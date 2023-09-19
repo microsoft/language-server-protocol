@@ -209,6 +209,7 @@ index: 1
 | [Twig](https://twig.symfony.com/) | [Stanislav Romanov](https://github.com/kaermorchen) | [Twig Language Server](https://github.com/kaermorchen/twig-language-server/tree/master/packages/language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
+| [Typst](https://github.com/typst/typst/) | [nvarner](https://github.com/nvarner/) | [typst-lsp](https://github.com/nvarner/typst-lsp) | Rust |
 | [V](https://vlang.io) | [Contributors](https://github.com/v-analyzer/v-analyzer/graphs/contributors) | [v-analyzer](https://github.com/v-analyzer/v-analyzer) | V
 | Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
 | VDM-SL, VDM++, VDM-RT | [Nick Battle](https://github.com/nickbattle)| [VDMJ-LSP](https://github.com/nickbattle/vdmj/tree/master/lsp) | Java |
