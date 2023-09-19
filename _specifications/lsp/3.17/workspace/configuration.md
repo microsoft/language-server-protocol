@@ -35,7 +35,7 @@ export interface ConfigurationItem {
 	/**
 	 * The scope to get the configuration section for.
 	 */
-	scopeUri?: DocumentUri;
+	scopeUri?: URI;
 
 	/**
 	 * The configuration section asked for.
