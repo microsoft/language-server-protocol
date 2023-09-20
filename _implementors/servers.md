@@ -47,6 +47,8 @@ index: 1
 | [Coq](https://coq.inria.fr/) | [ejgallego](https://github.com/ejgallego) | [coq-lsp](https://github.com/ejgallego/coq-lsp) | OCaml |
 | IBM Enterprise **COBOL** for z/OS | [Broadcom](https://www.broadcom.com/) | [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol) | Java |
 | [IBM Enterprise **COBOL** for z/OS](https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/welcome.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
+| [IBM Enterprise **RPG ILE** for IBM i](https://www.ibm.com/docs/en/i/7.5?topic=rpg-ile-reference) | IBM |  [IBMi Languages](https://marketplace.visualstudio.com/items?itemName=barrettotte.ibmi-languages) | Java |
+[ IBM Enterprise **CL ILE** for IBM i](https://www.ibm.com/docs/en/i/7.5?topic=concepts-cl-commands) | IBM |  [IBMi Languages](https://marketplace.visualstudio.com/items?itemName=barrettotte.ibmi-languages) | Java |
 | [CodeQL](https://securitylab.github.com/tools/codeql) | [GitHub](https://github.com/github/codeql) | [codeql](https://github.com/github/codeql) | Java |
 | [CoffeeScript](https://coffeescript.org/) | [phil294](https://github.com/phil294/) | [CoffeeSense](https://github.com/phil294/coffeesense/) | TypeScript
 | [CWL](https://www.commonwl.org/) | [Rabix](https://github.com/rabix) | [Benten](https://github.com/rabix/benten) | Python |
