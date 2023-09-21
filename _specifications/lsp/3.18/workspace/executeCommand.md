@@ -68,5 +68,5 @@ export interface ExecuteCommandParams extends WorkDoneProgressParams {
 The arguments are typically specified when a command is returned from the server to the client. Example requests that return a command are `textDocument/codeAction` or `textDocument/codeLens`.
 
 _Response_:
-* result: `LSPAny` \| `null`
+* result: `LSPAny`
 * error: code and message set in case an exception happens during the request.
