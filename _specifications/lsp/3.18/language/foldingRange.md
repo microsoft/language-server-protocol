@@ -120,6 +120,12 @@ export namespace FoldingRangeKind {
 	export const Comment = 'comment';
 
 	/**
+	 * Folding range for a legal blurb (license, copyright...)
+	 * @since 3.18.0
+	 */
+	export const Legal = 'legal';
+
+	/**
 	 * Folding range for imports or includes
 	 */
 	export const Imports = 'imports';
