@@ -154,7 +154,7 @@ index: 1
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) | Java, Python |
 | Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) (unmaintained, use python-lsp-server instead) | Python |
 | Python| [Spyder IDE team and the community](https://github.com/python-lsp) | [python-lsp-server](https://github.com/python-lsp/python-lsp-server) | Python |
-| Python | MS | [python-language-server](https://github.com/Microsoft/python-language-server) | C# |
+| Python | MS | [python-language-server](https://github.com/Microsoft/python-language-server) (unmaintained, archived) | C# |
 | Python | [Samuel Roeca](https://github.com/pappasam) | [jedi-language-server](https://github.com/pappasam/jedi-language-server) | Python |
 | [Pony](https://www.ponylang.io/) | [Mahan Bakhshi](https://github.com/MahanBi) | [PonyLS](https://github.com/MahanBi/PonyLS) | Pony |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
