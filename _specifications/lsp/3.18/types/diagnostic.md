@@ -151,8 +151,19 @@ export interface DiagnosticRelatedInformation {
  */
 export interface CodeDescription {
 	/**
-	 * An URI to open with more information about the diagnostic error.
+	 * An URI to open with general information about the diagnostic error (e.g.
+	 * paragraphs of a description, code examples, exceptions, links to sources).
+	 * The URI can start with "file:", "https:", or other.
 	 */
-	href: URI;
+	href?: URI;
+
+	/**
+	 * A string with unique information about this particular instance of the
+	 * diagnostic error (e.g. a warning that mentions your variable name
+	 * specifcally and the function it was defined in).
+	 *
+	 * @since 3.18.0
+	 */
+	dynamicDescription?: string;
 }
 ```
