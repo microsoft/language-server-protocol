@@ -90,3 +90,24 @@ interface PublishDiagnosticsParams {
 	diagnostics: Diagnostic[];
 }
 ```
+
+#### <a href="#textDocument_publishDiagnosticLongDescriptions" name="textDocument_publishDiagnosticLongDescriptions" class="anchor">PublishDiagnosticLongDescriptions Notification (:arrow_left:)</a>
+
+Diagnostic long descriptions notifications are sent from the server to the client to provide static descriptions of a particular diagnostic code.
+
+These notifications can be sent before or after the `textDocument/publishDiagnostics` notifications.
+
+_Notification_:
+* method: `textDocument/publishDiagnosticLongDescriptions`
+* params: `PublishDiagnosticLongDescriptionsParams` defined as follows:
+
+<div class="anchorHolder"><a href="#publishDiagnosticLongDescriptionsParams" name="publishDiagnosticLongDescriptionsParams" class="linkableAnchor"></a></div>
+
+```typescript
+interface PublishDiagnosticLongDescriptionsParams {
+	/**
+	 * An array of diagnostic long description items.
+	 */
+	diagnosticLongDescriptions: DiagnosticLongDescription[];
+}
+```

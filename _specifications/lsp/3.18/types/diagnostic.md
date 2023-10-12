@@ -156,3 +156,27 @@ export interface CodeDescription {
 	href: URI;
 }
 ```
+
+`DiagnosticLongDescription` is defined as follows:
+
+<div class="anchorHolder"><a href="#diagnosticLongDescription" name="diagnosticLongDescription" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Structure to capture a static long description for a diagnostic error.
+ *
+ * @since 3.18.0
+ */
+export interface DiagnosticLongDescription {
+	/**
+	 * The diagnostic's code.
+	 */
+	code?: integer | string;
+
+	/**
+	 * The content with more information about the diagnostic error (e.g.
+	 * multiple paragraphs, code examples, exceptions, links to sources).
+	 */
+	description: string | MarkupContent;
+}
+```
