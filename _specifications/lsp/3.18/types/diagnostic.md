@@ -34,9 +34,21 @@ export interface Diagnostic {
 	source?: string;
 
 	/**
-	 * The diagnostic's message.
+	 * The diagnostic's message, e.g. 'Unknown type name "int_8_t"'.
 	 */
 	message: string;
+
+	/**
+	 * An optional property to describe this diagnostic's message with more
+	 * details. For example:
+	 * The type name "int_8_t" is unknown. Did you mean any of these types?
+	 * - int
+	 * - int8_t
+	 * Read more about the built-in types [here](file:///path/to/docs.md).
+	 *
+	 * @since 3.18.0
+	 */
+	longMessage?: string | MarkupContent;
 
 	/**
 	 * Additional metadata about the diagnostic.
