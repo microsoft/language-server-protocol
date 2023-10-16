@@ -48,7 +48,7 @@ export interface Diagnostic {
 	 *
 	 * @since 3.18.0
 	 */
-	longMessage?: string | MarkupContent;
+	messageDetails?: string | MarkupContent;
 
 	/**
 	 * Additional metadata about the diagnostic.
