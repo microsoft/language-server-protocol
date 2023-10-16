@@ -27,7 +27,9 @@ index: 2
 | Emacs | [Andy Stewart](https://github.com/manateelazycat/) | [lsp-bridge](https://github.com/manateelazycat/lsp-bridge/) | 
 | [ecode](https://github.com/SpartanJ/ecode) | [Martín Lucas Golini](https://github.com/SpartanJ) | [ecode](https://github.com/SpartanJ/ecode) | 
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
+| [GoLand](https://www.jetbrains.com/go) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Helix Editor](https://helix-editor.com/) | [Blaž Hrastnik](https://github.com/archseer) | [helix](https://github.com/helix-editor/helix) |
+| [IntelliJ IDEA](https://www.jetbrains.com/idea/) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [JCIDE](https://www.javacardos.com/tools) | [Javacardos](https://www.javacardos.com) | [JCIDE](https://www.javacardos.com/javacardforum/viewtopic.php?f=5&t=2108&p=6175#p6175) |
 | [JupyterLab](https://github.com/jupyterlab/jupyterlab) | [krassowski](https://github.com/krassowski) | [jupyterlab-lsp](https://github.com/jupyter-lsp/jupyterlab-lsp) |
 | [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
@@ -41,8 +43,12 @@ index: 2
 | [Nova](https://nova.app) | [Panic Inc](http://panic.com) | Proprietary |
 | [Oni](https://www.onivim.io) | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 | [OpenSumi](https://opensumi.com) | [opensumi](https://github.com/opensumi) | [opensumi](https://github.com/opensumi/core) |
+| [PhpStorm](https://www.jetbrains.com/phpstorm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
+| [PyCharm](https://www.jetbrains.com/pycharm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Qt Creator](https://doc-snapshots.qt.io/qtcreator-9.0/creator-language-servers.html) | [The Qt Company](http://qt.io/) | [qtcreator](https://github.com/qt-creator/qt-creator)
 | [RAD Studio](https://www.embarcadero.com/products/rad-studio) ([Delphi](https://www.embarcadero.com/products/delphi) and [C++Builder](https://www.embarcadero.com/products/cbuilder)) | [Embarcadero](https://www.embarcadero.com/) | Proprietary |
+| [Rider](https://www.jetbrains.com/rider) | [JetBrains](https://www.jetbrains.com) | Proprietary |
+| [Ruby](https://www.jetbrains.com/ruby) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [RJ TextEd](https://www.rj-texted.se/) | [Rickard Johansson](https://github.com/rickard67) | [lsp](https://github.com/rickard67/LSP-Pascal-Library) |
 | [Spyder](http://spyder-ide.org) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
 | [Sublime Text](https://www.sublimetext.com/) | [Raoul Wols](https://github.com/rwols) | [lsp](https://github.com/sublimelsp/LSP) |
@@ -58,4 +64,5 @@ index: 2
 | Visual Studio | [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
 | Visual Studio | Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 | [Visual Studio Code](https://code.visualstudio.com) | Microsoft | [vscode](https://github.com/Microsoft/vscode/)  |
+| [WebStorm](https://blog.jetbrains.com/webstorm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 {: .table .table-bordered .table-responsive}
