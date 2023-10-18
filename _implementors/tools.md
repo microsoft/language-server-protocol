@@ -31,6 +31,7 @@ index: 2
 | [Helix Editor](https://helix-editor.com/) | [Blaž Hrastnik](https://github.com/archseer) | [helix](https://github.com/helix-editor/helix) |
 | [IntelliJ IDEA](https://www.jetbrains.com/idea/) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [JCIDE](https://www.javacardos.com/tools) | [Javacardos](https://www.javacardos.com) | [JCIDE](https://www.javacardos.com/javacardforum/viewtopic.php?f=5&t=2108&p=6175#p6175) |
+| [JetBrains Fleet](https://www.jetbrains.com/fleet/) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [JupyterLab](https://github.com/jupyterlab/jupyterlab) | [krassowski](https://github.com/krassowski) | [jupyterlab-lsp](https://github.com/jupyter-lsp/jupyterlab-lsp) |
 | [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
 | [Kate](https://kate-editor.org) | [Kate Team](https://kate-editor.org) | [kate](https://invent.kde.org/kde/kate) |
