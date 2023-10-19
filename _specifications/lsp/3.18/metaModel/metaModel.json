@@ -1,6 +1,6 @@
 {
 	"metaData": {
-		"version": "3.18.0"
+		"version": "3.17.0"
 	},
 	"requests": [
 		{
@@ -53,7 +53,7 @@
 				"kind": "reference",
 				"name": "ImplementationRegistrationOptions"
 			},
-			"documentation": "A request to resolve the implementation locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositionParams]\n(#TextDocumentPositionParams) the response is of type {@link Definition} or a\nThenable that resolves to such."
+			"documentation": "A request to resolve the implementation locations of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPositionParams}\nthe response is of type {@link Definition} or a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/typeDefinition",
@@ -105,7 +105,7 @@
 				"kind": "reference",
 				"name": "TypeDefinitionRegistrationOptions"
 			},
-			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositionParams]\n(#TextDocumentPositionParams) the response is of type {@link Definition} or a\nThenable that resolves to such."
+			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPositionParams}\nthe response is of type {@link Definition} or a Thenable that resolves to such."
 		},
 		{
 			"method": "workspace/workspaceFolders",
@@ -244,6 +244,17 @@
 			"documentation": "A request to provide folding ranges in a document. The request's\nparameter is of type {@link FoldingRangeParams}, the\nresponse is of type {@link FoldingRangeList} or a Thenable\nthat resolves to such."
 		},
 		{
+			"method": "workspace/foldingRange/refresh",
+			"result": {
+				"kind": "base",
+				"name": "null"
+			},
+			"messageDirection": "serverToClient",
+			"documentation": "@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
 			"method": "textDocument/declaration",
 			"result": {
 				"kind": "or",
@@ -293,7 +304,7 @@
 				"kind": "reference",
 				"name": "DeclarationRegistrationOptions"
 			},
-			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositionParams]\n(#TextDocumentPositionParams) the response is of type {@link Declaration}\nor a typed array of {@link DeclarationLink} or a Thenable that resolves\nto such."
+			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPositionParams}\nthe response is of type {@link Declaration} or a typed array of {@link DeclarationLink}\nor a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/selectionRange",
@@ -1013,8 +1024,9 @@
 				"kind": "reference",
 				"name": "InlineCompletionRegistrationOptions"
 			},
-			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"method": "client/registerCapability",
@@ -1273,7 +1285,7 @@
 				"kind": "reference",
 				"name": "DefinitionRegistrationOptions"
 			},
-			"documentation": "A request to resolve the definition location of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPosition]\n(#TextDocumentPosition) the response is of either type {@link Definition}\nor a typed array of {@link DefinitionLink} or a Thenable that resolves\nto such."
+			"documentation": "A request to resolve the definition location of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPosition}\nthe response is of either type {@link Definition} or a typed array of\n{@link DefinitionLink} or a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/references",
@@ -1345,7 +1357,7 @@
 				"kind": "reference",
 				"name": "DocumentHighlightRegistrationOptions"
 			},
-			"documentation": "Request to resolve a {@link DocumentHighlight} for a given\ntext document position. The request's parameter is of type [TextDocumentPosition]\n(#TextDocumentPosition) the request response is of type [DocumentHighlight[]]\n(#DocumentHighlight) or a Thenable that resolves to such."
+			"documentation": "Request to resolve a {@link DocumentHighlight} for a given\ntext document position. The request's parameter is of type {@link TextDocumentPosition}\nthe request response is an array of type {@link DocumentHighlight}\nor a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/documentSymbol",
@@ -1674,7 +1686,7 @@
 				"kind": "reference",
 				"name": "DocumentFormattingRegistrationOptions"
 			},
-			"documentation": "A request to to format a whole document."
+			"documentation": "A request to format a whole document."
 		},
 		{
 			"method": "textDocument/rangeFormatting",
@@ -4131,8 +4143,9 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "InlineCompletionList",
@@ -4149,7 +4162,9 @@
 					"documentation": "The inline completion items"
 				}
 			],
-			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor."
+			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "InlineCompletionItem",
@@ -4157,19 +4172,19 @@
 				{
 					"name": "insertText",
 					"type": {
-						"kind": "base",
-						"name": "string"
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "string"
+							},
+							{
+								"kind": "reference",
+								"name": "StringValue"
+							}
+						]
 					},
 					"documentation": "The text to replace the range with. Must be set."
-				},
-				{
-					"name": "insertTextFormat",
-					"type": {
-						"kind": "reference",
-						"name": "InsertTextFormat"
-					},
-					"optional": true,
-					"documentation": "The format of the insert text. The format applies to the `insertText`. If omitted defaults to `InsertTextFormat.PlainText`."
 				},
 				{
 					"name": "filterText",
@@ -4199,8 +4214,9 @@
 					"documentation": "An optional {@link Command} that is executed *after* inserting this completion."
 				}
 			],
-			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "InlineCompletionRegistrationOptions",
@@ -4221,8 +4237,9 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "RegistrationParams",
@@ -5812,7 +5829,7 @@
 						"name": "LSPAny"
 					},
 					"optional": true,
-					"documentation": "A data entry field that is preserved on a code lens item between\na {@link CodeLensRequest} and a [CodeLensResolveRequest]\n(#CodeLensResolveRequest)"
+					"documentation": "A data entry field that is preserved on a code lens item between\na {@link CodeLensRequest} and a {@link CodeLensResolveRequest}"
 				}
 			],
 			"documentation": "A code lens represents a {@link Command command} that should be shown along with\nsource text, like the number of references, a way to run tests, etc.\n\nA code lens is _unresolved_ when no command is associated to it. For performance\nreasons the creation of a code lens and resolving should be done in two stages."
@@ -6630,7 +6647,7 @@
 					"name": "scopeUri",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "URI"
 					},
 					"optional": true,
 					"documentation": "The scope to get the configuration section for."
@@ -6748,7 +6765,7 @@
 					"documentation": "Character offset on a line in a document (zero-based).\n\nThe meaning of this offset is determined by the negotiated\n`PositionEncodingKind`.\n\nIf the character value is greater than the line length it defaults back to the\nline length."
 				}
 			],
-			"documentation": "Position in a text document expressed as zero-based line and character\noffset. Prior to 3.17 the offsets were always based on a UTF-16 string\nrepresentation. So a string of the form `a𐐀b` the character offset of the\ncharacter `a` is 0, the character offset of `𐐀` is 1 and the character\noffset of b is 3 since `𐐀` is represented using two code units in UTF-16.\nSince 3.17 clients and servers can agree on a different string encoding\nrepresentation (e.g. UTF-8). The client announces it's supported encoding\nvia the client capability [`general.positionEncodings`](#clientCapabilities).\nThe value is an array of position encodings the client supports, with\ndecreasing preference (e.g. the encoding at index `0` is the most preferred\none). To stay backwards compatible the only mandatory encoding is UTF-16\nrepresented via the string `utf-16`. The server can pick one of the\nencodings offered by the client and signals that encoding back to the\nclient via the initialize result's property\n[`capabilities.positionEncoding`](#serverCapabilities). If the string value\n`utf-16` is missing from the client's capability `general.positionEncodings`\nservers can safely assume that the client supports UTF-16. If the server\nomits the position encoding in its initialize result the encoding defaults\nto the string value `utf-16`. Implementation considerations: since the\nconversion from one encoding into another requires the content of the\nfile / line the conversion is best done where the file is read which is\nusually on the server side.\n\nPositions are line end character agnostic. So you can not specify a position\nthat denotes `\\r|\\n` or `\\n|` where `|` represents the character offset.\n\n@since 3.17.0 - support for negotiated position encoding.",
+			"documentation": "Position in a text document expressed as zero-based line and character\noffset. Prior to 3.17 the offsets were always based on a UTF-16 string\nrepresentation. So a string of the form `a𐐀b` the character offset of the\ncharacter `a` is 0, the character offset of `𐐀` is 1 and the character\noffset of b is 3 since `𐐀` is represented using two code units in UTF-16.\nSince 3.17 clients and servers can agree on a different string encoding\nrepresentation (e.g. UTF-8). The client announces it's supported encoding\nvia the client capability [`general.positionEncodings`](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#clientCapabilities).\nThe value is an array of position encodings the client supports, with\ndecreasing preference (e.g. the encoding at index `0` is the most preferred\none). To stay backwards compatible the only mandatory encoding is UTF-16\nrepresented via the string `utf-16`. The server can pick one of the\nencodings offered by the client and signals that encoding back to the\nclient via the initialize result's property\n[`capabilities.positionEncoding`](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#serverCapabilities). If the string value\n`utf-16` is missing from the client's capability `general.positionEncodings`\nservers can safely assume that the client supports UTF-16. If the server\nomits the position encoding in its initialize result the encoding defaults\nto the string value `utf-16`. Implementation considerations: since the\nconversion from one encoding into another requires the content of the\nfile / line the conversion is best done where the file is read which is\nusually on the server side.\n\nPositions are line end character agnostic. So you can not specify a position\nthat denotes `\\r|\\n` or `\\n|` where `|` represents the character offset.\n\n@since 3.17.0 - support for negotiated position encoding.",
 			"since": "3.17.0 - support for negotiated position encoding."
 		},
 		{
@@ -7845,8 +7862,33 @@
 					"documentation": "Provides information about the currently selected item in the autocomplete widget if it is visible."
 				}
 			],
-			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
+			"name": "StringValue",
+			"properties": [
+				{
+					"name": "kind",
+					"type": {
+						"kind": "stringLiteral",
+						"value": "snippet"
+					},
+					"documentation": "The kind of string value."
+				},
+				{
+					"name": "value",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "The snippet string."
+				}
+			],
+			"documentation": "A string value used as a snippet is a template which allows to insert text\nand to control the editor cursor when insertion happens.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Variables are defined with `$name` and\n`${name:default value}`.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "InlineCompletionOptions",
@@ -7857,8 +7899,9 @@
 				}
 			],
 			"properties": [],
-			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "Registration",
@@ -7889,7 +7932,7 @@
 					"documentation": "Options necessary for the registration."
 				}
 			],
-			"documentation": "General parameters to to register for an notification or to register a provider."
+			"documentation": "General parameters to register for a notification or to register a provider."
 		},
 		{
 			"name": "Unregistration",
@@ -8680,8 +8723,9 @@
 						]
 					},
 					"optional": true,
-					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
-					"since": "3.18.0"
+					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				},
 				{
 					"name": "workspace",
@@ -9988,8 +10032,9 @@
 					"documentation": "The text the range will be replaced with if this completion is accepted."
 				}
 			],
-			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "ClientCapabilities",
@@ -10636,6 +10681,17 @@
 					"optional": true,
 					"documentation": "Capabilities specific to the diagnostic requests scoped to the\nworkspace.\n\n@since 3.17.0.",
 					"since": "3.17.0."
+				},
+				{
+					"name": "foldingRange",
+					"type": {
+						"kind": "reference",
+						"name": "FoldingRangeWorkspaceClientCapabilities"
+					},
+					"optional": true,
+					"documentation": "Capabilities specific to the folding range requests scoped to the workspace.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				}
 			],
 			"documentation": "Workspace specific client capabilities."
@@ -10934,8 +10990,9 @@
 						"name": "InlineCompletionClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
-					"since": "3.18.0"
+					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				}
 			],
 			"documentation": "Text document specific client capabilities."
@@ -11453,6 +11510,25 @@
 			],
 			"documentation": "Workspace client capabilities specific to diagnostic pull requests.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "FoldingRangeWorkspaceClientCapabilities",
+			"properties": [
+				{
+					"name": "refreshSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\nfolding ranges currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
+				}
+			],
+			"documentation": "Client workspace capabilities specific to folding ranges\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "TextDocumentSyncClientCapabilities",
@@ -12784,8 +12860,9 @@
 					"documentation": "Whether implementation supports dynamic registration for inline completion providers."
 				}
 			],
-			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "NotebookDocumentSyncClientCapabilities",
@@ -13409,26 +13486,6 @@
 			"since": "3.17.0"
 		},
 		{
-			"name": "InsertTextFormat",
-			"type": {
-				"kind": "base",
-				"name": "uinteger"
-			},
-			"values": [
-				{
-					"name": "PlainText",
-					"value": 1,
-					"documentation": "The primary text to be inserted is treated as a plain string."
-				},
-				{
-					"name": "Snippet",
-					"value": 2,
-					"documentation": "The primary text to be inserted is treated as a snippet.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Placeholders with equal identifiers are linked,\nthat is typing in one will update others too.\n\nSee also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax"
-				}
-			],
-			"documentation": "Defines whether the insert text in a completion item should be interpreted as\nplain text or a snippet."
-		},
-		{
 			"name": "MessageType",
 			"type": {
 				"kind": "base",
@@ -13454,6 +13511,12 @@
 					"name": "Log",
 					"value": 4,
 					"documentation": "A log message."
+				},
+				{
+					"name": "Debug",
+					"value": 5,
+					"documentation": "A debug message.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The message type"
@@ -13635,6 +13698,26 @@
 			"since": "3.15.0"
 		},
 		{
+			"name": "InsertTextFormat",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "PlainText",
+					"value": 1,
+					"documentation": "The primary text to be inserted is treated as a plain string."
+				},
+				{
+					"name": "Snippet",
+					"value": 2,
+					"documentation": "The primary text to be inserted is treated as a snippet.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Placeholders with equal identifiers are linked,\nthat is typing in one will update others too.\n\nSee also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax"
+				}
+			],
+			"documentation": "Defines whether the insert text in a completion item should be interpreted as\nplain text or a snippet."
+		},
+		{
 			"name": "InsertTextMode",
 			"type": {
 				"kind": "base",
@@ -13799,8 +13882,9 @@
 					"documentation": "Completion was triggered automatically while editing."
 				}
 			],
-			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0",
-			"since": "3.18.0"
+			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "PositionEncodingKind",
@@ -14553,7 +14637,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern, like `*.{ts,js}`."
+									"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples."
 								}
 							]
 						}
@@ -14586,7 +14670,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern, like `*.{ts,js}`."
+									"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples."
 								}
 							]
 						}
@@ -14619,7 +14703,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "A glob pattern, like `*.{ts,js}`."
+									"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples."
 								}
 							]
 						}
