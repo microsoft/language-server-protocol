@@ -20,7 +20,7 @@ LSP is a win for both language providers and tooling vendors!
 
 A language server runs as a separate process and development tools communicate with the server using the language protocol over JSON-RPC. Below is an example for how a tool and a language server communicate during a routine editing session:
 
-<img src="../img/language-server-sequence.png" class="img-fluid" alt="language server protocol">
+<img src="../lsp/img/language-server-sequence.png" class="img-fluid" alt="language server protocol">
 
 * **The user opens a file (referred to as a *document*) in the tool**: The tool notifies the language server that a document is open ('textDocument/didOpen'). From now on, the truth about the contents of the document is no longer on the file system but kept by the tool in memory. The contents now has to be synchronized between the tool and the language server.
 
@@ -77,7 +77,7 @@ This is the response:
 
 When a user is working with different languages, a development tool usually starts a language server for each programming language. The example below shows a session where the user works on Java and SASS files.
 
-<img src="../img/language-server.png" class="img-fluid" alt="language server protocol">
+<img src="../lsp/img/language-server.png" class="img-fluid" alt="language server protocol">
 
 ## Capabilities
 
