@@ -840,6 +840,8 @@ else		::= text
 
 The request is sent from the client to the server to resolve additional information for a given completion item.
 
+This request should only be called for completion items returned in the last completion request. Servers may keep state for the last completion request to reduce payload sizes so resolving a completion item from an earlier completion request may produce incorrect results.
+
 _Request_:
 * method: `completionItem/resolve`
 * params: `CompletionItem`
