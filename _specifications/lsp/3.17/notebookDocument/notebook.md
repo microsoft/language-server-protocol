@@ -241,10 +241,12 @@ To synchronize the whole notebook document a server provides a `notebookDocument
 ```typescript
 {
 	notebookDocumentSync: {
-		notebookSelector: {
-			notebook: { scheme: 'file', notebookType: 'jupyter-notebook' },
-			cells: [{ language: 'python' }]
-		}
+		notebookSelector: [
+			{
+				notebook: { scheme: 'file', notebookType: 'jupyter-notebook' },
+				cells: [{ language: 'python' }]
+			}
+		]
 	}
 }
 ```
