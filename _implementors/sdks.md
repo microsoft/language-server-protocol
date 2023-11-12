@@ -26,6 +26,7 @@ index: 3
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server)|
 | Python | [Open Law Library](http://www.openlawlib.org/) | [pygls](https://github.com/openlawlibrary/pygls)|
 | Python | [Yeger](https://github.com/yeger00) | [pylspclient](https://github.com/yeger00/pylspclient)|
+| Python | [Microsoft](https://github.com/microsoft) | [multilspy](https://github.com/microsoft/monitors4codegen#4-multilspy)|
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
 | Rust | Bruno Medeiros and Markus Westerlind | [lsp-types](https://github.com/gluon-lang/lsp-types)
 | Rust | [Eyal Kalderon](https://github.com/ebkalderon) | [tower-lsp](https://github.com/ebkalderon/tower-lsp)
