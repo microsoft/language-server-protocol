@@ -123,6 +123,7 @@ index: 1
 | [Liquid](https://shopify.github.io/liquid/) | [Shopify](https://github.com/Shopify/theme-check) | [theme-check](https://github.com/Shopify/theme-check) | Ruby |
 | [IBM **LALR** Parser Generator language](https://sourceforge.net/projects/lpg/)| [kuafuwang](https://github.com/kuafuwang) | [LPG-language-server](https://github.com/kuafuwang/LPG-language-server) | C++ |
 | [Markdown](https://commonmark.org) | [Artem Pianykh](https://github.com/artempyanykh) | [Marksman](https://github.com/artempyanykh/marksman) | F# |
+| [Markdown](https://commonmark.org) | [Nico Rehwaldt](https://github.com/nikku) | [Markmark](https://github.com/nikku/markmark) | JavaScript |
 | [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features/server) | TypeScript |
 | MATLAB | mathworks | [MATLAB-language-server](https://github.com/mathworks/MATLAB-language-server) | TypeScript, MATLAB |
 | Motorola 68000 Assembly | [Graham Bates](https://github.com/grahambates) | [m68k-lsp](https://github.com/grahambates/m68k-lsp) | TypeScript |
