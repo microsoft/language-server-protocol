@@ -65,6 +65,7 @@ index: 1
 | [Deno](https://deno.land) (TypeScript/JavaScript) | [Deno Land](https://github.com/denoland) | [`deno lsp`](https://github.com/denoland/deno/tree/main/cli/lsp) | Rust |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) | TypeScript |
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
+| Emacs Lisp | [Jen-Chieh Shen](https://github.com/jcs090218) | [ellsp](https://github.com/jcs090218/ellsp) | Emacs Lisp |
 | Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) | Erlang |
 | [Erlang](https://www.erlang.org) | [Roberto Aloi](https://github.com/robertoaloi) and [Contributors](https://github.com/erlang-ls/erlang_ls/graphs/contributors) | [erlang_ls](https://github.com/erlang-ls/erlang_ls) | Erlang |
 | [Erlang](https://www.erlang.org) | [WhatsApp](https://github.com/whatsapp) | [ELP](https://github.com/whatsapp/erlang-language-platform) | Rust, Erlang |
@@ -229,6 +230,7 @@ index: 1
 | [WebGPU Shading Language](https://gpuweb.github.io/gpuweb/wgsl/) | [WGSL-Analyzer Team](https://github.com/wgsl-analyzer) | [wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) | Rust |
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [Wolfram Research](https://github.com/WolframResearch) | [LSPServer](https://github.com/WolframResearch/lspserver) | Wolfram Language |
+| [Wolfram Language](https://www.wolfram.com) | [markjet7](https://github.com/markjet7) | [wlsp](https://github.com/markjet7/wlsp) | Wolfram Language |
 | WXML| [Qiming Zhao](https://github.com/chemzqm)| [wxml-languageserver](https://github.com/chemzqm/wxml-languageserver) | TypeScript |
 | XML | IBM | [XML Language Server](https://github.com/microclimate-devops/xml-language-server) | Java |
 | XML | [Red Hat Developers](https://github.com/redhat-developer) and [Angelo ZERR](https://github.com/angelozerr/) | [XML Language Server (LemMinX)](https://github.com/eclipse/lemminx) | Java |
