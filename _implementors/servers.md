@@ -195,6 +195,7 @@ index: 1
 | Standard ML | [azdavis](https://azdavis.net) | [Millet](https://github.com/azdavis/millet) | Rust |
 | Stylable | [Wix.com](https://www.wix.com) | [stylable/language-service](https://github.com/wix/stylable/tree/master/packages/language-service) | TypeScript |
 | [Svelte](https://svelte.dev/) | [Contributors](https://github.com/sveltejs/language-tools/graphs/contributors) | [svelte-language-server](https://github.com/sveltejs/language-tools) | TypeScript |
+| Sway | [Fuel Labs]([https://github.com/apple](https://www.fuel.network/)) | [sway-lsp]([https://github.com/apple/sourcekit-lsp](https://github.com/FuelLabs/sway/tree/master/sway-lsp)) | Rust |
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
