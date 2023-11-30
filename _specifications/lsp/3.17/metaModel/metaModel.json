@@ -12874,7 +12874,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether implementation supports dynamic registration. If this is\nset to `true` the client supports the new\n`(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
+					"documentation": "Whether implementation supports dynamic registration. If this is\nset to `true` the client supports the new\n`(NotebookDocumentSyncRegistrationOptions & NotebookDocumentSyncOptions)`\nreturn value for the corresponding server capability as well."
 				},
 				{
 					"name": "executionSummarySupport",
