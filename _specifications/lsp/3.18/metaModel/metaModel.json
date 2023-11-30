@@ -1934,6 +1934,10 @@
 				"kind": "reference",
 				"name": "DidOpenNotebookDocumentParams"
 			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "NotebookDocumentSyncRegistrationOptions"
+			},
 			"registrationMethod": "notebookDocument/sync",
 			"documentation": "A notification sent when a notebook opens.\n\n@since 3.17.0",
 			"since": "3.17.0"
@@ -1945,6 +1949,10 @@
 				"kind": "reference",
 				"name": "DidChangeNotebookDocumentParams"
 			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "NotebookDocumentSyncRegistrationOptions"
+			},
 			"registrationMethod": "notebookDocument/sync"
 		},
 		{
@@ -1953,6 +1961,10 @@
 			"params": {
 				"kind": "reference",
 				"name": "DidSaveNotebookDocumentParams"
+			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "NotebookDocumentSyncRegistrationOptions"
 			},
 			"registrationMethod": "notebookDocument/sync",
 			"documentation": "A notification sent when a notebook document is saved.\n\n@since 3.17.0",
@@ -1964,6 +1976,10 @@
 			"params": {
 				"kind": "reference",
 				"name": "DidCloseNotebookDocumentParams"
+			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "NotebookDocumentSyncRegistrationOptions"
 			},
 			"registrationMethod": "notebookDocument/sync",
 			"documentation": "A notification sent when a notebook closes.\n\n@since 3.17.0",
