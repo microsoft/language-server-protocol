@@ -1850,7 +1850,7 @@
 				"kind": "reference",
 				"name": "ExecuteCommandRegistrationOptions"
 			},
-			"documentation": "A request send from the client to the server to execute a command. The request might return\na workspace edit which the client will apply to the workspace."
+			"documentation": "A request sent from the client to the server to execute a command. The request might return\na workspace edit which the client will apply to the workspace."
 		},
 		{
 			"method": "workspace/applyEdit",
@@ -1863,7 +1863,7 @@
 				"kind": "reference",
 				"name": "ApplyWorkspaceEditParams"
 			},
-			"documentation": "A request sent from the server to the client to modified certain resources."
+			"documentation": "A request sent from the server to the client to modify certain resources."
 		}
 	],
 	"notifications": [
