@@ -177,6 +177,7 @@ index: 1
 | [Robot Framework](https://robotframework.org/) | [Daniel Biehl](https://github.com/d-biehl) | [RobotCode](https://github.com/d-biehl/robotcode) | Python |
 | [Robot Framework](https://robotframework.org/) | [Tomi Turtiainen](https://github.com/tomi) | [VSCode RF language server](https://github.com/tomi/vscode-rf-language-server) | TypeScript |
 | [Robot Framework](https://robotframework.org) | [Robocorp](https://robocorp.com) | [robotframework-lsp](https://github.com/robocorp/robotframework-lsp) | Python |
+| Robots.txt | [Darian Benam](https://github.com/BeardedFish) | [vscode-robots-dot-txt-support](https://github.com/BeardedFish/vscode-robots-dot-txt-support) | TypeScript |
 | Ruby | [Fred Snyder](https://github.com/castwide) | [solargraph](https://github.com/castwide/solargraph) | Ruby |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [language_server-ruby](https://github.com/mtsmfm/language_server-ruby) | Ruby |
 | Ruby | [Stripe](https://stripe.com) | [sorbet](https://github.com/sorbet/sorbet) | C++ |
