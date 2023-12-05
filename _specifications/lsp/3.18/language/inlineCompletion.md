@@ -135,7 +135,7 @@ export namespace InlineCompletionTriggerKind {
 	 * Completion was triggered explicitly by a user gesture.
 	 * Return multiple completion items to enable cycling through them.
 	 */
-	export const Invoke: 1 = 2;
+	export const Invoked: 1 = 1;
 
 	/**
 	 * Completion was triggered automatically while editing.
