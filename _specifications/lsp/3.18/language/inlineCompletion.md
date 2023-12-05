@@ -135,16 +135,16 @@ export namespace InlineCompletionTriggerKind {
 	 * Completion was triggered explicitly by a user gesture.
 	 * Return multiple completion items to enable cycling through them.
 	 */
-	export const Invoke: 0 = 0;
+	export const Invoke: 1 = 2;
 
 	/**
 	 * Completion was triggered automatically while editing.
 	 * It is sufficient to return a single completion item in this case.
 	 */
-	export const Automatic: 1 = 1;
+	export const Automatic: 2 = 2;
 }
 
-export type InlineCompletionTriggerKind = 0 | 1;
+export type InlineCompletionTriggerKind = 1 | 2;
 ```
 
 <div class="anchorHolder"><a href="#selectedCompletionInfo" name="selectedCompletionInfo" class="linkableAnchor"></a></div>
