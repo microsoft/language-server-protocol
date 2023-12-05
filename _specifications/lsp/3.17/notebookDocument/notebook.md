@@ -272,7 +272,7 @@ export interface NotebookDocumentSyncClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration. If this is
 	 * set to `true` the client supports the new
-	 * `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	 * `(NotebookDocumentSyncRegistrationOptions & NotebookDocumentSyncOptions)`
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;
@@ -289,7 +289,7 @@ _Server Capability_:
 The following server capabilities are defined for notebook documents:
 
 * property name (optional): `notebookDocumentSync`
-* property type: `NotebookDocumentOptions | NotebookDocumentRegistrationOptions` where `NotebookDocumentOptions` is defined as follows:
+* property type: `NotebookDocumentSyncOptions | NotebookDocumentSyncRegistrationOptions` where `NotebookDocumentOptions` is defined as follows:
 
 <div class="anchorHolder"><a href="#notebookDocumentSyncOptions" name="notebookDocumentSyncOptions" class="linkableAnchor"></a></div>
 
@@ -347,7 +347,7 @@ export interface NotebookDocumentSyncOptions {
 }
 ```
 
-_Registration Options_: `NotebookDocumentRegistrationOptions` defined as follows:
+_Registration Options_: `notebookDocumentSyncRegistrationOptions` defined as follows:
 
 <div class="anchorHolder"><a href="#notebookDocumentSyncRegistrationOptions" name="notebookDocumentSyncRegistrationOptions" class="linkableAnchor"></a></div>
 
