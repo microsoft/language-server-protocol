@@ -1,6 +1,6 @@
 #### <a href="#textDocument_publishDiagnostics" name="textDocument_publishDiagnostics" class="anchor">PublishDiagnostics Notification (:arrow_left:)</a>
 
-Diagnostics notification are sent from the server to the client to signal results of validation runs.
+Diagnostics notifications are sent from the server to the client to signal results of validation runs.
 
 Diagnostics are "owned" by the server so it is the server's responsibility to clear them if necessary. The following rule is used for VS Code servers that generate diagnostics:
 

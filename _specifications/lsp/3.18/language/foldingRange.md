@@ -193,3 +193,44 @@ export interface FoldingRange {
 
 * partial result: `FoldingRange[]`
 * error: code and message set in case an exception happens during the 'textDocument/foldingRange' request
+
+#### <a href="#workspace_foldingRange_refresh" name="workspace_foldingRange_refresh" class="anchor">Folding Range Refresh Request (:arrow_right_hook:)</a>
+
+> *Since version 3.18.0*
+
+The `workspace/foldingRange/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the folding ranges currently shown in editors. As a result the client should ask the server to recompute the folding ranges for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all folding ranges. Note that the client still has the freedom to delay the re-calculation of the folding ranges if for example an editor is currently not visible.
+
+_Client Capability_:
+
+* property name (optional): `workspace.foldingRange`
+* property type: `FoldingRangeWorkspaceClientCapabilities` defined as follows:
+
+<div class="anchorHolder"><a href="#foldingRangeWorkspaceClientCapabilities" name="foldingRangeWorkspaceClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+export interface FoldingRangeWorkspaceClientCapabilities {
+	/**
+	 * Whether the client implementation supports a refresh request sent from the
+	 * server to the client.
+	 *
+	 * Note that this event is global and will force the client to refresh all
+	 * folding ranges currently shown. It should be used with absolute care and is
+	 * useful for situation where a server for example detect a project wide
+	 * change that requires such a calculation.
+	 * 
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	refreshSupport?: boolean;
+}
+```
+
+_Request_:
+
+* method: `workspace/foldingRange/refresh`
+* params: none
+
+_Response_:
+
+* result: void
+* error: code and message set in case an exception happens during the 'workspace/foldingRange/refresh' request

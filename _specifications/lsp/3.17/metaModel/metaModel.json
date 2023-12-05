@@ -53,7 +53,7 @@
 				"kind": "reference",
 				"name": "ImplementationRegistrationOptions"
 			},
-			"documentation": "A request to resolve the implementation locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositionParams]\n(#TextDocumentPositionParams) the response is of type {@link Definition} or a\nThenable that resolves to such."
+			"documentation": "A request to resolve the implementation locations of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPositionParams}\nthe response is of type {@link Definition} or a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/typeDefinition",
@@ -105,7 +105,7 @@
 				"kind": "reference",
 				"name": "TypeDefinitionRegistrationOptions"
 			},
-			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositionParams]\n(#TextDocumentPositionParams) the response is of type {@link Definition} or a\nThenable that resolves to such."
+			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPositionParams}\nthe response is of type {@link Definition} or a Thenable that resolves to such."
 		},
 		{
 			"method": "workspace/workspaceFolders",
@@ -244,6 +244,17 @@
 			"documentation": "A request to provide folding ranges in a document. The request's\nparameter is of type {@link FoldingRangeParams}, the\nresponse is of type {@link FoldingRangeList} or a Thenable\nthat resolves to such."
 		},
 		{
+			"method": "workspace/foldingRange/refresh",
+			"result": {
+				"kind": "base",
+				"name": "null"
+			},
+			"messageDirection": "serverToClient",
+			"documentation": "@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
 			"method": "textDocument/declaration",
 			"result": {
 				"kind": "or",
@@ -293,7 +304,7 @@
 				"kind": "reference",
 				"name": "DeclarationRegistrationOptions"
 			},
-			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPositionParams]\n(#TextDocumentPositionParams) the response is of type {@link Declaration}\nor a typed array of {@link DeclarationLink} or a Thenable that resolves\nto such."
+			"documentation": "A request to resolve the type definition locations of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPositionParams}\nthe response is of type {@link Declaration} or a typed array of {@link DeclarationLink}\nor a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/selectionRange",
@@ -620,7 +631,7 @@
 				"kind": "reference",
 				"name": "FileOperationRegistrationOptions"
 			},
-			"documentation": "The will create files request is sent from the client to the server before files are actually\ncreated as long as the creation is triggered from within the client.\n\n@since 3.16.0",
+			"documentation": "The will create files request is sent from the client to the server before files are actually\ncreated as long as the creation is triggered from within the client.\n\nThe request can return a `WorkspaceEdit` which will be applied to workspace before the\nfiles are created. Hence the `WorkspaceEdit` can not manipulate the content of the file\nto be created.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -976,6 +987,48 @@
 			"since": "3.17.0"
 		},
 		{
+			"method": "textDocument/inlineCompletion",
+			"result": {
+				"kind": "or",
+				"items": [
+					{
+						"kind": "reference",
+						"name": "InlineCompletionList"
+					},
+					{
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "InlineCompletionItem"
+						}
+					},
+					{
+						"kind": "base",
+						"name": "null"
+					}
+				]
+			},
+			"messageDirection": "clientToServer",
+			"params": {
+				"kind": "reference",
+				"name": "InlineCompletionParams"
+			},
+			"partialResult": {
+				"kind": "array",
+				"element": {
+					"kind": "reference",
+					"name": "InlineCompletionItem"
+				}
+			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "InlineCompletionRegistrationOptions"
+			},
+			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
 			"method": "client/registerCapability",
 			"result": {
 				"kind": "base",
@@ -1232,7 +1285,7 @@
 				"kind": "reference",
 				"name": "DefinitionRegistrationOptions"
 			},
-			"documentation": "A request to resolve the definition location of a symbol at a given text\ndocument position. The request's parameter is of type [TextDocumentPosition]\n(#TextDocumentPosition) the response is of either type {@link Definition}\nor a typed array of {@link DefinitionLink} or a Thenable that resolves\nto such."
+			"documentation": "A request to resolve the definition location of a symbol at a given text\ndocument position. The request's parameter is of type {@link TextDocumentPosition}\nthe response is of either type {@link Definition} or a typed array of\n{@link DefinitionLink} or a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/references",
@@ -1304,7 +1357,7 @@
 				"kind": "reference",
 				"name": "DocumentHighlightRegistrationOptions"
 			},
-			"documentation": "Request to resolve a {@link DocumentHighlight} for a given\ntext document position. The request's parameter is of type [TextDocumentPosition]\n(#TextDocumentPosition) the request response is of type [DocumentHighlight[]]\n(#DocumentHighlight) or a Thenable that resolves to such."
+			"documentation": "Request to resolve a {@link DocumentHighlight} for a given\ntext document position. The request's parameter is of type {@link TextDocumentPosition}\nthe request response is an array of type {@link DocumentHighlight}\nor a Thenable that resolves to such."
 		},
 		{
 			"method": "textDocument/documentSymbol",
@@ -1663,6 +1716,37 @@
 				"name": "DocumentRangeFormattingRegistrationOptions"
 			},
 			"documentation": "A request to format a range in a document."
+		},
+		{
+			"method": "textDocument/rangesFormatting",
+			"result": {
+				"kind": "or",
+				"items": [
+					{
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "TextEdit"
+						}
+					},
+					{
+						"kind": "base",
+						"name": "null"
+					}
+				]
+			},
+			"messageDirection": "clientToServer",
+			"params": {
+				"kind": "reference",
+				"name": "DocumentRangesFormattingParams"
+			},
+			"registrationOptions": {
+				"kind": "reference",
+				"name": "DocumentRangeFormattingRegistrationOptions"
+			},
+			"documentation": "A request to format ranges in a document.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"method": "textDocument/onTypeFormatting",
@@ -3061,7 +3145,7 @@
 						"kind": "base",
 						"name": "URI"
 					},
-					"documentation": "The document uri to show."
+					"documentation": "The uri to show."
 				},
 				{
 					"name": "external",
@@ -3070,7 +3154,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Indicates to show the resource in an external program.\nTo show for example `https://code.visualstudio.com/`\nin the default WEB browser set `external` to `true`."
+					"documentation": "Indicates to show the resource in an external program.\nTo show, for example, `https://code.visualstudio.com/`\nin the default WEB browser set `external` to `true`."
 				},
 				{
 					"name": "takeFocus",
@@ -3091,7 +3175,7 @@
 					"documentation": "An optional selection range if the document is a text\ndocument. Clients might ignore the property if an\nexternal program is started or the file is not a text\nfile."
 				}
 			],
-			"documentation": "Params to show a document.\n\n@since 3.16.0",
+			"documentation": "Params to show a resource in the UI.\n\n@since 3.16.0",
 			"since": "3.16.0"
 		},
 		{
@@ -4034,6 +4118,128 @@
 			],
 			"documentation": "The params sent in a close notebook document notification.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "InlineCompletionParams",
+			"properties": [
+				{
+					"name": "context",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionContext"
+					},
+					"documentation": "Additional information about the context in which inline completions were\nrequested."
+				}
+			],
+			"extends": [
+				{
+					"kind": "reference",
+					"name": "TextDocumentPositionParams"
+				}
+			],
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "WorkDoneProgressParams"
+				}
+			],
+			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
+			"name": "InlineCompletionList",
+			"properties": [
+				{
+					"name": "items",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "InlineCompletionItem"
+						}
+					},
+					"documentation": "The inline completion items"
+				}
+			],
+			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
+			"name": "InlineCompletionItem",
+			"properties": [
+				{
+					"name": "insertText",
+					"type": {
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "string"
+							},
+							{
+								"kind": "reference",
+								"name": "StringValue"
+							}
+						]
+					},
+					"documentation": "The text to replace the range with. Must be set."
+				},
+				{
+					"name": "filterText",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A text that is used to decide if this inline completion should be shown. When `falsy` the {@link InlineCompletionItem.insertText} is used."
+				},
+				{
+					"name": "range",
+					"type": {
+						"kind": "reference",
+						"name": "Range"
+					},
+					"optional": true,
+					"documentation": "The range to replace. Must begin and end on the same line."
+				},
+				{
+					"name": "command",
+					"type": {
+						"kind": "reference",
+						"name": "Command"
+					},
+					"optional": true,
+					"documentation": "An optional {@link Command} that is executed *after* inserting this completion."
+				}
+			],
+			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
+			"name": "InlineCompletionRegistrationOptions",
+			"properties": [],
+			"extends": [
+				{
+					"kind": "reference",
+					"name": "InlineCompletionOptions"
+				},
+				{
+					"kind": "reference",
+					"name": "TextDocumentRegistrationOptions"
+				}
+			],
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "StaticRegistrationOptions"
+				}
+			],
+			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "RegistrationParams",
@@ -5623,7 +5829,7 @@
 						"name": "LSPAny"
 					},
 					"optional": true,
-					"documentation": "A data entry field that is preserved on a code lens item between\na {@link CodeLensRequest} and a [CodeLensResolveRequest]\n(#CodeLensResolveRequest)"
+					"documentation": "A data entry field that is preserved on a code lens item between\na {@link CodeLensRequest} and a {@link CodeLensResolveRequest}"
 				}
 			],
 			"documentation": "A code lens represents a {@link Command command} that should be shown along with\nsource text, like the number of references, a way to run tests, etc.\n\nA code lens is _unresolved_ when no command is associated to it. For performance\nreasons the creation of a code lens and resolving should be done in two stages."
@@ -5682,7 +5888,7 @@
 					"name": "target",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "URI"
 					},
 					"optional": true,
 					"documentation": "The uri this link points to. If missing a resolve request is sent later."
@@ -5817,6 +6023,47 @@
 				}
 			],
 			"documentation": "Registration options for a {@link DocumentRangeFormattingRequest}."
+		},
+		{
+			"name": "DocumentRangesFormattingParams",
+			"properties": [
+				{
+					"name": "textDocument",
+					"type": {
+						"kind": "reference",
+						"name": "TextDocumentIdentifier"
+					},
+					"documentation": "The document to format."
+				},
+				{
+					"name": "ranges",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "Range"
+						}
+					},
+					"documentation": "The ranges to format"
+				},
+				{
+					"name": "options",
+					"type": {
+						"kind": "reference",
+						"name": "FormattingOptions"
+					},
+					"documentation": "The format options"
+				}
+			],
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "WorkDoneProgressParams"
+				}
+			],
+			"documentation": "The parameters of a {@link DocumentRangesFormattingRequest}.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "DocumentOnTypeFormattingParams",
@@ -6400,7 +6647,7 @@
 					"name": "scopeUri",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "URI"
 					},
 					"optional": true,
 					"documentation": "The scope to get the configuration section for."
@@ -6518,7 +6765,7 @@
 					"documentation": "Character offset on a line in a document (zero-based).\n\nThe meaning of this offset is determined by the negotiated\n`PositionEncodingKind`.\n\nIf the character value is greater than the line length it defaults back to the\nline length."
 				}
 			],
-			"documentation": "Position in a text document expressed as zero-based line and character\noffset. Prior to 3.17 the offsets were always based on a UTF-16 string\nrepresentation. So a string of the form `a𐐀b` the character offset of the\ncharacter `a` is 0, the character offset of `𐐀` is 1 and the character\noffset of b is 3 since `𐐀` is represented using two code units in UTF-16.\nSince 3.17 clients and servers can agree on a different string encoding\nrepresentation (e.g. UTF-8). The client announces it's supported encoding\nvia the client capability [`general.positionEncodings`](#clientCapabilities).\nThe value is an array of position encodings the client supports, with\ndecreasing preference (e.g. the encoding at index `0` is the most preferred\none). To stay backwards compatible the only mandatory encoding is UTF-16\nrepresented via the string `utf-16`. The server can pick one of the\nencodings offered by the client and signals that encoding back to the\nclient via the initialize result's property\n[`capabilities.positionEncoding`](#serverCapabilities). If the string value\n`utf-16` is missing from the client's capability `general.positionEncodings`\nservers can safely assume that the client supports UTF-16. If the server\nomits the position encoding in its initialize result the encoding defaults\nto the string value `utf-16`. Implementation considerations: since the\nconversion from one encoding into another requires the content of the\nfile / line the conversion is best done where the file is read which is\nusually on the server side.\n\nPositions are line end character agnostic. So you can not specify a position\nthat denotes `\\r|\\n` or `\\n|` where `|` represents the character offset.\n\n@since 3.17.0 - support for negotiated position encoding.",
+			"documentation": "Position in a text document expressed as zero-based line and character\noffset. Prior to 3.17 the offsets were always based on a UTF-16 string\nrepresentation. So a string of the form `a𐐀b` the character offset of the\ncharacter `a` is 0, the character offset of `𐐀` is 1 and the character\noffset of b is 3 since `𐐀` is represented using two code units in UTF-16.\nSince 3.17 clients and servers can agree on a different string encoding\nrepresentation (e.g. UTF-8). The client announces it's supported encoding\nvia the client capability [`general.positionEncodings`](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#clientCapabilities).\nThe value is an array of position encodings the client supports, with\ndecreasing preference (e.g. the encoding at index `0` is the most preferred\none). To stay backwards compatible the only mandatory encoding is UTF-16\nrepresented via the string `utf-16`. The server can pick one of the\nencodings offered by the client and signals that encoding back to the\nclient via the initialize result's property\n[`capabilities.positionEncoding`](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#serverCapabilities). If the string value\n`utf-16` is missing from the client's capability `general.positionEncodings`\nservers can safely assume that the client supports UTF-16. If the server\nomits the position encoding in its initialize result the encoding defaults\nto the string value `utf-16`. Implementation considerations: since the\nconversion from one encoding into another requires the content of the\nfile / line the conversion is best done where the file is read which is\nusually on the server side.\n\nPositions are line end character agnostic. So you can not specify a position\nthat denotes `\\r|\\n` or `\\n|` where `|` represents the character offset.\n\n@since 3.17.0 - support for negotiated position encoding.",
 			"since": "3.17.0 - support for negotiated position encoding."
 		},
 		{
@@ -7595,6 +7842,68 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "InlineCompletionContext",
+			"properties": [
+				{
+					"name": "triggerKind",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionTriggerKind"
+					},
+					"documentation": "Describes how the inline completion was triggered."
+				},
+				{
+					"name": "selectedCompletionInfo",
+					"type": {
+						"kind": "reference",
+						"name": "SelectedCompletionInfo"
+					},
+					"optional": true,
+					"documentation": "Provides information about the currently selected item in the autocomplete widget if it is visible."
+				}
+			],
+			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
+			"name": "StringValue",
+			"properties": [
+				{
+					"name": "kind",
+					"type": {
+						"kind": "stringLiteral",
+						"value": "snippet"
+					},
+					"documentation": "The kind of string value."
+				},
+				{
+					"name": "value",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "The snippet string."
+				}
+			],
+			"documentation": "A string value used as a snippet is a template which allows to insert text\nand to control the editor cursor when insertion happens.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Variables are defined with `$name` and\n`${name:default value}`.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
+			"name": "InlineCompletionOptions",
+			"mixins": [
+				{
+					"kind": "reference",
+					"name": "WorkDoneProgressOptions"
+				}
+			],
+			"properties": [],
+			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
 			"name": "Registration",
 			"properties": [
 				{
@@ -8397,6 +8706,26 @@
 					"optional": true,
 					"documentation": "The server has support for pull model diagnostics.\n\n@since 3.17.0",
 					"since": "3.17.0"
+				},
+				{
+					"name": "inlineCompletionProvider",
+					"type": {
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "boolean"
+							},
+							{
+								"kind": "reference",
+								"name": "InlineCompletionOptions"
+							}
+						]
+					},
+					"optional": true,
+					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				},
 				{
 					"name": "workspace",
@@ -9231,7 +9560,19 @@
 		},
 		{
 			"name": "DocumentRangeFormattingOptions",
-			"properties": [],
+			"properties": [
+				{
+					"name": "rangesSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether the server supports formatting multiple ranges at once.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
+				}
+			],
 			"mixins": [
 				{
 					"kind": "reference",
@@ -9670,6 +10011,30 @@
 			],
 			"documentation": "A change describing how to move a `NotebookCell`\narray from state S to S'.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "SelectedCompletionInfo",
+			"properties": [
+				{
+					"name": "range",
+					"type": {
+						"kind": "reference",
+						"name": "Range"
+					},
+					"documentation": "The range that will be replaced if this completion item is accepted."
+				},
+				{
+					"name": "text",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "The text the range will be replaced with if this completion is accepted."
+				}
+			],
+			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "ClientCapabilities",
@@ -10316,6 +10681,17 @@
 					"optional": true,
 					"documentation": "Capabilities specific to the diagnostic requests scoped to the\nworkspace.\n\n@since 3.17.0.",
 					"since": "3.17.0."
+				},
+				{
+					"name": "foldingRange",
+					"type": {
+						"kind": "reference",
+						"name": "FoldingRangeWorkspaceClientCapabilities"
+					},
+					"optional": true,
+					"documentation": "Capabilities specific to the folding range requests scoped to the workspace.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				}
 			],
 			"documentation": "Workspace specific client capabilities."
@@ -10606,6 +10982,17 @@
 					"optional": true,
 					"documentation": "Capabilities specific to the diagnostic pull model.\n\n@since 3.17.0",
 					"since": "3.17.0"
+				},
+				{
+					"name": "inlineCompletion",
+					"type": {
+						"kind": "reference",
+						"name": "InlineCompletionClientCapabilities"
+					},
+					"optional": true,
+					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				}
 			],
 			"documentation": "Text document specific client capabilities."
@@ -11123,6 +11510,25 @@
 			],
 			"documentation": "Workspace client capabilities specific to diagnostic pull requests.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "FoldingRangeWorkspaceClientCapabilities",
+			"properties": [
+				{
+					"name": "refreshSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\nfolding ranges currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
+				}
+			],
+			"documentation": "Client workspace capabilities specific to folding ranges\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "TextDocumentSyncClientCapabilities",
@@ -11912,6 +12318,17 @@
 					},
 					"optional": true,
 					"documentation": "Whether range formatting supports dynamic registration."
+				},
+				{
+					"name": "rangesSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether the client supports formatting multiple ranges at once.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				}
 			],
 			"documentation": "Client capabilities of a {@link DocumentRangeFormattingRequest}."
@@ -12429,6 +12846,23 @@
 			],
 			"documentation": "Client capabilities specific to diagnostic pull requests.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "InlineCompletionClientCapabilities",
+			"properties": [
+				{
+					"name": "dynamicRegistration",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether implementation supports dynamic registration for inline completion providers."
+				}
+			],
+			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
 		},
 		{
 			"name": "NotebookDocumentSyncClientCapabilities",
@@ -13077,6 +13511,12 @@
 					"name": "Log",
 					"value": 4,
 					"documentation": "A log message."
+				},
+				{
+					"name": "Debug",
+					"value": 5,
+					"documentation": "A debug message.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The message type"
@@ -13425,6 +13865,28 @@
 			"documentation": "Describes the content type that a client supports in various\nresult literals like `Hover`, `ParameterInfo` or `CompletionItem`.\n\nPlease note that `MarkupKinds` must not start with a `$`. This kinds\nare reserved for internal usage."
 		},
 		{
+			"name": "InlineCompletionTriggerKind",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "Invoked",
+					"value": 0,
+					"documentation": "Completion was triggered explicitly by a user gesture."
+				},
+				{
+					"name": "Automatic",
+					"value": 1,
+					"documentation": "Completion was triggered automatically while editing."
+				}
+			],
+			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0\n@proposed",
+			"since": "3.18.0",
+			"proposed": true
+		},
+		{
 			"name": "PositionEncodingKind",
 			"type": {
 				"kind": "base",
@@ -13434,7 +13896,7 @@
 				{
 					"name": "UTF8",
 					"value": "utf-8",
-					"documentation": "Character offsets count UTF-8 code units."
+					"documentation": "Character offsets count UTF-8 code units (e.g. bytes)."
 				},
 				{
 					"name": "UTF16",
@@ -13444,7 +13906,7 @@
 				{
 					"name": "UTF32",
 					"value": "utf-32",
-					"documentation": "Character offsets count UTF-32 code units.\n\nImplementation note: these are the same as Unicode code points,\nso this `PositionEncodingKind` may also be used for an\nencoding-agnostic representation of character offsets."
+					"documentation": "Character offsets count UTF-32 code units.\n\nImplementation note: these are the same as Unicode codepoints,\nso this `PositionEncodingKind` may also be used for an\nencoding-agnostic representation of character offsets."
 				}
 			],
 			"supportsCustomValues": true,
@@ -14175,7 +14637,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern, like `*.{ts,js}`."
+									"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples."
 								}
 							]
 						}
@@ -14208,7 +14670,7 @@
 										"name": "string"
 									},
 									"optional": true,
-									"documentation": "A glob pattern, like `*.{ts,js}`."
+									"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples."
 								}
 							]
 						}
@@ -14241,7 +14703,7 @@
 										"kind": "base",
 										"name": "string"
 									},
-									"documentation": "A glob pattern, like `*.{ts,js}`."
+									"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples."
 								}
 							]
 						}
