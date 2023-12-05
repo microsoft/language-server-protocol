@@ -14,7 +14,7 @@ GEM
       execjs
     coffee-script-source (1.11.1)
     colorator (1.1.0)
-    commonmarker (0.23.7)
+    commonmarker (0.23.10)
     concurrent-ruby (1.2.0)
     dnsruby (1.61.9)
       simpleidn (~> 0.1)
@@ -231,7 +231,7 @@ GEM
       jekyll-seo-tag (~> 2.1)
     minitest (5.17.0)
     multipart-post (2.1.1)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     octokit (4.22.0)
       faraday (>= 0.9)
@@ -239,7 +239,7 @@ GEM
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (4.0.6)
-    racc (1.6.1)
+    racc (1.6.2)
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -282,7 +282,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 2.7.5p203
 
 BUNDLED WITH
-   2.3.10
+   2.3.17
