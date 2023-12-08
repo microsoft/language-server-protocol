@@ -32,5 +32,7 @@ index: 3
 | Rust | [Eyal Kalderon](https://github.com/ebkalderon) | [tower-lsp](https://github.com/ebkalderon/tower-lsp)
 | Swift | [Chime](https://github.com/chimehq) | [LanguageServerProtocol](https://github.com/chimehq/LanguageServerProtocol)|
 | TypeScript | [TypeFox](https://www.typefox.io/) | [langium](https://github.com/langium/langium)|
+| TypeScript | [Volar team](https://volarjs.dev) | [Volar.js](https://github.com/volarjs/volar.js)|
+| TypeScript | [Volar team](https://volarjs.dev) | [Volar services](https://github.com/volarjs/services)|
 | Go | [TobiasYin](https://github.com/TobiasYin/) | [go-lsp](https://github.com/TobiasYin/go-lsp/)|
 {: .table .table-bordered .table-responsive}
