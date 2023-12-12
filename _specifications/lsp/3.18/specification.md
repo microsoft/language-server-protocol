@@ -387,7 +387,7 @@ Progress is reported against a token. The token is different than the request ID
 
 The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means, for example, that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsify value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
 
-An example would be a request send from the client to the server to request a hover value for a symbol at a certain position in a text document. The request's method would be `textDocument/hover` with a parameter like this:
+An example would be a request sent from the client to the server to request a hover value for a symbol at a certain position in a text document. The request's method would be `textDocument/hover` with a parameter like this:
 
 ```typescript
 interface HoverParams {
@@ -438,9 +438,9 @@ As said LSP defines a set of requests, responses and notifications. Each of thos
 
 There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are documented in this section.
 
-{% include_relative types/uri.md %}
+{% include types/uri.md %}
 {% include_relative types/regexp.md %}
-{% include_relative types/enumerations.md %}
+{% include types/enumerations.md %}
 
 {% include_relative types/textDocuments.md %}
 {% include_relative types/position.md %}
@@ -465,20 +465,20 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/workDoneProgress.md %}
 {% include_relative types/partialResults.md %}
 {% include_relative types/partialResultParams.md %}
-{% include_relative types/traceValue.md %}
+{% include types/traceValue.md %}
 
 ### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor"> Server lifecycle </a>
 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
 {% include_relative general/initialize.md %}
-{% include_relative general/initialized.md %}
-{% include_relative client/registerCapability.md %}
-{% include_relative client/unregisterCapability.md %}
-{% include_relative general/setTrace.md %}
-{% include_relative general/logTrace.md %}
-{% include_relative general/shutdown.md %}
-{% include_relative general/exit.md %}
+{% include messages/3.18/initialized.md %}
+{% include messages/3.18/registerCapability.md %}
+{% include messages/3.18/unregisterCapability.md %}
+{% include messages/3.18/setTrace.md %}
+{% include messages/3.18/logTrace.md %}
+{% include messages/3.18/shutdown.md %}
+{% include messages/3.18/exit.md %}
 
 ### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
@@ -625,6 +625,8 @@ Language Features provide the actual smarts in the language server protocol. The
 - code comprehension features like Hover or Goto Definition.
 - coding features like diagnostics, code complete or code actions.
 
+The language features should be computed on the [synchronized state](#textDocument_synchronization) of the document.
+
 {% include_relative language/declaration.md %}
 {% include_relative language/definition.md %}
 {% include_relative language/typeDefinition.md %}
@@ -655,6 +657,7 @@ Language Features provide the actual smarts in the language server protocol. The
 {% include_relative language/onTypeFormatting.md %}
 {% include_relative language/rename.md %}
 {% include_relative language/linkedEditingRange.md %}
+{% include_relative language/inlineCompletion.md %}
 
 ### <a href="#workspaceFeatures" name="workspaceFeatures" class="anchor">Workspace Features</a>
 
@@ -675,13 +678,13 @@ Language Features provide the actual smarts in the language server protocol. The
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
-{% include_relative window/showMessage.md %}
-{% include_relative window/showMessageRequest.md %}
+{% include messages/3.18/showMessage.md %}
+{% include messages/3.18/showMessageRequest.md %}
 {% include_relative window/showDocument.md %}
-{% include_relative window/logMessage.md %}
+{% include messages/3.18/logMessage.md %}
 {% include_relative window/workDoneProgressCreate.md %}
 {% include_relative window/workDoneProgressCancel.md %}
-{% include_relative telemetry/event.md %}
+{% include messages/3.18/telemetryEvent.md %}
 
 #### <a href="#miscellaneous" name="miscellaneous" class="anchor">Miscellaneous</a>
 
@@ -694,6 +697,7 @@ Language servers usually run in a separate process and clients communicate with 
   - keep the request running if the client can still make use of the result by, for example, transforming it to a new result by applying the state change to the result.
 - servers should therefore not decide by themselves to cancel requests simply due to that fact that a state change notification is detected in the queue. As said the result could still be useful for the client.
 - if a server detects an internal state change (for example, a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- a client should not send resolve requests for out of date objects (for example, code lenses, ...). If a server receives a resolve request for an out of date object the server can error these requests with `ContentModified`.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
 Servers usually support different communication channels (e.g. stdio, pipes, ...). To ease the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
@@ -716,6 +720,8 @@ Since 3.17 there is a meta model describing the LSP protocol:
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
 #### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (mm/dd/yyyy)</a>
+
+* Add support for `activeParameter` on `SignatureHelp` and `SignatureInformation` being `null`.
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (05/10/2022)</a>
 

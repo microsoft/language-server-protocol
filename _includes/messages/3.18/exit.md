@@ -5,4 +5,4 @@ The server should exit with `success` code 0 if the shutdown request has been re
 
 _Notification_:
 * method: 'exit'
-* params: void
+* params: none

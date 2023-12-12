@@ -6,6 +6,12 @@ The `workspace/configuration` request is sent from the server to the client to f
 
 A `ConfigurationItem` consists of the configuration section to ask for and an additional scope URI. The configuration section asked for is defined by the server and doesn't necessarily need to correspond to the configuration store used by the client. So a server might ask for a configuration `cpp.formatterOptions` but the client stores the configuration in an XML store layout differently. It is up to the client to do the necessary conversion. If a scope URI is provided the client should return the setting scoped to the provided resource. If the client for example uses [EditorConfig](http://editorconfig.org/) to manage its settings the configuration should be returned for the passed resource URI. If the client can't provide a configuration setting for a given scope then `null` needs to be present in the returned array.
 
+This pull model replaces the old push model were the client signaled configuration change via an event. If the server still needs to react to configuration changes (since the server caches the result of `workspace/configuration` requests) the server should register for an empty configuration change using the following registration pattern:
+
+```typescript
+connection.client.register(DidChangeConfigurationNotification.type, undefined);
+```
+
 _Client Capability_:
 * property path (optional): `workspace.configuration`
 * property type: `boolean`
@@ -29,7 +35,7 @@ export interface ConfigurationItem {
 	/**
 	 * The scope to get the configuration section for.
 	 */
-	scopeUri?: DocumentUri;
+	scopeUri?: URI;
 
 	/**
 	 * The configuration section asked for.

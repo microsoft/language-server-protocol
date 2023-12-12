@@ -441,9 +441,9 @@ As said LSP defines a set of requests, responses and notifications. Each of thos
 
 There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are documented in this section.
 
-{% include_relative types/uri.md %}
+{% include types/uri.md %}
 {% include_relative types/regexp.md %}
-{% include_relative types/enumerations.md %}
+{% include types/enumerations.md %}
 
 {% include_relative types/textDocuments.md %}
 {% include_relative types/position.md %}
@@ -468,20 +468,20 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/workDoneProgress.md %}
 {% include_relative types/partialResults.md %}
 {% include_relative types/partialResultParams.md %}
-{% include_relative types/traceValue.md %}
+{% include types/traceValue.md %}
 
 ### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor"> Server lifecycle </a>
 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
 {% include_relative general/initialize.md %}
-{% include_relative general/initialized.md %}
-{% include_relative client/registerCapability.md %}
-{% include_relative client/unregisterCapability.md %}
-{% include_relative general/setTrace.md %}
-{% include_relative general/logTrace.md %}
-{% include_relative general/shutdown.md %}
-{% include_relative general/exit.md %}
+{% include messages/3.17/initialized.md %}
+{% include messages/3.17/registerCapability.md %}
+{% include messages/3.17/unregisterCapability.md %}
+{% include messages/3.17/setTrace.md %}
+{% include messages/3.17/logTrace.md %}
+{% include messages/3.17/shutdown.md %}
+{% include messages/3.17/exit.md %}
 
 ### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
@@ -628,6 +628,8 @@ Language Features provide the actual smarts in the language server protocol. The
 - code comprehension features like Hover or Goto Definition.
 - coding features like diagnostics, code complete or code actions.
 
+The language features should be computed on the [synchronized state](#textDocument_synchronization) of the document.
+
 {% include_relative language/declaration.md %}
 {% include_relative language/definition.md %}
 {% include_relative language/typeDefinition.md %}
@@ -659,6 +661,7 @@ Language Features provide the actual smarts in the language server protocol. The
 {% include_relative language/rename.md %}
 {% include_relative language/linkedEditingRange.md %}
 
+
 ### <a href="#workspaceFeatures" name="workspaceFeatures" class="anchor">Workspace Features</a>
 
 {% include_relative workspace/symbol.md %}
@@ -678,13 +681,13 @@ Language Features provide the actual smarts in the language server protocol. The
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
-{% include_relative window/showMessage.md %}
-{% include_relative window/showMessageRequest.md %}
+{% include messages/3.17/showMessage.md %}
+{% include messages/3.17/showMessageRequest.md %}
 {% include_relative window/showDocument.md %}
-{% include_relative window/logMessage.md %}
+{% include messages/3.17/logMessage.md %}
 {% include_relative window/workDoneProgressCreate.md %}
 {% include_relative window/workDoneProgressCancel.md %}
-{% include_relative telemetry/event.md %}
+{% include messages/3.17/telemetryEvent.md %}
 
 #### <a href="#miscellaneous" name="miscellaneous" class="anchor">Miscellaneous</a>
 
@@ -694,9 +697,10 @@ Language servers usually run in a separate process and clients communicate with 
 
 - if a client sends a request to the server and the client state changes in a way that it invalidates the response it should do the following:
   - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary the client should resend the request.
-  - keep the request running if the client can still make use of the result by for example transforming it to a new result by applying the state change to the result.
+  - keep the request running if the client can still make use of the result by, for example, transforming it to a new result by applying the state change to the result.
 - servers should therefore not decide by themselves to cancel requests simply due to that fact that a state change notification is detected in the queue. As said the result could still be useful for the client.
-- if a server detects an internal state change (for example a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- if a server detects an internal state change (for example, a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- a client should not send resolve requests for out of date objects (for example, code lenses, ...). If a server receives a resolve request for an out of date object the server can error these requests with `ContentModified`.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
 Servers usually support different communication channels (e.g. stdio, pipes, ...). To ease the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:

@@ -2,6 +2,11 @@
 
 The document range formatting request is sent from the client to the server to format a given range in a document.
 
+> *Since version 3.18.0*
+
+If supported, the client may send multiple ranges at once for formatting via the `textDocument/rangesFormatting` method.
+
+
 _Client Capability_:
 * property name (optional): `textDocument.rangeFormatting`
 * property type: `DocumentRangeFormattingClientCapabilities` defined as follows:
@@ -14,6 +19,14 @@ export interface DocumentRangeFormattingClientCapabilities {
 	 * Whether formatting supports dynamic registration.
 	 */
 	dynamicRegistration?: boolean;
+
+	/**
+	 * Whether the client supports formatting multiple ranges at once.
+	 *
+	 * @since 3.18.0
+ 	 * @proposed
+	 */
+	rangesSupport?: boolean;
 }
 ```
 
@@ -26,6 +39,13 @@ _Server Capability_:
 ```typescript
 export interface DocumentRangeFormattingOptions extends
 	WorkDoneProgressOptions {
+	/**
+	 * Whether the server supports formatting multiple ranges at once.
+	 *
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	rangesSupport?: boolean;
 }
 ```
 
@@ -67,3 +87,34 @@ interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 _Response_:
 * result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document to be formatted.
 * error: code and message set in case an exception happens during the range formatting request.
+
+> *Since version 3.18.0*
+
+_Request_:
+* method: `textDocument/rangesFormatting`,
+* params: `DocumentRangesFormattingParams` defined as follows:
+
+<div class="anchorHolder"><a href="#documentRangesFormattingParams" name="documentRangesFormattingParams" class="linkableAnchor"></a></div>
+
+```typescript
+interface DocumentRangesFormattingParams extends WorkDoneProgressParams {
+	/**
+	 * The document to format.
+	 */
+	textDocument: TextDocumentIdentifier;
+
+	/**
+	 * The ranges to format
+	 */
+	ranges: Range[];
+
+	/**
+	 * The format options
+	 */
+	options: FormattingOptions;
+}
+```
+
+_Response_:
+* result: [`TextEdit[]`](#textEdit) \| `null` describing the modification to the document to be formatted.
+* error: code and message set in case an exception happens during the ranges formatting request.

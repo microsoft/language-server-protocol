@@ -306,7 +306,7 @@ The workspace diagnostic request is sent from the client to the server to ask th
 If a client receives a diagnostic report for a document in a workspace diagnostic request for which the client also issues individual document diagnostic pull requests the client needs to decide which diagnostics win and should be presented. In general:
 
 - diagnostics for a higher document version should win over those from a lower document version (e.g. note that document versions are steadily increasing)
-- diagnostics from a document pull should win over diagnostics form a workspace pull if no version information is provided.
+- diagnostics from a document pull should win over diagnostics from a workspace pull.
 
 _Request_:
 * method: 'workspace/diagnostic'.
@@ -434,7 +434,7 @@ export type WorkspaceDocumentDiagnosticReport =
 	| WorkspaceUnchangedDocumentDiagnosticReport;
 ```
 
-* partial result: The first literal send need to be a `WorkspaceDiagnosticReport` followed by n `DocumentDiagnosticReportPartialResult` literals defined as follows:
+* partial result: The first literal send need to be a `WorkspaceDiagnosticReport` followed by n `WorkspaceDiagnosticReportPartialResult` literals defined as follows:
 
 <div class="anchorHolder"><a href="#workspaceDiagnosticReportPartialResult" name="workspaceDiagnosticReportPartialResult" class="linkableAnchor"></a></div>
 
