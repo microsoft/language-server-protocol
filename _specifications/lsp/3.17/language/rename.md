@@ -12,10 +12,12 @@ _Client Capability_:
 export namespace PrepareSupportDefaultBehavior {
 	/**
 	 * The client's default behavior is to select the identifier
-	 * according the to language's syntax rule.
+	 * according to the language's syntax rule.
 	 */
 	 export const Identifier: 1 = 1;
 }
+
+export type PrepareSupportDefaultBehavior = 1;
 ```
 
 <div class="anchorHolder"><a href="#renameClientCapabilities" name="renameClientCapabilities" class="linkableAnchor"></a></div>
@@ -47,7 +49,7 @@ export interface RenameClientCapabilities {
 	prepareSupportDefaultBehavior?: PrepareSupportDefaultBehavior;
 
 	/**
-	 * Whether th client honors the change annotations in
+	 * Whether the client honors the change annotations in
 	 * text edits and resource operations returned via the
 	 * rename request's workspace edit by for example presenting
 	 * the workspace edit in the user interface and asking
@@ -121,7 +123,7 @@ _Request_:
 <div class="anchorHolder"><a href="#prepareRenameParams" name="prepareRenameParams" class="linkableAnchor"></a></div>
 
 ```typescript
-export interface PrepareRenameParams extends TextDocumentPositionParams {
+export interface PrepareRenameParams extends TextDocumentPositionParams, WorkDoneProgressParams {
 }
 ```
 

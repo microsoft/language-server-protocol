@@ -4,7 +4,7 @@ description: >
   Language Server Protocol documentation and specification page.
 
 baseurl: /language-server-protocol # the subpath of your site, e.g. /blog/
-url: https://microsoft.github.io/ # the base hostname & protocol for your site
+url: https://microsoft.github.io # the base hostname & protocol for your site
 git_address: https://github.com/Microsoft/language-server-protocol
 git_edit_address: https://github.com/Microsoft/language-server-protocol/blob/gh-pages
 
@@ -24,7 +24,8 @@ exclude:
   - .idea/
   - .gitignore
   - README.md
-  - resources
+  - resources/
+  - vendor/
 
 timezone: Europe/Zurich
 

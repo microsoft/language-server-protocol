@@ -264,25 +264,55 @@ export interface TextDocumentClientCapabilities {
 	/**
 	 * Capabilities specific to the various type hierarchy requests.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	typeHierarchy?: TypeHierarchyClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/inlineValue` request.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlineValue?: InlineValueClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/inlayHint` request.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	inlayHint?: InlayHintClientCapabilities;
+
+	/**
+	 * Capabilities specific to the diagnostic pull model.
+	 *
+	 * @since 3.17.0
+	 */
+	diagnostic?: DiagnosticClientCapabilities;
 }
 ```
+
+##### NotebookDocumentClientCapabilities
+
+`NotebookDocumentClientCapabilities` define capabilities the editor / tool provides on notebook documents.
+
+<div class="anchorHolder"><a href="#notebookDocumentClientCapabilities" name="notebookDocumentClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Capabilities specific to the notebook document support.
+ *
+ * @since 3.17.0
+ */
+export interface NotebookDocumentClientCapabilities {
+	/**
+	 * Capabilities specific to notebook document synchronization
+	 *
+	 * @since 3.17.0
+	 */
+	synchronization: NotebookDocumentSyncClientCapabilities;
+}
+```
+
 
 `ClientCapabilities` define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
 
@@ -406,22 +436,36 @@ interface ClientCapabilities {
 		/**
 		 * Client workspace capabilities specific to inline values.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		inlineValue?: InlineValueWorkspaceClientCapabilities;
 
 		/**
 		 * Client workspace capabilities specific to inlay hints.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		inlayHint?: InlayHintWorkspaceClientCapabilities;
+
+		/**
+		 * Client workspace capabilities specific to diagnostics.
+		 *
+		 * @since 3.17.0.
+		 */
+		diagnostics?: DiagnosticWorkspaceClientCapabilities;
 	};
 
 	/**
 	 * Text document specific client capabilities.
 	 */
 	textDocument?: TextDocumentClientCapabilities;
+
+	/**
+	 * Capabilities specific to the notebook document support.
+	 *
+	 * @since 3.17.0
+	 */
+	notebookDocument?: NotebookDocumentClientCapabilities;
 
 	/**
 	 * Window specific client capabilities.
@@ -510,22 +554,14 @@ interface ClientCapabilities {
 		 *
 		 * If omitted it defaults to ['utf-16'].
 		 *
-		 * For the following standard Unicode encodings these values should be
-		 * used:
-		 *
-		 * UTF-8: 'utf-8'
-		 * UTF-16: 'utf-16'
-		 * UTF-32: 'utf-32'
-		 *
 		 * Implementation considerations: since the conversion from one encoding
 		 * into another requires the content of the file / line the conversion
 		 * is best done where the file is read which is usually on the server
 		 * side.
 		 *
 		 * @since 3.17.0
-		 * @proposed
 		 */
-		positionEncodings?: ('utf-16' | 'utf-8' | 'utf-32' | string)[];
+		positionEncodings?: PositionEncodingKind[];
 	};
 
 	/**
@@ -621,9 +657,8 @@ interface ServerCapabilities {
 	 * If omitted it defaults to 'utf-16'.
 	 *
 	 * @since 3.17.0
-	 * @proposed
 	 */
-	positionEncoding?: 'utf-16' | 'utf-8' | 'utf-32' | string;
+	positionEncoding?: PositionEncodingKind;
 
 	/**
 	 * Defines how text documents are synced. Is either a detailed structure
@@ -632,6 +667,14 @@ interface ServerCapabilities {
 	 * `TextDocumentSyncKind.None`.
 	 */
 	textDocumentSync?: TextDocumentSyncOptions | TextDocumentSyncKind;
+
+	/**
+	 * Defines how notebook documents are synced.
+	 *
+	 * @since 3.17.0
+	 */
+	notebookDocumentSync?: NotebookDocumentSyncOptions
+		| NotebookDocumentSyncRegistrationOptions;
 
 	/**
 	 * The server provides completion support.
@@ -794,23 +837,33 @@ interface ServerCapabilities {
 	/**
 	 * The server provides type hierarchy support.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
-	typeHierarchyProvider?: boolean | TypeHierarchyOptions | TypeHierarchyRegistrationOptions;
+	typeHierarchyProvider?: boolean | TypeHierarchyOptions
+		 | TypeHierarchyRegistrationOptions;
 
 	/**
 	 * The server provides inline values.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
-	inlineValueProvider?: boolean | InlineValueOptions | InlineValueRegistrationOptions;
+	inlineValueProvider?: boolean | InlineValueOptions
+		 | InlineValueRegistrationOptions;
 
 	/**
 	 * The server provides inlay hints.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
-	inlayHintProvider?: boolean | InlayHintOptions | InlayHintRegistrationOptions;
+	inlayHintProvider?: boolean | InlayHintOptions
+		 | InlayHintRegistrationOptions;
+
+	/**
+	 * The server has support for pull model diagnostics.
+	 *
+	 * @since 3.17.0
+	 */
+	diagnosticProvider?: DiagnosticOptions | DiagnosticRegistrationOptions;
 
 	/**
 	 * The server provides workspace symbol support.

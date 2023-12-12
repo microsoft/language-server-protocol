@@ -6,17 +6,20 @@ sectionid: specification-3-17
 toc: specification-3-17-toc
 fullTitle: Language Server Protocol Specification - 3.17
 index: 2
+redirect_from:
+  - specification
+  - specification/
+  - specifications/specification-current
+  - specifications/specification-current/
 ---
 
-This document describes the upcoming 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
+This document describes the 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.17/specification.md).
 
 ## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.17 </a>
 
-All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are:
-
-- None so far.
+All new 3.17 features are tagged with a corresponding since version 3.17 text or in JSDoc using `@since 3.17.0` annotation. Major new feature are: type hierarchy, inline values, inlay hints, notebook document support and a meta model that describes the 3.17 LSP version.
 
 A detailed list of the changes can be found in the [change log](#version_3_17_0)
 
@@ -55,7 +58,7 @@ Content-Length: ...\r\n
 {
 	"jsonrpc": "2.0",
 	"id": 1,
-	"method": "textDocument/didOpen",
+	"method": "textDocument/completion",
 	"params": {
 		...
 	}
@@ -108,7 +111,8 @@ export type decimal = number;
  *
  * @since 3.17.0
  */
-export type LSPAny = LSPObject | LSPArray | string | integer | uinteger | decimal | boolean | null;
+export type LSPAny = LSPObject | LSPArray | string | integer | uinteger |
+	decimal | boolean | null;
 ```
 
 <div class="anchorHolder"><a href="#lspObject" name="lspObject" class="linkableAnchor"></a></div>
@@ -170,7 +174,7 @@ interface RequestMessage extends Message {
 
 #### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
 
-A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
+A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON-RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -183,7 +187,7 @@ interface ResponseMessage extends Message {
 	 * The result of a request. This member is REQUIRED on success.
 	 * This member MUST NOT exist if there was an error invoking the method.
 	 */
-	result?: string | number | boolean | object | null;
+	result?: string | number | boolean | array | object | null;
 
 	/**
 	 * The error object in case a request fails.
@@ -218,7 +222,7 @@ interface ResponseError {
 
 ```typescript
 export namespace ErrorCodes {
-	// Defined by JSON RPC
+	// Defined by JSON-RPC
 	export const ParseError: integer = -32700;
 	export const InvalidRequest: integer = -32600;
 	export const MethodNotFound: integer = -32601;
@@ -226,7 +230,7 @@ export namespace ErrorCodes {
 	export const InternalError: integer = -32603;
 
 	/**
-	 * This is the start range of JSON RPC reserved error codes.
+	 * This is the start range of JSON-RPC reserved error codes.
 	 * It doesn't denote a real error code. No LSP error codes should
 	 * be defined between the start and end range. For backwards
 	 * compatibility the `ServerNotInitialized` and the `UnknownErrorCode`
@@ -246,7 +250,7 @@ export namespace ErrorCodes {
 	export const UnknownErrorCode: integer = -32001;
 
 	/**
-	 * This is the end range of JSON RPC reserved error codes.
+	 * This is the end range of JSON-RPC reserved error codes.
 	 * It doesn't denote a real error code.
 	 *
 	 * @since 3.16.0
@@ -348,13 +352,13 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON-RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
 #### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
 
 > *Since version 3.15.0*
 
-The base protocol offers also support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including work done progress (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
+The base protocol offers also support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including [work done progress](#workDoneProgress) (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
 
 A progress notification has the following properties:
 
@@ -419,27 +423,27 @@ The set of capabilities is exchanged between the client and server during the [i
 
 Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So for example if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
 
-However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as these each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since the executing the latter may affect the result of the former.
+However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since executing the latter may affect the result of the former.
 
 ### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
 
-As said LSP defines a set of requests, responses and notifications. Each of those are document using the following format:
+As said LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
 
 * a header describing the request
 * an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
 * an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure. Clients should ignore server capabilities they don't understand (e.g. the initialize request shouldn't fail in this case).
 * an optional _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration. See the [register](#client_registerCapability) and [unregister](#client_unregisterCapability) request for how this works in detail.
-* a _Request_ section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
+* a _Request_ section describing the format of the request sent. The method is a string identifying the request, the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
 * a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
 
 ### <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> Basic JSON Structures </a>
 
-There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are document in this section.
+There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are documented in this section.
 
-{% include_relative types/uri.md %}
+{% include types/uri.md %}
 {% include_relative types/regexp.md %}
-{% include_relative types/enumerations.md %}
+{% include types/enumerations.md %}
 
 {% include_relative types/textDocuments.md %}
 {% include_relative types/position.md %}
@@ -464,20 +468,20 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/workDoneProgress.md %}
 {% include_relative types/partialResults.md %}
 {% include_relative types/partialResultParams.md %}
-{% include_relative types/traceValue.md %}
+{% include types/traceValue.md %}
 
 ### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor"> Server lifecycle </a>
 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
 {% include_relative general/initialize.md %}
-{% include_relative general/initialized.md %}
-{% include_relative client/registerCapability.md %}
-{% include_relative client/unregisterCapability.md %}
-{% include_relative general/setTrace.md %}
-{% include_relative general/logTrace.md %}
-{% include_relative general/shutdown.md %}
-{% include_relative general/exit.md %}
+{% include messages/3.17/initialized.md %}
+{% include messages/3.17/registerCapability.md %}
+{% include messages/3.17/unregisterCapability.md %}
+{% include messages/3.17/setTrace.md %}
+{% include messages/3.17/logTrace.md %}
+{% include messages/3.17/shutdown.md %}
+{% include messages/3.17/exit.md %}
 
 ### <a href="#textDocument_synchronization" name="textDocument_synchronization" class="anchor">Text Document Synchronization</a>
 
@@ -515,10 +519,12 @@ export namespace TextDocumentSyncKind {
 	/**
 	 * Documents are synced by sending the full content on open.
 	 * After that only incremental updates to the document are
-	 * send.
+	 * sent.
 	 */
 	export const Incremental = 2;
 }
+
+export type TextDocumentSyncKind = 0 | 1 | 2;
 ```
 
 <div class="anchorHolder"><a href="#textDocumentSyncOptions" name="textDocumentSyncOptions" class="linkableAnchor"></a></div>
@@ -527,7 +533,7 @@ export namespace TextDocumentSyncKind {
 export interface TextDocumentSyncOptions {
 	/**
 	 * Open and close notifications are sent to the server. If omitted open
-	 * close notification should not be sent.
+	 * close notifications should not be sent.
 	 */
 	openClose?: boolean;
 
@@ -579,36 +585,6 @@ export interface TextDocumentSyncClientCapabilities {
 }
 ```
 
-<div class="anchorHolder"><a href="#textDocumentSyncKind" name="textDocumentSyncKind" class="linkableAnchor"></a></div>
-
-```typescript
-/**
- * Defines how the host (editor) should sync document changes to the language
- * server.
- */
-export namespace TextDocumentSyncKind {
-	/**
-	 * Documents should not be synced at all.
-	 */
-	export const None = 0;
-
-	/**
-	 * Documents are synced by always sending the full content
-	 * of the document.
-	 */
-	export const Full = 1;
-
-	/**
-	 * Documents are synced by sending the full content on open.
-	 * After that only incremental updates to the document are
-	 * send.
-	 */
-	export const Incremental = 2;
-}
-
-export type TextDocumentSyncKind = 0 | 1 | 2;
-```
-
 <div class="anchorHolder"><a href="#textDocumentSyncOptions" name="textDocumentSyncOptions" class="linkableAnchor"></a></div>
 
 ```typescript
@@ -643,12 +619,16 @@ export interface TextDocumentSyncOptions {
 }
 ```
 
+{% include_relative notebookDocument/notebook.md %}
+
 ### <a href="#languageFeatures" name="languageFeatures" class="anchor">Language Features</a>
 
-Language Feature provide the actual smarts in the language server protocol. The are usually executed on a [text document, position] tuple. The main language feature categories are:
+Language Features provide the actual smarts in the language server protocol. They are usually executed on a [text document, position] tuple. The main language feature categories are:
 
 - code comprehension features like Hover or Goto Definition.
 - coding features like diagnostics, code complete or code actions.
+
+The language features should be computed on the [synchronized state](#textDocument_synchronization) of the document.
 
 {% include_relative language/declaration.md %}
 {% include_relative language/definition.md %}
@@ -670,6 +650,7 @@ Language Feature provide the actual smarts in the language server protocol. The 
 {% include_relative language/moniker.md %}
 {% include_relative language/completion.md %}
 {% include_relative language/publishDiagnostics.md %}
+{% include_relative language/pullDiagnostics.md %}
 {% include_relative language/signatureHelp.md %}
 {% include_relative language/codeAction.md %}
 {% include_relative language/documentColor.md %}
@@ -679,6 +660,7 @@ Language Feature provide the actual smarts in the language server protocol. The 
 {% include_relative language/onTypeFormatting.md %}
 {% include_relative language/rename.md %}
 {% include_relative language/linkedEditingRange.md %}
+
 
 ### <a href="#workspaceFeatures" name="workspaceFeatures" class="anchor">Workspace Features</a>
 
@@ -699,25 +681,26 @@ Language Feature provide the actual smarts in the language server protocol. The 
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
-{% include_relative window/showMessage.md %}
-{% include_relative window/showMessageRequest.md %}
+{% include messages/3.17/showMessage.md %}
+{% include messages/3.17/showMessageRequest.md %}
 {% include_relative window/showDocument.md %}
-{% include_relative window/logMessage.md %}
+{% include messages/3.17/logMessage.md %}
 {% include_relative window/workDoneProgressCreate.md %}
 {% include_relative window/workDoneProgressCancel.md %}
-{% include_relative telemetry/event.md %}
+{% include messages/3.17/telemetryEvent.md %}
 
-miscellaneous
+#### <a href="#miscellaneous" name="miscellaneous" class="anchor">Miscellaneous</a>
 
-### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
+#### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
-Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
+Language servers usually run in a separate process and clients communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
 - if a client sends a request to the server and the client state changes in a way that it invalidates the response it should do the following:
   - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary the client should resend the request.
-  - keep the request running if the client can still make use of the result by for example transforming it to a new result by applying the state change to the result.
+  - keep the request running if the client can still make use of the result by, for example, transforming it to a new result by applying the state change to the result.
 - servers should therefore not decide by themselves to cancel requests simply due to that fact that a state change notification is detected in the queue. As said the result could still be useful for the client.
-- if a server detects an internal state change (for example a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- if a server detects an internal state change (for example, a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- a client should not send resolve requests for out of date objects (for example, code lenses, ...). If a server receives a resolve request for an out of date object the server can error these requests with `ContentModified`.
 - if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
 Servers usually support different communication channels (e.g. stdio, pipes, ...). To ease the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
@@ -725,19 +708,40 @@ Servers usually support different communication channels (e.g. stdio, pipes, ...
 - **stdio**: uses stdio as the communication channel.
 - **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
 - **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
-- **node-ipc**: use node IPC communication between the client and the server. This is only support if both client and server run under node.
+- **node-ipc**: use node IPC communication between the client and the server. This is only supported if both client and server run under node.
 
-To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id pass on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
+To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id passed on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
+
+#### <a href="#metaModel" name="metaModel" class="anchor">Meta Model</a>
+
+Since 3.17 there is a meta model describing the LSP protocol:
+
+- [metaModel.json](../metaModel/metaModel.json): The actual meta model for the LSP 3.17 specification
+- [metaModel.ts](../metaModel/metaModel.ts): A TypeScript file defining the data types that make up the meta model.
+- [metaModel.schema.json](../metaModel/metaModel.schema.json): A JSON schema file defining the data types that make up the meta model. Can be used to generate code to read the meta model JSON file.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
-#### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (xx/xx/xxxx)</a>
+#### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (05/10/2022)</a>
 
+* Specify how clients will handle stale requests.
 * Add support for a completion item label details.
 * Add support for workspace symbol resolve request.
+* Add support for label details and insert text mode on completion items.
 * Add support for shared values on CompletionItemList.
 * Add support for HTML tags in Markdown.
-* Specify how clients will handle stale requests.
+* Add support for collapsed text in folding.
+* Add support for trigger kinds on code action requests.
+* Add the following support to semantic tokens:
+  - server cancelable
+  - augmentation of syntax tokens
+* Add support to negotiate the position encoding.
+* Add support for relative patterns in file watchers.
+* Add support for type hierarchies
+* Add support for inline values.
+* Add support for inlay hints.
+* Add support for notebook documents.
+* Add support for diagnostic pull model.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 

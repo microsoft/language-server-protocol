@@ -112,22 +112,32 @@
   - title: Document Synchronization
     anchor: textSynchronization
     children:
-    - title: Overview
+    - title: Overview - Text Document
       anchor: textDocument_synchronization
-    - title: Did Open Document
+    - title: Did Open Text Document
       anchor: textDocument_didOpen
-    - title: Did Change Document
+    - title: Did Change Text Document
       anchor: textDocument_didChange
-    - title: Will Save Document
+    - title: Will Save Text Document
       anchor: textDocument_willSave
     - title: Will Save Document Wait Until
       anchor: textDocument_willSaveWaitUntil
-    - title: Did Save Document
+    - title: Did Save Text Document
       anchor: textDocument_didSave
-    - title: Did Close Document
+    - title: Did Close Text Document
       anchor: textDocument_didClose
-    - title: Rename a Document
+    - title: Rename a Text Document
       anchor: textDocument_didRename
+    - title: Overview - Notebook Document
+      anchor: notebookDocument_synchronization
+    - title: Did Open Notebook Document
+      anchor: notebookDocument_didOpen
+    - title: Did Change Notebook Document
+      anchor: notebookDocument_didChange
+    - title: Did Save Notebook Document
+      anchor: notebookDocument_didSave
+    - title: Did Close Notebook Document
+      anchor: notebookDocument_didClose
   - title: Language Features
     anchor: languageFeatures
     children:
@@ -193,6 +203,8 @@
       anchor: completionItem_resolve
     - title: Publish Diagnostics
       anchor: textDocument_publishDiagnostics
+    - title: Pull Diagnostics
+      anchor: textDocument_pullDiagnostics
     - title: Signature Help
       anchor: textDocument_signatureHelp
     - title: Code Action
@@ -270,6 +282,8 @@
     children:
     - title: Implementation Considerations
       anchor: implementationConsiderations
+    - title: Meta Model
+      anchor: metaModel
   - title: Change Log
     anchor: changeLog
     children:

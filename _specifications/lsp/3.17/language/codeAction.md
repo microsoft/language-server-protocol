@@ -305,7 +305,7 @@ export interface CodeActionContext {
 /**
  * The reason why code actions were requested.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export namespace CodeActionTriggerKind {
 	/**
@@ -456,4 +456,4 @@ _Request_:
 
 _Response_:
 * result: `CodeAction`
-* error: code and message set in case an exception happens during the completion resolve request.
+* error: code and message set in case an exception happens during the code action resolve request.

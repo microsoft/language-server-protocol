@@ -6,19 +6,22 @@ sectionid: lsif-0-6-0
 toc: lsif-0-6-0-toc
 index: 2
 fullTitle: Language Server Index Format Specification - 0.6.0
+lspVersion: 3.17
 ---
 
 The 0.6.0 version of LSIF is currently under construction.
 
 ## <a href="#lsifIntro" name="lsifIntro" class="anchor">Language Server Index Format</a>
 
-The purpose of the Language Server Index Format (LSIF) is it to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
+The purpose of the Language Server Index Format (LSIF) is to define a standard format for language servers or other programming tools to dump their knowledge about a workspace. This dump can later be used to answer language server [LSP](https://microsoft.github.io/language-server-protocol/) requests for the same workspace without running the language server itself. Since much of the information would be invalidated by a change to the workspace, the dumped information typically excludes requests used when mutating a document. So, for example, the result of a code complete request is typically not part of such a dump.
 
 ### Changelog
 
 #### Version 0.6.0
 
 Feedback from store implementors showed that the concept of grouping projects into larger storage units is nothing that should be defined in LSIF itself. It should be left to the storage backend. Due to this the `Group` vertex introduced in 0.5.0 got removed again. Since some information captured in the `Group` vertex is useful in general a `Source` vertex got introduce to store this information.
+
+1. Support for Semantic Colorization of files via LSIF. To support this, 'textDocument/semanticTokens/full' request was added.
 
 #### Version 0.5.0
 
@@ -49,15 +52,15 @@ Principal design goals:
 
 LSP requests that are good candidates to be supported in LSIF are:
 
-- [`textDocument/documentSymbol`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_documentSymbol)
-- [`textDocument/foldingRange`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_foldingRange)
-- [`textDocument/documentLink`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_documentLink)
-- [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_definition)
-- [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_declaration)
-- [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_typeDefinition)
-- [`textDocument/hover`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_hover)
-- [`textDocument/references`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_references)
-- [`textDocument/implementation`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_implementation)
+- `textDocument/documentSymbol`
+- `textDocument/foldingRange`
+- `textDocument/documentLink`
+- `textDocument/definition`
+- `textDocument/declaration`
+- `textDocument/typeDefinition`
+- `textDocument/hover`
+- `textDocument/references`
+- `textDocument/implementation`
 
 The corresponding LSP requests have one of the following two forms:
 
@@ -90,7 +93,7 @@ The dump format therefore should support the following features:
 - Each element has a unique id (which may be a string or a number).
 - It should be possible to emit data as soon as it is available to allow streaming rather than large memory requirements. For example, emitting data based on document syntax should be done for each file as parsing progresses.
 - It should be easy to add additional requests later on.
-- It should be easy for a tool to consume a dump and for example import it into a database without holding the dump in memory.
+- It should be easy for a tool to consume a dump and, for example, import it into a database without holding the dump in memory.
 
 
 We came to the conclusion that the most flexible way to emit this is a graph, where edges represent the method and vertices are `[uri]`, `[uri, position]` or a request result. This data could then be stored as JSON or read into a database that can represent these vertices and relationships.
@@ -158,7 +161,7 @@ The corresponding graph looks like this
 
 The ranges emitted for a document in the contains relationship must follow these rules:
 
-1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if the have the same start / end value.
+1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if they have the same start / end value.
 1. No two ranges can be equal.
 1. No two ranges can overlap, claiming the same position in a document unless one range is entirely contained by the other.
 
@@ -290,7 +293,7 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 { id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], shard: 4 }
 ```
 
-The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
+The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. an item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
 
 ### <a href="#declaration" name="declaration" class="anchor">Request: `textDocument/declaration`</a>
 
@@ -615,11 +618,11 @@ The relevant emitted vertices and edges looks like this:
 { id: 51, type: "edge", label: "item", outV: 37, inVs: [9], shard: 4 }
 ```
 
-As with other results ranges get added using a `item` edge. In this case without a `property` since there is only on kind of range.
+As with other results ranges get added using a `item` edge. In this case without a `property` since there is only one kind of range.
 
 ## Document requests
 
-The Language Server Protocol also supports requests for documents only (without any position information). These requests are `textDocument/foldingRange`, `textDocument/documentLink`, and `textDocument/documentSymbol`. We follow the same pattern as before to model these, the difference being that the result is linked to the document instead of to a range.
+The Language Server Protocol also supports requests for documents only (without any position information). These requests are `textDocument/foldingRange`, `textDocument/documentLink`, `textDocument/documentSymbol`, and `textDocument/semanticTokens/full`. We follow the same pattern as before to model these, the difference being that the result is linked to the document instead of to a range.
 
 ### <a href="#foldingRange" name="foldingRange" class="anchor">Request: `textDocument/foldingRange`</a>
 
@@ -932,6 +935,60 @@ Produces the following output:
 
 Since diagnostics are not very common in dumps, no effort has been made to reuse ranges in diagnostics.
 
+### <a href="#semanticTokens" name="semanticTokens" class="anchor">Request: `textDocument/semanticTokens/full`</a>
+
+Finally, the `textDocument/semanticTokens/full` edge and `SemanticTokensResult` type define a means for
+exporting information about the semantics of ranges in the text. This mechanism is primarily a means of
+classifying points of interest to enable additional, richer, semantic code colorization that indicates information
+about the code that cannot be determined via syntax parsers alone (colorizing resolved types, formatting by visibility, etc.)
+
+```typescript
+function hello() {
+  console.log('Hello');
+}
+```
+
+```typescript
+{ id: 2, type: "vertex", label: "document",
+  uri: "file:///Users/dirkb/sample.ts", languageId: "typescript"
+}
+{ id: 112, type: "vertex", label: "semanticTokensResult", result: {"data": [1, 2, 7, 0, 0] } }
+{ id: 113, type: "edge", label: "textDocument/semanticTokens", outV: 2, inV: 112 }
+```
+
+The corresponding `SemanticTokensResult` is defined as follows:
+
+```typescript
+export interface SemanticTokensResult {
+  label: 'semanticTokensResult';
+
+  result: lsp.SemanticTokens;
+}
+```
+
+The above example defines a single 5-integer-encoded range at 'console'.
+
+The `SemanticTokens` type, its `data` member, and the encoding of the integers within
+are all consistent with the Language Server Protocol representations of these same concepts.
+
+The 4th and 5th integer in every 5 integer encoded token represent the SemanticTokensType and SemanticTokensModifiers, respectively.
+Much like LSP, these integers are mapped to token type names and token modifiers names via entries in the capabilities vertex.
+
+For example, the `object` semantic token type declared below maps to `0`. Any tokens with integer number 4 of 5 set to 0
+will be considered `object` for the purposes of colorization.
+
+```typescript
+{
+    "semanticTokensProvider": {
+      "tokenTypes": [ "object" ],
+      "tokenModifiers": [ "static" ]
+  },
+  "label": "capabilities"
+}
+```
+
+See [LSP Semantic Tokens Protocol](#textDocument_semanticTokens) for more information.
+
 ### <a href="#projectContext" name="projectContext" class="anchor">The Project vertex</a>
 
 Usually language servers operate in some sort of project context. In TypeScript, a project is defined using a `tsconfig.json` file. C# and C++ have their own means. The project file usually contains information about compile options and other parameters. Having these in the dump can be valuable. The LSIF therefore defines a project vertex. In addition, all documents that belong to that project are connected to the project using a `contains` edge. If there was a `tsconfig.json` in the previous examples, the first emitted edges and vertices would look like this:
@@ -983,7 +1040,7 @@ It can be valuable to embed the contents of a document or project file into the 
 
 ### <a href="#events" name="events" class="anchor">Events</a>
 
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
+To ease the processing of an LSIF dump to, for example, import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example, no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be referenced in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
 
 ```ts
 // The actual document
@@ -1100,11 +1157,11 @@ export class Emitter {
 This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has the following properties:
 
 - `scheme` to indicate how the `identifiers` is to be interpreted.
-- `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
+- `identifier` to actually identify the symbol. Its structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 - `kind` to indicate whether the moniker is exported, imported or local to the project.
 - `unique` to indicate how unique the moniker is. See the multi project section for more information on this.
 
-Please also note that the method `Emitter#doEmit` has a export moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
+Please also note that the method `Emitter#doEmit` has an export moniker although the method is private. If private elements do have monikers depends on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
 
 ### <a href="#multiProjects" name="multiProjects" class="anchor">Systems with multiple Projects</a>
 
@@ -1172,7 +1229,7 @@ The dump for project P2 includes the same source vertex:
 }
 ```
 
-Note that P1 and P2 have the same source information which is a good indication for the storage backend to resolve references across these two projects. However project grouping might not be limited to source repositories. Therefore a storage backend should define a way to group projects in a hierarchal way. This will for example allow searches like: find all references to function `foo` in the organization O.
+Note that P1 and P2 have the same source information which is a good indication for the storage backend to resolve references across these two projects. However project grouping might not be limited to source repositories. Therefore a storage backend should define a way to group projects in a hierarchal way. This will, for example, allow searches like: find all references to function `foo` in the organization O.
 
 Now lets look how we ensure that searching for references for `Widget#dispose` find the `d.dispose()` match in P1 as well. First lets look what kind of information will be in the dump of P1 for `Disposable#dispose`:
 
@@ -1202,10 +1259,10 @@ Now lets look how we ensure that searching for references for `Widget#dispose` f
 
 Interesting here is line 22 which defines the moniker for `Disposable#dispose`. It has new a property `unique` telling that the moniker is unique inside a `workspace` of projects but not necessarily outside. Other possible values for `unique` are:
 
-- `document` to indicate that the moniker is only unique inside a document. Used for example for locals or private members.
-- `project` to indicate that the moniker is only unique inside a project. Used for example for project internal symbols.
-- `workspace` to indicate that the moniker is unique inside a workspace of projects. Used for example for exported members.
-- `scheme` to indicate that the moniker is unique inside the moniker's scheme. For example if the moniker is generated for a specific package manager (see npm example below) then these monikers are usually unique inside the moniker's theme (e.g. all moniker generated for npm carry the `npm` scheme and are unique)
+- `document` to indicate that the moniker is only unique inside a document. Used, for example, for locals or private members.
+- `project` to indicate that the moniker is only unique inside a project. Used, for example, for project internal symbols.
+- `workspace` to indicate that the moniker is unique inside a workspace of projects. Used, for example, for exported members.
+- `scheme` to indicate that the moniker is unique inside the moniker's scheme. For example, if the moniker is generated for a specific package manager (see npm example below) then these monikers are usually unique inside the moniker's theme (e.g. all moniker generated for npm carry the `npm` scheme and are unique)
 - `global` to indicate that the moniker is globally unique (e.g. its identifer is unique independent of the scheme or kind)
 
 When generating the dump for P2 the information for `Widget#dispose` will look like this:
@@ -1388,7 +1445,7 @@ which made the moniker specific to the npm `mobx` package. In addition informati
 
 Usually monikers are attached to result sets since they are the same for all ranges pointing to the result set. However for dumps that don't use result sets, monikers can also be emitted on ranges.
 
-For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example function arguments can only be navigated inside the file). To help postprocessing tools to efficiently decide this, LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
+For tools processing the dump and importing it into a database it is sometime useful to know whether a result is local to a file or not (for example, function arguments can only be navigated inside the file). To help postprocessing tools to efficiently decide this, LSIF generation tools should generate a moniker for locals as well. The corresponding kind to use is `local`. The identifier should still be unique inside the document.
 
 For the following example
 
@@ -1424,7 +1481,7 @@ In addition to this moniker schemes starting with `$` are reserved and shouldn't
 
 Ranges in LSIF have currently two meanings:
 
-1. they act as LSP request sensitive areas in a document (e.g. we use them to decided of for a given position a corresponding LSP request result exists)
+1. they act as LSP request sensitive areas in a document (e.g. we use them to decide if for a given position a corresponding LSP request result exists)
 1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
 
 To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
@@ -1473,14 +1530,14 @@ export interface MetaData {
 
 > Extended in 0.6.0
 
-The following emitting constraints (some of which have already mean mentioned in the document) exists:
+The following emitting constraints (some of which have already been mentioned in the document) exist:
 
 - a vertex needs to be emitted before it can be referenced in an edge.
 - a `range` and `resultRange` can only be contained in one document.
 - a `resultRange` can not be used as a target in a `contains` edge.
-- after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
+- after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is, for example, not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 - if ranges point to result sets and monikers are emitted, they must be emitted on the result set and can't be emitted on individual ranges.
-- if a range is references in a items edge the range must have been attached to a document using the contains edge. This ensures that that target document of a range is known. (@since 0.6.0)
+- if a range is references in items edge the range must have been attached to a document using the contains edge. This ensures that target document of a range is known. (@since 0.6.0)
 
 ## <a href="#additionalInformation" name="additionalInformation" class="anchor">Additional Information </a>
 

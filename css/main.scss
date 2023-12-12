@@ -11,10 +11,11 @@ html {
 body {
 	letter-spacing: .25px;
 	text-rendering: optimizeLegibility;
+	color: #242628;
 }
 
 a {
-	color: #216fc9
+	color: #216fc9;
 }
 
 .single-page {
@@ -463,15 +464,7 @@ pre[class=highlight] {
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-    color: rgba(255,255,255,0.5);
-}
-
-.nav .nav-link {
-	color: #206bc6 !important;
-  }
-
-.nav .nav-link:hover {
-	color: #1034a8 !important;
+    color: rgba(255, 255, 255, 0.75);
 }
 
 code.highlighter-rouge a {
@@ -479,13 +472,9 @@ code.highlighter-rouge a {
 	font-weight: bold;
 }
 
-a h3, h3 a, h4 a {
+a h3, h2 a, h3 a, h4 a {
 	padding-top: 2px;
 	padding-bottom: 2px;
-}
-
-a:hover {
-	color: #1034a8;
 }
 
 .navbar-dark .navbar-nav .nav-link {

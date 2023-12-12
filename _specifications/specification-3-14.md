@@ -229,7 +229,7 @@ type DocumentUri = string;
 
 #### Text Documents
 
-The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
+The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So in a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
 Positions are line end character agnostic. So you can not specify  a position that denotes `\r|\n` or `\n|` where `|` represents the character offset.
 
@@ -322,7 +322,7 @@ interface LocationLink {
 
 	/**
 	 * The range that should be selected and revealed when this link is being followed, e.g the name of a function.
-	 * Must be contained by the the `targetRange`. See also `DocumentSymbol#range`
+	 * Must be contained by the `targetRange`. See also `DocumentSymbol#range`
 	 */
 	targetSelectionRange: Range;
 }
@@ -723,7 +723,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	 * is sent from the server to the client and the file is not open in the editor
 	 * (the server has not received an open notification before) the server can send
 	 * `null` to indicate that the version is known and the content on disk is the
-	 * truth (as speced with document content ownership).
+	 * truth (as specced with document content ownership).
 	 *
 	 * The version number of a document will increase after each change, including
 	 * undo/redo. The number doesn't need to be consecutive.
@@ -754,7 +754,7 @@ interface TextDocumentPositionParams {
 
 #### DocumentFilter
 
-A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter the applies to JSON files with name `package.json`:
+A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter that applies to JSON files with name `package.json`:
 ```typescript
 { language: 'typescript', scheme: 'file' }
 { language: 'json', pattern: '**/package.json' }
@@ -860,7 +860,7 @@ export interface MarkupContent {
 This section documents the actual language server protocol. It uses the following format:
 
 * a header describing the request
-* a _Request_: section describing the format of the request sent. The method is a string identifying the request the params are documented using a TypeScript interface
+* a _Request_: section describing the format of the request sent. The method is a string identifying the request, the params are documented using a TypeScript interface
 * a _Response_: section describing the format of the response. The result item describes the returned data in case of a success. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only spec'd if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 * a _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration.
 
@@ -868,7 +868,7 @@ This section documents the actual language server protocol. It uses the followin
 
 Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So for example if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
 
-However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as these each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since the executing the latter may affect the result of the former.
+However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since executing the latter may affect the result of the former.
 
 #### Server lifetime
 
@@ -1902,7 +1902,7 @@ interface ServerCapabilities {
 			* Whether the server wants to receive workspace folder
 			* change notifications.
 			*
-			* If a strings is provided the string is treated as a ID
+			* If a strings is provided the string is treated as an ID
 			* under which the notification is registered on the client
 			* side. The ID can be used to unregister for these events
 			* using the `client/unregisterCapability` request.
@@ -2959,7 +2959,7 @@ interface CompletionItem {
 
 	/**
 	 * The format of the insert text. The format applies to both the `insertText` property
-	 * and the `newText` property of a provided `textEdit`. If ommitted defaults to
+	 * and the `newText` property of a provided `textEdit`. If omitted defaults to
 	 * `InsertTextFormat.PlainText`.
 	 */
 	insertTextFormat?: InsertTextFormat;
@@ -3056,7 +3056,7 @@ export interface CompletionRegistrationOptions extends TextDocumentRegistrationO
 
 	/**
 	 * The list of all possible characters that commit a completion. This field can be used
-	 * if clients don't support individual commmit characters per completion item. See
+	 * if clients don't support individual commit characters per completion item. See
 	 * `ClientCapabilities.textDocument.completion.completionItem.commitCharactersSupport`.
 	 *
 	 * If a server provides both `allCommitCharacters` and commit characters on an individual
@@ -3616,7 +3616,7 @@ interface SymbolInformation {
 	 * the range usually spans more then the actual symbol's name and does
 	 * normally include things like visibility modifiers.
 	 *
-	 * The range doesn't have to denote a node range in the sense of a abstract
+	 * The range doesn't have to denote a node range in the sense of an abstract
 	 * syntax tree. It can therefore not be used to re-construct a hierarchy of
 	 * the symbols.
 	 */
@@ -4318,7 +4318,7 @@ export enum FoldingRangeKind {
 	 */
 	Comment = 'comment',
 	/**
-	 * Folding range for a imports or includes
+	 * Folding range for imports or includes
 	 */
 	Imports = 'imports',
 	/**
@@ -4368,7 +4368,7 @@ _Registration Options_: `TextDocumentRegistrationOptions`
 
 ### Implementation considerations
 
-Language servers usually run in a separate process and client communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
+Language servers usually run in a separate process and clients communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
 - if a client sends a request to the server and the client state changes in a way that the result will be invalid it should cancel the server request and ignore the result. If necessary it can resend the request to receive an up to date result.
 - if a server detects a state change that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if appropriate.

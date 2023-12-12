@@ -37,7 +37,11 @@ export enum SemanticTokenTypes {
 	string = 'string',
 	number = 'number',
 	regexp = 'regexp',
-	operator = 'operator'
+	operator = 'operator',
+	/**
+	 * @since 3.17.0
+	 */
+	decorator = 'decorator'
 }
 ```
 
@@ -101,6 +105,7 @@ There are different ways how the position of a token can be expressed in a file.
 - at index `5*i+3` - `tokenType`: will be looked up in `SemanticTokensLegend.tokenTypes`. We currently ask that `tokenType` < 65536.
 - at index `5*i+4` - `tokenModifiers`: each set bit will be looked up in `SemanticTokensLegend.tokenModifiers`
 
+The `deltaStart` and the `length` values must be encoded using the encoding the client and server agrees on during the `initialize` request (see also [TextDocuments](#textDocuments)).
 Whether a token can span multiple lines is defined by the client capability `multilineTokenSupport`. If multiline tokens are not supported and a tokens length takes it past the end of the line, it should be treated as if the token ends at the end of the line and will not wrap onto the next line.
 
 The client capability `overlappingTokenSupport` defines whether tokens can overlap each other.
@@ -456,6 +461,8 @@ There are two uses cases where it can be beneficial to only compute semantic tok
 
 - for faster rendering of the tokens in the user interface when a user opens a file. In this use cases servers should also implement the `textDocument/semanticTokens/full` request as well to allow for flicker free scrolling and semantic coloring of a minimap.
 - if computing semantic tokens for a full document is too expensive servers can only provide a range call. In this case the client might not render a minimap correctly or might even decide to not show any semantic tokens at all.
+
+A server is allowed to compute the semantic tokens for a broader range than requested by the client. However if the server does the semantic tokens for the broader range must be complete and correct.
 
 _Request_:
 

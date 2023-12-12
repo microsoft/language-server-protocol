@@ -6,6 +6,7 @@ sectionid: lsif-0-5-0
 toc: lsif-0-5-0-toc
 index: 2
 fullTitle: Language Server Index Format Specification - 0.5.0
+lspVersion: 3.17
 ---
 
 The 0.5.0 version of LSIF is currently under construction.
@@ -45,15 +46,15 @@ Principal design goals:
 
 LSP requests that are good candidates to be supported in LSIF are:
 
-- [`textDocument/documentSymbol`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_documentSymbol)
-- [`textDocument/foldingRange`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_foldingRange)
-- [`textDocument/documentLink`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_documentLink)
-- [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_definition)
-- [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_declaration)
-- [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specifications/specification-current#textDocument_typeDefinition)
-- [`textDocument/hover`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_hover)
-- [`textDocument/references`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_references)
-- [`textDocument/implementation`](https://microsoft.github.io/language-server-protocol/specifications/specification-3-15#textDocument_implementation)
+- [`textDocument/documentSymbol`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_documentSymbol)
+- [`textDocument/foldingRange`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_foldingRange)
+- [`textDocument/documentLink`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_documentLink)
+- [`textDocument/definition`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_definition)
+- [`textDocument/declaration`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_declaration)
+- [`textDocument/typeDefinition`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_typeDefinition)
+- [`textDocument/hover`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_hover)
+- [`textDocument/references`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_references)
+- [`textDocument/implementation`](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification#textDocument_implementation)
 
 The corresponding LSP requests have one of the following two forms:
 
@@ -154,7 +155,7 @@ The corresponding graph looks like this
 
 The ranges emitted for a document in the contains relationship must follow these rules:
 
-1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if the have the same start / end value.
+1. a given range ID can only be contained in one document or in other words: ranges must not be shared between documents even if they have the same start / end value.
 1. No two ranges can be equal.
 1. No two ranges can overlap, claiming the same position in a document unless one range is entirely contained by the other.
 
@@ -286,7 +287,7 @@ Running **Go to Definition** on `X` in `let x: X` will show a dialog which lets 
 { id : 40, type: "edge", label: "item", outV: 38, inVs: [9, 13], shard: 4 }
 ```
 
-The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. a item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
+The `item` edge as an additional property shard which indicate the vertex that is the source (e.g. a document or a project) of these declarations. We added this information to still make it easy to emit the data but also make it easy to process and shard the data when storing into a database. Without that information we would either need to specific an order in which data needs to be emitted (e.g. an item edge and only refer to a range that got already added to a document using a `contains` edge) or we force processing tools to keep a lot of vertices and edges in memory. The approach of having this `shard` property looks like a fair balance.
 
 ### <a href="#declaration" name="declaration" class="anchor">Request: `textDocument/declaration`</a>
 
@@ -611,7 +612,7 @@ The relevant emitted vertices and edges looks like this:
 { id: 51, type: "edge", label: "item", outV: 37, inVs: [9], shard: 4 }
 ```
 
-As with other results ranges get added using a `item` edge. In this case without a `property` since there is only on kind of range.
+As with other results ranges get added using a `item` edge. In this case without a `property` since there is only one kind of range.
 
 ## Document requests
 
@@ -979,7 +980,7 @@ It can be valuable to embed the contents of a document or project file into the 
 
 ### <a href="#events" name="events" class="anchor">Events</a>
 
-To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be reference in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
+To ease the processing of an LSIF dump to for example import it into a database the dump emits begin and end events for documents and projects. After the end event of a document has been emitted the dump must not contain any further data referencing that document. For example no ranges from that document can be referenced in `item` edges. Nor can result sets or other vertices linked to the ranges in that document. The document can however be referenced in a `contains` edge adding the document to a project. The begin / end events for documents look like this:
 
 ```ts
 // The actual document
@@ -1096,11 +1097,11 @@ export class Emitter {
 This describes the exported declaration inside `index.ts` with a moniker (e.g. a handle in string format) that is bound to the corresponding range declaration. The generated moniker must be position independent and stable so that it can be used to identify the symbol in other projects or documents. It should be sufficiently unique so as to avoid matching other monikers in other projects unless they actually refer to the same symbol. A moniker therefore has the following properties:
 
 - `scheme` to indicate how the `identifiers` is to be interpreted.
-- `identifier` to actually identify the symbol. It structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
+- `identifier` to actually identify the symbol. Its structure is opaque to the scheme owner. In the above example the monikers are created by the TypeScript compiler tsc and can only be compared to monikers also having the scheme `tsc`.
 - `kind` to indicate whether the moniker is exported, imported or local to the project.
 - `unique` to indicate how unique the moniker is. See the multi project section for more information on this.
 
-Please also note that the method `Emitter#doEmit` has a export moniker although the method is private. If private elements do have monikers depend on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
+Please also note that the method `Emitter#doEmit` has an export moniker although the method is private. If private elements do have monikers depends on the programming language. Since TypeScript can't enforce visibility (it compiles to JS which doesn't have the concept) we treat them as visible. Even the TypeScript language server does so. Find all references does find all references to private methods even if it is flagged as a visibility violation.
 
 ### <a href="#multiProjects" name="multiProjects" class="anchor">Systems with multiple Projects</a>
 
@@ -1139,7 +1140,7 @@ w.dispose();
 
 Now if a user search for reference to `Widget#dispose` it is expected that the reference `d.dispose` in P1 is included in the result. However when P1 is process the tools doesn't know about P2. And when P2 is processed it usually doesn't know about the source of P1. It only knows about its API shape (e.g. in TypeScript the corresponding `d.ts` file).
 
-To make this work we first need to group projects into larger units so that we know in which projects `d.dispose` is actually a match. Assume there is a totally unrelated project PX which also uses `Disposable` from P1 but P2 is never linked into one system with PX. So a object of type `Widget` can never flow to code in PX hence reference in PX should not be listed. We therefore introduce the notation of a group to logically group projects into larger systems. Projects belong to a group and groups are identified using a URI. Lets look at the concrete dumps for P1 and P2:
+To make this work we first need to group projects into larger units so that we know in which projects `d.dispose` is actually a match. Assume there is a totally unrelated project PX which also uses `Disposable` from P1 but P2 is never linked into one system with PX. So an object of type `Widget` can never flow to code in PX hence reference in PX should not be listed. We therefore introduce the notation of a group to logically group projects into larger systems. Projects belong to a group and groups are identified using a URI. Lets look at the concrete dumps for P1 and P2:
 
 ```typescript
 {id: 2, type: "vertex", label: "group",
@@ -1420,7 +1421,7 @@ In addition to this moniker schemes starting with `$` are reserved and shouldn't
 
 Ranges in LSIF have currently two meanings:
 
-1. they act as LSP request sensitive areas in a document (e.g. we use them to decided of for a given position a corresponding LSP request result exists)
+1. they act as LSP request sensitive areas in a document (e.g. we use them to decide if for a given position a corresponding LSP request result exists)
 1. they act as navigation targets (e.g. they are the result of a Go To declaration navigation).
 
 To fulfil the first LSIF specifies that ranges can't overlap or be the same. However this constraint is not necessary for the second meaning. To support equal or overlapping target ranges we introduce a vertex `resultRange`. It is not allowed to use a `resultRange` as a target in a `contains` edge.
@@ -1467,7 +1468,7 @@ export interface MetaData {
 
 ### <a href="#emittingConstraints" name="emittingConstraints" class="anchor">Emitting constraints</a>
 
-The following emitting constraints (some of which have already mean mentioned in the document) exists:
+The following emitting constraints (some of which have already been mentioned in the document) exist:
 
 - a vertex needs to be emitted before it can be referenced in an edge.
 - a `range` and `resultRange` can only be contained in one document.

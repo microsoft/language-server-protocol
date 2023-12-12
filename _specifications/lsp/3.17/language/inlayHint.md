@@ -14,9 +14,9 @@ _Client Capability_:
 /**
  * Inlay hint client capabilities.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlayHintClientCapabilities = {
+export interface InlayHintClientCapabilities {
 
 	/**
 	 * Whether inlay hints support dynamic registration.
@@ -24,7 +24,7 @@ export type InlayHintClientCapabilities = {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Indicates which properties a client can resolve lazily on a inlay
+	 * Indicates which properties a client can resolve lazily on an inlay
 	 * hint.
 	 */
 	resolveSupport?: {
@@ -34,7 +34,7 @@ export type InlayHintClientCapabilities = {
 		 */
 		properties: string[];
 	};
-};
+}
 ```
 
 _Server Capability_:
@@ -47,15 +47,15 @@ _Server Capability_:
 /**
  * Inlay hint options used during static registration.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlayHintOptions = WorkDoneProgressOptions & {
+export interface InlayHintOptions extends WorkDoneProgressOptions {
 	/**
 	 * The server provides support to resolve additional
 	 * information for an inlay hint item.
 	 */
 	resolveProvider?: boolean;
-};
+}
 ```
 
 _Registration Options_: `InlayHintRegistrationOptions` defined as follows:
@@ -66,10 +66,11 @@ _Registration Options_: `InlayHintRegistrationOptions` defined as follows:
 /**
  * Inlay hint options used during static or dynamic registration.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlayHintRegistrationOptions = InlayHintOptions
-	& TextDocumentRegistrationOptions & StaticRegistrationOptions;
+export interface InlayHintRegistrationOptions extends InlayHintOptions,
+	TextDocumentRegistrationOptions, StaticRegistrationOptions {
+}
 ```
 
 _Request_:
@@ -82,9 +83,9 @@ _Request_:
 /**
  * A parameter literal used in inlay hint requests.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlayHintParams = WorkDoneProgressParams & {
+export interface InlayHintParams extends WorkDoneProgressParams {
 	/**
 	 * The text document.
 	 */
@@ -94,7 +95,7 @@ export type InlayHintParams = WorkDoneProgressParams & {
 	 * The visible document range for which inlay hints should be computed.
 	 */
 	range: Range;
-};
+}
 ```
 
 _Response_:
@@ -106,9 +107,9 @@ _Response_:
 /**
  * Inlay hint information.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlayHint = {
+export interface InlayHint {
 
 	/**
 	 * The position of this hint.
@@ -169,11 +170,11 @@ export type InlayHint = {
 
 
 	/**
-	 * A data entry field that is preserved on a inlay hint between
+	 * A data entry field that is preserved on an inlay hint between
 	 * a `textDocument/inlayHint` and a `inlayHint/resolve` request.
 	 */
 	data?: LSPAny;
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#inlayHintLabelPart" name="inlayHintLabelPart" class="linkableAnchor"></a></div>
@@ -183,9 +184,9 @@ export type InlayHint = {
  * An inlay hint label part allows for interactive and composite labels
  * of inlay hints.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlayHintLabelPart = {
+export interface InlayHintLabelPart {
 
 	/**
 	 * The value of this label part.
@@ -221,7 +222,7 @@ export type InlayHintLabelPart = {
 	 * might resolve this property late using the resolve request.
 	 */
 	command?: Command;
-};
+}
 ```
 
 <div class="anchorHolder"><a href="#inlayHintKind" name="inlayHintKind" class="linkableAnchor"></a></div>
@@ -230,7 +231,7 @@ export type InlayHintLabelPart = {
 /**
  * Inlay hint kinds.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export namespace InlayHintKind {
 
@@ -243,7 +244,9 @@ export namespace InlayHintKind {
 	 * An inlay hint that is for a parameter.
 	 */
 	export const Parameter = 2;
-};
+}
+
+export type InlayHintKind = 1 | 2;
 ```
 
 * error: code and message set in case an exception happens during the inlay hint request.
@@ -253,7 +256,7 @@ export namespace InlayHintKind {
 > *Since version 3.17.0*
 
 The request is sent from the client to the server to resolve additional information for a given inlay hint. This is usually used to compute
-the `tooltip`, `location` or `command` properties of a inlay hint's label part to avoid its unnecessary computation during the `textDocument/inlayHint` request.
+the `tooltip`, `location` or `command` properties of an inlay hint's label part to avoid its unnecessary computation during the `textDocument/inlayHint` request.
 
 Consider the clients announces the `label.location` property as a property that can be resolved lazy using the client capability
 
@@ -292,9 +295,9 @@ _Client Capability_:
 /**
  * Client workspace capabilities specific to inlay hints.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
-export type InlayHintWorkspaceClientCapabilities = {
+export interface InlayHintWorkspaceClientCapabilities {
 	/**
 	 * Whether the client implementation supports a refresh request sent from
 	 * the server to the client.
@@ -305,7 +308,7 @@ export type InlayHintWorkspaceClientCapabilities = {
 	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;
-};
+}
 ```
 
 _Request_:

@@ -115,7 +115,7 @@ export interface CompletionClientCapabilities {
 		 * The client has support for completion item label
 		 * details (see also `CompletionItemLabelDetails`).
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		labelDetailsSupport?: boolean;
 	};
@@ -144,7 +144,7 @@ export interface CompletionClientCapabilities {
 	 * The client's default when the completion item doesn't provide a
 	 * `insertTextMode` property.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	insertTextMode?: InsertTextMode;
 
@@ -152,18 +152,18 @@ export interface CompletionClientCapabilities {
 	 * The client supports the following `CompletionList` specific
 	 * capabilities.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	completionList?: {
 		/**
-		 * The client supports the the following itemDefaults on
+		 * The client supports the following itemDefaults on
 		 * a completion list.
 		 *
 		 * The value lists the supported property names of the
 		 * `CompletionList.itemDefaults` object. If omitted
 		 * no properties are supported.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		itemDefaults?: string[];
 	}
@@ -182,16 +182,17 @@ _Server Capability_:
  */
 export interface CompletionOptions extends WorkDoneProgressOptions {
 	/**
-	 * Most tools trigger completion request automatically without explicitly
+	 * The additional characters, beyond the defaults provided by the client (typically
+	 * [a-zA-Z]), that should automatically trigger a completion request. For example
+	 * `.` in JavaScript represents the beginning of an object property or method and is
+	 * thus a good candidate for triggering a completion request.
+	 *
+	 * Most tools trigger a completion request automatically without explicitly
 	 * requesting it using a keyboard shortcut (e.g. Ctrl+Space). Typically they
 	 * do so when the user starts to type an identifier. For example if the user
 	 * types `c` in a JavaScript file code complete will automatically pop up
 	 * present `console` besides others as a completion item. Characters that
 	 * make up identifiers don't need to be listed here.
-	 *
-	 * If code complete should automatically be trigger on characters not being
-	 * valid inside an identifier (for example `.` in JavaScript) list them in
-	 * `triggerCharacters`.
 	 */
 	triggerCharacters?: string[];
 
@@ -218,7 +219,7 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 	 * The server supports the following `CompletionItem` specific
 	 * capabilities.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	completionItem?: {
 		/**
@@ -226,7 +227,7 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 		 * details (see also `CompletionItemLabelDetails`) when receiving
 		 * a completion item in a resolve call.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		labelDetailsSupport?: boolean;
 	}
@@ -344,20 +345,20 @@ export interface CompletionList {
 	 * signals support for this via the `completionList.itemDefaults`
 	 * capability.
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	itemDefaults?: {
 		/**
 		 * A default commit character set.
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		commitCharacters?: string[];
 
 		/**
 		 * A default edit range
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		editRange?: Range | {
 			insert: Range;
@@ -367,16 +368,23 @@ export interface CompletionList {
 		/**
 		 * A default insert text format
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		insertTextFormat?: InsertTextFormat;
 
 		/**
 		 * A default insert text mode
 		 *
-		 * @since 3.17.0 - proposed state
+		 * @since 3.17.0
 		 */
 		insertTextMode?: InsertTextMode;
+
+		/**
+		 * A default data value.
+		 *
+		 * @since 3.17.0
+		 */
+		data?: LSPAny;
 	}
 
 	/**
@@ -498,7 +506,7 @@ export type InsertTextMode = 1 | 2;
 /**
  * Additional details for a completion item label.
  *
- * @since 3.17.0 - proposed state
+ * @since 3.17.0
  */
 export interface CompletionItemLabelDetails {
 
@@ -537,7 +545,7 @@ export interface CompletionItem {
 	/**
 	 * Additional details for the label
 	 *
-	 * @since 3.17.0 - proposed state
+	 * @since 3.17.0
 	 */
 	labelDetails?: CompletionItemLabelDetails;
 
@@ -585,21 +593,21 @@ export interface CompletionItem {
 
 	/**
 	 * A string that should be used when comparing this item
-	 * with other items. When `falsy` the label is used
+	 * with other items. When omitted the label is used
 	 * as the sort text for this item.
 	 */
 	sortText?: string;
 
 	/**
 	 * A string that should be used when filtering a set of
-	 * completion items. When `falsy` the label is used as the
+	 * completion items. When omitted the label is used as the
 	 * filter text for this item.
 	 */
 	filterText?: string;
 
 	/**
 	 * A string that should be inserted into a document when selecting
-	 * this completion. When `falsy` the label is used as the insert text
+	 * this completion. When omitted the label is used as the insert text
 	 * for this item.
 	 *
 	 * The `insertText` is subject to interpretation by the client side.
@@ -657,6 +665,20 @@ export interface CompletionItem {
 	 * @since 3.16.0 additional type `InsertReplaceEdit`
 	 */
 	textEdit?: TextEdit | InsertReplaceEdit;
+
+	/**
+	 * The edit text used if the completion item is part of a CompletionList and
+	 * CompletionList defines an item default for the text edit range.
+	 *
+	 * Clients will only honor this property if they opt into completion list
+	 * item defaults using the capability `completionList.itemDefaults`.
+	 *
+	 * If not provided and a list's default range is provided the label
+	 * property is used as a text.
+	 *
+	 * @since 3.17.0
+	 */
+	textEditText?: string;
 
 	/**
 	 * An optional array of additional text edits that are applied when
@@ -725,6 +747,8 @@ export namespace CompletionItemKind {
 	export const Operator = 24;
 	export const TypeParameter = 25;
 }
+
+export type CompletionItemKind = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25;
 ```
 * partial result: `CompletionItem[]` or `CompletionList` followed by `CompletionItem[]`. If the first provided result item is of type `CompletionList` subsequent partial results of `CompletionItem[]` add to the `items` property of the `CompletionList`.
 * error: code and message set in case an exception happens during the completion request.
@@ -809,6 +833,8 @@ options     ::= Regular Expression option (ctor-options)
 var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
 int         ::= [0-9]+
 text        ::= .*
+if			::= text
+else		::= text
 ```
 
 #### <a href="#completionItem_resolve" name="completionItem_resolve" class="anchor">Completion Item Resolve Request (:leftwards_arrow_with_hook:)</a>

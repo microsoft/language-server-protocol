@@ -31,5 +31,8 @@
 		"unregistrations",
 		"upcase",
 		"workspaceedit"
+	],
+	"git.branchProtection": [
+		"gh-pages"
 	]
 }
