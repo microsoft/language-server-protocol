@@ -1850,7 +1850,7 @@
 				"kind": "reference",
 				"name": "ExecuteCommandRegistrationOptions"
 			},
-			"documentation": "A request send from the client to the server to execute a command. The request might return\na workspace edit which the client will apply to the workspace."
+			"documentation": "A request sent from the client to the server to execute a command. The request might return\na workspace edit which the client will apply to the workspace."
 		},
 		{
 			"method": "workspace/applyEdit",
@@ -1863,7 +1863,7 @@
 				"kind": "reference",
 				"name": "ApplyWorkspaceEditParams"
 			},
-			"documentation": "A request sent from the server to the client to modified certain resources."
+			"documentation": "A request sent from the server to the client to modify certain resources."
 		}
 	],
 	"notifications": [
@@ -5197,11 +5197,20 @@
 				{
 					"name": "activeParameter",
 					"type": {
-						"kind": "base",
-						"name": "uinteger"
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "uinteger"
+							},
+							{
+								"kind": "base",
+								"name": "null"
+							}
+						]
 					},
 					"optional": true,
-					"documentation": "The active parameter of the active signature. If omitted or the value\nlies outside the range of `signatures[activeSignature].parameters`\ndefaults to 0 if the active signature has parameters. If\nthe active signature has no parameters it is ignored.\nIn future version of the protocol this property might become\nmandatory to better express the active parameter if the\nactive signature does have any."
+					"documentation": "The active parameter of the active signature.\n\nIf `null`, no parameter of the signature is active (for example a named\nargument that does not match any declared parameters). This is only valid\nsince 3.18.0 and if the client specifies the client capability\n`textDocument.signatureHelp.noActiveParameterSupport === true`\n\nIf omitted or the value lies outside the range of\n`signatures[activeSignature].parameters` defaults to 0 if the active\nsignature has parameters.\n\nIf the active signature has no parameters it is ignored.\n\nIn future version of the protocol this property might become\nmandatory (but still nullable) to better express the active parameter if\nthe active signature does have any."
 				}
 			],
 			"documentation": "Signature help represents the signature of something\ncallable. There can be multiple signature but only one\nactive and only one active parameter."
@@ -9198,11 +9207,20 @@
 				{
 					"name": "activeParameter",
 					"type": {
-						"kind": "base",
-						"name": "uinteger"
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "uinteger"
+							},
+							{
+								"kind": "base",
+								"name": "null"
+							}
+						]
 					},
 					"optional": true,
-					"documentation": "The index of the active parameter.\n\nIf provided, this is used in place of `SignatureHelp.activeParameter`.\n\n@since 3.16.0",
+					"documentation": "The index of the active parameter.\n\nIf `null`, no parameter of the signature is active (for example a named\nargument that does not match any declared parameters). This is only valid\nsince 3.18.0 and if the client specifies the client capability\n`textDocument.signatureHelp.noActiveParameterSupport === true`\n\nIf provided (or `null`), this is used in place of\n`SignatureHelp.activeParameter`.\n\n@since 3.16.0",
 					"since": "3.16.0"
 				}
 			],
@@ -11892,6 +11910,16 @@
 									"optional": true,
 									"documentation": "The client supports the `activeParameter` property on `SignatureInformation`\nliteral.\n\n@since 3.16.0",
 									"since": "3.16.0"
+								},
+								{
+									"name": "noActiveParameterSupport",
+									"type": {
+										"kind": "base",
+										"name": "boolean"
+									},
+									"optional": true,
+									"documentation": "The client supports the `activeParameter` property on\n`SignatureInformation` being set to `null` to indicate that no\nparameter should be active.\n\n@since 3.18.0",
+									"since": "3.18.0"
 								}
 							]
 						}
