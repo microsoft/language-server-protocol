@@ -721,6 +721,8 @@ Since 3.17 there is a meta model describing the LSP protocol:
 
 #### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (mm/dd/yyyy)</a>
 
+* Add support for `activeParameter` on `SignatureHelp` and `SignatureInformation` being `null`.
+
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (05/10/2022)</a>
 
 * Specify how clients will handle stale requests.
