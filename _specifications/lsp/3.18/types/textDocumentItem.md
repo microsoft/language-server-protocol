@@ -40,6 +40,8 @@ C | `c`
 C++ | `cpp`
 C# | `csharp`
 CSS | `css`
+D | `d`
+Delphi | `pascal`
 Diff | `diff`
 Dart | `dart`
 Dockerfile | `dockerfile`
@@ -63,6 +65,7 @@ Makefile | `makefile`
 Markdown | `markdown`
 Objective-C | `objective-c`
 Objective-C++ | `objective-cpp`
+Pascal | `pascal`
 Perl | `perl`
 Perl 6 | `perl6`
 PHP | `php`
