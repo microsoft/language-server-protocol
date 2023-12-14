@@ -721,6 +721,7 @@ Since 3.17 there is a meta model describing the LSP protocol:
 
 #### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (mm/dd/yyyy)</a>
 
+* support for code action kind documentation.
 * Add support for `activeParameter` on `SignatureHelp` and `SignatureInformation` being `null`.
 * Add tooltip to `Command`.
 
