@@ -8,10 +8,17 @@ interface Command {
 	 * Title of the command, like `save`.
 	 */
 	title: string;
+
+	/**
+	 * An optional tooltip.
+	 */
+	tooltip?: string;
+
 	/**
 	 * The identifier of the actual command handler.
 	 */
 	command: string;
+
 	/**
 	 * Arguments that the command handler should be
 	 * invoked with.
