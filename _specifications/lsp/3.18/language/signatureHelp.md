@@ -308,11 +308,10 @@ export interface ParameterInformation {
 	 * offsets are based on a UTF-16 string representation as `Position` and
 	 * `Range` does.
 	 *
-
 	 * To avoid ambiguities a server should use the [start, end] offset value
 	 * instead of using a substring. Whether a client support this is
 	 * controlled via `labelOffsetSupport` client capability.
-
+	 *
 	 * *Note*: a label of type string should be a substring of its containing
 	 * signature label. Its intended use case is to highlight the parameter
 	 * label part in the `SignatureInformation.label`.
