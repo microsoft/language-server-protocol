@@ -55,7 +55,7 @@ export interface SignatureHelpClientCapabilities {
 		 * @since 3.18.0
 		 */
 		noActiveParameterSupport?: boolean;
-		
+
 	};
 
 	/**
@@ -228,18 +228,18 @@ export interface SignatureHelp {
 
 	/**
 	 * The active parameter of the active signature.
-	 * 
+	 *
 	 * If `null`, no parameter of the signature is active (for example a named
 	 * argument that does not match any declared parameters). This is only valid
 	 * since 3.18.0 and if the client specifies the client capability
 	 * `textDocument.signatureHelp.noActiveParameterSupport === true`
-	 * 
+	 *
 	 * If omitted or the value lies outside the range of
 	 * `signatures[activeSignature].parameters` defaults to 0 if the active
 	 * signature has parameters.
-	 * 
+	 *
 	 * If the active signature has no parameters it is ignored.
-	 * 
+	 *
 	 * In future version of the protocol this property might become
 	 * mandatory (but still nullable) to better express the active parameter if
 	 * the active signature does have any.
@@ -307,6 +307,10 @@ export interface ParameterInformation {
 	 * its containing signature label. (see SignatureInformation.label). The
 	 * offsets are based on a UTF-16 string representation as `Position` and
 	 * `Range` does.
+	 *
+	 * To avoid ambiguities a server should use the [start, end] offset value
+	 * instead of using a substring. Whether a client support this is
+	 * controlled via `labelOffsetSupport` client capability.
 	 *
 	 * *Note*: a label of type string should be a substring of its containing
 	 * signature label. Its intended use case is to highlight the parameter
