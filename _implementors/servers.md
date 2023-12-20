@@ -47,6 +47,7 @@ index: 1
 | [CMake](https://cmake.org/) | [regen100](https://github.com/regen100) | [cmake-language-server](https://github.com/regen100/cmake-language-server) | Python |
 | [CMake](https://cmake.org/) | [Decodetalkers](https://github.com/Decodetalkers) | [neocmakelsp](https://github.com/Decodetalkers/neocmakelsp) | Rust |
 | [Coq](https://coq.inria.fr/) | [ejgallego](https://github.com/ejgallego) | [coq-lsp](https://github.com/ejgallego/coq-lsp) | OCaml |
+| [Coq](https://coq.inria.fr/) | [coq-community](https://github.com/coq-community) | [vscoq](https://github.com/coq-community/vscoq) | OCaml |
 | IBM Enterprise **COBOL** for z/OS | [Broadcom](https://www.broadcom.com/) | [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol) | Java |
 | [IBM Enterprise **COBOL** for z/OS](https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/welcome.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | [IBM Enterprise **RPG ILE** for IBM i](https://www.ibm.com/docs/en/i/7.5?topic=rpg-ile-reference) | IBM |  [IBMi Languages](https://marketplace.visualstudio.com/items?itemName=barrettotte.ibmi-languages) | Java |
