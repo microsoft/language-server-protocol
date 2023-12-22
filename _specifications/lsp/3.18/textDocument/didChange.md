@@ -71,7 +71,7 @@ export type TextDocumentContentChangeEvent = {
 	/**
 	 * The range of the document that changed.
 	 */
-	range: Range;
+	range?: Range;
 
 	/**
 	 * The optional length of the range that got replaced.
