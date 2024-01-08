@@ -6,7 +6,7 @@ ruby RUBY_VERSION
 # to use GitHub Pages
 # gem "github-pages", group: :jekyll_plugins
 
-gem "github-pages", "~> 225", group: :jekyll_plugins
+gem "github-pages", "~> 228", group: :jekyll_plugins
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
