@@ -22,6 +22,7 @@ index: 1
 | [API Elements](http://api-elements.readthedocs.io/en/latest/) | [Vincenzo Chianese(@XVincentX)](https://github.com/XVincentX) | [vscode-apielements](https://github.com/XVincentX/vscode-apielements) | TypeScript |
 | [APL](https://aplwiki.com/) | [Optima Systems](https://github.com/OptimaSystems/apl-language-server) | [APL Language Server](https://github.com/OptimaSystems/apl-language-server) | APL |
 | Apache Camel | [Contributors](https://github.com/camel-tooling/camel-language-server/graphs/contributors) | [Apache Camel Language Server](https://github.com/camel-tooling/camel-language-server) | Java |
+| [Apache Dispatcher Config](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration.html?lang=en) | [Darian Benam](https://github.com/BeardedFish) | [vscode-apache-dispatcher-config-language-support](https://github.com/BeardedFish/vscode-apache-dispatcher-config-language-support) | TypeScript |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) | TypeScript |
 | [Astro](https://astro.build) | [Astro team](https://github.com/withastro) |  [withastro/language-tools](https://github.com/withastro/language-tools) | TypeScript |
 | IBM High Level **Assembler** | [Broadcom](https://www.broadcom.com/) | [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) | C++ |
