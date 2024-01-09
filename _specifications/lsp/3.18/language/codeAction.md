@@ -337,6 +337,14 @@ export namespace CodeActionKind {
 	 * @since 3.17.0
 	 */
 	export const SourceFixAll: CodeActionKind = 'source.fixAll';
+
+	/**
+	 * Base kind for all code actions applying to the entire notebook's scope. CodeActionKinds using
+	 * this should always begin with `notebook.`
+	 *
+	 * @since 3.18.0
+	 */
+	export const Notebook: CodeActionKind = 'notebook';
 }
 ```
 
