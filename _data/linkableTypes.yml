@@ -256,6 +256,8 @@
     link: '#workspace_applyEdit'
   - type: 'ApplyWorkspaceEditParams'
     link: '#applyWorkspaceEditParams'
+  - type: 'WorkspaceEditMetadata'
+    link: '#workspaceEditMetadata'
   - type: 'ApplyWorkspaceEditResult'
     link: '#applyWorkspaceEditResult'
   - type: 'ApplyWorkspaceEditResponse'

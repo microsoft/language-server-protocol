@@ -27,6 +27,31 @@ export interface ApplyWorkspaceEditParams {
 	 * The edits to apply.
 	 */
 	edit: WorkspaceEdit;
+
+	/**
+	 * Additional data about the edit.
+	 *
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	metadata?: WorkspaceEditMetadata;
+}
+```
+
+<div class="anchorHolder"><a href="#workspaceEditMetadata" name="workspaceEditMetadata" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Additional data about a workspace edit.
+ *
+ * @since 3.18.0
+ * @proposed
+ */
+export interface WorkspaceEditMetadata {
+	/**
+	 * Signal to the editor that this edit is a refactoring.
+	 */
+	isRefactoring?: boolean;
 }
 ```
 
