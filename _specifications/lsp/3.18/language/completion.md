@@ -811,28 +811,36 @@ ${TM_FILENAME/(.*)\..+$/$1/}
 
 ##### Grammar
 
-Below is the EBNF ([extended Backus-Naur form](https://en.wikipedia.org/wiki/Extended_Backus-Naur_form)) for snippets. With `\` (backslash), you can escape `$`, `}` and `\`. Within choice elements, the backslash also escapes comma and pipe characters. Only the characters required to be escaped can be escaped, so `$` should not be escaped within these constructs and neither `$` or `}` should be escaped inside choice constructs.
+Below is the grammar for snippets in EBNF ([extended Backus-Naur form, XML variant](https://www.w3.org/TR/xml/#sec-notation)). With `\` (backslash), you can escape `$`, `}` and `\`. Within choice elements, the backslash also escapes comma and pipe characters. Only the characters required to be escaped can be escaped, so `$` should not be escaped within these constructs and neither `$` nor `}` should be escaped inside choice constructs.
 
 ```
 any         ::= tabstop | placeholder | choice | variable | text
 tabstop     ::= '$' int | '${' int '}'
 placeholder ::= '${' int ':' any '}'
-choice      ::= '${' int '|' text (',' text)* '|}'
+choice      ::= '${' int '|' choicetext (',' choicetext)* '|}'
 variable    ::= '$' var | '${' var }'
                 | '${' var ':' any '}'
-                | '${' var '/' regex '/' (format | text)+ '/' options '}'
+                | '${' var '/' regex '/' (format | formattext)* '/' options '}'
 format      ::= '$' int | '${' int '}'
-                | '${' int ':' '/upcase' | '/downcase' | '/capitalize' '}'
-                | '${' int ':+' if '}'
+                /* Transforms the text to be uppercase, lowercase, or capitalized, respectively. */
+                | '${' int ':' ('/upcase' | '/downcase' | '/capitalize') '}'
+                /* Inserts the 'ifOnly' text if the match is non-empty. */
+                | '${' int ':+' ifOnly '}'
+                /* Inserts the 'if' text if the match is non-empty,
+                   otherwise the 'else' text will be inserted. */
                 | '${' int ':?' if ':' else '}'
+                /* Inserts the 'else' text if the match is empty. */
                 | '${' int ':-' else '}' | '${' int ':' else '}'
 regex       ::= Regular Expression value (ctor-string)
 options     ::= Regular Expression option (ctor-options)
 var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
 int         ::= [0-9]+
-text        ::= .*
-if			::= text
-else		::= text
+text        ::= ([^$}\] | '\$' | '\}' | '\\')*
+choicetext  ::= ([^,|\] | '\,' | '\|' | '\\')*
+formattext  ::= ([^$/\] | '\$' | '\/' | '\\')*
+ifOnly      ::= text
+if          ::= ([^:\] | '\:' | '\\')*
+else        ::= text
 ```
 
 #### <a href="#completionItem_resolve" name="completionItem_resolve" class="anchor">Completion Item Resolve Request (:leftwards_arrow_with_hook:)</a>
