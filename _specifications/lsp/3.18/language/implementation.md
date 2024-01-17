@@ -1,4 +1,4 @@
-#### <a href="#textDocument_implementation" name="textDocument_implementation" class="anchor">Goto Implementation Request (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_implementation" name="textDocument_implementation" class="anchor">Go to Implementation Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -15,8 +15,8 @@ _Client Capability_:
 ```typescript
 export interface ImplementationClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to
-	 * `true` the client supports the new `ImplementationRegistrationOptions`
+	 * Whether the implementation supports dynamic registration. If this is set to
+	 * `true`, the client supports the new `ImplementationRegistrationOptions`
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;

@@ -1,9 +1,9 @@
 ### <a href="#notebookDocument_synchronization" name="notebookDocument_synchronization" class="anchor">Notebook Document Synchronization</a>
 
-Notebooks are becoming more and more popular. Adding support for them to the language server protocol allows notebook editors to reuse language smarts provided by the server inside a notebook or a notebook cell, respectively. To reuse protocol parts and therefore server implementations notebooks are modeled in the following way in LSP:
+Notebooks are becoming more and more popular. Adding support for them to the language server protocol allows notebook editors to reuse language smarts provided by the server inside a notebook or a notebook cell, respectively. To reuse protocol parts and therefore server implementations, notebooks are modeled in the following way in LSP:
 
 - *notebook document*: a collection of notebook cells typically stored in a file on disk. A notebook document has a type and can be uniquely identified using a resource URI.
-- *notebook cell*: holds the actual text content. Cells have a kind (either code or markdown). The actual text content of the cell is stored in a text document which can be synced to the server like all other text documents. Cell text documents have an URI however servers should not rely on any format for this URI since it is up to the client on how it will create these URIs. The URIs must be unique across ALL notebook cells and can therefore be used to uniquely identify a notebook cell or the cell's text document.
+- *notebook cell*: holds the actual text content. Cells have a kind (either code or markdown). The actual text content of the cell is stored in a text document which can be synced to the server like all other text documents. Cell text documents have a URI, but servers should not rely on any format for this URI, since it is up to the client on how it will create these URIs. The URIs must be unique across ALL notebook cells and can therefore be used to uniquely identify a notebook cell or the cell's text document.
 
 The two concepts are defined as follows:
 
@@ -62,7 +62,7 @@ export interface NotebookDocument {
 export interface NotebookCell {
 
 	/**
-	 * The cell's kind
+	 * The cell's kind.
 	 */
 	kind: NotebookCellKind;
 
@@ -96,7 +96,7 @@ export interface NotebookCell {
 export namespace NotebookCellKind {
 
 	/**
-	 * A markup-cell is formatted source that is used for display.
+	 * A markup-cell is a formatted source that is used for display.
 	 */
 	export const Markup: 1 = 1;
 
@@ -112,7 +112,7 @@ export namespace NotebookCellKind {
 ```typescript
 export interface ExecutionSummary {
 	/**
-	 * A strict monotonically increasing value
+	 * A strictly monotonically increasing value
 	 * indicating the execution order of a cell
 	 * inside a notebook.
 	 */
@@ -128,7 +128,7 @@ export interface ExecutionSummary {
 
 Next we describe how notebooks, notebook cells and the content of a notebook cell should be synchronized to a language server.
 
-Syncing the text content of a cell is relatively easy since clients should model them as text documents. However since the URI of a notebook cell's text document should be opaque, servers can not know its scheme nor its path. However what is know is the notebook document itself. We therefore introduce a special filter for notebook cell documents:
+Syncing the text content of a cell is relatively easy since clients should model them as text documents. However, since the URI of a notebook cell's text document should be opaque, servers cannot know its scheme nor its path. What is known is the notebook document itself. We therefore introduce a special filter for notebook cell documents:
 
 <div class="anchorHolder"><a href="#notebookCellTextDocumentFilter" name="notebookCellTextDocumentFilter" class="linkableAnchor"></a></div>
 
@@ -143,15 +143,15 @@ export interface NotebookCellTextDocumentFilter {
 	/**
 	 * A filter that matches against the notebook
 	 * containing the notebook cell. If a string
-	 * value is provided it matches against the
+	 * value is provided, it matches against the
 	 * notebook type. '*' matches every notebook.
 	 */
 	notebook: string | NotebookDocumentFilter;
 
 	/**
-	 * A language id like `python`.
+	 * A language ID like `python`.
 	 *
-	 * Will be matched against the language id of the
+	 * Will be matched against the language ID of the
 	 * notebook cell document. '*' matches every language.
 	 */
 	language?: string;
@@ -168,51 +168,69 @@ export interface NotebookCellTextDocumentFilter {
  * @since 3.17.0
  */
 export type NotebookDocumentFilter = {
-	/** The type of the enclosing notebook. */
+	/**
+   * The type of the enclosing notebook.
+   */
 	notebookType: string;
 
-	/** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+	/**
+   * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+   */
 	scheme?: string;
 
-	/** A glob pattern. */
+	/**
+   * A glob pattern.
+   */
 	pattern?: string;
 } | {
-	/** The type of the enclosing notebook. */
+	/**
+   * The type of the enclosing notebook.
+   */
 	notebookType?: string;
 
-	/** A Uri [scheme](#Uri.scheme), like `file` or `untitled`.*/
+	/**
+   * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+   */
 	scheme: string;
 
-	/** A glob pattern. */
+	/**
+   * A glob pattern.
+   */
 	pattern?: string;
 } | {
-	/** The type of the enclosing notebook. */
+	/**
+   * The type of the enclosing notebook.
+   */
 	notebookType?: string;
 
-	/** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+	/**
+   * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+   */
 	scheme?: string;
 
-	/** A glob pattern. */
+	/**
+   * A glob pattern.
+   */
 	pattern: string;
 };
 ```
 
-Given these structures a Python cell document in a Jupyter notebook stored on disk in a folder having `books1` in its path can be identified as follows;
+Given these structures, a Python cell document in a Jupyter notebook stored on disk in a folder having `books1` in its path can be identified as follows:
 
 ```typescript
 {
 	notebook: {
 		scheme: 'file',
-		pattern '**/books1/**',
+		pattern: '**/books1/**',
 		notebookType: 'jupyter-notebook'
 	},
 	language: 'python'
 }
 ```
 
-A `NotebookCellTextDocumentFilter` can be used to register providers for certain requests like code complete or hover. If such a provider is registered the client will send the corresponding `textDocument/*` requests to the server using the cell text document's URI as the document URI.
+A `NotebookCellTextDocumentFilter` can be used to register providers for certain requests like code complete or hover. If such a provider is registered, the client will send the corresponding `textDocument/*` requests to the server using the cell text document's URI as the document URI.
 
-There are cases where simply only knowing about a cell's text content is not enough for a server to reason about the cells content and to provide good language smarts. Sometimes it is necessary to know all cells of a notebook document including the notebook document itself. Consider a notebook that has two JavaScript cells with the following content
+There are cases where only knowing about a cell's text content is not enough for a server to reason about the cells content and to provide good language smarts. Sometimes it is necessary to know all cells of a notebook document, including the notebook document itself. Consider a notebook that has two JavaScript cells with the following content
 
 Cell one:
 
@@ -231,12 +249,12 @@ Requesting code assist in cell two at the marked cursor position should propose 
 
 The protocol will therefore support two modes when it comes to synchronizing cell text content:
 
-* _cellContent_: in this mode only the cell text content is synchronized to the server using the standard `textDocument/did*` notification. No notebook document and no cell structure is synchronized. This mode allows for easy adoption of notebooks since servers can reuse most of it implementation logic.
-* _notebook_: in this mode the notebook document, the notebook cells and the notebook cell text content is synchronized to the server. To allow servers to create a consistent picture of a notebook document the cell text content is NOT synchronized using the standard `textDocument/did*` notifications. It is instead synchronized using special `notebookDocument/did*` notifications. This ensures that the cell and its text content arrives on the server using one open, change or close event.
+* _cellContent_: in this mode, only the cell text content is synchronized to the server using the standard `textDocument/did*` notification. No notebook document and no cell structure is synchronized. This mode allows for easy adoption of notebooks since servers can reuse most of their implementation logic.
+* _notebook_: in this mode the notebook document, the notebook cells and the notebook cell text content is synchronized to the server. To allow servers to create a consistent picture of a notebook document, the cell text content is NOT synchronized using the standard `textDocument/did*` notifications. It is instead synchronized using special `notebookDocument/did*` notifications. This ensures that the cell and its text content arrive on the server using one open, change or close event.
 
-To request the cell content only a normal document selector can be used. For example, the selector `[{ language: 'python' }]` will synchronize Python notebook document cells to the server. However since this might synchronize unwanted documents as well a document filter can also be a `NotebookCellTextDocumentFilter`. So `{ notebook: { scheme: 'file', notebookType: 'jupyter-notebook' }, language: 'python' }` synchronizes all Python cells in a Jupyter notebook stored on disk.
+To request the cell content, only a normal document selector can be used. For example, the selector `[{ language: 'python' }]` will synchronize Python notebook document cells to the server. However, since this might synchronize unwanted documents as well, a document filter can also be a `NotebookCellTextDocumentFilter`. So `{ notebook: { scheme: 'file', notebookType: 'jupyter-notebook' }, language: 'python' }` synchronizes all Python cells in a Jupyter notebook stored on disk.
 
-To synchronize the whole notebook document a server provides a `notebookDocumentSync` in its server capabilities. For example:
+To synchronize the whole notebook document, a server provides a `notebookDocumentSync` in its server capabilities. For example:
 
 ```typescript
 {
@@ -271,7 +289,7 @@ export interface NotebookDocumentSyncClientCapabilities {
 
 	/**
 	 * Whether implementation supports dynamic registration. If this is
-	 * set to `true` the client supports the new
+	 * set to `true`, the client supports the new
 	 * `(NotebookDocumentSyncRegistrationOptions & NotebookDocumentSyncOptions)`
 	 * return value for the corresponding server capability as well.
 	 */
@@ -299,11 +317,11 @@ The following server capabilities are defined for notebook documents:
  * to be synced to the server.
  *
  * If a selector provides a notebook document
- * filter but no cell selector all cells of a
+ * filter but no cell selector, all cells of a
  * matching notebook document will be synced.
  *
  * If a selector provides no notebook document
- * filter but only a cell selector all notebook
+ * filter but only a cell selector, all notebook
  * documents that contain at least one matching
  * cell will be synced.
  *
@@ -316,7 +334,7 @@ export interface NotebookDocumentSyncOptions {
 	notebookSelector: ({
 		/**
 		 * The notebook to be synced. If a string
-		 * value is provided it matches against the
+		 * value is provided, it matches against the
 		 * notebook type. '*' matches every notebook.
 		 */
 		notebook: string | NotebookDocumentFilter;
@@ -328,7 +346,7 @@ export interface NotebookDocumentSyncOptions {
 	} | {
 		/**
 		 * The notebook to be synced. If a string
-		 * value is provided it matches against the
+		 * value is provided, it matches against the
 		 * notebook type. '*' matches every notebook.
 		 */
 		notebook?: string | NotebookDocumentFilter;
@@ -340,7 +358,7 @@ export interface NotebookDocumentSyncOptions {
 	})[];
 
 	/**
-	 * Whether save notification should be forwarded to
+	 * Whether save notifications should be forwarded to
 	 * the server. Will only be honored if mode === `notebook`.
 	 */
 	save?: boolean;
@@ -422,8 +440,8 @@ export interface DidChangeNotebookDocumentParams {
 	/**
 	 * The actual changes to the notebook document.
 	 *
-	 * The change describes single state change to the notebook document.
-	 * So it moves a notebook document, its cells and its cell text document
+	 * The change describes a single state change to the notebook document,
+	 * so it moves a notebook document, its cells and its cell text document
 	 * contents from state S to S'.
 	 *
 	 * To mirror the content of a notebook using change events use the
@@ -473,7 +491,7 @@ export interface NotebookDocumentChangeEvent {
 	metadata?: LSPObject;
 
 	/**
-	 * Changes to cells
+	 * Changes to cells.
 	 */
 	cells?: {
 		/**
@@ -530,12 +548,12 @@ export interface NotebookCellArrayChange {
 	start: uinteger;
 
 	/**
-	 * The deleted cells
+	 * The number of deleted cells.
 	 */
 	deleteCount: uinteger;
 
 	/**
-	 * The new cells, if any
+	 * The new cells, if any.
 	 */
 	cells?: NotebookCell[];
 }

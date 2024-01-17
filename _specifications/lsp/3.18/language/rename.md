@@ -98,7 +98,7 @@ _Request_:
 interface RenameParams extends TextDocumentPositionParams,
 	WorkDoneProgressParams {
 	/**
-	 * The new name of the symbol. If the given name is not valid the
+	 * The new name of the symbol. If the given name is not valid, the
 	 * request must return a [ResponseError](#ResponseError) with an
 	 * appropriate message set.
 	 */
@@ -107,7 +107,7 @@ interface RenameParams extends TextDocumentPositionParams,
 ```
 
 _Response_:
-* result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace. `null` should be treated the same was as [`WorkspaceEdit`](#workspaceedit) with no changes (no change was required).
+* result: [`WorkspaceEdit`](#workspaceedit) \| `null` describing the modification to the workspace. `null` should be treated the same as [`WorkspaceEdit`](#workspaceedit) with no changes (no change was required).
 * error: code and message set in case when rename could not be performed for any reason. Examples include: there is nothing at given `position` to rename (like a space), given symbol does not support renaming by the server or the code is invalid (e.g. does not compile).
 
 #### <a href="#textDocument_prepareRename" name="textDocument_prepareRename" class="anchor">Prepare Rename Request (:leftwards_arrow_with_hook:)</a>
@@ -128,5 +128,5 @@ export interface PrepareRenameParams extends TextDocumentPositionParams, WorkDon
 ```
 
 _Response_:
-* result: `Range | { range: Range, placeholder: string } | { defaultBehavior: boolean } | null` describing a [`Range`](#range) of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16) the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
+* result: `Range | { range: Range, placeholder: string } | { defaultBehavior: boolean } | null` describing a [`Range`](#range) of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16), the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
 * error: code and message set in case the element can't be renamed. Clients should show the information in their user interface.

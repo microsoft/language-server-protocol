@@ -2,7 +2,7 @@
 
 > *Since version 3.6.0*
 
-The `workspace/didChangeWorkspaceFolders` notification is sent from the client to the server to inform the server about workspace folder configuration changes. A server can register for this notification by using either the _server capability_ `workspace.workspaceFolders.changeNotifications` or by using the dynamic capability registration mechanism. To dynamically register for the `workspace/didChangeWorkspaceFolders` send a `client/registerCapability` request from the server to the client. The registration parameter must have a `registrations` item of the following form, where `id` is a unique id used to unregister the capability (the example uses a UUID):
+The `workspace/didChangeWorkspaceFolders` notification is sent from the client to the server to inform the server about workspace folder configuration changes. A server can register for this notification by using either the _server capability_ `workspace.workspaceFolders.changeNotifications` or by using the dynamic capability registration mechanism. To dynamically register for the `workspace/didChangeWorkspaceFolders`, send a `client/registerCapability` request from the server to the client. The registration parameter must have a `registrations` item of the following form, where `id` is a unique ID used to unregister the capability (the example uses a UUID):
 ```ts
 {
 	id: "28c6150c-bd7b-11e7-abc4-cec278b6b50a",
@@ -33,12 +33,12 @@ export interface DidChangeWorkspaceFoldersParams {
  */
 export interface WorkspaceFoldersChangeEvent {
 	/**
-	 * The array of added workspace folders
+	 * The array of added workspace folders.
 	 */
 	added: WorkspaceFolder[];
 
 	/**
-	 * The array of the removed workspace folders
+	 * The array of removed workspace folders.
 	 */
 	removed: WorkspaceFolder[];
 }

@@ -52,7 +52,7 @@ interface DocumentFormattingParams extends WorkDoneProgressParams {
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The format options.
+	 * The formatting options.
 	 */
 	options: FormattingOptions;
 }

@@ -1,4 +1,4 @@
-#### <a href="#textDocument_definition" name="textDocument_definition" class="anchor">Goto Definition Request (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_definition" name="textDocument_definition" class="anchor">Go to Definition Request (:leftwards_arrow_with_hook:)</a>
 
 The go to definition request is sent from the client to the server to resolve the definition location of a symbol at a given text document position.
 

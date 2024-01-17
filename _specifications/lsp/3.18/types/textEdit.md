@@ -8,18 +8,18 @@ A textual edit applicable to a text document.
 interface TextEdit {
 	/**
 	 * The range of the text document to be manipulated. To insert
-	 * text into a document create a range where start === end.
+	 * text into a document, create a range where start === end.
 	 */
 	range: Range;
 
 	/**
-	 * The string to be inserted. For delete operations use an
+	 * The string to be inserted. For delete operations, use an
 	 * empty string.
 	 */
 	newText: string;
 }
 ```
-Since 3.16.0 there is also the concept of an annotated text edit which supports to add an annotation to a text edit. The annotation can add information describing the change to the text edit.
+Since 3.16.0 there is also the concept of an annotated text edit which supports adding an annotation to a text edit. The annotation can add information describing the change to the text edit.
 
 <div class="anchorHolder"><a href="#changeAnnotation" name="changeAnnotation" class="linkableAnchor"></a></div>
 
@@ -32,7 +32,7 @@ Since 3.16.0 there is also the concept of an annotated text edit which supports 
 export interface ChangeAnnotation {
 	/**
 	 * A human-readable string describing the actual change. The string
-	 * is rendered prominent in the user interface.
+	 * is rendered prominently in the user interface.
 	 */
 	label: string;
 
@@ -43,7 +43,7 @@ export interface ChangeAnnotation {
 	needsConfirmation?: boolean;
 
 	/**
-	 * A human-readable string which is rendered less prominent in
+	 * A human-readable string which is rendered less prominently in
 	 * the user interface.
 	 */
 	description?: string;

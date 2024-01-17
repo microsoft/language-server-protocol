@@ -2,7 +2,7 @@
 
 > *Since version 3.16.0*
 
-Language Server Index Format (LSIF) introduced the concept of symbol monikers to help associate symbols across different indexes. This request adds capability for LSP server implementations to provide the same symbol moniker information given a text document position. Clients can utilize this method to get the moniker at the current location in a file user is editing and do further code navigation queries in other services that rely on LSIF indexes and link symbols together.
+Language Server Index Format (LSIF) introduced the concept of symbol monikers to help associate symbols across different indexes. This request adds the capability for LSP server implementations to provide the same symbol moniker information given a text document position. Clients can utilize this method to get the moniker at the current location in a file the user is editing and do further code navigation queries in other services that rely on LSIF indexes and link symbols together.
 
 The `textDocument/moniker` request is sent from the client to the server to get the symbol monikers for a given text document position. An array of Moniker types is returned as response to indicate possible monikers at the given location. If no monikers can be calculated, an empty array or `null` should be returned.
 
@@ -17,7 +17,7 @@ _Client Capabilities_:
 interface MonikerClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration. If this is set to
-	 * `true` the client supports the new `(TextDocumentRegistrationOptions &
+	 * `true`, the client supports the new `(TextDocumentRegistrationOptions &
 	 * StaticRegistrationOptions)` return value for the corresponding server
 	 * capability as well.
 	 */
@@ -76,17 +76,17 @@ _Response_:
  */
 export enum UniquenessLevel {
 	/**
-	 * The moniker is only unique inside a document
+	 * The moniker is only unique inside a document.
 	 */
 	document = 'document',
 
 	/**
-	 * The moniker is unique inside a project for which a dump got created
+	 * The moniker is unique inside a project for which a dump got created.
 	 */
 	project = 'project',
 
 	/**
-	 * The moniker is unique inside the group to which a project belongs
+	 * The moniker is unique inside the group to which a project belongs.
 	 */
 	group = 'group',
 
@@ -96,7 +96,7 @@ export enum UniquenessLevel {
 	scheme = 'scheme',
 
 	/**
-	 * The moniker is globally unique
+	 * The moniker is globally unique.
 	 */
 	global = 'global'
 }
@@ -110,12 +110,12 @@ export enum UniquenessLevel {
  */
 export enum MonikerKind {
 	/**
-	 * The moniker represent a symbol that is imported into a project
+	 * The moniker represent a symbol that is imported into a project.
 	 */
 	import = 'import',
 
 	/**
-	 * The moniker represents a symbol that is exported from a project
+	 * The moniker represents a symbol that is exported from a project.
 	 */
 	export = 'export',
 
@@ -135,18 +135,18 @@ export enum MonikerKind {
  */
 export interface Moniker {
 	/**
-	 * The scheme of the moniker. For example, `tsc` or `.Net`
+	 * The scheme of the moniker. For example, `tsc` or `.NET`.
 	 */
 	scheme: string;
 
 	/**
-	 * The identifier of the moniker. The value is opaque in LSIF however
+	 * The identifier of the moniker. The value is opaque in LSIF, however
 	 * schema owners are allowed to define the structure if they want.
 	 */
 	identifier: string;
 
 	/**
-	 * The scope in which the moniker is unique
+	 * The scope in which the moniker is unique.
 	 */
 	unique: UniquenessLevel;
 

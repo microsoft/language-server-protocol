@@ -18,7 +18,7 @@ _Client Capability_:
  */
 export interface InlineValueClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration for inline
+	 * Whether the implementation supports dynamic registration for inline
 	 * value providers.
 	 */
 	dynamicRegistration?: boolean;
@@ -95,13 +95,13 @@ export interface InlineValueParams extends WorkDoneProgressParams {
  */
 export interface InlineValueContext {
 	/**
-	 * The stack frame (as a DAP Id) where the execution has stopped.
+	 * The stack frame (as a DAP ID) where the execution has stopped.
 	 */
 	frameId: integer;
 
 	/**
 	 * The document range where execution has stopped.
-	 * Typically the end position of the range denotes the line where the
+	 * Typically, the end position of the range denotes the line where the
 	 * inline values are shown.
 	 */
 	stoppedLocation: Range;
@@ -154,7 +154,7 @@ export interface InlineValueVariableLookup {
 	range: Range;
 
 	/**
-	 * If specified the name of the variable to look up.
+	 * If specified, the name of the variable to look up.
 	 */
 	variableName?: string;
 
@@ -214,7 +214,7 @@ export type InlineValue = InlineValueText | InlineValueVariableLookup
 
 > *Since version 3.17.0*
 
-The `workspace/inlineValue/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inline values currently shown in editors. As a result the client should ask the server to recompute the inline values for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inline values. Note that the client still has the freedom to delay the re-calculation of the inline values if, for example, an editor is currently not visible.
+The `workspace/inlineValue/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inline values currently shown in editors. As a result, the client should ask the server to recompute the inline values for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inline values. Note that the client still has the freedom to delay the re-calculation of the inline values if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -236,7 +236,7 @@ export interface InlineValueWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * inline values currently shown. It should be used with absolute care and
-	 * is useful for situation where a server, for example, detect a project wide
+	 * is useful for situations where a server, for example, detects a project wide
 	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;

@@ -281,7 +281,7 @@
       anchor: window_workDoneProgress_create
     - title: Cancel a Work Done Progress
       anchor: window_workDoneProgress_cancel
-    - title: Sent Telemetry
+    - title: Send Telemetry
       anchor: telemetry_event
   - title: Miscellaneous
     anchor: miscellaneous

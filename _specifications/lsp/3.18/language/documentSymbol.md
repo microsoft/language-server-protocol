@@ -177,7 +177,7 @@ export type SymbolTag = 1;
 /**
  * Represents programming constructs like variables, classes, interfaces etc.
  * that appear in a document. Document symbols can be hierarchical and they
- * have two ranges: one that encloses its definition and one that points to its
+ * have two ranges: one that encloses their definition and one that points to their
  * most interesting range, e.g. the range of an identifier.
  */
 export interface DocumentSymbol {
@@ -190,7 +190,7 @@ export interface DocumentSymbol {
 	name: string;
 
 	/**
-	 * More detail for this symbol, e.g the signature of a function.
+	 * More detail for this symbol, e.g. the signature of a function.
 	 */
 	detail?: string;
 
@@ -215,8 +215,8 @@ export interface DocumentSymbol {
 
 	/**
 	 * The range enclosing this symbol not including leading/trailing whitespace
-	 * but everything else like comments. This information is typically used to
-	 * determine if the clients cursor is inside the symbol to reveal in the
+	 * but everything else, like comments. This information is typically used to
+	 * determine if the client's cursor is inside the symbol to reveal the
 	 * symbol in the UI.
 	 */
 	range: Range;

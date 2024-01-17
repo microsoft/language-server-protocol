@@ -26,7 +26,7 @@ _Notification_:
 ```typescript
 interface DidChangeConfigurationParams {
 	/**
-	 * The actual changed settings
+	 * The actual changed settings.
 	 */
 	settings: LSPAny;
 }

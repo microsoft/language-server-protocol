@@ -1,4 +1,4 @@
-#### <a href="#textDocument_typeDefinition" name="textDocument_typeDefinition" class="anchor">Goto Type Definition Request (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_typeDefinition" name="textDocument_typeDefinition" class="anchor">Go to Type Definition Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.6.0*
 
@@ -16,7 +16,7 @@ _Client Capability_:
 export interface TypeDefinitionClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration. If this is set to
-	 * `true` the client supports the new `TypeDefinitionRegistrationOptions`
+	 * `true`, the client supports the new `TypeDefinitionRegistrationOptions`
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;

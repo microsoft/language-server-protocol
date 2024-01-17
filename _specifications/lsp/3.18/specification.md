@@ -67,7 +67,7 @@ The following TypeScript definitions describe the base JSON-RPC protocol:
 
 #### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
 
-The protocol use the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
+The protocol uses the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
 <div class="anchorHolder"><a href="#integer" name="integer" class="linkableAnchor"></a></div>
 
@@ -92,10 +92,10 @@ export type uinteger = number;
 ```typescript
 /**
  * Defines a decimal number. Since decimal numbers are very
- * rare in the language server specification we denote the
+ * rare in the language server specification, we denote the
  * exact range with every decimal using the mathematics
- * interval notation (e.g. [0, 1] denotes all decimals d with
- * 0 <= d <= 1.
+ * interval notation (e.g., [0, 1] denotes all decimals d with
+ * 0 <= d <= 1.)
  */
 export type decimal = number;
 ```
@@ -104,7 +104,7 @@ export type decimal = number;
 
 ```typescript
 /**
- * The LSP any type
+ * The LSP any type.
  *
  * @since 3.17.0
  */
@@ -287,7 +287,7 @@ export namespace ErrorCodes {
 	 * The server detected that the content of a document got
 	 * modified outside normal conditions. A server should
 	 * NOT send this error code if it detects a content change
-	 * in it unprocessed messages. The result even computed
+	 * in its unprocessed messages. The result even computed
 	 * on an older state might still be useful for the client.
 	 *
 	 * If a client decides that a result is not of any use anymore
@@ -296,7 +296,7 @@ export namespace ErrorCodes {
 	export const ContentModified: integer = -32801;
 
 	/**
-	 * The client has canceled a request and a server as detected
+	 * The client has canceled a request and a server has detected
 	 * the cancel.
 	 */
 	export const RequestCancelled: integer = -32800;
@@ -330,7 +330,7 @@ interface NotificationMessage extends Message {
 
 #### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
 
-Notification and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example, if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
+Notification and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
 #### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
 
@@ -349,13 +349,13 @@ interface CancelParams {
 }
 ```
 
-A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON-RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
+A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON-RPC protocol that requires that every request sends a response back. In addition, it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
 #### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
 
 > *Since version 3.15.0*
 
-The base protocol offers also support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including [work done progress](#workDoneProgress) (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
+The base protocol also offers support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including [work done progress](#workDoneProgress) (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
 
 A progress notification has the following properties:
 
@@ -385,7 +385,7 @@ Progress is reported against a token. The token is different than the request ID
 
 ## <a href="#languageServerProtocol" name="languageServerProtocol" class="anchor"> Language Server Protocol </a>
 
-The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means, for example, that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsify value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
+The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means, for example, that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsy value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
 
 An example would be a request sent from the client to the server to request a hover value for a symbol at a certain position in a text document. The request's method would be `textDocument/hover` with a parameter like this:
 
@@ -424,10 +424,10 @@ However, the server may decide to use a parallel execution strategy and may wish
 
 ### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
 
-As said LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
+As said, LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
 
 * a header describing the request
-* an optional _Client capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
+* an optional _Client Capability_ section describing the client capability of the request. This includes the client capabilities property path and JSON structure.
 * an optional _Server Capability_ section describing the server capability of the request. This includes the server capabilities property path and JSON structure. Clients should ignore server capabilities they don't understand (e.g. the initialize request shouldn't fail in this case).
 * an optional _Registration Options_ section describing the registration option if the request or notification supports dynamic capability registration. See the [register](#client_registerCapability) and [unregister](#client_unregisterCapability) request for how this works in detail.
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request, the params are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
@@ -690,24 +690,24 @@ The language features should be computed on the [synchronized state](#textDocume
 
 #### <a href="#implementationConsiderations" name="implementationConsiderations" class="anchor">Implementation Considerations</a>
 
-Language servers usually run in a separate process and clients communicate with them in an asynchronous fashion. Additionally clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
+Language servers usually run in a separate process and clients communicate with them in an asynchronous fashion. Additionally, clients usually allow users to interact with the source code even if request results are pending. We recommend the following implementation pattern to avoid that clients apply outdated response results:
 
-- if a client sends a request to the server and the client state changes in a way that it invalidates the response it should do the following:
-  - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary the client should resend the request.
+- if a client sends a request to the server and the client state changes in a way that invalidates the response, the client should do the following:
+  - cancel the server request and ignore the result if the result is not useful for the client anymore. If necessary, the client should resend the request.
   - keep the request running if the client can still make use of the result by, for example, transforming it to a new result by applying the state change to the result.
-- servers should therefore not decide by themselves to cancel requests simply due to that fact that a state change notification is detected in the queue. As said the result could still be useful for the client.
-- if a server detects an internal state change (for example, a project context changed) that invalidates the result of a request in execution the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, it generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
-- a client should not send resolve requests for out of date objects (for example, code lenses, ...). If a server receives a resolve request for an out of date object the server can error these requests with `ContentModified`.
-- if a client notices that a server exits unexpectedly, it should try to restart the server. However clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
+- servers should therefore not decide by themselves to cancel requests simply due to that fact that a state change notification is detected in the queue. As said, the result could still be useful for the client.
+- if a server detects an internal state change (for example, a project context changed) that invalidates the result of a request in execution, the server can error these requests with `ContentModified`. If clients receive a `ContentModified` error, they generally should not show it in the UI for the end-user. Clients can resend the request if they know how to do so. It should be noted that for all position based requests it might be especially hard for clients to re-craft a request.
+- a client should not send resolve requests for out of date objects (for example, code lenses). If a server receives a resolve request for an out of date object, the server can error these requests with `ContentModified`.
+- if a client notices that a server exits unexpectedly, it should try to restart the server. However, clients should be careful not to restart a crashing server endlessly. VS Code, for example, doesn't restart a server which has crashed 5 times in the last 180 seconds.
 
-Servers usually support different communication channels (e.g. stdio, pipes, ...). To ease the usage of servers in different clients it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
+Servers usually support different communication channels (e.g. stdio, pipes, ...). To ease the usage of servers in different clients, it is highly recommended that a server implementation supports the following command line arguments to pick the communication channel:
 
-- **stdio**: uses stdio as the communication channel.
+- **stdio**: use stdio as the communication channel.
 - **pipe**: use pipes (Windows) or socket files (Linux, Mac) as the communication channel. The pipe / socket file name is passed as the next arg or with `--pipe=`.
-- **socket**: uses a socket as the communication channel. The port is passed as next arg or with `--port=`.
+- **socket**: use a socket as the communication channel. The port is passed as the next arg or with `--port=`.
 - **node-ipc**: use node IPC communication between the client and the server. This is only supported if both client and server run under node.
 
-To support the case that the editor starting a server crashes an editor should also pass its process id to the server. This allows the server to monitor the editor process and to shutdown itself if the editor process dies. The process id passed on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
+To support the case that the editor starting a server crashes, an editor should also pass its process ID to the server. This allows the server to monitor the editor process and to shut itself down if the editor process dies. The process ID passed on the command line should be the same as the one passed in the initialize parameters. The command line argument to use is `--clientProcessId`.
 
 #### <a href="#metaModel" name="metaModel" class="anchor">Meta Model</a>
 

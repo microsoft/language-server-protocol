@@ -82,14 +82,14 @@ interface DocumentLink {
 	range: Range;
 
 	/**
-	 * The uri this link points to. If missing a resolve request is sent later.
+	 * The URI this link points to. If missing, a resolve request is sent later.
 	 */
 	target?: URI;
 
 	/**
 	 * The tooltip text when you hover over this link.
 	 *
-	 * If a tooltip is provided, is will be displayed in a string that includes
+	 * If a tooltip is provided, it will be displayed in a string that includes
 	 * instructions on how to trigger the link, such as `{0} (ctrl + click)`.
 	 * The specific instructions vary depending on OS, user settings, and
 	 * localization.

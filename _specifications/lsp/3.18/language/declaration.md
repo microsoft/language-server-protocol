@@ -1,4 +1,4 @@
-#### <a href="#textDocument_declaration" name="textDocument_declaration" class="anchor">Goto Declaration Request (:leftwards_arrow_with_hook:)</a>
+#### <a href="#textDocument_declaration" name="textDocument_declaration" class="anchor">Go to Declaration Request (:leftwards_arrow_with_hook:)</a>
 
 > *Since version 3.14.0*
 
@@ -16,7 +16,7 @@ _Client Capability_:
 export interface DeclarationClientCapabilities {
 	/**
 	 * Whether declaration supports dynamic registration. If this is set to
-	 * `true` the client supports the new `DeclarationRegistrationOptions`
+	 * `true`, the client supports the new `DeclarationRegistrationOptions`
 	 * return value for the corresponding server capability as well.
 	 */
 	dynamicRegistration?: boolean;

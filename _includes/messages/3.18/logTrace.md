@@ -20,7 +20,7 @@ interface LogTraceParams {
 	message: string;
 	/**
 	 * Additional information that can be computed if the `trace` configuration
-	 * is set to `'verbose'`
+	 * is set to `'verbose'`.
 	 */
 	verbose?: string;
 }
