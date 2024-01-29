@@ -209,7 +209,7 @@ _Response_:
 export interface SignatureHelp {
 	/**
 	 * One or more signatures. If no signatures are available,
-   * the signature help request should return `null`.
+	 * the signature help request should return `null`.
 	 */
 	signatures: SignatureInformation[];
 

@@ -304,7 +304,7 @@ export interface CompletionContext {
 
 	/**
 	 * The trigger character (a single character) that
-   * has triggered code complete. Is undefined if
+	 * has triggered code complete. Is undefined if
 	 * `triggerKind !== CompletionTriggerKind.TriggerCharacter`
 	 */
 	triggerCharacter?: string;
@@ -611,8 +611,8 @@ export interface CompletionItem {
 	 * The `insertText` is subject to interpretation by the client side.
 	 * Some tools might not take the string literally. For example,
 	 * when code complete is requested for `con<cursor position>`
-   * and a completion item with an `insertText` of `console` is provided,
-   * VSCode will only insert `sole`. Therefore, it is
+	 * and a completion item with an `insertText` of `console` is provided,
+	 * VSCode will only insert `sole`. Therefore, it is
 	 * recommended to use `textEdit` instead since it avoids additional client
 	 * side interpretation.
 	 */
@@ -643,7 +643,8 @@ export interface CompletionItem {
 	 * When an edit is provided, the value of `insertText` is ignored.
 	 *
 	 * *Note:* The range of the edit must be a single line range and it must
-	 * contain the position at which completion has been requested.
+	 * contain the position at which completion has been requested. Despite this
+	 * limitation, your edit can write multiple lines.
 	 *
 	 * Most editors support two different operations when accepting a completion
 	 * item. One is to insert a completion text and the other is to replace an
@@ -655,7 +656,8 @@ export interface CompletionItem {
 	 *
 	 * *Note 1:* The text edit's range as well as both ranges from an insert
 	 * replace edit must be a single line and they must contain the position
-	 * at which completion has been requested.
+	 * at which completion has been requested. In both cases, the new text can
+	 * consist of multiple lines.
 	 * *Note 2:* If an `InsertReplaceEdit` is returned, the edit's insert range
 	 * must be a prefix of the edit's replace range, meaning it must be
 	 * contained in and starting at the same position.

@@ -399,7 +399,7 @@ export namespace CodeActionTriggerKind {
 	 * Code actions were requested automatically.
 	 *
 	 * This typically happens when the current selection in a file changes,
-   * but can also be triggered when file content changes.
+	 * but can also be triggered when file content changes.
 	 */
 	export const Automatic: 2 = 2;
 }

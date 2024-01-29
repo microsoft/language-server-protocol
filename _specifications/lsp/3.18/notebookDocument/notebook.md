@@ -169,48 +169,48 @@ export interface NotebookCellTextDocumentFilter {
  */
 export type NotebookDocumentFilter = {
 	/**
-   * The type of the enclosing notebook.
-   */
+	 * The type of the enclosing notebook.
+	 */
 	notebookType: string;
 
 	/**
-   * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
-   */
+	 * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+    */
 	scheme?: string;
 
 	/**
-   * A glob pattern.
-   */
+	 * A glob pattern.
+	 */
 	pattern?: string;
 } | {
 	/**
-   * The type of the enclosing notebook.
-   */
+	 * The type of the enclosing notebook.
+	 */
 	notebookType?: string;
 
 	/**
-   * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
-   */
+	 * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+	 */
 	scheme: string;
 
 	/**
-   * A glob pattern.
-   */
+	 * A glob pattern.
+	 */
 	pattern?: string;
 } | {
 	/**
-   * The type of the enclosing notebook.
-   */
+	 * The type of the enclosing notebook.
+	 */
 	notebookType?: string;
 
 	/**
-   * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
-   */
+	 * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+	 */
 	scheme?: string;
 
 	/**
-   * A glob pattern.
-   */
+	 * A glob pattern.
+	 */
 	pattern: string;
 };
 ```

@@ -141,7 +141,7 @@ export interface InlayHint {
 	 * hint itself is now obsolete.
 	 *
 	 * Depending on the client capability `inlayHint.resolveSupport`,
-   * clients might resolve this property late using the resolve request.
+	 * clients might resolve this property late using the resolve request.
 	 */
 	textEdits?: TextEdit[];
 
