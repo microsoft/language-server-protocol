@@ -4,7 +4,7 @@
 
 The selection range request is sent from the client to the server to return suggested selection ranges at an array of given positions. A selection range is a range around the cursor position which the user might be interested in selecting.
 
-A selection range in the return array is for the position in the provided parameters at the same index. Therefore positions[i] must be contained in result[i].range. To allow for results where some positions have selection ranges and others do not, result[i].range is allowed to be the empty range at positions[i].
+A selection range in the return array is for the position in the provided parameters at the same index. Therefore, positions[i] must be contained in result[i].range. To allow for results where some positions have selection ranges and others do not, result[i].range is allowed to be the empty range at positions[i].
 
 Typically, but not necessary, selection ranges correspond to the nodes of the syntax tree.
 
@@ -17,8 +17,8 @@ _Client Capability_:
 ```typescript
 export interface SelectionRangeClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration for selection range
-	 * providers. If this is set to `true` the client supports the new
+	 * Whether the implementation supports dynamic registration for selection range
+	 * providers. If this is set to `true`, the client supports the new
 	 * `SelectionRangeRegistrationOptions` return value for the corresponding
 	 * server capability as well.
 	 */
@@ -83,8 +83,8 @@ export interface SelectionRange {
 	 */
 	range: Range;
 	/**
-	 * The parent selection range containing this range. Therefore
-	 * `parent.range` must contain `this.range`.
+	 * The parent selection range containing this range.
+	 * Therefore, `parent.range` must contain `this.range`.
 	 */
 	parent?: SelectionRange;
 }

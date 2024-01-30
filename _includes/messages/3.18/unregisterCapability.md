@@ -32,7 +32,7 @@ export interface Unregistration {
 
 ```typescript
 export interface UnregistrationParams {
-	// This should correctly be named `unregistrations`. However changing this
+	// This should correctly be named `unregistrations`. However, changing this
 	// is a breaking change and needs to wait until we deliver a 4.x version
 	// of the specification.
 	unregisterations: Unregistration[];

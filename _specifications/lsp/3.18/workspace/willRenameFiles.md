@@ -1,6 +1,6 @@
 #### <a href="#workspace_willRenameFiles" name="workspace_willRenameFiles" class="anchor">WillRenameFiles Request (:leftwards_arrow_with_hook:)</a>
 
-The will rename files request is sent from the client to the server before files are actually renamed as long as the rename is triggered from within the client either by a user action or by applying a workspace edit. The request can return a WorkspaceEdit which will be applied to workspace before the files are renamed. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep renames fast and reliable.
+The will rename files request is sent from the client to the server before files are actually renamed as long as the rename is triggered from within the client either by a user action or by applying a workspace edit. The request can return a WorkspaceEdit which will be applied to the workspace before the files are renamed. Please note that clients might drop results if computing the edit took too long or if a server constantly fails on this request. This is done to keep renames fast and reliable.
 
 _Client Capability_:
 * property name (optional): `workspace.fileOperations.willRename`
@@ -62,5 +62,5 @@ export interface FileRename {
 ```
 
 _Response_:
-* result:`WorkspaceEdit` \| `null`
+* result: `WorkspaceEdit` \| `null`
 * error: code and message set in case an exception happens during the `workspace/willRenameFiles` request.

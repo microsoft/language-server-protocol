@@ -198,7 +198,7 @@ export interface FoldingRange {
 
 > *Since version 3.18.0*
 
-The `workspace/foldingRange/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the folding ranges currently shown in editors. As a result the client should ask the server to recompute the folding ranges for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all folding ranges. Note that the client still has the freedom to delay the re-calculation of the folding ranges if for example an editor is currently not visible.
+The `workspace/foldingRange/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the folding ranges currently shown in editors. As a result, the client should ask the server to recompute the folding ranges for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all folding ranges. Note that the client still has the freedom to delay the re-calculation of the folding ranges if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -215,7 +215,7 @@ export interface FoldingRangeWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * folding ranges currently shown. It should be used with absolute care and is
-	 * useful for situation where a server for example detect a project wide
+	 * useful for situation where a server, for example, detects a project wide
 	 * change that requires such a calculation.
 	 * 
 	 * @since 3.18.0

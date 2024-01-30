@@ -1,6 +1,6 @@
 #### <a href="#workspace_executeCommand" name="workspace_executeCommand" class="anchor">Execute a command (:leftwards_arrow_with_hook:)</a>
 
-The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit` which is sent from the server to the client.
+The `workspace/executeCommand` request is sent from the client to the server to trigger command execution on the server. In most cases, the server creates a `WorkspaceEdit` structure and applies the changes to the workspace using the request `workspace/applyEdit`, which is sent from the server to the client.
 
 _Client Capability_:
 * property path (optional): `workspace.executeCommand`
@@ -26,7 +26,7 @@ _Server Capability_:
 ```typescript
 export interface ExecuteCommandOptions extends WorkDoneProgressOptions {
 	/**
-	 * The commands to be executed on the server
+	 * The commands to be executed on the server.
 	 */
 	commands: string[];
 }

@@ -16,7 +16,7 @@ export interface HoverClientCapabilities {
 	dynamicRegistration?: boolean;
 
 	/**
-	 * Client supports the follow content formats if the content
+	 * Client supports the following content formats if the content
 	 * property refers to a `literal of type MarkupContent`.
 	 * The order describes the preferred format of the client.
 	 */
@@ -68,7 +68,7 @@ _Response_:
  */
 export interface Hover {
 	/**
-	 * The hover's content
+	 * The hover's content.
 	 */
 	contents: MarkedString | MarkedString[] | MarkupContent;
 

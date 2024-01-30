@@ -73,12 +73,12 @@ interface DocumentRangeFormattingParams extends WorkDoneProgressParams {
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The range to format
+	 * The range to format.
 	 */
 	range: Range;
 
 	/**
-	 * The format options
+	 * The formatting options.
 	 */
 	options: FormattingOptions;
 }
@@ -104,12 +104,12 @@ interface DocumentRangesFormattingParams extends WorkDoneProgressParams {
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The ranges to format
+	 * The ranges to format.
 	 */
 	ranges: Range[];
 
 	/**
-	 * The format options
+	 * The format options.
 	 */
 	options: FormattingOptions;
 }

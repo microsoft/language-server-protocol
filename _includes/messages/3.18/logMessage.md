@@ -11,12 +11,12 @@ _Notification_:
 ```typescript
 interface LogMessageParams {
 	/**
-	 * The message type. See {@link MessageType}
+	 * The message type. See {@link MessageType}.
 	 */
 	type: MessageType;
 
 	/**
-	 * The actual message
+	 * The actual message.
 	 */
 	message: string;
 }

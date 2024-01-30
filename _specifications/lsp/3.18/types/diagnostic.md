@@ -77,7 +77,7 @@ export namespace DiagnosticSeverity {
 	 */
 	export const Warning: 2 = 2;
 	/**
-	 * Reports an information.
+	 * Reports information.
 	 */
 	export const Information: 3 = 3;
 	/**
@@ -108,7 +108,7 @@ export namespace DiagnosticTag {
 	/**
 	 * Deprecated or obsolete code.
 	 *
-	 * Clients are allowed to rendered diagnostics with this tag strike through.
+	 * Clients are allowed to render diagnostics with this tag strike through.
 	 */
 	export const Deprecated: 2 = 2;
 }
@@ -124,7 +124,7 @@ export type DiagnosticTag = 1 | 2;
 /**
  * Represents a related message and source code location for a diagnostic.
  * This should be used to point to code locations that cause or are related to
- * a diagnostics, e.g when duplicating a symbol in a scope.
+ * a diagnostic, e.g. when duplicating a symbol in a scope.
  */
 export interface DiagnosticRelatedInformation {
 	/**
@@ -151,7 +151,7 @@ export interface DiagnosticRelatedInformation {
  */
 export interface CodeDescription {
 	/**
-	 * An URI to open with more information about the diagnostic error.
+	 * A URI to open with more information about the diagnostic error.
 	 */
 	href: URI;
 }

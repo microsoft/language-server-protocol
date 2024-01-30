@@ -4,9 +4,9 @@
 
 The color presentation request is sent from the client to the server to obtain a list of presentations for a color value at a given location. Clients can use the result to
 - modify a color reference.
-- show in a color picker and let users pick one of the presentations
+- show a color picker and let users pick one of the presentations.
 
-This request has no special capabilities and registration options since it is send as a resolve request for the `textDocument/documentColor` request.
+This request has no special capabilities and registration options since it is sent as a resolve request for the `textDocument/documentColor` request.
 
 _Request_:
 
@@ -44,13 +44,13 @@ _Response_:
 interface ColorPresentation {
 	/**
 	 * The label of this color presentation. It will be shown on the color
-	 * picker header. By default this is also the text that is inserted when
+	 * picker header. By default, this is also the text that is inserted when
 	 * selecting this color presentation.
 	 */
 	label: string;
 	/**
 	 * An [edit](#TextEdit) which is applied to a document when selecting
-	 * this presentation for the color. When omitted the
+	 * this presentation for the color. When omitted, the
 	 * [label](#ColorPresentation.label) is used.
 	 */
 	textEdit?: TextEdit;

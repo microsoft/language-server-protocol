@@ -1,6 +1,6 @@
 #### <a href="#textDocument_pullDiagnostics" name="textDocument_pullDiagnostics" class="anchor">Pull Diagnostics</a>
 
-Diagnostics are currently published by the server to the client using a notification. This model has the advantage that for workspace wide diagnostics the server has the freedom to compute them at a server preferred point in time. On the other hand the approach has the disadvantage that the server can't prioritize the computation for the file in which the user types or which are visible in the editor. Inferring the client's UI state from the `textDocument/didOpen` and `textDocument/didChange` notifications might lead to false positives since these notifications are ownership transfer notifications.
+Diagnostics are currently published by the server to the client using a notification. This model has the advantage that for workspace wide diagnostics, the server has the freedom to compute them at a server preferred point in time. On the other hand, the approach has the disadvantage that the server can't prioritize the computation for the file in which the user types or which are visible in the editor. Inferring the client's UI state from the `textDocument/didOpen` and `textDocument/didChange` notifications might lead to false positives since these notifications are ownership transfer notifications.
 
 The specification therefore introduces the concept of diagnostic pull requests to give a client more control over the documents for which diagnostics should be computed and at which point in time.
 
@@ -19,7 +19,7 @@ _Client Capability_:
 export interface DiagnosticClientCapabilities {
 	/**
 	 * Whether implementation supports dynamic registration. If this is set to
-	 * `true` the client supports the new
+	 * `true`, the client supports the new
 	 * `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	 * return value for the corresponding server capability as well.
 	 */
@@ -53,7 +53,7 @@ export interface DiagnosticOptions extends WorkDoneProgressOptions {
 	identifier?: string;
 
 	/**
-	 * Whether the language has inter file dependencies meaning that
+	 * Whether the language has inter file dependencies, meaning that
 	 * editing code in one file can result in a different diagnostic
 	 * set in another file. Inter file dependencies are common for
 	 * most programming languages and typically uncommon for linters.
@@ -85,7 +85,7 @@ export interface DiagnosticRegistrationOptions extends
 
 ##### <a href="#textDocument_diagnostic" name="textDocument_diagnostic" class="anchor">Document Diagnostics(:leftwards_arrow_with_hook:)</a>
 
-The text document diagnostic request is sent from the client to the server to ask the server to compute the diagnostics for a given document. As with other pull requests the server is asked to compute the diagnostics for the currently synced version of the document.
+The text document diagnostic request is sent from the client to the server to ask the server to compute the diagnostics for a given document. As with other pull requests, the server is asked to compute the diagnostics for the currently synced version of the document.
 
 _Request_:
 * method: 'textDocument/diagnostic'.
@@ -112,7 +112,7 @@ export interface DocumentDiagnosticParams extends WorkDoneProgressParams,
 	identifier?: string;
 
 	/**
-	 * The result id of a previous response if provided.
+	 * The result ID of a previous response, if provided.
 	 */
 	previousResultId?: string;
 }
@@ -126,8 +126,8 @@ _Response_:
 ```typescript
 /**
  * The result of a document diagnostic pull request. A report can
- * either be a full report containing all diagnostics for the
- * requested document or an unchanged report indicating that nothing
+ * either be a full report, containing all diagnostics for the
+ * requested document, or an unchanged report, indicating that nothing
  * has changed in terms of diagnostics in comparison to the last
  * pull request.
  *
@@ -177,7 +177,7 @@ export interface FullDocumentDiagnosticReport {
 	kind: DocumentDiagnosticReportKind.Full;
 
 	/**
-	 * An optional result id. If provided it will
+	 * An optional result ID. If provided, it will
 	 * be sent on the next diagnostic request for the
 	 * same document.
 	 */
@@ -203,13 +203,13 @@ export interface UnchangedDocumentDiagnosticReport {
 	/**
 	 * A document diagnostic report indicating
 	 * no changes to the last result. A server can
-	 * only return `unchanged` if result ids are
+	 * only return `unchanged` if result IDs are
 	 * provided.
 	 */
 	kind: DocumentDiagnosticReportKind.Unchanged;
 
 	/**
-	 * A result id which will be sent on the next
+	 * A result ID which will be sent on the next
 	 * diagnostic request for the same document.
 	 */
 	resultId: string;
@@ -230,8 +230,8 @@ export interface RelatedFullDocumentDiagnosticReport extends
 	 * Diagnostics of related documents. This information is useful
 	 * in programming languages where code in a file A can generate
 	 * diagnostics in a file B which A depends on. An example of
-	 * such a language is C/C++ where marco definitions in a file
-	 * a.cpp and result in errors in a header file b.hpp.
+	 * such a language is C/C++, where macro definitions in a file
+	 * a.cpp can result in errors in a header file b.hpp.
 	 *
 	 * @since 3.17.0
 	 */
@@ -256,8 +256,8 @@ export interface RelatedUnchangedDocumentDiagnosticReport extends
 	 * Diagnostics of related documents. This information is useful
 	 * in programming languages where code in a file A can generate
 	 * diagnostics in a file B which A depends on. An example of
-	 * such a language is C/C++ where marco definitions in a file
-	 * a.cpp and result in errors in a header file b.hpp.
+	 * such a language is C/C++, where macro definitions in a file
+	 * a.cpp can result in errors in a header file b.hpp.
 	 *
 	 * @since 3.17.0
 	 */
@@ -284,7 +284,7 @@ export interface DocumentDiagnosticReportPartialResult {
 	};
 }
 ```
-* error: code and message set in case an exception happens during the diagnostic request. A server is also allowed to return an error with code `ServerCancelled` indicating that the server can't compute the result right now. A server can return a `DiagnosticServerCancellationData` data to indicate whether the client should re-trigger the request. If no data is provided it defaults to `{ retriggerRequest: true }`:
+* error: code and message set in case an exception happens during the diagnostic request. A server is also allowed to return an error with code `ServerCancelled` indicating that the server can't compute the result right now. A server can return a `DiagnosticServerCancellationData` to indicate whether the client should re-trigger the request. If no data is provided, it defaults to `{ retriggerRequest: true }`:
 
 <div class="anchorHolder"><a href="#diagnosticServerCancellationData" name="diagnosticServerCancellationData" class="linkableAnchor"></a></div>
 
@@ -301,9 +301,9 @@ export interface DiagnosticServerCancellationData {
 
 ##### <a href="#workspace_diagnostic" name="workspace_diagnostic" class="anchor">Workspace Diagnostics(:leftwards_arrow_with_hook:)</a>
 
-The workspace diagnostic request is sent from the client to the server to ask the server to compute workspace wide diagnostics which previously where pushed from the server to the client. In contrast to the document diagnostic request the workspace request can be long running and is not bound to a specific workspace or document state. If the client supports streaming for the workspace diagnostic pull it is legal to provide a document diagnostic report multiple times for the same document URI. The last one reported will win over previous reports.
+The workspace diagnostic request is sent from the client to the server to ask the server to compute workspace wide diagnostics which previously were pushed from the server to the client. In contrast to the document diagnostic request, the workspace request can be long running and is not bound to a specific workspace or document state. If the client supports streaming for the workspace diagnostic pull, it is legal to provide a document diagnostic report multiple times for the same document URI. The last one reported will win over previous reports.
 
-If a client receives a diagnostic report for a document in a workspace diagnostic request for which the client also issues individual document diagnostic pull requests the client needs to decide which diagnostics win and should be presented. In general:
+If a client receives a diagnostic report for a document in a workspace diagnostic request for which the client also issues individual document diagnostic pull requests, the client needs to decide which diagnostics win and should be presented. In general:
 
 - diagnostics for a higher document version should win over those from a lower document version (e.g. note that document versions are steadily increasing)
 - diagnostics from a document pull should win over diagnostics from a workspace pull.
@@ -329,7 +329,7 @@ export interface WorkspaceDiagnosticParams extends WorkDoneProgressParams,
 
 	/**
 	 * The currently known diagnostic reports with their
-	 * previous result ids.
+	 * previous result IDs.
 	 */
 	previousResultIds: PreviousResultId[];
 }
@@ -339,19 +339,19 @@ export interface WorkspaceDiagnosticParams extends WorkDoneProgressParams,
 
 ```typescript
 /**
- * A previous result id in a workspace pull request.
+ * A previous result ID in a workspace pull request.
  *
  * @since 3.17.0
  */
 export interface PreviousResultId {
 	/**
 	 * The URI for which the client knows a
-	 * result id.
+	 * result ID.
 	 */
 	uri: DocumentUri;
 
 	/**
-	 * The value of the previous result id.
+	 * The value of the previous result ID.
 	 */
 	value: string;
 }
@@ -391,7 +391,7 @@ export interface WorkspaceFullDocumentDiagnosticReport extends
 
 	/**
 	 * The version number for which the diagnostics are reported.
-	 * If the document is not marked as open `null` can be provided.
+	 * If the document is not marked as open, `null` can be provided.
 	 */
 	version: integer | null;
 }
@@ -415,7 +415,7 @@ export interface WorkspaceUnchangedDocumentDiagnosticReport extends
 
 	/**
 	 * The version number for which the diagnostics are reported.
-	 * If the document is not marked as open `null` can be provided.
+	 * If the document is not marked as open, `null` can be provided.
 	 */
 	version: integer | null;
 };
@@ -434,7 +434,7 @@ export type WorkspaceDocumentDiagnosticReport =
 	| WorkspaceUnchangedDocumentDiagnosticReport;
 ```
 
-* partial result: The first literal send need to be a `WorkspaceDiagnosticReport` followed by n `WorkspaceDiagnosticReportPartialResult` literals defined as follows:
+* partial result: The first literal sent needs to be a `WorkspaceDiagnosticReport` followed by n `WorkspaceDiagnosticReportPartialResult` literals defined as follows:
 
 <div class="anchorHolder"><a href="#workspaceDiagnosticReportPartialResult" name="workspaceDiagnosticReportPartialResult" class="linkableAnchor"></a></div>
 
@@ -449,7 +449,7 @@ export interface WorkspaceDiagnosticReportPartialResult {
 }
 ```
 
-* error: code and message set in case an exception happens during the diagnostic request. A server is also allowed to return and error with code `ServerCancelled` indicating that the server can't compute the result right now. A server can return a `DiagnosticServerCancellationData` data to indicate whether the client should re-trigger the request. If no data is provided it defaults to `{ retriggerRequest: true }`:
+* error: code and message set in case an exception happens during the diagnostic request. A server is also allowed to return and error with code `ServerCancelled` indicating that the server can't compute the result right now. A server can return a `DiagnosticServerCancellationData` to indicate whether the client should re-trigger the request. If no data is provided, it defaults to `{ retriggerRequest: true }`:
 
 ##### <a href="#diagnostic_refresh" name="diagnostic_refresh" class="anchor">Diagnostics Refresh(:arrow_right_hook:)</a>
 
@@ -495,8 +495,8 @@ _Response_:
 
 ##### Implementation Considerations
 
-Generally the language server specification doesn't enforce any specific client implementation since those usually depend on how the client UI behaves. However since diagnostics can be provided on a document and workspace level here are some tips:
+Generally the language server specification doesn't enforce any specific client implementation since those usually depend on how the client UI behaves. However, since diagnostics can be provided on a document and workspace level, here are some tips:
 
 - a client should pull actively for the document the users types in.
-- if the server signals inter file dependencies a client should also pull for visible documents to ensure accurate diagnostics. However the pull should happen less frequently.
-- if the server signals workspace pull support a client should also pull for workspace diagnostics. It is recommended for clients to implement partial result progress for the workspace pull to allow servers to keep the request open for a long time. If a server closes a workspace diagnostic pull request the client should re-trigger the request.
+- if the server signals inter file dependencies, a client should also pull for visible documents to ensure accurate diagnostics. However, the pull should happen less frequently.
+- if the server signals workspace pull support, a client should also pull for workspace diagnostics. It is recommended for clients to implement partial result progress for the workspace pull to allow servers to keep the request open for a long time. If a server closes a workspace diagnostic pull request the client should re-trigger the request.

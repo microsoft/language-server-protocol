@@ -4,9 +4,9 @@
 
 The inline completion request is sent from the client to the server to compute inline completions for a given text document either explicitly by a user gesture or implicitly when typing.
 
-Inline completion items usually complete bigger portions of text (e.g. whole methods, ...) and in contrast to completions items can complete code that might be syntactically or semantically incorrect.
+Inline completion items usually complete bigger portions of text (e.g., whole methods) and in contrast to completions, items can complete code that might be syntactically or semantically incorrect.
 
-Due to this inline completion items are usually not suited to be presented in normal code completion widgets like a list of items. One possible approach can be to present the information inline in the editor with lower contrast.
+Due to this, inline completion items are usually not suited to be presented in normal code completion widgets like a list of items. One possible approach can be to present the information inline in the editor with lower contrast.
 
 When multiple inline completion items are returned, the client may decide whether the user can cycle through them or if they, along with their `filterText`, are merely for filtering if the user continues to type without yet accepting the inline completion item.
 
@@ -207,7 +207,7 @@ export interface InlineCompletionItem {
 
 	/**
 	 * A text that is used to decide if this inline completion should be
-	 * shown. When `falsy` the {@link InlineCompletionItem.insertText} is
+	 * shown. When `falsy`, the {@link InlineCompletionItem.insertText} is
 	 * used.
 	 *
 	 * An inline completion is shown if the text to replace is a prefix of the
@@ -232,7 +232,7 @@ export interface InlineCompletionItem {
 
 	/**
 	 * The format of the insert text. The format applies to the `insertText`.
-	 * If omitted defaults to `InsertTextFormat.PlainText`.
+	 * If omitted, defaults to `InsertTextFormat.PlainText`.
 	 */
 	insertTextFormat?: InsertTextFormat;
 }

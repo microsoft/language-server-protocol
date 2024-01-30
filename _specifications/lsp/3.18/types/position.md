@@ -1,6 +1,6 @@
 #### <a href="#position" name="position" class="anchor"> Position </a>
 
-Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in an editor. Special values like, for example, `-1` to denote the end of a line are not supported.
+Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in an editor. Special values, like `-1` to denote the end of a line, are not supported.
 
 ```typescript
 interface Position {
@@ -20,7 +20,7 @@ interface Position {
 }
 ```
 
-When describing positions the protocol needs to specify how offsets (specifically character offsets) should be interpreted.
+When describing positions, the protocol needs to specify how offsets (specifically character offsets) should be interpreted.
 The corresponding `PositionEncodingKind` is negotiated between the client and the server during initialization.
 
 <div class="anchorHolder"><a href="#positionEncodingKind" name="positionEncodingKind" class="linkableAnchor"></a></div>
@@ -51,7 +51,7 @@ export namespace PositionEncodingKind {
 	 * Character offsets count UTF-16 code units.
 	 *
 	 * This is the default and must always be supported
-	 * by servers
+	 * by servers.
 	 */
 	export const UTF16: PositionEncodingKind = 'utf-16';
 

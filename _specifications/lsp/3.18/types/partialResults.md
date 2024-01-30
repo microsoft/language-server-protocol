@@ -25,9 +25,9 @@ Partial results are also reported using the generic [`$/progress`](#progress) no
 
 The `partialResultToken` is then used to report partial results for the find references request.
 
-If a server reports partial result via a corresponding `$/progress`, the whole result must be reported using n `$/progress` notifications. Each of the n `$/progress` notification appends items to the result. The final response has to be empty in terms of result values. This avoids confusion about how the final result should be interpreted, e.g. as another partial result or as a replacing result.
+If a server reports partial result via a corresponding `$/progress`, the whole result must be reported using `$/progress` notifications, each of which appends items to the result. The final response has to be empty in terms of result values. This avoids confusion about how the final result should be interpreted, e.g. as another partial result or as a replacing result.
 
-If the response errors the provided partial results should be treated as follows:
+If the response errors, the provided partial results should be treated as follows:
 
-- the `code` equals to `RequestCancelled`: the client is free to use the provided results but should make clear that the request got canceled and may be incomplete.
-- in all other cases the provided partial results shouldn't be used.
+- if the `code` equals `RequestCancelled`: the client is free to use the provided results but should make clear that the request got canceled and may be incomplete.
+- in all other cases, the provided partial results shouldn't be used.
