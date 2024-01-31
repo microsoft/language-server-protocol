@@ -105,6 +105,14 @@ export interface WorkspaceEditClientCapabilities {
 		 */
 		groupsOnLabel?: boolean;
 	};
+
+	/**
+	 * Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.
+	 *
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	metadataSupport?: boolean;
 }
 ```
 
