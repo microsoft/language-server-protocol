@@ -113,6 +113,14 @@ export interface WorkspaceEditClientCapabilities {
 	 * @proposed
 	 */
 	metadataSupport?: boolean;
+
+	/**
+	 * Whether the client supports snippets as text edits.
+	 *
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	snippetEditSupport?: boolean;
 }
 ```
 

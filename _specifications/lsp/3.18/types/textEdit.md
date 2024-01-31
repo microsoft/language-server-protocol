@@ -1,6 +1,8 @@
-#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit & AnnotatedTextEdit </a>
+#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit, AnnotatedTextEdit & SnippetTextEdit </a>
 
-> New in version 3.16: Support for `AnnotatedTextEdit`.
+- New in version 3.16: Support for `AnnotatedTextEdit`.
+- New in version 3.18: Support for `SnippetTextEdit`.
+
 
 A textual edit applicable to a text document.
 
@@ -77,5 +79,33 @@ export interface AnnotatedTextEdit extends TextEdit {
 	 * The actual annotation identifier.
 	 */
 	annotationId: ChangeAnnotationIdentifier;
+}
+```
+
+Since 3.18.0, there is also the concept of a snippet text edit, which supports inserting a snippet instead of plain text.
+
+<div class="anchorHolder"><a href="#snippetTextEdit" name="snippetTextEdit" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * An interactive text edit.
+ *
+ * @since 3.18.0
+ */
+export interface SnippetTextEdit {
+	/**
+	 * The range of the text document to be manipulated.
+	 */
+	range: Range;
+
+	/**
+	 * The snippet to be inserted.
+	 */
+	snippet: StringValue;
+
+	/**
+	 * The actual identifier of the snippet edit.
+	 */
+	annotationId?: ChangeAnnotationIdentifier;
 }
 ```
