@@ -50,8 +50,8 @@ export type MarkupKind = 'plaintext' | 'markdown';
  * };
  * ```
  *
- * *Please Note* that clients might sanitize the returned markdown. A client could
- * decide to remove HTML from the markdown to avoid script execution.
+ * *Please Note* that clients might sanitize the returned markdown. A client
+ * could decide to remove HTML from the markdown to avoid script execution.
  */
 export interface MarkupContent {
 	/**

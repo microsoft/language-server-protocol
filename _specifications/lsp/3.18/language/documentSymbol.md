@@ -149,7 +149,8 @@ export namespace SymbolKind {
 	export const TypeParameter = 26;
 }
 
-export type SymbolKind = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
+export type SymbolKind = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+	14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
 ```
 
 <div class="anchorHolder"><a href="#symbolTag" name="symbolTag" class="linkableAnchor"></a></div>
@@ -177,8 +178,8 @@ export type SymbolTag = 1;
 /**
  * Represents programming constructs like variables, classes, interfaces etc.
  * that appear in a document. Document symbols can be hierarchical and they
- * have two ranges: one that encloses their definition and one that points to their
- * most interesting range, e.g. the range of an identifier.
+ * have two ranges: one that encloses their definition and one that points to
+ * their most interesting range, e.g. the range of an identifier.
  */
 export interface DocumentSymbol {
 
