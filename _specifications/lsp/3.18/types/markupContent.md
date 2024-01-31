@@ -1,23 +1,23 @@
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
- A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/).
+ A `MarkupContent` literal represents a string value whose content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/).
 
 ```typescript
 /**
  * Describes the content type that a client supports in various
  * result literals like `Hover`, `ParameterInfo` or `CompletionItem`.
  *
- * Please note that `MarkupKinds` must not start with a `$`. This kinds
+ * Please note that `MarkupKinds` must not start with a `$`. These kinds
  * are reserved for internal usage.
  */
 export namespace MarkupKind {
 	/**
-	 * Plain text is supported as a content format
+	 * Plain text is supported as a content format.
 	 */
 	export const PlainText: 'plaintext' = 'plaintext';
 
 	/**
-	 * Markdown is supported as a content format
+	 * Markdown is supported as a content format.
 	 */
 	export const Markdown: 'markdown' = 'markdown';
 }
@@ -28,8 +28,8 @@ export type MarkupKind = 'plaintext' | 'markdown';
 
 ```typescript
 /**
- * A `MarkupContent` literal represents a string value which content is
- * interpreted base on its kind flag. Currently the protocol supports
+ * A `MarkupContent` literal represents a string value whose content is
+ * interpreted based on its kind flag. Currently, the protocol supports
  * `plaintext` and `markdown` as markup kinds.
  *
  * If the kind is `markdown` then the value can contain fenced code blocks like
@@ -50,23 +50,23 @@ export type MarkupKind = 'plaintext' | 'markdown';
  * };
  * ```
  *
- * *Please Note* that clients might sanitize the return markdown. A client could
- * decide to remove HTML from the markdown to avoid script execution.
+ * *Please Note* that clients might sanitize the returned markdown. A client
+ * could decide to remove HTML from the markdown to avoid script execution.
  */
 export interface MarkupContent {
 	/**
-	 * The type of the Markup
+	 * The type of the Markup.
 	 */
 	kind: MarkupKind;
 
 	/**
-	 * The content itself
+	 * The content itself.
 	 */
 	value: string;
 }
 ```
 
-In addition clients should signal the markdown parser they are using via the client capability `general.markdown` introduced in version 3.16.0 defined as follows:
+In addition, clients should signal the markdown parser they are using via the client capability `general.markdown` introduced in version 3.16.0 defined as follows:
 
 <div class="anchorHolder"><a href="#markdownClientCapabilities" name="markdownClientCapabilities" class="linkableAnchor"></a></div>
 

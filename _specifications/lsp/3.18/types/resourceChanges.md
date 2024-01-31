@@ -12,7 +12,7 @@ File resource changes allow servers to create, rename and delete files and folde
  */
 export interface CreateFileOptions {
 	/**
-	 * Overwrite existing file. Overwrite wins over `ignoreIfExists`
+	 * Overwrite existing file. Overwrite wins over `ignoreIfExists`.
 	 */
 	overwrite?: boolean;
 
@@ -31,7 +31,7 @@ export interface CreateFileOptions {
  */
 export interface CreateFile {
 	/**
-	 * A create
+	 * This is a create operation.
 	 */
 	kind: 'create';
 
@@ -41,7 +41,7 @@ export interface CreateFile {
 	uri: DocumentUri;
 
 	/**
-	 * Additional options
+	 * Additional options.
 	 */
 	options?: CreateFileOptions;
 
@@ -62,7 +62,7 @@ export interface CreateFile {
  */
 export interface RenameFileOptions {
 	/**
-	 * Overwrite target if existing. Overwrite wins over `ignoreIfExists`
+	 * Overwrite target if existing. Overwrite wins over `ignoreIfExists`.
 	 */
 	overwrite?: boolean;
 
@@ -81,7 +81,7 @@ export interface RenameFileOptions {
  */
 export interface RenameFile {
 	/**
-	 * A rename
+	 * This is a rename operation.
 	 */
 	kind: 'rename';
 
@@ -136,7 +136,7 @@ export interface DeleteFileOptions {
  */
 export interface DeleteFile {
 	/**
-	 * A delete
+	 * This is a delete operation.
 	 */
 	kind: 'delete';
 

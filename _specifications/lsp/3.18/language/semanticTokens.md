@@ -2,11 +2,11 @@
 
 > *Since version 3.16.0*
 
-The request is sent from the client to the server to resolve semantic tokens for a given file. Semantic tokens are used to add additional color information to a file that depends on language specific symbol information. A semantic token request usually produces a large result. The protocol therefore supports encoding tokens with numbers. In addition optional support for deltas is available.
+The request is sent from the client to the server to resolve semantic tokens for a given file. Semantic tokens are used to add additional color information to a file that depends on language specific symbol information. A semantic token request usually produces a large result. The protocol therefore supports encoding tokens with numbers. In addition, optional support for deltas is available.
 
 _General Concepts_
 
-Tokens are represented using one token type combined with n token modifiers. A token type is something like `class` or `function` and token modifiers are like `static` or `async`. The protocol defines a set of token types and modifiers but clients are allowed to extend these and announce the values they support in the corresponding client capability. The predefined values are:
+Tokens are represented using one token type combined with token modifiers. A token type is something like `class` or `function` and token modifiers are like `static` or `async`. The protocol defines a set of token types and modifiers but clients are allowed to extend these and announce the values they support in the corresponding client capability. The predefined values are:
 
 <div class="anchorHolder"><a href="#semanticTokenTypes" name="semanticTokenTypes" class="linkableAnchor"></a></div>
 
@@ -62,7 +62,7 @@ export enum SemanticTokenModifiers {
 }
 ```
 
-The protocol defines an additional token format capability to allow future extensions of the format. The only format that is currently specified is `relative` expressing that the tokens are described using relative positions (see Integer Encoding for Tokens below).
+The protocol defines an additional token format capability to allow future extensions of the format. The only format that is currently specified is `relative`, expressing that the tokens are described using relative positions (see Integer Encoding for Tokens below).
 
 <div class="anchorHolder"><a href="#tokenFormat" name="tokenFormat" class="linkableAnchor"></a></div>
 
@@ -76,7 +76,7 @@ export type TokenFormat = 'relative';
 
 _Integer Encoding for Tokens_
 
-On the capability level types and modifiers are defined using strings. However the real encoding happens using numbers. The server therefore needs to let the client know which numbers it is using for which types and modifiers. They do so using a legend, which is defined as follows:
+On the capability level, types and modifiers are defined using strings. However, the real encoding happens using integers. The server therefore needs to let the client know which numbers it is using for which types and modifiers. They do so using a legend, which is defined as follows:
 
 <div class="anchorHolder"><a href="#semanticTokensLegend" name="semanticTokensLegend" class="linkableAnchor"></a></div>
 
@@ -94,23 +94,23 @@ export interface SemanticTokensLegend {
 }
 ```
 
-Token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Since a token type can have n modifiers, multiple token modifiers can be set by using bit flags,
+Token types are looked up by index, so a `tokenType` value of `1` means `tokenTypes[1]`. Since a token type can have multiple modifiers, those token modifiers can be set by using bit flags,
 so a `tokenModifier` value of `3` is first viewed as binary `0b00000011`, which means `[tokenModifiers[0], tokenModifiers[1]]` because bits 0 and 1 are set.
 
-There are different ways how the position of a token can be expressed in a file. Absolute positions or relative positions. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplifies the computation of a delta if a server supports it. So each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
+There are two different ways how the position of a token can be expressed in a file: Absolute positions or relative positions. The protocol for the token format `relative` uses relative positions, because most tokens remain stable relative to each other when edits are made in a file. This simplifies the computation of a delta if a server supports it. Each token is represented using 5 integers. A specific token `i` in the file consists of the following array indices:
 
-- at index `5*i`   - `deltaLine`: token line number, relative to the previous token
-- at index `5*i+1` - `deltaStart`: token start character, relative to the previous token (relative to 0 or the previous token's start if they are on the same line)
+- at index `5*i`   - `deltaLine`: token line number, relative to the previous token.
+- at index `5*i+1` - `deltaStart`: token start character, relative to the previous token (relative to 0 or the previous token's start if they are on the same line).
 - at index `5*i+2` - `length`: the length of the token.
 - at index `5*i+3` - `tokenType`: will be looked up in `SemanticTokensLegend.tokenTypes`. We currently ask that `tokenType` < 65536.
-- at index `5*i+4` - `tokenModifiers`: each set bit will be looked up in `SemanticTokensLegend.tokenModifiers`
+- at index `5*i+4` - `tokenModifiers`: each set bit will be looked up in `SemanticTokensLegend.tokenModifiers`.
 
 The `deltaStart` and the `length` values must be encoded using the encoding the client and server agrees on during the `initialize` request (see also [TextDocuments](#textDocuments)).
 Whether a token can span multiple lines is defined by the client capability `multilineTokenSupport`. If multiline tokens are not supported and a tokens length takes it past the end of the line, it should be treated as if the token ends at the end of the line and will not wrap onto the next line.
 
 The client capability `overlappingTokenSupport` defines whether tokens can overlap each other.
 
-Lets look at a concrete example which uses single line tokens without overlaps for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
+Let's look at a concrete example which uses single line tokens without overlaps for encoding a file with 3 tokens in a number array. We start with absolute positions to demonstrate how they can easily be transformed into relative positions:
 
 ```typescript
 { line: 2, startChar:  5, length: 3, tokenType: "property",
@@ -120,7 +120,7 @@ Lets look at a concrete example which uses single line tokens without overlaps f
 { line: 5, startChar:  2, length: 7, tokenType: "class", tokenModifiers: [] }
 ```
 
-First of all, a legend must be devised. This legend must be provided up-front on registration and capture all possible token types and modifiers. For the example we use this legend:
+First of all, a legend must be devised. This legend must be provided up-front on registration and capture all possible token types and modifiers. For the example, we use this legend:
 
 ```typescript
 {
@@ -169,9 +169,9 @@ Running the same transformations as above will result in the following number ar
 [  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]
 ```
 
-The delta is now expressed on these number arrays without any form of interpretation what these numbers mean. This is comparable to the text document edits send from the server to the client to modify the content of a file. Those are character based and don't make any assumption about the meaning of the characters. So `[  2,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0 ]` can be transformed into `[  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]` using the following edit description: `{ start:  0, deleteCount: 1, data: [3] }` which tells the client to simply replace the first number (e.g. `2`) in the array with `3`.
+The delta is now expressed on these number arrays without any form of interpretation what these numbers mean. This is comparable to the text document edits sent from the server to the client to modify the content of a file. Those are character based and don't make any assumption about the meaning of the characters. So, `[  2,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0 ]` can be transformed into `[  3,5,3,0,3,  0,5,4,1,0,  3,2,7,2,0]` using the following edit description: `{ start:  0, deleteCount: 1, data: [3] }` which tells the client to simply replace the first number (e.g. `2`) in the array with `3`.
 
-Semantic token edits behave conceptually like [text edits](#textEditArray) on documents: if an edit description consists of n edits all n edits are based on the same state Sm of the number array. They will move the number array from state Sm to Sm+1. A client applying the edits must not assume that they are sorted. An easy algorithm to apply them to the number array is to sort the edits and apply them from the back to the front of the number array.
+Semantic token edits behave conceptually like [text edits](#textEditArray) on documents: if an edit description consists of n edits, all n edits are based on the same state Sm of the number array. They will move the number array from state Sm to Sm+1. A client applying the edits must not assume that they are sorted. An easy algorithm to apply them to the number array is to sort the edits and apply them from the back to the front of the number array.
 
 _Client Capability_:
 
@@ -185,8 +185,8 @@ The following client capabilities are defined for semantic token requests sent f
 ```typescript
 interface SemanticTokensClientCapabilities {
 	/**
-	 * Whether implementation supports dynamic registration. If this is set to
-	 * `true` the client supports the new `(TextDocumentRegistrationOptions &
+	 * Whether the implementation supports dynamic registration. If this is set to
+	 * `true`, the client supports the new `(TextDocumentRegistrationOptions &
 	 * StaticRegistrationOptions)` return value for the corresponding server
 	 * capability as well.
 	 */
@@ -199,7 +199,7 @@ interface SemanticTokensClientCapabilities {
 	 * or full request is advertised by the client but not provided by the
 	 * server. If, for example, the client capability `requests.full` and
 	 * `request.range` are both set to true but the server only provides a
-	 * range provider the client might not render a minimap correctly or might
+	 * range provider, the client might not render a minimap correctly or might
 	 * even decide to not show any semantic tokens at all.
 	 */
 	requests: {
@@ -234,7 +234,7 @@ interface SemanticTokensClientCapabilities {
 	tokenModifiers: string[];
 
 	/**
-	 * The formats the clients supports.
+	 * The formats the client supports.
 	 */
 	formats: TokenFormat[];
 
@@ -251,7 +251,7 @@ interface SemanticTokensClientCapabilities {
 	/**
 	 * Whether the client allows the server to actively cancel a
 	 * semantic token request, e.g. supports returning
-	 * ErrorCodes.ServerCancelled. If a server does the client
+	 * ErrorCodes.ServerCancelled. If a server does so, the client
 	 * needs to retrigger the request.
 	 *
 	 * @since 3.17.0
@@ -260,9 +260,9 @@ interface SemanticTokensClientCapabilities {
 
 	/**
 	 * Whether the client uses semantic tokens to augment existing
-	 * syntax tokens. If set to `true` client side created syntax
+	 * syntax tokens. If set to `true`, client side created syntax
 	 * tokens and semantic tokens are both used for colorization. If
-	 * set to `false` the client only uses the returned semantic tokens
+	 * set to `false`, the client only uses the returned semantic tokens
 	 * for colorization.
 	 *
 	 * If the value is `undefined` then the client behavior is not
@@ -286,7 +286,7 @@ The following server capabilities are defined for semantic tokens:
 ```typescript
 export interface SemanticTokensOptions extends WorkDoneProgressOptions {
 	/**
-	 * The legend used by the server
+	 * The legend used by the server.
 	 */
 	legend: SemanticTokensLegend;
 
@@ -320,7 +320,7 @@ export interface SemanticTokensRegistrationOptions extends
 }
 ```
 
-Since the registration option handles range, full and delta requests the method used to register for semantic tokens requests is `textDocument/semanticTokens` and not one of the specific methods described below.
+Since the registration option handles range, full and delta requests, the method used to register for semantic tokens requests is `textDocument/semanticTokens` and not one of the specific methods described below.
 
 **Requesting semantic tokens for a whole file**
 
@@ -352,9 +352,9 @@ _Response_:
 ```typescript
 export interface SemanticTokens {
 	/**
-	 * An optional result id. If provided and clients support delta updating
-	 * the client will include the result id in the next semantic token request.
-	 * A server can then instead of computing all semantic tokens again simply
+	 * An optional result ID. If provided and clients support delta updating,
+	 * the client will include the result ID in the next semantic token request.
+	 * A server can then, instead of computing all semantic tokens again, simply
 	 * send a delta.
 	 */
 	resultId?: string;
@@ -398,8 +398,8 @@ export interface SemanticTokensDeltaParams extends WorkDoneProgressParams,
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The result id of a previous response. The result Id can either point to
-	 * a full response or a delta response depending on what was received last.
+	 * The result ID of a previous response. The result ID can either point to
+	 * a full response or a delta response, depending on what was received last.
 	 */
 	previousResultId: string;
 }
@@ -459,10 +459,10 @@ export interface SemanticTokensDeltaPartialResult {
 
 There are two uses cases where it can be beneficial to only compute semantic tokens for a visible range:
 
-- for faster rendering of the tokens in the user interface when a user opens a file. In this use cases servers should also implement the `textDocument/semanticTokens/full` request as well to allow for flicker free scrolling and semantic coloring of a minimap.
-- if computing semantic tokens for a full document is too expensive servers can only provide a range call. In this case the client might not render a minimap correctly or might even decide to not show any semantic tokens at all.
+- for faster rendering of the tokens in the user interface when a user opens a file. In this use case, servers should also implement the `textDocument/semanticTokens/full` request as well to allow for flicker free scrolling and semantic coloring of a minimap.
+- if computing semantic tokens for a full document is too expensive, servers can only provide a range call. In this case, the client might not render a minimap correctly or might even decide to not show any semantic tokens at all.
 
-A server is allowed to compute the semantic tokens for a broader range than requested by the client. However if the server does the semantic tokens for the broader range must be complete and correct.
+A server is allowed to compute the semantic tokens for a broader range than requested by the client. However, if the server does so, the semantic tokens for the broader range must be complete and correct.
 
 _Request_:
 
@@ -496,7 +496,7 @@ _Response_:
 
 **Requesting a refresh of all semantic tokens**
 
-The `workspace/semanticTokens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the editors for which this server provides semantic tokens. As a result the client should ask the server to recompute the semantic tokens for these editors. This is useful if a server detects a project wide configuration change which requires a re-calculation of all semantic tokens. Note that the client still has the freedom to delay the re-calculation of the semantic tokens if, for example, an editor is currently not visible.
+The `workspace/semanticTokens/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the editors for which this server provides semantic tokens. As a result, the client should ask the server to recompute the semantic tokens for these editors. This is useful if a server detects a project wide configuration change which requires a re-calculation of all semantic tokens. Note that the client still has the freedom to delay the re-calculation of the semantic tokens if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -513,7 +513,7 @@ export interface SemanticTokensWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * semantic tokens currently shown. It should be used with absolute care
-	 * and is useful for situation where a server, for example, detect a project
+	 * and is useful for situation where a server, for example, detects a project
 	 * wide change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;

@@ -19,16 +19,16 @@ interface LocationLink {
 	targetUri: DocumentUri;
 
 	/**
-	 * The full target range of this link. If the target, for example, is a symbol
-	 * then target range is the range enclosing this symbol not including
-	 * leading/trailing whitespace but everything else like comments. This
-	 * information is typically used to highlight the range in the editor.
+	 * The full target range of this link. If the target is, for example, a
+	 * symbol, then the target range is the range enclosing this symbol not
+	 * including leading/trailing whitespace but everything else like comments.
+	 * This information is typically used to highlight the range in the editor.
 	 */
 	targetRange: Range;
 
 	/**
 	 * The range that should be selected and revealed when this link is being
-	 * followed, e.g the name of a function. Must be contained by the
+	 * followed, e.g., the name of a function. Must be contained by the
 	 * `targetRange`. See also `DocumentSymbol#range`
 	 */
 	targetSelectionRange: Range;

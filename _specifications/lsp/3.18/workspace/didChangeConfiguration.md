@@ -12,6 +12,8 @@ _Client Capability_:
 export interface DidChangeConfigurationClientCapabilities {
 	/**
 	 * Did change configuration notification supports dynamic registration.
+	 *
+	 * @since 3.6.0 to support the new pull model.
 	 */
 	dynamicRegistration?: boolean;
 }
@@ -26,7 +28,7 @@ _Notification_:
 ```typescript
 interface DidChangeConfigurationParams {
 	/**
-	 * The actual changed settings
+	 * The actual changed settings.
 	 */
 	settings: LSPAny;
 }

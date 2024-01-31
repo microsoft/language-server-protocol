@@ -1,14 +1,14 @@
 #### <a href="#textDocument_completion" name="textDocument_completion" class="anchor">Completion Request (:leftwards_arrow_with_hook:)</a>
 
-The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case is for example: the `textDocument/completion` request doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface then a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. By default the request can only delay the computation of the `detail` and `documentation` properties. Since 3.16.0 the client
+The Completion request is sent from the client to the server to compute completion items at a given cursor position. Completion items are presented in the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) user interface. If computing full completion items is expensive, servers can additionally provide a handler for the completion item resolve request ('completionItem/resolve'). This request is sent when a completion item is selected in the user interface. A typical use case for this would be the `textDocument/completion` request, which doesn't fill in the `documentation` property for returned completion items since it is expensive to compute. When the item is selected in the user interface, a 'completionItem/resolve' request is sent with the selected completion item as a parameter. The returned completion item should have the documentation property filled in. By default, the request can only delay the computation of the `detail` and `documentation` properties. Since 3.16.0, the client
 can signal that it can resolve more properties lazily. This is done using the `completionItem#resolveSupport` client capability which lists all properties that can be filled in during a 'completionItem/resolve' request. All other properties (usually `sortText`, `filterText`, `insertText` and `textEdit`) must be provided in the `textDocument/completion` response and must not be changed during resolve.
 
 The language server protocol uses the following model around completions:
 
-- to achieve consistency across languages and to honor different clients usually the client is responsible for filtering and sorting. This has also the advantage that client can experiment with different filter and sorting models. However servers can enforce different behavior by setting a `filterText` / `sortText`
-- for speed clients should be able to filter an already received completion list if the user continues typing. Servers can opt out of this using a `CompletionList` and mark it as `isIncomplete`.
+- to achieve consistency across languages and to honor different clients, usually the client is responsible for filtering and sorting. This also has the advantage that clients can experiment with different filter and sorting models. However, servers can enforce different behavior by setting a `filterText` / `sortText`.
+- for speed, clients should be able to filter an already received completion list if the user continues typing. Servers can opt out of this using a `CompletionList` and mark it as `isIncomplete`.
 
-A completion item provides additional means to influence filtering and sorting. They are expressed by either creating a `CompletionItem` with a `insertText` or with a `textEdit`. The two modes differ as follows:
+A completion item provides additional means to influence filtering and sorting. They are expressed by either creating a `CompletionItem` with an `insertText` or with a `textEdit`. The two modes differ as follows:
 
 - **Completion item provides an insertText / label without a text edit**: in the model the client should filter against what the user has already typed using the word boundary rules of the language (e.g. resolving the word under the cursor position). The reason for this mode is that it makes it extremely easy for a server to implement a basic completion list and get it filtered on the client.
 
@@ -38,7 +38,7 @@ export interface CompletionClientCapabilities {
 		 * A snippet can define tab stops and placeholders with `$1`, `$2`
 		 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
 		 * the end of the snippet. Placeholders with equal identifiers are
-		 * linked, that is typing in one will update others too.
+		 * linked, that is, typing in one will update others too.
 		 */
 		snippetSupport?: boolean;
 
@@ -48,7 +48,7 @@ export interface CompletionClientCapabilities {
 		commitCharactersSupport?: boolean;
 
 		/**
-		 * Client supports the follow content formats for the documentation
+		 * Client supports these content formats for the documentation
 		 * property. The order describes the preferred format of the client.
 		 */
 		documentationFormat?: MarkupKind[];
@@ -88,7 +88,7 @@ export interface CompletionClientCapabilities {
 
 		/**
 		 * Indicates which properties a client can resolve lazily on a
-		 * completion item. Before version 3.16.0 only the predefined properties
+		 * completion item. Before version 3.16.0, only the predefined properties
 		 * `documentation` and `detail` could be resolved lazily.
 		 *
 		 * @since 3.16.0
@@ -123,25 +123,25 @@ export interface CompletionClientCapabilities {
 	completionItemKind?: {
 		/**
 		 * The completion item kind values the client supports. When this
-		 * property exists the client also guarantees that it will
+		 * property exists, the client also guarantees that it will
 		 * handle values outside its set gracefully and falls back
 		 * to a default value when unknown.
 		 *
-		 * If this property is not present the client only supports
-		 * the completion items kinds from `Text` to `Reference` as defined in
+		 * If this property is not present, the client only supports
+		 * the completion item kinds from `Text` to `Reference` as defined in
 		 * the initial version of the protocol.
 		 */
 		valueSet?: CompletionItemKind[];
 	};
 
 	/**
-	 * The client supports to send additional context information for a
+	 * The client supports sending additional context information for a
 	 * `textDocument/completion` request.
 	 */
 	contextSupport?: boolean;
 
 	/**
-	 * The client's default when the completion item doesn't provide a
+	 * The client's default when the completion item doesn't provide an
 	 * `insertTextMode` property.
 	 *
 	 * @since 3.17.0
@@ -160,7 +160,7 @@ export interface CompletionClientCapabilities {
 		 * a completion list.
 		 *
 		 * The value lists the supported property names of the
-		 * `CompletionList.itemDefaults` object. If omitted
+		 * `CompletionList.itemDefaults` object. If omitted,
 		 * no properties are supported.
 		 *
 		 * @since 3.17.0
@@ -183,14 +183,14 @@ _Server Capability_:
 export interface CompletionOptions extends WorkDoneProgressOptions {
 	/**
 	 * Most tools trigger completion request automatically without explicitly
-	 * requesting it using a keyboard shortcut (e.g. Ctrl+Space). Typically they
+	 * requesting it using a keyboard shortcut (e.g., Ctrl+Space). Typically they
 	 * do so when the user starts to type an identifier. For example, if the user
-	 * types `c` in a JavaScript file code complete will automatically pop up
+	 * types `c` in a JavaScript file, code complete will automatically pop up and
 	 * present `console` besides others as a completion item. Characters that
 	 * make up identifiers don't need to be listed here.
 	 *
-	 * If code complete should automatically be trigger on characters not being
-	 * valid inside an identifier (for example, `.` in JavaScript) list them in
+	 * If code complete should automatically be triggered on characters not being
+	 * valid inside an identifier (for example, `.` in JavaScript), list them in
 	 * `triggerCharacters`.
 	 */
 	triggerCharacters?: string[];
@@ -202,7 +202,7 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 	 * `completion.completionItem.commitCharactersSupport`.
 	 *
 	 * If a server provides both `allCommitCharacters` and commit characters on
-	 * an individual completion item the ones on the completion item win.
+	 * an individual completion item, the ones on the completion item win.
 	 *
 	 * @since 3.2.0
 	 */
@@ -265,12 +265,12 @@ export interface CompletionParams extends TextDocumentPositionParams,
 
 ```typescript
 /**
- * How a completion was triggered
+ * How a completion was triggered.
  */
 export namespace CompletionTriggerKind {
 	/**
-	 * Completion was triggered by typing an identifier (24x7 code
-	 * complete), manual invocation (e.g Ctrl+Space) or via API.
+	 * Completion was triggered by typing an identifier (automatic code
+	 * complete), manual invocation (e.g. Ctrl+Space) or via API.
 	 */
 	export const Invoked: 1 = 1;
 
@@ -303,8 +303,8 @@ export interface CompletionContext {
 	triggerKind: CompletionTriggerKind;
 
 	/**
-	 * The trigger character (a single character) that has trigger code
-	 * complete. Is undefined if
+	 * The trigger character (a single character) that
+	 * has triggered code complete. Is undefined if
 	 * `triggerKind !== CompletionTriggerKind.TriggerCharacter`
 	 */
 	triggerCharacter?: string;
@@ -312,7 +312,7 @@ export interface CompletionContext {
 ```
 
 _Response_:
-* result: `CompletionItem[]` \| `CompletionList` \| `null`. If a `CompletionItem[]` is provided it is interpreted to be complete. So it is the same as `{ isIncomplete: false, items }`
+* result: `CompletionItem[]` \| `CompletionList` \| `null`. If a `CompletionItem[]` is provided, it is interpreted to be complete, so it is the same as `{ isIncomplete: false, items }`
 
 <div class="anchorHolder"><a href="#completionList" name="completionList" class="linkableAnchor"></a></div>
 
@@ -332,13 +332,13 @@ export interface CompletionList {
 	isIncomplete: boolean;
 
 	/**
-	 * In many cases the items of an actual completion result share the same
+	 * In many cases, the items of an actual completion result share the same
 	 * value for properties like `commitCharacters` or the range of a text
 	 * edit. A completion list can therefore define item defaults which will
 	 * be used if a completion item itself doesn't specify the value.
 	 *
 	 * If a completion list specifies a default value and a completion item
-	 * also specifies a corresponding value the one from the item is used.
+	 * also specifies a corresponding value, the one from the item is used.
 	 *
 	 * Servers are only allowed to return default values if the client
 	 * signals support for this via the `completionList.itemDefaults`
@@ -355,7 +355,7 @@ export interface CompletionList {
 		commitCharacters?: string[];
 
 		/**
-		 * A default edit range
+		 * A default edit range.
 		 *
 		 * @since 3.17.0
 		 */
@@ -365,14 +365,14 @@ export interface CompletionList {
 		};
 
 		/**
-		 * A default insert text format
+		 * A default insert text format.
 		 *
 		 * @since 3.17.0
 		 */
 		insertTextFormat?: InsertTextFormat;
 
 		/**
-		 * A default insert text mode
+		 * A default insert text mode.
 		 *
 		 * @since 3.17.0
 		 */
@@ -412,7 +412,7 @@ export namespace InsertTextFormat {
 	 * A snippet can define tab stops and placeholders with `$1`, `$2`
 	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
 	 * the end of the snippet. Placeholders with equal identifiers are linked,
-	 * that is typing in one will update others too.
+	 * that is, typing in one will update others too.
 	 */
 	export const Snippet = 2;
 }
@@ -454,7 +454,7 @@ export interface InsertReplaceEdit {
 	newText: string;
 
 	/**
-	 * The range if the insert is requested
+	 * The range if the insert is requested.
 	 */
 	insert: Range;
 
@@ -476,8 +476,8 @@ export interface InsertReplaceEdit {
  */
 export namespace InsertTextMode {
 	/**
-	 * The insertion or replace strings is taken as it is. If the
-	 * value is multi line the lines below the cursor will be
+	 * The insertion or replace strings are taken as-is. If the
+	 * value is multiline, the lines below the cursor will be
 	 * inserted using the indentation defined in the string value.
 	 * The client will not apply any kind of adjustments to the
 	 * string.
@@ -519,7 +519,7 @@ export interface CompletionItemLabelDetails {
 	/**
 	 * An optional string which is rendered less prominently after
 	 * {@link CompletionItemLabelDetails.detail}. Should be used for fully qualified
-	 * names or file path.
+	 * names or file paths.
 	 */
 	description?: string;
 }
@@ -536,21 +536,20 @@ export interface CompletionItem {
 	 * The label property is also by default the text that
 	 * is inserted when selecting this completion.
 	 *
-	 * If label details are provided the label itself should
+	 * If label details are provided, the label itself should
 	 * be an unqualified name of the completion item.
 	 */
 	label: string;
 
 	/**
-	 * Additional details for the label
+	 * Additional details for the label.
 	 *
 	 * @since 3.17.0
 	 */
 	labelDetails?: CompletionItemLabelDetails;
 
-
 	/**
-	 * The kind of this completion item. Based of the kind
+	 * The kind of this completion item. Based on the kind,
 	 * an icon is chosen by the editor. The standardized set
 	 * of available values is defined in `CompletionItemKind`.
 	 */
@@ -592,28 +591,28 @@ export interface CompletionItem {
 
 	/**
 	 * A string that should be used when comparing this item
-	 * with other items. When omitted the label is used
+	 * with other items. When omitted, the label is used
 	 * as the sort text for this item.
 	 */
 	sortText?: string;
 
 	/**
 	 * A string that should be used when filtering a set of
-	 * completion items. When omitted the label is used as the
+	 * completion items. When omitted, the label is used as the
 	 * filter text for this item.
 	 */
 	filterText?: string;
 
 	/**
 	 * A string that should be inserted into a document when selecting
-	 * this completion. When omitted the label is used as the insert text
+	 * this completion. When omitted, the label is used as the insert text
 	 * for this item.
 	 *
 	 * The `insertText` is subject to interpretation by the client side.
-	 * Some tools might not take the string literally. For example
-	 * VS Code when code complete is requested in this example
-	 * `con<cursor position>` and a completion item with an `insertText` of
-	 * `console` is provided it will only insert `sole`. Therefore it is
+	 * Some tools might not take the string literally. For example,
+	 * when code complete is requested for `con<cursor position>`
+	 * and a completion item with an `insertText` of `console` is provided,
+	 * VSCode will only insert `sole`. Therefore, it is
 	 * recommended to use `textEdit` instead since it avoids additional client
 	 * side interpretation.
 	 */
@@ -622,7 +621,7 @@ export interface CompletionItem {
 	/**
 	 * The format of the insert text. The format applies to both the
 	 * `insertText` property and the `newText` property of a provided
-	 * `textEdit`. If omitted defaults to `InsertTextFormat.PlainText`.
+	 * `textEdit`. If omitted, defaults to `InsertTextFormat.PlainText`.
 	 *
 	 * Please note that the insertTextFormat doesn't apply to
 	 * `additionalTextEdits`.
@@ -631,7 +630,7 @@ export interface CompletionItem {
 
 	/**
 	 * How whitespace and indentation is handled during completion
-	 * item insertion. If not provided the client's default value depends on
+	 * item insertion. If not provided, the client's default value depends on
 	 * the `textDocument.completion.insertTextMode` client capability.
 	 *
 	 * @since 3.16.0
@@ -641,7 +640,7 @@ export interface CompletionItem {
 
 	/**
 	 * An edit which is applied to a document when selecting this completion.
-	 * When an edit is provided the value of `insertText` is ignored.
+	 * When an edit is provided, the value of `insertText` is ignored.
 	 *
 	 * *Note:* The range of the edit must be a single line range and it must
 	 * contain the position at which completion has been requested. Despite this
@@ -656,12 +655,12 @@ export interface CompletionItem {
 	 * capability property.
 	 *
 	 * *Note 1:* The text edit's range as well as both ranges from an insert
-	 * replace edit must be a [single line] and they must contain the position
-	 * at which completion has been requested. In both case the new text can
-	 * have multiple lines.
-	 * *Note 2:* If an `InsertReplaceEdit` is returned the edit's insert range
-	 * must be a prefix of the edit's replace range, that means it must be
-	 * contained and starting at the same position.
+	 * replace edit must be a single line and they must contain the position
+	 * at which completion has been requested. In both cases, the new text can
+	 * consist of multiple lines.
+	 * *Note 2:* If an `InsertReplaceEdit` is returned, the edit's insert range
+	 * must be a prefix of the edit's replace range, meaning it must be
+	 * contained in and starting at the same position.
 	 *
 	 * @since 3.16.0 additional type `InsertReplaceEdit`
 	 */
@@ -674,7 +673,7 @@ export interface CompletionItem {
 	 * Clients will only honor this property if they opt into completion list
 	 * item defaults using the capability `completionList.itemDefaults`.
 	 *
-	 * If not provided and a list's default range is provided the label
+	 * If not provided and a list's default range is provided, the label
 	 * property is used as a text.
 	 *
 	 * @since 3.17.0
@@ -687,14 +686,14 @@ export interface CompletionItem {
 	 * insert position) with the main edit nor with themselves.
 	 *
 	 * Additional text edits should be used to change text unrelated to the
-	 * current cursor position (for example, adding an import statement at the
+	 * current cursor position (for example adding an import statement at the
 	 * top of the file if the completion item will insert an unqualified type).
 	 */
 	additionalTextEdits?: TextEdit[];
 
 	/**
-	 * An optional set of characters that when pressed while this completion is
-	 * active will accept it first and then type that character. *Note* that all
+	 * An optional set of characters that, when pressed while this completion is
+	 * active, will accept it first and then type that character. *Note* that all
 	 * commit characters should have `length=1` and that superfluous characters
 	 * will be ignored.
 	 */
@@ -751,7 +750,7 @@ export namespace CompletionItemKind {
 
 export type CompletionItemKind = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25;
 ```
-* partial result: `CompletionItem[]` or `CompletionList` followed by `CompletionItem[]`. If the first provided result item is of type `CompletionList` subsequent partial results of `CompletionItem[]` add to the `items` property of the `CompletionList`.
+* partial result: `CompletionItem[]` or `CompletionList` followed by `CompletionItem[]`. If the first provided result item is of type `CompletionList`, subsequent partial results of `CompletionItem[]` add to the `items` property of the `CompletionList`.
 * error: code and message set in case an exception happens during the completion request.
 
 Completion items support snippets (see `InsertTextFormat.Snippet`). The snippet format is as follows:
@@ -762,7 +761,7 @@ The `body` of a snippet can use special constructs to control cursors and the te
 
 ##### Tab stops
 
-With tab stops, you can make the editor cursor move inside a snippet. Use `$1`, `$2` to specify cursor locations. The number is the order in which tab stops will be visited, whereas `$0` denotes the final cursor position. Multiple tab stops are linked and updated in sync.
+With tab stops, you can make the editor cursor move inside a snippet. Use `$1`, `$2`, and so on to specify cursor locations. The number is the order in which tab stops will be visited, whereas `$0` denotes the final cursor position. Multiple tab stops are linked and updated in sync.
 
 ##### Placeholders
 
@@ -770,7 +769,7 @@ Placeholders are tab stops with values, like `${1:foo}`. The placeholder text wi
 
 ##### Choice
 
-Placeholders can have choices as values. The syntax is a comma separated enumeration of values, enclosed with the pipe-character, for example, `${1|one,two,three|}`. When the snippet is inserted and the placeholder selected, choices will prompt the user to pick one of the values.
+Placeholders can have choices as values. The syntax is a comma separated enumeration of values, enclosed with the pipe-character, for example `${1|one,two,three|}`. When the snippet is inserted and the placeholder selected, choices will prompt the user to pick one of the values.
 
 ##### Variables
 
@@ -780,7 +779,7 @@ The following variables can be used:
 
 * `TM_SELECTED_TEXT` The currently selected text or the empty string
 * `TM_CURRENT_LINE` The contents of the current line
-* `TM_CURRENT_WORD` The contents of the word under cursor or the empty string
+* `TM_CURRENT_WORD` The contents of the word under the cursor or the empty string
 * `TM_LINE_INDEX` The zero-index based line number
 * `TM_LINE_NUMBER` The one-index based line number
 * `TM_FILENAME` The filename of the current document
@@ -793,10 +792,10 @@ The following variables can be used:
 Transformations allow you to modify the value of a variable before it is inserted. The definition of a transformation consists of three parts:
 
 1. A [regular expression](#regExp) that is matched against the value of a variable, or the empty string when the variable cannot be resolved.
-2. A "format string" that allows to reference matching groups from the regular expression. The format string allows for conditional inserts and simple modifications.
+2. A "format string" that allows referencing matching groups from the regular expression. The format string allows for conditional inserts and simple modifications.
 3. Options that are passed to the regular expression.
 
-The following example inserts the name of the current file without its ending, so from `foo.txt` it makes `foo`.
+The following example inserts the name of the current file without its ending, so it transforms `foo.txt` to `foo`.
 
 ```
 ${TM_FILENAME/(.*)\..+$/$1/}
@@ -814,28 +813,36 @@ ${TM_FILENAME/(.*)\..+$/$1/}
 
 ##### Grammar
 
-Below is the EBNF ([extended Backus-Naur form](https://en.wikipedia.org/wiki/Extended_Backus-Naur_form)) for snippets. With `\` (backslash), you can escape `$`, `}` and `\`. Within choice elements, the backslash also escapes comma and pipe characters. Only the characters required to be escaped can be escaped, so `$` should not be escaped within these constructs and neither `$` or `}` should be escaped inside choice constructs.
+Below is the grammar for snippets in EBNF ([extended Backus-Naur form, XML variant](https://www.w3.org/TR/xml/#sec-notation)). With `\` (backslash), you can escape `$`, `}` and `\`. Within choice elements, the backslash also escapes comma and pipe characters. Only the characters required to be escaped can be escaped, so `$` should not be escaped within these constructs and neither `$` nor `}` should be escaped inside choice constructs.
 
 ```
 any         ::= tabstop | placeholder | choice | variable | text
 tabstop     ::= '$' int | '${' int '}'
 placeholder ::= '${' int ':' any '}'
-choice      ::= '${' int '|' text (',' text)* '|}'
+choice      ::= '${' int '|' choicetext (',' choicetext)* '|}'
 variable    ::= '$' var | '${' var }'
                 | '${' var ':' any '}'
-                | '${' var '/' regex '/' (format | text)+ '/' options '}'
+                | '${' var '/' regex '/' (format | formattext)* '/' options '}'
 format      ::= '$' int | '${' int '}'
-                | '${' int ':' '/upcase' | '/downcase' | '/capitalize' '}'
-                | '${' int ':+' if '}'
+                /* Transforms the text to be uppercase, lowercase, or capitalized, respectively. */
+                | '${' int ':' ('/upcase' | '/downcase' | '/capitalize') '}'
+                /* Inserts the 'ifOnly' text if the match is non-empty. */
+                | '${' int ':+' ifOnly '}'
+                /* Inserts the 'if' text if the match is non-empty,
+                   otherwise the 'else' text will be inserted. */
                 | '${' int ':?' if ':' else '}'
+                /* Inserts the 'else' text if the match is empty. */
                 | '${' int ':-' else '}' | '${' int ':' else '}'
 regex       ::= Regular Expression value (ctor-string)
 options     ::= Regular Expression option (ctor-options)
 var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
 int         ::= [0-9]+
-text        ::= .*
-if			::= text
-else		::= text
+text        ::= ([^$}\] | '\$' | '\}' | '\\')*
+choicetext  ::= ([^,|\] | '\,' | '\|' | '\\')*
+formattext  ::= ([^$/\] | '\$' | '\/' | '\\')*
+ifOnly      ::= text
+if          ::= ([^:\] | '\:' | '\\')*
+else        ::= text
 ```
 
 #### <a href="#completionItem_resolve" name="completionItem_resolve" class="anchor">Completion Item Resolve Request (:leftwards_arrow_with_hook:)</a>

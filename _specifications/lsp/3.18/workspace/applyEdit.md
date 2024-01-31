@@ -75,7 +75,7 @@ export interface ApplyWorkspaceEditResult {
 	failureReason?: string;
 
 	/**
-	 * Depending on the client's failure handling strategy `failedChange`
+	 * Depending on the client's failure handling strategy, `failedChange`
 	 * might contain the index of the change that failed. This property is
 	 * only available if the client signals a `failureHandling` strategy
 	 * in its client capabilities.

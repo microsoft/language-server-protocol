@@ -6,7 +6,7 @@
 The type hierarchy request is sent from the client to the server to return a type hierarchy for the language element of given text document positions. Will return `null` if the server couldn't infer a valid type from the position. The type hierarchy requests are executed in two steps:
 
   1. first a type hierarchy item is prepared for the given text document position.
-  1. for a type hierarchy item the supertype or subtype type hierarchy items are resolved.
+  1. for a type hierarchy item, the supertype or subtype type hierarchy items are resolved.
 
 _Client Capability_:
 

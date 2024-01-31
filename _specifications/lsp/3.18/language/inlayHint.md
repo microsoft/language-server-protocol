@@ -113,7 +113,7 @@ export interface InlayHint {
 
 	/**
 	 * The position of this hint.
-	 * 
+	 *
 	 * If multiple hints have the same position, they will be shown in the order
 	 * they appear in the response.
 	 */
@@ -140,8 +140,8 @@ export interface InlayHint {
 	 * hint (or its nearest variant) is now part of the document and the inlay
 	 * hint itself is now obsolete.
 	 *
-	 * Depending on the client capability `inlayHint.resolveSupport` clients
-	 * might resolve this property late using the resolve request.
+	 * Depending on the client capability `inlayHint.resolveSupport`,
+	 * clients might resolve this property late using the resolve request.
 	 */
 	textEdits?: TextEdit[];
 
@@ -174,7 +174,7 @@ export interface InlayHint {
 
 	/**
 	 * A data entry field that is preserved on an inlay hint between
-	 * a `textDocument/inlayHint` and a `inlayHint/resolve` request.
+	 * a `textDocument/inlayHint` and an `inlayHint/resolve` request.
 	 */
 	data?: LSPAny;
 }
@@ -198,7 +198,7 @@ export interface InlayHintLabelPart {
 
 	/**
 	 * The tooltip text when you hover over this label part. Depending on
-	 * the client capability `inlayHint.resolveSupport` clients might resolve
+	 * the client capability `inlayHint.resolveSupport`, clients might resolve
 	 * this property late using the resolve request.
 	 */
 	tooltip?: string | MarkupContent;
@@ -221,7 +221,7 @@ export interface InlayHintLabelPart {
 	/**
 	 * An optional command for this label part.
 	 *
-	 * Depending on the client capability `inlayHint.resolveSupport` clients
+	 * Depending on the client capability `inlayHint.resolveSupport`, clients
 	 * might resolve this property late using the resolve request.
 	 */
 	command?: Command;
@@ -239,7 +239,7 @@ export interface InlayHintLabelPart {
 export namespace InlayHintKind {
 
 	/**
-	 * An inlay hint that for a type annotation.
+	 * An inlay hint that is for a type annotation.
 	 */
 	export const Type = 1;
 
@@ -261,7 +261,7 @@ export type InlayHintKind = 1 | 2;
 The request is sent from the client to the server to resolve additional information for a given inlay hint. This is usually used to compute
 the `tooltip`, `location` or `command` properties of an inlay hint's label part to avoid its unnecessary computation during the `textDocument/inlayHint` request.
 
-Consider the clients announces the `label.location` property as a property that can be resolved lazy using the client capability
+Consider the client announces the `label.location` property as a property that can be resolved lazily using the client capability
 
 ```typescript
 textDocument.inlayHint.resolveSupport = { properties: ['label.location'] };
@@ -285,7 +285,7 @@ _Response_:
 
 > *Since version 3.17.0*
 
-The `workspace/inlayHint/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inlay hints currently shown in editors. As a result the client should ask the server to recompute the inlay hints for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inlay hints. Note that the client still has the freedom to delay the re-calculation of the inlay hints if, for example, an editor is currently not visible.
+The `workspace/inlayHint/refresh` request is sent from the server to the client. Servers can use it to ask clients to refresh the inlay hints currently shown in editors. As a result, the client should ask the server to recompute the inlay hints for these editors. This is useful if a server detects a configuration change which requires a re-calculation of all inlay hints. Note that the client still has the freedom to delay the re-calculation of the inlay hints if, for example, an editor is currently not visible.
 
 _Client Capability_:
 
@@ -307,7 +307,7 @@ export interface InlayHintWorkspaceClientCapabilities {
 	 *
 	 * Note that this event is global and will force the client to refresh all
 	 * inlay hints currently shown. It should be used with absolute care and
-	 * is useful for situation where a server, for example, detects a project wide
+	 * is useful for situations where a server, for example, detects a project wide
 	 * change that requires such a calculation.
 	 */
 	refreshSupport?: boolean;

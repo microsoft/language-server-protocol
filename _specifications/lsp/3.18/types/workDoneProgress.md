@@ -22,8 +22,8 @@ export interface WorkDoneProgressBegin {
 	title: string;
 
 	/**
-	 * Controls if a cancel button should show to allow the user to cancel the
-	 * long running operation. Clients that don't support cancellation are
+	 * Controls if a cancel button should be shown to allow the user to cancel
+	 * the long running operation. Clients that don't support cancellation are
 	 * allowed to ignore the setting.
 	 */
 	cancellable?: boolean;
@@ -43,7 +43,7 @@ export interface WorkDoneProgressBegin {
 	 * to ignore the `percentage` value in subsequent in report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule. The value range is [0, 100]
+	 * that are not following this rule. The value range is [0, 100].
 	 */
 	percentage?: uinteger;
 }
@@ -62,7 +62,7 @@ export interface WorkDoneProgressReport {
 	 * Controls enablement state of a cancel button. This property is only valid
 	 * if a cancel button got requested in the `WorkDoneProgressBegin` payload.
 	 *
-	 * Clients that don't support cancellation or don't support control the
+	 * Clients that don't support cancellation or don't support controlling the
 	 * button's enablement state are allowed to ignore the setting.
 	 */
 	cancellable?: boolean;
@@ -82,7 +82,7 @@ export interface WorkDoneProgressReport {
 	 * to ignore the `percentage` value in subsequent in report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule. The value range is [0, 100]
+	 * that are not following this rule. The value range is [0, 100].
 	 */
 	percentage?: uinteger;
 }
@@ -98,8 +98,8 @@ export interface WorkDoneProgressEnd {
 	kind: 'end';
 
 	/**
-	 * Optional, a final message indicating to, for example, indicate the outcome
-	 * of the operation.
+	 * Optional, a final message indicating, for example,
+     * the outcome of the operation.
 	 */
 	message?: string;
 }
@@ -109,12 +109,12 @@ export interface WorkDoneProgressEnd {
 
 Work Done progress can be initiated in two different ways:
 
-1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal. The document will refer to this kind of progress as client initiated progress.
-1. by a server using the request `window/workDoneProgress/create`. The document will refer to this kind of progress as server initiated progress.
+1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal. The specification will refer to this kind of progress as client initiated progress.
+1. by a server using the request `window/workDoneProgress/create`. The specification will refer to this kind of progress as server initiated progress.
 
 ###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress </a>
 
-Consider a client sending a `textDocument/reference` request to a server and the client accepts work done progress reporting on that request. To signal this to the server the client would add a `workDoneToken` property to the reference request parameters. Something like this:
+Consider a client sending a `textDocument/reference` request to a server and the client accepts work done progress reporting on that request. To signal this to the server, the client would add a `workDoneToken` property to the reference request parameters. This might look like this:
 
 ```json
 {
@@ -147,7 +147,7 @@ export interface WorkDoneProgressParams {
 }
 ```
 
-A server uses the `workDoneToken` to report progress for the specific `textDocument/reference`. For the above request the `$/progress` notification params look like this:
+A server uses the `workDoneToken` to report progress for the specific `textDocument/reference`. For the above request, the `$/progress` notification params look like this:
 
 ```json
 {
@@ -162,12 +162,12 @@ A server uses the `workDoneToken` to report progress for the specific `textDocum
 }
 ```
 
-The token received via the `workDoneToken` property in a request's param literal is only valid as long as the request has not send a response back. Canceling work done progress is done by simply
+The token received via the `workDoneToken` property in a request's param literal is only valid as long as the request has not sent a response back. Canceling work done progress is done by simply
 canceling the corresponding request.
 
-There is no specific client capability signaling whether a client will send a progress token per request. The reason for this is that this is in many clients not a static aspect and might even change for every request instance for the same request type. So the capability is signal on every request instance by the presence of a `workDoneToken` property.
+There is no specific client capability signaling whether a client will send a progress token per request. The reason for this is that this is in many clients not a static aspect and might even change for every request instance for the same request type. Thus, the capability is signaled on every request instance by the presence of a `workDoneToken` property.
 
-To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress a server needs to signal general work done progress reporting support in the corresponding server capability. For the above find references example a server would signal such a support by setting the `referencesProvider` property in the server capabilities as follows:
+To avoid that clients set up a progress monitor user interface before sending a request but the server doesn't actually report any progress, a server needs to signal general work done progress reporting support in the corresponding server capability. For the above "find references" example, a server would signal such support by setting the `referencesProvider` property in the server capabilities as follows:
 
 ```json
 {
@@ -188,9 +188,9 @@ export interface WorkDoneProgressOptions {
 ```
 ###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
 
-Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example, the server needs to re-index a database). The token can then be used to report progress using the same notifications used as for client initiated progress. The token provided in the create request should only be used once (e.g. only one begin, many report and one end notification should be sent to it).
+Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example, if the server needs to re-index a database). The token can then be used to report progress using the same notifications used as for client initiated progress. The token provided in the create request should only be used once (e.g. only one begin, many report and one end notification should be sent to it).
 
-To keep the protocol backwards compatible servers are only allowed to use `window/workDoneProgress/create` request if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
+To keep the protocol backwards compatible, servers are only allowed to use the `window/workDoneProgress/create` request if the client signals corresponding support using the client capability `window.workDoneProgress` which is defined as follows:
 
 ```typescript
 	/**

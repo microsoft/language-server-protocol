@@ -72,7 +72,7 @@ interface DocumentOnTypeFormattingParams {
 	 * The character that has been typed that triggered the formatting
 	 * on type request. That is not necessarily the last character that
 	 * got inserted into the document since the client could auto insert
-	 * characters as well (e.g. like automatic brace completion).
+	 * characters as well (e.g. automatic brace completion).
 	 */
 	ch: string;
 
