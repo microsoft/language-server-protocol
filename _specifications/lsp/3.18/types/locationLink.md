@@ -19,10 +19,10 @@ interface LocationLink {
 	targetUri: DocumentUri;
 
 	/**
-	 * The full target range of this link. If the target is, for example, a symbol,
-	 * then the target range is the range enclosing this symbol not including
-	 * leading/trailing whitespace but everything else like comments. This
-	 * information is typically used to highlight the range in the editor.
+	 * The full target range of this link. If the target is, for example, a
+	 * symbol, then the target range is the range enclosing this symbol not
+	 * including leading/trailing whitespace but everything else like comments.
+	 * This information is typically used to highlight the range in the editor.
 	 */
 	targetRange: Range;
 

@@ -22,8 +22,8 @@ export interface WorkDoneProgressBegin {
 	title: string;
 
 	/**
-	 * Controls if a cancel button should be shown to allow the user to cancel the
-	 * long running operation. Clients that don't support cancellation are
+	 * Controls if a cancel button should be shown to allow the user to cancel
+	 * the long running operation. Clients that don't support cancellation are
 	 * allowed to ignore the setting.
 	 */
 	cancellable?: boolean;

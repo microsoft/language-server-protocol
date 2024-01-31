@@ -77,8 +77,8 @@ interface PublishDiagnosticsParams {
 	uri: DocumentUri;
 
 	/**
-	 * Optionally, the version number of the document the diagnostics are published
-	 * for.
+	 * Optionally, the version number of the document the diagnostics are
+	 * published for.
 	 *
 	 * @since 3.15.0
 	 */
