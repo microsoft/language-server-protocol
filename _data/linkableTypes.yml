@@ -898,3 +898,5 @@
     link: '#inlineCompletionList'
   - type: 'InlineCompletionItem'
     link: '#inlineCompletionItem'
+  - type: 'StringValue'
+    link: '#stringValue'
