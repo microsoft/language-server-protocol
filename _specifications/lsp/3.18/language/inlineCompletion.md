@@ -203,7 +203,7 @@ export interface InlineCompletionItem {
 	 * The text to replace the range with. Must be set.
 	 * Is used both for the preview and the accept operation.
 	 */
-	insertText: string;
+	insertText: string | StringValue;
 
 	/**
 	 * A text that is used to decide if this inline completion should be
