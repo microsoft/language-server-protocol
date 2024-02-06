@@ -229,12 +229,6 @@ export interface InlineCompletionItem {
 	 * completion.
 	 */
 	command?: Command;
-
-	/**
-	 * The format of the insert text. The format applies to the `insertText`.
-	 * If omitted, defaults to `InsertTextFormat.PlainText`.
-	 */
-	insertTextFormat?: InsertTextFormat;
 }
 ```
 
