@@ -50,6 +50,7 @@ Git | `git-commit` and `git-rebase`
 Go | `go`
 Groovy | `groovy`
 Handlebars | `handlebars`
+Haskell | `haskell`
 HTML | `html`
 Ini | `ini`
 Java | `java`
