@@ -900,3 +900,5 @@
     link: '#inlineCompletionItem'
   - type: 'StringValue'
     link: '#stringValue'
+  - type: 'SnippetTextEdit'
+    link: '#snippetTextEdit'
