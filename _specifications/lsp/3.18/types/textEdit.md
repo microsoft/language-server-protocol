@@ -85,8 +85,9 @@ export interface AnnotatedTextEdit extends TextEdit {
 Since 3.18.0, there is also the concept of a snippet text edit, which supports inserting a snippet instead of plain text.
 
 Some important remarks:
-- For each file, only one snippet can specify a cursor position. In case there are multiple snippets defining a cursor position for a given URI, it is up to the client to decide the end position of the cursor.
-- In case the snippet text edit corresponds to a file that is not currently open in the editor, the client should downgrade the snippet to a non-interactive normal text edit and apply it to the file. This ensures that a workspace edit doesn't open arbitrary files.
+- interactive snippets are only applied to the file opened in the active editor. This avoids unwanted focus switches or editor reveals.
+- For the active file, only one snippet can specify a cursor position. In case there are multiple snippets defining a cursor position for a given URI, it is up to the client to decide the end position of the cursor.
+- In case the snippet text edit corresponds to a file that is not currently open in the active editor, the client should downgrade the snippet to a non-interactive normal text edit and apply it to the file. This ensures that a workspace edit doesn't open arbitrary files.
 
 <div class="anchorHolder"><a href="#snippetTextEdit" name="snippetTextEdit" class="linkableAnchor"></a></div>
 
