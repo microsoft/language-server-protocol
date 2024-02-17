@@ -250,7 +250,6 @@ index: 1
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
 | [Zig](https://ziglang.org/) | [zigtools](https://github.com/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
 | [Nix](https://nix.dev/) | [oxalica](https://github.com/oxalica/) | [nil](https://github.com/oxalica/nil) | Rust
-| [Nix](https://nix.dev/) | [nix-community](https://github.com/nix-community/) | [rnix-lsp](https://github.com/nix-community/rnix-lsp) | Rust
 | [Nix](https://nix.dev/) | [nix-community](https://github.com/nix-community/) | [nixd](https://github.com/nix-community/nixd) | C++
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
 | * | [iamcco](https://github.com/iamcco) | [diagnostic-languageserver](https://github.com/iamcco/diagnostic-languageserver) | TypeScript |
