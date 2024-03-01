@@ -361,6 +361,9 @@ export interface CodeActionContext {
 	 * for the given range. There is no guarantee that these accurately reflect
 	 * the error state of the resource. The primary parameter
 	 * to compute code actions is the provided range.
+	 * 
+	 * Note that the client should check the `textDocument.diagnostic.markupMessageSupport`
+	 * server capability before sending diagnostics with markup messages to a server.
 	 */
 	diagnostics: Diagnostic[];
 

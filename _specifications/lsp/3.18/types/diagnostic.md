@@ -1,5 +1,9 @@
 #### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
 
+- New in version 3.18: support for markup content in diagnostic messages. The support is guarded by the 
+client capability `textDocument.diagnostic.markupMessageSupport`. If a client doesn't signal the capability, 
+servers shouldn't send `MarkupContent` diagnostic messages back to the client.
+
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
 ```typescript
@@ -35,8 +39,11 @@ export interface Diagnostic {
 
 	/**
 	 * The diagnostic's message.
+	 * 
+	 * @since 3.18.0 - support for MarkupContent. This is guarded by the client
+	 * capability `textDocument.diagnostic.markupMessageSupport`.
 	 */
-	message: string;
+	message: string | MarkupContent;
 
 	/**
 	 * Additional metadata about the diagnostic.
