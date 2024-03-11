@@ -72,6 +72,7 @@ index: 1
 | Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) | Erlang |
 | [Erlang](https://www.erlang.org) | [Roberto Aloi](https://github.com/robertoaloi) and [Contributors](https://github.com/erlang-ls/erlang_ls/graphs/contributors) | [erlang_ls](https://github.com/erlang-ls/erlang_ls) | Erlang |
 | [Erlang](https://www.erlang.org) | [WhatsApp](https://github.com/whatsapp) | [ELP](https://github.com/whatsapp/erlang-language-platform) | Rust, Erlang |
+| [Erg](https://erg-lang.org) | [Shunsuke Shibayama](https://github.com/mtshiba) | [els](https://github.com/erg-lang/erg/tree/main/crates/els) | Rust |
 | [Elixir](https://elixir-lang.org/)| [Elixir LSP](https://github.com/elixir-lsp) | [elixir-ls](https://github.com/elixir-lsp/elixir-ls) | Elixir |
 | [Elm](https://elm-lang.org/)| [Kolja Lampe](https://github.com/razzeee) | [elmLS](https://github.com/elm-tooling/elm-language-server) | Typescript |
 | [Ember](https://emberjs.com/) | [Alex Kanunnikov](https://github.com/lifeart) and [contributors](https://github.com/lifeart/ember-language-server/graphs/contributors) | [Ember Language Server](https://github.com/lifeart/ember-language-server) | TypeScript |
@@ -166,6 +167,7 @@ index: 1
 | Python| [Spyder IDE team and the community](https://github.com/python-lsp) | [python-lsp-server](https://github.com/python-lsp/python-lsp-server) | Python |
 | Python | MS | [python-language-server](https://github.com/Microsoft/python-language-server) (unmaintained, archived) | C# |
 | Python | [Samuel Roeca](https://github.com/pappasam) | [jedi-language-server](https://github.com/pappasam/jedi-language-server) | Python |
+| Python | [Shunsuke Shibayama](https://github.com/mtshiba) | [pylyzer](https://github.com/mtshiba/pylyzer) | Rust |
 | [Pony](https://www.ponylang.io/) | [Mahan Bakhshi](https://github.com/MahanBi) | [PonyLS](https://github.com/MahanBi/PonyLS) | Pony |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
