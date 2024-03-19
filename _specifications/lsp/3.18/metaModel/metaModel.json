@@ -8737,6 +8737,41 @@
 					"proposed": true
 				},
 				{
+					"name": "textDocument",
+					"type": {
+						"kind": "literal",
+						"value": {
+							"properties": [
+								{
+									"name": "diagnostic",
+									"type": {
+										"kind": "literal",
+										"properties": [
+											{
+												"name": "markupMessageSupport",
+												"type": {
+													"kind": "base",
+													"name": "boolean"
+												},
+												"optional": true,
+												"documentation": "Whether the server supports `MarkupContent` in diagnostic messages.",
+												"since": "3.18.0",
+												"proposed": true
+											}
+										]
+									},
+									"optional": true,
+									"documentation": "Capabilities specific to the diagnostic pull model.\n\n@since 3.18.0",
+									"since": "3.18.0"
+								}
+							]
+						}
+					},
+					"optional": true,
+					"documentation": "Text document specific server capabilities.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0"
+				},
+				{
 					"name": "workspace",
 					"type": {
 						"kind": "literal",
@@ -8920,10 +8955,19 @@
 				{
 					"name": "message",
 					"type": {
-						"kind": "base",
-						"name": "string"
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "string"
+							},
+							{
+								"kind": "reference",
+								"name": "MarkupContent"
+							}
+						]
 					},
-					"documentation": "The diagnostic's message. It usually appears in the user interface"
+					"documentation": "The diagnostic's message. It usually appears in the user interface.\n\n@since 3.18.0 - support for `MarkupContent`. This is guarded by the client capability `textDocument.diagnostic.markupMessageSupport`."
 				},
 				{
 					"name": "tags",
@@ -9388,7 +9432,7 @@
 							"name": "Diagnostic"
 						}
 					},
-					"documentation": "An array of diagnostics known on the client side overlapping the range provided to the\n`textDocument/codeAction` request. They are provided so that the server knows which\nerrors are currently presented to the user for the given range. There is no guarantee\nthat these accurately reflect the error state of the resource. The primary parameter\nto compute code actions is the provided range."
+					"documentation": "An array of diagnostics known on the client side overlapping the range provided to the\n`textDocument/codeAction` request. They are provided so that the server knows which\nerrors are currently presented to the user for the given range. There is no guarantee\nthat these accurately reflect the error state of the resource. The primary parameter\nto compute code actions is the provided range.\n\nNote that the client should check the `textDocument.diagnostic.markupMessageSupport` server capability before sending diagnostics with markup messages to a server."
 				},
 				{
 					"name": "only",
@@ -12870,6 +12914,17 @@
 					},
 					"optional": true,
 					"documentation": "Whether the clients supports related documents for document diagnostic pulls."
+				},
+				{
+					"name": "markupMessageSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether the client supports `MarkupContent` in diagnostic messages.",
+					"since": "3.18.0",
+					"proposed": true
 				}
 			],
 			"documentation": "Client capabilities specific to diagnostic pull requests.\n\n@since 3.17.0",

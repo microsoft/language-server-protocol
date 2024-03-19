@@ -886,6 +886,28 @@ interface ServerCapabilities {
 	inlineCompletionProvider?: boolean | InlineCompletionOptions;
 
 	/**
+	 * Text document specific server capabilities.
+	 * 
+	 * @since 3.18.0
+	 */
+	textDocument?: {
+		/**
+		 * Capabilities specific to the diagnostic pull model.
+		 * 
+		 * @since 3.18.0
+		 */
+		diagnostic?: {
+			/**
+			 * Whether the server supports `MarkupContent` in diagnostic messages.
+			 * 
+			 * @since 3.18.0
+			 * @proposed
+			 */
+			markupMessageSupport?: boolean;
+		};
+	};
+
+	/**
 	 * Workspace specific server capabilities
 	 */
 	workspace?: {
