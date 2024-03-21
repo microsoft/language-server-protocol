@@ -8746,19 +8746,21 @@
 									"name": "diagnostic",
 									"type": {
 										"kind": "literal",
-										"properties": [
-											{
-												"name": "markupMessageSupport",
-												"type": {
-													"kind": "base",
-													"name": "boolean"
-												},
-												"optional": true,
-												"documentation": "Whether the server supports `MarkupContent` in diagnostic messages.",
-												"since": "3.18.0",
-												"proposed": true
-											}
-										]
+										"value": {
+											"properties": [
+												{
+													"name": "markupMessageSupport",
+													"type": {
+														"kind": "base",
+														"name": "boolean"
+													},
+													"optional": true,
+													"documentation": "Whether the server supports `MarkupContent` in diagnostic messages.",
+													"since": "3.18.0",
+													"proposed": true
+												}
+											]
+										}
 									},
 									"optional": true,
 									"documentation": "Capabilities specific to the diagnostic pull model.\n\n@since 3.18.0",
