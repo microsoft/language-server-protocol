@@ -179,6 +179,7 @@ index: 1
 | [RAML](https://raml.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
+| Rego | [Styra](https://www.styra.com) | [Regal](https://github.com/styrainc/regal) | Go, Rego |
 | [REL](https://github.com/sscit/rel) | [Stefan Schlichthärle](https://www.github.com/sscit) | [rel-ls](https://github.com/sscit/rel) | C++ |
 | [ReScript](https://rescript-lang.org) | [rescript-lang](https://github.com/rescript-lang) | [rescript-vscode](https://github.com/rescript-lang/rescript-vscode) | ReScript |
 | [IBM TSO/E **REXX**](https://www.ibm.com/docs/en/zos/2.4.0?topic=tsoe-zos-rexx-reference) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
