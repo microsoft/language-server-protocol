@@ -33,6 +33,7 @@ index: 1
 | [B/ProB](https://prob.hhu.de/w/) | [STUPS](https://github.com/hhu-stups/prob-issues/issues) | [B-language-server](https://github.com/hhu-stups/b-language-server) | Kotlin/Prolog |
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
+| Batch | [RechInformatica](https://github.com/RechInformatica) | [rech-editor-batch](https://github.com/RechInformatica/rech-editor-batch/tree/master/src/lsp) | TypeScript |
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) | C# |
@@ -49,6 +50,7 @@ index: 1
 | [CMake](https://cmake.org/) | [Decodetalkers](https://github.com/Decodetalkers) | [neocmakelsp](https://github.com/Decodetalkers/neocmakelsp) | Rust |
 | [Coq](https://coq.inria.fr/) | [ejgallego](https://github.com/ejgallego) | [coq-lsp](https://github.com/ejgallego/coq-lsp) | OCaml |
 | [Coq](https://coq.inria.fr/) | [coq-community](https://github.com/coq-community) | [vscoq](https://github.com/coq-community/vscoq) | OCaml |
+| Cobol| [RechInformatica](https://github.com/RechInformatica) | [rech-editor-cobol](https://github.com/RechInformatica/rech-editor-cobol/tree/master/src/lsp) | TypeScript |
 | IBM Enterprise **COBOL** for z/OS | [Broadcom](https://www.broadcom.com/) | [COBOL Language Support](https://github.com/eclipse/che-che4z-lsp-for-cobol) | Java |
 | [IBM Enterprise **COBOL** for z/OS](https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/welcome.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | [IBM Enterprise **RPG ILE** for IBM i](https://www.ibm.com/docs/en/i/7.5?topic=rpg-ile-reference) | IBM |  [IBMi Languages](https://marketplace.visualstudio.com/items?itemName=barrettotte.ibmi-languages) | Java |
