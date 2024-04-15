@@ -34,5 +34,6 @@
 	],
 	"git.branchProtection": [
 		"gh-pages"
-	]
+	],
+	"cmake.sourceDirectory": "C:/Users/nb80161/Downloads"
 }
