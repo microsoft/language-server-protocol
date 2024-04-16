@@ -381,7 +381,7 @@ export namespace ErrorCodes {
 	export const ContentModified: integer = -32801;
 
 	/**
-	 * The client has canceled a request and a server as detected
+	 * The client has canceled a request and a server has detected
 	 * the cancel.
 	 */
 	export const RequestCancelled: integer = -32800;

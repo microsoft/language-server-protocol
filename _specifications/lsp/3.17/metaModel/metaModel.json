@@ -13241,7 +13241,7 @@
 				{
 					"name": "RequestCancelled",
 					"value": -32800,
-					"documentation": "The client has canceled a request and a server as detected\nthe cancel."
+					"documentation": "The client has canceled a request and a server has detected\nthe cancel."
 				}
 			],
 			"supportsCustomValues": true
