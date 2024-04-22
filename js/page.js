@@ -39,7 +39,7 @@ $(function () {
 
   const cookieManager = document.querySelector('#footer-cookie-link');
   if (consentRequired() && cookieManager && cookieManager.parentElement) {
-    cookieManager.parentElement.style.display = '';
+    cookieManager.parentElement.style.visibility = 'visible';
   }
 
   // initialize consent
