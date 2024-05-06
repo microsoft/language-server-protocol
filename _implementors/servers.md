@@ -144,6 +144,7 @@ index: 1
 | [Nim](https://nim-lang.org/) | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
 | OCaml/Reason | [freebroccolo](https://github.com/freebroccolo) | [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server) | TypeScript |
 | OCaml/Reason | [OCaml Labs](http://ocamllabs.io) | [ocamllsp](https://github.com/ocaml/ocaml-lsp) | OCaml |
+| [Odin](https://odin-lang.org) | [Daniel Gavin](https://github.com/DanielGavin/) | [ols](https://github.com/DanielGavin/ols) | Odin | 
 | [OpenAPI](https://www.openapis.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | [openVALIDATION](http://openvalidation.io/) | [openVALIDATION](https://github.com/openvalidation) | [ov-language-server](https://github.com/openvalidation/ov-language-server) | TypeScript
 | [Papyrus](https://www.creationkit.com/fallout4/index.php?title=Category:Papyrus) | [Joel Day](https://github.com/joelday) | [papyrus-lang](https://github.com/joelday/papyrus-lang) | C# |
