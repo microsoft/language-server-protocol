@@ -16,7 +16,7 @@ index: 1
 | ActionScript 2.0 | [Adam Vernon](https://github.com/admvx) |  [AS2 Language Support](https://github.com/admvx/as2-language-support) | TypeScript |
 | Ada/SPARK | AdaCore |  [ada_language_server](https://github.com/AdaCore/ada_language_server) | Ada |
 | [AML](https://a.ml/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
-| [Ansible](https://docs.ansible.com/ansible/latest/) | [Ansible](https://www.ansible.com/) | [Ansible Language Server](https://github.com/ansible/ansible-language-server) | TypeScript |
+| [Ansible](https://docs.ansible.com/ansible/latest/) | [Ansible](https://www.ansible.com/) | [Ansible Language Server](https://github.com/ansible/vscode-ansible) | TypeScript |
 | Angular | [Angular team](https://github.com/angular/angular) & [ivanwonder](https://github.com/ivanwonder) | [Angular Language Server](https://github.com/angular/vscode-ng-language-service/tree/main/server) | TypeScript |
 | Antlr | [Ken Domino](https://github.com/kaby76) | [Antlrvsix](https://github.com/kaby76/AntlrVSIX) | C# |
 | [API Elements](http://api-elements.readthedocs.io/en/latest/) | [Vincenzo Chianese(@XVincentX)](https://github.com/XVincentX) | [vscode-apielements](https://github.com/XVincentX/vscode-apielements) | TypeScript |
