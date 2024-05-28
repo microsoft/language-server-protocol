@@ -29,6 +29,7 @@ index: 2
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
 | [GoLand](https://www.jetbrains.com/go) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Helix Editor](https://helix-editor.com/) | [Blaž Hrastnik](https://github.com/archseer) | [helix](https://github.com/helix-editor/helix) |
+| [IntelliJ-based IDEs](https://plugins.jetbrains.com/plugin/23257-lsp4ij?noRedirect=true) | [Red Hat](https://idetools.dev/) | [LSP4IJ](https://github.com/redhat-developer/lsp4ij) |
 | [IntelliJ IDEA](https://www.jetbrains.com/idea/) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [JCIDE](https://www.javacardos.com/tools) | [Javacardos](https://www.javacardos.com) | [JCIDE](https://www.javacardos.com/javacardforum/viewtopic.php?f=5&t=2108&p=6175#p6175) |
 | [JetBrains Fleet](https://www.jetbrains.com/fleet/) | [JetBrains](https://www.jetbrains.com) | Proprietary |
