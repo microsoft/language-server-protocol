@@ -63,6 +63,7 @@ index: 2
 | vim8 and neovim| [Nate Bosch](https://github.com/natebosch) | [vim-lsc](https://github.com/natebosch/vim-lsc) |
 | vim8 and neovim| [w0rp](https://github.com/w0rp) | [ALE (Asynchronous Lint Engine) ](https://github.com/w0rp/ale) |
 | vim9 | [Yegappan Lakshmanan](https://github.com/yegappan) | [Vim9 LSP plugin](https://github.com/yegappan/lsp) |
+| vis | [Florian Fischer](https://gitlab.com/muhq) | [LSP client for the vis editor](https://gitlab.com/muhq/vis-lspc) |
 | Visual Studio | [Adam Friedman](https://github.com/tintoy) | [LSP client in Visual Studio](https://github.com/tintoy/dotnet-language-client/tree/sample/visual-studio/samples/VisualStudioExtension) |
 | Visual Studio | Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 | [Visual Studio Code](https://code.visualstudio.com) | Microsoft | [vscode](https://github.com/Microsoft/vscode/)  |
