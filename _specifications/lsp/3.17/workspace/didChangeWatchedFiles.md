@@ -181,7 +181,7 @@ interface FileEvent {
 	/**
 	 * The change type.
 	 */
-	type: uinteger;
+	type: FileChangeType;
 }
 ```
 
