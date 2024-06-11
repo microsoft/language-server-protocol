@@ -17,6 +17,7 @@ index: 2
 | [Coginiti Pro](https://www.coginiti.co/products/coginiti-pro/) | [Coginiti](https://www.coginiti.co) | |
 | [Coginiti Premium](https://www.coginiti.co/products/coginiti-premium/) | [Coginiti](https://www.coginiti.co) | |
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
+| [Code::Blocks](https://www.codeblocks.org/) | [The Code::Blocks Team](https://www.codeblocks.org/) | svn://svn.code.sf.net/p/codeblocks/code/trunk |
 | [CodeLite](https://codelite.org/) | [Eran Ifrah](https://github.com/eranif) | https://github.com/eranif/codelite |
 | [CodeMirror](https://codemirror.net/6/) | [Furqan Software](https://github.com/furqansoftware) | [codemirror-languageserver](https://github.com/furqansoftware/codemirror-languageserver) |
 | [CudaText](https://cudatext.github.io/) | [Alexey-T](https://github.com/Alexey-T) | [cuda_lsp](https://github.com/CudaText-addons/cuda_lsp) |
