@@ -129,7 +129,8 @@ index: 1
 | [Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot) | [TypeCobolTeam](https://github.com/TypeCobolTeam) | [TypeCobol Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot/wiki) | C# |
 | [LanguageTool](https://languagetool.org/)| [Adam Voss](https://github.com/adamvoss) | [languagetool](https://github.com/adamvoss/languagetool-languageserver) | Java |
 | [LanguageTool](https://languagetool.org/)| [Julian Valentin](https://github.com/valentjn) | [ltex-ls](https://github.com/valentjn/ltex-ls) | Kotlin |
-| [LaTeX](https://www.latex-project.org/)| [Eric Förster](https://github.com/efoerster) | [texlab](https://github.com/efoerster/texlab) |
+| [LaTeX](https://www.latex-project.org/)| [Eric Förster](https://github.com/efoerster) | [texlab](https://github.com/efoerster/texlab) | Rust |
+| [Lean4](https://lean-lang.org/) | [leanprover](https://github.com/leanprover) | [Language Server](https://github.com/leanprover/lean4/tree/master/src/Lean/Server) | Lean4 |
 | [Lox](https://craftinginterpreters.com/appendix-i.html) | [Ajeet D'Souza](https://github.com/ajeetdsouza) | [loxcraft](https://github.com/ajeetdsouza/loxcraft) | Rust |
 | LPC | [John Chmura](https://github.com/jlchmura/) | [lpc-language-server](https://github.com/jlchmura/lpc-language-server) | TypeScript |
 | [Lua](http://www.lua.org/)| [Kyle McLamb](https://github.com/Alloyed) | [lua-lsp](https://github.com/Alloyed/lua-lsp) | Lua |
