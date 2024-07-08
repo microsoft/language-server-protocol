@@ -59,7 +59,7 @@ export interface Diagnostic {
 	 *
 	 * @since 3.16.0
 	 */
-	data?: unknown;
+	data?: LSPAny;
 }
 ```
 

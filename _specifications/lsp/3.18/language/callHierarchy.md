@@ -112,7 +112,7 @@ export interface CallHierarchyItem {
 	 * A data entry field that is preserved between a call hierarchy prepare and
 	 * incoming calls or outgoing calls requests.
 	 */
-	data?: unknown;
+	data?: LSPAny;
 }
 ```
 

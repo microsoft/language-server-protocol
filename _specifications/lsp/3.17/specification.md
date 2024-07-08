@@ -187,7 +187,7 @@ interface ResponseMessage extends Message {
 	 * The result of a request. This member is REQUIRED on success.
 	 * This member MUST NOT exist if there was an error invoking the method.
 	 */
-	result?: string | number | boolean | array | object | null;
+	result?: LSPAny;
 
 	/**
 	 * The error object in case a request fails.
@@ -214,7 +214,7 @@ interface ResponseError {
 	 * A primitive or structured value that contains additional
 	 * information about the error. Can be omitted.
 	 */
-	data?: string | number | boolean | array | object | null;
+	data?: LSPAny;
 }
 ```
 
