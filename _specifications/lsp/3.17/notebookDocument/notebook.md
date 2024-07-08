@@ -171,7 +171,7 @@ export type NotebookDocumentFilter = {
 	/** The type of the enclosing notebook. */
 	notebookType: string;
 
-	/** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+	/** A Uri scheme, like `file` or `untitled`. */
 	scheme?: string;
 
 	/** A glob pattern. */
@@ -180,7 +180,7 @@ export type NotebookDocumentFilter = {
 	/** The type of the enclosing notebook. */
 	notebookType?: string;
 
-	/** A Uri [scheme](#Uri.scheme), like `file` or `untitled`.*/
+	/** A Uri scheme, like `file` or `untitled`.*/
 	scheme: string;
 
 	/** A glob pattern. */
@@ -189,7 +189,7 @@ export type NotebookDocumentFilter = {
 	/** The type of the enclosing notebook. */
 	notebookType?: string;
 
-	/** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+	/** A Uri scheme, like `file` or `untitled`. */
 	scheme?: string;
 
 	/** A glob pattern. */
