@@ -462,7 +462,7 @@ There are two uses cases where it can be beneficial to only compute semantic tok
 - for faster rendering of the tokens in the user interface when a user opens a file. In this use case, servers should also implement the `textDocument/semanticTokens/full` request as well to allow for flicker free scrolling and semantic coloring of a minimap.
 - if computing semantic tokens for a full document is too expensive, servers can only provide a range call. In this case, the client might not render a minimap correctly or might even decide to not show any semantic tokens at all.
 
-A server is allowed to compute the semantic tokens for a broader range than requested by the client. However, if the server does so, the semantic tokens for the broader range must be complete and correct.
+A server is allowed to compute the semantic tokens for a broader range than requested by the client. However, if the server does so, the semantic tokens for the broader range must be complete and correct. If a token at the beginning or end only partially overlaps with the requested range the server should include those tokens in the response.
 
 _Request_:
 
