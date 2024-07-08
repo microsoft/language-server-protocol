@@ -174,7 +174,7 @@ export type NotebookDocumentFilter = {
 	notebookType: string;
 
 	/**
-	 * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+	 * A Uri scheme, like `file` or `untitled`.
     */
 	scheme?: string;
 
@@ -189,7 +189,7 @@ export type NotebookDocumentFilter = {
 	notebookType?: string;
 
 	/**
-	 * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+	 * A Uri scheme, like `file` or `untitled`.
 	 */
 	scheme: string;
 
@@ -204,7 +204,7 @@ export type NotebookDocumentFilter = {
 	notebookType?: string;
 
 	/**
-	 * A Uri [scheme](#Uri.scheme), like `file` or `untitled`.
+	 * A Uri scheme, like `file` or `untitled`.
 	 */
 	scheme?: string;
 
