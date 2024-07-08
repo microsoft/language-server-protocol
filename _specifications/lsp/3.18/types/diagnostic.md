@@ -1,7 +1,7 @@
 #### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
 
-- New in version 3.18: support for markup content in diagnostic messages. The support is guarded by the 
-client capability `textDocument.diagnostic.markupMessageSupport`. If a client doesn't signal the capability, 
+- New in version 3.18: support for markup content in diagnostic messages. The support is guarded by the
+client capability `textDocument.diagnostic.markupMessageSupport`. If a client doesn't signal the capability,
 servers shouldn't send `MarkupContent` diagnostic messages back to the client.
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
@@ -14,8 +14,9 @@ export interface Diagnostic {
 	range: Range;
 
 	/**
-	 * The diagnostic's severity. Can be omitted. If omitted it is up to the
-	 * client to interpret diagnostics as error, warning, info or hint.
+	 * The diagnostic's severity. To avoid interpretation mismatches when a
+	 * server is used with different clients it is highly recommended that
+	 * servers always provide a severity value.
 	 */
 	severity?: DiagnosticSeverity;
 
@@ -39,7 +40,7 @@ export interface Diagnostic {
 
 	/**
 	 * The diagnostic's message.
-	 * 
+	 *
 	 * @since 3.18.0 - support for MarkupContent. This is guarded by the client
 	 * capability `textDocument.diagnostic.markupMessageSupport`.
 	 */
