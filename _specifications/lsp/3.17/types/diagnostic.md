@@ -12,7 +12,8 @@ export interface Diagnostic {
 	/**
 	 * The diagnostic's severity. To avoid interpretation mismatches when a
 	 * server is used with different clients it is highly recommended that
-	 * servers always provide a severity value.
+	 * servers always provide a severity value. If omitted, it’s recommended
+	 * for the client to interpret it as an Error severity.
 	 */
 	severity?: DiagnosticSeverity;
 
