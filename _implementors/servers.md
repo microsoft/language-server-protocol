@@ -272,4 +272,5 @@ index: 1
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
 | * | [iamcco](https://github.com/iamcco) | [diagnostic-languageserver](https://github.com/iamcco/diagnostic-languageserver) | TypeScript |
 | * | [daquexian](https://github.com/daquexian) | [tagls](https://github.com/daquexian/tagls) | Python |
+| * | [Sonar](https://github.com/SonarSource) | [SonarLint Language Server](https://github.com/SonarSource/sonarlint-language-server) | Java |
 {: .table .table-bordered .table-responsive}
