@@ -237,6 +237,7 @@ index: 1
 | [TTCN-3](http://www.ttcn-3.org) | [Nokia](https://www.nokia.com) | [ntt](https://github.com/nokia/ntt) | Go |
 | [TTCN-3](http://www.ttcn-3.org) | [Eclipse Titan](https://projects.eclipse.org/projects/tools.titan) | [Titan Language Server](https://gitlab.eclipse.org/eclipse/titan/titan.language-server) | Java |
 | Turtle | [Stardog Union](https://github.com/stardog-union) | [Turtle Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server) | TypeScript |
+| [Tailwind CSS](https://tailwindcss.com) | [Tailwind Labs](https://tailwindcss.com) | [Tailwind Intellisense](http://github.com/tailwindlabs/tailwindcss-intellisense) | TypeScript |
 | [Twig](https://twig.symfony.com/) | [Stanislav Romanov](https://github.com/kaermorchen) | [Twig Language Server](https://github.com/kaermorchen/twig-language-server/tree/master/packages/language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
