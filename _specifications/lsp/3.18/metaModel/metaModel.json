@@ -12323,6 +12323,16 @@
 					},
 					"optional": true,
 					"documentation": "Whether code lens supports dynamic registration."
+				},
+				{
+					"name": "resolveSupport",
+					"type": {
+						"kind": "reference",
+						"name": "ClientCodeLensResolveOptions"
+					},
+					"optional": true,
+					"documentation": "Whether the client supports resolving additional code lens properties via a separate `codeLens/resolve` request.",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The client capabilities  of a {@link CodeLensRequest}."
@@ -14915,6 +14925,28 @@
 			},
 			"documentation": "The glob pattern to watch relative to the base path. Glob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "ClientCodeLensResolveOptions",
+			"type": {
+				"kind": "literal",
+				"value": {
+					"properties": [
+						{
+							"name": "properties",
+							"type": {
+								"kind": "array",
+								"element": {
+									"kind": "base",
+									"name": "string"
+									}
+							},
+							"documentation": "The properties that a client can resolve lazily."
+						}
+					]
+				}
+			},
+			"since": "3.18.0"
 		}
 	]
 }
