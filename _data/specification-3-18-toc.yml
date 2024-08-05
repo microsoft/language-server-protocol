@@ -54,6 +54,8 @@
       anchor: versionedTextDocumentIdentifier
     - title: Text Document Position Params
       anchor: textDocumentPositionParams
+    - title: Patterns
+      anchor: patterns
     - title: Document Filter
       anchor: documentFilter
     - title: String Value

@@ -234,8 +234,8 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.3.3)
+      strscan
     rouge (3.26.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
@@ -261,6 +261,7 @@ GEM
       unf_ext
     unf_ext (0.0.9.1)
     unicode-display_width (1.8.0)
+    webrick (1.8.1)
 
 PLATFORMS
   x86_64-linux
@@ -271,9 +272,10 @@ DEPENDENCIES
   jekyll-remote-theme
   jemoji
   tzinfo-data
+  webrick (~> 1.8)
 
 RUBY VERSION
-   ruby 2.7.5p203
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.3.17
