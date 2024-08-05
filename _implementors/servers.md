@@ -155,6 +155,7 @@ index: 1
 | [OpenAPI](https://www.openapis.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | [openVALIDATION](http://openvalidation.io/) | [openVALIDATION](https://github.com/openvalidation) | [ov-language-server](https://github.com/openvalidation/ov-language-server) | TypeScript
 | [Papyrus](https://www.creationkit.com/fallout4/index.php?title=Category:Papyrus) | [Joel Day](https://github.com/joelday) | [papyrus-lang](https://github.com/joelday/papyrus-lang) | C# |
+| [PartiQL](https://partiql.org/) | [AWS](https://github.com/aws/language-servers) | [aws-lsp-partiql](https://github.com/aws/language-servers/tree/main/server/aws-lsp-partiql) | TypeScript |
 | Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl |
 | Perl | [Marc Reisner](https://github.com/FractalBoy) | [PLS](https://github.com/FractalBoy/perl-language-server)| Perl |
 | Perl | [Brian Scannell](https://github.com/bscan) | [Perl Navigator](https://github.com/bscan/PerlNavigator)| Perl |
@@ -238,6 +239,7 @@ index: 1
 | [TTCN-3](http://www.ttcn-3.org) | [Nokia](https://www.nokia.com) | [ntt](https://github.com/nokia/ntt) | Go |
 | [TTCN-3](http://www.ttcn-3.org) | [Eclipse Titan](https://projects.eclipse.org/projects/tools.titan) | [Titan Language Server](https://gitlab.eclipse.org/eclipse/titan/titan.language-server) | Java |
 | Turtle | [Stardog Union](https://github.com/stardog-union) | [Turtle Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/turtle-language-server) | TypeScript |
+| [Tailwind CSS](https://tailwindcss.com) | [Tailwind Labs](https://tailwindcss.com) | [Tailwind Intellisense](http://github.com/tailwindlabs/tailwindcss-intellisense) | TypeScript |
 | [Twig](https://twig.symfony.com/) | [Stanislav Romanov](https://github.com/kaermorchen) | [Twig Language Server](https://github.com/kaermorchen/twig-language-server/tree/master/packages/language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
