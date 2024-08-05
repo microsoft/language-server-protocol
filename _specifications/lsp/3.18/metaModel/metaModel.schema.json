@@ -114,6 +114,13 @@
           "description": "Since when (release number) this enumeration is available. Is undefined if not known.",
           "type": "string"
         },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "supportsCustomValues": {
           "description": "Whether the enumeration supports custom values (e.g. values which are not part of the set defined in `values`). If omitted no custom values are supported.",
           "type": "boolean"
@@ -160,6 +167,13 @@
         "since": {
           "description": "Since when (release number) this enumeration entry is available. Is undefined if not known.",
           "type": "string"
+        },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "value": {
           "description": "The value.",
@@ -361,7 +375,7 @@
           "description": "The direction in which this notification is sent in the protocol."
         },
         "method": {
-          "description": "The request's method name.",
+          "description": "The notifications's method name.",
           "type": "string"
         },
         "params": {
@@ -383,7 +397,7 @@
           "type": "boolean"
         },
         "registrationMethod": {
-          "description": "Optional a dynamic registration method if it different from the request's method.",
+          "description": "Optional a dynamic registration method if it different from the notifications's method.",
           "type": "string"
         },
         "registrationOptions": {
@@ -392,6 +406,17 @@
         },
         "since": {
           "description": "Since when (release number) this notification is available. Is undefined if not known.",
+          "type": "string"
+        },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "typeName": {
+          "description": "The type name of the notifications if any.",
           "type": "string"
         }
       },
@@ -449,6 +474,13 @@
         "since": {
           "description": "Since when (release number) this property is available. Is undefined if not known.",
           "type": "string"
+        },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "type": {
           "$ref": "#/definitions/Type",
@@ -540,6 +572,17 @@
         "since": {
           "description": "Since when (release number) this request is available. Is undefined if not known.",
           "type": "string"
+        },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "typeName": {
+          "description": "The type name of the request if any.",
+          "type": "string"
         }
       },
       "required": [
@@ -611,6 +654,13 @@
         "since": {
           "description": "Since when (release number) this structure is available. Is undefined if not known.",
           "type": "string"
+        },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -645,6 +695,13 @@
         "since": {
           "description": "Since when (release number) this structure is available. Is undefined if not known.",
           "type": "string"
+        },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -751,6 +808,13 @@
         "since": {
           "description": "Since when (release number) this structure is available. Is undefined if not known.",
           "type": "string"
+        },
+        "sinceTags": {
+          "description": "All since tags in case there was more than one tag. Is undefined if not known.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "type": {
           "$ref": "#/definitions/Type",

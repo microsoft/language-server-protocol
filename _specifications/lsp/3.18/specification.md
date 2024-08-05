@@ -449,6 +449,7 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/textDocumentIdentifier.md %}
 {% include_relative types/versionedTextDocumentIdentifier.md %}
 {% include_relative types/textDocumentPositionParams.md %}
+{% include_relative types/patterns.md %}
 {% include_relative types/documentFilter.md %}
 
 {% include_relative types/stringValue.md %}

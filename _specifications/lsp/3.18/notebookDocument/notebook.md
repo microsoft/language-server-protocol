@@ -181,7 +181,7 @@ export type NotebookDocumentFilter = {
 	/**
 	 * A glob pattern.
 	 */
-	pattern?: string;
+	pattern?: GlobPattern;
 } | {
 	/**
 	 * The type of the enclosing notebook.
@@ -196,7 +196,7 @@ export type NotebookDocumentFilter = {
 	/**
 	 * A glob pattern.
 	 */
-	pattern?: string;
+	pattern?: GlobPattern;
 } | {
 	/**
 	 * The type of the enclosing notebook.
@@ -211,7 +211,7 @@ export type NotebookDocumentFilter = {
 	/**
 	 * A glob pattern.
 	 */
-	pattern: string;
+	pattern: GlobPattern;
 };
 ```
 
