@@ -261,6 +261,7 @@ GEM
       unf_ext
     unf_ext (0.0.9.1)
     unicode-display_width (1.8.0)
+    webrick (1.8.1)
 
 PLATFORMS
   x86_64-linux
@@ -271,9 +272,10 @@ DEPENDENCIES
   jekyll-remote-theme
   jemoji
   tzinfo-data
+  webrick (~> 1.8)
 
 RUBY VERSION
-   ruby 2.7.5p203
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.3.17
