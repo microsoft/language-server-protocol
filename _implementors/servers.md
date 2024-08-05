@@ -218,6 +218,7 @@ index: 1
 | [Sphinx](https://www.sphinx-doc.org/en/master/) | [Alex Carney](https://github.com/alcarney) | [esbonio](https://github.com/swyddfa/esbonio) | Python |
 | SQL | [Toshikazu Ohashi](https://github.com/lighttiger2505) | [sqls](https://github.com/lighttiger2505/sqls) | Go |
 | Standard ML | [azdavis](https://azdavis.net) | [Millet](https://github.com/azdavis/millet) | Rust |
+| [Stimulus](https://stimulus.hotwired.dev) | [Marco Roth](https://github.com/marcoroth) | [Stimulus LSP](https://github.com/marcoroth/stimulus-lsp) | TypeScript | 
 | Stylable | [Wix.com](https://www.wix.com) | [stylable/language-service](https://github.com/wix/stylable/tree/master/packages/language-service) | TypeScript |
 | [Svelte](https://svelte.dev/) | [Contributors](https://github.com/sveltejs/language-tools/graphs/contributors) | [svelte-language-server](https://github.com/sveltejs/language-tools) | TypeScript |
 | Sway | [Fuel Labs](https://www.fuel.network/) | [sway-lsp](https://github.com/FuelLabs/sway/tree/master/sway-lsp) | Rust |
