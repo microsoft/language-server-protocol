@@ -270,6 +270,8 @@
       anchor: workspace_executeCommand
     - title: Apply Edit
       anchor: workspace_applyEdit
+    - title: Text Document Content
+      anchor: workspace_textDocumentContent
   - title: Window Features
     anchor: windowFeatures
     children:
