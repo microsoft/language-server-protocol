@@ -677,6 +677,7 @@ The language features should be computed on the [synchronized state](#textDocume
 {% include_relative workspace/didChangeWatchedFiles.md %}
 {% include_relative workspace/executeCommand.md %}
 {% include_relative workspace/applyEdit.md %}
+{% include_relative workspace/textDocumentContent.md %}
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
