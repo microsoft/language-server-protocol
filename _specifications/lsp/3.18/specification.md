@@ -716,7 +716,7 @@ To support the case that the editor starting a server crashes, an editor should 
 
 Since 3.17 there is a meta model describing the LSP protocol:
 
-- [metaModel.json](../metaModel/metaModel.json): The actual meta model for the LSP 3.17 specification
+- [metaModel.json](../metaModel/metaModel.json): The actual meta model for the LSP 3.18 specification
 - [metaModel.ts](../metaModel/metaModel.ts): A TypeScript file defining the data types that make up the meta model.
 - [metaModel.schema.json](../metaModel/metaModel.schema.json): A JSON schema file defining the data types that make up the meta model. Can be used to generate code to read the meta model JSON file.
 
@@ -724,102 +724,113 @@ Since 3.17 there is a meta model describing the LSP protocol:
 
 #### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (mm/dd/yyyy)</a>
 
-* support for code action kind documentation.
+* Added inline completions support.
+* Added dynamic text document content support.
+* Added refresh support for folding ranges.
+* Support to format multiple ranges at once.
+* Support for snippets in workspace edits.
+* Relative Pattern support for document filters and notebook document filters.
+* Support for code action kind documentation.
 * Add support for `activeParameter` on `SignatureHelp` and `SignatureInformation` being `null`.
-* Add tooltip to `Command`.
+* Support tooltips for `Command`.
+* Support for meta data information on workspace edits.
+* Support for snippets in text document edits.
+* Support for debug message kind.
+* Client capability to enumerate properties that can be resolved for code lenses.
+
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (05/10/2022)</a>
 
 * Specify how clients will handle stale requests.
-* Add support for a completion item label details.
-* Add support for workspace symbol resolve request.
-* Add support for label details and insert text mode on completion items.
-* Add support for shared values on CompletionItemList.
-* Add support for HTML tags in Markdown.
-* Add support for collapsed text in folding.
-* Add support for trigger kinds on code action requests.
-* Add the following support to semantic tokens:
+* Added support for a completion item label details.
+* Added support for workspace symbol resolve request.
+* Added support for label details and insert text mode on completion items.
+* Added support for shared values on CompletionItemList.
+* Added support for HTML tags in Markdown.
+* Added support for collapsed text in folding.
+* Added support for trigger kinds on code action requests.
+* Added the following support to semantic tokens:
   - server cancelable
   - augmentation of syntax tokens
-* Add support to negotiate the position encoding.
-* Add support for relative patterns in file watchers.
-* Add support for type hierarchies
-* Add support for inline values.
-* Add support for inlay hints.
-* Add support for notebook documents.
-* Add support for diagnostic pull model.
+* Added support to negotiate the position encoding.
+* Added support for relative patterns in file watchers.
+* Added support for type hierarchies
+* Added support for inline values.
+* Added support for inlay hints.
+* Added support for notebook documents.
+* Added support for diagnostic pull model.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
-* Add support for tracing.
-* Add semantic token support.
-* Add call hierarchy support.
-* Add client capability for resolving text edits on completion items.
-* Add support for client default behavior on renames.
-* Add support for insert and replace ranges on `CompletionItem`.
-* Add support for diagnostic code descriptions.
-* Add support for document symbol provider label.
-* Add support for tags on `SymbolInformation` and `DocumentSymbol`.
-* Add support for moniker request method.
-* Add support for code action `data` property.
-* Add support for code action `disabled` property.
-* Add support for code action resolve request.
-* Add support for diagnostic `data` property.
-* Add support for signature information `activeParameter` property.
-* Add support for `workspace/didCreateFiles` notifications and `workspace/willCreateFiles` requests.
-* Add support for `workspace/didRenameFiles` notifications and `workspace/willRenameFiles` requests.
-* Add support for `workspace/didDeleteFiles` notifications and `workspace/willDeleteFiles` requests.
-* Add client capability to signal whether the client normalizes line endings.
-* Add support to preserve additional attributes on `MessageActionItem`.
-* Add support to provide the clients locale in the initialize call.
-* Add support for opening and showing a document in the client user interface.
-* Add support for linked editing.
-* Add support for change annotations in text edits as well as in create file, rename file and delete file operations.
+* Added support for tracing.
+* Added semantic token support.
+* Added call hierarchy support.
+* Added client capability for resolving text edits on completion items.
+* Added support for client default behavior on renames.
+* Added support for insert and replace ranges on `CompletionItem`.
+* Added support for diagnostic code descriptions.
+* Added support for document symbol provider label.
+* Added support for tags on `SymbolInformation` and `DocumentSymbol`.
+* Added support for moniker request method.
+* Added support for code action `data` property.
+* Added support for code action `disabled` property.
+* Added support for code action resolve request.
+* Added support for diagnostic `data` property.
+* Added support for signature information `activeParameter` property.
+* Added support for `workspace/didCreateFiles` notifications and `workspace/willCreateFiles` requests.
+* Added support for `workspace/didRenameFiles` notifications and `workspace/willRenameFiles` requests.
+* Added support for `workspace/didDeleteFiles` notifications and `workspace/willDeleteFiles` requests.
+* Added client capability to signal whether the client normalizes line endings.
+* Added support to preserve additional attributes on `MessageActionItem`.
+* Added support to provide the clients locale in the initialize call.
+* Added support for opening and showing a document in the client user interface.
+* Added support for linked editing.
+* Added support for change annotations in text edits as well as in create file, rename file and delete file operations.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
-* Add generic progress reporting support.
-* Add specific work done progress reporting support to requests where applicable.
-* Add specific partial result progress support to requests where applicable.
-* Add support for `textDocument/selectionRange`.
-* Add support for server and client information.
-* Add signature help context.
-* Add Erlang and Elixir to the list of supported programming languages
-* Add `version` on `PublishDiagnosticsParams`
-* Add `CodeAction#isPreferred` support.
-* Add `CompletionItem#tag` support.
-* Add `Diagnostic#tag` support.
-* Add `DocumentLink#tooltip` support.
-* Add `trimTrailingWhitespace`, `insertFinalNewline` and `trimFinalNewlines` to `FormattingOptions`.
+* Added generic progress reporting support.
+* Added specific work done progress reporting support to requests where applicable.
+* Added specific partial result progress support to requests where applicable.
+* Added support for `textDocument/selectionRange`.
+* Added support for server and client information.
+* Added signature help context.
+* Added Erlang and Elixir to the list of supported programming languages
+* Added `version` on `PublishDiagnosticsParams`
+* Added `CodeAction#isPreferred` support.
+* Added `CompletionItem#tag` support.
+* Added `Diagnostic#tag` support.
+* Added `DocumentLink#tooltip` support.
+* Added `trimTrailingWhitespace`, `insertFinalNewline` and `trimFinalNewlines` to `FormattingOptions`.
 * Clarified `WorkspaceSymbolParams#query` parameter.
 
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
 
-* Add support for signature label offsets.
-* Add support for location links.
-* Add support for `textDocument/declaration` request.
+* Added support for signature label offsets.
+* Added support for location links.
+* Added support for `textDocument/declaration` request.
 
 #### <a href="#version_3_13_0" name="version_3_13_0" class="anchor">3.13.0 (9/11/2018)</a>
 
-* Add support for file and folder operations (create, rename, move) to workspace edits.
+* Added support for file and folder operations (create, rename, move) to workspace edits.
 
 #### <a href="#version_3_12_0" name="version_3_12_0" class="anchor">3.12.0 (8/23/2018)</a>
 
-* Add support for `textDocument/prepareRename` request.
+* Added support for `textDocument/prepareRename` request.
 
 #### <a href="#version_3_11_0" name="version_3_11_0" class="anchor">3.11.0 (8/21/2018)</a>
 
-* Add support for CodeActionOptions to allow a server to provide a list of code action it supports.
+* Added support for CodeActionOptions to allow a server to provide a list of code action it supports.
 
 #### <a href="#version_3_10_0" name="version_3_10_0" class="anchor">3.10.0 (7/23/2018)</a>
 
-* Add support for hierarchical document symbols as a valid response to a `textDocument/documentSymbol` request.
-* Add support for folding ranges as a valid response to a `textDocument/foldingRange` request.
+* Added support for hierarchical document symbols as a valid response to a `textDocument/documentSymbol` request.
+* Added support for folding ranges as a valid response to a `textDocument/foldingRange` request.
 
 #### <a href="#version_3_9_0" name="version_3_9_0" class="anchor">3.9.0 (7/10/2018)</a>
 
-* Add support for `preselect` property in `CompletionItem`
+* Added support for `preselect` property in `CompletionItem`
 
 #### <a href="#version_3_8_0" name="version_3_8_0" class="anchor">3.8.0 (6/11/2018)</a>
 
@@ -870,9 +881,9 @@ Decided to skip this version to bring the protocol version number in sync the wi
 
 #### <a href="#version_3_0_0" name="version_3_0_0" class="anchor">3.0 Version</a>
 
-- add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
-- add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediately.
+- Added support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
+- Added support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediately.
 - servers can more dynamically react to client features. Capabilities can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This, for example, allows servers to react to settings or configuration changes without a restart.
-- add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
-- add support for `textDocument/documentLink` request.
-- add a `rootUri` property to the initializeParams in favor of the `rootPath` property.
+- Added support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
+- Added support for `textDocument/documentLink` request.
+- Added a `rootUri` property to the initializeParams in favor of the `rootPath` property.
