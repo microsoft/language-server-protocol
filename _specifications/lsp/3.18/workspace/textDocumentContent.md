@@ -1,6 +1,6 @@
 #### <a href="#workspace_textDocumentContent" name="workspace_textDocumentContent" class="anchor">Text Document Content Request (:leftwards_arrow_with_hook:)</a>
 
-The `workspace/textDocumentContent` request is sent from the client to the server to dynamically fetch the content of a text document.
+The `workspace/textDocumentContent` request is sent from the client to the server to dynamically fetch the content of a text document. Clients should treat the content returned from this requests as readonly.
 
 _Client Capability_:
 * property path (optional): `workspace.textDocumentContent`
@@ -77,7 +77,29 @@ export interface TextDocumentContentParams {
 ```
 
 _Response_:
-* result: `string`. The content of the text document. Please note, that the content of any subsequent open notifications for the text document might differ from the returned content due to whitespace and line ending normalizations done on the client.
+* result: `TextDocumentContentResult` defined as follows:
+
+<div class="anchorHolder"><a href="#textDocumentContentResult" name="textDocumentContentResult" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Result of the `workspace/textDocumentContent` request.
+ *
+ * @since 3.18.0
+ * @proposed
+ */
+export interface TextDocumentContentResult {
+	/**
+	 * The text content of the text document. Please note, that the content of
+	 * any subsequent open notifications for the text document might differ
+	 * from the returned content due to whitespace and line ending
+	 * normalizations done on the client
+	 */
+	text: string;
+}
+```
+
+ The content of the text document. .
 * error: code and message set in case an exception happens during the text document content request.
 
 #### <a href="#workspace_textDocumentContentRefresh" name="workspace_textDocumentContentRefresh" class="anchor">Text Document Content Refresh Request (:arrow_right_hook:)</a>
