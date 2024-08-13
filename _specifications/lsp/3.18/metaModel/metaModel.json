@@ -14164,7 +14164,128 @@
 				{
 					"name": "Deprecated",
 					"value": 1,
-					"documentation": "Render a symbol as obsolete, usually using a strike-out."
+					"documentation": "Render a symbol as obsolete, usually using a strike-out.",
+					"since": "3.16"
+				},
+				{
+					"name": "Private",
+					"value": 2,
+					"documentation": "Render a symbol with visibility / access modifier \"private\".",
+					"since": "3.18"
+				},
+				{
+					"name": "Package",
+					"value": 3,
+					"documentation": "Render a symbol with visibility \"package private\", e.g. in Java.",
+					"since": "3.18"
+				},
+				{
+					"name": "Protected",
+					"value": 4,
+					"documentation": "Render a symbol with visibility / access modifier \"protected\". The modifier could be combined e.g. with \"internal\" or \"private\" in languages like C#.",
+					"since": "3.18"
+				},
+				{
+					"name": "Public",
+					"value": 5,
+					"documentation": "Render a symbol with visibility / access modifier \"public\".",
+					"since": "3.18"
+				},
+				{
+					"name": "Internal",
+					"value": 6,
+					"documentation": "Render a symbol with visibility / access modifier \"internal\", e.g. in C# or Kotlin.",
+					"since": "3.18"
+				},
+				{
+					"name": "File",
+					"value": 7,
+					"documentation": "Render a symbol with visibility / access modifier \"file\", e.g. in C#.",
+					"since": "3.18"
+				},
+				{
+					"name": "Static",
+					"value": 8,
+					"documentation": "Render a symbol as \"static\".",
+					"since": "3.18"
+				},
+				{
+					"name": "Abstract",
+					"value": 9,
+					"documentation": "Render a symbol as \"abstract\".",
+					"since": "3.18"
+				},
+				{
+					"name": "Final",
+					"value": 10,
+					"documentation": "Render a symbol as \"final\".",
+					"since": "3.18"
+				},
+				{
+					"name": "Sealed",
+					"value": 11,
+					"documentation": "Render a symbol as \"sealed\", e.g. classes and interfaces in Kotlin.",
+					"since": "3.18"
+				},
+				{
+					"name": "Constant",
+					"value": 12,
+					"documentation": "Render a symbol as \"constant\", e.g. \"const\" methods in C++.",
+					"since": "3.18"
+				},
+				{
+					"name": "Transient",
+					"value": 13,
+					"documentation": "Render a symbol as \"transient\", e.g. in Java.",
+					"since": "3.18"
+				},
+				{
+					"name": "Volatile",
+					"value": 14,
+					"documentation": "Render a symbol as \"volatile\", e.g. in Java.",
+					"since": "3.18"
+				},
+				{
+					"name": "Synchronized",
+					"value": 15,
+					"documentation": "Render a symbol as \"synchronized\", e.g. in Java.",
+					"since": "3.18"
+				},
+				{
+					"name": "Virtual",
+					"value": 16,
+					"documentation": "Render a symbol as \"virtual\", e.g. in C++.",
+					"since": "3.18"
+				},
+				{
+					"name": "Nullable",
+					"value": 17,
+					"documentation": "Render a symbol as \"nullable\", e.g. types with '?' in Kotlin.",
+					"since": "3.18"
+				},
+				{
+					"name": "NonNull",
+					"value": 18,
+					"documentation": "Render a symbol as \"never null\", e.g. types without '?' in Kotlin.",
+					"since": "3.18"
+				},
+				{
+					"name": "Declaration",
+					"value": 19,
+					"documentation": "Render a symbol as declaration.",
+					"since": "3.18"
+				},
+				{
+					"name": "Definition",
+					"value": 20,
+					"documentation": "Render a symbol as definition (in contrast to declaration), e.g. in header files in C++.",
+					"since": "3.18"
+				},
+				{
+					"name": "ReadOnly",
+					"value": 21,
+					"documentation": "Render a symbol as \"read-only\", i.e. variables / properties that cannot be changed.",
+					"since": "3.18"
 				}
 			],
 			"documentation": "Symbol tags are extra annotations that tweak the rendering of a symbol.\n\n@since 3.16",
