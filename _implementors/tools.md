@@ -27,6 +27,7 @@ index: 2
 | Emacs | [João Távora](https://github.com/joaotavora) | [Eglot](https://github.com/joaotavora/eglot) |
 | Emacs | [Andy Stewart](https://github.com/manateelazycat/) | [lsp-bridge](https://github.com/manateelazycat/lsp-bridge/) | 
 | [ecode](https://github.com/SpartanJ/ecode) | [Martín Lucas Golini](https://github.com/SpartanJ) | [ecode](https://github.com/SpartanJ/ecode) | 
+| [Geany](https://www.geany.org) | [Jiří Techet](https://github.com/techee) | [geany-lsp](https://github.com/techee/geany-lsp) |
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
 | [GoLand](https://www.jetbrains.com/go) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Helix Editor](https://helix-editor.com/) | [Blaž Hrastnik](https://github.com/archseer) | [helix](https://github.com/helix-editor/helix) |
