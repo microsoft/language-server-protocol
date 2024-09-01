@@ -40,7 +40,7 @@ export interface WorkDoneProgressBegin {
 	/**
 	 * Optional progress percentage to display (value 100 is considered 100%).
 	 * If not provided infinite progress is assumed and clients are allowed
-	 * to ignore the `percentage` value in subsequent in report notifications.
+	 * to ignore the `percentage` value in subsequent report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
 	 * that are not following this rule. The value range is [0, 100].
@@ -79,7 +79,7 @@ export interface WorkDoneProgressReport {
 	/**
 	 * Optional progress percentage to display (value 100 is considered 100%).
 	 * If not provided infinite progress is assumed and clients are allowed
-	 * to ignore the `percentage` value in subsequent in report notifications.
+	 * to ignore the `percentage` value in subsequent report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
 	 * that are not following this rule. The value range is [0, 100].
