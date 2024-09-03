@@ -6327,7 +6327,7 @@
 						"name": "uinteger"
 					},
 					"optional": true,
-					"documentation": "Optional progress percentage to display (value 100 is considered 100%).\nIf not provided infinite progress is assumed and clients are allowed\nto ignore the `percentage` value in subsequent in report notifications.\n\nThe value should be steadily rising. Clients are free to ignore values\nthat are not following this rule. The value range is [0, 100]."
+					"documentation": "Optional progress percentage to display (value 100 is considered 100%).\nIf not provided infinite progress is assumed and clients are allowed\nto ignore the `percentage` value in subsequent report notifications.\n\nThe value should be steadily rising. Clients are free to ignore values\nthat are not following this rule. The value range is [0, 100]."
 				}
 			]
 		},
@@ -6366,7 +6366,7 @@
 						"name": "uinteger"
 					},
 					"optional": true,
-					"documentation": "Optional progress percentage to display (value 100 is considered 100%).\nIf not provided infinite progress is assumed and clients are allowed\nto ignore the `percentage` value in subsequent in report notifications.\n\nThe value should be steadily rising. Clients are free to ignore values\nthat are not following this rule. The value range is [0, 100]"
+					"documentation": "Optional progress percentage to display (value 100 is considered 100%).\nIf not provided infinite progress is assumed and clients are allowed\nto ignore the `percentage` value in subsequent report notifications.\n\nThe value should be steadily rising. Clients are free to ignore values\nthat are not following this rule. The value range is [0, 100]."
 				}
 			]
 		},
