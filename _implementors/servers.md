@@ -142,7 +142,7 @@ index: 1
 | Make | [alexclewontin](https://github.com/alexclewontin) | [make-lsp-vscode](https://github.com/alexclewontin/make-lsp-vscode) | TypeScript |
 | [Markdown](https://commonmark.org) | [Artem Pianykh](https://github.com/artempyanykh) | [Marksman](https://github.com/artempyanykh/marksman) | F# |
 | [Markdown](https://commonmark.org) | [Nico Rehwaldt](https://github.com/nikku) | [Markmark](https://github.com/nikku/markmark) | JavaScript |
-| [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features/server) | TypeScript |
+| [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode-markdown-languageserver) (vscode client [here](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features)) | TypeScript |
 | MATLAB | mathworks | [MATLAB-language-server](https://github.com/mathworks/MATLAB-language-server) | TypeScript, MATLAB |
 | [MDX](https://mdxjs.com) | [MDX team](https://github.com/mdx-js) | [mdx-js/mdx-analyzer](https://github.com/mdx-js) | JavaScript |
 | Motorola 68000 Assembly | [Graham Bates](https://github.com/grahambates) | [m68k-lsp](https://github.com/grahambates/m68k-lsp) | TypeScript |
