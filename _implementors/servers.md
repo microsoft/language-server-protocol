@@ -85,6 +85,7 @@ index: 1
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
 | F# | [@Krzysztof-Cieslak](https://github.com/Krzysztof-Cieslak) & Contributors | [FsAutoComplete](https://github.com/fsharp/FsAutoComplete) | F# |
+| [fluent-bit](https://fluentbit.io/) | [Seonghyeon Cho](https://github.com/sh-cho) | [fluent-bit-lsp](https://github.com/sh-cho/fluent-bit-lsp) | Rust |
 | Fortran | [Chris Hansen](https://github.com/hansec) | [fortran-language-server](https://github.com/hansec/fortran-language-server) | Python |
 | [Fortran](https://fortran-lang.org/) | [Giannis Nikiteas](https://github.com/gnikit) | [fortls](https://github.com/gnikit/fortls) | Python |
 | [Fuzion](https://flang.dev) | [Tokiwa Software GmbH](https://tokiwa.software) | [Fuzion Language Server](https://github.com/tokiwa-software/fuzion-lsp-server) | Java, Fuzion |
