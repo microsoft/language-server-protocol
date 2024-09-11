@@ -405,8 +405,10 @@ export interface CompletionList {
 	 * 
 	 * In unspecified, all fields will be treated as "replace".
 	 * 
-	 * If a field's value is "replace", the value from a completion item will
-	 * always be used instead of the value from `completionItem.itemDefaults`.
+	 * If a field's value is "replace", the value from a completion item (if
+	 * provided) will always be used instead of the value from
+	 * `completionItem.itemDefaults`. `null` values are treated the same as a
+	 * value that was not provided.
 	 * 
 	 * If a field's value is "merge", the values will be merged using the rules
 	 * defined against each field below.
@@ -423,17 +425,15 @@ export interface CompletionList {
 		 * merged with those in `completionList.itemDefaults.commitCharacters`.
 		 * 
 		 * If "replace", the commit characters from the completion item will
-		 * always be used unless not provided, in which case those from
-		 * `completionList.itemDefaults.commitCharacters` will be used. An empty
-		 * list can be used if a completion item does not have any commit
+		 * always be used unless not provided (or `null`), in which case those
+		 * from `completionList.itemDefaults.commitCharacters` will be used. An
+		 * empty list can be used if a completion item does not have any commit
 		 * characters and also should not use those from
 		 * `completionList.itemDefaults.commitCharacters`.
 		 * 
 		 * If "merge" the commitCharacters for the completion will be the union
 		 * of all values in both `completionList.itemDefaults.commitCharacters`
-		 * and the completion's own `commitCharacters`. An empty list indicates
-		 * the completion adds no additional commit characters and a value of
-		 * `null` indicates the defaults should not be used.
+		 * and the completion's own `commitCharacters`.
 		 *
 		 * @since 3.18.0
 		 */
@@ -444,24 +444,20 @@ export interface CompletionList {
 		 * be merged with data from `completionList.itemDefaults.data`.
 		 * 
 		 * If "replace", the data from the completion item will be used if
-		 * provided, otherwise  `completionList.itemDefaults.data` will be used.
-		 * An empty object can be used if a completion item does not have any
-		 * data but also should not use the value from
-		 * `completionList.itemDefaults.data`.
+		 * provided (and not `null`), otherwise
+		 * `completionList.itemDefaults.data` will be used. An empty object can
+		 * be used if a completion item does not have any data but also should
+		 * not use the value from `completionList.itemDefaults.data`.
 		 * 
 		 * If "merge", a shallow merge will be performed between
 		 * `completionList.itemDefaults.data` and the completion's own data
 		 * using the following rules:
 		 * 
-		 * - If a completion's data is not specified, the data from
-		 *   `completionList.itemDefaults.data` will be used.
-		 * - If a completion's data is null, the resulting data field will be
-		 *   null (defaults are not used).
-		 * - If a field is specified in `completion.data` it will be used as-is.
-		 * - If a field is `null` in `completion.data`, it will remain `null`
-		 *   (default is not used).
-		 * - If a field is unspecified in `completion.data`, the same field from
-		 *   `completionList.itemDefaults.data` will be used.
+		 * - If a completion's `data` field is not provided (or `null`), the
+		 *   data from `completionList.itemDefaults.data` will be used as-is.
+		 * - If a completion's `data` is provided, each field will overwrite the
+		 *   field of the same name in `completionList.itemDefaults.data` but
+		 *   no merging of fields within that value will occur.
 		 *
 		 * @since 3.18.0
 		 */
