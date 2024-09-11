@@ -431,7 +431,9 @@ export interface CompletionList {
 		 * 
 		 * If "merge" the commitCharacters for the completion will be the union
 		 * of all values in both `completionList.itemDefaults.commitCharacters`
-		 * and the completion's own `commitCharacters`.
+		 * and the completion's own `commitCharacters`. An empty list indicates
+		 * the completion adds no additional commit characters and a value of
+		 * `null` indicates the defaults should not be used.
 		 *
 		 * @since 3.18.0
 		 */
@@ -451,8 +453,13 @@ export interface CompletionList {
 		 * `completionList.itemDefaults.data` and the completion's own data
 		 * using the following rules:
 		 * 
+		 * - If a completion's data is not specified, the data from
+		 *   `completionList.itemDefaults.data` will be used.
+		 * - If a completion's data is null, the resulting data field will be
+		 *   null (defaults are not used).
 		 * - If a field is specified in `completion.data` it will be used as-is.
-		 * - If a field is `null` in `completion.data`, it will remain `null`.
+		 * - If a field is `null` in `completion.data`, it will remain `null`
+		 *   (default is not used).
 		 * - If a field is unspecified in `completion.data`, the same field from
 		 *   `completionList.itemDefaults.data` will be used.
 		 *
