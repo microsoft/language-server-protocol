@@ -166,6 +166,18 @@ export interface CompletionClientCapabilities {
 		 * @since 3.17.0
 		 */
 		itemDefaults?: string[];
+
+		/**
+		 * Specifies which fields of `CompletionList.applyKind` the client
+		 * supports. If omitted, no properties are supported and all fields
+		 * in a completion item will replace the defaults.
+		 * 
+		 * Clients may only specify fields that have merge rules defined in the
+		 * LSP spec.
+		 *
+		 * @since 3.18.0
+		 */
+		applyKinds?: string[];
 	}
 }
 ```
@@ -338,7 +350,8 @@ export interface CompletionList {
 	 * be used if a completion item itself doesn't specify the value.
 	 *
 	 * If a completion list specifies a default value and a completion item
-	 * also specifies a corresponding value, the one from the item is used.
+	 * also specifies a corresponding value, the rules for combining these are
+	 * defined by `applyKinds`, defaulting to "replace".
 	 *
 	 * Servers are only allowed to return default values if the client
 	 * signals support for this via the `completionList.itemDefaults`
@@ -384,6 +397,68 @@ export interface CompletionList {
 		 * @since 3.17.0
 		 */
 		data?: LSPAny;
+	}
+
+	/**
+	 * Specifies how fields from a completion item should be combined with those
+	 * from `completionList.itemDefaults`.
+	 * 
+	 * In unspecified, all fields will be treated as "replace".
+	 * 
+	 * If a field's value is "replace", the value from a completion item will
+	 * always be used instead of the value from `completionItem.itemDefaults`.
+	 * 
+	 * If a field's value is "merge", the values will be merged using the rules
+	 * defined against each field below.
+	 *
+	 * Servers are only allowed to return `applyKind` if the client
+	 * signals support for this via the `completionList.applyKinds`
+	 * capability.
+	 *
+	 * @since 3.18.0
+	 */
+	applyKind?: {
+		/**
+		 * Specifies whether commitCharacters on a completion will replace or be
+		 * merged with those in `completionList.itemDefaults.commitCharacters`.
+		 * 
+		 * If "replace", the commit characters from the completion item will
+		 * always be used unless not provided, in which case those from
+		 * `completionList.itemDefaults.commitCharacters` will be used. An empty
+		 * list can be used if a completion item does not have any commit
+		 * characters and also should not use those from
+		 * `completionList.itemDefaults.commitCharacters`.
+		 * 
+		 * If "merge" the commitCharacters for the completion will be the union
+		 * of all values in both `completionList.itemDefaults.commitCharacters`
+		 * and the completion's own `commitCharacters`.
+		 *
+		 * @since 3.18.0
+		 */
+		commitCharacters?: "replace" | "merge";
+
+		/**
+		 * Specifies whether data on a completion will replace or
+		 * be merged with data from `completionList.itemDefaults.data`.
+		 * 
+		 * If "replace", the data from the completion item will be used if
+		 * provided, otherwise  `completionList.itemDefaults.data` will be used.
+		 * An empty object can be used if a completion item does not have any
+		 * data but also should not use the value from
+		 * `completionList.itemDefaults.data`.
+		 * 
+		 * If "merge", a shallow merge will be performed between
+		 * `completionList.itemDefaults.data` and the completion's own data
+		 * using the following rules:
+		 * 
+		 * - If a field is specified in `completion.data` it will be used as-is.
+		 * - If a field is `null` in `completion.data`, it will remain `null`.
+		 * - If a field is unspecified in `completion.data`, the same field from
+		 *   `completionList.itemDefaults.data` will be used.
+		 *
+		 * @since 3.18.0
+		 */
+		data?: "replace" | "merge";
 	}
 
 	/**
