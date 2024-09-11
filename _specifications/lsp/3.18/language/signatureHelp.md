@@ -2,6 +2,8 @@
 
 The signature help request is sent from the client to the server to request signature information at a given cursor position.
 
+If a user types and the client decides to ask for signature help, `textDocument/didChange` event must be delivered to the server before the signature help request is sent.
+
 _Client Capability_:
 * property name (optional): `textDocument.signatureHelp`
 * property type: `SignatureHelpClientCapabilities` defined as follows:
