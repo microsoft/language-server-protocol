@@ -2,6 +2,8 @@
 
 The document change notification is sent from the client to the server to signal changes to a text document. Before a client can change a text document it must claim ownership of its content using the `textDocument/didOpen` notification. In 2.0 the shape of the params has changed to include proper version numbers.
 
+Before requesting information from the server (e.g., `textDocument/completion` or `textDocument/signatureHelp`), the client must ensure that the document's state is synchronized with the server to guarantee reliable results.
+
 _Client Capability_:
 See general synchronization [client capabilities](#textDocument_synchronization_cc).
 
