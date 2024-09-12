@@ -168,16 +168,13 @@ export interface CompletionClientCapabilities {
 		itemDefaults?: string[];
 
 		/**
-		 * Specifies which fields of `CompletionList.applyKind` the client
-		 * supports. If omitted, no properties are supported and all fields
-		 * in a completion item will replace the defaults.
-		 * 
-		 * Clients may only specify fields that have merge rules defined in the
-		 * LSP spec.
+		 * Specifies whether the client supports `CompletionList.applyKind` to
+		 * indicate how supported values from `completionList.itemDefaults`
+		 * and `completion` will be combined.
 		 *
 		 * @since 3.18.0
 		 */
-		applyKinds?: string[];
+		applyKindSupport?: boolean;
 	}
 }
 ```
@@ -351,7 +348,8 @@ export interface CompletionList {
 	 *
 	 * If a completion list specifies a default value and a completion item
 	 * also specifies a corresponding value, the rules for combining these are
-	 * defined by `applyKinds`, defaulting to "replace".
+	 * defined by `applyKinds` (if the client supports it), defaulting to
+	 * "replace".
 	 *
 	 * Servers are only allowed to return default values if the client
 	 * signals support for this via the `completionList.itemDefaults`
@@ -406,15 +404,14 @@ export interface CompletionList {
 	 * In unspecified, all fields will be treated as "replace".
 	 * 
 	 * If a field's value is "replace", the value from a completion item (if
-	 * provided) will always be used instead of the value from
-	 * `completionItem.itemDefaults`. `null` values are treated the same as a
-	 * value that was not provided.
+	 * provided and not `null`) will always be used instead of the value from
+	 * `completionItem.itemDefaults`.
 	 * 
 	 * If a field's value is "merge", the values will be merged using the rules
 	 * defined against each field below.
 	 *
 	 * Servers are only allowed to return `applyKind` if the client
-	 * signals support for this via the `completionList.applyKinds`
+	 * signals support for this via the `completionList.applyKindSupport`
 	 * capability.
 	 *
 	 * @since 3.18.0
@@ -437,10 +434,10 @@ export interface CompletionList {
 		 *
 		 * @since 3.18.0
 		 */
-		commitCharacters?: "replace" | "merge";
+		commitCharacters?: ApplyKind;
 
 		/**
-		 * Specifies whether data on a completion will replace or
+		 * Specifies whether the `data` field on a completion will replace or
 		 * be merged with data from `completionList.itemDefaults.data`.
 		 * 
 		 * If "replace", the data from the completion item will be used if
@@ -454,14 +451,16 @@ export interface CompletionList {
 		 * using the following rules:
 		 * 
 		 * - If a completion's `data` field is not provided (or `null`), the
-		 *   data from `completionList.itemDefaults.data` will be used as-is.
-		 * - If a completion's `data` is provided, each field will overwrite the
-		 *   field of the same name in `completionList.itemDefaults.data` but
-		 *   no merging of fields within that value will occur.
+		 *   entire `data` field from `completionList.itemDefaults.data` will be
+		 *   used as-is.
+		 * - If a completion's `data` field is provided, each field will
+		 *   overwrite the field of the same name in
+		 *   `completionList.itemDefaults.data` but no merging of nested fields
+		 *   within that value will occur.
 		 *
 		 * @since 3.18.0
 		 */
-		data?: "replace" | "merge";
+		data?: ApplyKind;
 	}
 
 	/**
@@ -601,6 +600,32 @@ export interface CompletionItemLabelDetails {
 	 */
 	description?: string;
 }
+```
+
+<div class="anchorHolder"><a href="#applyKind" name="applyKind" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Defines how values from a set of defaults and an individual item will be
+ * merged.
+ */
+export namespace ApplyKind {
+	/**
+	 * The value from the individual item (if provided and not `null`) will be
+	 * used instead of the default.
+	 */
+	export const Replace: 'replace' = 'replace;
+
+	/**
+	 * The value from the item will be merged with the default.
+	 * 
+	 * The specific rules for mergeing values are defined against each field
+	 * that supports merging.
+	 */
+	export const Merge: 'merge' = 'merge';
+}
+
+export type ApplyKind = ApplyKind.Replace | ApplyKind.Merge;
 ```
 
 <div class="anchorHolder"><a href="#completionItem" name="completionItem" class="linkableAnchor"></a></div>
