@@ -4,6 +4,14 @@ The document change notification is sent from the client to the server to signal
 
 Before requesting information from the server (e.g., `textDocument/completion` or `textDocument/signatureHelp`), the client must ensure that the document's state is synchronized with the server to guarantee reliable results.
 
+The following example shows how the client should synchronize the state when the user has continuous input, assuming user input triggered `textDocument/completion`:
+
+| Document Version | User Input          | Client Behavior                                 | Request                   |
+| ---------------- | ------------------- | ----------------------------------------------- | ------------------------- |
+| 5                | document change one | sync document `v5` to the server                | `textDocument/didChange`  |
+| 5                | -                   | request from the server, based on document `v5` | `textDocument/completion` |
+| 6                | document change two | sync document `v6` to the server                | `textDocument/didChange`  |
+
 _Client Capability_:
 See general synchronization [client capabilities](#textDocument_synchronization_cc).
 
