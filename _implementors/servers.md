@@ -237,6 +237,7 @@ index: 1
 | [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
 | [Thrift](https://thrift.apache.org/) | [Pengfei Jiang](https://github.com/joyme123) | [thrift-ls](https://github.com/joyme123/thrift-ls) | Go |
 | [Tibbo Basic](https://docs.tibbo.com/taiko/) | [Tibbo](https://tibbo.com) | [tibbo-basic](https://github.com/tibbotech/tibbo-basic) | Tibbo Basic |
+| [TOML](https://toml.io/) | [Ferenc Tamás](https://github.com/tamasfe) | [Taplo](https://github.com/tamasfe/taplo) | Rust |
 | [Trino SQL](https://trino.io) | [Rocket Boosters](https://gitlab.com/rocket-boosters) | [trinols](https://gitlab.com/rocket-boosters/trinols) | TypeScript |
 | [TTCN-3](http://www.ttcn-3.org) | [Nokia](https://www.nokia.com) | [ntt](https://github.com/nokia/ntt) | Go |
 | [TTCN-3](http://www.ttcn-3.org) | [Eclipse Titan](https://projects.eclipse.org/projects/tools.titan) | [Titan Language Server](https://gitlab.eclipse.org/eclipse/titan/titan.language-server) | Java |
