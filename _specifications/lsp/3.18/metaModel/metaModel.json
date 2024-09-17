@@ -5721,8 +5721,7 @@
 					},
 					"optional": true,
 					"documentation": "Tags for this code action.\n\n@since 3.18.0 - proposed",
-					"since": "3.18.0 - proposed",
-					"proposed": true
+					"since": "3.18.0 - proposed"
 				}
 			],
 			"documentation": "A code action represents a change that can be performed in code, e.g. to fix a problem or\nto refactor code.\n\nA CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is applied first, then the `command` is executed."
@@ -14626,12 +14625,11 @@
 				{
 					"name": "LLMGenerated",
 					"value": 1,
-					"documentation": "Render a code action as LLM-generated, usually using a sparkle icon."
+					"documentation": "Marks the code action as LLM-generated."
 				}
 			],
-			"documentation": "Code action tags are extra annotations that tweak the rendering of a code action.\n\n@since 3.18.0",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Code action tags are extra annotations that tweak the behavior of a code action.\n\n@since 3.18.0 - proposed",
+			"since": "3.18.0 - proposed"
 		},
 		{
 			"name": "TraceValue",
