@@ -428,8 +428,8 @@ export interface CompletionList {
 		 * merged with those in `completionList.itemDefaults.commitCharacters`.
 		 * 
 		 * If "replace", the commit characters from the completion item will
-		 * always be used unless not provided (or `null`), in which case those
-		 * from `completionList.itemDefaults.commitCharacters` will be used. An
+		 * always be used unless not provided, in which case those from
+		 * `completionList.itemDefaults.commitCharacters` will be used. An
 		 * empty list can be used if a completion item does not have any commit
 		 * characters and also should not use those from
 		 * `completionList.itemDefaults.commitCharacters`.
@@ -620,7 +620,7 @@ export namespace ApplyKind {
 	 * The value from the individual item (if provided and not `null`) will be
 	 * used instead of the default.
 	 */
-	export const Replace: 'replace' = 'replace;
+	export const Replace: 'replace' = 'replace';
 
 	/**
 	 * The value from the item will be merged with the default.
@@ -631,7 +631,7 @@ export namespace ApplyKind {
 	export const Merge: 'merge' = 'merge';
 }
 
-export type ApplyKind = ApplyKind.Replace | ApplyKind.Merge;
+export type ApplyKind = 'replace' | 'merge';
 ```
 
 <div class="anchorHolder"><a href="#completionItem" name="completionItem" class="linkableAnchor"></a></div>
