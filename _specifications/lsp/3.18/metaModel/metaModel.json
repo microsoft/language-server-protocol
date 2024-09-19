@@ -12524,9 +12524,37 @@
 					"documentation": "Whether the client supports documentation for a class of\ncode actions.\n\n@since 3.18.0\n@proposed",
 					"since": "3.18.0",
 					"proposed": true
+				},
+				{
+					"name": "tagSupport",
+					"type": {
+						"kind": "reference",
+						"name": "CodeActionTagOptions"
+					},
+					"optional": true,
+					"documentation": "Client supports the tag property on a code action. Clients\nsupporting tags have to handle unknown tags gracefully.\n\n@since 3.18.0 - proposed",
+					"since": "3.18.0 - proposed"
 				}
 			],
 			"documentation": "The Client Capabilities of a {@link CodeActionRequest}."
+		},
+		{
+			"name": "CodeActionTagOptions",
+			"properties": [
+				{
+					"name": "valueSet",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "CodeActionTag"
+						}
+					},
+					"documentation": "The tags supported by the client."
+				}
+			],
+			"documentation": "@since 3.18.0 - proposed",
+			"since": "3.18.0 - proposed"
 		},
 		{
 			"name": "CodeLensClientCapabilities",

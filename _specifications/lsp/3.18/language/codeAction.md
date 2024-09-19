@@ -107,6 +107,19 @@ export interface CodeActionClientCapabilities {
 	 * @proposed
 	 */
 	 documentationSupport?: boolean;
+
+	/**
+	 * Client supports the tag property on a code action. Clients
+	 * supporting tags have to handle unknown tags gracefully.
+	 *
+	 * @since 3.18.0 - proposed
+	 */
+	tagSupport?: {
+		/**
+		 * The tags supported by the client.
+		 */
+		valueSet: CodeActionTag[];
+	}; 
 }
 ```
 
