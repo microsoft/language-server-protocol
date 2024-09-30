@@ -407,7 +407,7 @@ export interface CompletionList {
 	 * Specifies how fields from a completion item should be combined with those
 	 * from `completionList.itemDefaults`.
 	 * 
-	 * In unspecified, all fields will be treated as ApplyKind.Replace.
+	 * If unspecified, all fields will be treated as ApplyKind.Replace.
 	 * 
 	 * If a field's value is ApplyKind.Replace, the value from a completion item
 	 * (if provided and not `null`) will always be used instead of the value
