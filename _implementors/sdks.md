@@ -28,6 +28,7 @@ index: 3
 | Python | [Open Law Library](http://www.openlawlib.org/) | [pygls](https://github.com/openlawlibrary/pygls)|
 | Python | [Yeger](https://github.com/yeger00) | [pylspclient](https://github.com/yeger00/pylspclient)|
 | Python | [Microsoft](https://github.com/microsoft) | [multilspy](https://github.com/microsoft/monitors4codegen#4-multilspy)|
+| Rascal | [UseTheSource](https://github.com/UseTheSource) | [rascal-language-servers](https://github.com/usethesource/rascal-language-servers) |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [LanguageServer::Protocol](https://github.com/mtsmfm/language_server-protocol-ruby) |
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
 | Rust | Bruno Medeiros and Markus Westerlind | [lsp-types](https://github.com/gluon-lang/lsp-types)
