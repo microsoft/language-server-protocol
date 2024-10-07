@@ -4817,7 +4817,7 @@
 						"name": "CompletionContext"
 					},
 					"optional": true,
-					"documentation": "The completion context. This is only available it the client specifies\nto send this using the client capability `textDocument.completion.contextSupport === true`"
+					"documentation": "The completion context. This is only available if the client specifies\nto send this using the client capability `textDocument.completion.contextSupport === true`"
 				}
 			],
 			"extends": [
@@ -5709,6 +5709,19 @@
 					"optional": true,
 					"documentation": "A data entry field that is preserved on a code action between\na `textDocument/codeAction` and a `codeAction/resolve` request.\n\n@since 3.16.0",
 					"since": "3.16.0"
+				},
+				{
+					"name": "tags",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "CodeActionTag"
+						}
+					},
+					"optional": true,
+					"documentation": "Tags for this code action.\n\n@since 3.18.0 - proposed",
+					"since": "3.18.0 - proposed"
 				}
 			],
 			"documentation": "A code action represents a change that can be performed in code, e.g. to fix a problem or\nto refactor code.\n\nA CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is applied first, then the `command` is executed."
@@ -12511,9 +12524,37 @@
 					"documentation": "Whether the client supports documentation for a class of\ncode actions.\n\n@since 3.18.0\n@proposed",
 					"since": "3.18.0",
 					"proposed": true
+				},
+				{
+					"name": "tagSupport",
+					"type": {
+						"kind": "reference",
+						"name": "CodeActionTagOptions"
+					},
+					"optional": true,
+					"documentation": "Client supports the tag property on a code action. Clients\nsupporting tags have to handle unknown tags gracefully.\n\n@since 3.18.0 - proposed",
+					"since": "3.18.0 - proposed"
 				}
 			],
 			"documentation": "The Client Capabilities of a {@link CodeActionRequest}."
+		},
+		{
+			"name": "CodeActionTagOptions",
+			"properties": [
+				{
+					"name": "valueSet",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "CodeActionTag"
+						}
+					},
+					"documentation": "The tags supported by the client."
+				}
+			],
+			"documentation": "@since 3.18.0 - proposed",
+			"since": "3.18.0 - proposed"
 		},
 		{
 			"name": "CodeLensClientCapabilities",
@@ -14601,6 +14642,22 @@
 			],
 			"supportsCustomValues": true,
 			"documentation": "A set of predefined code action kinds"
+		},
+		{
+			"name": "CodeActionTag",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "LLMGenerated",
+					"value": 1,
+					"documentation": "Marks the code action as LLM-generated."
+				}
+			],
+			"documentation": "Code action tags are extra annotations that tweak the behavior of a code action.\n\n@since 3.18.0 - proposed",
+			"since": "3.18.0 - proposed"
 		},
 		{
 			"name": "TraceValue",

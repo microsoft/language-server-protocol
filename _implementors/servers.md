@@ -191,6 +191,7 @@ index: 1
 | Racket | [Jay McCarthy](https://github.com/jeapostrophe) | [racket-langserver](https://github.com/jeapostrophe/racket-langserver) | Racket |
 | Raku | [Brian Scannell](https://github.com/bscan) | [Raku Navigator](https://github.com/bscan/RakuNavigator) | TypeScript |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
+| [Rascal](https://www.rascal-mpl.org/) | [UseTheSource](https://github.com/UseTheSource) | [util::LanguageServer](https://github.com/usethesource/rascal-language-servers) | Java & Rascal & Typescript |
 | [RAML](https://raml.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
@@ -237,6 +238,7 @@ index: 1
 | [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
 | [Thrift](https://thrift.apache.org/) | [Pengfei Jiang](https://github.com/joyme123) | [thrift-ls](https://github.com/joyme123/thrift-ls) | Go |
 | [Tibbo Basic](https://docs.tibbo.com/taiko/) | [Tibbo](https://tibbo.com) | [tibbo-basic](https://github.com/tibbotech/tibbo-basic) | Tibbo Basic |
+| [TOML](https://toml.io/) | [Ferenc Tamás and contributors](https://github.com/tamasfe/taplo/graphs/contributors) | [Taplo](https://github.com/tamasfe/taplo) | Rust |
 | [Trino SQL](https://trino.io) | [Rocket Boosters](https://gitlab.com/rocket-boosters) | [trinols](https://gitlab.com/rocket-boosters/trinols) | TypeScript |
 | [TTCN-3](http://www.ttcn-3.org) | [Nokia](https://www.nokia.com) | [ntt](https://github.com/nokia/ntt) | Go |
 | [TTCN-3](http://www.ttcn-3.org) | [Eclipse Titan](https://projects.eclipse.org/projects/tools.titan) | [Titan Language Server](https://gitlab.eclipse.org/eclipse/titan/titan.language-server) | Java |
