@@ -189,6 +189,7 @@ index: 1
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
 | [R](https://www.r-project.org/) | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
 | Racket | [Jay McCarthy](https://github.com/jeapostrophe) | [racket-langserver](https://github.com/jeapostrophe/racket-langserver) | Racket |
+| [Rain](https://github.com/RainCmd/RainLanguage) | [渴望蓝天](https://github.com/RainCmd) | [RainLanguageServer](https://github.com/RainCmd/RainLanguageServer) | C# |
 | Raku | [Brian Scannell](https://github.com/bscan) | [Raku Navigator](https://github.com/bscan/RakuNavigator) | TypeScript |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
 | [Rascal](https://www.rascal-mpl.org/) | [UseTheSource](https://github.com/UseTheSource) | [util::LanguageServer](https://github.com/usethesource/rascal-language-servers) | Java & Rascal & Typescript |
