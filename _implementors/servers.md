@@ -217,6 +217,7 @@ index: 1
 | Shader | [Jen-Chieh Shen](https://github.com/jcs090218) | [shader-language-server](https://github.com/shader-ls/shader-language-server) | C# |
 | [Slint](https://slint-ui.com) | Slint | [slint-lsp](https://github.com/slint-ui/slint/tree/HEAD/tools/lsp) | Rust |
 | [Smalltalk/Pharo](https://pharo.org/) | [Benoît Verhaeghe](https://github.com/badetitou) | [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) | Pharo |
+| [Smithy](https://smithy.io/2.0/index.html) | [Smithy](https://smithy.io/2.0/index.html) | [Smithy Language Server](https://github.com/smithy-lang/smithy-language-server) | Java |
 | Snyk | [Snyk](https://snyk.io) | [Snyk Language Server](https://github.com/snyk/snyk-ls) | Snyk SCA / SAST / IaC findings |
 | SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) | TypeScript |
 | [Sphinx](https://www.sphinx-doc.org/en/master/) | [Alex Carney](https://github.com/alcarney) | [esbonio](https://github.com/swyddfa/esbonio) | Python |
