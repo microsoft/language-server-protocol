@@ -112,7 +112,17 @@ Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as f
  */
 export interface TextDocumentClientCapabilities {
 
+	/**
+	 * Defines which synchronization capabilities the client supports.
+	 */
 	synchronization?: TextDocumentSyncClientCapabilities;
+
+	/**
+	 * Defines which filters the client supports.
+	 *
+	 * @since 3.18.0
+	 */
+	filters?: TextDocumentFilterClientCapabilities;
 
 	/**
 	 * Capabilities specific to the `textDocument/completion` request.
@@ -292,10 +302,20 @@ export interface TextDocumentClientCapabilities {
 
 	/**
 	 * Capabilities specific to the `textDocument/inlineCompletion` request.
-	 * 
+	 *
 	 * @since 3.18.0
 	 */
 	inlineCompletion?: InlineCompletionClientCapabilities;
+}
+
+export interface TextDocumentFilterClientCapabilities {
+
+	/**
+	 * The client supports Relative Patterns.
+	 *
+	 * @since 3.18.0
+	 */
+	relativePatternSupport?: boolean;
 }
 ```
 
@@ -880,26 +900,26 @@ interface ServerCapabilities {
 
 	/**
 	 * The server provides inline completions.
-	 * 
+	 *
 	 * @since 3.18.0
 	 */
 	inlineCompletionProvider?: boolean | InlineCompletionOptions;
 
 	/**
 	 * Text document specific server capabilities.
-	 * 
+	 *
 	 * @since 3.18.0
 	 */
 	textDocument?: {
 		/**
 		 * Capabilities specific to the diagnostic pull model.
-		 * 
+		 *
 		 * @since 3.18.0
 		 */
 		diagnostic?: {
 			/**
 			 * Whether the server supports `MarkupContent` in diagnostic messages.
-			 * 
+			 *
 			 * @since 3.18.0
 			 * @proposed
 			 */
