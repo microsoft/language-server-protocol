@@ -936,10 +936,10 @@ Below is the grammar for snippets in EBNF ([extended Backus-Naur form, XML varia
 ```
 any         ::= tabstop | placeholder | choice | variable | text
 tabstop     ::= '$' int | '${' int '}'
-placeholder ::= '${' int ':' any '}'
+placeholder ::= '${' int ':' any+ '}'
 choice      ::= '${' int '|' choicetext (',' choicetext)* '|}'
 variable    ::= '$' var | '${' var }'
-                | '${' var ':' any '}'
+                | '${' var ':' any+ '}'
                 | '${' var '/' regex '/' (format | formattext)* '/' options '}'
 format      ::= '$' int | '${' int '}'
                 /* Transforms the text to be uppercase, lowercase, or capitalized, respectively. */
