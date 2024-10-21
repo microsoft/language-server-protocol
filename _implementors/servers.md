@@ -174,7 +174,7 @@ index: 1
 | PowerPC Assembly | [Noah Fields](https://github.com/OGoodness) | [PowerPC Support](https://github.com/OGoodness/VSCode-PowerPC-Syntax) | TypeScript |
 | PowerShell | MS | [PowerShell Editor Services](https://github.com/PowerShell/PowerShellEditorServices) | C# |
 | [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) | [Tobias Guggenmos](https://github.com/slrtbtfs) | [promql-langserver](https://github.com/prometheus-community/promql-langserver) | [Go](https://golang.org/) |
-| [Protocol Buffers](https://protobuf.dev/) | [coder3101](https://github.com/coder3101/protols) | [protols](https://github.com/coder3101/protols) | Rust |
+| [Protocol Buffers](https://protobuf.dev/) | [coder3101](https://github.com/coder3101) | [protols](https://github.com/coder3101/protols) | Rust |
 | [Protocol Buffers](https://protobuf.dev/) | [lasorda](https://github.com/lasorda) | [protobuf-language-server](https://github.com/lasorda/protobuf-language-server) | Go |
 | PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) | PureScript |
 | Puppet| [Lingua Pupuli](https://github.com/lingua-pupuli) | [puppet language server](https://github.com/lingua-pupuli/puppet-editor-services) | Ruby |
