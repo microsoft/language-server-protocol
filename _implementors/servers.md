@@ -35,6 +35,7 @@ index: 1
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | Batch | [RechInformatica](https://github.com/RechInformatica) | [rech-editor-batch](https://github.com/RechInformatica/rech-editor-batch/tree/master/src/lsp) | TypeScript |
+| [Bazel](https://bazel.build/) | [cameron-martin](https://github.com/cameron-martin) | [bazel-lsp](https://github.com/cameron-martin/bazel-lsp) | Rust |
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) | C# |
@@ -174,6 +175,8 @@ index: 1
 | PowerPC Assembly | [Noah Fields](https://github.com/OGoodness) | [PowerPC Support](https://github.com/OGoodness/VSCode-PowerPC-Syntax) | TypeScript |
 | PowerShell | MS | [PowerShell Editor Services](https://github.com/PowerShell/PowerShellEditorServices) | C# |
 | [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) | [Tobias Guggenmos](https://github.com/slrtbtfs) | [promql-langserver](https://github.com/prometheus-community/promql-langserver) | [Go](https://golang.org/) |
+| [Protocol Buffers](https://protobuf.dev/) | [coder3101](https://github.com/coder3101) | [protols](https://github.com/coder3101/protols) | Rust |
+| [Protocol Buffers](https://protobuf.dev/) | [lasorda](https://github.com/lasorda) | [protobuf-language-server](https://github.com/lasorda/protobuf-language-server) | Go |
 | PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) | PureScript |
 | Puppet| [Lingua Pupuli](https://github.com/lingua-pupuli) | [puppet language server](https://github.com/lingua-pupuli/puppet-editor-services) | Ruby |
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) | Java, Python |
