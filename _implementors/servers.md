@@ -35,6 +35,7 @@ index: 1
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | Batch | [RechInformatica](https://github.com/RechInformatica) | [rech-editor-batch](https://github.com/RechInformatica/rech-editor-batch/tree/master/src/lsp) | TypeScript |
+| [Bazel](https://bazel.build/) | [cameron-martin](https://github.com/cameron-martin) | [bazel-lsp](https://github.com/cameron-martin/bazel-lsp) | Rust |
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) | C# |
