@@ -88,7 +88,7 @@ export interface DiagnosticRegistrationOptions extends
 The text document diagnostic request is sent from the client to the server to ask the server to compute the diagnostics for a given document. As with other pull requests the server is asked to compute the diagnostics for the currently synced version of the document.
 
 _Request_:
-* method: 'textDocument/diagnostic'.
+* method: `textDocument/diagnostic`.
 * params: `DocumentDiagnosticParams` defined as follows:
 
 <div class="anchorHolder"><a href="#documentDiagnosticParams" name="documentDiagnosticParams" class="linkableAnchor"></a></div>
@@ -309,7 +309,7 @@ If a client receives a diagnostic report for a document in a workspace diagnosti
 - diagnostics from a document pull should win over diagnostics from a workspace pull.
 
 _Request_:
-* method: 'workspace/diagnostic'.
+* method: `workspace/diagnostic`.
 * params: `WorkspaceDiagnosticParams` defined as follows:
 
 <div class="anchorHolder"><a href="#workspaceDiagnosticParams" name="workspaceDiagnosticParams" class="linkableAnchor"></a></div>
