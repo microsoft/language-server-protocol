@@ -57,6 +57,7 @@ index: 2
 | [RJ TextEd](https://www.rj-texted.se/) | [Rickard Johansson](https://github.com/rickard67) | [lsp](https://github.com/rickard67/LSP-Pascal-Library) |
 | [Spyder](http://spyder-ide.org) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
 | [Sublime Text](https://www.sublimetext.com/) | [Raoul Wols](https://github.com/rwols) | [lsp](https://github.com/sublimelsp/LSP) |
+| [Textadept](https://orbitalquark.github.io/textadept) | [orbitalquark](https://github.com/orbitalquark) | [textadept-lsp](https://github.com/orbitalquark/textadept-lsp) |
 | [Theia](https://github.com/theia-ide/theia) | [theia-ide](https://github.com/theia-ide) | [theia](https://github.com/theia-ide/theia) |
 | vim8 and [neovim](https://neovim.io/) | [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
 | vim8 and neovim | [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
