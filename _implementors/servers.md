@@ -270,6 +270,7 @@ index: 1
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) | |
 | [Vue](https://vuejs.org/) | [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) | TypeScript |
 | [Vue](https://vuejs.org) | [Vue team](https://github.com/vuejs) | [vuejs/language-tools](https://github.com/vuejs/language-tools) | TypeScript |
+| [WebAssembly](https://webassembly.org/) | [Pig Fang](https://github.com/g-plane) | [wasm-language-tools](https://github.com/g-plane/wasm-language-tools) | Rust |
 | [WebAssembly](https://webassembly.org/) | [Darin Morrison](https://github.com/darinmorrison) | [wasm-language-server](https://github.com/wasm-lsp/wasm-language-server) | Rust |
 | [WebGPU Shading Language](https://gpuweb.github.io/gpuweb/wgsl/) | [WGSL-Analyzer Team](https://github.com/wgsl-analyzer) | [wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) | Rust |
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
