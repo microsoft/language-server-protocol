@@ -66,6 +66,7 @@ index: 1
 | [Crystal](https://crystal-lang.org/)| [Elbaz Julien](https://github.com/elbywan) | [Crystalline](https://github.com/elbywan/crystalline) | Crystal |
 | [Crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [Scry](https://github.com/crystal-lang-tools/scry) | Crystal |
 | [Cucumber/Gherkin](https://cucumber.io/)| [Cucumber core team](https://github.com/cucumber) | [Cucumber Language Server](https://github.com/cucumber/language-server) | TypeScript |
+| [Cython](https://cython.org/) | [ktnrg45](https://github.com/ktnrg45) | [cyright](https://github.com/ktnrg45/cyright) | TypeScript |
 | [D](https://dlang.org) | [Jan Jurzitza](https://github.com/WebFreak001) | [serve-d](https://github.com/Pure-D/serve-d) | D |
 | [D](https://dlang.org) | [Laurent Tréguier](https://github.com/LaurentTreguier) | [D Language Server](https://github.com/d-language-server/dls) | D |
 | [Dart](https://dart.dev/) | [Dart Team](https://dart.dev/) | [Dart SDK](https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md) | Dart |
@@ -124,6 +125,7 @@ index: 1
 | JavaScript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) | TypeScript |
 | JavaScript-Typescript | [Biome](https://github.com/biomejs) | [biome_lsp](https://github.com/biomejs/biome/tree/main/crates/biome_lsp) | Rust |
 | [JCL](https://publibz.boulder.ibm.com/epubs/pdf/iea2b600.pdf) | [IBM](https://www.ibm.com/) |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
+| [Jimmer DTO](https://github.com/babyfish-ct/jimmer) | [Enaium](https://github.com/Enaium/) | [jimmer-dto-lsp](https://github.com/Enaium/jimmer-dto-lsp) | Kotlin |
 | JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) | TypeScript |
 | [Jsonnet](https://jsonnet.org/) | [Grafana Labs](https://grafana.com/) | [jsonnet-language-server](https://github.com/grafana/jsonnet-language-server) | Go |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) | Julia |
