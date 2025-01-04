@@ -247,6 +247,7 @@ index: 1
 | SystemVerilog | [CHIPS Alliance](https://chipsalliance.org/) | [Verible](https://github.com/chipsalliance/verible) | C++ |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
 | [Tads3](http://www.tads.org/tads3.htm) | [Tomas Öberg](https://github.com/toerob) | [tads3tools](https://github.com/toerob/vscode-tads3tools) | Tads3 |
+| [Teal](https://github.com/teal-language/tl) | [Teal community](https://github.com/teal-language) | [teal-language-server](https://github.com/teal-language/teal-language-server) | Teal |
 | [Terraform](https://www.terraform.io/) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
 | [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
 | [Thrift](https://thrift.apache.org/) | [Pengfei Jiang](https://github.com/joyme123) | [thrift-ls](https://github.com/joyme123/thrift-ls) | Go |
