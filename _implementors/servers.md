@@ -229,6 +229,7 @@ index: 1
 | [Smalltalk/Pharo](https://pharo.org/) | [Benoît Verhaeghe](https://github.com/badetitou) | [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) | Pharo |
 | [Smithy](https://smithy.io/2.0/index.html) | [Smithy](https://smithy.io/2.0/index.html) | [Smithy Language Server](https://github.com/smithy-lang/smithy-language-server) | Java |
 | Snyk | [Snyk](https://snyk.io) | [Snyk Language Server](https://github.com/snyk/snyk-ls) | Snyk SCA / SAST / IaC findings |
+| SPARQL | [Ioannis Nezis](https://github.com/IoannisNezis) | [Qlue-ls](https://github.com/IoannisNezis/Qlue-ls) | Rust |
 | SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) | TypeScript |
 | [Sphinx](https://www.sphinx-doc.org/en/master/) | [Alex Carney](https://github.com/alcarney) | [esbonio](https://github.com/swyddfa/esbonio) | Python |
 | SQL | [Toshikazu Ohashi](https://github.com/lighttiger2505) | [sqls](https://github.com/lighttiger2505/sqls) | Go |
