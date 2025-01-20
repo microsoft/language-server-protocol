@@ -79,7 +79,7 @@ index: 1
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) | TypeScript |
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
 | [Egglog](https://github.com/egraphs-good/egglog) | [hatoo](https://github.com/hatoo) | [egglog-language-server](https://github.com/hatoo/egglog-language-server) | Rust |
-| Emacs Lisp | [Jen-Chieh Shen](https://github.com/jcs090218) | [ellsp](https://github.com/jcs090218/ellsp) | Emacs Lisp |
+| Emacs Lisp | [Jen-Chieh Shen](https://github.com/jcs090218) | [ellsp](https://github.com/elisp-lsp/ellsp) | Emacs Lisp |
 | Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) | Erlang |
 | [Erlang](https://www.erlang.org) | [Roberto Aloi](https://github.com/robertoaloi) and [Contributors](https://github.com/erlang-ls/erlang_ls/graphs/contributors) | [erlang_ls](https://github.com/erlang-ls/erlang_ls) | Erlang |
 | [Erlang](https://www.erlang.org) | [WhatsApp](https://github.com/whatsapp) | [ELP](https://github.com/whatsapp/erlang-language-platform) | Rust, Erlang |
@@ -230,6 +230,7 @@ index: 1
 | [Smalltalk/Pharo](https://pharo.org/) | [Benoît Verhaeghe](https://github.com/badetitou) | [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) | Pharo |
 | [Smithy](https://smithy.io/2.0/index.html) | [Smithy](https://smithy.io/2.0/index.html) | [Smithy Language Server](https://github.com/smithy-lang/smithy-language-server) | Java |
 | Snyk | [Snyk](https://snyk.io) | [Snyk Language Server](https://github.com/snyk/snyk-ls) | Snyk SCA / SAST / IaC findings |
+| SPARQL | [Ioannis Nezis](https://github.com/IoannisNezis) | [Qlue-ls](https://github.com/IoannisNezis/Qlue-ls) | Rust |
 | SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) | TypeScript |
 | [Sphinx](https://www.sphinx-doc.org/en/master/) | [Alex Carney](https://github.com/alcarney) | [esbonio](https://github.com/swyddfa/esbonio) | Python |
 | SQL | [Toshikazu Ohashi](https://github.com/lighttiger2505) | [sqls](https://github.com/lighttiger2505/sqls) | Go |
@@ -248,6 +249,7 @@ index: 1
 | SystemVerilog | [CHIPS Alliance](https://chipsalliance.org/) | [Verible](https://github.com/chipsalliance/verible) | C++ |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
 | [Tads3](http://www.tads.org/tads3.htm) | [Tomas Öberg](https://github.com/toerob) | [tads3tools](https://github.com/toerob/vscode-tads3tools) | Tads3 |
+| [Teal](https://github.com/teal-language/tl) | [Teal community](https://github.com/teal-language) | [teal-language-server](https://github.com/teal-language/teal-language-server) | Teal |
 | [Terraform](https://www.terraform.io/) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
 | [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
 | [Thrift](https://thrift.apache.org/) | [Pengfei Jiang](https://github.com/joyme123) | [thrift-ls](https://github.com/joyme123/thrift-ls) | Go |
@@ -295,4 +297,5 @@ index: 1
 | * | [iamcco](https://github.com/iamcco) | [diagnostic-languageserver](https://github.com/iamcco/diagnostic-languageserver) | TypeScript |
 | * | [daquexian](https://github.com/daquexian) | [tagls](https://github.com/daquexian/tagls) | Python |
 | * | [Sonar](https://github.com/SonarSource) | [SonarLint Language Server](https://github.com/SonarSource/sonarlint-language-server) | Java |
+| * | [kbwo](https://github.com/kbwo) | [testing-language-server](https://github.com/kbwo/testing-language-server) | Rust |
 {: .table .table-bordered .table-responsive}
