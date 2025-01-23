@@ -879,7 +879,9 @@ The `body` of a snippet can use special constructs to control cursors and the te
 
 ##### Tab stops
 
-With tab stops, you can make the editor cursor move inside a snippet. Use `$1`, `$2`, and so on to specify cursor locations. The number is the order in which tab stops will be visited, whereas `$0` denotes the final cursor position. Multiple tab stops are linked and updated in sync.
+With tab stops, you can make the editor cursor move inside a snippet. Use `$1`, `$2`, and so on to specify cursor locations. The number is the order in which tab stops will be visited. Multiple tab stops are linked and updated in sync.
+
+The `$0` tab stop denotes the final cursor position. This tab stop should not be combined with other snippet syntax - placeholders, choices, variables or transforms - it should only take the form `$0`.
 
 ##### Placeholders
 
