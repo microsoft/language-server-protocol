@@ -280,6 +280,7 @@ index: 1
 | [WebAssembly](https://webassembly.org/) | [Pig Fang](https://github.com/g-plane) | [wasm-language-tools](https://github.com/g-plane/wasm-language-tools) | Rust |
 | [WebAssembly](https://webassembly.org/) | [Darin Morrison](https://github.com/darinmorrison) | [wasm-language-server](https://github.com/wasm-lsp/wasm-language-server) | Rust |
 | [WebGPU Shading Language](https://gpuweb.github.io/gpuweb/wgsl/) | [WGSL-Analyzer Team](https://github.com/wgsl-analyzer) | [wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) | Rust |
+| [Wing](https://www.winglang.io/) | [Contributors](https://github.com/winglang/wing/graphs/contributors) | [Wing](https://github.com/winglang/wing) | Typescript |
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [Wolfram Research](https://github.com/WolframResearch) | [LSPServer](https://github.com/WolframResearch/lspserver) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [markjet7](https://github.com/markjet7) | [wlsp](https://github.com/markjet7/wlsp) | Wolfram Language |
