@@ -171,7 +171,7 @@ export interface CompletionClientCapabilities {
 		 * Specifies whether the client supports `CompletionList.applyKind` to
 		 * indicate how supported values from `completionList.itemDefaults`
 		 * and `completion` will be combined.
-		 * 
+		 *
 		 * If a client supports `applyKind` it must support it for all fields
 		 * that it supports that are listed in `CompletionList.applyKind`. This
 		 * means when clients add support for new/future fields in completion
@@ -406,13 +406,13 @@ export interface CompletionList {
 	/**
 	 * Specifies how fields from a completion item should be combined with those
 	 * from `completionList.itemDefaults`.
-	 * 
+	 *
 	 * If unspecified, all fields will be treated as ApplyKind.Replace.
-	 * 
+	 *
 	 * If a field's value is ApplyKind.Replace, the value from a completion item
 	 * (if provided and not `null`) will always be used instead of the value
 	 * from `completionItem.itemDefaults`.
-	 * 
+	 *
 	 * If a field's value is ApplyKind.Merge, the values will be merged using
 	 * the rules defined against each field below.
 	 *
@@ -426,14 +426,14 @@ export interface CompletionList {
 		/**
 		 * Specifies whether commitCharacters on a completion will replace or be
 		 * merged with those in `completionList.itemDefaults.commitCharacters`.
-		 * 
+		 *
 		 * If ApplyKind.Replace, the commit characters from the completion item
 		 * will always be used unless not provided, in which case those from
 		 * `completionList.itemDefaults.commitCharacters` will be used. An
 		 * empty list can be used if a completion item does not have any commit
 		 * characters and also should not use those from
 		 * `completionList.itemDefaults.commitCharacters`.
-		 * 
+		 *
 		 * If ApplyKind.Merge the commitCharacters for the completion will be
 		 * the union of all values in both
 		 * `completionList.itemDefaults.commitCharacters` and the completion's
@@ -446,17 +446,17 @@ export interface CompletionList {
 		/**
 		 * Specifies whether the `data` field on a completion will replace or
 		 * be merged with data from `completionList.itemDefaults.data`.
-		 * 
+		 *
 		 * If ApplyKind.Replace, the data from the completion item will be used
 		 * if provided (and not `null`), otherwise
 		 * `completionList.itemDefaults.data` will be used. An empty object can
 		 * be used if a completion item does not have any data but also should
 		 * not use the value from `completionList.itemDefaults.data`.
-		 * 
+		 *
 		 * If ApplyKind.Merge, a shallow merge will be performed between
 		 * `completionList.itemDefaults.data` and the completion's own data
 		 * using the following rules:
-		 * 
+		 *
 		 * - If a completion's `data` field is not provided (or `null`), the
 		 *   entire `data` field from `completionList.itemDefaults.data` will be
 		 *   used as-is.
@@ -880,8 +880,6 @@ The `body` of a snippet can use special constructs to control cursors and the te
 ##### Tab stops
 
 With tab stops, you can make the editor cursor move inside a snippet. Use `$1`, `$2`, and so on to specify cursor locations. The number is the order in which tab stops will be visited. Multiple tab stops are linked and updated in sync.
-
-The `$0` tab stop denotes the final cursor position. This tab stop should not be combined with other snippet syntax - placeholders, choices, variables or transforms - it should only take the form `$0`.
 
 ##### Placeholders
 
