@@ -2276,7 +2276,7 @@
 			"typeName": "DidOpenTextDocumentNotification",
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.synchronization",
-			"serverCapability": "textDocumentSync",
+			"serverCapability": "textDocumentSync.openClose",
 			"params": {
 				"kind": "reference",
 				"name": "DidOpenTextDocumentParams"
@@ -2308,7 +2308,7 @@
 			"typeName": "DidCloseTextDocumentNotification",
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.synchronization",
-			"serverCapability": "textDocumentSync",
+			"serverCapability": "textDocumentSync.openClose",
 			"params": {
 				"kind": "reference",
 				"name": "DidCloseTextDocumentParams"
