@@ -1898,6 +1898,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.rangeFormatting",
+			"serverCapability": "documentRangeFormattingProvider",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentRangeFormattingParams"
@@ -1928,8 +1930,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
-			"clientCapability": "textDocument.rangeFormatting",
-			"serverCapability": "documentRangeFormattingProvider",
+			"clientCapability": "textDocument.rangeFormatting.rangesSupport",
+			"serverCapability": "documentRangeFormattingProvider.rangesSupport",
 			"params": {
 				"kind": "reference",
 				"name": "DocumentRangesFormattingParams"
