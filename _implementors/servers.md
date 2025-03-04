@@ -90,6 +90,7 @@ index: 1
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
 | F# | [@Krzysztof-Cieslak](https://github.com/Krzysztof-Cieslak) & Contributors | [FsAutoComplete](https://github.com/fsharp/FsAutoComplete) | F# |
+| [fish](https://fishshell.com/) | [Nick Donfris](https://github.com/ndonfris) | [fish-lsp](https://github.com/ndonfris/fish-lsp) | TypeScript |
 | [fluent-bit](https://fluentbit.io/) | [Seonghyeon Cho](https://github.com/sh-cho) | [fluent-bit-lsp](https://github.com/sh-cho/fluent-bit-lsp) | Rust |
 | Fortran | [Chris Hansen](https://github.com/hansec) | [fortran-language-server](https://github.com/hansec/fortran-language-server) | Python |
 | [Fortran](https://fortran-lang.org/) | [Giannis Nikiteas](https://github.com/gnikit) | [fortls](https://github.com/gnikit/fortls) | Python |
@@ -280,6 +281,7 @@ index: 1
 | [WebAssembly](https://webassembly.org/) | [Pig Fang](https://github.com/g-plane) | [wasm-language-tools](https://github.com/g-plane/wasm-language-tools) | Rust |
 | [WebAssembly](https://webassembly.org/) | [Darin Morrison](https://github.com/darinmorrison) | [wasm-language-server](https://github.com/wasm-lsp/wasm-language-server) | Rust |
 | [WebGPU Shading Language](https://gpuweb.github.io/gpuweb/wgsl/) | [WGSL-Analyzer Team](https://github.com/wgsl-analyzer) | [wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) | Rust |
+| [Wikitext](https://mediawiki.org/wiki/Wikitext) | [Bhsd](https://github.com/bhsd-harry) | [VSCode-WikiParser](https://github.com/bhsd-harry/vscode-extension-wikiparser) | TypeScript
 | [Wing](https://www.winglang.io/) | [Contributors](https://github.com/winglang/wing/graphs/contributors) | [Wing](https://github.com/winglang/wing) | Typescript |
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [Wolfram Research](https://github.com/WolframResearch) | [LSPServer](https://github.com/WolframResearch/lspserver) | Wolfram Language |
@@ -300,4 +302,5 @@ index: 1
 | * | [daquexian](https://github.com/daquexian) | [tagls](https://github.com/daquexian/tagls) | Python |
 | * | [Sonar](https://github.com/SonarSource) | [SonarLint Language Server](https://github.com/SonarSource/sonarlint-language-server) | Java |
 | * | [kbwo](https://github.com/kbwo) | [testing-language-server](https://github.com/kbwo/testing-language-server) | Rust |
+| * | [GitHub](https://github.com/github/copilot-language-server-release) | [@github/copilot-language-server](https://www.npmjs.com/package/@github/copilot-language-server) (no code repository available, issues and feature requests can be done) | JavaScript |
 {: .table .table-bordered .table-responsive}
