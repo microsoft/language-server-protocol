@@ -570,6 +570,8 @@ then a code action
 
 needs to be resolved using the `codeAction/resolve` request before it can be applied.
 
+If the resolve request fails, the editor should try to apply the edit or command from the unresolved code action.
+
 _Client Capability_:
 * property name (optional): `textDocument.codeAction.resolveSupport`
 * property type: `{ properties: string[]; }`
