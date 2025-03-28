@@ -102,6 +102,7 @@ index: 1
 | [Gleam](https://gleam.run/) | [Gleam](https://github.com/gleam-lang/gleam) | [gleam](https://github.com/gleam-lang/gleam) | Rust |
 | [Glimmer templates](https://typed-ember.gitbook.io/glint) | [Contributors](https://github.com/typed-ember/glint/graphs/contributors) | [Glint](https://github.com/typed-ember/glint) | TypeScript |
 | Gluon | [Gluon](https://github.com/gluon-lang/gluon) | [Gluon Language Server](https://github.com/gluon-lang/gluon_language-server) | Rust |
+| [GN](https://gn.googlesource.com/gn/) | [Google](https://github.com/google/gn-language-server/graphs/contributors) | [gn-language-server](https://github.com/google/gn-language-server) | Rust |
 | Go | [Go Team](https://github.com/golang/tools) | [gopls](https://github.com/golang/tools/tree/master/gopls) | Go |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
 | [GraphQL](http://graphql.org/) | [GraphQL Foundation](https://foundation.graphql.org/) | [Official GraphQL Language Server](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-server) |  TypeScript |
