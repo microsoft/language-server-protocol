@@ -296,6 +296,7 @@ index: 1
 | [YARA](https://github.com/virusTotal/yara) | [Avast](https://github.com/avast) | [YARA Language Server](https://github.com/avast/yls) | Python |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
 | [Zig](https://ziglang.org/) | [zigtools](https://github.com/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
+| [ZX Basic](https://zxbasic.readthedocs.io/) | [rtorralba](https://github.com/rtorralba) | [zx-basic-lsp](https://github.com/boriel-basic/zx-basic-lsp) | ZX Basic |
 | [Nix](https://nix.dev/) | [oxalica](https://github.com/oxalica/) | [nil](https://github.com/oxalica/nil) | Rust
 | [Nix](https://nix.dev/) | [nix-community](https://github.com/nix-community/) | [nixd](https://github.com/nix-community/nixd) | C++
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
