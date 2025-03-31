@@ -107,6 +107,19 @@ export interface CodeActionClientCapabilities {
 	 * @proposed
 	 */
 	 documentationSupport?: boolean;
+
+	/**
+	 * Client supports the tag property on a code action. Clients
+	 * supporting tags have to handle unknown tags gracefully.
+	 *
+	 * @since 3.18.0 - proposed
+	 */
+	tagSupport?: {
+		/**
+		 * The tags supported by the client.
+		 */
+		valueSet: CodeActionTag[];
+	}; 
 }
 ```
 
@@ -412,6 +425,23 @@ export namespace CodeActionTriggerKind {
 export type CodeActionTriggerKind = 1 | 2;
 ```
 
+<div class="anchorHolder"><a href="#codeActionTag" name="codeActionTag" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Code action tags are extra annotations that tweak the behavior of a code action.
+ *
+ * @since 3.18.0 - proposed
+ */
+export namespace CodeActionTag {
+	/**
+	 * Marks the code action as LLM-generated.
+	 */
+	export const LLMGenerated = 1;
+}
+export type CodeActionTag = 1;
+```
+
 _Response_:
 * result: `(Command | CodeAction)[]` \| `null` where `CodeAction` is defined as follows:
 
@@ -505,6 +535,13 @@ export interface CodeAction {
 	 * @since 3.16.0
 	 */
 	data?: LSPAny;
+
+	/**
+ 	 * Tags for this code action.
+	 *
+	 * @since 3.18.0 - proposed
+	 */
+	tags?: CodeActionTag[];
 }
 ```
 * partial result: `(Command | CodeAction)[]`

@@ -737,6 +737,7 @@ Since 3.17 there is a meta model describing the LSP protocol:
 * Support for snippets in text document edits.
 * Support for debug message kind.
 * Client capability to enumerate properties that can be resolved for code lenses.
+* Added support for `completionList.applyKind` to determine how values from `completionList.itemDefaults` and `completion` are combined.
 
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (05/10/2022)</a>

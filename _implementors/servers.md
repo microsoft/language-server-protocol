@@ -35,7 +35,9 @@ index: 1
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | Batch | [RechInformatica](https://github.com/RechInformatica) | [rech-editor-batch](https://github.com/RechInformatica/rech-editor-batch/tree/master/src/lsp) | TypeScript |
+| [Bazel](https://bazel.build/) | [cameron-martin](https://github.com/cameron-martin) | [bazel-lsp](https://github.com/cameron-martin/bazel-lsp) | Rust |
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
+| [BitBake](https://docs.yoctoproject.org/bitbake/) | [The Yocto Project](https://github.com/yoctoproject) | [BitBake Language Server](https://github.com/yoctoproject/vscode-bitbake/tree/staging/server) | TypeScript |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
 | C# | [OmniSharp](http://www.omnisharp.net/) | [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) | C# |
 | C# | [Saulius Menkevičius](https://github.com/razzmatazz) | [csharp-ls](https://github.com/razzmatazz/csharp-language-server) | F# |
@@ -64,17 +66,20 @@ index: 1
 | [Crystal](https://crystal-lang.org/)| [Elbaz Julien](https://github.com/elbywan) | [Crystalline](https://github.com/elbywan/crystalline) | Crystal |
 | [Crystal](https://crystal-lang.org/)| [Ryan L. Bell](https://github.com/kofno) | [Scry](https://github.com/crystal-lang-tools/scry) | Crystal |
 | [Cucumber/Gherkin](https://cucumber.io/)| [Cucumber core team](https://github.com/cucumber) | [Cucumber Language Server](https://github.com/cucumber/language-server) | TypeScript |
+| [Cython](https://cython.org/) | [ktnrg45](https://github.com/ktnrg45) | [cyright](https://github.com/ktnrg45/cyright) | TypeScript |
 | [D](https://dlang.org) | [Jan Jurzitza](https://github.com/WebFreak001) | [serve-d](https://github.com/Pure-D/serve-d) | D |
 | [D](https://dlang.org) | [Laurent Tréguier](https://github.com/LaurentTreguier) | [D Language Server](https://github.com/d-language-server/dls) | D |
 | [Dart](https://dart.dev/) | [Dart Team](https://dart.dev/) | [Dart SDK](https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md) | Dart |
 | [Data Pack](https://minecraft.wiki/w/Data_Pack) | [SPGoding](https://github.com/SPGoding) | [Data-pack Language Server](https://github.com/SPGoding/datapack-language-server) | TypeScript |
+| Debian Packaging files | [The `debputy` maintainers](https://salsa.debian.org/debian/debputy) | [`debputy lsp server`](https://salsa.debian.org/debian/debputy) | Python |
 | [Delphi](https://www.embarcadero.com/products/delphi) | [Embarcadero](https://www.embarcadero.com/) | Proprietary ([DelphiLSP](http://docwiki.embarcadero.com/RADStudio/en/Code_Insight_References)) | Delphi and C |
 | [DenizenScript](https://denizenscript.com/) | [DenizenScript Team](https://github.com/DenizenScript/) | [DenizenVSCode](https://github.com/DenizenScript/DenizenVSCode) | C# |
+| [devicetree](https://www.devicetree.org) | [Kyle Micallef Bonnici](https://github.com/kylebonnici) | [dts-lsp](https://github.com/kylebonnici/dts-lsp) | Typescript |
 | [Deno](https://deno.land) (TypeScript/JavaScript) | [Deno Land](https://github.com/denoland) | [`deno lsp`](https://github.com/denoland/deno/tree/main/cli/lsp) | Rust |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) | TypeScript |
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
 | [Egglog](https://github.com/egraphs-good/egglog) | [hatoo](https://github.com/hatoo) | [egglog-language-server](https://github.com/hatoo/egglog-language-server) | Rust |
-| Emacs Lisp | [Jen-Chieh Shen](https://github.com/jcs090218) | [ellsp](https://github.com/jcs090218/ellsp) | Emacs Lisp |
+| Emacs Lisp | [Jen-Chieh Shen](https://github.com/jcs090218) | [ellsp](https://github.com/elisp-lsp/ellsp) | Emacs Lisp |
 | Erlang | [OTP](https://github.com/erlang), [Vlad Dumitrescu](https://github.com/vladdu) | [sourcer](https://github.com/erlang/sourcer) | Erlang |
 | [Erlang](https://www.erlang.org) | [Roberto Aloi](https://github.com/robertoaloi) and [Contributors](https://github.com/erlang-ls/erlang_ls/graphs/contributors) | [erlang_ls](https://github.com/erlang-ls/erlang_ls) | Erlang |
 | [Erlang](https://www.erlang.org) | [WhatsApp](https://github.com/whatsapp) | [ELP](https://github.com/whatsapp/erlang-language-platform) | Rust, Erlang |
@@ -85,6 +90,7 @@ index: 1
 | [Ember](https://ember-cli.com/) | [Ember community](https://github.com/emberwatch) | [ember language server](https://github.com/emberwatch/ember-language-server) | TypeScript |
 | F# | [@georgewfraser](https://github.com/georgewfraser) | [F# Language Server](https://github.com/georgewfraser/fsharp-language-server) | F# |
 | F# | [@Krzysztof-Cieslak](https://github.com/Krzysztof-Cieslak) & Contributors | [FsAutoComplete](https://github.com/fsharp/FsAutoComplete) | F# |
+| [fish](https://fishshell.com/) | [Nick Donfris](https://github.com/ndonfris) | [fish-lsp](https://github.com/ndonfris/fish-lsp) | TypeScript |
 | [fluent-bit](https://fluentbit.io/) | [Seonghyeon Cho](https://github.com/sh-cho) | [fluent-bit-lsp](https://github.com/sh-cho/fluent-bit-lsp) | Rust |
 | Fortran | [Chris Hansen](https://github.com/hansec) | [fortran-language-server](https://github.com/hansec/fortran-language-server) | Python |
 | [Fortran](https://fortran-lang.org/) | [Giannis Nikiteas](https://github.com/gnikit) | [fortls](https://github.com/gnikit/fortls) | Python |
@@ -96,6 +102,7 @@ index: 1
 | [Gleam](https://gleam.run/) | [Gleam](https://github.com/gleam-lang/gleam) | [gleam](https://github.com/gleam-lang/gleam) | Rust |
 | [Glimmer templates](https://typed-ember.gitbook.io/glint) | [Contributors](https://github.com/typed-ember/glint/graphs/contributors) | [Glint](https://github.com/typed-ember/glint) | TypeScript |
 | Gluon | [Gluon](https://github.com/gluon-lang/gluon) | [Gluon Language Server](https://github.com/gluon-lang/gluon_language-server) | Rust |
+| [GN](https://gn.googlesource.com/gn/) | [Google](https://github.com/google/gn-language-server/graphs/contributors) | [gn-language-server](https://github.com/google/gn-language-server) | Rust |
 | Go | [Go Team](https://github.com/golang/tools) | [gopls](https://github.com/golang/tools/tree/master/gopls) | Go |
 | Go | [Sourcegraph](https://sourcegraph.com/) | [sourcegraph-go](https://github.com/sourcegraph/go-langserver) | Go |
 | [GraphQL](http://graphql.org/) | [GraphQL Foundation](https://foundation.graphql.org/) | [Official GraphQL Language Server](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-server) |  TypeScript |
@@ -121,6 +128,7 @@ index: 1
 | JavaScript-Typescript | [Sourcegraph](https://sourcegraph.com/) | [javascript-typescript](https://github.com/sourcegraph/javascript-typescript-langserver) | TypeScript |
 | JavaScript-Typescript | [Biome](https://github.com/biomejs) | [biome_lsp](https://github.com/biomejs/biome/tree/main/crates/biome_lsp) | Rust |
 | [JCL](https://publibz.boulder.ibm.com/epubs/pdf/iea2b600.pdf) | [IBM](https://www.ibm.com/) |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
+| [Jimmer DTO](https://github.com/babyfish-ct/jimmer) | [Enaium](https://github.com/Enaium/) | [jimmer-dto-lsp](https://github.com/Enaium/jimmer-dto-lsp) | Kotlin |
 | JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) | TypeScript |
 | [Jsonnet](https://jsonnet.org/) | [Grafana Labs](https://grafana.com/) | [jsonnet-language-server](https://github.com/grafana/jsonnet-language-server) | Go |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) | Julia |
@@ -155,6 +163,7 @@ index: 1
 | OCaml/Reason | [OCaml Labs](http://ocamllabs.io) | [ocamllsp](https://github.com/ocaml/ocaml-lsp) | OCaml |
 | [Odin](https://odin-lang.org) | [Daniel Gavin](https://github.com/DanielGavin/) | [ols](https://github.com/DanielGavin/ols) | Odin | 
 | [OpenAPI](https://www.openapis.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
+| [OpenEdge ABL](https://www.progress.com/openedge) | [Riverside Software](https://riverside-software.fr) | [ABL Language Server](https://github.com/vscode-abl/vscode-abl) | Java |
 | [openVALIDATION](http://openvalidation.io/) | [openVALIDATION](https://github.com/openvalidation) | [ov-language-server](https://github.com/openvalidation/ov-language-server) | TypeScript
 | [Papyrus](https://www.creationkit.com/fallout4/index.php?title=Category:Papyrus) | [Joel Day](https://github.com/joelday) | [papyrus-lang](https://github.com/joelday/papyrus-lang) | C# |
 | [PartiQL](https://partiql.org/) | [AWS](https://github.com/aws/language-servers) | [aws-lsp-partiql](https://github.com/aws/language-servers/tree/main/server/aws-lsp-partiql) | TypeScript |
@@ -170,10 +179,13 @@ index: 1
 | PHP | [Dan Leech](https://github.com/dantleech) | [phpactor](https://github.com/phpactor/phpactor) | PHP |
 | PHPUnit | [Recca0120](https://github.com/recca0120) | [phpunit-language-server](https://github.com/recca0120/vscode-phpunit) | TypeScript |
 | [IBM Enterprise **PL/I** for z/OS](https://www.ibm.com/support/knowledgecenter/SSY2V3_5.3.0/com.ibm.ent.pl1.zos.doc/single_template_nobrand.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
+| PL/SQL | [Ivan Dubashinskii](https://github.com/EwanDubashinski) | [PL/SQL language server](https://github.com/EwanDubashinski/plsqllang-server) | Java |
 | [Polymer](https://www.polymer-project.org) | [Polymer Team](https://github.com/Polymer) | [polymer-editor-service](https://github.com/Polymer/polymer-editor-service) | TypeScript |
 | PowerPC Assembly | [Noah Fields](https://github.com/OGoodness) | [PowerPC Support](https://github.com/OGoodness/VSCode-PowerPC-Syntax) | TypeScript |
 | PowerShell | MS | [PowerShell Editor Services](https://github.com/PowerShell/PowerShellEditorServices) | C# |
 | [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) | [Tobias Guggenmos](https://github.com/slrtbtfs) | [promql-langserver](https://github.com/prometheus-community/promql-langserver) | [Go](https://golang.org/) |
+| [Protocol Buffers](https://protobuf.dev/) | [coder3101](https://github.com/coder3101) | [protols](https://github.com/coder3101/protols) | Rust |
+| [Protocol Buffers](https://protobuf.dev/) | [lasorda](https://github.com/lasorda) | [protobuf-language-server](https://github.com/lasorda/protobuf-language-server) | Go |
 | PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) | PureScript |
 | Puppet| [Lingua Pupuli](https://github.com/lingua-pupuli) | [puppet language server](https://github.com/lingua-pupuli/puppet-editor-services) | Ruby |
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) | Java, Python |
@@ -187,10 +199,13 @@ index: 1
 | [Pony](https://www.ponylang.io/) | [Mahan Bakhshi](https://github.com/MahanBi) | [PonyLS](https://github.com/MahanBi/PonyLS) | Pony |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
+| Query | [Riley Bruins](https://github.com/ribru17) | [ts_query_ls](https://github.com/ribru17/ts_query_ls) | Rust |
 | [R](https://www.r-project.org/) | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
 | Racket | [Jay McCarthy](https://github.com/jeapostrophe) | [racket-langserver](https://github.com/jeapostrophe/racket-langserver) | Racket |
+| [Rain](https://github.com/RainCmd/RainLanguage) | [渴望蓝天](https://github.com/RainCmd) | [RainLanguageServer](https://github.com/RainCmd/RainLanguageServer) | C# |
 | Raku | [Brian Scannell](https://github.com/bscan) | [Raku Navigator](https://github.com/bscan/RakuNavigator) | TypeScript |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
+| [Rascal](https://www.rascal-mpl.org/) | [UseTheSource](https://github.com/UseTheSource) | [util::LanguageServer](https://github.com/usethesource/rascal-language-servers) | Java & Rascal & Typescript |
 | [RAML](https://raml.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
@@ -215,7 +230,9 @@ index: 1
 | Shader | [Jen-Chieh Shen](https://github.com/jcs090218) | [shader-language-server](https://github.com/shader-ls/shader-language-server) | C# |
 | [Slint](https://slint-ui.com) | Slint | [slint-lsp](https://github.com/slint-ui/slint/tree/HEAD/tools/lsp) | Rust |
 | [Smalltalk/Pharo](https://pharo.org/) | [Benoît Verhaeghe](https://github.com/badetitou) | [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) | Pharo |
+| [Smithy](https://smithy.io/2.0/index.html) | [Smithy](https://smithy.io/2.0/index.html) | [Smithy Language Server](https://github.com/smithy-lang/smithy-language-server) | Java |
 | Snyk | [Snyk](https://snyk.io) | [Snyk Language Server](https://github.com/snyk/snyk-ls) | Snyk SCA / SAST / IaC findings |
+| SPARQL | [Ioannis Nezis](https://github.com/IoannisNezis) | [Qlue-ls](https://github.com/IoannisNezis/Qlue-ls) | Rust |
 | SPARQL | [Stardog Union](https://github.com/stardog-union) | [SPARQL Language Server](https://github.com/stardog-union/stardog-language-servers/tree/master/packages/sparql-language-server) | TypeScript |
 | [Sphinx](https://www.sphinx-doc.org/en/master/) | [Alex Carney](https://github.com/alcarney) | [esbonio](https://github.com/swyddfa/esbonio) | Python |
 | SQL | [Toshikazu Ohashi](https://github.com/lighttiger2505) | [sqls](https://github.com/lighttiger2505/sqls) | Go |
@@ -227,16 +244,20 @@ index: 1
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
+| systemd | [Paweł Sacawa](https://github.com/psacawa) | [systemd-language-server](https://github.com/psacawa/systemd-language-server) | Python |
 | [Systemtap](https://sourceware.org/systemtap/) | [Red Hat](https://www.redhat.com/) | [Systemtap LSP](https://sourceware.org/git/?p=systemtap.git;a=tree;f=language-server) | C++ |
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
 | SystemVerilog | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | SystemVerilog | [CHIPS Alliance](https://chipsalliance.org/) | [Verible](https://github.com/chipsalliance/verible) | C++ |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
 | [Tads3](http://www.tads.org/tads3.htm) | [Tomas Öberg](https://github.com/toerob) | [tads3tools](https://github.com/toerob/vscode-tads3tools) | Tads3 |
+| [Teal](https://github.com/teal-language/tl) | [Teal community](https://github.com/teal-language) | [teal-language-server](https://github.com/teal-language/teal-language-server) | Teal |
 | [Terraform](https://www.terraform.io/) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
 | [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
 | [Thrift](https://thrift.apache.org/) | [Pengfei Jiang](https://github.com/joyme123) | [thrift-ls](https://github.com/joyme123/thrift-ls) | Go |
 | [Tibbo Basic](https://docs.tibbo.com/taiko/) | [Tibbo](https://tibbo.com) | [tibbo-basic](https://github.com/tibbotech/tibbo-basic) | Tibbo Basic |
+| [TOML](https://toml.io/) | [Ferenc Tamás and contributors](https://github.com/tamasfe/taplo/graphs/contributors) | [Taplo](https://github.com/tamasfe/taplo) | Rust |
+| [TOML](https://toml.io/) | [yassun7010](https://github.com/yassun7010) | [Tombi](https://github.com/tombi-toml/tombi) | Rust |
 | [Trino SQL](https://trino.io) | [Rocket Boosters](https://gitlab.com/rocket-boosters) | [trinols](https://gitlab.com/rocket-boosters/trinols) | TypeScript |
 | [TTCN-3](http://www.ttcn-3.org) | [Nokia](https://www.nokia.com) | [ntt](https://github.com/nokia/ntt) | Go |
 | [TTCN-3](http://www.ttcn-3.org) | [Eclipse Titan](https://projects.eclipse.org/projects/tools.titan) | [Titan Language Server](https://gitlab.eclipse.org/eclipse/titan/titan.language-server) | Java |
@@ -258,8 +279,11 @@ index: 1
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) | |
 | [Vue](https://vuejs.org/) | [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) | TypeScript |
 | [Vue](https://vuejs.org) | [Vue team](https://github.com/vuejs) | [vuejs/language-tools](https://github.com/vuejs/language-tools) | TypeScript |
+| [WebAssembly](https://webassembly.org/) | [Pig Fang](https://github.com/g-plane) | [wasm-language-tools](https://github.com/g-plane/wasm-language-tools) | Rust |
 | [WebAssembly](https://webassembly.org/) | [Darin Morrison](https://github.com/darinmorrison) | [wasm-language-server](https://github.com/wasm-lsp/wasm-language-server) | Rust |
 | [WebGPU Shading Language](https://gpuweb.github.io/gpuweb/wgsl/) | [WGSL-Analyzer Team](https://github.com/wgsl-analyzer) | [wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) | Rust |
+| [Wikitext](https://mediawiki.org/wiki/Wikitext) | [Bhsd](https://github.com/bhsd-harry) | [VSCode-WikiParser](https://github.com/bhsd-harry/vscode-extension-wikiparser) | TypeScript
+| [Wing](https://www.winglang.io/) | [Contributors](https://github.com/winglang/wing/graphs/contributors) | [Wing](https://github.com/winglang/wing) | Typescript |
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [Wolfram Research](https://github.com/WolframResearch) | [LSPServer](https://github.com/WolframResearch/lspserver) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [markjet7](https://github.com/markjet7) | [wlsp](https://github.com/markjet7/wlsp) | Wolfram Language |
@@ -278,4 +302,6 @@ index: 1
 | * | [iamcco](https://github.com/iamcco) | [diagnostic-languageserver](https://github.com/iamcco/diagnostic-languageserver) | TypeScript |
 | * | [daquexian](https://github.com/daquexian) | [tagls](https://github.com/daquexian/tagls) | Python |
 | * | [Sonar](https://github.com/SonarSource) | [SonarLint Language Server](https://github.com/SonarSource/sonarlint-language-server) | Java |
+| * | [kbwo](https://github.com/kbwo) | [testing-language-server](https://github.com/kbwo/testing-language-server) | Rust |
+| * | [GitHub](https://github.com/github/copilot-language-server-release) | [@github/copilot-language-server](https://www.npmjs.com/package/@github/copilot-language-server) (no code repository available, issues and feature requests can be done) | JavaScript |
 {: .table .table-bordered .table-responsive}
