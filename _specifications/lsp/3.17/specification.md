@@ -32,7 +32,7 @@ separated by a '\r\n'.
 
 ### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
-The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conform to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
+The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conforms to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
 
 Currently the following header fields are supported:
 
@@ -48,7 +48,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
-(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treats the string `utf8` as `utf-8`.
+(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treat the string `utf8` as `utf-8`.
 
 ### Example:
 
@@ -70,7 +70,7 @@ The following TypeScript definitions describe the base [JSON-RPC protocol](http:
 
 #### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
 
-The protocol use the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
+The protocol uses the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
 <div class="anchorHolder"><a href="#integer" name="integer" class="linkableAnchor"></a></div>
 
@@ -244,7 +244,7 @@ export namespace ErrorCodes {
 
 	/**
 	 * Error code indicating that a server received a notification or
-	 * request before the server has received the `initialize` request.
+	 * request before the server received the `initialize` request.
 	 */
 	export const ServerNotInitialized: integer = -32002;
 	export const UnknownErrorCode: integer = -32001;
@@ -290,7 +290,7 @@ export namespace ErrorCodes {
 	 * The server detected that the content of a document got
 	 * modified outside normal conditions. A server should
 	 * NOT send this error code if it detects a content change
-	 * in it unprocessed messages. The result even computed
+	 * in its unprocessed messages. The result even computed
 	 * on an older state might still be useful for the client.
 	 *
 	 * If a client decides that a result is not of any use anymore
@@ -333,7 +333,7 @@ interface NotificationMessage extends Message {
 
 #### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
 
-Notification and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
+Notifications and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
 #### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
 
@@ -388,9 +388,9 @@ Progress is reported against a token. The token is different than the request ID
 
 ## <a href="#languageServerProtocol" name="languageServerProtocol" class="anchor"> Language Server Protocol </a>
 
-The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means for example that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsify value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
+The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means for example that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsy value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
 
-An example would be a request send from the client to the server to request a hover value for a symbol at a certain position in a text document. The request's method would be `textDocument/hover` with a parameter like this:
+An example would be a request sent from the client to the server to request a hover value for a symbol at a certain position in a text document. The request's method would be `textDocument/hover` with a parameter like this:
 
 ```typescript
 interface HoverParams {
@@ -411,7 +411,7 @@ Please also note that a response return value of `null` indicates no result. It 
 
 In general, the language server protocol supports JSON-RPC messages, however the base protocol defined here uses a convention such that the parameters passed to request/notification messages should be of `object` type (if passed at all). However, this does not disallow using `Array` parameter types in custom messages.
 
-The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such a sharing would require additional protocol e.g. to lock a document to support concurrent editing.
+The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such sharing would require additional protocol e.g. to lock a document to support concurrent editing.
 
 ### <a href="#capabilities" name= "capabilities" class="anchor"> Capabilities </a>
 
