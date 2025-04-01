@@ -27,7 +27,7 @@ separated by a '\r\n'.
 
 ### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
 
-The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conform to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
+The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conforms to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
 
 Currently the following header fields are supported:
 
@@ -43,7 +43,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC 2.0](https://www.jsonrpc.org/specification) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
-(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treats the string `utf8` as `utf-8`.
+(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treat the string `utf8` as `utf-8`.
 
 ### Example:
 
@@ -241,7 +241,7 @@ export namespace ErrorCodes {
 
 	/**
 	 * Error code indicating that a server received a notification or
-	 * request before the server has received the `initialize` request.
+	 * request before the server received the `initialize` request.
 	 */
 	export const ServerNotInitialized: integer = -32002;
 	export const UnknownErrorCode: integer = -32001;
@@ -330,7 +330,7 @@ interface NotificationMessage extends Message {
 
 #### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
 
-Notification and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
+Notifications and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
 #### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
 
@@ -408,7 +408,7 @@ Please also note that a response return value of `null` indicates no result. It 
 
 In general, the language server protocol supports JSON-RPC messages, however the base protocol defined here uses a convention such that the parameters passed to request/notification messages should be of `object` type (if passed at all). However, this does not disallow using `Array` parameter types in custom messages.
 
-The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such a sharing would require additional protocol e.g. to lock a document to support concurrent editing.
+The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such sharing would require additional protocol e.g. to lock a document to support concurrent editing.
 
 ### <a href="#capabilities" name= "capabilities" class="anchor"> Capabilities </a>
 
