@@ -26,6 +26,7 @@ index: 1
 | [Apache Dispatcher Config](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration.html?lang=en) | [Darian Benam](https://github.com/BeardedFish) | [vscode-apache-dispatcher-config-language-support](https://github.com/BeardedFish/vscode-apache-dispatcher-config-language-support) | TypeScript |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) | TypeScript |
 | [Astro](https://astro.build) | [Astro team](https://github.com/withastro) |  [withastro/language-tools](https://github.com/withastro/language-tools) | TypeScript |
+| [Boriel Basic](https://zxbasic.readthedocs.io/) | [rtorralba](https://github.com/rtorralba) | [boriel-basic-lsp](https://github.com/boriel-basic/boriel-basic-lsp) | Boriel Basic |
 | IBM High Level **Assembler** | [Broadcom](https://www.broadcom.com/) | [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) | C++ |
 | [IBM High Level **Assembler**](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.2.0/com.ibm.zos.v2r2.e0zc100/hlasm.htm) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | [ASN.1](https://www.itu.int/en/ITU-T/asn1/Pages/introduction.aspx) | [Eclipse Titan](https://projects.eclipse.org/projects/tools.titan) | [Titan Language Server](https://gitlab.eclipse.org/eclipse/titan/titan.language-server) | Java |
@@ -296,7 +297,6 @@ index: 1
 | [YARA](https://github.com/virusTotal/yara) | [Avast](https://github.com/avast) | [YARA Language Server](https://github.com/avast/yls) | Python |
 | [YANG](https://tools.ietf.org/html/rfc7950)| [Yang tools](https://github.com/yang-tools) | [yang-lsp](https://github.com/yang-tools/yang-lsp) |  XTend |
 | [Zig](https://ziglang.org/) | [zigtools](https://github.com/zigtools) | [zls](https://github.com/zigtools/zls) | [Zig](https://ziglang.org) |
-| [ZX Basic](https://zxbasic.readthedocs.io/) | [rtorralba](https://github.com/rtorralba) | [zx-basic-lsp](https://github.com/boriel-basic/zx-basic-lsp) | ZX Basic |
 | [Nix](https://nix.dev/) | [oxalica](https://github.com/oxalica/) | [nil](https://github.com/oxalica/nil) | Rust
 | [Nix](https://nix.dev/) | [nix-community](https://github.com/nix-community/) | [nixd](https://github.com/nix-community/nixd) | C++
 | * | [mattn](https://github.com/mattn) | [efm-langserver](https://github.com/mattn/efm-langserver) | [Go](https://golang.org/) |
