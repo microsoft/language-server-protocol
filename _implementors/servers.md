@@ -256,6 +256,7 @@ index: 1
 | [Terraform](https://www.terraform.io/) | [Julio Tain Sueiras](https://github.com/juliosueiras) | [terraform-lsp](https://github.com/juliosueiras/terraform-lsp) | Go |
 | [Terraform](https://www.terraform.io/) | [HashiCorp](https://github.com/hashicorp) | [terraform-ls](https://github.com/hashicorp/terraform-ls) | Go |
 | [Thrift](https://thrift.apache.org/) | [Pengfei Jiang](https://github.com/joyme123) | [thrift-ls](https://github.com/joyme123/thrift-ls) | Go |
+| [Thrift](https://thrift.apache.org/) | [ocfbnj](https://github.com/ocfbnj) | [thrift-ls](https://github.com/ocfbnj/thrift-ls) | Rust |
 | [Tibbo Basic](https://docs.tibbo.com/taiko/) | [Tibbo](https://tibbo.com) | [tibbo-basic](https://github.com/tibbotech/tibbo-basic) | Tibbo Basic |
 | [TOML](https://toml.io/) | [Ferenc Tamás and contributors](https://github.com/tamasfe/taplo/graphs/contributors) | [Taplo](https://github.com/tamasfe/taplo) | Rust |
 | [TOML](https://toml.io/) | [yassun7010](https://github.com/yassun7010) | [Tombi](https://github.com/tombi-toml/tombi) | Rust |
