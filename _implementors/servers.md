@@ -46,6 +46,7 @@ index: 1
 | [C++/clang](https://clangd.llvm.org/)| [LLVM Project](https://llvm.org/) | [clangd](https://github.com/llvm/llvm-project/tree/main/clang-tools-extra/clangd) | C++ |
 | C/C++/Objective-C | [Jacob Dufault](https://github.com/jacobdufault), [MaskRay](https://github.com/MaskRay), [topisani](https://github.com/topisani) | [cquery](https://github.com/jacobdufault/cquery) | C++ |
 | C/C++/Objective-C | [MaskRay](https://github.com/MaskRay) | [ccls](https://github.com/MaskRay/ccls) | C++ |
+| [caddy](https://caddyserver.com/) | [caddyserver](https://github.com/caddyserver/) | [vscode-caddyfile](https://github.com/caddyserver/vscode-caddyfile/tree/master/packages/server) | TypeScript |
 | [CDS](https://cap.cloud.sap/docs/cds/) | [SAP](https://www.sap.com/) | [@sap/cds-lsp](https://www.npmjs.com/package/@sap/cds-lsp) (no code repository available) | JavaScript |
 | CSS/LESS/SASS | MS | [vscode-css-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/css-language-features/server) | TypeScript |
 | [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) | Ceylon |
