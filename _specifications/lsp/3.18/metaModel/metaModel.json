@@ -2081,6 +2081,7 @@
 			"method": "workspace/didChangeWorkspaceFolders",
 			"typeName": "DidChangeWorkspaceFoldersNotification",
 			"messageDirection": "clientToServer",
+			"clientCapability": "workspace.workspaceFolders.changeNotifications",
 			"serverCapability": "workspace.workspaceFolders.changeNotifications",
 			"params": {
 				"kind": "reference",
@@ -11206,8 +11207,17 @@
 				{
 					"name": "workspaceFolders",
 					"type": {
-						"kind": "base",
-						"name": "boolean"
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "boolean"
+							},
+							{
+								"kind": "reference",
+								"name": "WorkspaceFoldersClientCapabilities"
+							}
+						]
 					},
 					"optional": true,
 					"documentation": "The client has support for workspace folders.\n\n@since 3.6.0",
@@ -12255,6 +12265,33 @@
 				}
 			],
 			"documentation": "The client capabilities of a {@link ExecuteCommandRequest}."
+		},
+		{
+			"name": "WorkspaceFoldersClientCapabilities",
+			"properties": [
+				{
+					"name": "changeNotifications",
+					"type": {
+						"kind": "literal",
+						"value": {
+							"properties": [
+								{
+									"name": "dynamicRegistration",
+									"type": {
+										"kind": "base",
+										"name": "boolean"
+									},
+									"optional": true,
+									"documentation": "Whether the client supports dynamic registration for the\n`workspace/didChangeWorkspaceFolders` notification."
+								}
+							]
+						}
+					},
+					"optional": true,
+					"documentation": "The client has support for workspace folder change notifications.\n\n@since 3.18.0",
+					"since": "3.18.0"
+				}
+			]
 		},
 		{
 			"name": "SemanticTokensWorkspaceClientCapabilities",
