@@ -23,9 +23,11 @@ index: 2
 | [CudaText](https://cudatext.github.io/) | [Alexey-T](https://github.com/Alexey-T) | [cuda_lsp](https://github.com/CudaText-addons/cuda_lsp) |
 | [Eclipse Che](https://www.eclipse.org/che/) | Eclipse,Codenvy/TypeFox | [Che](https://github.com/eclipse/che/issues/1287) |
 | Eclipse IDE | Eclipse,Red Hat | [Eclipse community](https://projects.eclipse.org/projects/technology.lsp4e/who), [Eclipse LSP4E](https://projects.eclipse.org/projects/technology.lsp4e) |
-| Emacs | [Vibhav Pant](https://github.com/vibhavp) | [emacs language server client](https://github.com/emacs-lsp/lsp-mode/) |
+| Emacs | [Vibhav Pant](https://github.com/vibhavp) | [LSP Mode](https://github.com/emacs-lsp/lsp-mode/) |
 | Emacs | [João Távora](https://github.com/joaotavora) | [Eglot](https://github.com/joaotavora/eglot) |
 | Emacs | [Andy Stewart](https://github.com/manateelazycat/) | [lsp-bridge](https://github.com/manateelazycat/lsp-bridge/) | 
+| Emacs | [zbelial](https://github.com/zbelial) | [lspce](https://github.com/zbelial/lspce) |
+| Emacs | [JadeStrong](https://github.com/jadestrong) | [Lsp-Proxy](https://github.com/jadestrong/lsp-proxy) |
 | [ecode](https://github.com/SpartanJ/ecode) | [Martín Lucas Golini](https://github.com/SpartanJ) | [ecode](https://github.com/SpartanJ/ecode) | 
 | [Geany](https://www.geany.org) | [Jiří Techet](https://github.com/techee) | [geany-lsp](https://github.com/techee/geany-lsp) |
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
