@@ -33,6 +33,7 @@ index: 1
 | [AsyncAPI](https://www.asyncapi.com/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | AWK | [Stanislav Chernov](https://github.com/Beaglefoot) | [AWK Language Server](https://github.com/Beaglefoot/awk-language-server) | TypeScript |
 | [B/ProB](https://prob.hhu.de/w/) | [STUPS](https://github.com/hhu-stups/prob-issues/issues) | [B-language-server](https://github.com/hhu-stups/b-language-server) | Kotlin/Prolog |
+| [Bake](https://docs.docker.com/build/bake/reference/)| [Docker](https://github.com/docker) | [docker-language-server](https://github.com/docker/docker-language-server) | Go |
 | [Ballerina](https://ballerina.io/) | [Ballerina.io](https://ballerina.io/) | [Ballerina Language Server](https://github.com/ballerina-platform/ballerina-lang/tree/master/language-server) | Java |
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | Batch | [RechInformatica](https://github.com/RechInformatica) | [rech-editor-batch](https://github.com/RechInformatica/rech-editor-batch/tree/master/src/lsp) | TypeScript |
@@ -54,6 +55,7 @@ index: 1
 | [Clojure](https://clojure.org/) | [Eric Dallo](https://github.com/ericdallo) | [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp) | Clojure |
 | [CMake](https://cmake.org/) | [regen100](https://github.com/regen100) | [cmake-language-server](https://github.com/regen100/cmake-language-server) | Python |
 | [CMake](https://cmake.org/) | [Decodetalkers](https://github.com/Decodetalkers) | [neocmakelsp](https://github.com/Decodetalkers/neocmakelsp) | Rust |
+| [Compose](https://docs.docker.com/reference/compose-file/)| [Docker](https://github.com/docker) | [docker-language-server](https://github.com/docker/docker-language-server) | Go |
 | [Coq](https://coq.inria.fr/) | [ejgallego](https://github.com/ejgallego) | [coq-lsp](https://github.com/ejgallego/coq-lsp) | OCaml |
 | [Coq](https://coq.inria.fr/) | [coq-community](https://github.com/coq-community) | [vscoq](https://github.com/coq-community/vscoq) | OCaml |
 | Cobol| [RechInformatica](https://github.com/RechInformatica) | [rech-editor-cobol](https://github.com/RechInformatica/rech-editor-cobol/tree/master/src/lsp) | TypeScript |
@@ -78,6 +80,7 @@ index: 1
 | [DenizenScript](https://denizenscript.com/) | [DenizenScript Team](https://github.com/DenizenScript/) | [DenizenVSCode](https://github.com/DenizenScript/DenizenVSCode) | C# |
 | [devicetree](https://www.devicetree.org) | [Kyle Micallef Bonnici](https://github.com/kylebonnici) | [dts-lsp](https://github.com/kylebonnici/dts-lsp) | Typescript |
 | [Deno](https://deno.land) (TypeScript/JavaScript) | [Deno Land](https://github.com/denoland) | [`deno lsp`](https://github.com/denoland/deno/tree/main/cli/lsp) | Rust |
+| [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Docker](https://github.com/docker) | [docker-language-server](https://github.com/docker/docker-language-server) | Go |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) | TypeScript |
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
 | [Egglog](https://github.com/egraphs-good/egglog) | [hatoo](https://github.com/hatoo) | [egglog-language-server](https://github.com/hatoo/egglog-language-server) | Rust |
