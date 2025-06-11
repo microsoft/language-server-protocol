@@ -216,8 +216,8 @@ export interface DocumentSymbol {
 	/**
 	 * The range enclosing this symbol not including leading/trailing whitespace
 	 * but everything else like comments. This information is typically used to
-	 * determine if the clients cursor is inside the symbol to reveal in the
-	 * symbol in the UI.
+	 * determine if the clients cursor is inside the symbol to reveal it  in the
+	 * UI.
 	 */
 	range: Range;
 
