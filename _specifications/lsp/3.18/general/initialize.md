@@ -756,7 +756,8 @@ interface ServerCapabilities {
 	/**
 	 * The server provides document highlight support.
 	 */
-	documentHighlightProvider?: boolean | DocumentHighlightOptions;
+	documentHighlightProvider?: boolean | DocumentHighlightOptions
+		| DocumentHighlightRegistrationOptions;
 
 	/**
 	 * The server provides document symbol support.

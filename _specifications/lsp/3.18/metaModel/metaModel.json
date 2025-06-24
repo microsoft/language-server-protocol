@@ -8544,6 +8544,10 @@
 							{
 								"kind": "reference",
 								"name": "DocumentHighlightOptions"
+							},
+							{
+								"kind": "reference",
+								"name": "DocumentHighlightRegistrationOptions"
 							}
 						]
 					},

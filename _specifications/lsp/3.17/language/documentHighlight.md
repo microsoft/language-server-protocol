@@ -22,7 +22,7 @@ export interface DocumentHighlightClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `documentHighlightProvider`
-* property type: `boolean | DocumentHighlightOptions` where `DocumentHighlightOptions` is defined as follows:
+* property type: `boolean | DocumentHighlightOptions | DocumentHighlightRegistrationOptions` where `DocumentHighlightOptions` is defined as follows:
 
 <div class="anchorHolder"><a href="#documentHighlightOptions" name="documentHighlightOptions" class="linkableAnchor"></a></div>
 
