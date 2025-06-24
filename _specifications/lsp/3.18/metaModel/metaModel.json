@@ -8526,6 +8526,10 @@
 							{
 								"kind": "reference",
 								"name": "ReferenceOptions"
+							},
+							{
+								"kind": "reference",
+								"name": "ReferenceRegistrationOptions"
 							}
 						]
 					},
