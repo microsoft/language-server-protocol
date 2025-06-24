@@ -198,6 +198,7 @@ index: 1
 | Puppet| [Lingua Pupuli](https://github.com/lingua-pupuli) | [puppet language server](https://github.com/lingua-pupuli/puppet-editor-services) | Ruby |
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) | Java, Python |
 | Python | MS | [Pyright](https://github.com/microsoft/pyright) | TypeScript |
+| Python | Meta | [Pyrefly](https://github.com/facebook/pyrefly) | Rust |
 | Python | [DetachHead](https://github.com/DetachHead) | [basedpyright](https://github.com/DetachHead/basedpyright) | TypeScript |
 | Python| [Palantir Technologies](https://github.com/palantir) | [python-language-server](https://github.com/palantir/python-language-server) (unmaintained, use python-lsp-server instead) | Python |
 | Python| [Spyder IDE team and the community](https://github.com/python-lsp) | [python-lsp-server](https://github.com/python-lsp/python-lsp-server) | Python |
