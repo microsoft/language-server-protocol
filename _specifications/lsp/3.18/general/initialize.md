@@ -778,7 +778,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides document link support.
 	 */
-	documentLinkProvider?: DocumentLinkOptions;
+	documentLinkProvider?: DocumentLinkOptions | DocumentLinkRegistrationOptions;
 
 	/**
 	 * The server provides color provider support.

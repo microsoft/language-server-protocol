@@ -26,7 +26,7 @@ export interface DocumentLinkClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `documentLinkProvider`
-* property type: `DocumentLinkOptions` defined as follows:
+* property type: `DocumentLinkOptions | DocumentLinkRegistrationOptions` defined as follows:
 
 <div class="anchorHolder"><a href="#documentLinkOptions" name="documentLinkOptions" class="linkableAnchor"></a></div>
 

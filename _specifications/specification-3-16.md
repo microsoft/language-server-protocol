@@ -2273,7 +2273,7 @@ interface ServerCapabilities {
 	/**
 	 * The server provides document link support.
 	 */
-	documentLinkProvider?: DocumentLinkOptions;
+	documentLinkProvider?: DocumentLinkOptions | DocumentLinkRegistrationOptions;
 
 	/**
 	 * The server provides color provider support.
@@ -6459,7 +6459,7 @@ export interface DocumentLinkClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `documentLinkProvider`
-* property type: `DocumentLinkOptions` defined as follows:
+* property type: `DocumentLinkOptions | DocumentLinkRegistrationOptions` defined as follows:
 
 ```typescript
 export interface DocumentLinkOptions extends WorkDoneProgressOptions {

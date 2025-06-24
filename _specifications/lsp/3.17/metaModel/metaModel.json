@@ -8369,8 +8369,17 @@
 				{
 					"name": "documentLinkProvider",
 					"type": {
-						"kind": "reference",
-						"name": "DocumentLinkOptions"
+						"kind": "or",
+						"items": [
+							{
+								"kind": "reference",
+								"name": "DocumentLinkOptions"
+							},
+							{
+								"kind": "reference",
+								"name": "DocumentLinkRegistrationOptions"
+							}
+						]
 					},
 					"optional": true,
 					"documentation": "The server provides document link support."
