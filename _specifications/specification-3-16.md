@@ -5504,7 +5504,7 @@ export interface ReferenceClientCapabilities {
 
 _Server Capability_:
 * property name (optional): `referencesProvider`
-* property type: `boolean | ReferenceOptions` where `ReferenceOptions` is defined as follows:
+* property type: `boolean | ReferenceOptions | ReferenceRegistrationOptions` where `ReferenceOptions` is defined as follows:
 
 ```typescript
 export interface ReferenceOptions extends WorkDoneProgressOptions {
