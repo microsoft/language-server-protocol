@@ -751,7 +751,8 @@ interface ServerCapabilities {
 	/**
 	 * The server provides find references support.
 	 */
-	referencesProvider?: boolean | ReferenceOptions;
+	referencesProvider?: boolean | ReferenceOptions
+		| ReferenceRegistrationOptions;
 
 	/**
 	 * The server provides document highlight support.
