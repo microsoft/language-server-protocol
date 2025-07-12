@@ -74,4 +74,5 @@ index: 2
 | Visual Studio | Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 | [Visual Studio Code](https://code.visualstudio.com) | Microsoft | [vscode](https://github.com/Microsoft/vscode/)  |
 | [WebStorm](https://blog.jetbrains.com/webstorm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
+| [Zed](https://zed.dev) | [Zed Industries](https://zed.dev) | [zed](https://github.com/zed-industries/zed) |
 {: .table .table-bordered .table-responsive}
