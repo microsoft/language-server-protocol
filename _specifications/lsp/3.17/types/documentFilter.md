@@ -22,7 +22,7 @@ export interface DocumentFilter {
 	 * A glob pattern, like `*.{ts,js}`.
 	 *
 	 * Glob patterns can have the following syntax:
-	 * - `*` to match one or more characters in a path segment
+	 * - `*` to match zero or more characters in a path segment
 	 * - `?` to match on one character in a path segment
 	 * - `**` to match any number of path segments, including none
 	 * - `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}`

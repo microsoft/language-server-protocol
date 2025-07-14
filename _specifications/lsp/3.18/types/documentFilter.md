@@ -19,19 +19,12 @@ export interface DocumentFilter {
 	scheme?: string;
 
 	/**
-	 * A glob pattern, like `*.{ts,js}`.
+	 * A pattern, like `*.{ts,js}` or a pattern relative to a workspace folders.
 	 *
-	 * Glob patterns can have the following syntax:
-	 * - `*` to match one or more characters in a path segment
-	 * - `?` to match on one character in a path segment
-	 * - `**` to match any number of path segments, including none
-	 * - `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}`
-	 *   matches all TypeScript and JavaScript files)
-	 * - `[]` to declare a range of characters to match in a path segment
-	 *   (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
-	 * - `[!...]` to negate a range of characters to match in a path segment
-	 *   (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but
-	 *   not `example.0`)
+	 * See GlobPattern.
+	 *
+	 * Whether clients support relative patterns depends on the client
+	 * capability `textDocuments.filters.relativePatternSupport`.
 	 */
 	pattern?: GlobPattern;
 }

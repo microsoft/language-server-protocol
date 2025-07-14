@@ -41,7 +41,11 @@ export enum SemanticTokenTypes {
 	/**
 	 * @since 3.17.0
 	 */
-	decorator = 'decorator'
+	decorator = 'decorator',
+	/**
+	 * @since 3.18.0
+	 */
+	label = 'label'
 }
 ```
 
