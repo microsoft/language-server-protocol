@@ -167,7 +167,6 @@ index: 1
 | Nginx | [pappasam](https://github.com/pappasam) | [nginx-language-server](https://github.com/pappasam/nginx-language-server) | Python |
 | [Nim](https://nim-lang.org/) | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
 | [Nobl9 YAML](https://docs.nobl9.com/yaml-guide) | [Nobl9](https://www.nobl9.com/) | [nobl9-vscode](https://github.com/nobl9/nobl9-vscode/) | Go |
-| OCaml/Reason | [freebroccolo](https://github.com/freebroccolo) | [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server) | TypeScript |
 | OCaml/Reason | [OCaml Labs](http://ocamllabs.io) | [ocamllsp](https://github.com/ocaml/ocaml-lsp) | OCaml |
 | [Odin](https://odin-lang.org) | [Daniel Gavin](https://github.com/DanielGavin/) | [ols](https://github.com/DanielGavin/ols) | Odin | 
 | [OpenAPI](https://www.openapis.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
