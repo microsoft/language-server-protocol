@@ -1,4 +1,4 @@
-### <a href="#resourceChanges" name="resourceChanges" class="anchor"> File Resource changes </a>
+### <a href="#resourceChanges" name="resourceChanges" class="anchor">File Resource changes</a>
 
 > New in version 3.13. Since version 3.16 file resource changes can carry an additional property `changeAnnotation` to describe the actual change in more detail. Whether a client has support for change annotations is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`.
 

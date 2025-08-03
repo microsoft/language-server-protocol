@@ -1,4 +1,4 @@
-#### <a href="#partialResults" name="partialResults" class="anchor"> Partial Result Progress </a>
+#### <a href="#partialResults" name="partialResults" class="anchor">Partial Result Progress</a>
 
 > *Since version 3.15.0*
 

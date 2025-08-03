@@ -1,4 +1,4 @@
-#### <a href="#patterns" name="patterns" class="anchor"> Patterns </a>
+#### <a href="#patterns" name="patterns" class="anchor">Patterns</a>
 
 Pattern definitions used in file watchers and document filters.
 

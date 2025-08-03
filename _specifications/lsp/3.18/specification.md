@@ -12,7 +12,7 @@ This document describes the upcoming 3.18.x version of the language server proto
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.18/specification.md).
 
-## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.18 </a>
+## <a href="#whatIsNew" name="whatIsNew" class="anchor">What's new in 3.18</a>
 
 All new 3.18 features are tagged with a corresponding since version 3.18 text or in JSDoc using `@since 3.18.0` annotation.
 
@@ -20,12 +20,12 @@ A detailed list of the changes can be found in the [change log](#version_3_18_0)
 
 The version of the specification is used to group features into a new specification release and to refer to their first appearance. Features in the spec are kept compatible using so called capability flags which are exchanged between the client and the server during initialization.
 
-## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
+## <a href="#baseProtocol" name="baseProtocol" class="anchor">Base Protocol</a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
 separated by a '\r\n'.
 
-### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
+### <a href="#headerPart" name="headerPart" class="anchor">Header Part</a>
 
 The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conforms to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
 
@@ -39,7 +39,7 @@ Currently the following header fields are supported:
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
-### <a href="#contentPart" name="contentPart" class="anchor"> Content Part </a>
+### <a href="#contentPart" name="contentPart" class="anchor">Content Part</a>
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC 2.0](https://www.jsonrpc.org/specification) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
@@ -65,7 +65,7 @@ The protocol uses request, response, and notification objects as specified in th
 
 The following TypeScript definitions describe the base JSON-RPC protocol:
 
-#### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
+#### <a href="#baseTypes" name="baseTypes" class="anchor">Base Types</a>
 
 The protocol uses the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
@@ -134,7 +134,7 @@ export type LSPObject = { [key: string]: LSPAny };
 export type LSPArray = LSPAny[];
 ```
 
-#### <a href="#abstractMessage" name="abstractMessage" class="anchor"> Abstract Message </a>
+#### <a href="#abstractMessage" name="abstractMessage" class="anchor">Abstract Message</a>
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
 
@@ -145,7 +145,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### <a href="#requestMessage" name="requestMessage" class="anchor"> Request Message </a>
+#### <a href="#requestMessage" name="requestMessage" class="anchor">Request Message</a>
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -169,7 +169,7 @@ interface RequestMessage extends Message {
 }
 ```
 
-#### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
+#### <a href="#responseMessage" name="responseMessage" class="anchor">Response Message</a>
 
 A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON-RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
@@ -310,7 +310,7 @@ export namespace ErrorCodes {
 	export const lspReservedErrorRangeEnd: integer = -32800;
 }
 ```
-#### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
+#### <a href="#notificationMessage" name="notificationMessage" class="anchor">Notification Message</a>
 
 A notification message. A processed notification message must not send a response back. They work like events.
 
@@ -328,11 +328,11 @@ interface NotificationMessage extends Message {
 }
 ```
 
-#### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
+#### <a href="#dollarRequests" name="dollarRequests" class="anchor">$ Notifications and Requests</a>
 
 Notifications and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
-#### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#cancelRequest" name="cancelRequest" class="anchor">Cancellation Support (:arrow_right: :arrow_left:)</a>
 
 The base protocol offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
 
@@ -351,7 +351,7 @@ interface CancelParams {
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON-RPC protocol that requires that every request sends a response back. In addition, it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
-#### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#progress" name="progress" class="anchor">Progress Support (:arrow_right: :arrow_left:)</a>
 
 > *Since version 3.15.0*
 
@@ -383,7 +383,7 @@ interface ProgressParams<T> {
 
 Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
 
-## <a href="#languageServerProtocol" name="languageServerProtocol" class="anchor"> Language Server Protocol </a>
+## <a href="#languageServerProtocol" name="languageServerProtocol" class="anchor">Language Server Protocol</a>
 
 The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means, for example, that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsy value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
 
@@ -410,19 +410,19 @@ In general, the language server protocol supports JSON-RPC messages, however the
 
 The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such sharing would require additional protocol e.g. to lock a document to support concurrent editing.
 
-### <a href="#capabilities" name= "capabilities" class="anchor"> Capabilities </a>
+### <a href="#capabilities" name="capabilities" class="anchor">Capabilities</a>
 
 Not every language server can support all features defined by the protocol. LSP therefore provides ‘capabilities’. A capability groups a set of language features. A development tool and the language server announce their supported features using capabilities. As an example, a server announces that it can handle the `textDocument/hover` request, but it might not handle the `workspace/symbol` request. Similarly, a development tool announces its ability to provide `about to save` notifications before a document is saved, so that a server can compute textual edits to format the edited document before it is saved.
 
 The set of capabilities is exchanged between the client and server during the [initialize](#initialize) request.
 
-### <a href="#messageOrdering" name= "messageOrdering" class="anchor"> Request, Notification and Response Ordering </a>
+### <a href="#messageOrdering" name="messageOrdering" class="anchor">Request, Notification and Response Ordering</a>
 
 Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So, for example, if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
 
 However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since executing the latter may affect the result of the former.
 
-### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
+### <a href="#messageDocumentation" name="messageDocumentation" class="anchor">Message Documentation</a>
 
 As said, LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
 
@@ -434,7 +434,7 @@ As said, LSP defines a set of requests, responses and notifications. Each of tho
 * a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
 
-### <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> Basic JSON Structures </a>
+### <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor">Basic JSON Structures</a>
 
 There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are documented in this section.
 
@@ -469,7 +469,7 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/partialResultParams.md %}
 {% include types/traceValue.md %}
 
-### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor"> Server lifecycle </a>
+### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor">Server lifecycle</a>
 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 

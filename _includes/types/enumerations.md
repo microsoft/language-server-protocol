@@ -1,4 +1,4 @@
-#### <a href="#enumerations" name="enumerations" class="anchor"> Enumerations </a>
+#### <a href="#enumerations" name="enumerations" class="anchor">Enumerations</a>
 
 The protocol supports two kind of enumerations: (a) integer based enumerations and (b) string based enumerations. Integer based enumerations usually start with `1`. The ones that don't are historical and they were kept to stay backwards compatible. If appropriate, the value set of an enumeration is announced by the defining side (e.g. client or server) and transmitted to the other side during the initialize handshake. An example is the `CompletionItemKind` enumeration. It is announced by the client using the `textDocument.completion.completionItemKind` client property.
 

@@ -12,19 +12,19 @@ This document describes the 3.15.x version of the language server protocol. An i
 
 **Note:** edits to this specification can be made via a pull request against this Markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-15.md).
 
-## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.15 </a>
+## <a href="#whatIsNew" name="whatIsNew" class="anchor">What's new in 3.15</a>
 
 All new 3.15 features are tagged with a corresponding since version 3.15 text or in JSDoc using `@since 3.15.0` annotation. Major new features are:
 
 - [general progress support](#progress), [work done progress](#workDoneProgress) and [partial result progress](#partialResults)
 - support for [selection ranges](#textDocument_selectionRange)
 
-## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
+## <a href="#baseProtocol" name="baseProtocol" class="anchor">Base Protocol</a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
 separated by a '\r\n'.
 
-### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
+### <a href="#headerPart" name="headerPart" class="anchor">Header Part</a>
 
 The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conform to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
 
@@ -38,7 +38,7 @@ Currently the following header fields are supported:
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
-### <a href="#contentPart" name="contentPart" class="anchor"> Content Part </a>
+### <a href="#contentPart" name="contentPart" class="anchor">Content Part</a>
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
@@ -71,7 +71,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### <a href="#requestMessage" name="requestMessage" class="anchor"> Request Message </a>
+#### <a href="#requestMessage" name="requestMessage" class="anchor">Request Message</a>
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -95,7 +95,7 @@ interface RequestMessage extends Message {
 }
 ```
 
-#### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
+#### <a href="#responseMessage" name="responseMessage" class="anchor">Response Message</a>
 
 A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
@@ -153,7 +153,7 @@ export namespace ErrorCodes {
 	export const ContentModified: number = -32801;
 }
 ```
-#### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
+#### <a href="#notificationMessage" name="notificationMessage" class="anchor">Notification Message</a>
 
 A notification message. A processed notification message must not send a response back. They work like events.
 
@@ -171,11 +171,11 @@ interface NotificationMessage extends Message {
 }
 ```
 
-#### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
+#### <a href="#dollarRequests" name="dollarRequests" class="anchor">$ Notifications and Requests</a>
 
 Notification and requests whose methods start with '$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a '$/cancelRequest' notification. If a server or client receives notifications starting with '$/' it is free to ignore the notification. If a server or client receives a requests starting with '$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
-#### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#cancelRequest" name="cancelRequest" class="anchor">Cancellation Support (:arrow_right: :arrow_left:)</a>
 
 The base protocol offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
 
@@ -194,7 +194,7 @@ interface CancelParams {
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
-#### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#progress" name="progress" class="anchor">Progress Support (:arrow_right: :arrow_left:)</a>
 
 > *Since version 3.15.0*
 
@@ -233,7 +233,7 @@ The protocol currently assumes that one server serves one tool. There is current
 
 ### Basic JSON Structures
 
-#### <a href="#uri" name="uri" class="anchor"> URI </a>
+#### <a href="#uri" name="uri" class="anchor">URI</a>
 
 URI's are transferred as strings. The URI's format is defined in [http://tools.ietf.org/html/rfc3986](http://tools.ietf.org/html/rfc3986)
 
@@ -255,7 +255,7 @@ Many of the interfaces contain fields that correspond to the URI of a document. 
 type DocumentUri = string;
 ```
 
-#### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
+#### <a href="#textDocuments" name="textDocuments" class="anchor">Text Documents</a>
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset. The offsets are based on a UTF-16 string representation. So in a string of the form `a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀` is 1 and the character offset of b is 3 since `𐐀` is represented using two code units in UTF-16. To ensure that both client and server split the string into the same line representation the protocol specifies the following end-of-line sequences: '\n', '\r\n' and '\r'.
 
@@ -265,7 +265,7 @@ Positions are line end character agnostic. So you can not specify a position tha
 export const EOL: string[] = ['\n', '\r\n', '\r'];
 ```
 
-#### <a href="#position" name="position" class="anchor"> Position </a>
+#### <a href="#position" name="position" class="anchor">Position</a>
 
 Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in an editor. Special values like for example `-1` to denote the end of a line are not supported.
 
@@ -287,7 +287,7 @@ interface Position {
 	character: number;
 }
 ```
-#### <a href="#range" name="range" class="anchor"> Range </a>
+#### <a href="#range" name="range" class="anchor">Range</a>
 
 A range in a text document expressed as (zero-based) start and end positions. A range is comparable to a selection in an editor. Therefore the end position is exclusive. If you want to specify a range that contains a line including the line ending character(s) then use an end position denoting the start of the next line. For example:
 ```typescript
@@ -311,7 +311,7 @@ interface Range {
 }
 ```
 
-#### <a href="#location" name="location" class="anchor"> Location </a>
+#### <a href="#location" name="location" class="anchor">Location</a>
 
 Represents a location inside a resource, such as a line inside a text file.
 ```typescript
@@ -321,7 +321,7 @@ interface Location {
 }
 ```
 
-#### <a href="#locationLink" name="locationLink" class="anchor"> LocationLink </a>
+#### <a href="#locationLink" name="locationLink" class="anchor">LocationLink</a>
 
 Represents a link between a source and a target location.
 
@@ -360,7 +360,7 @@ interface LocationLink {
 }
 ```
 
-#### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
+#### <a href="#diagnostic" name="diagnostic" class="anchor">Diagnostic</a>
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
@@ -477,7 +477,7 @@ export interface DiagnosticRelatedInformation {
 }
 ```
 
-#### <a href="#command" name="command" class="anchor"> Command </a>
+#### <a href="#command" name="command" class="anchor">Command</a>
 
 Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identified by a string identifier. The recommended way to handle commands is to implement their execution on the server side if the client and server provides the corresponding capabilities. Alternatively the tool extension code could handle the command. The protocol currently doesn't specify a set of well-known commands.
 
@@ -499,7 +499,7 @@ interface Command {
 }
 ```
 
-#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit </a>
+#### <a href="#textEdit" name="textEdit" class="anchor">TextEdit</a>
 
 A textual edit applicable to a text document.
 
@@ -519,13 +519,13 @@ interface TextEdit {
 }
 ```
 
-#### <a href="#textEditArray" name="textEditArray" class="anchor"> TextEdit[] </a>
+#### <a href="#textEditArray" name="textEditArray" class="anchor">TextEdit[]</a>
 
 Complex text manipulations are described with an array of `TextEdit`'s, representing a single change to the document.
 
 All text edits ranges refer to positions in the document they are computed on. They therefore move a document from state S1 to S2 without describing any intermediate state. Text edits ranges must never overlap, that means no part of the original document must be manipulated by more than one edit. However, it is possible that multiple edits have the same start position: multiple inserts, or any number of inserts followed by a single remove or replace edit. If multiple inserts have the same position, the order in the array defines the order in which the inserted strings appear in the resulting text.
 
-#### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
+#### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor">TextDocumentEdit</a>
 
 Describes textual changes on a single text document. The text document is referred to as a `VersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
 
@@ -543,7 +543,7 @@ export interface TextDocumentEdit {
 }
 ```
 
-### <a href="#resourceChanges" name="resourceChanges" class="anchor"> File Resource changes </a>
+### <a href="#resourceChanges" name="resourceChanges" class="anchor">File Resource changes</a>
 
 > New in version 3.13:
 
@@ -651,7 +651,7 @@ export interface DeleteFile {
 }
 ```
 
-#### <a href="#workspaceEdit" name="workspaceEdit" class="anchor"> WorkspaceEdit </a>
+#### <a href="#workspaceEdit" name="workspaceEdit" class="anchor">WorkspaceEdit</a>
 
 A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChanges` are present, the latter are preferred over `changes`.
 
@@ -684,7 +684,7 @@ export interface WorkspaceEdit {
 }
 ```
 
-##### <a href="#workspaceEditClientCapabilities" name="workspaceEditClientCapabilities" class="anchor"> WorkspaceEditClientCapabilities </a>
+##### <a href="#workspaceEditClientCapabilities" name="workspaceEditClientCapabilities" class="anchor">WorkspaceEditClientCapabilities</a>
 
 > New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
 
@@ -777,7 +777,7 @@ export namespace FailureHandlingKind {
 }
 ```
 
-#### <a href="#textDocumentIdentifier" name="textDocumentIdentifier" class="anchor"> TextDocumentIdentifier </a>
+#### <a href="#textDocumentIdentifier" name="textDocumentIdentifier" class="anchor">TextDocumentIdentifier</a>
 
 Text documents are identified using a URI. On the protocol level, URIs are passed as strings. The corresponding JSON structure looks like this:
 ```typescript
@@ -789,7 +789,7 @@ interface TextDocumentIdentifier {
 }
 ```
 
-#### <a href="#textDocumentItem" name="textDocumentItem" class="anchor"> TextDocumentItem </a>
+#### <a href="#textDocumentItem" name="textDocumentItem" class="anchor">TextDocumentItem</a>
 
 An item to transfer a text document from the client to the server.
 
@@ -879,7 +879,7 @@ XSL | `xsl`
 YAML | `yaml`
 {: .table .table-bordered .table-responsive}
 
-#### <a href="#versionedTextDocumentIdentifier" name="versionedTextDocumentIdentifier" class="anchor"> VersionedTextDocumentIdentifier </a>
+#### <a href="#versionedTextDocumentIdentifier" name="versionedTextDocumentIdentifier" class="anchor">VersionedTextDocumentIdentifier</a>
 
 An identifier to denote a specific version of a text document.
 
@@ -900,7 +900,7 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 }
 ```
 
-#### <a href="#textDocumentPositionParams" name="textDocumentPositionParams" class="anchor"> TextDocumentPositionParams </a>
+#### <a href="#textDocumentPositionParams" name="textDocumentPositionParams" class="anchor">TextDocumentPositionParams</a>
 
 Was `TextDocumentPosition` in 1.0 with inlined parameters.
 
@@ -920,7 +920,7 @@ interface TextDocumentPositionParams {
 }
 ```
 
-#### <a href="#documentFilter" name="documentFilter" class="anchor"> DocumentFilter </a>
+#### <a href="#documentFilter" name="documentFilter" class="anchor">DocumentFilter</a>
 
 A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter that applies to JSON files with name `package.json`:
 ```typescript
@@ -965,7 +965,7 @@ A document selector is the combination of one or more document filters.
 export type DocumentSelector = DocumentFilter[];
 ```
 
-#### <a href="#staticRegistrationOptions" name="staticRegistrationOptions" class="anchor"> StaticRegistrationOptions </a>
+#### <a href="#staticRegistrationOptions" name="staticRegistrationOptions" class="anchor">StaticRegistrationOptions</a>
 
 Static registration options can be used to register a feature in the initialize result with a given server control ID to be able to un-register the feature later on.
 
@@ -982,7 +982,7 @@ export interface StaticRegistrationOptions {
 }
 ```
 
-#### <a href="#textDocumentRegistrationOptions" name="textDocumentRegistrationOptions" class="anchor"> TextDocumentRegistrationOptions </a>
+#### <a href="#textDocumentRegistrationOptions" name="textDocumentRegistrationOptions" class="anchor">TextDocumentRegistrationOptions</a>
 
 Options to dynamically register for requests for a set of text documents.
 
@@ -1000,7 +1000,7 @@ export interface TextDocumentRegistrationOptions {
 }
 ```
 
-#### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
+#### <a href="#markupContent" name="markupContent" class="anchor">MarkupContent</a>
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content can contain fenced code blocks like in [GitHub issues](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting)
 
@@ -1064,13 +1064,13 @@ export interface MarkupContent {
 }
 ```
 
-#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
+#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor">Work Done Progress</a>
 
 > *Since version 3.15.0*
 
 Work done progress is reported using the generic [`$/progress`](#progress) notification. The value payload of a work done progress notification can be of three different forms.
 
-##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor"> Work Done Progress Begin </a>
+##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor">Work Done Progress Begin</a>
 
 To start progress reporting a `$/progress` notification with the following payload must be sent:
 
@@ -1115,7 +1115,7 @@ export interface WorkDoneProgressBegin {
 }
 ```
 
-##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor"> Work Done Progress Report </a>
+##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor">Work Done Progress Report</a>
 
 Reporting progress is done using the following payload:
 
@@ -1155,7 +1155,7 @@ export interface WorkDoneProgressReport {
 }
 ```
 
-##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor"> Work Done Progress End </a>
+##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor">Work Done Progress End</a>
 
 Signaling the end of a progress reporting is done using the following payload:
 
@@ -1172,14 +1172,14 @@ export interface WorkDoneProgressEnd {
 }
 ```
 
-##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor"> Initiating Work Done Progress </a>
+##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor">Initiating Work Done Progress</a>
 
 Work Done progress can be initiated in two different ways:
 
 1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal. The document will refer to this kind of progress as client initiated progress.
 1. by a server using the request `window/workDoneProgress/create`. The document will refer to this kind of progress as server initiated progress.
 
-###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress </a>
+###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress</a>
 
 Consider a client sending a `textDocument/reference` request to a server and the client accepts work done progress reporting on that request. To signal this to the server the client would add a `workDoneToken` property to the reference request parameters. Something like this:
 
@@ -1245,7 +1245,7 @@ export interface WorkDoneProgressOptions {
 	workDoneProgress?: boolean;
 }
 ```
-###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
+###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress</a>
 
 Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The returned token can then be used to report progress using the same notifications used as for client initiated progress.
 
@@ -1264,7 +1264,7 @@ To keep the protocol backwards compatible servers are only allowed to use `windo
 	}
 ```
 
-#### <a href="#partialResults" name="partialResults" class="anchor"> Partial Result Progress </a>
+#### <a href="#partialResults" name="partialResults" class="anchor">Partial Result Progress</a>
 
 > *Since version 3.15.0*
 
@@ -1298,7 +1298,7 @@ If the response errors the provided partial results should be treated as follows
 - the `code` equals to `RequestCancelled`: the client is free to use the provided results but should make clear that the request got canceled and may be incomplete.
 - in all other cases the provided partial results shouldn't be used.
 
-#### <a href="#partialResultParams" name="partialResultParams" class="anchor"> PartialResultParams </a>
+#### <a href="#partialResultParams" name="partialResultParams" class="anchor">PartialResultParams</a>
 
 A parameter literal used to pass a partial result token.
 
@@ -2001,7 +2001,7 @@ interface LogMessageParams {
 }
 ```
 
-#### <a href="#window_workDoneProgress_create" name="window_workDoneProgress_create" class="anchor"> Creating Work Done Progress (:arrow_right_hook:)</a>
+#### <a href="#window_workDoneProgress_create" name="window_workDoneProgress_create" class="anchor">Creating Work Done Progress (:arrow_right_hook:)</a>
 
 The `window/workDoneProgress/create` request is sent from the server to the client to ask the client to create a work done progress.
 
@@ -2024,7 +2024,7 @@ _Response_:
 * result: void
 * error: code and message set in case an exception happens during the 'window/workDoneProgress/create' request. In case an error occurs a server must not send any progress notification using the token provided in the `WorkDoneProgressCreateParams`.
 
-#### <a href="#window_workDoneProgress_cancel" name="window_workDoneProgress_cancel" class="anchor"> Canceling a Work Done Progress (:arrow_right:)</a>
+#### <a href="#window_workDoneProgress_cancel" name="window_workDoneProgress_cancel" class="anchor">Canceling a Work Done Progress (:arrow_right:)</a>
 
 The `window/workDoneProgress/cancel` notification is sent from the client to the server to cancel a progress initiated on the server side using the `window/workDoneProgress/create`.
 

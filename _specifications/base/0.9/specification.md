@@ -9,7 +9,7 @@ index: 3
 toolsVersion: 0.9
 ---
 
-## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
+## <a href="#baseProtocol" name="baseProtocol" class="anchor">Base Protocol</a>
 
 The purpose of the base protocol is to create an abstraction of common editor extensibility patterns into its own specification, independently of the presence of a language server powering such extension. In particular, concepts such as server and client capabilities, the initialization and shutdown request, and the structure of requests and notifications, were originally part of the language server protocol, but there is nothing about them that should be exclusive to language service extensions.
 
@@ -17,7 +17,7 @@ A motivating example is the [Build Server Protocol](https://build-server-protoco
 
 Do remark that the base protocol is currently under experimental construction and subject to breaking changes. Its future development will depend on feedback from the community and initial implementors of the protocol.
 
-### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
+### <a href="#headerPart" name="headerPart" class="anchor">Header Part</a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
 separated by a '\r\n'.
@@ -34,7 +34,7 @@ Currently the following header fields are supported:
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
-### <a href="#contentPart" name="contentPart" class="anchor"> Content Part </a>
+### <a href="#contentPart" name="contentPart" class="anchor">Content Part</a>
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
@@ -53,7 +53,7 @@ Content-Length: ...\r\n
 }
 ```
 
-### <a href="#capabilities" name="capabilities" class="anchor"> Capabilities </a>
+### <a href="#capabilities" name="capabilities" class="anchor">Capabilities</a>
 
 Not every server can support all features defined by a protocol. The base protocol therefore provides "capabilities". A capability groups a set of features. A development tool and the server announce their supported features using capabilities. As an example, a development tool could announce support for document creation notifications, so that servers can perform their corresponding document synchronizations tasks.
 
@@ -100,13 +100,13 @@ Note that the following list of capability identifiers are already used by the l
 - `workspace`
 - `workspaceSymbolProvider`
 
-### <a href="#messageOrdering" name= "messageOrdering" class="anchor"> Request, Notification and Response Ordering </a>
+### <a href="#messageOrdering" name="messageOrdering" class="anchor">Request, Notification and Response Ordering</a>
 
 Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So, for example, if a server providing unit testing features receives a `testing/configureFramework` request and then a `testing/configureProject` request, it will usually first return the response for the `testing/configureFramework` and then the response for `testing/configureProject`.
 
 However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `testing/configureFramework` and `testing/configureProject` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `testing/testCreated` and `testing/executeTest` requests, since test creation should happen before their execution.
 
-### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
+### <a href="#messageDocumentation" name="messageDocumentation" class="anchor">Message Documentation</a>
 
 As mentioned previously, the base protocol defines a set of requests, responses and notifications. Each of those are documented using the following format:
 
@@ -117,11 +117,11 @@ As mentioned previously, the base protocol defines a set of requests, responses 
 * a _Request_ section describing the format of the request sent. The method is a string identifying the request, the parameters are documented using a TypeScript interface. It is also documented whether the request supports work done progress and partial result progress.
 * a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The `error.data` describes the returned data in case of an error. Please remember that in case of a failure the response already contains an `error.code` and an `error.message` field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
-## <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> JSON structures </a>
+## <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor">JSON structures</a>
 
 The base protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](http://www.jsonrpc.org/specification). It currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
 
-#### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
+#### <a href="#baseTypes" name="baseTypes" class="anchor">Base Types</a>
 
 The base protocol uses the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
@@ -186,7 +186,7 @@ export type BaseArray = BaseAny[];
 
 {% include types/uri.md %}
 
-#### <a href="#regExp" name="regExp" class="anchor"> Regular Expressions </a>
+#### <a href="#regExp" name="regExp" class="anchor">Regular Expressions</a>
 
 Regular expressions are a powerful tool and there are actual use cases for them in protocols like LSP. However the downside with them is that almost every programming language has its own set of regular expression features so the base specification can not simply refer to them as a regular expression.
 
@@ -217,7 +217,7 @@ export interface RegularExpressionsClientCapabilities {
 }
 ```
 
-#### <a href="#enumerations" name="enumerations" class="anchor"> Enumerations </a>
+#### <a href="#enumerations" name="enumerations" class="anchor">Enumerations</a>
 
 The base protocol supports two kind of enumerations: (a) integer based enumerations and (b) strings based enumerations. Integer based enumerations usually start with `1`. If appropriate the value set of an enumeration is announced by the defining side (e.g. client or server) and transmitted to the other side during the initialize handshake.
 As an example, consider a `printSymbol` request that uses a `PrintFormat` enumeration. The client could announce its supported printing formats via `printing.format` property:
@@ -233,7 +233,7 @@ print: {
 
 To support the evolution of enumerations the using side of an enumeration shouldn't fail on an enumeration value it doesn't know. It should simply ignore it as a value it can use and try to do its best to preserve the value on round trips. Lets look at the `PrintFormat` enumeration as an example again: if in a future version of the protocol an additional `"html"` format is added and is now announced by a client, an (older) server not knowing about the value should not fail but simply ignore the value as a usable printing format.
 
-#### <a href="#abstractMessage" name="abstractMessage" class="anchor"> Abstract Message </a>
+#### <a href="#abstractMessage" name="abstractMessage" class="anchor">Abstract Message</a>
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
 
@@ -244,7 +244,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### <a href="#requestMessage" name="requestMessage" class="anchor"> Request Message </a>
+#### <a href="#requestMessage" name="requestMessage" class="anchor">Request Message</a>
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -268,7 +268,7 @@ interface RequestMessage extends Message {
 }
 ```
 
-#### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
+#### <a href="#responseMessage" name="responseMessage" class="anchor">Response Message</a>
 
 A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON-RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
@@ -395,7 +395,7 @@ export namespace ErrorCodes {
 ```
 To avoid conflicts with the error codes taken by the language service protocol, other implementers of the base protocol must use error codes outside the range defined by `lspReservedErrorRangeStart` and `lspReservedErrorRangeEnd`.
 
-#### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
+#### <a href="#notificationMessage" name="notificationMessage" class="anchor">Notification Message</a>
 
 A notification message. A processed notification message must not send a response back. They work like events.
 
@@ -413,11 +413,11 @@ interface NotificationMessage extends Message {
 }
 ```
 
-#### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
+#### <a href="#dollarRequests" name="dollarRequests" class="anchor">$ Notifications and Requests</a>
 
 Notification and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example, if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
-#### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#cancelRequest" name="cancelRequest" class="anchor">Cancellation Support (:arrow_right: :arrow_left:)</a>
 
 The base protocol offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
 
@@ -436,7 +436,7 @@ interface CancelParams {
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON-RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
-#### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#progress" name="progress" class="anchor">Progress Support (:arrow_right: :arrow_left:)</a>
 
 The base protocol also offers support to report progress in a generic fashion. This mechanism can be used to report any kind of progress including [work done progress](#workDoneProgress) (usually used to report progress in the user interface using a progress bar) and partial result progress to support streaming of results.
 
@@ -466,11 +466,11 @@ interface ProgressParams<T> {
 
 Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
 
-#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
+#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor">Work Done Progress</a>
 
 Work done progress is reported using the generic [`$/progress`](#progress) notification. The value payload of a work done progress notification can be of three different forms.
 
-##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor"> Work Done Progress Begin </a>
+##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor">Work Done Progress Begin</a>
 
 To start progress reporting a `$/progress` notification with the following payload must be sent:
 
@@ -514,7 +514,7 @@ export interface WorkDoneProgressBegin {
 }
 ```
 
-##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor"> Work Done Progress Report </a>
+##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor">Work Done Progress Report</a>
 
 Reporting progress is done using the following payload:
 
@@ -552,7 +552,7 @@ export interface WorkDoneProgressReport {
 }
 ```
 
-##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor"> Work Done Progress End </a>
+##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor">Work Done Progress End</a>
 
 Signaling the end of a progress reporting is done using the following payload:
 
@@ -568,14 +568,14 @@ export interface WorkDoneProgressEnd {
 }
 ```
 
-##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor"> Initiating Work Done Progress </a>
+##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor">Initiating Work Done Progress</a>
 
 Work Done progress can be initiated in two different ways:
 
 1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal. The document will refer to this kind of progress as client initiated progress.
 1. by a server using the request `window/workDoneProgress/create`. The document will refer to this kind of progress as server initiated progress.
 
-###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress </a>
+###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress</a>
 
 Consider a client sending a `build/deploy` request to a server that can compile and build applications and the client accepts work done progress reporting on that request. To signal this to the server, the client would add a `workDoneToken` property to the reference request parameters:
 
@@ -644,7 +644,7 @@ export interface WorkDoneProgressOptions {
 	workDoneProgress?: boolean;
 }
 ```
-###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
+###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress</a>
 
 Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example, the server needs to re-index a database). The token can then be used to report progress using the same notifications used as for client initiated progress. The token provided in the create request should only be used once (e.g. only one begin, many report and one end notification should be sent to it).
 
@@ -665,7 +665,7 @@ To keep the protocol backwards compatible servers are only allowed to use `windo
 
 {% include types/traceValue.md %}
 
-## <a href="#lifecycle" name="lifecycle" class="anchor"> Lifecycle Messages </a>
+## <a href="#lifecycle" name="lifecycle" class="anchor">Lifecycle Messages</a>
 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 

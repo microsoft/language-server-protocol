@@ -1,4 +1,4 @@
-#### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
+#### <a href="#markupContent" name="markupContent" class="anchor">MarkupContent</a>
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/).
 
@@ -103,4 +103,3 @@ Parser          | Version | Documentation
 --------------- | ------- | -------------
 marked          | 1.1.0   | [Marked Documentation](https://marked.js.org/)
 Python-Markdown | 3.2.2   | [Python-Markdown Documentation](https://python-markdown.github.io)
-
