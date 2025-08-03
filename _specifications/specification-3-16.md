@@ -8258,17 +8258,17 @@ Decided to skip this version to bring the protocol version number in sync the wi
 
 * [extensible completion item and symbol kinds](https://github.com/Microsoft/language-server-protocol/issues/129)
 
-#### <a href="version_3_3_0" name="version_3_3_0" class="anchor">3.3.0 (11/24/2017)</a>
+#### <a href="#version_3_3_0" name="version_3_3_0" class="anchor">3.3.0 (11/24/2017)</a>
 
 * Added support for `CompletionContext`
 * Added support for `MarkupContent`
 * Removed old New and Updated markers.
 
-#### <a href="version_3_2_0" name="version_3_2_0" class="anchor">3.2.0 (09/26/2017)</a>
+#### <a href="#version_3_2_0" name="version_3_2_0" class="anchor">3.2.0 (09/26/2017)</a>
 
 * Added optional `commitCharacters` property to the `CompletionItem`
 
-#### <a href="version_3_1_0" name="version_3_1_0" class="anchor">3.1.0 (02/28/2017)</a>
+#### <a href="#version_3_1_0" name="version_3_1_0" class="anchor">3.1.0 (02/28/2017)</a>
 
 * Make the `WorkspaceEdit` changes backwards compatible.
 * Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
