@@ -196,6 +196,8 @@
 				}
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.colorProvider",
+			"serverCapability": "colorProvider",
 			"params": {
 				"kind": "reference",
 				"name": "ColorPresentationParams"
