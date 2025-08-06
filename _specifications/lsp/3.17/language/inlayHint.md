@@ -261,7 +261,7 @@ export type InlayHintKind = 1 | 2;
 The request is sent from the client to the server to resolve additional information for a given inlay hint. This is usually used to compute
 the `tooltip`, `location` or `command` properties of an inlay hint's label part to avoid its unnecessary computation during the `textDocument/inlayHint` request.
 
-Consider the clients announces the `label.location` property as a property that can be resolved lazy using the client capability
+Consider the client announcing the `label.location` property as a property that can be resolved lazily using the client capability
 
 ```typescript
 textDocument.inlayHint.resolveSupport = { properties: ['label.location'] };
