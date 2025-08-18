@@ -195,6 +195,7 @@ index: 1
 | [Protocol Buffers](https://protobuf.dev/) | [lasorda](https://github.com/lasorda) | [protobuf-language-server](https://github.com/lasorda/protobuf-language-server) | Go |
 | PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) | PureScript |
 | Puppet| [Lingua Pupuli](https://github.com/lingua-pupuli) | [puppet language server](https://github.com/lingua-pupuli/puppet-editor-services) | Ruby |
+| Python | [astral-sh](https://astral.sh/) | [ty](https://github.com/astral-sh/ty) | Rust |
 | Python| [Fabio Zadrozny](https://github.com/fabioz/) | [PyDev on VSCode](http://www.pydev.org/vscode/index.html) | Java, Python |
 | Python | MS | [Pyright](https://github.com/microsoft/pyright) | TypeScript |
 | Python | Meta | [Pyrefly](https://github.com/facebook/pyrefly) | Rust |
