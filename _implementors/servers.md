@@ -137,6 +137,7 @@ index: 1
 | JSON | MS | [vscode-json-languageserver](https://www.npmjs.com/package/vscode-json-languageserver) | TypeScript |
 | [Jsonnet](https://jsonnet.org/) | [Grafana Labs](https://grafana.com/) | [jsonnet-language-server](https://github.com/grafana/jsonnet-language-server) | Go |
 | [Julia](http://julialang.org/) | [Contributors](https://github.com/JuliaEditorSupport/LanguageServer.jl/graphs/contributors) | [Julia language server](https://github.com/JuliaEditorSupport/LanguageServer.jl) | Julia |
+| [Kconfig](https://docs.kernel.org/kbuild/) | [Anakin Childerhose](https://github.com/anakin4747/) | [kconfig-language-server](https://github.com/anakin4747/kconfig-language-server) | Bash |
 | [KDL](https://kdl.dev/) | [kdl-org](https://github.com/kdl-org/) | [vscode-kdl](https://github.com/kdl-org/vscode-kdl) | Typescript |
 | [Kedro](https://kedro.org) | [Kedro Team](https://github.com/kedro-org/kedro) | [Kedro VSCode Language Server](https://github.com/kedro-org/vscode-kedro) | Python
 | [Kerboscript (kOS)](https://ksp-kos.github.io/KOS/) | [John Chabot](https://github.com/jonnyboyC) | [kos-language-server](https://github.com/jonnyboyC/kos-language-server) | Typescript
