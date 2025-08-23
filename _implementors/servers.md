@@ -55,6 +55,7 @@ index: 1
 | [Clojure](https://clojure.org/) | [Eric Dallo](https://github.com/ericdallo) | [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp) | Clojure |
 | [CMake](https://cmake.org/) | [regen100](https://github.com/regen100) | [cmake-language-server](https://github.com/regen100/cmake-language-server) | Python |
 | [CMake](https://cmake.org/) | [Decodetalkers](https://github.com/Decodetalkers) | [neocmakelsp](https://github.com/Decodetalkers/neocmakelsp) | Rust |
+| [Common Lisp](https://common-lisp.net/)| [cxxxr](https://github.com/cxxxr) | [cl-lsp](https://github.com/cxxxr/cl-lsp) | TypeScript |
 | [Compose](https://docs.docker.com/reference/compose-file/)| [Docker](https://github.com/docker) | [docker-language-server](https://github.com/docker/docker-language-server) | Go |
 | [Coq](https://coq.inria.fr/) | [ejgallego](https://github.com/ejgallego) | [coq-lsp](https://github.com/ejgallego/coq-lsp) | OCaml |
 | [Coq](https://coq.inria.fr/) | [coq-community](https://github.com/coq-community) | [vscoq](https://github.com/coq-community/vscoq) | OCaml |
