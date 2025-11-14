@@ -119,7 +119,7 @@ export interface CodeActionClientCapabilities {
 		 * The tags supported by the client.
 		 */
 		valueSet: CodeActionTag[];
-	}; 
+	};
 }
 ```
 
@@ -374,7 +374,7 @@ export interface CodeActionContext {
 	 * for the given range. There is no guarantee that these accurately reflect
 	 * the error state of the resource. The primary parameter
 	 * to compute code actions is the provided range.
-	 * 
+	 *
 	 * Note that the client should check the `textDocument.diagnostic.markupMessageSupport`
 	 * server capability before sending diagnostics with markup messages to a server.
 	 * Diagnostics with markup messages should be excluded for servers that don't support
@@ -554,7 +554,7 @@ export interface CodeAction {
 The request is sent from the client to the server to resolve additional information for a given code action. This is usually used to compute
 the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
 
-Consider the clients announcing the `edit` property as a property that can be resolved lazily using the client capability.
+Consider the client announcing the `edit` property as a property that can be resolved lazily using the client capability
 
 ```typescript
 textDocument.codeAction.resolveSupport = { properties: ['edit'] };

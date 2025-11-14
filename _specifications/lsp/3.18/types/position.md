@@ -1,4 +1,4 @@
-#### <a href="#position" name="position" class="anchor"> Position </a>
+#### <a href="#position" name="position" class="anchor">Position</a>
 
 Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in an editor. Special values, like `-1` to denote the end of a line, are not supported.
 

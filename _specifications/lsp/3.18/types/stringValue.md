@@ -1,4 +1,4 @@
-#### <a href="#stringValue" name="stringValue" class="anchor"> String Value </a>
+#### <a href="#stringValue" name="stringValue" class="anchor">String Value</a>
 
 Template strings for inserting text and controlling the editor cursor upon insertion.
 
@@ -11,7 +11,7 @@ Template strings for inserting text and controlling the editor cursor upon inser
  * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
  * the end of the snippet. Variables are defined with `$name` and
  * `${name:default value}`.
- * 
+ *
  * @since 3.18.0
  */
 export interface StringValue {

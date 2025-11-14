@@ -1,4 +1,4 @@
-#### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
+#### <a href="#diagnostic" name="diagnostic" class="anchor">Diagnostic</a>
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 

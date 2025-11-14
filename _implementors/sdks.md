@@ -16,6 +16,7 @@ index: 3
 | C# | [Draco language team](https://draco-lang.org/) | [Draco.Lsp](https://github.com/Draco-lang/Compiler) |
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
 | C++17 | [otreblan](https://github.com/otreblan) | [libclsp](https://github.com/otreblan/libclsp) (WIP)|
+| C++20 | [Leon Buckel](https://github.com/leon-bckl) | [lsp-framework](https://github.com/leon-bckl/lsp-framework) |
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
 | Haskell | [Luke Lau](https://github.com/Bubba) | [lsp-test](https://github.com/Bubba/lsp-test)|
 | Haxe | @nadako | [language-server-protocol-haxe](https://github.com/vshaxe/language-server-protocol-haxe)|

@@ -1,4 +1,4 @@
-#### <a href="#textDocumentItem" name="textDocumentItem" class="anchor"> TextDocumentItem </a>
+#### <a href="#textDocumentItem" name="textDocumentItem" class="anchor">TextDocumentItem</a>
 
 An item to transfer a text document from the client to the server.
 
@@ -89,4 +89,3 @@ XML | `xml`
 XSL | `xsl`
 YAML | `yaml`
 {: .table .table-bordered .table-responsive}
-

@@ -1,4 +1,4 @@
-#### <a href="#locationLink" name="locationLink" class="anchor"> LocationLink </a>
+#### <a href="#locationLink" name="locationLink" class="anchor">LocationLink</a>
 
 Represents a link between a source and a target location.
 

@@ -1,4 +1,4 @@
-#### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor"> TextDocumentEdit </a>
+#### <a href="#textDocumentEdit" name="textDocumentEdit" class="anchor">TextDocumentEdit</a>
 
 * New in version 3.16: support for `AnnotatedTextEdit`. The support is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`. If a client doesn't signal the capability, servers shouldn't send `AnnotatedTextEdit` literals back to the client.
 
@@ -18,7 +18,7 @@ export interface TextDocumentEdit {
 	 *
 	 * @since 3.16.0 - support for AnnotatedTextEdit. This is guarded by the
 	 * client capability `workspace.workspaceEdit.changeAnnotationSupport`
-	 * 
+	 *
 	 * @since 3.18.0 - support for SnippetTextEdit. This is guarded by the
 	 * client capability `workspace.workspaceEdit.snippetEditSupport`
 	 */

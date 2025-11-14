@@ -1,4 +1,4 @@
-#### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit & AnnotatedTextEdit </a>
+#### <a href="#textEdit" name="textEdit" class="anchor">TextEdit & AnnotatedTextEdit</a>
 
 > New in version 3.16: Support for `AnnotatedTextEdit`.
 

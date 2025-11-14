@@ -1,4 +1,4 @@
-#### <a href="#textDocumentPositionParams" name="textDocumentPositionParams" class="anchor"> TextDocumentPositionParams </a>
+#### <a href="#textDocumentPositionParams" name="textDocumentPositionParams" class="anchor">TextDocumentPositionParams</a>
 
 Was `TextDocumentPosition` in 1.0 with inlined parameters.
 
