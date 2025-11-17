@@ -263,6 +263,7 @@ index: 1
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
 | SystemVerilog | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | SystemVerilog | [CHIPS Alliance](https://chipsalliance.org/) | [Verible](https://github.com/chipsalliance/verible) | C++ |
+| SystemVerilog | [Hudson River Trading](https://www.hudson-trading.com/) | [slang-server](https://github.com/hudson-trading/slang-server) | C++ |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
 | [Tads3](http://www.tads.org/tads3.htm) | [Tomas Öberg](https://github.com/toerob) | [tads3tools](https://github.com/toerob/vscode-tads3tools) | Tads3 |
 | [Teal](https://github.com/teal-language/tl) | [Teal community](https://github.com/teal-language) | [teal-language-server](https://github.com/teal-language/teal-language-server) | Teal |
