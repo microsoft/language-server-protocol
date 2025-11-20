@@ -438,6 +438,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.callHierarchy",
+			"serverCapability": "callHierarchyProvider",
 			"params": {
 				"kind": "reference",
 				"name": "CallHierarchyIncomingCallsParams"
@@ -472,6 +474,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.callHierarchy",
+			"serverCapability": "callHierarchyProvider",
 			"params": {
 				"kind": "reference",
 				"name": "CallHierarchyOutgoingCallsParams"
@@ -840,6 +844,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.typeHierarchy",
+			"serverCapability": "typeHierarchyProvider",
 			"params": {
 				"kind": "reference",
 				"name": "TypeHierarchySupertypesParams"
@@ -874,6 +880,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.typeHierarchy",
+			"serverCapability": "typeHierarchyProvider",
 			"params": {
 				"kind": "reference",
 				"name": "TypeHierarchySubtypesParams"
