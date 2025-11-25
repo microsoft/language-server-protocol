@@ -5543,6 +5543,23 @@
 						"kind": "reference",
 						"name": "ReferenceContext"
 					}
+				},
+				{
+					"name": "referenceKind",
+					"kind": "or",
+					"items": [
+						{
+							"kind": "array",
+							"element": {
+								"kind": "reference",
+								"name": "ReferenceKind"
+							}
+						},
+						{
+							"kind": "base",
+							"name": "null"
+						}
+					]
 				}
 			],
 			"extends": [
@@ -16077,6 +16094,94 @@
 				"kind": "base",
 				"name": "string"
 			}
+		},
+		{
+			"name": "ReferenceKind",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "Lvalue",
+					"value": 1,
+					"documentation": "Statement with l-value usage of the selected variable.",
+					"since": "3.18"
+				},
+				{
+					"name": "Rvalue",
+					"value": 2,
+					"documentation": "Statement with r-value usage of the selected variable.",
+					"since": "3.18"
+				},
+				{
+					"name": "Type",
+					"value": 3,
+					"documentation": "Location that constructs a variable of the selected type.",
+					"since": "3.18"
+				},
+				{
+					"name": "SuperType",
+					"value": 4,
+					"documentation": "Location with super-type of the selected type.",
+					"since": "3.18"
+				},
+				{
+					"name": "SubType",
+					"value": 5,
+					"documentation": "Location with sub-type of the selected type.",
+					"since": "3.18"
+				},
+				{
+					"name": "TypeConversion",
+					"value": 6,
+					"documentation": "Expression that converts a value to the selected type.\n For example, in Go, 'writer = file' might implicitly convert\n an *os.File to an io.Writer.",
+					"since": "3.18"
+				},
+				{
+					"name": "Implicit",
+					"value": 7,
+					"documentation": "Implicit reference to the selected identifier.\n For example, in C++, 'Point2D {1, 2}' is shorthand to\n initialize the public fields X and Y, and it might be useful to\n highlight it when finding references to X or Y.",
+					"since": "3.18"
+				},
+				{
+					"name": "FreeVariable",
+					"value": 8,
+					"documentation": "Free variable of the selected code block.\n A variable is 'free' if it is referenced from within the\n selected code block but defined outside of it.",
+					"since": "3.18"
+				},
+				{
+					"name": "FunctionDeclaration",
+					"value": 9,
+					"documentation": "Function declaration (including anonymous lambdas) that\n satisfies a particular function type (and vice versa).",
+					"since": "3.18"
+				},
+				{
+					"name": "ArgumentExpression",
+					"value": 10,
+					"documentation": "Argument expression that assigns the selected parameter.\n For example, in Go, a query on y 'func f(x, y int)' might\n report the expression 456 in the call f(123, 456).",
+					"since": "3.18"
+				}
+			]
+		},
+		{
+			"name": "Reference",
+			"properties": [
+				{
+					"name": "location",
+					"type": {
+						"kind": "base",
+						"name": "Location"
+					}
+				},
+				{
+					"name": "referenceKind",
+					"type": {
+						"kind": "reference",
+						"name": "ReferenceKind"
+					}
+				}
+			]
 		}
 	]
 }
