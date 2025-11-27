@@ -16103,13 +16103,13 @@
 			},
 			"values": [
 				{
-					"name": "Lvalue",
+					"name": "Write",
 					"value": 1,
 					"documentation": "Statement with l-value usage of the selected variable.",
 					"since": "3.18"
 				},
 				{
-					"name": "Rvalue",
+					"name": "Read",
 					"value": 2,
 					"documentation": "Statement with r-value usage of the selected variable.",
 					"since": "3.18"

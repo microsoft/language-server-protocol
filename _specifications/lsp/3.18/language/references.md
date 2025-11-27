@@ -49,11 +49,11 @@ export namespace ReferenceKind {
 	/**
 	 * Statement with l-value usage of the selected variable.
 	 */
-	export const Lvalue = 1;
+	export const Write = 1;
 	/**
 	 * Statement with r-value usage of the selected variable.
 	 */
-	export const Rvalue = 2;
+	export const Read = 2;
 	/**
 	 * Location that constructs a variable of the selected type.
 	 */
