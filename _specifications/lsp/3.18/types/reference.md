@@ -4,6 +4,6 @@ Represents a reference inside a workspace. A reference has a location and a spec
 ```typescript
 interface Reference {
 	location: Location;
-	referenceKind: ReferenceKind;
+	referenceKind: ReferenceKind[];
 }
 ```
