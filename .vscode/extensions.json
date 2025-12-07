@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "pleiades.java-extension-pack-jdk",
+        "jasonnutter.search-node-modules",
+        "asbjornh.vscode-module-templates",
+        "hookyqr.createmodule",
+        "leizongmin.node-module-intellisense",
+        "clinyong.vscode-css-modules",
+        "gnramsay.create-python-module"
+    ]
+}
