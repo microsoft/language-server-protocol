@@ -6,6 +6,10 @@
         "hookyqr.createmodule",
         "leizongmin.node-module-intellisense",
         "clinyong.vscode-css-modules",
-        "gnramsay.create-python-module"
+        "gnramsay.create-python-module",
+        "georgewfraser.vscode-javac",
+        "matthiesen-technology.yaml-with-script",
+        "metabob.metabob",
+        "dedale-dev.ariana"
     ]
 }
