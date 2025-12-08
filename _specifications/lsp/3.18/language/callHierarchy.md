@@ -69,6 +69,19 @@ _Response_:
 <div class="anchorHolder"><a href="#callHierarchyItem" name="callHierarchyItem" class="linkableAnchor"></a></div>
 
 ```typescript
+export namespace ReferenceTag {
+	/**
+	 * Statement with r-value usage of the referenced variable.
+	 */
+	export const Read = 1;
+	/**
+	 * Statement with l-value usage of the referenced variable.
+	 */
+	export const Write = 2;
+}
+
+export type ReferenceTag = 1 | 2;
+
 export interface CallHierarchyItem {
 	/**
 	 * The name of this item.
@@ -84,6 +97,11 @@ export interface CallHierarchyItem {
 	 * Tags for this item.
 	 */
 	tags?: SymbolTag[];
+
+	/**
+	 * Reference tags of this item.
+	 */
+	referenceTags?: ReferenceTag[];
 
 	/**
 	 * More detail for this item, e.g. the signature of a function.
