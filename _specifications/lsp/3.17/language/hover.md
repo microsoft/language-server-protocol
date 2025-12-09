@@ -2,6 +2,8 @@
 
 The hover request is sent from the client to the server to request hover information at a given text document position.
 
+When the client sends a hover request, the position typically refers to the position immediately to the left of the character being hovered over. For example, when a user hovers over a character `c` at offset `n`, the client typically sends position `n` (the position before the character). However, how servers interpret this position and what hover information they return is language and implementation specific.
+
 _Client Capability_:
 * property name (optional): `textDocument.hover`
 * property type: `HoverClientCapabilities` defined as follows:
