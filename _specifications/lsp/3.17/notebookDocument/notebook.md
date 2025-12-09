@@ -281,6 +281,15 @@ export interface NotebookDocumentSyncClientCapabilities {
 	 * The client supports sending execution summary data per cell.
 	 */
 	executionSummarySupport?: boolean;
+
+	/**
+	 * The client supports the `textContentSyncKind` property on
+	 * `NotebookDocumentSyncOptions` to indicate how cell text content
+	 * should be synchronized.
+	 *
+	 * @since 3.18.0
+	 */
+	textContentSyncKindSupport?: boolean;
 }
 ```
 
@@ -344,6 +353,26 @@ export interface NotebookDocumentSyncOptions {
 	 * the server. Will only be honored if mode === `notebook`.
 	 */
 	save?: boolean;
+
+	/**
+	 * How cell text content should be synced to the server. If omitted,
+	 * cell text content is sent in full for every change.
+	 *
+	 * If `TextDocumentSyncKind.Full`, the client MUST send the full
+	 * content of the cell on every change. Ranged updates (incremental
+	 * synchronization) MUST NOT be used.
+	 *
+	 * If `TextDocumentSyncKind.Incremental`, the client SHOULD send
+	 * ranged (incremental) updates when possible, but MAY send full
+	 * content updates. This mirrors the behavior of `textDocumentSync.change`.
+	 *
+	 * Clients that advertise `textContentSyncKindSupport` in their
+	 * capabilities MUST honor the `textContentSyncKind` value and send
+	 * cell text changes accordingly.
+	 *
+	 * @since 3.18.0
+	 */
+	textContentSyncKind?: TextDocumentSyncKind;
 }
 ```
 
