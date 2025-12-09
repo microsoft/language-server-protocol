@@ -376,6 +376,10 @@ export interface NotebookDocumentSyncOptions {
 	 * How cell text content should be synced to the server. If omitted,
 	 * cell text content is sent in full for every change.
 	 *
+	 * If `TextDocumentSyncKind.None`, cell text content changes are not
+	 * synchronized to the server. This is useful when only the notebook
+	 * structure (cells) needs to be tracked, but not the cell content.
+	 *
 	 * If `TextDocumentSyncKind.Full`, the client MUST send the full
 	 * content of the cell on every change. Ranged updates (incremental
 	 * synchronization) MUST NOT be used.
