@@ -1,4 +1,4 @@
-#### <a href="#partialResultParams" name="partialResultParams" class="anchor"> PartialResultParams </a>
+#### <a href="#partialResultParams" name="partialResultParams" class="anchor">PartialResultParams</a>
 
 A parameter literal used to pass a partial result token.
 

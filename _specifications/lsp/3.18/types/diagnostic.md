@@ -1,4 +1,4 @@
-#### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
+#### <a href="#diagnostic" name="diagnostic" class="anchor">Diagnostic</a>
 
 - New in version 3.18: support for markup content in diagnostic messages. The support is guarded by the
 client capability `textDocument.diagnostic.markupMessageSupport`. If a client doesn't signal the capability,

@@ -234,6 +234,8 @@ The protocol will therefore support two modes when it comes to synchronizing cel
 * _cellContent_: in this mode only the cell text content is synchronized to the server using the standard `textDocument/did*` notification. No notebook document and no cell structure is synchronized. This mode allows for easy adoption of notebooks since servers can reuse most of it implementation logic.
 * _notebook_: in this mode the notebook document, the notebook cells and the notebook cell text content is synchronized to the server. To allow servers to create a consistent picture of a notebook document the cell text content is NOT synchronized using the standard `textDocument/did*` notifications. It is instead synchronized using special `notebookDocument/did*` notifications. This ensures that the cell and its text content arrives on the server using one open, change or close event.
 
+In both modes, notebook cell text documents are treated as regular text documents. Therefore, they use the same synchronization mechanism as specified by the server's `textDocumentSync` capability. For the _notebook_ mode, the cell text content changes sent via `notebookDocument/didChange` follow the same full/incremental change format as `textDocument/didChange`, respecting the `TextDocumentSyncKind` specified in `textDocumentSync.change`.
+
 To request the cell content only a normal document selector can be used. For example the selector `[{ language: 'python' }]` will synchronize Python notebook document cells to the server. However since this might synchronize unwanted documents as well a document filter can also be a `NotebookCellTextDocumentFilter`. So `{ notebook: { scheme: 'file', notebookType: 'jupyter-notebook' }, language: 'python' }` synchronizes all Python cells in a Jupyter notebook stored on disk.
 
 To synchronize the whole notebook document a server provides a `notebookDocumentSync` in its server capabilities. For example:
@@ -505,6 +507,12 @@ export interface NotebookDocumentChangeEvent {
 
 		/**
 		 * Changes to the text content of notebook cells.
+		 *
+		 * Cell text content changes follow the same synchronization mode
+		 * as specified by the server's `textDocumentSync.change` capability.
+		 * If `textDocumentSync.change` is `TextDocumentSyncKind.Incremental`,
+		 * clients should send incremental updates. If it is
+		 * `TextDocumentSyncKind.Full`, clients must send the full content.
 		 */
 		textContent?: {
 			document: VersionedTextDocumentIdentifier;

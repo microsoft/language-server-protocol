@@ -107,6 +107,19 @@ export interface CodeActionClientCapabilities {
 	 * @proposed
 	 */
 	 documentationSupport?: boolean;
+
+	/**
+	 * Client supports the tag property on a code action. Clients
+	 * supporting tags have to handle unknown tags gracefully.
+	 *
+	 * @since 3.18.0 - proposed
+	 */
+	tagSupport?: {
+		/**
+		 * The tags supported by the client.
+		 */
+		valueSet: CodeActionTag[];
+	};
 }
 ```
 
@@ -361,7 +374,7 @@ export interface CodeActionContext {
 	 * for the given range. There is no guarantee that these accurately reflect
 	 * the error state of the resource. The primary parameter
 	 * to compute code actions is the provided range.
-	 * 
+	 *
 	 * Note that the client should check the `textDocument.diagnostic.markupMessageSupport`
 	 * server capability before sending diagnostics with markup messages to a server.
 	 * Diagnostics with markup messages should be excluded for servers that don't support
@@ -410,6 +423,23 @@ export namespace CodeActionTriggerKind {
 }
 
 export type CodeActionTriggerKind = 1 | 2;
+```
+
+<div class="anchorHolder"><a href="#codeActionTag" name="codeActionTag" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Code action tags are extra annotations that tweak the behavior of a code action.
+ *
+ * @since 3.18.0 - proposed
+ */
+export namespace CodeActionTag {
+	/**
+	 * Marks the code action as LLM-generated.
+	 */
+	export const LLMGenerated = 1;
+}
+export type CodeActionTag = 1;
 ```
 
 _Response_:
@@ -505,6 +535,13 @@ export interface CodeAction {
 	 * @since 3.16.0
 	 */
 	data?: LSPAny;
+
+	/**
+ 	 * Tags for this code action.
+	 *
+	 * @since 3.18.0 - proposed
+	 */
+	tags?: CodeActionTag[];
 }
 ```
 * partial result: `(Command | CodeAction)[]`
@@ -517,7 +554,7 @@ export interface CodeAction {
 The request is sent from the client to the server to resolve additional information for a given code action. This is usually used to compute
 the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
 
-Consider the clients announcing the `edit` property as a property that can be resolved lazily using the client capability.
+Consider the client announcing the `edit` property as a property that can be resolved lazily using the client capability
 
 ```typescript
 textDocument.codeAction.resolveSupport = { properties: ['edit'] };

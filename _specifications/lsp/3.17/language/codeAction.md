@@ -430,7 +430,7 @@ export interface CodeAction {
 The request is sent from the client to the server to resolve additional information for a given code action. This is usually used to compute
 the `edit` property of a code action to avoid its unnecessary computation during the `textDocument/codeAction` request.
 
-Consider the clients announces the `edit` property as a property that can be resolved lazy using the client capability
+Consider the client announcing the `edit` property as a property that can be resolved lazily using the client capability
 
 ```typescript
 textDocument.codeAction.resolveSupport = { properties: ['edit'] };

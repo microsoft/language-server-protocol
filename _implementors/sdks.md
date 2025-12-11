@@ -13,8 +13,10 @@ index: 3
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
 | C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
 | C# | [Ken Domino](https://github.com/kaby76) | [LspTypes for C#](https://github.com/kaby76/lsp-types) |
+| C# | [Draco language team](https://draco-lang.org/) | [Draco.Lsp](https://github.com/Draco-lang/Compiler) |
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
 | C++17 | [otreblan](https://github.com/otreblan) | [libclsp](https://github.com/otreblan/libclsp) (WIP)|
+| C++20 | [Leon Buckel](https://github.com/leon-bckl) | [lsp-framework](https://github.com/leon-bckl/lsp-framework) |
 | Haskell | [Alan Zimmerman](https://github.com/alanz) | [Haskell-LSP](https://github.com/alanz/haskell-lsp)|
 | Haskell | [Luke Lau](https://github.com/Bubba) | [lsp-test](https://github.com/Bubba/lsp-test)|
 | Haxe | @nadako | [language-server-protocol-haxe](https://github.com/vshaxe/language-server-protocol-haxe)|
@@ -27,6 +29,7 @@ index: 3
 | Python | [Open Law Library](http://www.openlawlib.org/) | [pygls](https://github.com/openlawlibrary/pygls)|
 | Python | [Yeger](https://github.com/yeger00) | [pylspclient](https://github.com/yeger00/pylspclient)|
 | Python | [Microsoft](https://github.com/microsoft) | [multilspy](https://github.com/microsoft/monitors4codegen#4-multilspy)|
+| Rascal | [UseTheSource](https://github.com/UseTheSource) | [rascal-language-servers](https://github.com/usethesource/rascal-language-servers) |
 | Ruby | [Fumiaki MATSUSHIMA](https://github.com/mtsmfm) | [LanguageServer::Protocol](https://github.com/mtsmfm/language_server-protocol-ruby) |
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
 | Rust | Bruno Medeiros and Markus Westerlind | [lsp-types](https://github.com/gluon-lang/lsp-types)

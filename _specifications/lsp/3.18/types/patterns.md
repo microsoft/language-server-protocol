@@ -1,4 +1,4 @@
-#### <a href="#patterns" name="patterns" class="anchor"> Patterns </a>
+#### <a href="#patterns" name="patterns" class="anchor">Patterns</a>
 
 Pattern definitions used in file watchers and document filters.
 
@@ -6,9 +6,9 @@ Pattern definitions used in file watchers and document filters.
 
 ```typescript
 /**
- * The glob pattern to watch relative to the base path. Glob patterns can have
+ * The pattern to watch relative to the base path. Glob patterns can have
  * the following syntax:
- * - `*` to match one or more characters in a path segment
+ * - `*` to match zero or more characters in a path segment
  * - `?` to match on one character in a path segment
  * - `**` to match any number of path segments, including none
  * - `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript

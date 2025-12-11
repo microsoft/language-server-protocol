@@ -1,10 +1,10 @@
-#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor"> Work Done Progress </a>
+#### <a href="#workDoneProgress" name="workDoneProgress" class="anchor">Work Done Progress</a>
 
 > *Since version 3.15.0*
 
 Work done progress is reported using the generic [`$/progress`](#progress) notification. The value payload of a work done progress notification can be of three different forms.
 
-##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor"> Work Done Progress Begin </a>
+##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor">Work Done Progress Begin</a>
 
 To start progress reporting a `$/progress` notification with the following payload must be sent:
 
@@ -40,16 +40,16 @@ export interface WorkDoneProgressBegin {
 	/**
 	 * Optional progress percentage to display (value 100 is considered 100%).
 	 * If not provided infinite progress is assumed and clients are allowed
-	 * to ignore the `percentage` value in subsequent in report notifications.
+	 * to ignore the `percentage` value in subsequent report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule. The value range is [0, 100]
+	 * that are not following this rule. The value range is [0, 100].
 	 */
 	percentage?: uinteger;
 }
 ```
 
-##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor"> Work Done Progress Report </a>
+##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor">Work Done Progress Report</a>
 
 Reporting progress is done using the following payload:
 
@@ -79,16 +79,16 @@ export interface WorkDoneProgressReport {
 	/**
 	 * Optional progress percentage to display (value 100 is considered 100%).
 	 * If not provided infinite progress is assumed and clients are allowed
-	 * to ignore the `percentage` value in subsequent in report notifications.
+	 * to ignore the `percentage` value in subsequent report notifications.
 	 *
 	 * The value should be steadily rising. Clients are free to ignore values
-	 * that are not following this rule. The value range is [0, 100]
+	 * that are not following this rule. The value range is [0, 100].
 	 */
 	percentage?: uinteger;
 }
 ```
 
-##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor"> Work Done Progress End </a>
+##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor">Work Done Progress End</a>
 
 Signaling the end of a progress reporting is done using the following payload:
 
@@ -105,14 +105,14 @@ export interface WorkDoneProgressEnd {
 }
 ```
 
-##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor"> Initiating Work Done Progress </a>
+##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor">Initiating Work Done Progress</a>
 
 Work Done progress can be initiated in two different ways:
 
 1. by the sender of a request (mostly clients) using the predefined `workDoneToken` property in the requests parameter literal. The document will refer to this kind of progress as client initiated progress.
 1. by a server using the request `window/workDoneProgress/create`. The document will refer to this kind of progress as server initiated progress.
 
-###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress </a>
+###### <a href="#clientInitiatedProgress" name="clientInitiatedProgress" class="anchor">Client Initiated Progress</a>
 
 Consider a client sending a `textDocument/reference` request to a server and the client accepts work done progress reporting on that request. To signal this to the server the client would add a `workDoneToken` property to the reference request parameters. Something like this:
 
@@ -186,7 +186,7 @@ export interface WorkDoneProgressOptions {
 	workDoneProgress?: boolean;
 }
 ```
-###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
+###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress</a>
 
 Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The token can then be used to report progress using the same notifications used as for client initiated progress. The token provided in the create request should only be used once (e.g. only one begin, many report and one end notification should be sent to it).
 

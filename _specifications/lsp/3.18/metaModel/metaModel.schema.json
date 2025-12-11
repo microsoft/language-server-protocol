@@ -362,6 +362,10 @@
       "additionalProperties": false,
       "description": "Represents a LSP notification",
       "properties": {
+        "clientCapability": {
+          "description": "The client capability property path if any.",
+          "type": "string"
+        },
         "deprecated": {
           "description": "Whether the notification is deprecated or not. If deprecated the property contains the deprecation message.",
           "type": "string"
@@ -403,6 +407,10 @@
         "registrationOptions": {
           "$ref": "#/definitions/Type",
           "description": "Optional registration options if the notification supports dynamic registration."
+        },
+        "serverCapability": {
+          "description": "The server capability property path if any.",
+          "type": "string"
         },
         "since": {
           "description": "Since when (release number) this notification is available. Is undefined if not known.",
@@ -515,6 +523,10 @@
       "additionalProperties": false,
       "description": "Represents a LSP request",
       "properties": {
+        "clientCapability": {
+          "description": "The client capability property path if any.",
+          "type": "string"
+        },
         "deprecated": {
           "description": "Whether the request is deprecated or not. If deprecated the property contains the deprecation message.",
           "type": "string"
@@ -568,6 +580,10 @@
         "result": {
           "$ref": "#/definitions/Type",
           "description": "The result type."
+        },
+        "serverCapability": {
+          "description": "The server capability property path if any.",
+          "type": "string"
         },
         "since": {
           "description": "Since when (release number) this request is available. Is undefined if not known.",

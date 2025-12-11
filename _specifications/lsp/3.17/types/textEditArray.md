@@ -1,4 +1,4 @@
-#### <a href="#textEditArray" name="textEditArray" class="anchor"> TextEdit[] </a>
+#### <a href="#textEditArray" name="textEditArray" class="anchor">TextEdit[]</a>
 
 Complex text manipulations are described with an array of `TextEdit`'s or `AnnotatedTextEdit`'s, representing a single change to the document.
 

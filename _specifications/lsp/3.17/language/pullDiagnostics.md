@@ -30,6 +30,29 @@ export interface DiagnosticClientCapabilities {
 	 * pulls.
 	 */
 	relatedDocumentSupport?: boolean;
+
+	/**
+	 * Whether the clients accepts diagnostics with related information.
+	 */
+	relatedInformation?: boolean;
+
+	/**
+	 * Client supports the tag property to provide meta data about a diagnostic.
+	 * Clients supporting tags have to handle unknown tags gracefully.
+	 */
+	tagSupport?: ClientDiagnosticsTagOptions;
+
+	/**
+	 * Client supports a codeDescription property
+	 */
+	codeDescriptionSupport?: boolean;
+
+	/**
+	 * Whether code action supports the `data` property which is
+	 * preserved between a `textDocument/publishDiagnostics` and
+	 * `textDocument/codeAction` request.
+	 */
+	dataSupport?: boolean;
 }
 ```
 
@@ -88,7 +111,7 @@ export interface DiagnosticRegistrationOptions extends
 The text document diagnostic request is sent from the client to the server to ask the server to compute the diagnostics for a given document. As with other pull requests the server is asked to compute the diagnostics for the currently synced version of the document.
 
 _Request_:
-* method: 'textDocument/diagnostic'.
+* method: `textDocument/diagnostic`.
 * params: `DocumentDiagnosticParams` defined as follows:
 
 <div class="anchorHolder"><a href="#documentDiagnosticParams" name="documentDiagnosticParams" class="linkableAnchor"></a></div>
@@ -230,7 +253,7 @@ export interface RelatedFullDocumentDiagnosticReport extends
 	 * Diagnostics of related documents. This information is useful
 	 * in programming languages where code in a file A can generate
 	 * diagnostics in a file B which A depends on. An example of
-	 * such a language is C/C++ where marco definitions in a file
+	 * such a language is C/C++ where macro definitions in a file
 	 * a.cpp and result in errors in a header file b.hpp.
 	 *
 	 * @since 3.17.0
@@ -256,7 +279,7 @@ export interface RelatedUnchangedDocumentDiagnosticReport extends
 	 * Diagnostics of related documents. This information is useful
 	 * in programming languages where code in a file A can generate
 	 * diagnostics in a file B which A depends on. An example of
-	 * such a language is C/C++ where marco definitions in a file
+	 * such a language is C/C++ where macro definitions in a file
 	 * a.cpp and result in errors in a header file b.hpp.
 	 *
 	 * @since 3.17.0
@@ -301,7 +324,7 @@ export interface DiagnosticServerCancellationData {
 
 ##### <a href="#workspace_diagnostic" name="workspace_diagnostic" class="anchor">Workspace Diagnostics(:leftwards_arrow_with_hook:)</a>
 
-The workspace diagnostic request is sent from the client to the server to ask the server to compute workspace wide diagnostics which previously where pushed from the server to the client. In contrast to the document diagnostic request the workspace request can be long running and is not bound to a specific workspace or document state. If the client supports streaming for the workspace diagnostic pull it is legal to provide a document diagnostic report multiple times for the same document URI. The last one reported will win over previous reports.
+The workspace diagnostic request is sent from the client to the server to ask the server to compute workspace wide diagnostics which previously were pushed from the server to the client. In contrast to the document diagnostic request the workspace request can be long running and is not bound to a specific workspace or document state. If the client supports streaming for the workspace diagnostic pull it is legal to provide a document diagnostic report multiple times for the same document URI. The last one reported will win over previous reports.
 
 If a client receives a diagnostic report for a document in a workspace diagnostic request for which the client also issues individual document diagnostic pull requests the client needs to decide which diagnostics win and should be presented. In general:
 
@@ -309,7 +332,7 @@ If a client receives a diagnostic report for a document in a workspace diagnosti
 - diagnostics from a document pull should win over diagnostics from a workspace pull.
 
 _Request_:
-* method: 'workspace/diagnostic'.
+* method: `workspace/diagnostic`.
 * params: `WorkspaceDiagnosticParams` defined as follows:
 
 <div class="anchorHolder"><a href="#workspaceDiagnosticParams" name="workspaceDiagnosticParams" class="linkableAnchor"></a></div>
