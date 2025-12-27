@@ -43,6 +43,7 @@ index: 2
 | [Lite XL](https://lite-xl.com) | [Lite XL Team](https://lite-xl.com) | [LSP Plugin](https://github.com/lite-xl/lite-xl-lsp) |
 | [Micro](https://micro-editor.github.io/)| [zyedidia](https://github.com/zyedidia) | [micro-plugin-lsp](https://github.com/AndCake/micro-plugin-lsp) |
 | [Moonshine IDE](https://moonshine-ide.com) | [Prominic.NET](https://github.com/prominic) | [Moonshine-IDE](https://github.com/prominic/Moonshine-IDE) |
+| [MS Monaco Editor](https://github.com/Microsoft/monaco-editor) | Microsoft | [microsoft/monaco-editor](https://github.com/microsoft/monaco-editor/tree/main/monaco-lsp-client) |
 | [MS Monaco Editor](https://github.com/Microsoft/monaco-editor) | [TypeFox](https://github.com/TypeFox) | [monaco-languageclient](https://www.npmjs.com/package/monaco-languageclient) |
 | [MS Paint IDE](https://ms-paint-i.de/) | [RubbaBoy](https://github.com/RubbaBoy) | [MS Paint IDE](https://github.com/MSPaintIDE/MSPaintIDE) |
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 

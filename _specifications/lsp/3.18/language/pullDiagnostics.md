@@ -32,12 +32,35 @@ export interface DiagnosticClientCapabilities {
 	relatedDocumentSupport?: boolean;
 
 	/**
+	 * Whether the clients accepts diagnostics with related information.
+	 */
+	relatedInformation?: boolean;
+
+	/**
+	 * Client supports the tag property to provide meta data about a diagnostic.
+	 * Clients supporting tags have to handle unknown tags gracefully.
+	 */
+	tagSupport?: ClientDiagnosticsTagOptions;
+
+	/**
+	 * Client supports a codeDescription property
+	 */
+	codeDescriptionSupport?: boolean;
+
+	/**
 	 * Whether the client supports `MarkupContent` in diagnostic messages.
 	 *
 	 * @since 3.18.0
 	 * @proposed
 	 */
 	markupMessageSupport?: boolean;
+
+	/**
+	 * Whether code action supports the `data` property which is
+	 * preserved between a `textDocument/publishDiagnostics` and
+	 * `textDocument/codeAction` request.
+	 */
+	dataSupport?: boolean;
 }
 ```
 

@@ -119,6 +119,7 @@ index: 1
 | [Groovy](http://groovy-lang.org/) | [Prominic.NET](https://moonshine-ide.com/) | [Groovy Language Server](https://github.com/prominic/groovy-language-server) | Java |
 | [Groovy](http://groovy-lang.org/) | [VsCode Groovy Lint](https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint) | [VsCode Groovy Lint Language Server](https://github.com/nvuillam/vscode-groovy-lint/tree/master/server) | TypeScript |
 | HTML | MS | [vscode-html-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/html-language-features/server) | TypeScript |
+| HTML | [Loris Cro](https://github.com/kristoff-it) | [SuperHTML](https://github.com/kristoff-it/superhtml) | Zig |
 | Haskell| [Alan Zimmerman](https://github.com/alanz) | [Haskell Language Server (HLS)](https://github.com/haskell/haskell-language-server) | Haskell |
 | [Haxe](https://haxe.org/) | [Haxe Foundation](https://github.com/HaxeFoundation/) | [Haxe Language Server](https://github.com/vshaxe/haxe-language-server) | Haxe |
 | [Helm (Kubernetes)](https://helm.sh/) | [qvalentin](https://github.com/qvalentin/) | [helm-ls](https://github.com/mrjosh/helm-ls) | Go |
@@ -148,6 +149,7 @@ index: 1
 | [Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot) | [TypeCobolTeam](https://github.com/TypeCobolTeam) | [TypeCobol Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot/wiki) | C# |
 | [LanguageTool](https://languagetool.org/)| [Adam Voss](https://github.com/adamvoss) | [languagetool](https://github.com/adamvoss/languagetool-languageserver) | Java |
 | [LanguageTool](https://languagetool.org/)| [Julian Valentin](https://github.com/valentjn) | [ltex-ls](https://github.com/valentjn/ltex-ls) | Kotlin |
+| [Lark](https://lark-parser.readthedocs.io/en/stable/)| [Dynova](https://github.com/orgs/dynovaio/people) | [lark-parser-language-server](https://github.com/dynovaio/lark-parser-language-server) | Python |
 | [LaTeX](https://www.latex-project.org/)| [Eric Förster](https://github.com/efoerster) | [texlab](https://github.com/efoerster/texlab) | Rust |
 | [Lean4](https://lean-lang.org/) | [leanprover](https://github.com/leanprover) | [Language Server](https://github.com/leanprover/lean4/tree/master/src/Lean/Server) | Lean4 |
 | [Lox](https://craftinginterpreters.com/appendix-i.html) | [Ajeet D'Souza](https://github.com/ajeetdsouza) | [loxcraft](https://github.com/ajeetdsouza/loxcraft) | Rust |
@@ -261,6 +263,7 @@ index: 1
 | SystemVerilog | [dalance](https://github.com/dalance) | [svls](https://github.com/dalance/svls) | Rust |
 | SystemVerilog | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | SystemVerilog | [CHIPS Alliance](https://chipsalliance.org/) | [Verible](https://github.com/chipsalliance/verible) | C++ |
+| SystemVerilog | [Hudson River Trading](https://www.hudson-trading.com/) | [slang-server](https://github.com/hudson-trading/slang-server) | C++ |
 | T-SQL | MS | [VS Code SQL extension](https://github.com/Microsoft/vscode-mssql/tree/dev/src/languageservice ) | TypeScript, Binary |
 | [Tads3](http://www.tads.org/tads3.htm) | [Tomas Öberg](https://github.com/toerob) | [tads3tools](https://github.com/toerob/vscode-tads3tools) | Tads3 |
 | [Teal](https://github.com/teal-language/tl) | [Teal community](https://github.com/teal-language) | [teal-language-server](https://github.com/teal-language/teal-language-server) | Teal |
