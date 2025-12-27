@@ -29,6 +29,7 @@ index: 2
 | Emacs | [zbelial](https://github.com/zbelial) | [lspce](https://github.com/zbelial/lspce) |
 | Emacs | [JadeStrong](https://github.com/jadestrong) | [Lsp-Proxy](https://github.com/jadestrong/lsp-proxy) |
 | [ecode](https://github.com/SpartanJ/ecode) | [Martín Lucas Golini](https://github.com/SpartanJ) | [ecode](https://github.com/SpartanJ/ecode) | 
+| [Fresh](https://sinelaw.github.io/fresh/) | [sinelaw](https://github.com/sinelaw) | [Fresh](https://github.com/sinelaw/fresh/blob/master/docs/USER_GUIDE.md#lsp-integration) |
 | [Geany](https://www.geany.org) | [Jiří Techet](https://github.com/techee) | [geany-lsp](https://github.com/techee/geany-lsp) |
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
 | [GoLand](https://www.jetbrains.com/go) | [JetBrains](https://www.jetbrains.com) | Proprietary |
