@@ -4382,12 +4382,13 @@ _Server Capability_:
  */
 export interface CompletionOptions extends WorkDoneProgressOptions {
 	/**
-	 * Most tools trigger a completion request automatically without explicitly
-	 * requesting it using a keyboard shortcut (e.g. Ctrl+Space). Typically they
-	 * do so when the user starts to type an identifier. For example if the user
-	 * types `c` in a JavaScript file, code completion will automatically
-     * present `console` as a completion item.
-     * Characters that make up identifiers don't need to be listed here.
+	 * Most tools trigger a completion request automatically without an explicit
+	 * keyboard shortcut (e.g. Ctrl+Space). Typically they do so when the user
+	 * starts to type an identifier. For example if the user types `c` in a 
+	 * JavaScript file, code completion will automatically show `console` as a 
+	 * completion item.
+	 * 
+	 * Characters that make up identifiers don't need to be listed here.
 	 *
 	 * If code completion should automatically trigger on characters not
 	 * valid inside an identifier (for example `.` in JavaScript) list them in
