@@ -320,4 +320,5 @@ index: 1
 | * | [Sonar](https://github.com/SonarSource) | [SonarLint Language Server](https://github.com/SonarSource/sonarlint-language-server) | Java |
 | * | [kbwo](https://github.com/kbwo) | [testing-language-server](https://github.com/kbwo/testing-language-server) | Rust |
 | * | [GitHub](https://github.com/github/copilot-language-server-release) | [@github/copilot-language-server](https://www.npmjs.com/package/@github/copilot-language-server) (no code repository available, issues and feature requests can be done) | JavaScript |
+| * | [Automattic](https://github.com/Automattic) | [harper](https://github.com/Automattic/harper) | Rust |
 {: .table .table-bordered .table-responsive}
