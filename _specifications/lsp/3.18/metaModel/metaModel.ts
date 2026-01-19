@@ -57,7 +57,7 @@ export type MapType = {
 };
 
 /**
- * Represents an `and`type
+ * Represents an `and` type
  * (e.g. TextDocumentParams & WorkDoneProgressParams`).
  */
 export type AndType = {
