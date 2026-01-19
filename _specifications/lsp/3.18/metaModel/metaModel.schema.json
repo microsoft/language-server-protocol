@@ -3,7 +3,7 @@
   "definitions": {
     "AndType": {
       "additionalProperties": false,
-      "description": "Represents an `and`type (e.g. TextDocumentParams & WorkDoneProgressParams`).",
+      "description": "Represents an `and` type (e.g. TextDocumentParams & WorkDoneProgressParams`).",
       "properties": {
         "items": {
           "items": {
