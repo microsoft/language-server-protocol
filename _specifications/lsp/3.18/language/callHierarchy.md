@@ -71,11 +71,11 @@ _Response_:
 ```typescript
 export namespace ReferenceTag {
 	/**
-	 * Statement with r-value usage of the referenced variable.
+	 * Determines a read access to the referenced symbol.
 	 */
 	export const Read = 1;
 	/**
-	 * Statement with l-value usage of the referenced variable.
+	 * Determines a write access to the referenced symbol.
 	 */
 	export const Write = 2;
 }

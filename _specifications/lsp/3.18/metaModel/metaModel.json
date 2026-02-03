@@ -14586,6 +14586,27 @@
 			"since": "3.16"
 		},
 		{
+			"name": "RferenceTag",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "Read",
+					"value": 1,
+					"documentation": "Determines a read access to the referenced symbol."
+				},
+				{
+					"name": "Write",
+					"value": 2,
+					"documentation": "Determines a write access to the referenced symbol."
+				}
+			],
+			"documentation": "Reference tags are extra annotations that provide additional information about references.\n\n@since 3.18",
+			"since": "3.18"
+		},
+		{
 			"name": "UniquenessLevel",
 			"type": {
 				"kind": "base",
