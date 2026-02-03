@@ -197,6 +197,7 @@ index: 1
 | [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) | [Tobias Guggenmos](https://github.com/slrtbtfs) | [promql-langserver](https://github.com/prometheus-community/promql-langserver) | [Go](https://golang.org/) |
 | [Protocol Buffers](https://protobuf.dev/) | [coder3101](https://github.com/coder3101) | [protols](https://github.com/coder3101/protols) | Rust |
 | [Protocol Buffers](https://protobuf.dev/) | [lasorda](https://github.com/lasorda) | [protobuf-language-server](https://github.com/lasorda/protobuf-language-server) | Go |
+| [Protocol Buffers](https://protobuf.dev/) | [Buf](https://github.com/bufbuild) | [Buf Language Server](https://github.com/bufbuild/buf) | Go |
 | PureScript | [Nicholas Wolverson](https://github.com/nwolverson) | [purescript-language-server](https://github.com/nwolverson/purescript-language-server) | PureScript |
 | Puppet| [Lingua Pupuli](https://github.com/lingua-pupuli) | [puppet language server](https://github.com/lingua-pupuli/puppet-editor-services) | Ruby |
 | Python | [astral-sh](https://astral.sh/) | [ty](https://github.com/astral-sh/ty) | Rust |
@@ -320,4 +321,5 @@ index: 1
 | * | [Sonar](https://github.com/SonarSource) | [SonarLint Language Server](https://github.com/SonarSource/sonarlint-language-server) | Java |
 | * | [kbwo](https://github.com/kbwo) | [testing-language-server](https://github.com/kbwo/testing-language-server) | Rust |
 | * | [GitHub](https://github.com/github/copilot-language-server-release) | [@github/copilot-language-server](https://www.npmjs.com/package/@github/copilot-language-server) (no code repository available, issues and feature requests can be done) | JavaScript |
+| * | [Automattic](https://github.com/Automattic) | [harper](https://github.com/Automattic/harper) | Rust |
 {: .table .table-bordered .table-responsive}
