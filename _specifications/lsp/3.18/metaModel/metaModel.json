@@ -3044,6 +3044,18 @@
 					"documentation": "Tags for this item."
 				},
 				{
+					"name": "referenceTags",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "ReferenceTag"
+						}
+					},
+					"optional": true,
+					"documentation": "Reference tags for this item, i.e. determines the operations on the referenced symbol, read, write or both"
+				},
+				{
 					"name": "detail",
 					"type": {
 						"kind": "base",
