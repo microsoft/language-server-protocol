@@ -168,124 +168,140 @@ export namespace SymbolTag {
 	 * @since 3.16
 	 */
 	export const Deprecated = 1;
-
-    /**
+	
+	/**
 	 * Render a symbol with visibility / access modifier "private".
 	 * @since 3.18
 	 */
-    export const Private = 2;
-    
-    /**
+	export const Private = 2;
+	
+	/**
 	 * Render a symbol with visibility "package private", e.g. in Java.
 	 * @since 3.18
 	 */
-    export const Package = 3;
-    
-    /**
+	export const Package = 3;
+	
+	/**
 	 * Render a symbol with visibility / access modifier "protected".
 	 * The modifier could be combined e.g. with "internal" or "private" in languages like C#.
 	 * @since 3.18
 	 */
-    export const Protected = 4;
-    
-    /**
+	export const Protected = 4;
+	
+	/**
 	 * Render a symbol with visibility / access modifier "public".
 	 * @since 3.18
 	 */
-    export const Public = 5;
-    
-    /**
+	export const Public = 5;
+	
+	/**
 	 * Render a symbol with visibility / access modifier "internal", e.g. in C# or Kotlin.
 	 * @since 3.18
 	 */
-    export const Internal= 6;
-    
-    /**
+	export const Internal= 6;
+	
+	/**
 	 * Render a symbol with visibility / access modifier "file", e.g. in C#.
 	 * @since 3.18
 	 */
-    export const File = 7;
-
+	export const File = 7;
+	
 	/**
 	 * Render a symbol as "static".
 	 * @since 3.18
 	 */
-    export const Static = 8;
-    
-    /**
+	export const Static = 8;
+	
+	/**
 	 * Render a symbol as "abstract".
 	 * @since 3.18
 	 */
-    export const Abstract = 9;
-    
-    /**
+	export const Abstract = 9;
+	
+	/**
 	 * Render a symbol as "final".
 	 * @since 3.18
 	 */
-    export const Final = 10;
-
-    /**
+	export const Final = 10;
+	
+	/**
 	 * Render a symbol as "sealed", e.g. classes and interfaces in Kotlin.
 	 * @since 3.18
 	 */
-    export const Sealed = 11;
-    
-    /**
+	export const Sealed = 11;
+	
+	/**
 	 * Render a symbol as "transient", e.g. in Java.
 	 * @since 3.18
 	 */
-    export const Transient = 12;
-    
-    /**
+	export const Transient = 12;
+	
+	/**
 	 * Render a symbol as "volatile", e.g. in Java.
 	 * @since 3.18
 	 */
-    export const Volatile = 13;
-    
-    /**
+	export const Volatile = 13;
+	
+	/**
 	 * Render a symbol as "synchronized", e.g. in Java.
 	 * @since 3.18
 	 */
-    export const Synchronized = 14;
-    
-    /**
+	export const Synchronized = 14;
+	
+	/**
 	 * Render a symbol as "virtual", e.g. in C++.
 	 * @since 3.18
 	 */
-    export const Virtual = 15;
-    
-    /**
+	export const Virtual = 15;
+	
+	/**
 	 * Render a symbol as "nullable", e.g. types with '?' in Kotlin.
 	 * @since 3.18
 	 */
-    export const Nullable = 16;
-    
-    /**
+	export const Nullable = 16;
+	
+	/**
 	 * Render a symbol as "never null", e.g. types without '?' in Kotlin.
 	 * @since 3.18
 	 */
-    export const NonNull = 17;
-    
-    /**
+	export const NonNull = 17;
+	
+	/**
 	 * Render a symbol as declaration.
 	 * @since 3.18
 	 */
-    export const Declaration = 18;
-    
-    /**
+	export const Declaration = 18;
+	
+	/**
 	 * Render a symbol as definition (in contrast to declaration), e.g. in header files in C++.
 	 * @since 3.18
 	 */
-    export const Definition = 19;
-    
-    /**
+	export const Definition = 19;
+	
+	/**
 	 * Render a symbol as "read-only", i.e. variables / properties that cannot be changed.
 	 * @since 3.18
 	 */
-    export const ReadOnly = 20;
+	export const ReadOnly = 20;
+	
+	/**
+	 * Render a symbol as "overriding", e.g. a Java method replaces the implementation from an
+	 * equally named method (with same signature) from a parent class.
+	 * @since 3.18
+	 */
+	export const Overrides = 21;
+	
+	/**
+	 * Render a symbol as "implementing", e.g. a Java method implements a
+	 * method with same signature declared in an interface
+	 * or implements an abstract method (with same signature) from an abstract parent class.
+	 * @since 3.18
+	 */
+	export const Implements = 22;
 }
 
-export type SymbolTag = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+export type SymbolTag = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+	14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22;
 ```
 
 <div class="anchorHolder"><a href="#documentSymbol" name="documentSymbol" class="linkableAnchor"></a></div>

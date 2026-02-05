@@ -14693,6 +14693,18 @@
 					"value": 20,
 					"documentation": "Render a symbol as \"read-only\", i.e. variables / properties that cannot be changed.",
 					"since": "3.18"
+				},
+				{
+					"name": "Overrides",
+					"value": 21,
+					"documentation": "Render a symbol as \"overriding\", e.g. a Java method replaces the implementation from an equally named method (with same signature) from a parent class.",
+					"since": "3.18"
+				},
+				{
+					"name": "Implements",
+					"value": 22,
+					"documentation": "Render a symbol as \"implementing\", e.g. a Java method implements a method with same signature declared in an interface or implements an abstract method (with same signature) from an abstract parent class.",
+					"since": "3.18"
 				}
 			],
 			"documentation": "Symbol tags are extra annotations that tweak the rendering of a symbol.\n\n@since 3.16",
