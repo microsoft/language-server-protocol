@@ -12734,6 +12734,16 @@
 					},
 					"optional": true,
 					"documentation": "Whether references supports dynamic registration."
+				},
+				{
+					"name": "tagSupport",
+					"type": {
+						"kind": "reference",
+						"name": "ClientReferenceTagOptions"
+					},
+					"optional": true,
+					"documentation": "Determines whether the client supports reference tags, and if so, which ones exactly.\nClients supporting tags have to handle unknown tags gracefully.",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Client Capabilities for a {@link ReferencesRequest}."
@@ -13165,6 +13175,16 @@
 					},
 					"optional": true,
 					"documentation": "Whether implementation supports dynamic registration. If this is set to `true`\nthe client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
+				},
+				{
+					"name": "tagSupport",
+					"type": {
+						"kind": "reference",
+						"name": "ClientReferenceTagOptions"
+					},
+					"optional": true,
+					"documentation": "Determines whether the client supports reference tags, and if so, which ones exactly.\nClients supporting tags have to handle unknown tags gracefully.",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "@since 3.16.0",

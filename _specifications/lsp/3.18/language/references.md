@@ -14,6 +14,19 @@ export interface ReferenceClientCapabilities {
 	 * Whether references supports dynamic registration.
 	 */
 	dynamicRegistration?: boolean;
+
+    /**
+     * Determines whether the client supports reference tags, and if so, which ones exactly.
+     * Clients supporting tags have to handle unknown tags gracefully.
+     *
+     * @since 3.18.0
+     */
+    tagSupport?: {
+        /**
+         * The tags supported by the client.
+         */
+        valueSet: ReferenceTag[];
+    };
 }
 ```
 
@@ -62,6 +75,6 @@ export interface ReferenceContext {
 }
 ```
 _Response_:
-* result: [`Location`](#location)[] \| `null`
-* partial result: [`Location`](#location)[]
+* result: [`Location`](#location)[] \| [`Reference`](#reference)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`Reference`](#reference)[]
 * error: code and message set in case an exception happens during the reference request.
