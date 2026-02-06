@@ -28,7 +28,7 @@ interface CallHierarchyClientCapabilities {
      * Determines whether the client supports reference tags.
      * @since 3.18.0
      */
-    referenceItemSupport?: boolean;
+    referencesItemSupport?: boolean;
 }
 ```
 

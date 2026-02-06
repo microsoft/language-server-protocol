@@ -12736,7 +12736,7 @@
 					"documentation": "Whether references supports dynamic registration."
 				},
 				{
-					"name": "referenceItemSupport",
+					"name": "referencesItemSupport",
 					"type": {
 						"kind": "reference",
 						"name": "ClientReferenceTagSupportOption"
@@ -13177,7 +13177,7 @@
 					"documentation": "Whether implementation supports dynamic registration. If this is set to `true`\nthe client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
 				},
 				{
-					"name": "referenceItemSupport",
+					"name": "referencesItemSupport",
 					"type": {
 						"kind": "reference",
 						"name": "ClientReferenceTagSupportOption"
