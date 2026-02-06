@@ -25,7 +25,8 @@ interface CallHierarchyClientCapabilities {
 	dynamicRegistration?: boolean;
 
     /**
-     * Determines whether the client supports reference tags.
+     * Determines whether the client supports reference tags. If the value is missing,
+     * the server assumes that the client does not support reference tags.
      * @since 3.18.0
      */
     referencesItemSupport?: boolean;

@@ -16,10 +16,12 @@ export interface ReferenceClientCapabilities {
 	dynamicRegistration?: boolean;
 
     /**
-     * Determines whether the client supports reference tags.
+     * Determines whether the client supports and prefers Reference items instead
+     * of Location items. If this value is missing, the server assumes that the
+     * client accepts Location items as defined in earlier versions of the protocol.
      * @since 3.18.0
      */
-    referencesItemSupport?: boolean;
+    referencesTagSupport?: boolean;
 }
 ```
 
