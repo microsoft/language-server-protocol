@@ -12736,13 +12736,13 @@
 					"documentation": "Whether references supports dynamic registration."
 				},
 				{
-					"name": "referencesItemSupport",
+					"name": "referenceItemsSupport",
 					"type": {
 						"kind": "reference",
 						"name": "ClientReferenceTagSupportOption"
 					},
 					"optional": true,
-					"documentation": "Determines whether the client supports reference tags.",
+					"documentation": "Determines whether the client supports and prefers Reference items instead\nof Location items. If this value is missing, the server assumes that the\nclient accepts Location items as defined in earlier versions of the protocol.",
 					"since": "3.18.0"
 				}
 			],
@@ -13177,7 +13177,7 @@
 					"documentation": "Whether implementation supports dynamic registration. If this is set to `true`\nthe client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
 				},
 				{
-					"name": "referencesItemSupport",
+					"name": "referenceTagsSupport",
 					"type": {
 						"kind": "reference",
 						"name": "ClientReferenceTagSupportOption"

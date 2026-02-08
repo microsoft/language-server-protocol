@@ -21,7 +21,7 @@ export interface ReferenceClientCapabilities {
      * client accepts Location items as defined in earlier versions of the protocol.
      * @since 3.18.0
      */
-    referencesTagSupport?: boolean;
+    referenceItemsSupport?: boolean;
 }
 ```
 

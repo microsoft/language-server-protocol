@@ -29,7 +29,7 @@ interface CallHierarchyClientCapabilities {
      * the server assumes that the client does not support reference tags.
      * @since 3.18.0
      */
-    referencesItemSupport?: boolean;
+    referenceTagsSupport?: boolean;
 }
 ```
 
