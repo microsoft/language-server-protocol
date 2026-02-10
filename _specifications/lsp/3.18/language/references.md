@@ -10,10 +10,10 @@ _Client Capability_:
 
 ```typescript
 export interface ReferenceClientCapabilities {
-	/**
-	 * Whether references supports dynamic registration.
-	 */
-	dynamicRegistration?: boolean;
+    /**
+     * Whether references supports dynamic registration.
+     */
+    dynamicRegistration?: boolean;
 
     /**
      * Determines whether the client supports and prefers Reference items instead
