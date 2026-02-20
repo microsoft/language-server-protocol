@@ -192,6 +192,7 @@ index: 1
 | [IBM Enterprise **PL/I** for z/OS](https://www.ibm.com/support/knowledgecenter/SSY2V3_5.3.0/com.ibm.ent.pl1.zos.doc/single_template_nobrand.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | PL/SQL | [Ivan Dubashinskii](https://github.com/EwanDubashinski) | [PL/SQL language server](https://github.com/EwanDubashinski/plsqllang-server) | Java |
 | [Polymer](https://www.polymer-project.org) | [Polymer Team](https://github.com/Polymer) | [polymer-editor-service](https://github.com/Polymer/polymer-editor-service) | TypeScript |
+| [Pony](https://www.ponylang.io) | [Pony team](https://github.com/ponylang) | [ponyc](https://github.com/ponylang/ponyc) | Pony |
 | PowerPC Assembly | [Noah Fields](https://github.com/OGoodness) | [PowerPC Support](https://github.com/OGoodness/VSCode-PowerPC-Syntax) | TypeScript |
 | PowerShell | MS | [PowerShell Editor Services](https://github.com/PowerShell/PowerShellEditorServices) | C# |
 | [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) | [Tobias Guggenmos](https://github.com/slrtbtfs) | [promql-langserver](https://github.com/prometheus-community/promql-langserver) | [Go](https://golang.org/) |
