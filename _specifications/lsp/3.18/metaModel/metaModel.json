@@ -159,11 +159,20 @@
 			"method": "textDocument/documentColor",
 			"typeName": "DocumentColorRequest",
 			"result": {
-				"kind": "array",
-				"element": {
-					"kind": "reference",
-					"name": "ColorInformation"
-				}
+				"kind": "or",
+				"items": [
+					{
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "ColorInformation"
+						}
+					},
+					{
+						"kind": "base",
+						"name": "null"
+					}
+				]
 			},
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.colorProvider",
@@ -189,11 +198,20 @@
 			"method": "textDocument/colorPresentation",
 			"typeName": "ColorPresentationRequest",
 			"result": {
-				"kind": "array",
-				"element": {
-					"kind": "reference",
-					"name": "ColorPresentation"
-				}
+				"kind": "or",
+				"items": [
+					{
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "ColorPresentation"
+						}
+					},
+					{
+						"kind": "base",
+						"name": "null"
+					}
+				]
 			},
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.colorProvider",
@@ -438,6 +456,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.callHierarchy",
+			"serverCapability": "callHierarchyProvider",
 			"params": {
 				"kind": "reference",
 				"name": "CallHierarchyIncomingCallsParams"
@@ -472,6 +492,8 @@
 				]
 			},
 			"messageDirection": "clientToServer",
+			"clientCapability": "textDocument.callHierarchy",
+			"serverCapability": "callHierarchyProvider",
 			"params": {
 				"kind": "reference",
 				"name": "CallHierarchyOutgoingCallsParams"
