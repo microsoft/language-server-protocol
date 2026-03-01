@@ -36,7 +36,7 @@ interface ColorPresentationParams extends WorkDoneProgressParams,
 ```
 
 _Response_:
-* result: `ColorPresentation[]` defined as follows:
+* result: `ColorPresentation[] | null`, where `ColorPresentation` is defined as follows:
 
 <div class="anchorHolder"><a href="#colorPresentation" name="colorPresentation" class="linkableAnchor"></a></div>
 

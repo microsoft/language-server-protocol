@@ -63,7 +63,7 @@ interface DocumentColorParams extends WorkDoneProgressParams,
 ```
 
 _Response_:
-* result: `ColorInformation[]` defined as follows:
+* result: `ColorInformation[] | null`, where `ColorInformation` is defined as follows:
 
 <div class="anchorHolder"><a href="#colorInformation" name="colorInformation" class="linkableAnchor"></a></div>
 
