@@ -64,6 +64,18 @@ export interface DiagnosticClientCapabilities {
 }
 ```
 
+```typescript
+/**
+ * @since 3.18.0
+ */
+export interface ClientDiagnosticsTagOptions {
+	/**
+	 * The tags supported by the client.
+	 */
+	valueSet: DiagnosticTag[];
+}
+```
+
 _Server Capability_:
 * property name (optional): `diagnosticProvider`
 * property type: `DiagnosticOptions` defined as follows:
