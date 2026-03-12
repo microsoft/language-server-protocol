@@ -13,7 +13,6 @@ markdown: kramdown
 highlighter: rouge
 
 plugins:
-  - github-pages
   - jemoji
   - jekyll-redirect-from
 

@@ -4,7 +4,7 @@
             <h1>LSP / LSIF</h1>
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -12,7 +12,7 @@
             {% assign implementors = site.implementors | sort: 'index' %}
             {% assign specifications = site.specifications | sort: 'index' %}
 
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ms-auto">
                 <li {% if page.sectionid=='howItWorks' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/overviews/lsp/overview" | prepend: site.baseurl }}'>Overview</a>
                 </li>
@@ -21,6 +21,12 @@
                 </li>
                 <li {% if page.sectionid=='specification' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                     <a class="nav-link" href='{{ "/specifications/specification-current" | prepend: site.baseurl }}'>Specification</a>
+                </li>
+                <li class="nav-item">
+                    <button id="theme-toggle" class="nav-link btn btn-link" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+                        <i class="fas fa-moon" id="theme-icon-dark" style="display:none;"></i>
+                        <i class="fas fa-sun" id="theme-icon-light" style="display:none;"></i>
+                    </button>
                 </li>
             </ul>
         </div>
