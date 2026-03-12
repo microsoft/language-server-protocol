@@ -31,10 +31,8 @@
                     <li>
                         <div class="copyright">
                             <a id="footer-microsoft-link" class="logo" href="https://www.microsoft.com">
-                                <picture>
-                                    <source srcset="{{site.baseurl}}/img/microsoft-logo.png" media="(prefers-color-scheme: dark)"></source>
-                                    <img src="{{site.baseurl}}/img/microsoft-logo-inverted.png" height="20" alt="Microsoft">
-                                </picture>
+                                <img id="ms-logo-light" src="{{site.baseurl}}/img/microsoft-logo-inverted.png" height="20" alt="Microsoft">
+                                <img id="ms-logo-dark" src="{{site.baseurl}}/img/microsoft-logo.png" height="20" alt="Microsoft" style="display:none;">
                             </a>
                             <span>© {{ site.time | date: '%Y' }} Microsoft</span>
                         </div>

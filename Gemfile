@@ -1,22 +1,13 @@
 source "https://rubygems.org"
-ruby RUBY_VERSION
 
-# gem "jekyll", "3.6.2"
+gem "jekyll", "~> 4.4"
 
-# to use GitHub Pages
-# gem "github-pages", group: :jekyll_plugins
-
-gem "github-pages", "~> 232", group: :jekyll_plugins
-
-# If you have any plugins, put them here!
 group :jekyll_plugins do
-   gem "jemoji"
-   gem 'jekyll-redirect-from'
-   gem "jekyll-remote-theme"
+  gem "jemoji"
+  gem "jekyll-redirect-from"
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# Windows / WSL does not include zoneinfo files
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-
-gem "webrick", "~> 1.8"
+gem "webrick", "~> 1.9"

@@ -11,11 +11,11 @@ html {
 body {
 	letter-spacing: .25px;
 	text-rendering: optimizeLegibility;
-	color: #242628;
+	color: var(--bs-body-color, #242628);
 }
 
 a {
-	color: #216fc9;
+	color: var(--bs-link-color, #216fc9);
 }
 
 .single-page {
@@ -65,8 +65,8 @@ table.table-responsive.table-bordered {
 			position: -o-sticky;
 			top: 3rem; // 2.5rem for the header's height + padding,
 			           // +.5rem for the tr's own padding
-			background: #fff;
-			outline: 1px solid #e9ecef;
+			background: var(--bs-body-bg, #fff);
+			outline: 1px solid var(--bs-border-color, #e9ecef);
 		}
 	}
 }
@@ -87,7 +87,7 @@ table.table-responsive.table-bordered {
 
 .toc-link {
 	padding: 0.125rem 0.5rem;
-	color: #707070
+	color: var(--bs-secondary-color, #707070);
 }
 
 .anchor {
@@ -100,10 +100,9 @@ pre[class=highlight] {
 	overflow: auto;
 	font-size: 85%;
 	line-height: 1.45;
-	background-color: #f6f8fa;
-	border: 1px solid #ccc;
+	background-color: var(--lsp-code-bg, #f6f8fa);
+	border: 1px solid var(--bs-border-color, #ccc);
 	border-radius: 4px;
-	background: #f6f8fa
 }
 
 .highlight .hll {
@@ -375,8 +374,8 @@ pre[class=highlight] {
 
 .footer {
 	padding: 15px 0;
-	color: #000;
-	background: #e9ecef;
+	color: var(--bs-body-color, #000);
+	background: var(--bs-tertiary-bg, #e9ecef);
 
 	@media (min-width: 576px) {
 		padding: 50px 0;
@@ -506,3 +505,105 @@ a h3, h2 a, h3 a, h4 a {
 	top: -60px;
 	left: 0;
 }
+
+// Make Bootstrap 5 look like 4 for this legacy site design
+
+.lsp-sidebar .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+.lsp-sidebar a.nav-link {
+	color: var(--bs-link-color, #216fc9);
+}
+
+.lsp-sidebar a.toc-link {
+	color: var(--bs-secondary-color, #707070);
+}
+
+div.page-content > div.wrapper > div.header-container.bg-primary.jumbotron {
+	margin-top: -1em;
+}
+
+// Theme toggle button
+#theme-toggle {
+	color: rgba(255, 255, 255, 0.75);
+	text-decoration: none;
+	padding: 0.5rem;
+	line-height: 1;
+	&:hover {
+		color: #fff;
+	}
+}
+
+// Dark mode overrides
+[data-bs-theme="dark"] {
+	--lsp-code-bg: #161b22;
+
+	.highlight .hll { background-color: #2d333b; }
+	.highlight .c   { color: #8b949e; }
+	.highlight .err { color: #f85149; }
+	.highlight .k   { color: #d2a8ff; }
+	.highlight .l   { color: #a5d6ff; }
+	.highlight .n   { color: #c9d1d9; }
+	.highlight .o   { color: #c9d1d9; }
+	.highlight .p   { color: #c9d1d9; }
+	.highlight .cm  { color: #8b949e; }
+	.highlight .cp  { color: #8b949e; }
+	.highlight .c1  { color: #8b949e; }
+	.highlight .cs  { color: #8b949e; }
+	.highlight .gd  { color: #ffa198; }
+	.highlight .gh  { color: #c9d1d9; font-weight: bold; }
+	.highlight .gi  { color: #7ee787; }
+	.highlight .gp  { color: #7ee787; font-weight: bold; }
+	.highlight .gu  { color: #79c0ff; font-weight: bold; }
+	.highlight .kc  { color: #d2a8ff; }
+	.highlight .kd  { color: #d2a8ff; }
+	.highlight .kn  { color: #79c0ff; }
+	.highlight .kp  { color: #79c0ff; }
+	.highlight .kr  { color: #d2a8ff; }
+	.highlight .kt  { color: #ffa657; }
+	.highlight .ld  { color: #7ee787; }
+	.highlight .m   { color: #a5d6ff; }
+	.highlight .s   { color: #a5d6ff; }
+	.highlight .na  { color: #79c0ff; }
+	.highlight .nb  { color: #79c0ff; }
+	.highlight .nc  { color: #ffa657; }
+	.highlight .no  { color: #ffa657; }
+	.highlight .nd  { color: #79c0ff; }
+	.highlight .ni  { color: #c9d1d9; }
+	.highlight .ne  { color: #ffa198; }
+	.highlight .nf  { color: #d2a8ff; }
+	.highlight .nl  { color: #c9d1d9; }
+	.highlight .nn  { color: #ffa657; }
+	.highlight .nx  { color: #79c0ff; }
+	.highlight .py  { color: #c9d1d9; }
+	.highlight .nt  { color: #7ee787; }
+	.highlight .nv  { color: #ffa198; }
+	.highlight .ow  { color: #79c0ff; }
+	.highlight .w   { color: #c9d1d9; }
+	.highlight .mf  { color: #a5d6ff; }
+	.highlight .mh  { color: #a5d6ff; }
+	.highlight .mi  { color: #a5d6ff; }
+	.highlight .mo  { color: #a5d6ff; }
+	.highlight .sb  { color: #a5d6ff; }
+	.highlight .sc  { color: #c9d1d9; }
+	.highlight .sd  { color: #8b949e; }
+	.highlight .s2  { color: #a5d6ff; }
+	.highlight .se  { color: #a5d6ff; }
+	.highlight .sh  { color: #a5d6ff; }
+	.highlight .si  { color: #a5d6ff; }
+	.highlight .sx  { color: #a5d6ff; }
+	.highlight .sr  { color: #a5d6ff; }
+	.highlight .s1  { color: #a5d6ff; }
+	.highlight .ss  { color: #a5d6ff; }
+	.highlight .bp  { color: #c9d1d9; }
+	.highlight .vc  { color: #ffa198; }
+	.highlight .vg  { color: #ffa198; }
+	.highlight .vi  { color: #ffa198; }
+	.highlight .il  { color: #a5d6ff; }
+
+	code.highlighter-rouge a {
+		color: #ff7b72;
+	}
+}
+
