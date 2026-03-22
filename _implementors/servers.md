@@ -287,6 +287,7 @@ index: 1
 | TypeScript|[TypeFox](http://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
 | [Typst](https://github.com/typst/typst/) | [Myriad-Dreamin](https://github.com/Myriad-Dreamin) | [tinymist](https://github.com/Myriad-Dreamin/tinymist) | Rust |
 | [Typst](https://github.com/typst/typst/) | [nvarner](https://github.com/nvarner/) | [typst-lsp](https://github.com/nvarner/typst-lsp) | Rust |
+| [Umple](https://www.umple.org) | [Umple Team](https://www.umple.org) | [umple-lsp](https://github.com/umple/umple-lsp) | Typescript |
 | [V](https://vlang.io) | [Contributors](https://github.com/v-analyzer/v-analyzer/graphs/contributors) | [v-analyzer](https://github.com/v-analyzer/v-analyzer) | V
 | Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
 | VDM-SL, VDM++, VDM-RT | [Nick Battle](https://github.com/nickbattle)| [VDMJ-LSP](https://github.com/nickbattle/vdmj/tree/master/lsp) | Java |
