@@ -14,6 +14,7 @@ index: 2
 | [Atom](https://atom.io/) | [GitHub](https://github.com/) | [atom-languageclient](https://www.npmjs.com/package/atom-languageclient) |
 | [BBEdit](https://www.barebones.com/products/bbedit) | [Bare Bones Software, Inc.](https://www.barebones.com/) | Proprietary |
 | [Brackets](http://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) |
+| [Phoenix Code](https://phcode.io/) | [Core.Ai](https://core.ai/) | [Phoenix Code](https://github.com/phcode-dev/phoenix) |
 | [Coginiti Pro](https://www.coginiti.co/products/coginiti-pro/) | [Coginiti](https://www.coginiti.co) | |
 | [Coginiti Premium](https://www.coginiti.co/products/coginiti-premium/) | [Coginiti](https://www.coginiti.co) | |
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
