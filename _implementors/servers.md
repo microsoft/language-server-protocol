@@ -81,6 +81,7 @@ index: 1
 | [DenizenScript](https://denizenscript.com/) | [DenizenScript Team](https://github.com/DenizenScript/) | [DenizenVSCode](https://github.com/DenizenScript/DenizenVSCode) | C# |
 | [devicetree](https://www.devicetree.org) | [Kyle Micallef Bonnici](https://github.com/kylebonnici) | [dts-lsp](https://github.com/kylebonnici/dts-lsp) | Typescript |
 | [Deno](https://deno.land) (TypeScript/JavaScript) | [Deno Land](https://github.com/denoland) | [`deno lsp`](https://github.com/denoland/deno/tree/main/cli/lsp) | Rust |
+| [DITA](https://docs.oasis-open.org/dita/dita/v1.3/dita-v1.3-part0-overview.html) | [Jeremy JEANNE](https://github.com/jyjeanne) | [`DitaCaft`](https://github.com/jyjeanne/ditacraft/tree/main/server) | DITA |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Docker](https://github.com/docker) | [docker-language-server](https://github.com/docker/docker-language-server) | Go |
 | [Dockerfiles](https://docs.docker.com/engine/reference/builder/)| [Remy Suen](https://github.com/rcjsuen) | [dockerfile-language-server](https://github.com/rcjsuen/dockerfile-language-server-nodejs) | TypeScript |
 | [DreamMaker](https://secure.byond.com/) | [SpaceManiac](https://www.platymuus.com) | [DreamMaker Language Server](https://github.com/SpaceManiac/SpacemanDMM/tree/master/src/langserver) | Rust |
