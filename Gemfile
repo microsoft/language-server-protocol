@@ -6,7 +6,7 @@ ruby RUBY_VERSION
 # to use GitHub Pages
 # gem "github-pages", group: :jekyll_plugins
 
-gem "github-pages", "~> 228", group: :jekyll_plugins
+gem "github-pages", "~> 232", group: :jekyll_plugins
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
@@ -18,3 +18,5 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+
+gem "webrick", "~> 1.8"

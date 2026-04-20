@@ -1,4 +1,4 @@
-#### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
+#### <a href="#diagnostic" name="diagnostic" class="anchor">Diagnostic</a>
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 
@@ -12,7 +12,8 @@ export interface Diagnostic {
 	/**
 	 * The diagnostic's severity. To avoid interpretation mismatches when a
 	 * server is used with different clients it is highly recommended that
-	 * servers always provide a severity value.
+	 * servers always provide a severity value. If omitted, it’s recommended
+	 * for the client to interpret it as an Error severity.
 	 */
 	severity?: DiagnosticSeverity;
 

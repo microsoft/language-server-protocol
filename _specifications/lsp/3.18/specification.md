@@ -12,7 +12,7 @@ This document describes the upcoming 3.18.x version of the language server proto
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.18/specification.md).
 
-## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.18 </a>
+## <a href="#whatIsNew" name="whatIsNew" class="anchor">What's new in 3.18</a>
 
 All new 3.18 features are tagged with a corresponding since version 3.18 text or in JSDoc using `@since 3.18.0` annotation.
 
@@ -20,14 +20,14 @@ A detailed list of the changes can be found in the [change log](#version_3_18_0)
 
 The version of the specification is used to group features into a new specification release and to refer to their first appearance. Features in the spec are kept compatible using so called capability flags which are exchanged between the client and the server during initialization.
 
-## <a href="#baseProtocol" name="baseProtocol" class="anchor"> Base Protocol </a>
+## <a href="#baseProtocol" name="baseProtocol" class="anchor">Base Protocol</a>
 
 The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
 separated by a '\r\n'.
 
-### <a href="#headerPart" name="headerPart" class="anchor"> Header Part </a>
+### <a href="#headerPart" name="headerPart" class="anchor">Header Part</a>
 
-The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conform to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
+The header part consists of header fields. Each header field is comprised of a name and a value, separated by ': ' (a colon and a space). The structure of header fields conforms to the [HTTP semantic](https://tools.ietf.org/html/rfc7230#section-3.2). Each header field is terminated by '\r\n'. Considering the last header field and the overall header itself are each terminated with '\r\n', and that at least one header is mandatory, this means that two '\r\n' sequences always immediately precede the content part of a message.
 
 Currently the following header fields are supported:
 
@@ -39,11 +39,11 @@ Currently the following header fields are supported:
 
 The header part is encoded using the 'ascii' encoding. This includes the '\r\n' separating the header and content part.
 
-### <a href="#contentPart" name="contentPart" class="anchor"> Content Part </a>
+### <a href="#contentPart" name="contentPart" class="anchor">Content Part</a>
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC 2.0](https://www.jsonrpc.org/specification) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
-(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treats the string `utf8` as `utf-8`.
+(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treat the string `utf8` as `utf-8`.
 
 ### Example:
 
@@ -65,7 +65,7 @@ The protocol uses request, response, and notification objects as specified in th
 
 The following TypeScript definitions describe the base JSON-RPC protocol:
 
-#### <a href="#baseTypes" name="baseTypes" class="anchor"> Base Types </a>
+#### <a href="#baseTypes" name="baseTypes" class="anchor">Base Types</a>
 
 The protocol uses the following definitions for integers, unsigned integers, decimal numbers, objects and arrays:
 
@@ -134,7 +134,7 @@ export type LSPObject = { [key: string]: LSPAny };
 export type LSPArray = LSPAny[];
 ```
 
-#### <a href="#abstractMessage" name="abstractMessage" class="anchor"> Abstract Message </a>
+#### <a href="#abstractMessage" name="abstractMessage" class="anchor">Abstract Message</a>
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
 
@@ -145,7 +145,7 @@ interface Message {
 	jsonrpc: string;
 }
 ```
-#### <a href="#requestMessage" name="requestMessage" class="anchor"> Request Message </a>
+#### <a href="#requestMessage" name="requestMessage" class="anchor">Request Message</a>
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
 
@@ -169,7 +169,7 @@ interface RequestMessage extends Message {
 }
 ```
 
-#### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
+#### <a href="#responseMessage" name="responseMessage" class="anchor">Response Message</a>
 
 A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON-RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
 
@@ -241,7 +241,7 @@ export namespace ErrorCodes {
 
 	/**
 	 * Error code indicating that a server received a notification or
-	 * request before the server has received the `initialize` request.
+	 * request before the server received the `initialize` request.
 	 */
 	export const ServerNotInitialized: integer = -32002;
 	export const UnknownErrorCode: integer = -32001;
@@ -310,7 +310,7 @@ export namespace ErrorCodes {
 	export const lspReservedErrorRangeEnd: integer = -32800;
 }
 ```
-#### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
+#### <a href="#notificationMessage" name="notificationMessage" class="anchor">Notification Message</a>
 
 A notification message. A processed notification message must not send a response back. They work like events.
 
@@ -328,11 +328,11 @@ interface NotificationMessage extends Message {
 }
 ```
 
-#### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
+#### <a href="#dollarRequests" name="dollarRequests" class="anchor">$ Notifications and Requests</a>
 
-Notification and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
+Notifications and requests whose methods start with '\$/' are messages which are protocol implementation dependent and might not be implementable in all clients or servers. For example if the server implementation uses a single threaded synchronous programming language then there is little a server can do to react to a `$/cancelRequest` notification. If a server or client receives notifications starting with '\$/' it is free to ignore the notification. If a server or client receives a request starting with '\$/' it must error the request with error code `MethodNotFound` (e.g. `-32601`).
 
-#### <a href="#cancelRequest" name="cancelRequest" class="anchor"> Cancellation Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#cancelRequest" name="cancelRequest" class="anchor">Cancellation Support (:arrow_right: :arrow_left:)</a>
 
 The base protocol offers support for request cancellation. To cancel a request, a notification message with the following properties is sent:
 
@@ -351,7 +351,7 @@ interface CancelParams {
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON-RPC protocol that requires that every request sends a response back. In addition, it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
-#### <a href="#progress" name="progress" class="anchor"> Progress Support (:arrow_right: :arrow_left:)</a>
+#### <a href="#progress" name="progress" class="anchor">Progress Support (:arrow_right: :arrow_left:)</a>
 
 > *Since version 3.15.0*
 
@@ -383,7 +383,7 @@ interface ProgressParams<T> {
 
 Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
 
-## <a href="#languageServerProtocol" name="languageServerProtocol" class="anchor"> Language Server Protocol </a>
+## <a href="#languageServerProtocol" name="languageServerProtocol" class="anchor">Language Server Protocol</a>
 
 The language server protocol defines a set of JSON-RPC request, response and notification messages which are exchanged using the above base protocol. This section starts describing the basic JSON structures used in the protocol. The document uses TypeScript interfaces in strict mode to describe these. This means, for example, that a `null` value has to be explicitly listed and that a mandatory property must be listed even if a falsy value might exist. Based on the basic JSON structures, the actual requests with their responses and the notifications are described.
 
@@ -408,21 +408,21 @@ Please also note that a response return value of `null` indicates no result. It 
 
 In general, the language server protocol supports JSON-RPC messages, however the base protocol defined here uses a convention such that the parameters passed to request/notification messages should be of `object` type (if passed at all). However, this does not disallow using `Array` parameter types in custom messages.
 
-The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such a sharing would require additional protocol e.g. to lock a document to support concurrent editing.
+The protocol currently assumes that one server serves one tool. There is currently no support in the protocol to share one server between different tools. Such sharing would require additional protocol e.g. to lock a document to support concurrent editing.
 
-### <a href="#capabilities" name= "capabilities" class="anchor"> Capabilities </a>
+### <a href="#capabilities" name="capabilities" class="anchor">Capabilities</a>
 
 Not every language server can support all features defined by the protocol. LSP therefore provides ‘capabilities’. A capability groups a set of language features. A development tool and the language server announce their supported features using capabilities. As an example, a server announces that it can handle the `textDocument/hover` request, but it might not handle the `workspace/symbol` request. Similarly, a development tool announces its ability to provide `about to save` notifications before a document is saved, so that a server can compute textual edits to format the edited document before it is saved.
 
 The set of capabilities is exchanged between the client and server during the [initialize](#initialize) request.
 
-### <a href="#messageOrdering" name= "messageOrdering" class="anchor"> Request, Notification and Response Ordering </a>
+### <a href="#messageOrdering" name="messageOrdering" class="anchor">Request, Notification and Response Ordering</a>
 
 Responses to requests should be sent in roughly the same order as the requests appear on the server or client side. So, for example, if a server receives a `textDocument/completion` request and then a `textDocument/signatureHelp` request it will usually first return the response for the `textDocument/completion` and then the response for `textDocument/signatureHelp`.
 
 However, the server may decide to use a parallel execution strategy and may wish to return responses in a different order than the requests were received. The server may do so as long as this reordering doesn't affect the correctness of the responses. For example, reordering the result of `textDocument/completion` and `textDocument/signatureHelp` is allowed, as each of these requests usually won't affect the output of the other. On the other hand, the server most likely should not reorder `textDocument/definition` and `textDocument/rename` requests, since executing the latter may affect the result of the former.
 
-### <a href="#messageDocumentation" name= "messageDocumentation" class="anchor"> Message Documentation </a>
+### <a href="#messageDocumentation" name="messageDocumentation" class="anchor">Message Documentation</a>
 
 As said, LSP defines a set of requests, responses and notifications. Each of those are documented using the following format:
 
@@ -434,7 +434,7 @@ As said, LSP defines a set of requests, responses and notifications. Each of tho
 * a _Response_ section describing the format of the response. The result item describes the returned data in case of a success. The optional partial result item describes the returned data of a partial result notification. The error.data describes the returned data in case of an error. Please remember that in case of a failure the response already contains an error.code and an error.message field. These fields are only specified if the protocol forces the use of certain error codes or messages. In cases where the server can decide on these values freely they aren't listed here.
 
 
-### <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor"> Basic JSON Structures </a>
+### <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor">Basic JSON Structures</a>
 
 There are quite some JSON structures that are shared between different requests and notifications. Their structure and capabilities are documented in this section.
 
@@ -449,6 +449,7 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/textDocumentIdentifier.md %}
 {% include_relative types/versionedTextDocumentIdentifier.md %}
 {% include_relative types/textDocumentPositionParams.md %}
+{% include_relative types/patterns.md %}
 {% include_relative types/documentFilter.md %}
 
 {% include_relative types/stringValue.md %}
@@ -468,7 +469,7 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/partialResultParams.md %}
 {% include types/traceValue.md %}
 
-### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor"> Server lifecycle </a>
+### <a href="#lifeCycleMessages" name="lifeCycleMessages" class="anchor">Server lifecycle</a>
 
 The current protocol specification defines that the lifecycle of a server is managed by the client (e.g. a tool like VS Code or Emacs). It is up to the client to decide when to start (process-wise) and when to shutdown a server.
 
@@ -676,6 +677,7 @@ The language features should be computed on the [synchronized state](#textDocume
 {% include_relative workspace/didChangeWatchedFiles.md %}
 {% include_relative workspace/executeCommand.md %}
 {% include_relative workspace/applyEdit.md %}
+{% include_relative workspace/textDocumentContent.md %}
 
 ### <a href="#windowFeatures" name="windowFeatures" class="anchor">Window Features</a>
 
@@ -714,7 +716,7 @@ To support the case that the editor starting a server crashes, an editor should 
 
 Since 3.17 there is a meta model describing the LSP protocol:
 
-- [metaModel.json](../metaModel/metaModel.json): The actual meta model for the LSP 3.17 specification
+- [metaModel.json](../metaModel/metaModel.json): The actual meta model for the LSP 3.18 specification
 - [metaModel.ts](../metaModel/metaModel.ts): A TypeScript file defining the data types that make up the meta model.
 - [metaModel.schema.json](../metaModel/metaModel.schema.json): A JSON schema file defining the data types that make up the meta model. Can be used to generate code to read the meta model JSON file.
 
@@ -722,102 +724,114 @@ Since 3.17 there is a meta model describing the LSP protocol:
 
 #### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (mm/dd/yyyy)</a>
 
-* support for code action kind documentation.
+* Added inline completions support.
+* Added dynamic text document content support.
+* Added refresh support for folding ranges.
+* Support to format multiple ranges at once.
+* Support for snippets in workspace edits.
+* Relative Pattern support for document filters and notebook document filters.
+* Support for code action kind documentation.
 * Add support for `activeParameter` on `SignatureHelp` and `SignatureInformation` being `null`.
-* Add tooltip to `Command`.
+* Support tooltips for `Command`.
+* Support for meta data information on workspace edits.
+* Support for snippets in text document edits.
+* Support for debug message kind.
+* Client capability to enumerate properties that can be resolved for code lenses.
+* Added support for `completionList.applyKind` to determine how values from `completionList.itemDefaults` and `completion` are combined.
+
 
 #### <a href="#version_3_17_0" name="version_3_17_0" class="anchor">3.17.0 (05/10/2022)</a>
 
 * Specify how clients will handle stale requests.
-* Add support for a completion item label details.
-* Add support for workspace symbol resolve request.
-* Add support for label details and insert text mode on completion items.
-* Add support for shared values on CompletionItemList.
-* Add support for HTML tags in Markdown.
-* Add support for collapsed text in folding.
-* Add support for trigger kinds on code action requests.
-* Add the following support to semantic tokens:
+* Added support for a completion item label details.
+* Added support for workspace symbol resolve request.
+* Added support for label details and insert text mode on completion items.
+* Added support for shared values on CompletionItemList.
+* Added support for HTML tags in Markdown.
+* Added support for collapsed text in folding.
+* Added support for trigger kinds on code action requests.
+* Added the following support to semantic tokens:
   - server cancelable
   - augmentation of syntax tokens
-* Add support to negotiate the position encoding.
-* Add support for relative patterns in file watchers.
-* Add support for type hierarchies
-* Add support for inline values.
-* Add support for inlay hints.
-* Add support for notebook documents.
-* Add support for diagnostic pull model.
+* Added support to negotiate the position encoding.
+* Added support for relative patterns in file watchers.
+* Added support for type hierarchies
+* Added support for inline values.
+* Added support for inlay hints.
+* Added support for notebook documents.
+* Added support for diagnostic pull model.
 
 #### <a href="#version_3_16_0" name="version_3_16_0" class="anchor">3.16.0 (12/14/2020)</a>
 
-* Add support for tracing.
-* Add semantic token support.
-* Add call hierarchy support.
-* Add client capability for resolving text edits on completion items.
-* Add support for client default behavior on renames.
-* Add support for insert and replace ranges on `CompletionItem`.
-* Add support for diagnostic code descriptions.
-* Add support for document symbol provider label.
-* Add support for tags on `SymbolInformation` and `DocumentSymbol`.
-* Add support for moniker request method.
-* Add support for code action `data` property.
-* Add support for code action `disabled` property.
-* Add support for code action resolve request.
-* Add support for diagnostic `data` property.
-* Add support for signature information `activeParameter` property.
-* Add support for `workspace/didCreateFiles` notifications and `workspace/willCreateFiles` requests.
-* Add support for `workspace/didRenameFiles` notifications and `workspace/willRenameFiles` requests.
-* Add support for `workspace/didDeleteFiles` notifications and `workspace/willDeleteFiles` requests.
-* Add client capability to signal whether the client normalizes line endings.
-* Add support to preserve additional attributes on `MessageActionItem`.
-* Add support to provide the clients locale in the initialize call.
-* Add support for opening and showing a document in the client user interface.
-* Add support for linked editing.
-* Add support for change annotations in text edits as well as in create file, rename file and delete file operations.
+* Added support for tracing.
+* Added semantic token support.
+* Added call hierarchy support.
+* Added client capability for resolving text edits on completion items.
+* Added support for client default behavior on renames.
+* Added support for insert and replace ranges on `CompletionItem`.
+* Added support for diagnostic code descriptions.
+* Added support for document symbol provider label.
+* Added support for tags on `SymbolInformation` and `DocumentSymbol`.
+* Added support for moniker request method.
+* Added support for code action `data` property.
+* Added support for code action `disabled` property.
+* Added support for code action resolve request.
+* Added support for diagnostic `data` property.
+* Added support for signature information `activeParameter` property.
+* Added support for `workspace/didCreateFiles` notifications and `workspace/willCreateFiles` requests.
+* Added support for `workspace/didRenameFiles` notifications and `workspace/willRenameFiles` requests.
+* Added support for `workspace/didDeleteFiles` notifications and `workspace/willDeleteFiles` requests.
+* Added client capability to signal whether the client normalizes line endings.
+* Added support to preserve additional attributes on `MessageActionItem`.
+* Added support to provide the clients locale in the initialize call.
+* Added support for opening and showing a document in the client user interface.
+* Added support for linked editing.
+* Added support for change annotations in text edits as well as in create file, rename file and delete file operations.
 
 #### <a href="#version_3_15_0" name="version_3_15_0" class="anchor">3.15.0 (01/14/2020)</a>
 
-* Add generic progress reporting support.
-* Add specific work done progress reporting support to requests where applicable.
-* Add specific partial result progress support to requests where applicable.
-* Add support for `textDocument/selectionRange`.
-* Add support for server and client information.
-* Add signature help context.
-* Add Erlang and Elixir to the list of supported programming languages
-* Add `version` on `PublishDiagnosticsParams`
-* Add `CodeAction#isPreferred` support.
-* Add `CompletionItem#tag` support.
-* Add `Diagnostic#tag` support.
-* Add `DocumentLink#tooltip` support.
-* Add `trimTrailingWhitespace`, `insertFinalNewline` and `trimFinalNewlines` to `FormattingOptions`.
+* Added generic progress reporting support.
+* Added specific work done progress reporting support to requests where applicable.
+* Added specific partial result progress support to requests where applicable.
+* Added support for `textDocument/selectionRange`.
+* Added support for server and client information.
+* Added signature help context.
+* Added Erlang and Elixir to the list of supported programming languages
+* Added `version` on `PublishDiagnosticsParams`
+* Added `CodeAction#isPreferred` support.
+* Added `CompletionItem#tag` support.
+* Added `Diagnostic#tag` support.
+* Added `DocumentLink#tooltip` support.
+* Added `trimTrailingWhitespace`, `insertFinalNewline` and `trimFinalNewlines` to `FormattingOptions`.
 * Clarified `WorkspaceSymbolParams#query` parameter.
 
 
 #### <a href="#version_3_14_0" name="version_3_14_0" class="anchor">3.14.0 (12/13/2018)</a>
 
-* Add support for signature label offsets.
-* Add support for location links.
-* Add support for `textDocument/declaration` request.
+* Added support for signature label offsets.
+* Added support for location links.
+* Added support for `textDocument/declaration` request.
 
 #### <a href="#version_3_13_0" name="version_3_13_0" class="anchor">3.13.0 (9/11/2018)</a>
 
-* Add support for file and folder operations (create, rename, move) to workspace edits.
+* Added support for file and folder operations (create, rename, move) to workspace edits.
 
 #### <a href="#version_3_12_0" name="version_3_12_0" class="anchor">3.12.0 (8/23/2018)</a>
 
-* Add support for `textDocument/prepareRename` request.
+* Added support for `textDocument/prepareRename` request.
 
 #### <a href="#version_3_11_0" name="version_3_11_0" class="anchor">3.11.0 (8/21/2018)</a>
 
-* Add support for CodeActionOptions to allow a server to provide a list of code action it supports.
+* Added support for CodeActionOptions to allow a server to provide a list of code action it supports.
 
 #### <a href="#version_3_10_0" name="version_3_10_0" class="anchor">3.10.0 (7/23/2018)</a>
 
-* Add support for hierarchical document symbols as a valid response to a `textDocument/documentSymbol` request.
-* Add support for folding ranges as a valid response to a `textDocument/foldingRange` request.
+* Added support for hierarchical document symbols as a valid response to a `textDocument/documentSymbol` request.
+* Added support for folding ranges as a valid response to a `textDocument/foldingRange` request.
 
 #### <a href="#version_3_9_0" name="version_3_9_0" class="anchor">3.9.0 (7/10/2018)</a>
 
-* Add support for `preselect` property in `CompletionItem`
+* Added support for `preselect` property in `CompletionItem`
 
 #### <a href="#version_3_8_0" name="version_3_8_0" class="anchor">3.8.0 (6/11/2018)</a>
 
@@ -851,26 +865,26 @@ Decided to skip this version to bring the protocol version number in sync the wi
 
 * [extensible completion item and symbol kinds](https://github.com/Microsoft/language-server-protocol/issues/129)
 
-#### <a href="version_3_3_0" name="version_3_3_0" class="anchor">3.3.0 (11/24/2017)</a>
+#### <a href="#version_3_3_0" name="version_3_3_0" class="anchor">3.3.0 (11/24/2017)</a>
 
 * Added support for `CompletionContext`
 * Added support for `MarkupContent`
 * Removed old New and Updated markers.
 
-#### <a href="version_3_2_0" name="version_3_2_0" class="anchor">3.2.0 (09/26/2017)</a>
+#### <a href="#version_3_2_0" name="version_3_2_0" class="anchor">3.2.0 (09/26/2017)</a>
 
 * Added optional `commitCharacters` property to the `CompletionItem`
 
-#### <a href="version_3_1_0" name="version_3_1_0" class="anchor">3.1.0 (02/28/2017)</a>
+#### <a href="#version_3_1_0" name="version_3_1_0" class="anchor">3.1.0 (02/28/2017)</a>
 
 * Make the `WorkspaceEdit` changes backwards compatible.
 * Updated the specification to correctly describe the breaking changes from 2.x to 3.x around `WorkspaceEdit`and `TextDocumentEdit`.
 
 #### <a href="#version_3_0_0" name="version_3_0_0" class="anchor">3.0 Version</a>
 
-- add support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
-- add support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediately.
+- Added support for client feature flags to support that servers can adapt to different client capabilities. An example is the new `textDocument/willSaveWaitUntil` request which not all clients might be able to support. If the feature is disabled in the client capabilities sent on the initialize request, the server can't rely on receiving the request.
+- Added support to experiment with new features. The new `ClientCapabilities.experimental` section together with feature flags allow servers to provide experimental feature without the need of ALL clients to adopt them immediately.
 - servers can more dynamically react to client features. Capabilities can now be registered and unregistered after the initialize request using the new `client/registerCapability` and `client/unregisterCapability`. This, for example, allows servers to react to settings or configuration changes without a restart.
-- add support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
-- add support for `textDocument/documentLink` request.
-- add a `rootUri` property to the initializeParams in favor of the `rootPath` property.
+- Added support for `textDocument/willSave` notification and `textDocument/willSaveWaitUntil` request.
+- Added support for `textDocument/documentLink` request.
+- Added a `rootUri` property to the initializeParams in favor of the `rootPath` property.

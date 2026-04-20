@@ -221,9 +221,9 @@ export interface SignatureHelp {
 	 * lies outside the range of `signatures[activeSignature].parameters`
 	 * defaults to 0 if the active signature has parameters. If
 	 * the active signature has no parameters it is ignored.
-	 * In future version of the protocol this property might become
-	 * mandatory to better express the active parameter if the
-	 * active signature does have any.
+	 *
+	 * Since version 3.16.0 the `SignatureInformation` itself provides a
+	 * `activeParameter` property and it should be used instead of this one.
 	 */
 	activeParameter?: uinteger;
 }

@@ -551,7 +551,7 @@ In the above example, there will be three reference results
 
 For Typescript, method references are recorded at their most abstract declaration and if methods are merged (`B#foo`), they are combined using a reference result pointing to other results.
 
-### <a href="#references" name="implementation" class="anchor">Request: `textDocument/implementation`</a>
+### <a href="#references" name="references" class="anchor">Request: `textDocument/implementation`</a>
 
 Supporting a `textDocument/implementation` request is done reusing what we implemented for a `textDocument/references` request. In most cases, the `textDocument/implementation` returns the declaration values of the reference result that a symbol declaration points to. For cases where the result differs, the LSIF provides an `ImplementationResult`. To nest implementation results the `item` edge supports a `property` value `"implementationResults"`.
 
@@ -1476,7 +1476,7 @@ The following emitting constraints (some of which have already been mentioned in
 - after a document end event has been emitted only result sets, reference or implementation results emitted through that document can be referenced in edges. It is for example not allowed to reference ranges or result ranges from that document. This also includes adding monikers to ranges or result sets. The document data so to speak can not be altered anymore.
 - if ranges point to result sets and monikers are emitted, they must be emitted on the result set and can't be emitted on individual ranges.
 
-## <a href="#additionalInformation" name="additionalInformation" class="anchor">Additional Information </a>
+## <a href="#additionalInformation" name="additionalInformation" class="anchor">Additional Information</a>
 
 ### <a href="#tools" name="tools" class="anchor">Tools</a>
 

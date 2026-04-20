@@ -1,4 +1,4 @@
-#### <a href="#documentFilter" name="documentFilter" class="anchor"> DocumentFilter </a>
+#### <a href="#documentFilter" name="documentFilter" class="anchor">DocumentFilter</a>
 
 A document filter denotes a document through properties like `language`, `scheme` or `pattern`. An example is a filter that applies to TypeScript files on disk. Another example is a filter that applies to JSON files with name `package.json`:
 ```typescript
@@ -22,7 +22,7 @@ export interface DocumentFilter {
 	 * A glob pattern, like `*.{ts,js}`.
 	 *
 	 * Glob patterns can have the following syntax:
-	 * - `*` to match one or more characters in a path segment
+	 * - `*` to match zero or more characters in a path segment
 	 * - `?` to match on one character in a path segment
 	 * - `**` to match any number of path segments, including none
 	 * - `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}`

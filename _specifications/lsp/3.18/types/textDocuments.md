@@ -1,4 +1,4 @@
-#### <a href="#textDocuments" name="textDocuments" class="anchor"> Text Documents </a>
+#### <a href="#textDocuments" name="textDocuments" class="anchor">Text Documents</a>
 
 The current protocol is tailored for textual documents whose content can be represented as a string. There is currently no support for binary documents. A position inside a document (see Position definition below) is expressed as a zero-based line and character offset.
 

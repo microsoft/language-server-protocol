@@ -1,4 +1,4 @@
-#### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
+#### <a href="#diagnostic" name="diagnostic" class="anchor">Diagnostic</a>
 
 - New in version 3.18: support for markup content in diagnostic messages. The support is guarded by the
 client capability `textDocument.diagnostic.markupMessageSupport`. If a client doesn't signal the capability,
@@ -16,7 +16,8 @@ export interface Diagnostic {
 	/**
 	 * The diagnostic's severity. To avoid interpretation mismatches when a
 	 * server is used with different clients it is highly recommended that
-	 * servers always provide a severity value.
+	 * servers always provide a severity value. If omitted, it’s recommended
+	 * for the client to interpret it as an Error severity.
 	 */
 	severity?: DiagnosticSeverity;
 

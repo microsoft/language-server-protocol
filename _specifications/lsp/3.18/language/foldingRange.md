@@ -217,7 +217,7 @@ export interface FoldingRangeWorkspaceClientCapabilities {
 	 * folding ranges currently shown. It should be used with absolute care and is
 	 * useful for situation where a server, for example, detects a project wide
 	 * change that requires such a calculation.
-	 * 
+	 *
 	 * @since 3.18.0
 	 * @proposed
 	 */

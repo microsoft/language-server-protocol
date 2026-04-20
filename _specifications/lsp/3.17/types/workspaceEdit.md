@@ -1,4 +1,4 @@
-#### <a href="#workspaceEdit" name="workspaceEdit" class="anchor"> WorkspaceEdit </a>
+#### <a href="#workspaceEdit" name="workspaceEdit" class="anchor">WorkspaceEdit</a>
 
 A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChanges` are present, the latter are preferred over `changes`.
 
@@ -47,7 +47,7 @@ export interface WorkspaceEdit {
 }
 ```
 
-##### <a href="#workspaceEditClientCapabilities" name="workspaceEditClientCapabilities" class="anchor"> WorkspaceEditClientCapabilities </a>
+##### <a href="#workspaceEditClientCapabilities" name="workspaceEditClientCapabilities" class="anchor">WorkspaceEditClientCapabilities</a>
 
 > New in version 3.13: `ResourceOperationKind` and `FailureHandlingKind` and the client capability `workspace.workspaceEdit.resourceOperations` as well as `workspace.workspaceEdit.failureHandling`.
 

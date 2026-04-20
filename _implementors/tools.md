@@ -23,10 +23,13 @@ index: 2
 | [CudaText](https://cudatext.github.io/) | [Alexey-T](https://github.com/Alexey-T) | [cuda_lsp](https://github.com/CudaText-addons/cuda_lsp) |
 | [Eclipse Che](https://www.eclipse.org/che/) | Eclipse,Codenvy/TypeFox | [Che](https://github.com/eclipse/che/issues/1287) |
 | Eclipse IDE | Eclipse,Red Hat | [Eclipse community](https://projects.eclipse.org/projects/technology.lsp4e/who), [Eclipse LSP4E](https://projects.eclipse.org/projects/technology.lsp4e) |
-| Emacs | [Vibhav Pant](https://github.com/vibhavp) | [emacs language server client](https://github.com/emacs-lsp/lsp-mode/) |
+| Emacs | [Vibhav Pant](https://github.com/vibhavp) | [LSP Mode](https://github.com/emacs-lsp/lsp-mode/) |
 | Emacs | [João Távora](https://github.com/joaotavora) | [Eglot](https://github.com/joaotavora/eglot) |
 | Emacs | [Andy Stewart](https://github.com/manateelazycat/) | [lsp-bridge](https://github.com/manateelazycat/lsp-bridge/) | 
+| Emacs | [zbelial](https://github.com/zbelial) | [lspce](https://github.com/zbelial/lspce) |
+| Emacs | [JadeStrong](https://github.com/jadestrong) | [Lsp-Proxy](https://github.com/jadestrong/lsp-proxy) |
 | [ecode](https://github.com/SpartanJ/ecode) | [Martín Lucas Golini](https://github.com/SpartanJ) | [ecode](https://github.com/SpartanJ/ecode) | 
+| [Geany](https://www.geany.org) | [Jiří Techet](https://github.com/techee) | [geany-lsp](https://github.com/techee/geany-lsp) |
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
 | [GoLand](https://www.jetbrains.com/go) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Helix Editor](https://helix-editor.com/) | [Blaž Hrastnik](https://github.com/archseer) | [helix](https://github.com/helix-editor/helix) |
@@ -40,10 +43,11 @@ index: 2
 | [Lite XL](https://lite-xl.com) | [Lite XL Team](https://lite-xl.com) | [LSP Plugin](https://github.com/lite-xl/lite-xl-lsp) |
 | [Micro](https://micro-editor.github.io/)| [zyedidia](https://github.com/zyedidia) | [micro-plugin-lsp](https://github.com/AndCake/micro-plugin-lsp) |
 | [Moonshine IDE](https://moonshine-ide.com) | [Prominic.NET](https://github.com/prominic) | [Moonshine-IDE](https://github.com/prominic/Moonshine-IDE) |
+| [MS Monaco Editor](https://github.com/Microsoft/monaco-editor) | Microsoft | [microsoft/monaco-editor](https://github.com/microsoft/monaco-editor/tree/main/monaco-lsp-client) |
 | [MS Monaco Editor](https://github.com/Microsoft/monaco-editor) | [TypeFox](https://github.com/TypeFox) | [monaco-languageclient](https://www.npmjs.com/package/monaco-languageclient) |
 | [MS Paint IDE](https://ms-paint-i.de/) | [RubbaBoy](https://github.com/RubbaBoy) | [MS Paint IDE](https://github.com/MSPaintIDE/MSPaintIDE) |
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
-| [Neovim](https://neovim.io/) | [Neovim Team](https://github.com/neovim) | [native support since 0.5](https://neovim.io/doc/lsp/) |
+| [Neovim](https://neovim.io/) | [Neovim Team](https://github.com/neovim) | [native support since 0.5](https://neovim.io/doc/user/lsp/) |
 | [Nova](https://nova.app) | [Panic Inc](http://panic.com) | Proprietary |
 | [Oni](https://www.onivim.io) | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 | [OpenSumi](https://opensumi.com) | [opensumi](https://github.com/opensumi) | [opensumi](https://github.com/opensumi/core) |
@@ -56,6 +60,7 @@ index: 2
 | [RJ TextEd](https://www.rj-texted.se/) | [Rickard Johansson](https://github.com/rickard67) | [lsp](https://github.com/rickard67/LSP-Pascal-Library) |
 | [Spyder](http://spyder-ide.org) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
 | [Sublime Text](https://www.sublimetext.com/) | [Raoul Wols](https://github.com/rwols) | [lsp](https://github.com/sublimelsp/LSP) |
+| [Textadept](https://orbitalquark.github.io/textadept) | [orbitalquark](https://github.com/orbitalquark) | [textadept-lsp](https://github.com/orbitalquark/textadept-lsp) |
 | [Theia](https://github.com/theia-ide/theia) | [theia-ide](https://github.com/theia-ide) | [theia](https://github.com/theia-ide/theia) |
 | vim8 and [neovim](https://neovim.io/) | [Junfeng Li](https://github.com/autozimu) | [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim) |
 | vim8 and neovim | [Prabir Shrestha](https://github.com/prabirshrestha) | [vim-lsp](https://github.com/prabirshrestha/vim-lsp) |
@@ -70,4 +75,5 @@ index: 2
 | Visual Studio | Microsoft | [LSP Preview](https://marketplace.visualstudio.com/items?itemName=vsext.LanguageServerClientPreview) |
 | [Visual Studio Code](https://code.visualstudio.com) | Microsoft | [vscode](https://github.com/Microsoft/vscode/)  |
 | [WebStorm](https://blog.jetbrains.com/webstorm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
+| [Zed](https://zed.dev) | [Zed Industries](https://zed.dev) | [zed](https://github.com/zed-industries/zed) |
 {: .table .table-bordered .table-responsive}

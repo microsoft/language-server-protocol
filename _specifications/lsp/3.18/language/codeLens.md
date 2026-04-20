@@ -14,7 +14,25 @@ export interface CodeLensClientCapabilities {
 	 * Whether code lens supports dynamic registration.
 	 */
 	dynamicRegistration?: boolean;
+
+	/**
+	 * Whether the client supports resolving additional code lens
+	 * properties via a separate `codeLens/resolve` request.
+	 *
+	 * @since 3.18.0
+	 */
+	resolveSupport?: ClientCodeLensResolveOptions;
 }
+
+/**
+ * @since 3.18.0
+ */
+export type ClientCodeLensResolveOptions = {
+	/**
+	 * The properties that a client can resolve lazily.
+	 */
+	properties: string[];
+};
 ```
 
 _Server Capability_:
@@ -96,6 +114,10 @@ interface CodeLens {
 #### <a href="#codeLens_resolve" name="codeLens_resolve" class="anchor">Code Lens Resolve Request (:leftwards_arrow_with_hook:)</a>
 
 The code lens resolve request is sent from the client to the server to resolve the command for a given code lens item.
+
+_Client Capability_:
+* property name (optional): `textDocument.codeLens.resolveSupport`
+* property type: `ClientCodeLensResolveOptions`
 
 _Request_:
 * method: `codeLens/resolve`

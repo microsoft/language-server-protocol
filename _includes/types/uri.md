@@ -1,4 +1,4 @@
-#### <a href="#uri" name="uri" class="anchor"> URI </a>
+#### <a href="#uri" name="uri" class="anchor">URI</a>
 
 URI's are transferred as strings. The URI's format is defined in [https://tools.ietf.org/html/rfc3986](https://tools.ietf.org/html/rfc3986)
 
