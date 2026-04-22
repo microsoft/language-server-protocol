@@ -260,6 +260,7 @@ index: 1
 | Sway | [Fuel Labs](https://www.fuel.network/) | [sway-lsp](https://github.com/FuelLabs/sway/tree/master/sway-lsp) | Rust |
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
+| [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Jamie D](https://github.com/daltskin) | [sysml-v2-lsp](https://github.com/daltskin/sysml-v2-lsp)  | Typescript
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
 | systemd | [Paweł Sacawa](https://github.com/psacawa) | [systemd-language-server](https://github.com/psacawa/systemd-language-server) | Python |
 | [Systemtap](https://sourceware.org/systemtap/) | [Red Hat](https://www.redhat.com/) | [Systemtap LSP](https://sourceware.org/git/?p=systemtap.git;a=tree;f=language-server) | C++ |
