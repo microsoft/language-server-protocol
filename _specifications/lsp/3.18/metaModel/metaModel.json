@@ -12738,8 +12738,8 @@
 				{
 					"name": "referenceItemsSupport",
 					"type": {
-						"kind": "reference",
-						"name": "ClientReferenceTagSupportOption"
+						"kind": "base",
+						"name": "boolean"
 					},
 					"optional": true,
 					"documentation": "Determines whether the client supports and prefers Reference items instead\nof Location items. If this value is missing, the server assumes that the\nclient accepts Location items as defined in earlier versions of the protocol.",
@@ -13179,8 +13179,8 @@
 				{
 					"name": "referenceTagsSupport",
 					"type": {
-						"kind": "reference",
-						"name": "ClientReferenceTagSupportOption"
+						"kind": "base",
+						"name": "boolean"
 					},
 					"optional": true,
 					"documentation": "Determines whether the client supports reference tags.",
@@ -14606,7 +14606,7 @@
 			"since": "3.16"
 		},
 		{
-			"name": "RferenceTag",
+			"name": "ReferenceTag",
 			"type": {
 				"kind": "base",
 				"name": "uinteger"

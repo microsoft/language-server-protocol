@@ -1,4 +1,4 @@
-#### <a href="#textDocument_reference" name="textDocument_reference" class="anchor">Reference</a>
+#### <a href="#reference" name="reference" class="anchor">Reference</a>
 
 > *Since version 3.18.0*
 

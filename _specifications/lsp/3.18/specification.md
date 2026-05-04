@@ -457,6 +457,7 @@ There are quite some JSON structures that are shared between different requests 
 {% include_relative types/textEditArray.md %}
 {% include_relative types/textDocumentEdit.md %}
 {% include_relative types/location.md %}
+{% include_relative types/reference.md %}
 {% include_relative types/locationLink.md %}
 {% include_relative types/diagnostic.md %}
 {% include_relative types/command.md %}
