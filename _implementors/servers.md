@@ -25,6 +25,7 @@ index: 1
 | Apache Camel | [Contributors](https://github.com/camel-tooling/camel-language-server/graphs/contributors) | [Apache Camel Language Server](https://github.com/camel-tooling/camel-language-server) | Java |
 | [Apache Dispatcher Config](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration.html?lang=en) | [Darian Benam](https://github.com/BeardedFish) | [vscode-apache-dispatcher-config-language-support](https://github.com/BeardedFish/vscode-apache-dispatcher-config-language-support) | TypeScript |
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) | TypeScript |
+| Apex | [October Swimmer](https://www.octoberswimmer.com/) |  [aer](https://github.com/octoberswimmer/aer-dist) | Go |
 | [Astro](https://astro.build) | [Astro team](https://github.com/withastro) |  [withastro/language-tools](https://github.com/withastro/language-tools) | TypeScript |
 | [Boriel Basic](https://zxbasic.readthedocs.io/) | [rtorralba](https://github.com/rtorralba) | [boriel-basic-lsp](https://github.com/boriel-basic/boriel-basic-lsp) | Boriel Basic |
 | IBM High Level **Assembler** | [Broadcom](https://www.broadcom.com/) | [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) | C++ |
