@@ -162,34 +162,40 @@ export interface NotebookCellTextDocumentFilter {
 
 ```typescript
 /**
- * A notebook document filter denotes a notebook document by
- * different properties.
+ * A notebook document filter where `notebookType` is required field.
  *
- * @since 3.17.0
+ * @since 3.18.0
  */
-export type NotebookDocumentFilter = {
+export type NotebookDocumentFilterNotebookType = {
 	/**
 	 * The type of the enclosing notebook.
 	 */
 	notebookType: string;
 
 	/**
-	 * A Uri scheme, like `file` or `untitled`.
-    */
+	 * A Uri {@link Uri.scheme scheme}, like `file` or `untitled`.
+	 */
 	scheme?: string;
 
 	/**
 	 * A glob pattern.
 	 */
 	pattern?: GlobPattern;
-} | {
+};
+
+/**
+ * A notebook document filter where `scheme` is required field.
+ *
+ * @since 3.18.0
+ */
+export type NotebookDocumentFilterScheme = {
 	/**
 	 * The type of the enclosing notebook.
 	 */
 	notebookType?: string;
 
 	/**
-	 * A Uri scheme, like `file` or `untitled`.
+	 * A Uri {@link Uri.scheme scheme}, like `file` or `untitled`.
 	 */
 	scheme: string;
 
@@ -197,14 +203,21 @@ export type NotebookDocumentFilter = {
 	 * A glob pattern.
 	 */
 	pattern?: GlobPattern;
-} | {
+};
+
+/**
+ * A notebook document filter where `pattern` is required field.
+ *
+ * @since 3.18.0
+ */
+export type NotebookDocumentFilterPattern = {
 	/**
 	 * The type of the enclosing notebook.
 	 */
 	notebookType?: string;
 
 	/**
-	 * A Uri scheme, like `file` or `untitled`.
+	 * A Uri {@link Uri.scheme scheme}, like `file` or `untitled`.
 	 */
 	scheme?: string;
 
@@ -213,6 +226,16 @@ export type NotebookDocumentFilter = {
 	 */
 	pattern: GlobPattern;
 };
+
+/**
+ * A notebook document filter denotes a notebook document by
+ * different properties. The properties will be match
+ * against the notebook's URI (same as with documents)
+ *
+ * @since 3.17.0
+ */
+export type NotebookDocumentFilter = NotebookDocumentFilterNotebookType |
+	NotebookDocumentFilterScheme | NotebookDocumentFilterPattern;
 ```
 
 Given these structures, a Python cell document in a Jupyter notebook stored on disk in a folder having `books1` in its path can be identified as follows:

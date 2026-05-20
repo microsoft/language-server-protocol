@@ -7,30 +7,120 @@ A document filter denotes a document through properties like `language`, `scheme
 ```
 
 ```typescript
-export interface DocumentFilter {
+/**
+ * A document filter where `language` is required field.
+ *
+ * @since 3.18.0
+ */
+export type TextDocumentFilterLanguage = {
+	/**
+	 * A language id, like `typescript`.
+	 */
+	language: string;
+
+	/**
+	 * A Uri {@link Uri.scheme scheme}, like `file` or `untitled`.
+	 */
+	scheme?: string;
+
+	/**
+	 * A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.
+	 *
+	 * @since 3.18.0 - support for relative patterns. Whether clients support
+	 * relative patterns depends on the client capability
+	 * `textDocuments.filters.relativePatternSupport`.
+	 */
+	pattern?: GlobPattern;
+};
+
+/**
+ * A document filter where `scheme` is required field.
+ *
+ * @since 3.18.0
+ */
+export type TextDocumentFilterScheme = {
 	/**
 	 * A language id, like `typescript`.
 	 */
 	language?: string;
 
 	/**
-	 * A Uri scheme, like `file` or `untitled`.
+	 * A Uri {@link Uri.scheme scheme}, like `file` or `untitled`.
+	 */
+	scheme: string;
+
+	/**
+	 * A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.
+	 *
+	 * @since 3.18.0 - support for relative patterns. Whether clients support
+	 * relative patterns depends on the client capability
+	 * `textDocuments.filters.relativePatternSupport`.
+	 */
+	pattern?: GlobPattern;
+};
+
+/**
+ * A document filter where `pattern` is required field.
+ *
+ * @since 3.18.0
+ */
+export type TextDocumentFilterPattern = {
+	/**
+	 * A language id, like `typescript`.
+	 */
+	language?: string;
+
+	/**
+	 * A Uri {@link Uri.scheme scheme}, like `file` or `untitled`.
 	 */
 	scheme?: string;
 
 	/**
-	 * A pattern, like `*.{ts,js}` or a pattern relative to a workspace folders.
+	 * A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.
 	 *
-	 * See GlobPattern.
-	 *
-	 * Whether clients support relative patterns depends on the client
-	 * capability `textDocuments.filters.relativePatternSupport`.
+	 * @since 3.18.0 - support for relative patterns. Whether clients support
+	 * relative patterns depends on the client capability
+	 * `textDocuments.filters.relativePatternSupport`.
 	 */
-	pattern?: GlobPattern;
-}
-```
+	pattern: GlobPattern;
+};
 
-Please note that for a document filter to be valid, at least one of the properties for `language`, `scheme`, or `pattern` must be set. To keep the type definition simple, all properties are marked as optional.
+/**
+ * A document filter denotes a document by different properties like
+ * the {@link TextDocument.languageId language}, the {@link Uri.scheme scheme}
+ * of its resource, or a glob-pattern that is applied to
+ * the {@link TextDocument.fileName path}.
+ *
+ * Glob patterns can have the following syntax:
+ * - `*` to match zero or more characters in a path segment
+ * - `?` to match on one character in a path segment
+ * - `**` to match any number of path segments, including none
+ * - `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}`
+ *   matches all TypeScript and JavaScript files)
+ * - `[]` to declare a range of characters to match in a path segment
+ *   (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
+ * - `[!...]` to negate a range of characters to match in a path segment
+ *   (e.g., `example.[!0-9]` to match on `example.a`, `example.b`,
+ *   but not `example.0`)
+ *
+ * @sample A language filter that applies to typescript files on disk:
+ *   `{ language: 'typescript', scheme: 'file' }`
+ * @sample A language filter that applies to all package.json paths:
+ *   `{ language: 'json', pattern: '**package.json' }`
+ *
+ * @since 3.17.0
+ */
+export type TextDocumentFilter = TextDocumentFilterLanguage |
+	TextDocumentFilterScheme | TextDocumentFilterPattern;
+
+/**
+ * A document filter describes a top level text document or
+ * a notebook cell document.
+ *
+ * @since 3.17.0 - support for NotebookCellTextDocumentFilter.
+ */
+export type DocumentFilter = TextDocumentFilter | NotebookCellTextDocumentFilter;
+```
 
 A document selector is the combination of one or more document filters.
 

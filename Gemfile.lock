@@ -311,7 +311,7 @@ DEPENDENCIES
   webrick (~> 1.8)
 
 RUBY VERSION
-   ruby 3.4.4p34
+   ruby 3.4.9p82
 
 BUNDLED WITH
    2.6.7
