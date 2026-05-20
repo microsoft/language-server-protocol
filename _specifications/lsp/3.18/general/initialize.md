@@ -481,6 +481,24 @@ interface ClientCapabilities {
 		 * @since 3.17.0.
 		 */
 		diagnostics?: DiagnosticWorkspaceClientCapabilities;
+
+		/**
+		 * Capabilities specific to the folding range requests
+		 * scoped to the workspace.
+		 *
+		 * @since 3.18.0
+		 * @proposed
+		 */
+		foldingRange?: FoldingRangeWorkspaceClientCapabilities;
+
+		/**
+		 * Capabilities specific to the `workspace/textDocumentContent`
+		 * request.
+		 *
+		 * @since 3.18.0
+		 * @proposed
+		 */
+		textDocumentContent?: TextDocumentContentClientCapabilities;
 	};
 
 	/**
@@ -906,28 +924,6 @@ interface ServerCapabilities {
 	inlineCompletionProvider?: boolean | InlineCompletionOptions;
 
 	/**
-	 * Text document specific server capabilities.
-	 *
-	 * @since 3.18.0
-	 */
-	textDocument?: {
-		/**
-		 * Capabilities specific to the diagnostic pull model.
-		 *
-		 * @since 3.18.0
-		 */
-		diagnostic?: {
-			/**
-			 * Whether the server supports `MarkupContent` in diagnostic messages.
-			 *
-			 * @since 3.18.0
-			 * @proposed
-			 */
-			markupMessageSupport?: boolean;
-		};
-	};
-
-	/**
 	 * Workspace specific server capabilities
 	 */
 	workspace?: {
@@ -978,6 +974,15 @@ interface ServerCapabilities {
 			 */
 			willDelete?: FileOperationRegistrationOptions;
 		};
+
+		/**
+		 * The server supports the `workspace/textDocumentContent` request.
+		 *
+		 * @since 3.18.0
+		 * @proposed
+		 */
+		textDocumentContent?: TextDocumentContentOptions
+			| TextDocumentContentRegistrationOptions;
 	};
 
 	/**

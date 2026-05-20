@@ -11,6 +11,13 @@ _Client Capability_:
 <div class="anchorHolder"><a href="#diagnosticClientCapabilities" name="diagnosticClientCapabilities" class="linkableAnchor"></a></div>
 
 ```typescript
+export type ClientDiagnosticsTagOptions = {
+	/**
+	 * The tags supported by the client.
+	 */
+	valueSet: DiagnosticTag[];
+};
+
 /**
  * Client capabilities specific to diagnostic pull requests.
  *
