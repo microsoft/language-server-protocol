@@ -36,7 +36,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 ### <a href="#contentPart" name="contentPart" class="anchor">Content Part</a>
 
-Contains the actual content of the message. The content part of a message uses [JSON-RPC](http://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
+Contains the actual content of the message. The content part of a message uses [JSON-RPC](https://www.jsonrpc.org/) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
 ### Example:
 
@@ -119,7 +119,7 @@ As mentioned previously, the base protocol defines a set of requests, responses 
 
 ## <a href="#basicJsonStructures" name="basicJsonStructures" class="anchor">JSON structures</a>
 
-The base protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](http://www.jsonrpc.org/specification). It currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
+The base protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](https://www.jsonrpc.org/specification). It currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
 
 #### <a href="#baseTypes" name="baseTypes" class="anchor">Base Types</a>
 
