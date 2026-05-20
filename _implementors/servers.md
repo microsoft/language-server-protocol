@@ -184,7 +184,7 @@ index: 1
 | Perl | [Marc Reisner](https://github.com/FractalBoy) | [PLS](https://github.com/FractalBoy/perl-language-server)| Perl |
 | Perl | [Brian Scannell](https://github.com/bscan) | [Perl Navigator](https://github.com/bscan/PerlNavigator)| Perl |
 | Pest | [Pest Maintainers](https://github.com/orgs/pest-parser/teams/pest-ide-tools) | [Pest IDE Tools](https://github.com/pest-parser/pest-ide-tools) | Rust |
-| Crane **PHP** | [HvyIndustries](https://github.com/HvyIndustries) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=HvyIndustries.crane) | TypeScript |
+| Crane **PHP** | [HvyIndustries](https://github.com/HvyIndustries) | [crane](https://github.com/HvyIndustries/crane) | TypeScript |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [intelephense](https://github.com/bmewburn/vscode-intelephense) | TypeScript |
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server) | PHP |
 | PHP | [Tom Gerrits](https://gitlab.com/Gert-dev) | [Serenata](https://gitlab.com/Serenata/Serenata) | PHP |
@@ -215,7 +215,6 @@ index: 1
 | Python | [Samuel Roeca](https://github.com/pappasam) | [jedi-language-server](https://github.com/pappasam/jedi-language-server) | Python |
 | Python | [Shunsuke Shibayama](https://github.com/mtshiba) | [pylyzer](https://github.com/mtshiba/pylyzer) | Rust |
 | Python | [zubanls](https://zubanls.com/) | [zuban](https://github.com/zubanls/zuban) | Rust |
-| [Pony](https://www.ponylang.io/) | [Mahan Bakhshi](https://github.com/MahanBi) | [PonyLS](https://github.com/MahanBi/PonyLS) | Pony |
 | Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
 | Query | [Riley Bruins](https://github.com/ribru17) | [ts_query_ls](https://github.com/ribru17/ts_query_ls) | Rust |
