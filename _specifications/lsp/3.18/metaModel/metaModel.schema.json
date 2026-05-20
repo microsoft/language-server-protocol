@@ -1,9 +1,9 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "definitions": {
     "AndType": {
       "additionalProperties": false,
-      "description": "Represents an `and`type (e.g. TextDocumentParams & WorkDoneProgressParams`).",
+      "description": "Represents an `and` type (e.g. TextDocumentParams & WorkDoneProgressParams`).",
       "properties": {
         "items": {
           "items": {
