@@ -185,7 +185,7 @@ export interface FoldingRange {
 	 * collapsed. If not defined or not supported by the client, a default
 	 * will be chosen by the client.
 	 *
-	 * @since 3.17.0 - proposed
+	 * @since 3.17.0
 	 */
 	collapsedText?: string;
 }
