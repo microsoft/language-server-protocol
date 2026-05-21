@@ -31,108 +31,12 @@ export interface CompletionClientCapabilities {
 	 * The client supports the following `CompletionItem` specific
 	 * capabilities.
 	 */
-	completionItem?: {
-		/**
-		 * Client supports snippets as insert text.
-		 *
-		 * A snippet can define tab stops and placeholders with `$1`, `$2`
-		 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
-		 * the end of the snippet. Placeholders with equal identifiers are
-		 * linked, that is, typing in one will update others too.
-		 */
-		snippetSupport?: boolean;
+	completionItem?: ClientCompletionItemOptions;
 
-		/**
-		 * Client supports commit characters on a completion item.
-		 */
-		commitCharactersSupport?: boolean;
-
-		/**
-		 * Client supports these content formats for the documentation
-		 * property. The order describes the preferred format of the client.
-		 */
-		documentationFormat?: MarkupKind[];
-
-		/**
-		 * Client supports the deprecated property on a completion item.
-		 */
-		deprecatedSupport?: boolean;
-
-		/**
-		 * Client supports the preselect property on a completion item.
-		 */
-		preselectSupport?: boolean;
-
-		/**
-		 * Client supports the tag property on a completion item. Clients
-		 * supporting tags have to handle unknown tags gracefully. Clients
-		 * especially need to preserve unknown tags when sending a completion
-		 * item back to the server in a resolve call.
-		 *
-		 * @since 3.15.0
-		 */
-		tagSupport?: {
-			/**
-			 * The tags supported by the client.
-			 */
-			valueSet: CompletionItemTag[];
-		};
-
-		/**
-		 * Client supports insert replace edit to control different behavior if
-		 * a completion item is inserted in the text or should replace text.
-		 *
-		 * @since 3.16.0
-		 */
-		insertReplaceSupport?: boolean;
-
-		/**
-		 * Indicates which properties a client can resolve lazily on a
-		 * completion item. Before version 3.16.0, only the predefined properties
-		 * `documentation` and `detail` could be resolved lazily.
-		 *
-		 * @since 3.16.0
-		 */
-		resolveSupport?: {
-			/**
-			 * The properties that a client can resolve lazily.
-			 */
-			properties: string[];
-		};
-
-		/**
-		 * The client supports the `insertTextMode` property on
-		 * a completion item to override the whitespace handling mode
-		 * as defined by the client (see `insertTextMode`).
-		 *
-		 * @since 3.16.0
-		 */
-		insertTextModeSupport?: {
-			valueSet: InsertTextMode[];
-		};
-
-		/**
-		 * The client has support for completion item label
-		 * details (see also `CompletionItemLabelDetails`).
-		 *
-		 * @since 3.17.0
-		 */
-		labelDetailsSupport?: boolean;
-	};
-
-	completionItemKind?: {
-		/**
-		 * The completion item kind values the client supports. When this
-		 * property exists, the client also guarantees that it will
-		 * handle values outside its set gracefully and falls back
-		 * to a default value when unknown.
-		 *
-		 * If this property is not present, the client only supports
-		 * the completion item kinds from `Text` to `Reference` as defined in
-		 * the initial version of the protocol.
-		 */
-		valueSet?: CompletionItemKind[];
-	};
+	/**
+	 * The client supports the following completion item kinds.
+	 */
+	completionItemKind?: ClientCompletionItemOptionsKind;
 
 	/**
 	 * The client supports sending additional context information for a
@@ -154,34 +58,175 @@ export interface CompletionClientCapabilities {
 	 *
 	 * @since 3.17.0
 	 */
-	completionList?: {
-		/**
-		 * The client supports the following itemDefaults on
-		 * a completion list.
-		 *
-		 * The value lists the supported property names of the
-		 * `CompletionList.itemDefaults` object. If omitted,
-		 * no properties are supported.
-		 *
-		 * @since 3.17.0
-		 */
-		itemDefaults?: string[];
+	completionList?: CompletionListCapabilities;
+}
+```
 
-		/**
-		 * Specifies whether the client supports `CompletionList.applyKind` to
-		 * indicate how supported values from `completionList.itemDefaults`
-		 * and `completion` will be combined.
-		 *
-		 * If a client supports `applyKind` it must support it for all fields
-		 * that it supports that are listed in `CompletionList.applyKind`. This
-		 * means when clients add support for new/future fields in completion
-		 * items the MUST also support merge for them if those fields are
-		 * defined in `CompletionList.applyKind`.
-		 *
-		 * @since 3.18.0
-		 */
-		applyKindSupport?: boolean;
-	}
+<div class="anchorHolder"><a href="#clientCompletionItemOptions" name="clientCompletionItemOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientCompletionItemOptions = {
+	/**
+	 * Client supports snippets as insert text.
+	 *
+	 * A snippet can define tab stops and placeholders with `$1`, `$2`
+	 * and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+	 * the end of the snippet. Placeholders with equal identifiers are linked,
+	 * that is typing in one will update others too.
+	 */
+	snippetSupport?: boolean;
+
+	/**
+	 * Client supports commit characters on a completion item.
+	 */
+	commitCharactersSupport?: boolean;
+
+	/**
+	 * Client supports the following content formats for the documentation
+	 * property. The order describes the preferred format of the client.
+	 */
+	documentationFormat?: MarkupKind[];
+
+	/**
+	 * Client supports the deprecated property on a completion item.
+	 */
+	deprecatedSupport?: boolean;
+
+	/**
+	 * Client supports the preselect property on a completion item.
+	 */
+	preselectSupport?: boolean;
+
+	/**
+	 * Client supports the tag property on a completion item. Clients supporting
+	 * tags have to handle unknown tags gracefully. Clients especially need to
+	 * preserve unknown tags when sending a completion item back to the server in
+	 * a resolve call.
+	 *
+	 * @since 3.15.0
+	 */
+	tagSupport?: CompletionItemTagOptions;
+
+	/**
+	 * Client support insert replace edit to control different behavior if a
+	 * completion item is inserted in the text or should replace text.
+	 *
+	 * @since 3.16.0
+	 */
+	insertReplaceSupport?: boolean;
+
+	/**
+	 * Indicates which properties a client can resolve lazily on a completion
+	 * item. Before version 3.16.0 only the predefined properties `documentation`
+	 * and `details` could be resolved lazily.
+	 *
+	 * @since 3.16.0
+	 */
+	resolveSupport?: ClientCompletionItemResolveOptions;
+
+	/**
+	 * The client supports the `insertTextMode` property on
+	 * a completion item to override the whitespace handling mode
+	 * as defined by the client (see `insertTextMode`).
+	 *
+	 * @since 3.16.0
+	 */
+	insertTextModeSupport?: ClientCompletionItemInsertTextModeOptions;
+
+	/**
+	 * The client has support for completion item label
+	 * details (see also `CompletionItemLabelDetails`).
+	 *
+	 * @since 3.17.0
+	 */
+	labelDetailsSupport?: boolean;
+};
+```
+
+<div class="anchorHolder"><a href="#completionItemTagOptions" name="completionItemTagOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type CompletionItemTagOptions = {
+	/**
+	 * The tags supported by the client.
+	 */
+	valueSet: CompletionItemTag[];
+};
+```
+
+<div class="anchorHolder"><a href="#clientCompletionItemResolveOptions" name="clientCompletionItemResolveOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientCompletionItemResolveOptions = {
+	/**
+	 * The properties that a client can resolve lazily.
+	 */
+	properties: string[];
+};
+```
+
+<div class="anchorHolder"><a href="#clientCompletionItemInsertTextModeOptions" name="clientCompletionItemInsertTextModeOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientCompletionItemInsertTextModeOptions = {
+	valueSet: InsertTextMode[];
+};
+```
+
+<div class="anchorHolder"><a href="#clientCompletionItemOptionsKind" name="clientCompletionItemOptionsKind" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientCompletionItemOptionsKind = {
+	/**
+	 * The completion item kind values the client supports. When this
+	 * property exists the client also guarantees that it will
+	 * handle values outside its set gracefully and falls back
+	 * to a default value when unknown.
+	 *
+	 * If this property is not present the client only supports
+	 * the completion items kinds from `Text` to `Reference` as defined in
+	 * the initial version of the protocol.
+	 */
+	valueSet?: CompletionItemKind[];
+};
+```
+
+<div class="anchorHolder"><a href="#completionListCapabilities" name="completionListCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * The client supports the following `CompletionList` specific
+ * capabilities.
+ *
+ * @since 3.17.0
+ */
+export interface CompletionListCapabilities {
+	/**
+	 * The client supports the following itemDefaults on
+	 * a completion list.
+	 *
+	 * The value lists the supported property names of the
+	 * `CompletionList.itemDefaults` object. If omitted
+	 * no properties are supported.
+	 *
+	 * @since 3.17.0
+	 */
+	itemDefaults?: string[];
+
+	/**
+	 * Specifies whether the client supports `CompletionList.applyKind` to
+	 * indicate how supported values from `completionList.itemDefaults`
+	 * and `completion` will be combined.
+	 *
+	 * If a client supports `applyKind` it must support it for all fields
+	 * that it supports that are listed in `CompletionList.applyKind`. This
+	 * means when clients add support for new/future fields in completion
+	 * items the MUST also support merge for them if those fields are
+	 * defined in `CompletionList.applyKind`.
+	 *
+	 * @since 3.18.0
+	 */
+	applyKindSupport?: boolean;
 }
 ```
 
@@ -235,17 +280,23 @@ export interface CompletionOptions extends WorkDoneProgressOptions {
 	 *
 	 * @since 3.17.0
 	 */
-	completionItem?: {
-		/**
-		 * The server has support for completion item label
-		 * details (see also `CompletionItemLabelDetails`) when receiving
-		 * a completion item in a resolve call.
-		 *
-		 * @since 3.17.0
-		 */
-		labelDetailsSupport?: boolean;
-	}
+	completionItem?: ServerCompletionItemOptions;
 }
+```
+
+<div class="anchorHolder"><a href="#serverCompletionItemOptions" name="serverCompletionItemOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ServerCompletionItemOptions = {
+	/**
+	 * The server has support for completion item label
+	 * details (see also `CompletionItemLabelDetails`) when
+	 * receiving a completion item in a resolve call.
+	 *
+	 * @since 3.17.0
+	 */
+	labelDetailsSupport?: boolean;
+};
 ```
 
 _Registration Options_: `CompletionRegistrationOptions` options defined as follows:
@@ -329,6 +380,18 @@ export interface CompletionContext {
 _Response_:
 * result: `CompletionItem[]` \| `CompletionList` \| `null`. If a `CompletionItem[]` is provided, it is interpreted to be complete, so it is the same as `{ isIncomplete: false, items }`
 
+<div class="anchorHolder"><a href="#editRangeWithInsertReplace" name="editRangeWithInsertReplace" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Edit range variant that includes ranges for insert and replace operations.
+ */
+export type EditRangeWithInsertReplace = {
+	insert: Range;
+	replace: Range;
+};
+```
+
 <div class="anchorHolder"><a href="#completionList" name="completionList" class="linkableAnchor"></a></div>
 
 ```typescript
@@ -363,45 +426,7 @@ export interface CompletionList {
 	 *
 	 * @since 3.17.0
 	 */
-	itemDefaults?: {
-		/**
-		 * A default commit character set.
-		 *
-		 * @since 3.17.0
-		 */
-		commitCharacters?: string[];
-
-		/**
-		 * A default edit range.
-		 *
-		 * @since 3.17.0
-		 */
-		editRange?: Range | {
-			insert: Range;
-			replace: Range;
-		};
-
-		/**
-		 * A default insert text format.
-		 *
-		 * @since 3.17.0
-		 */
-		insertTextFormat?: InsertTextFormat;
-
-		/**
-		 * A default insert text mode.
-		 *
-		 * @since 3.17.0
-		 */
-		insertTextMode?: InsertTextMode;
-
-		/**
-		 * A default data value.
-		 *
-		 * @since 3.17.0
-		 */
-		data?: LSPAny;
-	}
+	itemDefaults?: CompletionItemDefaults
 
 	/**
 	 * Specifies how fields from a completion item should be combined with those
@@ -422,58 +447,140 @@ export interface CompletionList {
 	 *
 	 * @since 3.18.0
 	 */
-	applyKind?: {
-		/**
-		 * Specifies whether commitCharacters on a completion will replace or be
-		 * merged with those in `completionList.itemDefaults.commitCharacters`.
-		 *
-		 * If ApplyKind.Replace, the commit characters from the completion item
-		 * will always be used unless not provided, in which case those from
-		 * `completionList.itemDefaults.commitCharacters` will be used. An
-		 * empty list can be used if a completion item does not have any commit
-		 * characters and also should not use those from
-		 * `completionList.itemDefaults.commitCharacters`.
-		 *
-		 * If ApplyKind.Merge the commitCharacters for the completion will be
-		 * the union of all values in both
-		 * `completionList.itemDefaults.commitCharacters` and the completion's
-		 * own `commitCharacters`.
-		 *
-		 * @since 3.18.0
-		 */
-		commitCharacters?: ApplyKind;
-
-		/**
-		 * Specifies whether the `data` field on a completion will replace or
-		 * be merged with data from `completionList.itemDefaults.data`.
-		 *
-		 * If ApplyKind.Replace, the data from the completion item will be used
-		 * if provided (and not `null`), otherwise
-		 * `completionList.itemDefaults.data` will be used. An empty object can
-		 * be used if a completion item does not have any data but also should
-		 * not use the value from `completionList.itemDefaults.data`.
-		 *
-		 * If ApplyKind.Merge, a shallow merge will be performed between
-		 * `completionList.itemDefaults.data` and the completion's own data
-		 * using the following rules:
-		 *
-		 * - If a completion's `data` field is not provided (or `null`), the
-		 *   entire `data` field from `completionList.itemDefaults.data` will be
-		 *   used as-is.
-		 * - If a completion's `data` field is provided, each field will
-		 *   overwrite the field of the same name in
-		 *   `completionList.itemDefaults.data` but no merging of nested fields
-		 *   within that value will occur.
-		 *
-		 * @since 3.18.0
-		 */
-		data?: ApplyKind;
-	}
+	applyKind?: CompletionItemApplyKinds;
 
 	/**
 	 * The completion items.
 	 */
 	items: CompletionItem[];
+}
+```
+
+<div class="anchorHolder"><a href="#completionItemDefaults" name="completionItemDefaults" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * In many cases the items of an actual completion result share the same
+ * value for properties like `commitCharacters` or the range of a text
+ * edit. A completion list can therefore define item defaults which will
+ * be used if a completion item itself doesn't specify the value.
+ *
+ * If a completion list specifies a default value and a completion item
+ * also specifies a corresponding value, the rules for combining these are
+ * defined by `applyKinds` (if the client supports it), defaulting to
+ * ApplyKind.Replace.
+ *
+ * Servers are only allowed to return default values if the client
+ * signals support for this via the `completionList.itemDefaults`
+ * capability.
+ *
+ * @since 3.17.0
+ */
+export interface CompletionItemDefaults {
+	/**
+	 * A default commit character set.
+	 *
+	 * @since 3.17.0
+	 */
+	commitCharacters?: string[];
+
+	/**
+	 * A default edit range.
+	 *
+	 * @since 3.17.0
+	 */
+	editRange?: Range | EditRangeWithInsertReplace;
+
+	/**
+	 * A default insert text format.
+	 *
+	 * @since 3.17.0
+	 */
+	insertTextFormat?: InsertTextFormat;
+
+	/**
+	 * A default insert text mode.
+	 *
+	 * @since 3.17.0
+	 */
+	insertTextMode?: InsertTextMode;
+
+	/**
+	 * A default data value.
+	 *
+	 * @since 3.17.0
+	 */
+	data?: LSPAny;
+}
+```
+
+<div class="anchorHolder"><a href="#completionItemApplyKinds" name="completionItemApplyKinds" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Specifies how fields from a completion item should be combined with those
+ * from `completionList.itemDefaults`.
+ *
+ * If unspecified, all fields will be treated as ApplyKind.Replace.
+ *
+ * If a field's value is ApplyKind.Replace, the value from a completion item (if
+ * provided and not `null`) will always be used instead of the value from
+ * `completionItem.itemDefaults`.
+ *
+ * If a field's value is ApplyKind.Merge, the values will be merged using the rules
+ * defined against each field below.
+ *
+ * Servers are only allowed to return `applyKind` if the client
+ * signals support for this via the `completionList.applyKindSupport`
+ * capability.
+ *
+ * @since 3.18.0
+ */
+export interface CompletionItemApplyKinds {
+	/**
+	 * Specifies whether commitCharacters on a completion will replace or be
+	 * merged with those in `completionList.itemDefaults.commitCharacters`.
+	 *
+	 * If ApplyKind.Replace, the commit characters from the completion item will
+	 * always be used unless not provided, in which case those from
+	 * `completionList.itemDefaults.commitCharacters` will be used. An
+	 * empty list can be used if a completion item does not have any commit
+	 * characters and also should not use those from
+	 * `completionList.itemDefaults.commitCharacters`.
+	 *
+	 * If ApplyKind.Merge the commitCharacters for the completion will be the
+	 * union of all values in both `completionList.itemDefaults.commitCharacters`
+	 * and the completion's own `commitCharacters`.
+	 *
+	 * @since 3.18.0
+	 */
+	commitCharacters?: ApplyKind;
+
+	/**
+	 * Specifies whether the `data` field on a completion will replace or
+	 * be merged with data from `completionList.itemDefaults.data`.
+	 *
+	 * If ApplyKind.Replace, the data from the completion item will be used if
+	 * provided (and not `null`), otherwise
+	 * `completionList.itemDefaults.data` will be used. An empty object can
+	 * be used if a completion item does not have any data but also should
+	 * not use the value from `completionList.itemDefaults.data`.
+	 *
+	 * If ApplyKind.Merge, a shallow merge will be performed between
+	 * `completionList.itemDefaults.data` and the completion's own data
+	 * using the following rules:
+	 *
+	 * - If a completion's `data` field is not provided (or `null`), the
+	 *   entire `data` field from `completionList.itemDefaults.data` will be
+	 *   used as-is.
+	 * - If a completion's `data` field is provided, each field will
+	 *   overwrite the field of the same name in
+	 *   `completionList.itemDefaults.data` but no merging of nested fields
+	 *   within that value will occur.
+	 *
+	 * @since 3.18.0
+	 */
+	data?: ApplyKind;
 }
 ```
 
