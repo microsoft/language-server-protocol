@@ -186,6 +186,8 @@
     link: '#messageType'
   - type: 'ShowMessageRequestClientCapabilities'
     link: '#window_showMessageRequest'
+  - type: 'ClientShowMessageActionItemOptions'
+    link: '#clientShowMessageActionItemOptions'
   - type: 'ShowMessageRequestParams'
     link: '#showMessageRequestParams'
   - type: 'MessageActionItem'
