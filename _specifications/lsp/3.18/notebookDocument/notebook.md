@@ -356,31 +356,7 @@ export interface NotebookDocumentSyncOptions {
 	/**
 	 * The notebooks to be synced
 	 */
-	notebookSelector: ({
-		/**
-		 * The notebook to be synced. If a string
-		 * value is provided, it matches against the
-		 * notebook type. '*' matches every notebook.
-		 */
-		notebook: string | NotebookDocumentFilter;
-
-		/**
-		 * The cells of the matching notebook to be synced.
-		 */
-		cells?: { language: string }[];
-	} | {
-		/**
-		 * The notebook to be synced. If a string
-		 * value is provided, it matches against the
-		 * notebook type. '*' matches every notebook.
-		 */
-		notebook?: string | NotebookDocumentFilter;
-
-		/**
-		 * The cells of the matching notebook to be synced.
-		 */
-		cells: { language: string }[];
-	})[];
+	notebookSelector: (NotebookDocumentFilterWithNotebook | NotebookDocumentFilterWithCells)[];
 
 	/**
 	 * Whether save notifications should be forwarded to
@@ -388,6 +364,50 @@ export interface NotebookDocumentSyncOptions {
 	 */
 	save?: boolean;
 }
+```
+
+<div class="anchorHolder"><a href="#notebookDocumentFilterWithNotebook" name="notebookDocumentFilterWithNotebook" class="linkableAnchor"></a></div>
+
+```typescript
+export type NotebookDocumentFilterWithNotebook = {
+	/**
+	 * The notebook to be synced. If a string
+	 * value is provided, it matches against the
+	 * notebook type. '*' matches every notebook.
+	 */
+	notebook: string | NotebookDocumentFilter;
+
+	/**
+	 * The cells of the matching notebook to be synced.
+	 */
+	cells?: NotebookCellLanguage[];
+};
+```
+
+<div class="anchorHolder"><a href="#notebookDocumentFilterWithCells" name="notebookDocumentFilterWithCells" class="linkableAnchor"></a></div>
+
+```typescript
+export type NotebookDocumentFilterWithCells = {
+	/**
+	 * The notebook to be synced. If a string
+	 * value is provided, it matches against the
+	 * notebook type. '*' matches every notebook.
+	 */
+	notebook?: string | NotebookDocumentFilter;
+
+	/**
+	 * The cells of the matching notebook to be synced.
+	 */
+	cells: NotebookCellLanguage[];
+};
+```
+
+<div class="anchorHolder"><a href="#notebookCellLanguage" name="notebookCellLanguage" class="linkableAnchor"></a></div>
+
+```typescript
+export type NotebookCellLanguage = {
+	language: string;
+};
 ```
 
 _Registration Options_: `notebookDocumentSyncRegistrationOptions` defined as follows:
@@ -404,6 +424,8 @@ export interface NotebookDocumentSyncRegistrationOptions extends
 	NotebookDocumentSyncOptions, StaticRegistrationOptions {
 }
 ```
+
+Since the registration option handles open, change, save and close notifications, the method name used to register for notebook document synchronization is `notebookDocument/sync` and not one of the specific methods described below.
 
 #### <a href="#notebookDocument_didOpen" name="notebookDocument_didOpen" class="anchor">DidOpenNotebookDocument Notification (:arrow_right:)</a>
 
@@ -518,43 +540,70 @@ export interface NotebookDocumentChangeEvent {
 	/**
 	 * Changes to cells.
 	 */
-	cells?: {
-		/**
-		 * Changes to the cell structure to add or
-		 * remove cells.
-		 */
-		structure?: {
-			/**
-			 * The change to the cell array.
-			 */
-			array: NotebookCellArrayChange;
-
-			/**
-			 * Additional opened cell text documents.
-			 */
-			didOpen?: TextDocumentItem[];
-
-			/**
-			 * Additional closed cell text documents.
-			 */
-			didClose?: TextDocumentIdentifier[];
-		};
-
-		/**
-		 * Changes to notebook cells properties like its
-		 * kind, execution summary or metadata.
-		 */
-		data?: NotebookCell[];
-
-		/**
-		 * Changes to the text content of notebook cells.
-		 */
-		textContent?: {
-			document: VersionedTextDocumentIdentifier;
-			changes: TextDocumentContentChangeEvent[];
-		}[];
-	};
+	cells?: NotebookDocumentCellChanges;
 }
+```
+
+<div class="anchorHolder"><a href="#notebookDocumentCellChanges" name="notebookDocumentCellChanges" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Cell changes to a notebook document.
+ */
+export type NotebookDocumentCellChanges = {
+	/**
+	 * Changes to the cell structure to add or
+	 * remove cells.
+	 */
+	structure?: NotebookDocumentCellChangeStructure;
+
+	/**
+	 * Changes to notebook cells properties like its
+	 * kind, execution summary or metadata.
+	 */
+	data?: NotebookCell[];
+
+	/**
+	 * Changes to the text content of notebook cells.
+	 */
+	textContent?: NotebookDocumentCellContentChanges[];
+};
+```
+
+<div class="anchorHolder"><a href="#notebookDocumentCellChangeStructure" name="notebookDocumentCellChangeStructure" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Structural changes to cells in a notebook document.
+ */
+export type NotebookDocumentCellChangeStructure = {
+	/**
+	 * The change to the cell array.
+	 */
+	array: NotebookCellArrayChange;
+
+	/**
+	 * Additional opened cell text documents.
+	 */
+	didOpen?: TextDocumentItem[];
+
+	/**
+	 * Additional closed cell text documents.
+	 */
+	didClose?: TextDocumentIdentifier[];
+};
+```
+
+<div class="anchorHolder"><a href="#notebookDocumentCellContentChanges" name="notebookDocumentCellContentChanges" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Content changes to a cell in a notebook document.
+ */
+export type NotebookDocumentCellContentChanges = {
+	document: VersionedTextDocumentIdentifier;
+	changes: TextDocumentContentChangeEvent[];
+};
 ```
 
 <div class="anchorHolder"><a href="#notebookCellArrayChange" name="notebookCellArrayChange" class="linkableAnchor"></a></div>
