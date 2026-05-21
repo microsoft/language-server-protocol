@@ -9,8 +9,6 @@ A document filter denotes a document through properties like `language`, `scheme
 ```typescript
 /**
  * A document filter where `language` is required field.
- *
- * @since 3.18.0
  */
 export type TextDocumentFilterLanguage = {
 	/**
@@ -35,8 +33,6 @@ export type TextDocumentFilterLanguage = {
 
 /**
  * A document filter where `scheme` is required field.
- *
- * @since 3.18.0
  */
 export type TextDocumentFilterScheme = {
 	/**
@@ -61,8 +57,6 @@ export type TextDocumentFilterScheme = {
 
 /**
  * A document filter where `pattern` is required field.
- *
- * @since 3.18.0
  */
 export type TextDocumentFilterPattern = {
 	/**
@@ -107,8 +101,6 @@ export type TextDocumentFilterPattern = {
  *   `{ language: 'typescript', scheme: 'file' }`
  * @sample A language filter that applies to all package.json paths:
  *   `{ language: 'json', pattern: '**package.json' }`
- *
- * @since 3.17.0
  */
 export type TextDocumentFilter = TextDocumentFilterLanguage |
 	TextDocumentFilterScheme | TextDocumentFilterPattern;
