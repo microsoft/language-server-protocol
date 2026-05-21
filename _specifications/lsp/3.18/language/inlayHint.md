@@ -27,14 +27,19 @@ export interface InlayHintClientCapabilities {
 	 * Indicates which properties a client can resolve lazily on an inlay
 	 * hint.
 	 */
-	resolveSupport?: {
-
-		/**
-		 * The properties that a client can resolve lazily.
-		 */
-		properties: string[];
-	};
+	resolveSupport?: ClientInlayHintResolveOptions;
 }
+```
+
+<div class="anchorHolder"><a href="#clientInlayHintResolveOptions" name="clientInlayHintResolveOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientInlayHintResolveOptions = {
+	/**
+	 * The properties that a client can resolve lazily.
+	 */
+	properties: string[];
+};
 ```
 
 _Server Capability_:

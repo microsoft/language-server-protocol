@@ -806,6 +806,8 @@
     link: '#typeHierarchySubtypesParams'
   - type: 'InlayHintClientCapabilities'
     link: '#inlayHintClientCapabilities'
+  - type: 'ClientInlayHintResolveOptions'
+    link: '#clientInlayHintResolveOptions'
   - type: 'InlayHintOptions'
     link: '#inlayHintOptions'
   - type: 'InlayHintRegistrationOptions'
