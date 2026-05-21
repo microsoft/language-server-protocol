@@ -77,7 +77,14 @@ interface DidChangeTextDocumentParams {
  * An event describing a change to a text document. If only a text is provided
  * it is considered to be the full content of the document.
  */
-export type TextDocumentContentChangeEvent = {
+export type TextDocumentContentChangeEvent = TextDocumentContentChangePartial |
+	TextDocumentContentChangeWholeDocument;
+```
+
+<div class="anchorHolder"><a href="#textDocumentContentChangePartial" name="textDocumentContentChangePartial" class="linkableAnchor"></a></div>
+
+```typescript
+export type TextDocumentContentChangePartial = {
 	/**
 	 * The range of the document that changed.
 	 */
@@ -94,7 +101,13 @@ export type TextDocumentContentChangeEvent = {
 	 * The new text for the provided range.
 	 */
 	text: string;
-} | {
+};
+```
+
+<div class="anchorHolder"><a href="#textDocumentContentChangeWholeDocument" name="textDocumentContentChangeWholeDocument" class="linkableAnchor"></a></div>
+
+```typescript
+export type TextDocumentContentChangeWholeDocument = {
 	/**
 	 * The new text of the whole document.
 	 */
