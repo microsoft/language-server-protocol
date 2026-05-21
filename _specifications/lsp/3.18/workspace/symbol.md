@@ -146,7 +146,7 @@ export interface WorkspaceSymbol {
 	 *
 	 * See also `SymbolInformation.location`.
 	 */
-	location: Location | { uri: DocumentUri };
+	location: Location | LocationUriOnly;
 
 	/**
 	 * A data entry field that is preserved on a workspace symbol between a

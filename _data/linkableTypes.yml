@@ -58,6 +58,8 @@
     link: '#location'
   - type: 'LocationLink'
     link: '#locationLink'
+  - type: 'LocationUriOnly'
+    link: '#locationUriOnly'
   - type: 'Diagnostic'
     link: '#diagnostic'
   - type: 'DiagnosticSeverity'
