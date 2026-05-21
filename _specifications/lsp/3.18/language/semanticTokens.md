@@ -206,26 +206,7 @@ interface SemanticTokensClientCapabilities {
 	 * range provider, the client might not render a minimap correctly or might
 	 * even decide to not show any semantic tokens at all.
 	 */
-	requests: {
-		/**
-		 * The client will send the `textDocument/semanticTokens/range` request
-		 * if the server provides a corresponding handler.
-		 */
-		range?: boolean | {
-		};
-
-		/**
-		 * The client will send the `textDocument/semanticTokens/full` request
-		 * if the server provides a corresponding handler.
-		 */
-		full?: boolean | {
-			/**
-			 * The client will send the `textDocument/semanticTokens/full/delta`
-			 * request if the server provides a corresponding handler.
-			 */
-			delta?: boolean;
-		};
-	};
+	requests: ClientSemanticTokensRequestOptions;
 
 	/**
 	 * The token types that the client supports.
@@ -278,6 +259,37 @@ interface SemanticTokensClientCapabilities {
 }
 ```
 
+<div class="anchorHolder"><a href="#clientSemanticTokensRequestOptions" name="clientSemanticTokensRequestOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientSemanticTokensRequestOptions = {
+	/**
+	 * The client will send the `textDocument/semanticTokens/range` request if
+	 * the server provides a corresponding handler.
+	 */
+	range?: boolean | {
+	};
+
+	/**
+	 * The client will send the `textDocument/semanticTokens/full` request if
+	 * the server provides a corresponding handler.
+	 */
+	full?: boolean | ClientSemanticTokensRequestFullDelta;
+};
+```
+
+<div class="anchorHolder"><a href="#clientSemanticTokensRequestFullDelta" name="clientSemanticTokensRequestFullDelta" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientSemanticTokensRequestFullDelta = {
+	/**
+	 * The client will send the `textDocument/semanticTokens/full/delta` request if
+	 * the server provides a corresponding handler.
+	 */
+	delta?: boolean;
+};
+```
+
 _Server Capability_:
 
 The following server capabilities are defined for semantic tokens:
@@ -304,13 +316,22 @@ export interface SemanticTokensOptions extends WorkDoneProgressOptions {
 	/**
 	 * Server supports providing semantic tokens for a full document.
 	 */
-	full?: boolean | {
-		/**
-		 * The server supports deltas for full documents.
-		 */
-		delta?: boolean;
-	};
+	full?: boolean | SemanticTokensFullDelta;
 }
+```
+
+<div class="anchorHolder"><a href="#semanticTokensFullDelta" name="semanticTokensFullDelta" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Semantic tokens options to support deltas for full documents
+ */
+export type SemanticTokensFullDelta = {
+	/**
+	 * The server supports deltas for full documents.
+	 */
+	delta?: boolean;
+};
 ```
 
 _Registration Options_: `SemanticTokensRegistrationOptions` defined as follows:
