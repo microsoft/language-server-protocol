@@ -107,7 +107,7 @@ export type ClientCodeActionLiteralOptions = {
 	 * set.
 	 */
 	codeActionKind: ClientCodeActionKindOptions;
-}
+};
 ```
 
 <div class="anchorHolder"><a href="#clientCodeActionKindOptions" name="clientCodeActionKindOptions" class="linkableAnchor"></a></div>
@@ -121,7 +121,7 @@ export type ClientCodeActionKindOptions = {
 	 * to a default value when unknown.
 	 */
 	valueSet: CodeActionKind[];
-}
+};
 ```
 
 <div class="anchorHolder"><a href="#clientCodeActionResolveOptions" name="clientCodeActionResolveOptions" class="linkableAnchor"></a></div>
@@ -132,7 +132,7 @@ export type ClientCodeActionResolveOptions = {
 	 * The properties that a client can resolve lazily.
 	 */
 	properties: string[];
-}
+};
 ```
 
 <div class="anchorHolder"><a href="#codeActionTagOptions" name="codeActionTagOptions" class="linkableAnchor"></a></div>
@@ -143,7 +143,7 @@ export type CodeActionTagOptions = {
 	 * The tags supported by the client.
 	 */
 	valueSet: CodeActionTag[];
-}
+};
 ```
 
 _Server Capability_:
