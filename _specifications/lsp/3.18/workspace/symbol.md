@@ -17,19 +17,7 @@ interface WorkspaceSymbolClientCapabilities {
 	 * Specific capabilities for the `SymbolKind` in the `workspace/symbol`
 	 * request.
 	 */
-	symbolKind?: {
-		/**
-		 * The symbol kind values the client supports. When this
-		 * property exists, the client also guarantees that it will
-		 * handle values outside its set gracefully and falls back
-		 * to a default value when unknown.
-		 *
-		 * If this property is not present, the client only supports
-		 * the symbol kinds from `File` to `Array` as defined in
-		 * the initial version of the protocol.
-		 */
-		valueSet?: SymbolKind[];
-	};
+	symbolKind?: ClientSymbolKindOptions;
 
 	/**
 	 * The client supports tags on `SymbolInformation` and `WorkspaceSymbol`.
@@ -37,28 +25,29 @@ interface WorkspaceSymbolClientCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-	tagSupport?: {
-		/**
-		 * The tags supported by the client.
-		 */
-		valueSet: SymbolTag[];
-	};
+	tagSupport?: ClientSymbolTagOptions;
 
 	/**
 	 * The client supports partial workspace symbols. The client will send the
 	 * request `workspaceSymbol/resolve` to the server to resolve additional
 	 * properties.
 	 *
-	 * @since 3.17.0 - proposedState
+	 * @since 3.17.0
 	 */
-	resolveSupport?: {
-		/**
-		 * The properties that a client can resolve lazily. Usually consists of
-		 * `location.range`.
-		 */
-		properties: string[];
-	};
+	resolveSupport?: ClientSymbolResolveOptions;
 }
+```
+
+<div class="anchorHolder"><a href="#clientSymbolResolveOptions" name="clientSymbolResolveOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientSymbolResolveOptions = {
+	/**
+	 * The properties that a client can resolve lazily. Usually
+	 * `location.range`
+	 */
+	properties: string[];
+};
 ```
 
 _Server Capability_:
@@ -157,7 +146,7 @@ export interface WorkspaceSymbol {
 	 *
 	 * See also `SymbolInformation.location`.
 	 */
-	location: Location | { uri: DocumentUri };
+	location: Location | LocationUriOnly;
 
 	/**
 	 * A data entry field that is preserved on a workspace symbol between a

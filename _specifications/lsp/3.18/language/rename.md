@@ -123,10 +123,35 @@ _Request_:
 <div class="anchorHolder"><a href="#prepareRenameParams" name="prepareRenameParams" class="linkableAnchor"></a></div>
 
 ```typescript
-export interface PrepareRenameParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+export interface PrepareRenameParams extends
+	TextDocumentPositionParams, WorkDoneProgressParams {
 }
 ```
 
+<div class="anchorHolder"><a href="#prepareRenamePlaceholder" name="prepareRenamePlaceholder" class="linkableAnchor"></a></div>
+
+```typescript
+export type PrepareRenamePlaceholder = {
+	range: Range;
+	placeholder: string;
+};
+```
+
+<div class="anchorHolder"><a href="#prepareRenameDefaultBehavior" name="prepareRenameDefaultBehavior" class="linkableAnchor"></a></div>
+
+```typescript
+export type PrepareRenameDefaultBehavior = {
+	defaultBehavior: boolean;
+};
+```
+
+<div class="anchorHolder"><a href="#prepareRenameResult" name="prepareRenameResult" class="linkableAnchor"></a></div>
+
+```typescript
+export type PrepareRenameResult = Range |
+	PrepareRenamePlaceholder | PrepareRenameDefaultBehavior;
+```
+
 _Response_:
-* result: `Range | { range: Range, placeholder: string } | { defaultBehavior: boolean } | null` describing a [`Range`](#range) of the string to rename and optionally a placeholder text of the string content to be renamed. If `{ defaultBehavior: boolean }` is returned (since 3.16), the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
+* result: `PrepareRenameResult | null` describing a [`Range`](#range) of the string to rename and optionally a placeholder text of the string content to be renamed. If `PrepareRenameDefaultBehavior` is returned (since 3.16), the rename position is valid and the client should use its default behavior to compute the rename range. If `null` is returned then it is deemed that a 'textDocument/rename' request is not valid at the given position.
 * error: code and message set in case the element can't be renamed. Clients should show the information in their user interface.

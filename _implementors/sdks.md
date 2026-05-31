@@ -11,7 +11,7 @@ index: 3
 | Language | Maintainer | Repository |
 |------|--------|----------|
 | C# | [Inomata Kentaro](https://github.com/matarillo/) | [LanguageServerProtocol](https://github.com/matarillo/LanguageServerProtocol)|
-| C# | [OmniSharp](http://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
+| C# | [OmniSharp](https://www.omnisharp.net/) | [C#-LSP](https://github.com/OmniSharp/csharp-language-server-protocol)|
 | C# | [Ken Domino](https://github.com/kaby76) | [LspTypes for C#](https://github.com/kaby76/lsp-types) |
 | C# | [Draco language team](https://draco-lang.org/) | [Draco.Lsp](https://github.com/Draco-lang/Compiler) |
 | C++ | [Kuafu](https://github.com/kuafuwang) | [LspCpp](https://github.com/kuafuwang/LspCpp)|
@@ -26,7 +26,7 @@ index: 3
 | node.js | MS | [vscode-languageserver-node](https://github.com/Microsoft/vscode-languageserver-node)  |
 | Objective-C | [Christopher Atlan](https://twitter.com/catlan) | [LSPKit](https://github.com/catlan/LSPKit)|
 | PHP | [Felix Becker](https://github.com/felixfbecker) | [php-language-server](https://github.com/felixfbecker/php-language-server)|
-| Python | [Open Law Library](http://www.openlawlib.org/) | [pygls](https://github.com/openlawlibrary/pygls)|
+| Python | [Open Law Library](https://www.openlawlib.org/) | [pygls](https://github.com/openlawlibrary/pygls)|
 | Python | [Yeger](https://github.com/yeger00) | [pylspclient](https://github.com/yeger00/pylspclient)|
 | Python | [Microsoft](https://github.com/microsoft) | [multilspy](https://github.com/microsoft/monitors4codegen#4-multilspy)|
 | Rascal | [UseTheSource](https://github.com/UseTheSource) | [rascal-language-servers](https://github.com/usethesource/rascal-language-servers) |

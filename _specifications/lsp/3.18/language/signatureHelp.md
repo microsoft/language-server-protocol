@@ -19,44 +19,7 @@ export interface SignatureHelpClientCapabilities {
 	 * The client supports the following `SignatureInformation`
 	 * specific properties.
 	 */
-	signatureInformation?: {
-		/**
-		 * Client supports the following content formats for the documentation
-		 * property. The order describes the preferred format of the client.
-		 */
-		documentationFormat?: MarkupKind[];
-
-		/**
-		 * Client capabilities specific to parameter information.
-		 */
-		parameterInformation?: {
-			/**
-			 * The client supports processing label offsets instead of a
-			 * simple label string.
-			 *
-			 * @since 3.14.0
-			 */
-			labelOffsetSupport?: boolean;
-		};
-
-		/**
-		 * The client supports the `activeParameter` property on
-		 * `SignatureInformation` literal.
-		 *
-		 * @since 3.16.0
-		 */
-		activeParameterSupport?: boolean;
-
-		/**
-		 * The client supports the `activeParameter` property on
-		 * `SignatureHelp`/`SignatureInformation` being set to `null` to
-		 * indicate that no parameter should be active.
-		 *
-		 * @since 3.18.0
-		 */
-		noActiveParameterSupport?: boolean;
-
-	};
+	signatureInformation?: ClientSignatureInformationOptions;
 
 	/**
 	 * The client supports sending additional context information for a
@@ -68,6 +31,54 @@ export interface SignatureHelpClientCapabilities {
 	 */
 	contextSupport?: boolean;
 }
+```
+
+<div class="anchorHolder"><a href="#clientSignatureInformationOptions" name="clientSignatureInformationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientSignatureInformationOptions = {
+	/**
+	 * Client supports the following content formats for the documentation
+	 * property. The order describes the preferred format of the client.
+	 */
+	documentationFormat?: MarkupKind[];
+
+	/**
+	 * Client capabilities specific to parameter information.
+	 */
+	parameterInformation?: ClientSignatureParameterInformationOptions;
+
+	/**
+	 * The client supports the `activeParameter` property on
+	 * `SignatureInformation` literal.
+	 *
+	 * @since 3.16.0
+	 */
+	activeParameterSupport?: boolean;
+
+	/**
+	 * The client supports the `activeParameter` property on
+	 * `SignatureHelp`/`SignatureInformation` being set to `null` to
+	 * indicate that no parameter should be active.
+	 *
+	 * @since 3.18.0
+	 */
+	noActiveParameterSupport?: boolean;
+};
+```
+
+<div class="anchorHolder"><a href="#clientSignatureParameterInformationOptions" name="clientSignatureParameterInformationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientSignatureParameterInformationOptions = {
+	/**
+	 * The client supports processing label offsets instead of a
+	 * simple label string.
+	 *
+	 * @since 3.14.0
+	 */
+	labelOffsetSupport?: boolean;
+};
 ```
 
 _Server Capability_:

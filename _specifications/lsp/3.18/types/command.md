@@ -11,6 +11,8 @@ interface Command {
 
 	/**
 	 * An optional tooltip.
+	 *
+	 * @since 3.18.0
 	 */
 	tooltip?: string;
 

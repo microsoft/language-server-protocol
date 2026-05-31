@@ -30,17 +30,7 @@ interface InitializeParams extends WorkDoneProgressParams {
 	 *
 	 * @since 3.15.0
 	 */
-	clientInfo?: {
-		/**
-		 * The name of the client as defined by the client.
-		 */
-		name: string;
-
-		/**
-		 * The client's version as defined by the client.
-		 */
-		version?: string;
-	};
+	clientInfo?: ClientInfo;
 
 	/**
 	 * The locale the client is currently showing the user interface
@@ -97,6 +87,28 @@ interface InitializeParams extends WorkDoneProgressParams {
 	workspaceFolders?: WorkspaceFolder[] | null;
 }
 ```
+
+<div class="anchorHolder"><a href="#clientInfo" name="clientInfo" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Information about the client
+ *
+ * @since 3.15.0
+ */
+export type ClientInfo = {
+	/**
+	 * The name of the client as defined by the client.
+	 */
+	name: string;
+
+	/**
+	 * The client's version as defined by the client.
+	 */
+	version?: string;
+};
+```
+
 Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as follows:
 
 
@@ -353,135 +365,7 @@ interface ClientCapabilities {
 	/**
 	 * Workspace specific client capabilities.
 	 */
-	workspace?: {
-		/**
-		 * The client supports applying batch edits
-		 * to the workspace by supporting the request
-		 * 'workspace/applyEdit'
-		 */
-		applyEdit?: boolean;
-
-		/**
-		 * Capabilities specific to `WorkspaceEdit`s
-		 */
-		workspaceEdit?: WorkspaceEditClientCapabilities;
-
-		/**
-		 * Capabilities specific to the `workspace/didChangeConfiguration`
-		 * notification.
-		 */
-		didChangeConfiguration?: DidChangeConfigurationClientCapabilities;
-
-		/**
-		 * Capabilities specific to the `workspace/didChangeWatchedFiles`
-		 * notification.
-		 */
-		didChangeWatchedFiles?: DidChangeWatchedFilesClientCapabilities;
-
-		/**
-		 * Capabilities specific to the `workspace/symbol` request.
-		 */
-		symbol?: WorkspaceSymbolClientCapabilities;
-
-		/**
-		 * Capabilities specific to the `workspace/executeCommand` request.
-		 */
-		executeCommand?: ExecuteCommandClientCapabilities;
-
-		/**
-		 * The client has support for workspace folders.
-		 *
-		 * @since 3.6.0
-		 */
-		workspaceFolders?: boolean;
-
-		/**
-		 * The client supports `workspace/configuration` requests.
-		 *
-		 * @since 3.6.0
-		 */
-		configuration?: boolean;
-
-		/**
-		 * Capabilities specific to the semantic token requests scoped to the
-		 * workspace.
-		 *
-		 * @since 3.16.0
-		 */
-		 semanticTokens?: SemanticTokensWorkspaceClientCapabilities;
-
-		/**
-		 * Capabilities specific to the code lens requests scoped to the
-		 * workspace.
-		 *
-		 * @since 3.16.0
-		 */
-		codeLens?: CodeLensWorkspaceClientCapabilities;
-
-		/**
-		 * The client has support for file requests/notifications.
-		 *
-		 * @since 3.16.0
-		 */
-		fileOperations?: {
-			/**
-			 * Whether the client supports dynamic registration for file
-			 * requests/notifications.
-			 */
-			dynamicRegistration?: boolean;
-
-			/**
-			 * The client has support for sending didCreateFiles notifications.
-			 */
-			didCreate?: boolean;
-
-			/**
-			 * The client has support for sending willCreateFiles requests.
-			 */
-			willCreate?: boolean;
-
-			/**
-			 * The client has support for sending didRenameFiles notifications.
-			 */
-			didRename?: boolean;
-
-			/**
-			 * The client has support for sending willRenameFiles requests.
-			 */
-			willRename?: boolean;
-
-			/**
-			 * The client has support for sending didDeleteFiles notifications.
-			 */
-			didDelete?: boolean;
-
-			/**
-			 * The client has support for sending willDeleteFiles requests.
-			 */
-			willDelete?: boolean;
-		};
-
-		/**
-		 * Client workspace capabilities specific to inline values.
-		 *
-		 * @since 3.17.0
-		 */
-		inlineValue?: InlineValueWorkspaceClientCapabilities;
-
-		/**
-		 * Client workspace capabilities specific to inlay hints.
-		 *
-		 * @since 3.17.0
-		 */
-		inlayHint?: InlayHintWorkspaceClientCapabilities;
-
-		/**
-		 * Client workspace capabilities specific to diagnostics.
-		 *
-		 * @since 3.17.0.
-		 */
-		diagnostics?: DiagnosticWorkspaceClientCapabilities;
-	};
+	workspace?: WorkspaceClientCapabilities;
 
 	/**
 	 * Text document specific client capabilities.
@@ -498,105 +382,295 @@ interface ClientCapabilities {
 	/**
 	 * Window specific client capabilities.
 	 */
-	window?: {
-		/**
-		 * It indicates whether the client supports server initiated
-		 * progress using the `window/workDoneProgress/create` request.
-		 *
-		 * The capability also controls Whether client supports handling
-		 * of progress notifications. If set servers are allowed to report a
-		 * `workDoneProgress` property in the request specific server
-		 * capabilities.
-		 *
-		 * @since 3.15.0
-		 */
-		workDoneProgress?: boolean;
-
-		/**
-		 * Capabilities specific to the showMessage request
-		 *
-		 * @since 3.16.0
-		 */
-		showMessage?: ShowMessageRequestClientCapabilities;
-
-		/**
-		 * Client capabilities for the show document request.
-		 *
-		 * @since 3.16.0
-		 */
-		showDocument?: ShowDocumentClientCapabilities;
-	};
+	window?: WindowClientCapabilities;
 
 	/**
 	 * General client capabilities.
 	 *
 	 * @since 3.16.0
 	 */
-	general?: {
-		/**
-		 * Client capability that signals how the client
-		 * handles stale requests (e.g. a request
-		 * for which the client will not process the response
-		 * anymore since the information is outdated).
-		 *
-		 * @since 3.17.0
-		 */
-		staleRequestSupport?: {
-			/**
-			 * The client will actively cancel the request.
-			 */
-			cancel: boolean;
-
-			/**
-			 * The list of requests for which the client
-			 * will retry the request if it receives a
-			 * response with error code `ContentModified``
-			 */
-			 retryOnContentModified: string[];
-		}
-
-		/**
-		 * Client capabilities specific to regular expressions.
-		 *
-		 * @since 3.16.0
-		 */
-		regularExpressions?: RegularExpressionsClientCapabilities;
-
-		/**
-		 * Client capabilities specific to the client's markdown parser.
-		 *
-		 * @since 3.16.0
-		 */
-		markdown?: MarkdownClientCapabilities;
-
-		/**
-		 * The position encodings supported by the client. Client and server
-		 * have to agree on the same position encoding to ensure that offsets
-		 * (e.g. character position in a line) are interpreted the same on both
-		 * side.
-		 *
-		 * To keep the protocol backwards compatible the following applies: if
-		 * the value 'utf-16' is missing from the array of position encodings
-		 * servers can assume that the client supports UTF-16. UTF-16 is
-		 * therefore a mandatory encoding.
-		 *
-		 * If omitted it defaults to ['utf-16'].
-		 *
-		 * Implementation considerations: since the conversion from one encoding
-		 * into another requires the content of the file / line the conversion
-		 * is best done where the file is read which is usually on the server
-		 * side.
-		 *
-		 * @since 3.17.0
-		 */
-		positionEncodings?: PositionEncodingKind[];
-	};
+	general?: GeneralClientCapabilities;
 
 	/**
 	 * Experimental client capabilities.
 	 */
 	experimental?: LSPAny;
 }
+```
+
+<div class="anchorHolder"><a href="#workspaceClientCapabilities" name="workspaceClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+export type WorkspaceClientCapabilities = {
+	/**
+	 * The client supports applying batch edits
+	 * to the workspace by supporting the request
+	 * 'workspace/applyEdit'
+	 */
+	applyEdit?: boolean;
+
+	/**
+	 * Capabilities specific to `WorkspaceEdit`s
+	 */
+	workspaceEdit?: WorkspaceEditClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `workspace/didChangeConfiguration`
+	 * notification.
+	 */
+	didChangeConfiguration?: DidChangeConfigurationClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `workspace/didChangeWatchedFiles`
+	 * notification.
+	 */
+	didChangeWatchedFiles?: DidChangeWatchedFilesClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `workspace/symbol` request.
+	 */
+	symbol?: WorkspaceSymbolClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `workspace/executeCommand` request.
+	 */
+	executeCommand?: ExecuteCommandClientCapabilities;
+
+	/**
+	 * The client has support for workspace folders.
+	 *
+	 * @since 3.6.0
+	 */
+	workspaceFolders?: boolean;
+
+	/**
+	 * The client supports `workspace/configuration` requests.
+	 *
+	 * @since 3.6.0
+	 */
+	configuration?: boolean;
+
+	/**
+	 * Capabilities specific to the semantic token requests scoped to the
+	 * workspace.
+	 *
+	 * @since 3.16.0
+	 */
+	semanticTokens?: SemanticTokensWorkspaceClientCapabilities;
+
+	/**
+	 * Capabilities specific to the code lens requests scoped to the
+	 * workspace.
+	 *
+	 * @since 3.16.0
+	 */
+	codeLens?: CodeLensWorkspaceClientCapabilities;
+
+	/**
+	 * The client has support for file requests/notifications.
+	 *
+	 * @since 3.16.0
+	 */
+	fileOperations?: FileOperationClientCapabilities;
+
+	/**
+	 * Client workspace capabilities specific to inline values.
+	 *
+	 * @since 3.17.0
+	 */
+	inlineValue?: InlineValueWorkspaceClientCapabilities;
+
+	/**
+	 * Client workspace capabilities specific to inlay hints.
+	 *
+	 * @since 3.17.0
+	 */
+	inlayHint?: InlayHintWorkspaceClientCapabilities;
+
+	/**
+	 * Client workspace capabilities specific to diagnostics.
+	 *
+	 * @since 3.17.0.
+	 */
+	diagnostics?: DiagnosticWorkspaceClientCapabilities;
+
+	/**
+	 * Capabilities specific to the folding range requests
+	 * scoped to the workspace.
+	 *
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	foldingRange?: FoldingRangeWorkspaceClientCapabilities;
+
+	/**
+	 * Capabilities specific to the `workspace/textDocumentContent`
+	 * request.
+	 *
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	textDocumentContent?: TextDocumentContentClientCapabilities;
+}
+```
+
+<div class="anchorHolder"><a href="#fileOperationClientCapabilities" name="fileOperationClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Capabilities relating to events from file operations by the user in the client.
+ *
+ * These events do not come from the file system, they come from user operations
+ * like renaming a file in the UI.
+ *
+ * @since 3.16.0
+ */
+export interface FileOperationClientCapabilities {
+
+	/**
+	 * Whether the client supports dynamic registration for
+	 * file requests/notifications.
+	 */
+	dynamicRegistration?: boolean;
+
+	/**
+	 * The client has support for sending didCreateFiles notifications.
+	 */
+	didCreate?: boolean;
+
+	/**
+	 * The client has support for sending willCreateFiles requests.
+	 */
+	willCreate?: boolean;
+
+	/**
+	 * The client has support for sending didRenameFiles notifications.
+	 */
+	didRename?: boolean;
+
+	/**
+	 * The client has support for sending willRenameFiles requests.
+	 */
+	willRename?: boolean;
+
+	/**
+	 * The client has support for sending didDeleteFiles notifications.
+	 */
+	didDelete?: boolean;
+
+	/**
+	 * The client has support for sending willDeleteFiles requests.
+	 */
+	willDelete?: boolean;
+}
+```
+
+<div class="anchorHolder"><a href="#windowClientCapabilities" name="windowClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+export interface WindowClientCapabilities {
+	/**
+	 * It indicates whether the client supports server initiated
+	 * progress using the `window/workDoneProgress/create` request.
+	 *
+	 * The capability also controls Whether client supports handling
+	 * of progress notifications. If set servers are allowed to report a
+	 * `workDoneProgress` property in the request specific server
+	 * capabilities.
+	 *
+	 * @since 3.15.0
+	 */
+	workDoneProgress?: boolean;
+
+	/**
+	 * Capabilities specific to the showMessage request.
+	 *
+	 * @since 3.16.0
+	 */
+	showMessage?: ShowMessageRequestClientCapabilities;
+
+	/**
+	 * Capabilities specific to the showDocument request.
+	 *
+	 * @since 3.16.0
+	 */
+	showDocument?: ShowDocumentClientCapabilities;
+}
+```
+
+<div class="anchorHolder"><a href="#generalClientCapabilities" name="generalClientCapabilities" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * General client capabilities.
+ *
+ * @since 3.16.0
+ */
+export interface GeneralClientCapabilities {
+	/**
+	 * Client capability that signals how the client
+	 * handles stale requests (e.g. a request
+	 * for which the client will not process the response
+	 * anymore since the information is outdated).
+	 *
+	 * @since 3.17.0
+	 */
+	staleRequestSupport?: StaleRequestSupportOptions;
+
+	/**
+	 * Client capabilities specific to regular expressions.
+	 *
+	 * @since 3.16.0
+	 */
+	regularExpressions?: RegularExpressionsClientCapabilities;
+
+	/**
+	 * Client capabilities specific to the client's markdown parser.
+	 *
+	 * @since 3.16.0
+	 */
+	markdown?: MarkdownClientCapabilities;
+
+	/**
+	 * The position encodings supported by the client. Client and server
+	 * have to agree on the same position encoding to ensure that offsets
+	 * (e.g. character position in a line) are interpreted the same on both
+	 * sides.
+	 *
+	 * To keep the protocol backwards compatible the following applies: if
+	 * the value 'utf-16' is missing from the array of position encodings
+	 * servers can assume that the client supports UTF-16. UTF-16 is
+	 * therefore a mandatory encoding.
+	 *
+	 * If omitted it defaults to ['utf-16'].
+	 *
+	 * Implementation considerations: since the conversion from one encoding
+	 * into another requires the content of the file / line the conversion
+	 * is best done where the file is read which is usually on the server
+	 * side.
+	 *
+	 * @since 3.17.0
+	 */
+	positionEncodings?: PositionEncodingKind[];
+}
+```
+
+<div class="anchorHolder"><a href="#staleRequestSupportOptions" name="staleRequestSupportOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type StaleRequestSupportOptions = {
+	/**
+	 * The client will actively cancel the request.
+	 */
+	cancel: boolean;
+
+	/**
+	 * The list of requests for which the client
+	 * will retry the request if it receives a
+	 * response with error code `ContentModified`
+	 */
+	retryOnContentModified: string[];
+};
 ```
 
 _Response_:
@@ -616,18 +690,29 @@ interface InitializeResult {
 	 *
 	 * @since 3.15.0
 	 */
-	serverInfo?: {
-		/**
-		 * The name of the server as defined by the server.
-		 */
-		name: string;
-
-		/**
-		 * The server's version as defined by the server.
-		 */
-		version?: string;
-	};
+	serverInfo?: ServerInfo;
 }
+```
+
+<div class="anchorHolder"><a href="#serverInfo" name="serverInfo" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Information about the server
+ *
+ * @since 3.15.0
+ */
+export type ServerInfo = {
+	/**
+	 * The name of the server as defined by the server.
+	 */
+	name: string;
+
+	/**
+	 * The server's version as defined by the server.
+	 */
+	version?: string;
+};
 ```
 * error.code:
 
@@ -906,83 +991,87 @@ interface ServerCapabilities {
 	inlineCompletionProvider?: boolean | InlineCompletionOptions;
 
 	/**
-	 * Text document specific server capabilities.
-	 *
-	 * @since 3.18.0
-	 */
-	textDocument?: {
-		/**
-		 * Capabilities specific to the diagnostic pull model.
-		 *
-		 * @since 3.18.0
-		 */
-		diagnostic?: {
-			/**
-			 * Whether the server supports `MarkupContent` in diagnostic messages.
-			 *
-			 * @since 3.18.0
-			 * @proposed
-			 */
-			markupMessageSupport?: boolean;
-		};
-	};
-
-	/**
 	 * Workspace specific server capabilities
 	 */
-	workspace?: {
-		/**
-		 * The server supports workspace folder.
-		 *
-		 * @since 3.6.0
-		 */
-		workspaceFolders?: WorkspaceFoldersServerCapabilities;
-
-		/**
-		 * The server is interested in file notifications/requests.
-		 *
-		 * @since 3.16.0
-		 */
-		fileOperations?: {
-			/**
-			 * The server is interested in receiving didCreateFiles
-			 * notifications.
-			 */
-			didCreate?: FileOperationRegistrationOptions;
-
-			/**
-			 * The server is interested in receiving willCreateFiles requests.
-			 */
-			willCreate?: FileOperationRegistrationOptions;
-
-			/**
-			 * The server is interested in receiving didRenameFiles
-			 * notifications.
-			 */
-			didRename?: FileOperationRegistrationOptions;
-
-			/**
-			 * The server is interested in receiving willRenameFiles requests.
-			 */
-			willRename?: FileOperationRegistrationOptions;
-
-			/**
-			 * The server is interested in receiving didDeleteFiles file
-			 * notifications.
-			 */
-			didDelete?: FileOperationRegistrationOptions;
-
-			/**
-			 * The server is interested in receiving willDeleteFiles file
-			 * requests.
-			 */
-			willDelete?: FileOperationRegistrationOptions;
-		};
-	};
+	workspace?: WorkspaceOptions;
 
 	/**
 	 * Experimental server capabilities.
 	 */
 	experimental?: LSPAny;
+}
+```
+
+<div class="anchorHolder"><a href="#workspaceOptions" name="workspaceOptions" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Defines workspace specific capabilities of the server.
+ */
+export type WorkspaceOptions = {
+	/**
+	 * The server supports workspace folder.
+	 *
+	 * @since 3.6.0
+	 */
+	workspaceFolders?: WorkspaceFoldersServerCapabilities;
+
+	/**
+	 * The server is interested in notifications/requests for operations on files.
+	 *
+	 * @since 3.16.0
+	 */
+	fileOperations?: FileOperationOptions;
+
+	/**
+	 * The server supports the `workspace/textDocumentContent` request.
+	 *
+	 * @since 3.18.0
+	 * @proposed
+	 */
+	textDocumentContent?: TextDocumentContentOptions
+		| TextDocumentContentRegistrationOptions;
+};
+```
+
+<div class="anchorHolder"><a href="#fileOperationOptions" name="fileOperationOptions" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Options for notifications/requests for user operations on files.
+ *
+ * @since 3.16.0
+ */
+export interface FileOperationOptions {
+
+	/**
+	* The server is interested in receiving didCreateFiles notifications.
+	*/
+	didCreate?: FileOperationRegistrationOptions;
+
+	/**
+	* The server is interested in receiving willCreateFiles requests.
+	*/
+	willCreate?: FileOperationRegistrationOptions;
+
+	/**
+	* The server is interested in receiving didRenameFiles notifications.
+	*/
+	didRename?: FileOperationRegistrationOptions;
+
+	/**
+	* The server is interested in receiving willRenameFiles requests.
+	*/
+	willRename?: FileOperationRegistrationOptions;
+
+	/**
+	* The server is interested in receiving didDeleteFiles file notifications.
+	*/
+	didDelete?: FileOperationRegistrationOptions;
+
+	/**
+	* The server is interested in receiving willDeleteFiles file requests.
+	*/
+	willDelete?: FileOperationRegistrationOptions;
 }
 ```

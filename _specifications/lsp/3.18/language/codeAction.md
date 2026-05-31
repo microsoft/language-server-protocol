@@ -36,22 +36,7 @@ export interface CodeActionClientCapabilities {
 	 *
 	 * @since 3.8.0
 	 */
-	codeActionLiteralSupport?: {
-		/**
-		 * The code action kind is supported with the following value
-		 * set.
-		 */
-		codeActionKind: {
-
-			/**
-			 * The code action kind values that the client supports. When this
-			 * property exists, the client also guarantees that it will
-			 * handle values outside its set gracefully and falls back
-			 * to a default value when unknown.
-			 */
-			valueSet: CodeActionKind[];
-		};
-	};
+	codeActionLiteralSupport?: ClientCodeActionLiteralOptions;
 
 	/**
 	 * Whether code action supports the `isPreferred` property.
@@ -82,12 +67,7 @@ export interface CodeActionClientCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-	resolveSupport?: {
-		/**
-		 * The properties that a client can resolve lazily.
-		 */
-		properties: string[];
-	};
+	resolveSupport?: ClientCodeActionResolveOptions;
 
 	/**
 	 * Whether the client honors the change annotations in
@@ -114,13 +94,56 @@ export interface CodeActionClientCapabilities {
 	 *
 	 * @since 3.18.0 - proposed
 	 */
-	tagSupport?: {
-		/**
-		 * The tags supported by the client.
-		 */
-		valueSet: CodeActionTag[];
-	};
+	tagSupport?: CodeActionTagOptions;
 }
+```
+
+<div class="anchorHolder"><a href="#clientCodeActionLiteralOptions" name="clientCodeActionLiteralOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientCodeActionLiteralOptions = {
+	/**
+	 * The code action kind is supported with the following value
+	 * set.
+	 */
+	codeActionKind: ClientCodeActionKindOptions;
+};
+```
+
+<div class="anchorHolder"><a href="#clientCodeActionKindOptions" name="clientCodeActionKindOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientCodeActionKindOptions = {
+	/**
+	 * The code action kind values the client supports. When this
+	 * property exists the client also guarantees that it will
+	 * handle values outside its set gracefully and falls back
+	 * to a default value when unknown.
+	 */
+	valueSet: CodeActionKind[];
+};
+```
+
+<div class="anchorHolder"><a href="#clientCodeActionResolveOptions" name="clientCodeActionResolveOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientCodeActionResolveOptions = {
+	/**
+	 * The properties that a client can resolve lazily.
+	 */
+	properties: string[];
+};
+```
+
+<div class="anchorHolder"><a href="#codeActionTagOptions" name="codeActionTagOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type CodeActionTagOptions = {
+	/**
+	 * The tags supported by the client.
+	 */
+	valueSet: CodeActionTag[];
+};
 ```
 
 _Server Capability_:
@@ -445,6 +468,24 @@ export type CodeActionTag = 1;
 _Response_:
 * result: `(Command | CodeAction)[]` \| `null` where `CodeAction` is defined as follows:
 
+<div class="anchorHolder"><a href="#codeActionDisabled" name="codeActionDisabled" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Captures why the code action is currently disabled.
+ *
+ * @since 3.18.0
+ */
+export interface CodeActionDisabled {
+	/**
+	 * Human readable description of why the code action is currently disabled.
+	 *
+	 * This is displayed in the code actions UI.
+	 */
+	reason: string;
+}
+```
+
 <div class="anchorHolder"><a href="#codeAction" name="codeAction" class="linkableAnchor"></a></div>
 
 ```typescript
@@ -505,16 +546,7 @@ export interface CodeAction {
 	 *
 	 * @since 3.16.0
 	 */
-	disabled?: {
-
-		/**
-		 * Human readable description of why the code action is currently
-		 * disabled.
-		 *
-		 * This is displayed in the code actions UI.
-		 */
-		reason: string;
-	};
+	disabled?: CodeActionDisabled;
 
 	/**
 	 * The workspace edit this code action performs.
