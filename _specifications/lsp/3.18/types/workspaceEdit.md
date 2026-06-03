@@ -103,7 +103,6 @@ export interface WorkspaceEditClientCapabilities {
 	 * Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	metadataSupport?: boolean;
 
@@ -111,7 +110,6 @@ export interface WorkspaceEditClientCapabilities {
 	 * Whether the client supports snippets as text edits.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	snippetEditSupport?: boolean;
 }

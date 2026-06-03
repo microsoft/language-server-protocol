@@ -159,20 +159,11 @@
 			"method": "textDocument/documentColor",
 			"typeName": "DocumentColorRequest",
 			"result": {
-				"kind": "or",
-				"items": [
-					{
-						"kind": "array",
-						"element": {
-							"kind": "reference",
-							"name": "ColorInformation"
-						}
-					},
-					{
-						"kind": "base",
-						"name": "null"
-					}
-				]
+				"kind": "array",
+				"element": {
+					"kind": "reference",
+					"name": "ColorInformation"
+				}
 			},
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.colorProvider",
@@ -198,20 +189,11 @@
 			"method": "textDocument/colorPresentation",
 			"typeName": "ColorPresentationRequest",
 			"result": {
-				"kind": "or",
-				"items": [
-					{
-						"kind": "array",
-						"element": {
-							"kind": "reference",
-							"name": "ColorPresentation"
-						}
-					},
-					{
-						"kind": "base",
-						"name": "null"
-					}
-				]
+				"kind": "array",
+				"element": {
+					"kind": "reference",
+					"name": "ColorPresentation"
+				}
 			},
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.colorProvider",
@@ -240,7 +222,7 @@
 					}
 				]
 			},
-			"documentation": "A request to list all presentation for a color. The request's\nparameter is of type {@link ColorPresentationParams} the\nresponse is of type {@link ColorInformation ColorInformation[]} or a Thenable\nthat resolves to such."
+			"documentation": "A request to list all presentation for a color. The request's\nparameter is of type {@link ColorPresentationParams} the\nresponse is of type {@link ColorPresentation ColorPresentation[]} or a Thenable\nthat resolves to such."
 		},
 		{
 			"method": "textDocument/foldingRange",
@@ -290,9 +272,8 @@
 			},
 			"messageDirection": "serverToClient",
 			"clientCapability": "workspace.foldingRange.refreshSupport",
-			"documentation": "@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A request to refresh the folding ranges in a document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "textDocument/declaration",
@@ -1138,9 +1119,8 @@
 				"kind": "reference",
 				"name": "InlineCompletionRegistrationOptions"
 			},
-			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "workspace/textDocumentContent",
@@ -1160,9 +1140,8 @@
 				"kind": "reference",
 				"name": "TextDocumentContentRegistrationOptions"
 			},
-			"documentation": "The `workspace/textDocumentContent` request is sent from the client to the\nserver to request the content of a text document.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "The `workspace/textDocumentContent` request is sent from the client to the\nserver to request the content of a text document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "workspace/textDocumentContent/refresh",
@@ -1176,9 +1155,8 @@
 				"kind": "reference",
 				"name": "TextDocumentContentRefreshParams"
 			},
-			"documentation": "The `workspace/textDocumentContent` request is sent from the server to the client to refresh\nthe content of a specific text document.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "The `workspace/textDocumentContent` request is sent from the server to the client to refresh\nthe content of a specific text document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "client/registerCapability",
@@ -1964,9 +1942,8 @@
 				"kind": "reference",
 				"name": "DocumentRangeFormattingRegistrationOptions"
 			},
-			"documentation": "A request to format ranges in a document.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A request to format ranges in a document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "textDocument/onTypeFormatting",
@@ -3952,7 +3929,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The document range for which inline values should be computed."
+					"documentation": "The document range for which inline values information will be returned."
 				},
 				{
 					"name": "context",
@@ -3960,7 +3937,7 @@
 						"kind": "reference",
 						"name": "InlineValueContext"
 					},
-					"documentation": "Additional information about the context in which inline values were\nrequested."
+					"documentation": "Additional information about the context in which inline values information was\nrequested.\t */"
 				}
 			],
 			"mixins": [
@@ -4458,9 +4435,8 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionList",
@@ -4477,9 +4453,8 @@
 					"documentation": "The inline completion items"
 				}
 			],
-			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionItem",
@@ -4529,9 +4504,8 @@
 					"documentation": "An optional {@link Command} that is executed *after* inserting this completion."
 				}
 			],
-			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionRegistrationOptions",
@@ -4552,9 +4526,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentParams",
@@ -4568,9 +4541,8 @@
 					"documentation": "The uri of the text document."
 				}
 			],
-			"documentation": "Parameters for the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Parameters for the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentResult",
@@ -4584,9 +4556,8 @@
 					"documentation": "The text content of the text document. Please note, that the content of\nany subsequent open notifications for the text document might differ\nfrom the returned content due to whitespace and line ending\nnormalizations done on the client"
 				}
 			],
-			"documentation": "Result of the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Result of the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentRegistrationOptions",
@@ -4603,9 +4574,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Text document content provider registration options.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Text document content provider registration options.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentRefreshParams",
@@ -4619,9 +4589,8 @@
 					"documentation": "The uri of the text document to refresh."
 				}
 			],
-			"documentation": "Parameters for the `workspace/textDocumentContent/refresh` request.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Parameters for the `workspace/textDocumentContent/refresh` request.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "RegistrationParams",
@@ -5500,7 +5469,7 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The active parameter of the active signature.\n\nIf `null`, no parameter of the signature is active (for example a named\nargument that does not match any declared parameters). This is only valid\nif the client specifies the client capability\n`textDocument.signatureHelp.noActiveParameterSupport === true`\n\nIf omitted or the value lies outside the range of\n`signatures[activeSignature].parameters` defaults to 0 if the active\nsignature has parameters.\n\nIf the active signature has no parameters it is ignored.\n\nIn future version of the protocol this property might become\nmandatory (but still nullable) to better express the active parameter if\nthe active signature does have any."
+					"documentation": "The active parameter of the active signature.\n\nIf `null`, no parameter of the signature is active (for example a named\nargument that does not match any declared parameters). This is only valid\nif the client specifies the client capability\n`textDocument.signatureHelp.noActiveParameterSupport === true`\n\nIf omitted or the value lies outside the range of\n`signatures[activeSignature].parameters` defaults to 0 if the active\nsignature has parameters.\n\nIf the active signature has no parameters it is ignored.\n\nIn future version of the protocol this property might become\nmandatory (but still nullable) to better express the active parameter if\nthe active signature does have any.\n\nSince version 3.16.0 the `SignatureInformation` itself provides a\n`activeParameter` property and it should be used instead of this one."
 				}
 			],
 			"documentation": "Signature help represents the signature of something\ncallable. There can be multiple signature but only one\nactive and only one active parameter."
@@ -5868,9 +5837,8 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "An optional tooltip.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "An optional tooltip.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "command",
@@ -6363,9 +6331,8 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "The parameters of a {@link DocumentRangesFormattingRequest}.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "The parameters of a {@link DocumentRangesFormattingRequest}.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "DocumentOnTypeFormattingParams",
@@ -6547,9 +6514,8 @@
 						"name": "WorkspaceEditMetadata"
 					},
 					"optional": true,
-					"documentation": "Additional data about the edit.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Additional data about the edit.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The parameters passed via an apply workspace edit request."
@@ -7534,7 +7500,7 @@
 					"documentation": "The text of the inline value."
 				}
 			],
-			"documentation": "Provide inline value as text.\n\n@since 3.17.0",
+			"documentation": "Returns inline value information as the complete text to be shown.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -7546,7 +7512,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The document range for which the inline value applies.\nThe range is used to extract the variable name from the underlying document."
+					"documentation": "The document range for which the inline value applies.\n\nThe range could be used to extract the variable name\nfrom the underlying document."
 				},
 				{
 					"name": "variableName",
@@ -7566,7 +7532,7 @@
 					"documentation": "How to perform the lookup."
 				}
 			],
-			"documentation": "Provide inline value through a variable lookup.\nIf only a range is specified, the variable name will be extracted from the underlying document.\nAn optional variable name can be used to override the extracted name.\n\n@since 3.17.0",
+			"documentation": "To compute inline value through a variable lookup.\n\nIf only a range is specified, the variable name should\nbe extracted from the underlying document.\n\nAn optional variable name could be used to lookup instead\nof the extracted name.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -7578,7 +7544,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The document range for which the inline value applies.\nThe range is used to extract the evaluatable expression from the underlying document."
+					"documentation": "The document range for which the inline value applies.\n\nThe range could be used to extract the evaluatable expression\nfrom the underlying document."
 				},
 				{
 					"name": "expression",
@@ -7587,10 +7553,10 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "If specified the expression overrides the extracted expression."
+					"documentation": "If specified the expression could be evaluated instead."
 				}
 			],
-			"documentation": "Provide an inline value through an expression evaluation.\nIf only a range is specified, the expression will be extracted from the underlying document.\nAn optional expression can be used to override the extracted expression.\n\n@since 3.17.0",
+			"documentation": "To compute an inline value through an expression evaluation.\n\nIf only a range is specified, the expression should be\nextracted from the underlying document.\n\nAn optional expression could be evaluated instead of\nthe extracted expression.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -8106,9 +8072,8 @@
 					"documentation": "Provides information about the currently selected item in the autocomplete widget if it is visible."
 				}
 			],
-			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "StringValue",
@@ -8130,9 +8095,8 @@
 					"documentation": "The snippet string."
 				}
 			],
-			"documentation": "A string value used as a snippet is a template which allows to insert text\nand to control the editor cursor when insertion happens.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Variables are defined with `$name` and\n`${name:default value}`.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A string value used as a snippet is a template which allows to insert text\nand to control the editor cursor when insertion happens.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Variables are defined with `$name` and\n`${name:default value}`.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionOptions",
@@ -8143,9 +8107,8 @@
 				}
 			],
 			"properties": [],
-			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentOptions",
@@ -8162,9 +8125,8 @@
 					"documentation": "The schemes for which the server provides content."
 				}
 			],
-			"documentation": "Text document content provider options.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Text document content provider options.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "Registration",
@@ -8966,9 +8928,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "workspace",
@@ -9787,9 +9748,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Static documentation for a class of code actions.\n\nDocumentation from the provider should be shown in the code actions menu if either:\n\n- Code actions of `kind` are requested by the editor. In this case, the editor will show the documentation that\n  most closely matches the requested code action kind. For example, if a provider has documentation for\n  both `Refactor` and `RefactorExtract`, when the user requests code actions for `RefactorExtract`,\n  the editor will use the documentation for `RefactorExtract` instead of the documentation for `Refactor`.\n\n- Any code actions of `kind` are returned by the provider.\n\nAt most one documentation entry should be shown per provider.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Static documentation for a class of code actions.\n\nDocumentation from the provider should be shown in the code actions menu if either:\n\n- Code actions of `kind` are requested by the editor. In this case, the editor will show the documentation that\n  most closely matches the requested code action kind. For example, if a provider has documentation for\n  both `Refactor` and `RefactorExtract`, when the user requests code actions for `RefactorExtract`,\n  the editor will use the documentation for `RefactorExtract` instead of the documentation for `Refactor`.\n\n- Any code actions of `kind` are returned by the provider.\n\nAt most one documentation entry should be shown per provider.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "resolveProvider",
@@ -9961,9 +9921,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the server supports formatting multiple ranges at once.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the server supports formatting multiple ranges at once.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"mixins": [
@@ -10093,9 +10052,8 @@
 					"documentation": "Signal to the editor that this edit is a refactoring."
 				}
 			],
-			"documentation": "Additional data about a workspace edit.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Additional data about a workspace edit.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "SemanticTokensLegend",
@@ -10221,9 +10179,8 @@
 					"documentation": "The actual identifier of the snippet edit."
 				}
 			],
-			"documentation": "An interactive text edit.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "An interactive text edit.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "ResourceOperation",
@@ -10330,7 +10287,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The glob pattern to match. Glob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)"
+					"documentation": "The glob pattern to match. Glob patterns can have the following syntax:\n- `*` to match zero or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)"
 				},
 				{
 					"name": "matches",
@@ -10603,9 +10560,8 @@
 					"documentation": "The text the range will be replaced with if this completion is accepted."
 				}
 			],
-			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "ClientInfo",
@@ -10795,9 +10751,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The server supports the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "The server supports the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Defines workspace specific capabilities of the server.\n\n@since 3.18.0",
@@ -11018,9 +10973,8 @@
 					"documentation": "Command that is ued to display the documentation to the user.\n\nThe title of this documentation code action is taken from {@linkcode Command.title}"
 				}
 			],
-			"documentation": "Documentation for a class of code actions.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Documentation for a class of code actions.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "NotebookCellTextDocumentFilter",
@@ -11313,9 +11267,8 @@
 						"name": "FoldingRangeWorkspaceClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the folding range requests scoped to the workspace.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the folding range requests scoped to the workspace.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "textDocumentContent",
@@ -11324,9 +11277,8 @@
 						"name": "TextDocumentContentClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Workspace specific client capabilities."
@@ -11635,9 +11587,8 @@
 						"name": "InlineCompletionClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Text document specific client capabilities."
@@ -12166,9 +12117,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "snippetEditSupport",
@@ -12177,9 +12127,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports snippets as text edits.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports snippets as text edits.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			]
 		},
@@ -12440,14 +12389,12 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\nfolding ranges currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\nfolding ranges currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
-			"documentation": "Client workspace capabilities specific to folding ranges\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Client workspace capabilities specific to folding ranges\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentClientCapabilities",
@@ -12462,9 +12409,8 @@
 					"documentation": "Text document content provider supports dynamic registration."
 				}
 			],
-			"documentation": "Client capabilities for a text document content provider.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Client capabilities for a text document content provider.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentSyncClientCapabilities",
@@ -12549,7 +12495,8 @@
 						"kind": "reference",
 						"name": "ClientCompletionItemOptionsKind"
 					},
-					"optional": true
+					"optional": true,
+					"documentation": "The client supports the following completion item kinds."
 				},
 				{
 					"name": "insertTextMode",
@@ -12905,9 +12852,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports documentation for a class of\ncode actions.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports documentation for a class of\ncode actions.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "tagSupport",
@@ -13020,9 +12966,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports formatting multiple ranges at once.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports formatting multiple ranges at once.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Client capabilities of a {@link DocumentRangeFormattingRequest}."
@@ -13402,9 +13347,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports `MarkupContent` in diagnostic messages.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports `MarkupContent` in diagnostic messages.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"extends": [
@@ -13429,9 +13373,8 @@
 					"documentation": "Whether implementation supports dynamic registration for inline completion providers."
 				}
 			],
-			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "NotebookDocumentSyncClientCapabilities",
@@ -13841,9 +13784,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The client supports the `activeParameter` property on\n`SignatureHelp`/`SignatureInformation` being set to `null` to\nindicate that no parameter should be active.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "The client supports the `activeParameter` property on\n`SignatureHelp`/`SignatureInformation` being set to `null` to\nindicate that no parameter should be active.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "@since 3.18.0",
@@ -14729,9 +14671,8 @@
 				{
 					"name": "Debug",
 					"value": 5,
-					"documentation": "A debug message.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "A debug message.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The message type"
@@ -15013,9 +14954,8 @@
 				{
 					"name": "RefactorMove",
 					"value": "refactor.move",
-					"documentation": "Base kind for refactoring move actions: `refactor.move`\n\nExample move actions:\n\n- Move a function to a new file\n- Move a property between classes\n- Move method to base class\n- ...\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Base kind for refactoring move actions: `refactor.move`\n\nExample move actions:\n\n- Move a function to a new file\n- Move a property between classes\n- Move method to base class\n- ...\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "RefactorRewrite",
@@ -15154,16 +15094,14 @@
 				{
 					"name": "D",
 					"value": "d",
-					"documentation": "@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "Delphi",
 					"value": "pascal",
-					"documentation": "@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "Diff",
@@ -15195,7 +15133,7 @@
 				},
 				{
 					"name": "GitRebase",
-					"value": "rebase"
+					"value": "git-rebase"
 				},
 				{
 					"name": "Go",
@@ -15268,9 +15206,8 @@
 				{
 					"name": "Pascal",
 					"value": "pascal",
-					"documentation": "@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "Perl",
@@ -15283,6 +15220,10 @@
 				{
 					"name": "PHP",
 					"value": "php"
+				},
+				{
+					"name": "Plaintext",
+					"value": "plaintext"
 				},
 				{
 					"name": "Powershell",
@@ -15391,9 +15332,8 @@
 					"documentation": "Completion was triggered automatically while editing."
 				}
 			],
-			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "PositionEncodingKind",
@@ -16070,7 +16010,7 @@
 					}
 				]
 			},
-			"documentation": "A document filter denotes a document by different properties like\nthe {@link TextDocument.languageId language}, the {@link Uri.scheme scheme} of\nits resource, or a glob-pattern that is applied to the {@link TextDocument.fileName path}.\n\nGlob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@sample A language filter that applies to typescript files on disk: `{ language: 'typescript', scheme: 'file' }`\n@sample A language filter that applies to all package.json paths: `{ language: 'json', pattern: '**package.json' }`\n\n@since 3.17.0",
+			"documentation": "A document filter denotes a document by different properties like\nthe {@link TextDocument.languageId language}, the {@link Uri.scheme scheme} of\nits resource, or a glob-pattern that is applied to the {@link TextDocument.fileName path}.\n\nGlob patterns can have the following syntax:\n- `*` to match zero or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@sample A language filter that applies to typescript files on disk: `{ language: 'typescript', scheme: 'file' }`\n@sample A language filter that applies to all package.json paths: `{ language: 'json', pattern: '**package.json' }`\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -16101,7 +16041,7 @@
 				"kind": "base",
 				"name": "string"
 			},
-			"documentation": "The glob pattern to watch relative to the base path. Glob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@since 3.17.0",
+			"documentation": "The glob pattern to watch relative to the base path. Glob patterns can have the following syntax:\n- `*` to match zero or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{

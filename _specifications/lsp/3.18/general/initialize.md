@@ -499,7 +499,6 @@ export type WorkspaceClientCapabilities = {
 	 * scoped to the workspace.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	foldingRange?: FoldingRangeWorkspaceClientCapabilities;
 
@@ -508,7 +507,6 @@ export type WorkspaceClientCapabilities = {
 	 * request.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	textDocumentContent?: TextDocumentContentClientCapabilities;
 }
@@ -1027,7 +1025,6 @@ export type WorkspaceOptions = {
 	 * The server supports the `workspace/textDocumentContent` request.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	textDocumentContent?: TextDocumentContentOptions
 		| TextDocumentContentRegistrationOptions;

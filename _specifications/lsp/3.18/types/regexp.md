@@ -17,7 +17,6 @@ The following client capability is used to announce a client's regular expressio
  * Regular Expression Engines
  *
  * @since 3.18.0
- * @proposed
  */
 export namespace RegularExpressionEngineKind {
 	export const ES2020 = 'ES2020' as const;

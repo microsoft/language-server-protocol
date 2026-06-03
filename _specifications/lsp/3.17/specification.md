@@ -1,21 +1,17 @@
 ---
 title: Specification
-shortTitle: 3.17 (Upcoming)
+shortTitle: 3.17
 layout: specifications
 sectionid: specification-3-17
 toc: specification-3-17-toc
 fullTitle: Language Server Protocol Specification - 3.17
 index: 2
 redirect_from:
-  - specification
-  - specification/
-  - specifications/specification-current
-  - specifications/specification-current/
   - specifications/specification-3-17
   - specifications/specification-3-17/
 ---
 
-This document describes the 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
+This document describes the previous 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.17/specification.md).
 

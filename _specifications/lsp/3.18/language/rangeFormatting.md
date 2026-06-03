@@ -24,7 +24,6 @@ export interface DocumentRangeFormattingClientCapabilities {
 	 * Whether the client supports formatting multiple ranges at once.
 	 *
 	 * @since 3.18.0
- 	 * @proposed
 	 */
 	rangesSupport?: boolean;
 }
@@ -43,7 +42,6 @@ export interface DocumentRangeFormattingOptions extends
 	 * Whether the server supports formatting multiple ranges at once.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	rangesSupport?: boolean;
 }

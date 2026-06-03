@@ -84,7 +84,6 @@ export interface CodeActionClientCapabilities {
 	 * Whether the client supports documentation for a class of code actions.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	 documentationSupport?: boolean;
 
@@ -92,7 +91,7 @@ export interface CodeActionClientCapabilities {
 	 * Client supports the tag property on a code action. Clients
 	 * supporting tags have to handle unknown tags gracefully.
 	 *
-	 * @since 3.18.0 - proposed
+	 * @since 3.18.0
 	 */
 	tagSupport?: CodeActionTagOptions;
 }
@@ -157,7 +156,6 @@ _Server Capability_:
  * Documentation for a class of code actions.
  *
  * @since 3.18.0
- * @proposed
  */
 export interface CodeActionKindDocumentation {
 	/**
@@ -208,7 +206,6 @@ export interface CodeActionOptions extends WorkDoneProgressOptions {
 	 * At most one documentation entry should be shown per provider.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	documentation?: CodeActionKindDocumentation[];
 
@@ -330,7 +327,7 @@ export namespace CodeActionKind {
 	 * - Move method to base class
 	 * - ...
 	 *
-	 * @since 3.18.0 - proposed
+	 * @since 3.18.0
 	 */
 	export const RefactorMove: CodeActionKind = 'refactor.move';
 
@@ -454,7 +451,7 @@ export type CodeActionTriggerKind = 1 | 2;
 /**
  * Code action tags are extra annotations that tweak the behavior of a code action.
  *
- * @since 3.18.0 - proposed
+ * @since 3.18.0
  */
 export namespace CodeActionTag {
 	/**
@@ -571,7 +568,7 @@ export interface CodeAction {
 	/**
  	 * Tags for this code action.
 	 *
-	 * @since 3.18.0 - proposed
+	 * @since 3.18.0
 	 */
 	tags?: CodeActionTag[];
 }
