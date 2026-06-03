@@ -39,6 +39,7 @@ index: 1
 | Bash | [Mads Hartmann](https://github.com/mads-hartmann/) | [Bash Language Server](https://github.com/mads-hartmann/bash-language-server) | TypeScript |
 | Batch | [RechInformatica](https://github.com/RechInformatica) | [rech-editor-batch](https://github.com/RechInformatica/rech-editor-batch/tree/master/src/lsp) | TypeScript |
 | [Bazel](https://bazel.build/) | [cameron-martin](https://github.com/cameron-martin) | [bazel-lsp](https://github.com/cameron-martin/bazel-lsp) | Rust |
+| [Bazel](https://bazel.build/) | [withered-magic](https://github.com/withered-magic) | [starpls](https://github.com/withered-magic/starpls) | Rust |
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
 | [BitBake](https://docs.yoctoproject.org/bitbake/) | [The Yocto Project](https://github.com/yoctoproject) | [BitBake Language Server](https://github.com/yoctoproject/vscode-bitbake/tree/staging/server) | TypeScript |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
