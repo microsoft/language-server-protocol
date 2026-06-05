@@ -731,7 +731,7 @@ Since 3.17 there is a meta model describing the LSP protocol:
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
-#### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (mm/dd/yyyy)</a>
+#### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (06/04/2026)</a>
 
 * Added inline completions support.
 * Added dynamic text document content support.
