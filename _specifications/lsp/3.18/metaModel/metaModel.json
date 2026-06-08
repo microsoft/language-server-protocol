@@ -3937,7 +3937,7 @@
 						"kind": "reference",
 						"name": "InlineValueContext"
 					},
-					"documentation": "Additional information about the context in which inline values information was\nrequested.\t */"
+					"documentation": "Additional information about the context in which inline values information was\nrequested."
 				}
 			],
 			"mixins": [
