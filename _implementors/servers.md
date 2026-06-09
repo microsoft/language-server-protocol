@@ -312,6 +312,7 @@ index: 1
 | [Wolfram Language](https://www.wolfram.com/language/) ([Mathematica](https://www.wolfram.com/mathematica)) | [kenkangxgwe](https://github.com/kenkangxgwe) | [lsp-wl](https://github.com/kenkangxgwe/lsp-wl) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [Wolfram Research](https://github.com/WolframResearch) | [LSPServer](https://github.com/WolframResearch/lspserver) | Wolfram Language |
 | [Wolfram Language](https://www.wolfram.com) | [markjet7](https://github.com/markjet7) | [wlsp](https://github.com/markjet7/wlsp) | Wolfram Language |
+| [wks](https://docs.yoctoproject.org/ref-manual/kickstart.html) | [Anakin Childerhose](https://github.com/anakin4747/) | [wksls](https://github.com/anakin4747/wksls) | Bash |
 | WXML| [Qiming Zhao](https://github.com/chemzqm)| [wxml-languageserver](https://github.com/chemzqm/wxml-languageserver) | TypeScript |
 | XML | IBM | [XML Language Server](https://github.com/microclimate-devops/xml-language-server) | Java |
 | XML | [Red Hat Developers](https://github.com/redhat-developer) and [Angelo ZERR](https://github.com/angelozerr/) | [XML Language Server (LemMinX)](https://github.com/eclipse/lemminx) | Java |
