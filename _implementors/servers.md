@@ -184,6 +184,7 @@ index: 1
 | Perl | GRICHTER | [Perl::LanguageServer](https://metacpan.org/pod/Perl::LanguageServer) | Perl |
 | Perl | [Marc Reisner](https://github.com/FractalBoy) | [PLS](https://github.com/FractalBoy/perl-language-server)| Perl |
 | Perl | [Brian Scannell](https://github.com/bscan) | [Perl Navigator](https://github.com/bscan/PerlNavigator)| Perl |
+| Perl | [Veesh Goldman](https://github.com/rabbiveesh) | [perl-lsp](https://github.com/tree-sitter-perl/perl-tree-sitter-lsp) | Rust |
 | Pest | [Pest Maintainers](https://github.com/orgs/pest-parser/teams/pest-ide-tools) | [Pest IDE Tools](https://github.com/pest-parser/pest-ide-tools) | Rust |
 | Crane **PHP** | [HvyIndustries](https://github.com/HvyIndustries) | [crane](https://github.com/HvyIndustries/crane) | TypeScript |
 | PHP | [Ben Mewburn](https://github.com/bmewburn) | [intelephense](https://github.com/bmewburn/vscode-intelephense) | TypeScript |
