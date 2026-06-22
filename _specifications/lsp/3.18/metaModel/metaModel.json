@@ -1,6 +1,6 @@
 {
 	"metaData": {
-		"version": "3.18.0"
+		"version": "3.17.0"
 	},
 	"requests": [
 		{
@@ -1028,7 +1028,7 @@
 			},
 			"partialResult": {
 				"kind": "reference",
-				"name": "DocumentDiagnosticReportPartialResult"
+				"name": "DocumentDiagnosticReportProgress"
 			},
 			"errorData": {
 				"kind": "reference",
@@ -1038,7 +1038,7 @@
 				"kind": "reference",
 				"name": "DiagnosticRegistrationOptions"
 			},
-			"documentation": "The document diagnostic request definition.\n\n@since 3.17.0",
+			"documentation": "The document diagnostic request definition.\n\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -4164,36 +4164,6 @@
 				}
 			],
 			"documentation": "Parameters of the document diagnostic request.\n\n@since 3.17.0",
-			"since": "3.17.0"
-		},
-		{
-			"name": "DocumentDiagnosticReportPartialResult",
-			"properties": [
-				{
-					"name": "relatedDocuments",
-					"type": {
-						"kind": "map",
-						"key": {
-							"kind": "base",
-							"name": "DocumentUri"
-						},
-						"value": {
-							"kind": "or",
-							"items": [
-								{
-									"kind": "reference",
-									"name": "FullDocumentDiagnosticReport"
-								},
-								{
-									"kind": "reference",
-									"name": "UnchangedDocumentDiagnosticReport"
-								}
-							]
-						}
-					}
-				}
-			],
-			"documentation": "A partial result for a document diagnostic report.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -7745,61 +7715,33 @@
 			"since": "3.17.0"
 		},
 		{
-			"name": "FullDocumentDiagnosticReport",
+			"name": "DocumentDiagnosticReportPartialResult",
 			"properties": [
 				{
-					"name": "kind",
+					"name": "relatedDocuments",
 					"type": {
-						"kind": "stringLiteral",
-						"value": "full"
-					},
-					"documentation": "A full document diagnostic report."
-				},
-				{
-					"name": "resultId",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"optional": true,
-					"documentation": "An optional result id. If provided it will\nbe sent on the next diagnostic request for the\nsame document."
-				},
-				{
-					"name": "items",
-					"type": {
-						"kind": "array",
-						"element": {
-							"kind": "reference",
-							"name": "Diagnostic"
+						"kind": "map",
+						"key": {
+							"kind": "base",
+							"name": "DocumentUri"
+						},
+						"value": {
+							"kind": "or",
+							"items": [
+								{
+									"kind": "reference",
+									"name": "FullDocumentDiagnosticReport"
+								},
+								{
+									"kind": "reference",
+									"name": "UnchangedDocumentDiagnosticReport"
+								}
+							]
 						}
-					},
-					"documentation": "The actual items."
+					}
 				}
 			],
-			"documentation": "A diagnostic report with a full set of problems.\n\n@since 3.17.0",
-			"since": "3.17.0"
-		},
-		{
-			"name": "UnchangedDocumentDiagnosticReport",
-			"properties": [
-				{
-					"name": "kind",
-					"type": {
-						"kind": "stringLiteral",
-						"value": "unchanged"
-					},
-					"documentation": "A document diagnostic report indicating\nno changes to the last result. A server can\nonly return `unchanged` if result ids are\nprovided."
-				},
-				{
-					"name": "resultId",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"documentation": "A result id which will be sent on the next\ndiagnostic request for the same document."
-				}
-			],
-			"documentation": "A diagnostic report indicating that the last returned\nreport is still accurate.\n\n@since 3.17.0",
+			"documentation": "A partial result for a document diagnostic report.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -10310,6 +10252,64 @@
 			],
 			"documentation": "A pattern to describe in which file operation requests or notifications\nthe server is interested in receiving.\n\n@since 3.16.0",
 			"since": "3.16.0"
+		},
+		{
+			"name": "FullDocumentDiagnosticReport",
+			"properties": [
+				{
+					"name": "kind",
+					"type": {
+						"kind": "stringLiteral",
+						"value": "full"
+					},
+					"documentation": "A full document diagnostic report."
+				},
+				{
+					"name": "resultId",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "An optional result id. If provided it will\nbe sent on the next diagnostic request for the\nsame document."
+				},
+				{
+					"name": "items",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "Diagnostic"
+						}
+					},
+					"documentation": "The actual items."
+				}
+			],
+			"documentation": "A diagnostic report with a full set of problems.\n\n@since 3.17.0",
+			"since": "3.17.0"
+		},
+		{
+			"name": "UnchangedDocumentDiagnosticReport",
+			"properties": [
+				{
+					"name": "kind",
+					"type": {
+						"kind": "stringLiteral",
+						"value": "unchanged"
+					},
+					"documentation": "A document diagnostic report indicating\nno changes to the last result. A server can\nonly return `unchanged` if result ids are\nprovided."
+				},
+				{
+					"name": "resultId",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "A result id which will be sent on the next\ndiagnostic request for the same document."
+				}
+			],
+			"documentation": "A diagnostic report indicating that the last returned\nreport is still accurate.\n\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceFullDocumentDiagnosticReport",
@@ -15829,6 +15829,24 @@
 			},
 			"documentation": "The result of a document diagnostic pull request. A report can\neither be a full report containing all diagnostics for the\nrequested document or an unchanged report indicating that nothing\nhas changed in terms of diagnostics in comparison to the last\npull request.\n\n@since 3.17.0",
 			"since": "3.17.0"
+		},
+		{
+			"name": "DocumentDiagnosticReportProgress",
+			"type": {
+				"kind": "or",
+				"items": [
+					{
+						"kind": "reference",
+						"name": "DocumentDiagnosticReport"
+					},
+					{
+						"kind": "reference",
+						"name": "DocumentDiagnosticReportPartialResult"
+					}
+				]
+			},
+			"documentation": "The document diagnostic report used when reporting partial result.\n\nWhen using partial results, the first literal sent needs to be a\nDocumentDiagnosticReport providing the diagnostics on the document\nfollowed by n DocumentDiagnosticReportPartialResult literals providing\nthe diagnostics for related documents.\n\n```\nDocumentDiagnosticReport\nDocumentDiagnosticReportPartialResult\nDocumentDiagnosticReportPartialResult\n...\n```\n\n@since 3.18.1",
+			"since": "3.18.1"
 		},
 		{
 			"name": "PrepareRenameResult",
