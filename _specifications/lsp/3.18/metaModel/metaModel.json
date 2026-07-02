@@ -15099,7 +15099,7 @@
 				},
 				{
 					"name": "Delphi",
-					"value": "pascal",
+					"value": "delphi",
 					"documentation": "@since 3.18.0",
 					"since": "3.18.0"
 				},
