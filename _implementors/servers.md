@@ -27,6 +27,7 @@ index: 1
 | Apex | Salesforce |  [VS Code Apex extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-apex) | TypeScript |
 | Apex | [October Swimmer](https://www.octoberswimmer.com/) |  [aer](https://github.com/octoberswimmer/aer-dist) | Go |
 | [Astro](https://astro.build) | [Astro team](https://github.com/withastro) |  [withastro/language-tools](https://github.com/withastro/language-tools) | TypeScript |
+| [AutoHotKey v2](https://www.autohotkey.com/) | [thqby](https://github.com/thqby) | [vscode-autohotkey2-lsp](https://github.com/thqby/vscode-autohotkey2-lsp) | TypeScript |
 | [Boriel Basic](https://zxbasic.readthedocs.io/) | [rtorralba](https://github.com/rtorralba) | [boriel-basic-lsp](https://github.com/boriel-basic/boriel-basic-lsp) | Boriel Basic |
 | IBM High Level **Assembler** | [Broadcom](https://www.broadcom.com/) | [HLASM Language Support](https://github.com/eclipse/che-che4z-lsp-for-hlasm) | C++ |
 | [IBM High Level **Assembler**](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.2.0/com.ibm.zos.v2r2.e0zc100/hlasm.htm) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
