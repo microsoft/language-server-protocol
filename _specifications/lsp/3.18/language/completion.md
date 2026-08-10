@@ -378,7 +378,7 @@ export interface CompletionContext {
 ```
 
 _Response_:
-* result: `CompletionItem[]` \| `CompletionList` \| `null`. If a `CompletionItem[]` or `null` is provided, it is interpreted to be complete, so it is the same as `{ isIncomplete: false, items }`
+* result: `CompletionItem[]` \| `CompletionList` \| `null`. If a `CompletionItem[]` is provided, it is interpreted to be complete, so it is the same as `{ isIncomplete: false, items }`. `null` is interpreted as an empty `CompletionItem[]`.
 
 <div class="anchorHolder"><a href="#editRangeWithInsertReplace" name="editRangeWithInsertReplace" class="linkableAnchor"></a></div>
 
