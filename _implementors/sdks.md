@@ -39,4 +39,5 @@ index: 3
 | TypeScript | [Volar team](https://volarjs.dev) | [Volar.js](https://github.com/volarjs/volar.js)|
 | TypeScript | [Volar team](https://volarjs.dev) | [Volar services](https://github.com/volarjs/services)|
 | Go | [TobiasYin](https://github.com/TobiasYin/) | [go-lsp](https://github.com/TobiasYin/go-lsp/)|
+| Go | [Koichi Shiraishi](https://github.com/zchee) | [protocol](https://github.com/go-language-server/protocol) |
 {: .table .table-bordered .table-responsive}
