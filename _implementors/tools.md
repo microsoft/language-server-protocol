@@ -13,7 +13,8 @@ index: 2
 | [Acme](https://en.wikipedia.org/wiki/Acme_(text_editor)) | [Fazlul Shahriar](https://github.com/fhs) | [acme-lsp](https://github.com/fhs/acme-lsp) |
 | [Atom](https://atom.io/) | [GitHub](https://github.com/) | [atom-languageclient](https://www.npmjs.com/package/atom-languageclient) |
 | [BBEdit](https://www.barebones.com/products/bbedit) | [Bare Bones Software, Inc.](https://www.barebones.com/) | Proprietary |
-| [Brackets](http://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) |
+| [Brackets](https://brackets.io) | [Adobe](https://github.com/adobe) | [brackets](https://github.com/adobe/brackets) |
+| [Phoenix Code](https://phcode.io/) | [Core.Ai](https://core.ai/) | [Phoenix Code](https://github.com/phcode-dev/phoenix) |
 | [Coginiti Pro](https://www.coginiti.co/products/coginiti-pro/) | [Coginiti](https://www.coginiti.co) | |
 | [Coginiti Premium](https://www.coginiti.co/products/coginiti-premium/) | [Coginiti](https://www.coginiti.co) | |
 | [Cloud Studio](https://studio.dev.tencent.com/) | CODING |  |
@@ -29,6 +30,7 @@ index: 2
 | Emacs | [zbelial](https://github.com/zbelial) | [lspce](https://github.com/zbelial/lspce) |
 | Emacs | [JadeStrong](https://github.com/jadestrong) | [Lsp-Proxy](https://github.com/jadestrong/lsp-proxy) |
 | [ecode](https://github.com/SpartanJ/ecode) | [Martín Lucas Golini](https://github.com/SpartanJ) | [ecode](https://github.com/SpartanJ/ecode) | 
+| [Fresh](https://sinelaw.github.io/fresh/) | [sinelaw](https://github.com/sinelaw) | [Fresh](https://github.com/sinelaw/fresh/blob/master/docs/USER_GUIDE.md#lsp-integration) |
 | [Geany](https://www.geany.org) | [Jiří Techet](https://github.com/techee) | [geany-lsp](https://github.com/techee/geany-lsp) |
 | [GNOME Builder](https://wiki.gnome.org/Apps/Builder) | [gnome.org](https://wiki.gnome.org/Apps/Builder/) | [language server client](https://git.gnome.org/browse/gnome-builder/tree/src/libide/lsp) |
 | [GoLand](https://www.jetbrains.com/go) | [JetBrains](https://www.jetbrains.com) | Proprietary |
@@ -38,7 +40,7 @@ index: 2
 | [JCIDE](https://www.javacardos.com/tools) | [Javacardos](https://www.javacardos.com) | [JCIDE](https://www.javacardos.com/javacardforum/viewtopic.php?f=5&t=2108&p=6175#p6175) |
 | [JetBrains Fleet](https://www.jetbrains.com/fleet/) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [JupyterLab](https://github.com/jupyterlab/jupyterlab) | [krassowski](https://github.com/krassowski) | [jupyterlab-lsp](https://github.com/jupyter-lsp/jupyterlab-lsp) |
-| [Kakoune](http://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
+| [Kakoune](https://kakoune.org/) | [ul](https://github.com/ul) | [kak-lsp](https://github.com/ul/kak-lsp) |
 | [Kate](https://kate-editor.org) | [Kate Team](https://kate-editor.org) | [kate](https://invent.kde.org/kde/kate) |
 | [Lite XL](https://lite-xl.com) | [Lite XL Team](https://lite-xl.com) | [LSP Plugin](https://github.com/lite-xl/lite-xl-lsp) |
 | [Micro](https://micro-editor.github.io/)| [zyedidia](https://github.com/zyedidia) | [micro-plugin-lsp](https://github.com/AndCake/micro-plugin-lsp) |
@@ -48,17 +50,17 @@ index: 2
 | [MS Paint IDE](https://ms-paint-i.de/) | [RubbaBoy](https://github.com/RubbaBoy) | [MS Paint IDE](https://github.com/MSPaintIDE/MSPaintIDE) |
 | [Multiple editors](https://github.com/Valloric/ycmd#known-ycmd-clients) | Ycmd team | [ycmd](https://github.com/Valloric/ycmd) | 
 | [Neovim](https://neovim.io/) | [Neovim Team](https://github.com/neovim) | [native support since 0.5](https://neovim.io/doc/user/lsp/) |
-| [Nova](https://nova.app) | [Panic Inc](http://panic.com) | Proprietary |
+| [Nova](https://nova.app) | [Panic Inc](https://panic.com) | Proprietary |
 | [Oni](https://www.onivim.io) | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 | [OpenSumi](https://opensumi.com) | [opensumi](https://github.com/opensumi) | [opensumi](https://github.com/opensumi/core) |
 | [PhpStorm](https://www.jetbrains.com/phpstorm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [PyCharm](https://www.jetbrains.com/pycharm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
-| [Qt Creator](https://doc-snapshots.qt.io/qtcreator-9.0/creator-language-servers.html) | [The Qt Company](http://qt.io/) | [qtcreator](https://github.com/qt-creator/qt-creator)
+| [Qt Creator](https://doc-snapshots.qt.io/qtcreator-9.0/creator-language-servers.html) | [The Qt Company](https://www.qt.io/) | [qtcreator](https://github.com/qt-creator/qt-creator)
 | [RAD Studio](https://www.embarcadero.com/products/rad-studio) ([Delphi](https://www.embarcadero.com/products/delphi) and [C++Builder](https://www.embarcadero.com/products/cbuilder)) | [Embarcadero](https://www.embarcadero.com/) | Proprietary |
 | [Rider](https://www.jetbrains.com/rider) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Ruby](https://www.jetbrains.com/ruby) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [RJ TextEd](https://www.rj-texted.se/) | [Rickard Johansson](https://github.com/rickard67) | [lsp](https://github.com/rickard67/LSP-Pascal-Library) |
-| [Spyder](http://spyder-ide.org) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
+| [Spyder](https://www.spyder-ide.org/) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
 | [Sublime Text](https://www.sublimetext.com/) | [Raoul Wols](https://github.com/rwols) | [lsp](https://github.com/sublimelsp/LSP) |
 | [Textadept](https://orbitalquark.github.io/textadept) | [orbitalquark](https://github.com/orbitalquark) | [textadept-lsp](https://github.com/orbitalquark/textadept-lsp) |
 | [Theia](https://github.com/theia-ide/theia) | [theia-ide](https://github.com/theia-ide) | [theia](https://github.com/theia-ide/theia) |

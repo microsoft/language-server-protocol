@@ -97,20 +97,12 @@ export interface WorkspaceEditClientCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-	changeAnnotationSupport?: {
-		/**
-		 * Whether the client groups edits with equal labels into tree nodes,
-		 * for instance all edits labelled with "Changes in Strings" would
-		 * be a tree node.
-		 */
-		groupsOnLabel?: boolean;
-	};
+	changeAnnotationSupport?: ChangeAnnotationsSupportOptions;
 
 	/**
 	 * Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	metadataSupport?: boolean;
 
@@ -118,10 +110,22 @@ export interface WorkspaceEditClientCapabilities {
 	 * Whether the client supports snippets as text edits.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	snippetEditSupport?: boolean;
 }
+```
+
+<div class="anchorHolder"><a href="#changeAnnotationsSupportOptions" name="changeAnnotationsSupportOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ChangeAnnotationsSupportOptions = {
+	/**
+	 * Whether the client groups edits with equal labels into tree nodes,
+	 * for instance all edits labelled with "Changes in Strings" would
+	 * be a tree node.
+	 */
+	groupsOnLabel?: boolean;
+};
 ```
 
 <div class="anchorHolder"><a href="#resourceOperationKind" name="resourceOperationKind" class="linkableAnchor"></a></div>

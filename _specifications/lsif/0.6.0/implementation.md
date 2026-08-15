@@ -83,7 +83,7 @@ If the LSIF exporter does not work across platforms (Windows, Linux, Mac), platf
 
 ### Output format
 
-The LSIF exporter is expected to implement the [line-delimited JSON](https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON) (also known as [JSON lines](http://jsonlines.org/)) output format: series of JSON objects (vertex or edge) separated by newline. Since JSON lines is suitable for streaming output and works better for larger repos, it is preferred over a JSON array output.
+The LSIF exporter is expected to implement the [line-delimited JSON](https://en.wikipedia.org/wiki/JSON_streaming#Line-delimited_JSON) (also known as [JSON lines](https://jsonlines.org/)) output format: series of JSON objects (vertex or edge) separated by newline. Since JSON lines is suitable for streaming output and works better for larger repos, it is preferred over a JSON array output.
 
 If an LSIF consumer requires a valid JSON array as input (for example, the VS Code LSIF extension), the JSON lines output can be converted into a JSON array by piping into a conversion tool.
 

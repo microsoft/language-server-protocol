@@ -2,7 +2,8 @@
 
 > *Since version 3.17.0*
 
-The inline value request is sent from the client to the server to compute inline values for a given text document that may be rendered in the editor at the end of lines.
+The request is sent from the client to the server to return entries in a given document range for which inline values may be computed and rendered in the editor at the end of lines.
+For programming languages, the editor usually uses a debugger to get the value of an entry.
 
 _Client Capability_:
 * property name (optional): `textDocument.inlineValue`
@@ -75,12 +76,12 @@ export interface InlineValueParams extends WorkDoneProgressParams {
 	textDocument: TextDocumentIdentifier;
 
 	/**
-	 * The document range for which inline values should be computed.
+	 * The document range for which inline values information will be returned.
 	 */
 	range: Range;
 
 	/**
-	 * Additional information about the context in which inline values were
+	 * Additional information about the context in which inline values information was
 	 * requested.
 	 */
 	context: InlineValueContext;
@@ -115,7 +116,7 @@ _Response_:
 
 ```typescript
 /**
- * Provide inline value as text.
+ * Returns inline value information as the complete text to be shown.
  *
  * @since 3.17.0
  */
@@ -136,19 +137,19 @@ export interface InlineValueText {
 
 ```typescript
 /**
- * Provide inline value through a variable lookup.
+ * To compute inline value through a variable lookup.
  *
- * If only a range is specified, the variable name will be extracted from
+ * If only a range is specified, the variable name should be extracted from
  * the underlying document.
  *
- * An optional variable name can be used to override the extracted name.
+ * An optional variable name could be used to lookup instead of the extracted name.
  *
  * @since 3.17.0
  */
 export interface InlineValueVariableLookup {
 	/**
 	 * The document range for which the inline value applies.
-	 * The range is used to extract the variable name from the underlying
+	 * The range could be used to extract the variable name from the underlying
 	 * document.
 	 */
 	range: Range;
@@ -169,25 +170,25 @@ export interface InlineValueVariableLookup {
 
 ```typescript
 /**
- * Provide an inline value through an expression evaluation.
+ * To compute an inline value through an expression evaluation.
  *
- * If only a range is specified, the expression will be extracted from the
+ * If only a range is specified, the expression should be extracted from the
  * underlying document.
  *
- * An optional expression can be used to override the extracted expression.
+ * An optional expression could be evaluated instead of the extracted expression.
  *
  * @since 3.17.0
  */
 export interface InlineValueEvaluatableExpression {
 	/**
 	 * The document range for which the inline value applies.
-	 * The range is used to extract the evaluatable expression from the
+	 * The range could be used to extract the evaluatable expression from the
 	 * underlying document.
 	 */
 	range: Range;
 
 	/**
-	 * If specified the expression overrides the extracted expression.
+	 * If specified the expression could be evaluated instead.
 	 */
 	expression?: string;
 }

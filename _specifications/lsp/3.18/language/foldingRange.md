@@ -39,30 +39,43 @@ export interface FoldingRangeClientCapabilities {
 	 *
 	 * @since 3.17.0
 	 */
-	foldingRangeKind? : {
-		/**
-		 * The folding range kind values the client supports. When this
-		 * property exists the client also guarantees that it will
-		 * handle values outside its set gracefully and falls back
-		 * to a default value when unknown.
-		 */
-		valueSet?: FoldingRangeKind[];
-	};
+	foldingRangeKind?: ClientFoldingRangeKindOptions;
 
 	/**
 	 * Specific options for the folding range.
+	 *
 	 * @since 3.17.0
 	 */
-	foldingRange?: {
-		/**
-		* If set, the client signals that it supports setting collapsedText on
-		* folding ranges to display custom labels instead of the default text.
-		*
-		* @since 3.17.0
-		*/
-		collapsedText?: boolean;
-	};
+	foldingRange?: ClientFoldingRangeOptions;
 }
+```
+
+<div class="anchorHolder"><a href="#clientFoldingRangeKindOptions" name="clientFoldingRangeKindOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientFoldingRangeKindOptions = {
+	/**
+	 * The folding range kind values the client supports. When this
+	 * property exists the client also guarantees that it will
+	 * handle values outside its set gracefully and falls back
+	 * to a default value when unknown.
+	 */
+	valueSet?: FoldingRangeKind[];
+};
+```
+
+<div class="anchorHolder"><a href="#clientFoldingRangeOptions" name="clientFoldingRangeOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientFoldingRangeOptions = {
+	/**
+	 * If set, the client signals that it supports setting collapsedText on
+	 * folding ranges to display custom labels instead of the default text.
+	 *
+	 * @since 3.17.0
+	 */
+	collapsedText?: boolean;
+};
 ```
 
 _Server Capability_:
@@ -185,7 +198,7 @@ export interface FoldingRange {
 	 * collapsed. If not defined or not supported by the client, a default
 	 * will be chosen by the client.
 	 *
-	 * @since 3.17.0 - proposed
+	 * @since 3.17.0
 	 */
 	collapsedText?: string;
 }

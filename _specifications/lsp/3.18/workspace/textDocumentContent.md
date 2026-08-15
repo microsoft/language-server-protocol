@@ -86,7 +86,6 @@ _Response_:
  * Result of the `workspace/textDocumentContent` request.
  *
  * @since 3.18.0
- * @proposed
  */
 export interface TextDocumentContentResult {
 	/**

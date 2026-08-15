@@ -24,19 +24,7 @@ export interface DocumentSymbolClientCapabilities {
 	 * Specific capabilities for the `SymbolKind` in the
 	 * `textDocument/documentSymbol` request.
 	 */
-	symbolKind?: {
-		/**
-		 * The symbol kind values the client supports. When this
-		 * property exists the client also guarantees that it will
-		 * handle values outside its set gracefully and falls back
-		 * to a default value when unknown.
-		 *
-		 * If this property is not present the client only supports
-		 * the symbol kinds from `File` to `Array` as defined in
-		 * the initial version of the protocol.
-		 */
-		valueSet?: SymbolKind[];
-	};
+	symbolKind?: ClientSymbolKindOptions;
 
 	/**
 	 * The client supports hierarchical document symbols.
@@ -50,12 +38,7 @@ export interface DocumentSymbolClientCapabilities {
 	 *
 	 * @since 3.16.0
 	 */
-	tagSupport?: {
-		/**
-		 * The tags supported by the client.
-		 */
-		valueSet: SymbolTag[];
-	};
+	tagSupport?: ClientSymbolTagOptions;
 
 	/**
 	 * The client supports an additional label presented in the UI when
@@ -65,6 +48,35 @@ export interface DocumentSymbolClientCapabilities {
 	 */
 	labelSupport?: boolean;
 }
+```
+
+<div class="anchorHolder"><a href="#clientSymbolKindOptions" name="clientSymbolKindOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientSymbolKindOptions = {
+	/**
+	 * The symbol kind values the client supports. When this
+	 * property exists the client also guarantees that it will
+	 * handle values outside its set gracefully and falls back
+	 * to a default value when unknown.
+	 *
+	 * If this property is not present the client only supports
+	 * the symbol kinds from `File` to `Array` as defined in
+	 * the initial version of the protocol.
+	 */
+	valueSet?: SymbolKind[];
+};
+```
+
+<div class="anchorHolder"><a href="#clientSymbolTagOptions" name="clientSymbolTagOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientSymbolTagOptions = {
+	/**
+	 * The tags supported by the client.
+	 */
+	valueSet: SymbolTag[];
+};
 ```
 
 _Server Capability_:
