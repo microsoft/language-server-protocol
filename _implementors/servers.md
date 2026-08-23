@@ -54,6 +54,7 @@ index: 1
 | [CDS](https://cap.cloud.sap/docs/cds/) | [SAP](https://www.sap.com/) | [@sap/cds-lsp](https://www.npmjs.com/package/@sap/cds-lsp) (no code repository available) | JavaScript |
 | CSS/LESS/SASS | MS | [vscode-css-languageserver](https://github.com/Microsoft/vscode/tree/master/extensions/css-language-features/server) | TypeScript |
 | [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) | Ceylon |
+| [Civet](https://civet.dev/) | [Daniel X. Moore](https://github.com/DanielXMoore) | [Civet Language Server](https://github.com/DanielXMoore/Civet/tree/main/lsp/server) | Civet |
 | [Clarity](https://docs.stacks.co/docs/write-smart-contracts/) | [Hiro](https://hiro.so) | [clarity-lsp](https://github.com/hirosystems/clarity-lsp) | TypeScript |
 | [Clojure](https://clojure.org/) | [Eric Dallo](https://github.com/ericdallo) | [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp) | Clojure |
 | [CMake](https://cmake.org/) | [regen100](https://github.com/regen100) | [cmake-language-server](https://github.com/regen100/cmake-language-server) | Python |
