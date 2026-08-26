@@ -468,7 +468,7 @@ export interface SemanticTokensEdit {
 }
 ```
 
-* partial result: `SemanticTokensDeltaPartialResult` defines as follows:
+* partial result: `SemanticTokensPartialResult | SemanticTokensDeltaPartialResult` where `SemanticTokensDeltaPartialResult` is defined as follows:
 
 <div class="anchorHolder"><a href="#semanticTokensDeltaPartialResult" name="semanticTokensDeltaPartialResult" class="linkableAnchor"></a></div>
 
