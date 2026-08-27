@@ -400,7 +400,7 @@ An example would be a request sent from the client to the server to request a ho
 
 ```typescript
 interface HoverParams {
-	textDocument: string; /** The text document's URI in string form */
+	textDocument: { uri: string; };
 	position: { line: uinteger; character: uinteger; };
 }
 ```
@@ -409,7 +409,7 @@ The result of the request would be the hover to be presented. In its simple form
 
 ```typescript
 interface HoverResult {
-	value: string;
+	contents: string;
 }
 ```
 
