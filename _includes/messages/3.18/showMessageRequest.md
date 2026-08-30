@@ -14,15 +14,21 @@ export interface ShowMessageRequestClientCapabilities {
 	/**
 	 * Capabilities specific to the `MessageActionItem` type.
 	 */
-	messageActionItem?: {
-		/**
-		 * Whether the client supports additional attributes which
-		 * are preserved and sent back to the server in the
-		 * request's response.
-		 */
-		additionalPropertiesSupport?: boolean;
-	};
+	messageActionItem?: ClientShowMessageActionItemOptions;
 }
+```
+
+<div class="anchorHolder"><a href="#clientShowMessageActionItemOptions" name="clientShowMessageActionItemOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientShowMessageActionItemOptions = {
+	/**
+	 * Whether the client supports additional attributes which
+	 * are preserved and send back to the server in the
+	 * request's response.
+	 */
+	additionalPropertiesSupport?: boolean;
+};
 ```
 
 _Request_:
@@ -60,6 +66,13 @@ interface MessageActionItem {
 	 * A short title like 'Retry', 'Open Log' etc.
 	 */
 	title: string;
+
+	/**
+	 * Additional attributes that the client preserves and
+	 * sends back to the server. This depends on the client
+	 * capability window.messageActionItem.additionalPropertiesSupport.
+	 */
+	[key: string]: string | boolean | integer | object;
 }
 ```
 

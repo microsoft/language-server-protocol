@@ -30,12 +30,7 @@ export interface PublishDiagnosticsClientCapabilities {
 	 *
 	 * @since 3.15.0
 	 */
-	tagSupport?: {
-		/**
-		 * The tags supported by the client.
-		 */
-		valueSet: DiagnosticTag[];
-	};
+	tagSupport?: ClientDiagnosticsTagOptions;
 
 	/**
 	 * Whether the client interprets the version property of the
@@ -61,6 +56,17 @@ export interface PublishDiagnosticsClientCapabilities {
 	 */
 	dataSupport?: boolean;
 }
+```
+
+<div class="anchorHolder"><a href="#clientDiagnosticsTagOptions" name="clientDiagnosticsTagOptions" class="linkableAnchor"></a></div>
+
+```typescript
+export type ClientDiagnosticsTagOptions = {
+	/**
+	 * The tags supported by the client.
+	 */
+	valueSet: DiagnosticTag[];
+};
 ```
 
 _Notification_:

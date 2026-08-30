@@ -159,20 +159,11 @@
 			"method": "textDocument/documentColor",
 			"typeName": "DocumentColorRequest",
 			"result": {
-				"kind": "or",
-				"items": [
-					{
-						"kind": "array",
-						"element": {
-							"kind": "reference",
-							"name": "ColorInformation"
-						}
-					},
-					{
-						"kind": "base",
-						"name": "null"
-					}
-				]
+				"kind": "array",
+				"element": {
+					"kind": "reference",
+					"name": "ColorInformation"
+				}
 			},
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.colorProvider",
@@ -198,20 +189,11 @@
 			"method": "textDocument/colorPresentation",
 			"typeName": "ColorPresentationRequest",
 			"result": {
-				"kind": "or",
-				"items": [
-					{
-						"kind": "array",
-						"element": {
-							"kind": "reference",
-							"name": "ColorPresentation"
-						}
-					},
-					{
-						"kind": "base",
-						"name": "null"
-					}
-				]
+				"kind": "array",
+				"element": {
+					"kind": "reference",
+					"name": "ColorPresentation"
+				}
 			},
 			"messageDirection": "clientToServer",
 			"clientCapability": "textDocument.colorProvider",
@@ -228,19 +210,10 @@
 				}
 			},
 			"registrationOptions": {
-				"kind": "and",
-				"items": [
-					{
-						"kind": "reference",
-						"name": "WorkDoneProgressOptions"
-					},
-					{
-						"kind": "reference",
-						"name": "TextDocumentRegistrationOptions"
-					}
-				]
+				"kind": "reference",
+				"name": "DocumentColorRegistrationOptions"
 			},
-			"documentation": "A request to list all presentation for a color. The request's\nparameter is of type {@link ColorPresentationParams} the\nresponse is of type {@link ColorInformation ColorInformation[]} or a Thenable\nthat resolves to such."
+			"documentation": "A request to list all presentation for a color. The request's\nparameter is of type {@link ColorPresentationParams} the\nresponse is of type {@link ColorPresentation ColorPresentation[]} or a Thenable\nthat resolves to such."
 		},
 		{
 			"method": "textDocument/foldingRange",
@@ -290,9 +263,8 @@
 			},
 			"messageDirection": "serverToClient",
 			"clientCapability": "workspace.foldingRange.refreshSupport",
-			"documentation": "@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A request to refresh the folding ranges in a document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "textDocument/declaration",
@@ -1047,7 +1019,7 @@
 			},
 			"partialResult": {
 				"kind": "reference",
-				"name": "DocumentDiagnosticReportPartialResult"
+				"name": "DocumentDiagnosticReportProgress"
 			},
 			"errorData": {
 				"kind": "reference",
@@ -1057,7 +1029,7 @@
 				"kind": "reference",
 				"name": "DiagnosticRegistrationOptions"
 			},
-			"documentation": "The document diagnostic request definition.\n\n@since 3.17.0",
+			"documentation": "The document diagnostic request definition.\n\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -1138,9 +1110,8 @@
 				"kind": "reference",
 				"name": "InlineCompletionRegistrationOptions"
 			},
-			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A request to provide inline completions in a document. The request's parameter is of\ntype {@link InlineCompletionParams}, the response is of type\n{@link InlineCompletion InlineCompletion[]} or a Thenable that resolves to such.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "workspace/textDocumentContent",
@@ -1160,9 +1131,8 @@
 				"kind": "reference",
 				"name": "TextDocumentContentRegistrationOptions"
 			},
-			"documentation": "The `workspace/textDocumentContent` request is sent from the client to the\nserver to request the content of a text document.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "The `workspace/textDocumentContent` request is sent from the client to the\nserver to request the content of a text document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "workspace/textDocumentContent/refresh",
@@ -1176,9 +1146,8 @@
 				"kind": "reference",
 				"name": "TextDocumentContentRefreshParams"
 			},
-			"documentation": "The `workspace/textDocumentContent` request is sent from the server to the client to refresh\nthe content of a specific text document.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "The `workspace/textDocumentContent` request is sent from the server to the client to refresh\nthe content of a specific text document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "client/registerCapability",
@@ -1964,9 +1933,8 @@
 				"kind": "reference",
 				"name": "DocumentRangeFormattingRegistrationOptions"
 			},
-			"documentation": "A request to format ranges in a document.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A request to format ranges in a document.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"method": "textDocument/onTypeFormatting",
@@ -2732,42 +2700,6 @@
 					"documentation": "An optional array of additional {@link TextEdit text edits} that are applied when\nselecting this color presentation. Edits must not overlap with the main {@link ColorPresentation.textEdit edit} nor with themselves."
 				}
 			]
-		},
-		{
-			"name": "WorkDoneProgressOptions",
-			"properties": [
-				{
-					"name": "workDoneProgress",
-					"type": {
-						"kind": "base",
-						"name": "boolean"
-					},
-					"optional": true
-				}
-			]
-		},
-		{
-			"name": "TextDocumentRegistrationOptions",
-			"properties": [
-				{
-					"name": "documentSelector",
-					"type": {
-						"kind": "or",
-						"items": [
-							{
-								"kind": "reference",
-								"name": "DocumentSelector"
-							},
-							{
-								"kind": "base",
-								"name": "null"
-							}
-						]
-					},
-					"documentation": "A document selector to identify the scope of the registration. If set to null\nthe document selector provided on the client side will be used."
-				}
-			],
-			"documentation": "General text document registration options."
 		},
 		{
 			"name": "FoldingRangeParams",
@@ -3952,7 +3884,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The document range for which inline values should be computed."
+					"documentation": "The document range for which inline values information will be returned."
 				},
 				{
 					"name": "context",
@@ -3960,7 +3892,7 @@
 						"kind": "reference",
 						"name": "InlineValueContext"
 					},
-					"documentation": "Additional information about the context in which inline values were\nrequested."
+					"documentation": "Additional information about the context in which inline values information was\nrequested."
 				}
 			],
 			"mixins": [
@@ -4187,36 +4119,6 @@
 				}
 			],
 			"documentation": "Parameters of the document diagnostic request.\n\n@since 3.17.0",
-			"since": "3.17.0"
-		},
-		{
-			"name": "DocumentDiagnosticReportPartialResult",
-			"properties": [
-				{
-					"name": "relatedDocuments",
-					"type": {
-						"kind": "map",
-						"key": {
-							"kind": "base",
-							"name": "DocumentUri"
-						},
-						"value": {
-							"kind": "or",
-							"items": [
-								{
-									"kind": "reference",
-									"name": "FullDocumentDiagnosticReport"
-								},
-								{
-									"kind": "reference",
-									"name": "UnchangedDocumentDiagnosticReport"
-								}
-							]
-						}
-					}
-				}
-			],
-			"documentation": "A partial result for a document diagnostic report.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -4458,9 +4360,8 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A parameter literal used in inline completion requests.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionList",
@@ -4477,9 +4378,8 @@
 					"documentation": "The inline completion items"
 				}
 			],
-			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Represents a collection of {@link InlineCompletionItem inline completion items} to be presented in the editor.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionItem",
@@ -4529,9 +4429,8 @@
 					"documentation": "An optional {@link Command} that is executed *after* inserting this completion."
 				}
 			],
-			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "An inline completion item represents a text snippet that is proposed inline to complete text that is being typed.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionRegistrationOptions",
@@ -4552,9 +4451,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Inline completion options used during static or dynamic registration.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentParams",
@@ -4568,9 +4466,8 @@
 					"documentation": "The uri of the text document."
 				}
 			],
-			"documentation": "Parameters for the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Parameters for the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentResult",
@@ -4584,9 +4481,8 @@
 					"documentation": "The text content of the text document. Please note, that the content of\nany subsequent open notifications for the text document might differ\nfrom the returned content due to whitespace and line ending\nnormalizations done on the client"
 				}
 			],
-			"documentation": "Result of the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Result of the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentRegistrationOptions",
@@ -4603,9 +4499,8 @@
 					"name": "StaticRegistrationOptions"
 				}
 			],
-			"documentation": "Text document content provider registration options.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Text document content provider registration options.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentRefreshParams",
@@ -4619,9 +4514,8 @@
 					"documentation": "The uri of the text document to refresh."
 				}
 			],
-			"documentation": "Parameters for the `workspace/textDocumentContent/refresh` request.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Parameters for the `workspace/textDocumentContent/refresh` request.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "RegistrationParams",
@@ -4851,6 +4745,29 @@
 				}
 			],
 			"documentation": "The parameters sent in an open text document notification"
+		},
+		{
+			"name": "TextDocumentRegistrationOptions",
+			"properties": [
+				{
+					"name": "documentSelector",
+					"type": {
+						"kind": "or",
+						"items": [
+							{
+								"kind": "reference",
+								"name": "DocumentSelector"
+							},
+							{
+								"kind": "base",
+								"name": "null"
+							}
+						]
+					},
+					"documentation": "A document selector to identify the scope of the registration. If set to null\nthe document selector provided on the client side will be used."
+				}
+			],
+			"documentation": "General text document registration options."
 		},
 		{
 			"name": "DidChangeTextDocumentParams",
@@ -5500,7 +5417,7 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The active parameter of the active signature.\n\nIf `null`, no parameter of the signature is active (for example a named\nargument that does not match any declared parameters). This is only valid\nif the client specifies the client capability\n`textDocument.signatureHelp.noActiveParameterSupport === true`\n\nIf omitted or the value lies outside the range of\n`signatures[activeSignature].parameters` defaults to 0 if the active\nsignature has parameters.\n\nIf the active signature has no parameters it is ignored.\n\nIn future version of the protocol this property might become\nmandatory (but still nullable) to better express the active parameter if\nthe active signature does have any."
+					"documentation": "The active parameter of the active signature.\n\nIf `null`, no parameter of the signature is active (for example a named\nargument that does not match any declared parameters). This is only valid\nif the client specifies the client capability\n`textDocument.signatureHelp.noActiveParameterSupport === true`\n\nIf omitted or the value lies outside the range of\n`signatures[activeSignature].parameters` defaults to 0 if the active\nsignature has parameters.\n\nIf the active signature has no parameters it is ignored.\n\nIn future version of the protocol this property might become\nmandatory (but still nullable) to better express the active parameter if\nthe active signature does have any.\n\nSince version 3.16.0 the `SignatureInformation` itself provides a\n`activeParameter` property and it should be used instead of this one."
 				}
 			],
 			"documentation": "Signature help represents the signature of something\ncallable. There can be multiple signature but only one\nactive and only one active parameter."
@@ -5868,9 +5785,8 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "An optional tooltip.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "An optional tooltip.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "command",
@@ -5985,8 +5901,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Tags for this code action.\n\n@since 3.18.0 - proposed",
-					"since": "3.18.0 - proposed"
+					"documentation": "Tags for this code action.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "A code action represents a change that can be performed in code, e.g. to fix a problem or\nto refactor code.\n\nA CodeAction must set either `edit` and/or a `command`. If both are supplied, the `edit` is applied first, then the `command` is executed."
@@ -6363,9 +6279,8 @@
 					"name": "WorkDoneProgressParams"
 				}
 			],
-			"documentation": "The parameters of a {@link DocumentRangesFormattingRequest}.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "The parameters of a {@link DocumentRangesFormattingRequest}.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "DocumentOnTypeFormattingParams",
@@ -6547,9 +6462,8 @@
 						"name": "WorkspaceEditMetadata"
 					},
 					"optional": true,
-					"documentation": "Additional data about the edit.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Additional data about the edit.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The parameters passed via an apply workspace edit request."
@@ -7204,9 +7118,9 @@
 					"name": "uri",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "DocumentUri"
 					},
-					"documentation": "A file:// URI for the location of the file/folder being created."
+					"documentation": "A URI for the location of the file/folder being created."
 				}
 			],
 			"documentation": "Represents information on a file/folder create.\n\n@since 3.16.0",
@@ -7438,17 +7352,17 @@
 					"name": "oldUri",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "DocumentUri"
 					},
-					"documentation": "A file:// URI for the original location of the file/folder being renamed."
+					"documentation": "A URI for the original location of the file/folder being renamed."
 				},
 				{
 					"name": "newUri",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "DocumentUri"
 					},
-					"documentation": "A file:// URI for the new location of the file/folder being renamed."
+					"documentation": "A URI for the new location of the file/folder being renamed."
 				}
 			],
 			"documentation": "Represents information on a file/folder rename.\n\n@since 3.16.0",
@@ -7461,9 +7375,9 @@
 					"name": "uri",
 					"type": {
 						"kind": "base",
-						"name": "string"
+						"name": "DocumentUri"
 					},
-					"documentation": "A file:// URI for the location of the file/folder being deleted."
+					"documentation": "A URI for the location of the file/folder being deleted."
 				}
 			],
 			"documentation": "Represents information on a file/folder delete.\n\n@since 3.16.0",
@@ -7534,7 +7448,7 @@
 					"documentation": "The text of the inline value."
 				}
 			],
-			"documentation": "Provide inline value as text.\n\n@since 3.17.0",
+			"documentation": "Returns inline value information as the complete text to be shown.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -7546,7 +7460,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The document range for which the inline value applies.\nThe range is used to extract the variable name from the underlying document."
+					"documentation": "The document range for which the inline value applies.\n\nThe range could be used to extract the variable name\nfrom the underlying document."
 				},
 				{
 					"name": "variableName",
@@ -7566,7 +7480,7 @@
 					"documentation": "How to perform the lookup."
 				}
 			],
-			"documentation": "Provide inline value through a variable lookup.\nIf only a range is specified, the variable name will be extracted from the underlying document.\nAn optional variable name can be used to override the extracted name.\n\n@since 3.17.0",
+			"documentation": "To compute inline value through a variable lookup.\n\nIf only a range is specified, the variable name should\nbe extracted from the underlying document.\n\nAn optional variable name could be used to lookup instead\nof the extracted name.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -7578,7 +7492,7 @@
 						"kind": "reference",
 						"name": "Range"
 					},
-					"documentation": "The document range for which the inline value applies.\nThe range is used to extract the evaluatable expression from the underlying document."
+					"documentation": "The document range for which the inline value applies.\n\nThe range could be used to extract the evaluatable expression\nfrom the underlying document."
 				},
 				{
 					"name": "expression",
@@ -7587,10 +7501,10 @@
 						"name": "string"
 					},
 					"optional": true,
-					"documentation": "If specified the expression overrides the extracted expression."
+					"documentation": "If specified the expression could be evaluated instead."
 				}
 			],
-			"documentation": "Provide an inline value through an expression evaluation.\nIf only a range is specified, the expression will be extracted from the underlying document.\nAn optional expression can be used to override the extracted expression.\n\n@since 3.17.0",
+			"documentation": "To compute an inline value through an expression evaluation.\n\nIf only a range is specified, the expression should be\nextracted from the underlying document.\n\nAn optional expression could be evaluated instead of\nthe extracted expression.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -7779,61 +7693,33 @@
 			"since": "3.17.0"
 		},
 		{
-			"name": "FullDocumentDiagnosticReport",
+			"name": "DocumentDiagnosticReportPartialResult",
 			"properties": [
 				{
-					"name": "kind",
+					"name": "relatedDocuments",
 					"type": {
-						"kind": "stringLiteral",
-						"value": "full"
-					},
-					"documentation": "A full document diagnostic report."
-				},
-				{
-					"name": "resultId",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"optional": true,
-					"documentation": "An optional result id. If provided it will\nbe sent on the next diagnostic request for the\nsame document."
-				},
-				{
-					"name": "items",
-					"type": {
-						"kind": "array",
-						"element": {
-							"kind": "reference",
-							"name": "Diagnostic"
+						"kind": "map",
+						"key": {
+							"kind": "base",
+							"name": "DocumentUri"
+						},
+						"value": {
+							"kind": "or",
+							"items": [
+								{
+									"kind": "reference",
+									"name": "FullDocumentDiagnosticReport"
+								},
+								{
+									"kind": "reference",
+									"name": "UnchangedDocumentDiagnosticReport"
+								}
+							]
 						}
-					},
-					"documentation": "The actual items."
+					}
 				}
 			],
-			"documentation": "A diagnostic report with a full set of problems.\n\n@since 3.17.0",
-			"since": "3.17.0"
-		},
-		{
-			"name": "UnchangedDocumentDiagnosticReport",
-			"properties": [
-				{
-					"name": "kind",
-					"type": {
-						"kind": "stringLiteral",
-						"value": "unchanged"
-					},
-					"documentation": "A document diagnostic report indicating\nno changes to the last result. A server can\nonly return `unchanged` if result ids are\nprovided."
-				},
-				{
-					"name": "resultId",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"documentation": "A result id which will be sent on the next\ndiagnostic request for the same document."
-				}
-			],
-			"documentation": "A diagnostic report indicating that the last returned\nreport is still accurate.\n\n@since 3.17.0",
+			"documentation": "A partial result for a document diagnostic report.\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -8106,9 +7992,8 @@
 					"documentation": "Provides information about the currently selected item in the autocomplete widget if it is visible."
 				}
 			],
-			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Provides information about the context in which an inline completion was requested.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "StringValue",
@@ -8130,9 +8015,8 @@
 					"documentation": "The snippet string."
 				}
 			],
-			"documentation": "A string value used as a snippet is a template which allows to insert text\nand to control the editor cursor when insertion happens.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Variables are defined with `$name` and\n`${name:default value}`.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "A string value used as a snippet is a template which allows to insert text\nand to control the editor cursor when insertion happens.\n\nA snippet can define tab stops and placeholders with `$1`, `$2`\nand `${3:foo}`. `$0` defines the final tab stop, it defaults to\nthe end of the snippet. Variables are defined with `$name` and\n`${name:default value}`.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "InlineCompletionOptions",
@@ -8143,9 +8027,8 @@
 				}
 			],
 			"properties": [],
-			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentOptions",
@@ -8162,9 +8045,8 @@
 					"documentation": "The schemes for which the server provides content."
 				}
 			],
-			"documentation": "Text document content provider options.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Text document content provider options.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "Registration",
@@ -8966,9 +8848,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Inline completion options used during static registration.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "workspace",
@@ -9159,10 +9040,20 @@
 				{
 					"name": "message",
 					"type": {
-						"kind": "base",
-						"name": "string"
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "string"
+							},
+							{
+								"kind": "reference",
+								"name": "MarkupContent"
+							}
+						]
 					},
-					"documentation": "The diagnostic's message. It usually appears in the user interface"
+					"documentation": "The diagnostic's message. It usually appears in the user interface.\n\n@since 3.18.0 - support for MarkupContent. This is guarded by the client\ncapability `textDocument.diagnostic.markupMessageSupport`.",
+					"since": "3.18.0 - support for MarkupContent. This is guarded by the client\ncapability `textDocument.diagnostic.markupMessageSupport`."
 				},
 				{
 					"name": "tags",
@@ -9777,9 +9668,8 @@
 						}
 					},
 					"optional": true,
-					"documentation": "Static documentation for a class of code actions.\n\nDocumentation from the provider should be shown in the code actions menu if either:\n\n- Code actions of `kind` are requested by the editor. In this case, the editor will show the documentation that\n  most closely matches the requested code action kind. For example, if a provider has documentation for\n  both `Refactor` and `RefactorExtract`, when the user requests code actions for `RefactorExtract`,\n  the editor will use the documentation for `RefactorExtract` instead of the documentation for `Refactor`.\n\n- Any code actions of `kind` are returned by the provider.\n\nAt most one documentation entry should be shown per provider.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Static documentation for a class of code actions.\n\nDocumentation from the provider should be shown in the code actions menu if either:\n\n- Code actions of `kind` are requested by the editor. In this case, the editor will show the documentation that\n  most closely matches the requested code action kind. For example, if a provider has documentation for\n  both `Refactor` and `RefactorExtract`, when the user requests code actions for `RefactorExtract`,\n  the editor will use the documentation for `RefactorExtract` instead of the documentation for `Refactor`.\n\n- Any code actions of `kind` are returned by the provider.\n\nAt most one documentation entry should be shown per provider.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "resolveProvider",
@@ -9951,9 +9841,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the server supports formatting multiple ranges at once.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the server supports formatting multiple ranges at once.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"mixins": [
@@ -10083,9 +9972,21 @@
 					"documentation": "Signal to the editor that this edit is a refactoring."
 				}
 			],
-			"documentation": "Additional data about a workspace edit.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Additional data about a workspace edit.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
+			"name": "WorkDoneProgressOptions",
+			"properties": [
+				{
+					"name": "workDoneProgress",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true
+				}
+			]
 		},
 		{
 			"name": "SemanticTokensLegend",
@@ -10211,9 +10112,8 @@
 					"documentation": "The actual identifier of the snippet edit."
 				}
 			],
-			"documentation": "An interactive text edit.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "An interactive text edit.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "ResourceOperation",
@@ -10320,7 +10220,7 @@
 						"kind": "base",
 						"name": "string"
 					},
-					"documentation": "The glob pattern to match. Glob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)"
+					"documentation": "The glob pattern to match. Glob patterns can have the following syntax:\n- `*` to match zero or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)"
 				},
 				{
 					"name": "matches",
@@ -10343,6 +10243,64 @@
 			],
 			"documentation": "A pattern to describe in which file operation requests or notifications\nthe server is interested in receiving.\n\n@since 3.16.0",
 			"since": "3.16.0"
+		},
+		{
+			"name": "FullDocumentDiagnosticReport",
+			"properties": [
+				{
+					"name": "kind",
+					"type": {
+						"kind": "stringLiteral",
+						"value": "full"
+					},
+					"documentation": "A full document diagnostic report."
+				},
+				{
+					"name": "resultId",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "An optional result id. If provided it will\nbe sent on the next diagnostic request for the\nsame document."
+				},
+				{
+					"name": "items",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "Diagnostic"
+						}
+					},
+					"documentation": "The actual items."
+				}
+			],
+			"documentation": "A diagnostic report with a full set of problems.\n\n@since 3.17.0",
+			"since": "3.17.0"
+		},
+		{
+			"name": "UnchangedDocumentDiagnosticReport",
+			"properties": [
+				{
+					"name": "kind",
+					"type": {
+						"kind": "stringLiteral",
+						"value": "unchanged"
+					},
+					"documentation": "A document diagnostic report indicating\nno changes to the last result. A server can\nonly return `unchanged` if result ids are\nprovided."
+				},
+				{
+					"name": "resultId",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "A result id which will be sent on the next\ndiagnostic request for the same document."
+				}
+			],
+			"documentation": "A diagnostic report indicating that the last returned\nreport is still accurate.\n\n@since 3.17.0",
+			"since": "3.17.0"
 		},
 		{
 			"name": "WorkspaceFullDocumentDiagnosticReport",
@@ -10593,9 +10551,8 @@
 					"documentation": "The text the range will be replaced with if this completion is accepted."
 				}
 			],
-			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Describes the currently selected completion item.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "ClientInfo",
@@ -10785,9 +10742,8 @@
 						]
 					},
 					"optional": true,
-					"documentation": "The server supports the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "The server supports the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Defines workspace specific capabilities of the server.\n\n@since 3.18.0",
@@ -11008,42 +10964,8 @@
 					"documentation": "Command that is ued to display the documentation to the user.\n\nThe title of this documentation code action is taken from {@linkcode Command.title}"
 				}
 			],
-			"documentation": "Documentation for a class of code actions.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
-		},
-		{
-			"name": "NotebookCellTextDocumentFilter",
-			"properties": [
-				{
-					"name": "notebook",
-					"type": {
-						"kind": "or",
-						"items": [
-							{
-								"kind": "base",
-								"name": "string"
-							},
-							{
-								"kind": "reference",
-								"name": "NotebookDocumentFilter"
-							}
-						]
-					},
-					"documentation": "A filter that matches against the notebook\ncontaining the notebook cell. If a string\nvalue is provided it matches against the\nnotebook type. '*' matches every notebook."
-				},
-				{
-					"name": "language",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"optional": true,
-					"documentation": "A language id like `python`.\n\nWill be matched against the language id of the\nnotebook cell document. '*' matches every language."
-				}
-			],
-			"documentation": "A notebook cell text document filter denotes a cell text\ndocument by different properties.\n\n@since 3.17.0",
-			"since": "3.17.0"
+			"documentation": "Documentation for a class of code actions.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "FileOperationPatternOptions",
@@ -11303,9 +11225,8 @@
 						"name": "FoldingRangeWorkspaceClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the folding range requests scoped to the workspace.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the folding range requests scoped to the workspace.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "textDocumentContent",
@@ -11314,9 +11235,8 @@
 						"name": "TextDocumentContentClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Capabilities specific to the `workspace/textDocumentContent` request.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Capabilities specific to the `workspace/textDocumentContent` request.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Workspace specific client capabilities."
@@ -11625,9 +11545,8 @@
 						"name": "InlineCompletionClientCapabilities"
 					},
 					"optional": true,
-					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Text document specific client capabilities."
@@ -11827,6 +11746,39 @@
 			"since": "3.16.0"
 		},
 		{
+			"name": "NotebookCellTextDocumentFilter",
+			"properties": [
+				{
+					"name": "notebook",
+					"type": {
+						"kind": "or",
+						"items": [
+							{
+								"kind": "base",
+								"name": "string"
+							},
+							{
+								"kind": "reference",
+								"name": "NotebookDocumentFilter"
+							}
+						]
+					},
+					"documentation": "A filter that matches against the notebook\ncontaining the notebook cell. If a string\nvalue is provided it matches against the\nnotebook type. '*' matches every notebook."
+				},
+				{
+					"name": "language",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A language id like `python`.\n\nWill be matched against the language id of the\nnotebook cell document. '*' matches every language."
+				}
+			],
+			"documentation": "A notebook cell text document filter denotes a cell text\ndocument by different properties.\n\n@since 3.17.0",
+			"since": "3.17.0"
+		},
+		{
 			"name": "RelativePattern",
 			"properties": [
 				{
@@ -11857,108 +11809,6 @@
 			],
 			"documentation": "A relative pattern is a helper to construct glob patterns that are matched\nrelatively to a base URI. The common value for a `baseUri` is a workspace\nfolder root, but it can be another absolute URI as well.\n\n@since 3.17.0",
 			"since": "3.17.0"
-		},
-		{
-			"name": "TextDocumentFilterLanguage",
-			"properties": [
-				{
-					"name": "language",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"documentation": "A language id, like `typescript`."
-				},
-				{
-					"name": "scheme",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"optional": true,
-					"documentation": "A Uri {@link Uri.scheme scheme}, like `file` or `untitled`."
-				},
-				{
-					"name": "pattern",
-					"type": {
-						"kind": "reference",
-						"name": "GlobPattern"
-					},
-					"optional": true,
-					"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.\n\n@since 3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`.",
-					"since": "3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`."
-				}
-			],
-			"documentation": "A document filter where `language` is required field.\n\n@since 3.18.0",
-			"since": "3.18.0"
-		},
-		{
-			"name": "TextDocumentFilterScheme",
-			"properties": [
-				{
-					"name": "language",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"optional": true,
-					"documentation": "A language id, like `typescript`."
-				},
-				{
-					"name": "scheme",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"documentation": "A Uri {@link Uri.scheme scheme}, like `file` or `untitled`."
-				},
-				{
-					"name": "pattern",
-					"type": {
-						"kind": "reference",
-						"name": "GlobPattern"
-					},
-					"optional": true,
-					"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.\n\n@since 3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`.",
-					"since": "3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`."
-				}
-			],
-			"documentation": "A document filter where `scheme` is required field.\n\n@since 3.18.0",
-			"since": "3.18.0"
-		},
-		{
-			"name": "TextDocumentFilterPattern",
-			"properties": [
-				{
-					"name": "language",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"optional": true,
-					"documentation": "A language id, like `typescript`."
-				},
-				{
-					"name": "scheme",
-					"type": {
-						"kind": "base",
-						"name": "string"
-					},
-					"optional": true,
-					"documentation": "A Uri {@link Uri.scheme scheme}, like `file` or `untitled`."
-				},
-				{
-					"name": "pattern",
-					"type": {
-						"kind": "reference",
-						"name": "GlobPattern"
-					},
-					"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.\n\n@since 3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`.",
-					"since": "3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`."
-				}
-			],
-			"documentation": "A document filter where `pattern` is required field.\n\n@since 3.18.0",
-			"since": "3.18.0"
 		},
 		{
 			"name": "NotebookDocumentFilterNotebookType",
@@ -12156,9 +12006,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports `WorkspaceEditMetadata` in `WorkspaceEdit`s.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "snippetEditSupport",
@@ -12167,9 +12016,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports snippets as text edits.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports snippets as text edits.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			]
 		},
@@ -12430,14 +12278,12 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\nfolding ranges currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client implementation supports a refresh request sent from the\nserver to the client.\n\nNote that this event is global and will force the client to refresh all\nfolding ranges currently shown. It should be used with absolute care and is\nuseful for situation where a server for example detects a project wide\nchange that requires such a calculation.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
-			"documentation": "Client workspace capabilities specific to folding ranges\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Client workspace capabilities specific to folding ranges\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentContentClientCapabilities",
@@ -12452,9 +12298,8 @@
 					"documentation": "Text document content provider supports dynamic registration."
 				}
 			],
-			"documentation": "Client capabilities for a text document content provider.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Client capabilities for a text document content provider.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TextDocumentSyncClientCapabilities",
@@ -12539,7 +12384,8 @@
 						"kind": "reference",
 						"name": "ClientCompletionItemOptionsKind"
 					},
-					"optional": true
+					"optional": true,
+					"documentation": "The client supports the following completion item kinds."
 				},
 				{
 					"name": "insertTextMode",
@@ -12895,9 +12741,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports documentation for a class of\ncode actions.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports documentation for a class of\ncode actions.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "tagSupport",
@@ -12906,8 +12751,8 @@
 						"name": "CodeActionTagOptions"
 					},
 					"optional": true,
-					"documentation": "Client supports the tag property on a code action. Clients\nsupporting tags have to handle unknown tags gracefully.\n\n@since 3.18.0 - proposed",
-					"since": "3.18.0 - proposed"
+					"documentation": "Client supports the tag property on a code action. Clients\nsupporting tags have to handle unknown tags gracefully.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The Client Capabilities of a {@link CodeActionRequest}."
@@ -13010,9 +12855,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports formatting multiple ranges at once.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports formatting multiple ranges at once.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Client capabilities of a {@link DocumentRangeFormattingRequest}."
@@ -13384,6 +13228,16 @@
 					},
 					"optional": true,
 					"documentation": "Whether the clients supports related documents for document diagnostic pulls."
+				},
+				{
+					"name": "markupMessageSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether the client supports `MarkupContent` in diagnostic messages.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"extends": [
@@ -13408,9 +13262,8 @@
 					"documentation": "Whether implementation supports dynamic registration for inline completion providers."
 				}
 			],
-			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Client capabilities specific to inline completions.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "NotebookDocumentSyncClientCapabilities",
@@ -13553,6 +13406,108 @@
 			],
 			"documentation": "Client capabilities specific to the used markdown parser.\n\n@since 3.16.0",
 			"since": "3.16.0"
+		},
+		{
+			"name": "TextDocumentFilterLanguage",
+			"properties": [
+				{
+					"name": "language",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "A language id, like `typescript`."
+				},
+				{
+					"name": "scheme",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A Uri {@link Uri.scheme scheme}, like `file` or `untitled`."
+				},
+				{
+					"name": "pattern",
+					"type": {
+						"kind": "reference",
+						"name": "GlobPattern"
+					},
+					"optional": true,
+					"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.\n\n@since 3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`.",
+					"since": "3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`."
+				}
+			],
+			"documentation": "A document filter where `language` is required field.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
+			"name": "TextDocumentFilterScheme",
+			"properties": [
+				{
+					"name": "language",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A language id, like `typescript`."
+				},
+				{
+					"name": "scheme",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"documentation": "A Uri {@link Uri.scheme scheme}, like `file` or `untitled`."
+				},
+				{
+					"name": "pattern",
+					"type": {
+						"kind": "reference",
+						"name": "GlobPattern"
+					},
+					"optional": true,
+					"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.\n\n@since 3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`.",
+					"since": "3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`."
+				}
+			],
+			"documentation": "A document filter where `scheme` is required field.\n\n@since 3.18.0",
+			"since": "3.18.0"
+		},
+		{
+			"name": "TextDocumentFilterPattern",
+			"properties": [
+				{
+					"name": "language",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A language id, like `typescript`."
+				},
+				{
+					"name": "scheme",
+					"type": {
+						"kind": "base",
+						"name": "string"
+					},
+					"optional": true,
+					"documentation": "A Uri {@link Uri.scheme scheme}, like `file` or `untitled`."
+				},
+				{
+					"name": "pattern",
+					"type": {
+						"kind": "reference",
+						"name": "GlobPattern"
+					},
+					"documentation": "A glob pattern, like **​/*.{ts,js}. See TextDocumentFilter for examples.\n\n@since 3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`.",
+					"since": "3.18.0 - support for relative patterns. Whether clients support\nrelative patterns depends on the client capability\n`textDocuments.filters.relativePatternSupport`."
+				}
+			],
+			"documentation": "A document filter where `pattern` is required field.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "ChangeAnnotationsSupportOptions",
@@ -13820,9 +13775,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "The client supports the `activeParameter` property on\n`SignatureHelp`/`SignatureInformation` being set to `null` to\nindicate that no parameter should be active.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "The client supports the `activeParameter` property on\n`SignatureHelp`/`SignatureInformation` being set to `null` to\nindicate that no parameter should be active.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "@since 3.18.0",
@@ -13876,8 +13830,8 @@
 					"documentation": "The tags supported by the client."
 				}
 			],
-			"documentation": "@since 3.18.0 - proposed",
-			"since": "3.18.0 - proposed"
+			"documentation": "@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "ClientCodeLensResolveOptions",
@@ -14708,9 +14662,8 @@
 				{
 					"name": "Debug",
 					"value": 5,
-					"documentation": "A debug message.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "A debug message.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "The message type"
@@ -14992,9 +14945,8 @@
 				{
 					"name": "RefactorMove",
 					"value": "refactor.move",
-					"documentation": "Base kind for refactoring move actions: `refactor.move`\n\nExample move actions:\n\n- Move a function to a new file\n- Move a property between classes\n- Move method to base class\n- ...\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Base kind for refactoring move actions: `refactor.move`\n\nExample move actions:\n\n- Move a function to a new file\n- Move a property between classes\n- Move method to base class\n- ...\n\n@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "RefactorRewrite",
@@ -15040,8 +14992,8 @@
 					"documentation": "Marks the code action as LLM-generated."
 				}
 			],
-			"documentation": "Code action tags are extra annotations that tweak the behavior of a code action.\n\n@since 3.18.0 - proposed",
-			"since": "3.18.0 - proposed"
+			"documentation": "Code action tags are extra annotations that tweak the behavior of a code action.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "TraceValue",
@@ -15133,16 +15085,14 @@
 				{
 					"name": "D",
 					"value": "d",
-					"documentation": "@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "Delphi",
 					"value": "pascal",
-					"documentation": "@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "Diff",
@@ -15174,7 +15124,7 @@
 				},
 				{
 					"name": "GitRebase",
-					"value": "rebase"
+					"value": "git-rebase"
 				},
 				{
 					"name": "Go",
@@ -15247,9 +15197,8 @@
 				{
 					"name": "Pascal",
 					"value": "pascal",
-					"documentation": "@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "@since 3.18.0",
+					"since": "3.18.0"
 				},
 				{
 					"name": "Perl",
@@ -15262,6 +15211,10 @@
 				{
 					"name": "PHP",
 					"value": "php"
+				},
+				{
+					"name": "Plaintext",
+					"value": "plaintext"
 				},
 				{
 					"name": "Powershell",
@@ -15370,9 +15323,8 @@
 					"documentation": "Completion was triggered automatically while editing."
 				}
 			],
-			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0\n@proposed",
-			"since": "3.18.0",
-			"proposed": true
+			"documentation": "Describes how an {@link InlineCompletionItemProvider inline completion provider} was triggered.\n\n@since 3.18.0",
+			"since": "3.18.0"
 		},
 		{
 			"name": "PositionEncodingKind",
@@ -15870,6 +15822,24 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "DocumentDiagnosticReportProgress",
+			"type": {
+				"kind": "or",
+				"items": [
+					{
+						"kind": "reference",
+						"name": "DocumentDiagnosticReport"
+					},
+					{
+						"kind": "reference",
+						"name": "DocumentDiagnosticReportPartialResult"
+					}
+				]
+			},
+			"documentation": "The document diagnostic report used when reporting partial result.\n\nWhen using partial results, the first literal sent needs to be a\nDocumentDiagnosticReport providing the diagnostics on the document\nfollowed by n DocumentDiagnosticReportPartialResult literals providing\nthe diagnostics for related documents.\n\n```\nDocumentDiagnosticReport\nDocumentDiagnosticReportPartialResult\nDocumentDiagnosticReportPartialResult\n...\n```\n\n@since 3.18.1",
+			"since": "3.18.1"
+		},
+		{
 			"name": "PrepareRenameResult",
 			"type": {
 				"kind": "or",
@@ -15888,18 +15858,6 @@
 					}
 				]
 			}
-		},
-		{
-			"name": "DocumentSelector",
-			"type": {
-				"kind": "array",
-				"element": {
-					"kind": "reference",
-					"name": "DocumentFilter"
-				}
-			},
-			"documentation": "A document selector is the combination of one or many document filters.\n\n@sample `let sel:DocumentSelector = [{ language: 'typescript' }, { language: 'json', pattern: '**∕tsconfig.json' }]`;\n\nThe use of a string as a document filter is deprecated @since 3.16.0.",
-			"since": "3.16.0."
 		},
 		{
 			"name": "ProgressToken",
@@ -15944,6 +15902,18 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "DocumentSelector",
+			"type": {
+				"kind": "array",
+				"element": {
+					"kind": "reference",
+					"name": "DocumentFilter"
+				}
+			},
+			"documentation": "A document selector is the combination of one or many document filters.\n\n@sample `let sel:DocumentSelector = [{ language: 'typescript' }, { language: 'json', pattern: '**∕tsconfig.json' }]`;\n\nThe use of a string as a document filter is deprecated @since 3.16.0.",
+			"since": "3.16.0."
+		},
+		{
 			"name": "TextDocumentContentChangeEvent",
 			"type": {
 				"kind": "or",
@@ -15979,6 +15949,22 @@
 			"deprecated": "use MarkupContent instead."
 		},
 		{
+			"name": "LSPObject",
+			"type": {
+				"kind": "map",
+				"key": {
+					"kind": "base",
+					"name": "string"
+				},
+				"value": {
+					"kind": "reference",
+					"name": "LSPAny"
+				}
+			},
+			"documentation": "LSP object definition.\n@since 3.17.0",
+			"since": "3.17.0"
+		},
+		{
 			"name": "DocumentFilter",
 			"type": {
 				"kind": "or",
@@ -15997,22 +15983,6 @@
 			"since": "3.17.0 - support for NotebookCellTextDocumentFilter."
 		},
 		{
-			"name": "LSPObject",
-			"type": {
-				"kind": "map",
-				"key": {
-					"kind": "base",
-					"name": "string"
-				},
-				"value": {
-					"kind": "reference",
-					"name": "LSPAny"
-				}
-			},
-			"documentation": "LSP object definition.\n@since 3.17.0",
-			"since": "3.17.0"
-		},
-		{
 			"name": "GlobPattern",
 			"type": {
 				"kind": "or",
@@ -16028,28 +15998,6 @@
 				]
 			},
 			"documentation": "The glob pattern. Either a string pattern or a relative pattern.\n\n@since 3.17.0",
-			"since": "3.17.0"
-		},
-		{
-			"name": "TextDocumentFilter",
-			"type": {
-				"kind": "or",
-				"items": [
-					{
-						"kind": "reference",
-						"name": "TextDocumentFilterLanguage"
-					},
-					{
-						"kind": "reference",
-						"name": "TextDocumentFilterScheme"
-					},
-					{
-						"kind": "reference",
-						"name": "TextDocumentFilterPattern"
-					}
-				]
-			},
-			"documentation": "A document filter denotes a document by different properties like\nthe {@link TextDocument.languageId language}, the {@link Uri.scheme scheme} of\nits resource, or a glob-pattern that is applied to the {@link TextDocument.fileName path}.\n\nGlob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@sample A language filter that applies to typescript files on disk: `{ language: 'typescript', scheme: 'file' }`\n@sample A language filter that applies to all package.json paths: `{ language: 'json', pattern: '**package.json' }`\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{
@@ -16075,12 +16023,34 @@
 			"since": "3.17.0"
 		},
 		{
+			"name": "TextDocumentFilter",
+			"type": {
+				"kind": "or",
+				"items": [
+					{
+						"kind": "reference",
+						"name": "TextDocumentFilterLanguage"
+					},
+					{
+						"kind": "reference",
+						"name": "TextDocumentFilterScheme"
+					},
+					{
+						"kind": "reference",
+						"name": "TextDocumentFilterPattern"
+					}
+				]
+			},
+			"documentation": "A document filter denotes a document by different properties like\nthe {@link TextDocument.languageId language}, the {@link Uri.scheme scheme} of\nits resource, or a glob-pattern that is applied to the {@link TextDocument.fileName path}.\n\nGlob patterns can have the following syntax:\n- `*` to match zero or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group sub patterns into an OR expression. (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@sample A language filter that applies to typescript files on disk: `{ language: 'typescript', scheme: 'file' }`\n@sample A language filter that applies to all package.json paths: `{ language: 'json', pattern: '**package.json' }`\n\n@since 3.17.0",
+			"since": "3.17.0"
+		},
+		{
 			"name": "Pattern",
 			"type": {
 				"kind": "base",
 				"name": "string"
 			},
-			"documentation": "The glob pattern to watch relative to the base path. Glob patterns can have the following syntax:\n- `*` to match one or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@since 3.17.0",
+			"documentation": "The glob pattern to watch relative to the base path. Glob patterns can have the following syntax:\n- `*` to match zero or more characters in a path segment\n- `?` to match on one character in a path segment\n- `**` to match any number of path segments, including none\n- `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)\n- `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)\n- `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)\n\n@since 3.17.0",
 			"since": "3.17.0"
 		},
 		{

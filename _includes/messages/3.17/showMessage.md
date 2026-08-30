@@ -46,7 +46,6 @@ export namespace MessageType {
 	 * A debug message.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	export const Debug = 5;
 }

@@ -1,14 +1,23 @@
 ---
 title: Specification
-shortTitle: 3.18 (Upcoming)
+shortTitle: 3.18
 layout: specifications
 sectionid: specification-3-18
 toc: specification-3-18-toc
 fullTitle: Language Server Protocol Specification - 3.18
 index: 2
+redirect_from:
+  - specification
+  - specification/
+  - specifications
+  - specifications/
+  - specifications/specification-3-18
+  - specifications/specification-3-18/
+  - specifications/specification-current
+  - specifications/specification-current/
 ---
 
-This document describes the upcoming 3.18.x version of the language server protocol and is under development. An implementation for node of the 3.18.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
+This document describes the current 3.18.x version of the language server protocol and is under development. An implementation for node of the 3.18.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.18/specification.md).
 
@@ -43,7 +52,7 @@ The header part is encoded using the 'ascii' encoding. This includes the '\r\n' 
 
 Contains the actual content of the message. The content part of a message uses [JSON-RPC 2.0](https://www.jsonrpc.org/specification) to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to `utf-8`, which is the only encoding supported right now. If a server or client receives a header with a different encoding than `utf-8` it should respond with an error.
 
-(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](http://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treat the string `utf8` as `utf-8`.
+(Prior versions of the protocol used the string constant `utf8` which is not a correct encoding constant according to [specification](https://www.iana.org/assignments/character-sets/character-sets.xhtml).) For backwards compatibility it is highly recommended that a client and a server treat the string `utf8` as `utf-8`.
 
 ### Example:
 
@@ -61,7 +70,7 @@ Content-Length: ...\r\n
 ```
 ### Base Protocol JSON structures
 
-The protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](http://www.jsonrpc.org/specification). The protocol currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
+The protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](https://www.jsonrpc.org/specification). The protocol currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
 
 The following TypeScript definitions describe the base JSON-RPC protocol:
 
@@ -722,7 +731,7 @@ Since 3.17 there is a meta model describing the LSP protocol:
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
 
-#### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (mm/dd/yyyy)</a>
+#### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (06/04/2026)</a>
 
 * Added inline completions support.
 * Added dynamic text document content support.

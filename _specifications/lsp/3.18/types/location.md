@@ -7,3 +7,14 @@ interface Location {
 	range: Range;
 }
 ```
+
+<div class="anchorHolder"><a href="#locationUriOnly" name="locationUriOnly" class="linkableAnchor"></a></div>
+
+```typescript
+/**
+ * Location with only uri and does not include range.
+ */
+export type LocationUriOnly = {
+	uri: DocumentUri;
+};
+```
