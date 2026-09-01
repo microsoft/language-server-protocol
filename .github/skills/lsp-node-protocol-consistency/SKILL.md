@@ -42,6 +42,8 @@ way the task does not resolve, stop and ask which behavior is intended.
 ## Apply source-of-truth rules
 
 - The specification prose defines normative protocol behavior.
+- However the implementation is the point of truth of the actual behavior. The
+  protocol should follow the implementation if not noted otherwise.
 - The Node TypeScript sources define the Node API and generate the meta model.
 - The specification's `metaModel.json`, `metaModel.ts`, and
   `metaModel.schema.json` are mirrors of artifacts from the Node repository.
