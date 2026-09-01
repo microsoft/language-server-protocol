@@ -57,6 +57,7 @@ index: 1
 | [Ceylon](https://ceylon-lang.org/) | [John Vasileff](https://github.com/jvasileff) | [vscode-ceylon](https://github.com/jvasileff/vscode-ceylon) | Ceylon |
 | [Civet](https://civet.dev/) | [Daniel X. Moore](https://github.com/DanielXMoore) | [Civet Language Server](https://github.com/DanielXMoore/Civet/tree/main/lsp/server) | Civet |
 | [Clarity](https://docs.stacks.co/docs/write-smart-contracts/) | [Hiro](https://hiro.so) | [clarity-lsp](https://github.com/hirosystems/clarity-lsp) | TypeScript |
+| [Clean](https://clean-lang.org/) | [TOP Software Technology](https://www.top-software.nl) | [Eastwood](https://gitlab.com/top-software/eastwood) | Clean |
 | [Clojure](https://clojure.org/) | [Eric Dallo](https://github.com/ericdallo) | [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp) | Clojure |
 | [CMake](https://cmake.org/) | [regen100](https://github.com/regen100) | [cmake-language-server](https://github.com/regen100/cmake-language-server) | Python |
 | [CMake](https://cmake.org/) | [Decodetalkers](https://github.com/Decodetalkers) | [neocmakelsp](https://github.com/Decodetalkers/neocmakelsp) | Rust |
