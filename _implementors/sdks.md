@@ -34,6 +34,7 @@ index: 3
 | Rust | [Bruno Medeiros](https://github.com/bruno-medeiros) | [RustLSP](https://github.com/RustDT/RustLSP)|
 | Rust | Bruno Medeiros and Markus Westerlind | [lsp-types](https://github.com/gluon-lang/lsp-types)
 | Rust | [Eyal Kalderon](https://github.com/ebkalderon) | [tower-lsp](https://github.com/ebkalderon/tower-lsp)
+| Rust | [Yuming Chen](https://github.com/meymchen) | [lspf](https://github.com/meymchen/lspf) |
 | Swift | [Chime](https://github.com/chimehq) | [LanguageServerProtocol](https://github.com/chimehq/LanguageServerProtocol)|
 | TypeScript | [TypeFox](https://www.typefox.io/) | [langium](https://github.com/langium/langium)|
 | TypeScript | [Volar team](https://volarjs.dev) | [Volar.js](https://github.com/volarjs/volar.js)|
