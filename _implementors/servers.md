@@ -198,6 +198,7 @@ index: 1
 | PHP | [Tom Gerrits](https://gitlab.com/Gert-dev) | [Serenata](https://gitlab.com/Serenata/Serenata) | PHP |
 | PHP | [Tyson Andre](https://github.com/TysonAndre) | [Phan](https://github.com/phan/phan) | PHP |
 | PHP | [Dan Leech](https://github.com/dantleech) | [phpactor](https://github.com/phpactor/phpactor) | PHP |
+| PHP | [PHPantom community](https://github.com/PHPantom-dev) | [PHPantom](https://github.com/PHPantom-dev/phpantom_lsp) | Rust |
 | PHPUnit | [Recca0120](https://github.com/recca0120) | [phpunit-language-server](https://github.com/recca0120/vscode-phpunit) | TypeScript |
 | [IBM Enterprise **PL/I** for z/OS](https://www.ibm.com/support/knowledgecenter/SSY2V3_5.3.0/com.ibm.ent.pl1.zos.doc/single_template_nobrand.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | IBM Enterprise **PL/I** for z/OS | [Broadcom](https://www.broadcom.com/) | [PL/I Language Support](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.pli-language-support) | TypeScript |
