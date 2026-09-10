@@ -1,31 +1,25 @@
 ---
 title: Specification
-shortTitle: 3.18
+shortTitle: 3.19
 layout: specifications
-sectionid: specification-3-18
-toc: specification-3-18-toc
-fullTitle: Language Server Protocol Specification - 3.18
+sectionid: specification-3-19
+toc: specification-3-19-toc
+fullTitle: Language Server Protocol Specification - 3.19
 index: 2
 redirect_from:
-  - specification
-  - specification/
-  - specifications
-  - specifications/
-  - specifications/specification-3-18
-  - specifications/specification-3-18/
-  - specifications/specification-current
-  - specifications/specification-current/
+  - specifications/specification-3-19
+  - specifications/specification-3-19/
 ---
 
-This document describes the current 3.18.x version of the language server protocol. An implementation for node of the 3.18.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
+This document describes the current 3.19.x version of the language server protocol and is under development. An implementation for node of the 3.19.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
-**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.18/specification.md).
+**Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/lsp/3.19/specification.md).
 
-## <a href="#whatIsNew" name="whatIsNew" class="anchor">What's new in 3.18</a>
+## <a href="#whatIsNew" name="whatIsNew" class="anchor">What's new in 3.19</a>
 
-All new 3.18 features are tagged with a corresponding since version 3.18 text or in JSDoc using `@since 3.18.0` annotation.
+All new 3.19 features are tagged with a corresponding since version 3.19 text or in JSDoc using `@since 3.19.0` annotation.
 
-A detailed list of the changes can be found in the [change log](#version_3_18_0)
+A detailed list of the changes can be found in the [change log](#version_3_19_0)
 
 The version of the specification is used to group features into a new specification release and to refer to their first appearance. Features in the spec are kept compatible using so called capability flags which are exchanged between the client and the server during initialization.
 
@@ -730,6 +724,9 @@ Since 3.17 there is a meta model describing the LSP protocol:
 - [metaModel.schema.json](../metaModel/metaModel.schema.json): A JSON schema file defining the data types that make up the meta model. Can be used to generate code to read the meta model JSON file.
 
 ### <a href="#changeLog" name="changeLog" class="anchor">Change Log</a>
+
+#### <a href="#version_3_19_0" name="version_3_19_0" class="anchor">3.19.0 (mm/dd/yyyy)</a>
+
 
 #### <a href="#version_3_18_0" name="version_3_18_0" class="anchor">3.18.0 (06/04/2026)</a>
 
