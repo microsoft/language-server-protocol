@@ -2998,6 +2998,18 @@
 					"documentation": "Tags for this item."
 				},
 				{
+					"name": "referenceTags",
+					"type": {
+						"kind": "array",
+						"element": {
+							"kind": "reference",
+							"name": "ReferenceTag"
+						}
+					},
+					"optional": true,
+					"documentation": "Reference tags for this item, i.e. determines the operations on the referenced symbol, read, write or both"
+				},
+				{
 					"name": "detail",
 					"type": {
 						"kind": "base",
@@ -12590,6 +12602,16 @@
 					},
 					"optional": true,
 					"documentation": "Whether references supports dynamic registration."
+				},
+				{
+					"name": "referenceItemsSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Determines whether the client supports and prefers Reference items instead\nof Location items. If this value is missing, the server assumes that the\nclient accepts Location items as defined in earlier versions of the protocol.",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "Client Capabilities for a {@link ReferencesRequest}."
@@ -13019,6 +13041,16 @@
 					},
 					"optional": true,
 					"documentation": "Whether implementation supports dynamic registration. If this is set to `true`\nthe client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`\nreturn value for the corresponding server capability as well."
+				},
+				{
+					"name": "referenceTagsSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Determines whether the client supports reference tags.",
+					"since": "3.18.0"
 				}
 			],
 			"documentation": "@since 3.16.0",
@@ -14548,6 +14580,27 @@
 			],
 			"documentation": "Symbol tags are extra annotations that tweak the rendering of a symbol.\n\n@since 3.16",
 			"since": "3.16"
+		},
+		{
+			"name": "ReferenceTag",
+			"type": {
+				"kind": "base",
+				"name": "uinteger"
+			},
+			"values": [
+				{
+					"name": "Read",
+					"value": 1,
+					"documentation": "Determines a read access to the referenced symbol."
+				},
+				{
+					"name": "Write",
+					"value": 2,
+					"documentation": "Determines a write access to the referenced symbol."
+				}
+			],
+			"documentation": "Reference tags are extra annotations that provide additional information about references.\n\n@since 3.18",
+			"since": "3.18"
 		},
 		{
 			"name": "UniquenessLevel",
