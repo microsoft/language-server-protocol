@@ -151,6 +151,7 @@ index: 1
 | [Kedro](https://kedro.org) | [Kedro Team](https://github.com/kedro-org/kedro) | [Kedro VSCode Language Server](https://github.com/kedro-org/vscode-kedro) | Python
 | [Kerboscript (kOS)](https://ksp-kos.github.io/KOS/) | [John Chabot](https://github.com/jonnyboyC) | [kos-language-server](https://github.com/jonnyboyC/kos-language-server) | Typescript
 | [KerML](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
+| [KerML](https://github.com/Systems-Modeling/SysML-v2-Release) | [Open-MBEE](https://github.com/Open-MBEE) | [OpenSysML](https://github.com/Open-MBEE/OpenSysML) | Go |
 | [Kotlin](https://kotlinlang.org) | [@fwcd](https://github.com/fwcd) | [kotlin-language-server](https://github.com/fwcd/kotlin-language-server) | Kotlin |
 | [Kotlin](https://kotlinlang.org) | [JetBrains](https://www.jetbrains.com/) | [kotlin-lsp](https://github.com/Kotlin/kotlin-lsp) | Kotlin |
 | [Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot) | [TypeCobolTeam](https://github.com/TypeCobolTeam) | [TypeCobol Language Server Robot](https://github.com/TypeCobolTeam/LanguageServerRobot/wiki) | C# |
@@ -275,6 +276,7 @@ index: 1
 | Swift | [Apple](https://github.com/apple) | [SourceKit-LSP](https://github.com/apple/sourcekit-lsp) | Swift |
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Sensmetry](https://sensmetry.com) | [SysML2 Tools](https://gitlab.com/sensmetry/public/sysml-2ls) | Typescript
 | [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Jamie D](https://github.com/daltskin) | [sysml-v2-lsp](https://github.com/daltskin/sysml-v2-lsp)  | Typescript
+| [SysML v2](https://github.com/Systems-Modeling/SysML-v2-Release) | [Open-MBEE](https://github.com/Open-MBEE) | [OpenSysML](https://github.com/Open-MBEE/OpenSysML) | Go |
 | Sysl | [ANZ Bank](https://github.com/anz-bank) | [Sysl LSP](https://github.com/anz-bank/sysl) | Go |
 | systemd | [Paweł Sacawa](https://github.com/psacawa) | [systemd-language-server](https://github.com/psacawa/systemd-language-server) | Python |
 | [Systemtap](https://sourceware.org/systemtap/) | [Red Hat](https://www.redhat.com/) | [Systemtap LSP](https://sourceware.org/git/?p=systemtap.git;a=tree;f=language-server) | C++ |
