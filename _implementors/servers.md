@@ -311,6 +311,7 @@ index: 1
 | VHDL | [Olof Kraigher](https://github.com/kraigher) | [vhdl_ls](https://github.com/kraigher/rust_hdl) | Rust |
 | VHDL | [Sigasi](https://www.sigasi.com) | Proprietary ([Sigasi](https://insights.sigasi.com/vscode/)) | Java |
 | VHDL | [ViDE-Software](https://www.vide-software.at) | Proprietary ([VHDL for Professionals](https://marketplace.visualstudio.com/items?itemName=ViDE-Software.v4pvhdlforprofessionals)) | C# |
+| Vim9, Legacy Vim | [chemzqm](https://github.com/chemzqm) | [vimls-go](https://github.com/neoclide/vimls-go) | Go |
 | Viml | [iamcco](https://github.com/iamcco) | [vim-language-server](https://github.com/iamcco/vim-language-server) | Typescript |
 | Visualforce | Salesforce |  [VS Code Visualforce extension](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode-visualforce) | |
 | [Vue](https://vuejs.org/) | [Pine Wu](https://github.com/octref) & [@HerringtonDarkholme](https://github.com/HerringtonDarkholme) | [vuejs/vetur](https://github.com/vuejs/vetur) | TypeScript |
