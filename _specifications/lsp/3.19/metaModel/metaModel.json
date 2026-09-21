@@ -13010,7 +13010,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports `MarkupContent`\nin push based diagnostic messages.\n\n@since 3.19.0\n@proposed",
+					"documentation": "Whether the client supports `MarkupContent`\nin push diagnostic messages.\n\n@since 3.19.0\n@proposed",
 					"since": "3.19.0",
 					"proposed": true
 				}
@@ -13251,7 +13251,7 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports `MarkupContent`\nin pull-based diagnostic messages.\n\n@since 3.18.0\n@proposed",
+					"documentation": "Whether the client supports `MarkupContent`\nin pull diagnostic messages.\n\n@since 3.18.0\n@proposed",
 					"since": "3.18.0",
 					"proposed": true
 				}
