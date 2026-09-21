@@ -1,8 +1,11 @@
 #### <a href="#diagnostic" name="diagnostic" class="anchor">Diagnostic</a>
 
-- New in version 3.18: support for markup content in diagnostic messages. The support is guarded by the
-client capability `textDocument.diagnostic.markupMessageSupport` and `textDocument.publishDiagnostics.markupMessageSupport`. 
-If a client doesn't signal the capability, servers shouldn't send `MarkupContent` diagnostic messages back to the client.
+- New in version 3.18: support for markup content in diagnostic messages.
+The support is guarded by one client capability per transport:
+`textDocument.diagnostic.markupMessageSupport` for pull diagnostics and,
+since 3.19, `textDocument.publishDiagnostics.markupMessageSupport` for push diagnostics.
+If a client doesn't signal the capability for a given transport,
+servers shouldn't send `MarkupContent` diagnostic messages over it.
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
 

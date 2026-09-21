@@ -395,8 +395,8 @@ export interface CodeActionContext {
 	 * the error state of the resource. The primary parameter
 	 * to compute code actions is the provided range.
 	 *
-	 * Note that the client should check the `textDocument.diagnostic.markupMessageSupport` 
-	 * and/or `textDocument.publishDiagnostics` server capability 
+	 * Note that the client should check the `textDocument.diagnostic.markupMessageSupport`
+	 * and/or `textDocument.publishDiagnostics` server capability
 	 * before sending diagnostics with markup messages to a server.
 	 * Diagnostics with markup messages should be excluded for servers that don't support
 	 * them.
