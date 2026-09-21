@@ -55,7 +55,8 @@ export interface DiagnosticClientCapabilities {
 	codeDescriptionSupport?: boolean;
 
 	/**
-	 * Whether the client supports `MarkupContent` in diagnostic messages.
+	 * Whether the client supports `MarkupContent`
+	 * in pull-based diagnostic messages.
 	 *
 	 * @since 3.18.0
 	 * @proposed

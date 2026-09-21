@@ -9052,8 +9052,12 @@
 							}
 						]
 					},
-					"documentation": "The diagnostic's message. It usually appears in the user interface.\n\n@since 3.18.0 - support for MarkupContent. This is guarded by the client\ncapability `textDocument.diagnostic.markupMessageSupport`.",
-					"since": "3.18.0 - support for MarkupContent. This is guarded by the client\ncapability `textDocument.diagnostic.markupMessageSupport`."
+					"documentation": "The diagnostic's message. It usually appears in the user interface.\n\n@since 3.18.0 - support for MarkupContent in pull diagnostics.\nThis is guarded by the client capability\n`textDocument.diagnostic.markupMessageSupport`.\n\n@since 3.19.0 - support for MarkupContent in push diagnostics.\nThis is guarded by the client capability\n`textDocument.publishDiagnostics.markupMessageSupport`.",
+					"since": "3.19.0 - support for MarkupContent in push diagnostics.\nThis is guarded by the client capability\n`textDocument.publishDiagnostics.markupMessageSupport`.",
+					"sinceTags": [
+						"3.18.0 - support for MarkupContent in pull diagnostics.\nThis is guarded by the client capability\n`textDocument.diagnostic.markupMessageSupport`.",
+						"3.19.0 - support for MarkupContent in push diagnostics.\nThis is guarded by the client capability\n`textDocument.publishDiagnostics.markupMessageSupport`."
+					]
 				},
 				{
 					"name": "tags",
@@ -12998,6 +13002,17 @@
 					"optional": true,
 					"documentation": "Whether the client interprets the version property of the\n`textDocument/publishDiagnostics` notification's parameter.\n\n@since 3.15.0",
 					"since": "3.15.0"
+				},
+				{
+					"name": "markupMessageSupport",
+					"type": {
+						"kind": "base",
+						"name": "boolean"
+					},
+					"optional": true,
+					"documentation": "Whether the client supports `MarkupContent`\nin push based diagnostic messages.\n\n@since 3.19.0\n@proposed",
+					"since": "3.19.0",
+					"proposed": true
 				}
 			],
 			"extends": [
@@ -13236,8 +13251,9 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports `MarkupContent` in diagnostic messages.\n\n@since 3.18.0",
-					"since": "3.18.0"
+					"documentation": "Whether the client supports `MarkupContent`\nin pull-based diagnostic messages.\n\n@since 3.18.0\n@proposed",
+					"since": "3.18.0",
+					"proposed": true
 				}
 			],
 			"extends": [
