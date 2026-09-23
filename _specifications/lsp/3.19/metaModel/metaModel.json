@@ -13251,9 +13251,8 @@
 						"name": "boolean"
 					},
 					"optional": true,
-					"documentation": "Whether the client supports `MarkupContent`\nin pull diagnostic messages.\n\n@since 3.18.0\n@proposed",
-					"since": "3.18.0",
-					"proposed": true
+					"documentation": "Whether the client supports `MarkupContent`\nin pull diagnostic messages.\n\n@since 3.18.0",
+					"since": "3.18.0"
 				}
 			],
 			"extends": [
