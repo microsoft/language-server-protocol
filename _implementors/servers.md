@@ -169,6 +169,7 @@ index: 1
 | [Lua](https://www.lua.org/)| [treert](https://github.com/treert) | [mylua-lsp](https://github.com/treert/ai-mylua-lsp) | Rust |
 | [Liquid](https://shopify.github.io/liquid/) | [Shopify](https://github.com/Shopify/theme-check) | [theme-check](https://github.com/Shopify/theme-check) | Ruby |
 | [IBM **LALR** Parser Generator language](https://sourceforge.net/projects/lpg/)| [kuafuwang](https://github.com/kuafuwang) | [LPG-language-server](https://github.com/kuafuwang/LPG-language-server) | C++ |
+| [Mach](https://machlang.org) | [Briar Systems](https://github.com/briar-systems) | [mach-lsp](https://github.com/briar-systems/mach-lsp) | Mach |
 | Make | [alexclewontin](https://github.com/alexclewontin) | [make-lsp-vscode](https://github.com/alexclewontin/make-lsp-vscode) | TypeScript |
 | [Markdown](https://commonmark.org) | [Artem Pianykh](https://github.com/artempyanykh) | [Marksman](https://github.com/artempyanykh/marksman) | F# |
 | [Markdown](https://commonmark.org) | [Nico Rehwaldt](https://github.com/nikku) | [Markmark](https://github.com/nikku/markmark) | JavaScript |
