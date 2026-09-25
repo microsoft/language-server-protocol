@@ -174,7 +174,8 @@ index: 1
 | [Markdown](https://commonmark.org) | [Nico Rehwaldt](https://github.com/nikku) | [Markmark](https://github.com/nikku/markmark) | JavaScript |
 | [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode-markdown-languageserver) (vscode client [here](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features)) | TypeScript |
 | MATLAB | mathworks | [MATLAB-language-server](https://github.com/mathworks/MATLAB-language-server) | TypeScript, MATLAB |
-| [MDX](https://mdxjs.com) | [MDX team](https://github.com/mdx-js) | [mdx-js/mdx-analyzer](https://github.com/mdx-js) | JavaScript |
+| [MDX](https://mdxjs.com) | [MDX team](https://github.com/mdx-js) | [mdx-analyzer](https://github.com/mdx-js/mdx-analyzer) | JavaScript |
+| [MDX](https://mdxjs.com) | [Remco Haszing](https://github.com/remcohaszing) | [mdxlint-language-server](https://github.com/remcohaszing/mdxlint-language-server) | JavaScript |
 | Motorola 68000 Assembly | [Graham Bates](https://github.com/grahambates) | [m68k-lsp](https://github.com/grahambates/m68k-lsp) | TypeScript |
 | [MSBuild](https://github.com/Microsoft/msbuild) | [Adam Friedman](https://github.com/tintoy) | [msbuild-project-tools-vscode](https://github.com/tintoy/msbuild-project-tools-vscode) | TypeScript |
 | [NASM/GO/GAS Assembly](https://en.wikipedia.org/wiki/Assembly_language) | [Contributors](https://github.com/bergercookie/asm-lsp/graphs/contributors) | [asm-lsp](https://github.com/bergercookie/asm-lsp) | Rust |
