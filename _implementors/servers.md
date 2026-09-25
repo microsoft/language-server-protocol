@@ -301,7 +301,8 @@ index: 1
 | [Tailwind CSS](https://tailwindcss.com) | [Tailwind Labs](https://tailwindcss.com) | [Tailwind Intellisense](https://github.com/tailwindlabs/tailwindcss-intellisense) | TypeScript |
 | [Twig](https://twig.symfony.com/) | [Stanislav Romanov](https://github.com/kaermorchen) | [Twig Language Server](https://github.com/kaermorchen/twig-language-server/tree/master/packages/language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
-| TypeScript|[TypeFox](https://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
+| [TypeScript](https://www.typescriptlang.org) | MS | [TypeScript](https://github.com/microsoft/typescript) | Go |
+| [TypeScript](https://www.typescriptlang.org) | [TypeFox](https://typefox.io/) | [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
 | [Typst](https://github.com/typst/typst/) | [Myriad-Dreamin](https://github.com/Myriad-Dreamin) | [tinymist](https://github.com/Myriad-Dreamin/tinymist) | Rust |
 | [Typst](https://github.com/typst/typst/) | [nvarner](https://github.com/nvarner/) | [typst-lsp](https://github.com/nvarner/typst-lsp) | Rust |
 | [Umple](https://www.umple.org) | [Umple Team](https://www.umple.org) | [umple-lsp](https://github.com/umple/umple-lsp) | Typescript |
