@@ -232,7 +232,6 @@ export interface FoldingRangeWorkspaceClientCapabilities {
 	 * change that requires such a calculation.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	refreshSupport?: boolean;
 }

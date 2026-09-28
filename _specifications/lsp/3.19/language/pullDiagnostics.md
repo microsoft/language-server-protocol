@@ -58,7 +58,6 @@ export interface DiagnosticClientCapabilities {
 	 * Whether the client supports `MarkupContent` in diagnostic messages.
 	 *
 	 * @since 3.18.0
-	 * @proposed
 	 */
 	markupMessageSupport?: boolean;
 
