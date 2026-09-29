@@ -54,6 +54,7 @@ index: 2
 | [Oni](https://www.onivim.io) | [@oni_vim](https://twitter.com/oni_vim) | [Oni's Features](https://www.onivim.io/Features) |
 | [OpenSumi](https://opensumi.com) | [opensumi](https://github.com/opensumi) | [opensumi](https://github.com/opensumi/core) |
 | [PhpStorm](https://www.jetbrains.com/phpstorm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
+| [Pragtical](https://pragtical.dev/) | [Pragtical Team](https://github.com/pragtical) | [LSP Plugin](https://github.com/pragtical/lsp) |
 | [PyCharm](https://www.jetbrains.com/pycharm) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Qt Creator](https://doc-snapshots.qt.io/qtcreator-9.0/creator-language-servers.html) | [The Qt Company](https://www.qt.io/) | [qtcreator](https://github.com/qt-creator/qt-creator)
 | [RAD Studio](https://www.embarcadero.com/products/rad-studio) ([Delphi](https://www.embarcadero.com/products/delphi) and [C++Builder](https://www.embarcadero.com/products/cbuilder)) | [Embarcadero](https://www.embarcadero.com/) | Proprietary |
