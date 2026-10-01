@@ -308,6 +308,7 @@ index: 1
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
 | [TypeScript](https://www.typescriptlang.org) | MS | [TypeScript](https://github.com/microsoft/typescript) | Go |
 | [TypeScript](https://www.typescriptlang.org) | [TypeFox](https://typefox.io/) | [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
+| [TypeScript](https://www.typescriptlang.org/) (cross-service API contracts) | [Carrick](https://carrick.tools) | [carrick](https://github.com/carrick-tools/carrick/tree/main/npm/carrick) | TypeScript |
 | [Typst](https://github.com/typst/typst/) | [Myriad-Dreamin](https://github.com/Myriad-Dreamin) | [tinymist](https://github.com/Myriad-Dreamin/tinymist) | Rust |
 | [Typst](https://github.com/typst/typst/) | [nvarner](https://github.com/nvarner/) | [typst-lsp](https://github.com/nvarner/typst-lsp) | Rust |
 | [Umple](https://www.umple.org) | [Umple Team](https://www.umple.org) | [umple-lsp](https://github.com/umple/umple-lsp) | Typescript |
