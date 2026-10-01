@@ -173,9 +173,11 @@ index: 1
 | Make | [alexclewontin](https://github.com/alexclewontin) | [make-lsp-vscode](https://github.com/alexclewontin/make-lsp-vscode) | TypeScript |
 | [Markdown](https://commonmark.org) | [Artem Pianykh](https://github.com/artempyanykh) | [Marksman](https://github.com/artempyanykh/marksman) | F# |
 | [Markdown](https://commonmark.org) | [Nico Rehwaldt](https://github.com/nikku) | [Markmark](https://github.com/nikku/markmark) | JavaScript |
+| [Markdown](https://commonmark.org) | [Ankit Saini](https://github.com/nkitsaini) | [Sanemark](https://github.com/nkitsaini/sanemark) | Rust |
 | [Markdown](https://commonmark.org) | MS | [vscode-markdown-languageserver](https://github.com/microsoft/vscode-markdown-languageserver) (vscode client [here](https://github.com/microsoft/vscode/tree/main/extensions/markdown-language-features)) | TypeScript |
 | MATLAB | mathworks | [MATLAB-language-server](https://github.com/mathworks/MATLAB-language-server) | TypeScript, MATLAB |
-| [MDX](https://mdxjs.com) | [MDX team](https://github.com/mdx-js) | [mdx-js/mdx-analyzer](https://github.com/mdx-js) | JavaScript |
+| [MDX](https://mdxjs.com) | [MDX team](https://github.com/mdx-js) | [mdx-analyzer](https://github.com/mdx-js/mdx-analyzer) | JavaScript |
+| [MDX](https://mdxjs.com) | [Remco Haszing](https://github.com/remcohaszing) | [mdxlint-language-server](https://github.com/remcohaszing/mdxlint-language-server) | JavaScript |
 | Motorola 68000 Assembly | [Graham Bates](https://github.com/grahambates) | [m68k-lsp](https://github.com/grahambates/m68k-lsp) | TypeScript |
 | [MSBuild](https://github.com/Microsoft/msbuild) | [Adam Friedman](https://github.com/tintoy) | [msbuild-project-tools-vscode](https://github.com/tintoy/msbuild-project-tools-vscode) | TypeScript |
 | [NASM/GO/GAS Assembly](https://en.wikipedia.org/wiki/Assembly_language) | [Contributors](https://github.com/bergercookie/asm-lsp/graphs/contributors) | [asm-lsp](https://github.com/bergercookie/asm-lsp) | Rust |
@@ -228,7 +230,7 @@ index: 1
 | Python | [Shunsuke Shibayama](https://github.com/mtshiba) | [pylyzer](https://github.com/mtshiba/pylyzer) | Rust |
 | Python | [zubanls](https://zubanls.com/) | [zuban](https://github.com/zubanls/zuban) | Rust |
 | Python | [maniek2332](https://github.com/maniek2332) | [py-import-completer](https://github.com/maniek2332/py-import-completer) | Python |
-| Q# | [MS](https://github.com/microsoft/qsharp-compiler/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qsharp-compiler) | C# |
+| Q# | [MS](https://github.com/microsoft/qdk/graphs/contributors) | [Q# Language Server](https://github.com/microsoft/qdk) | C# |
 | QML | [Qt](https://www.qt.io/) | [qmlls](https://github.com/qt/qtdeclarative/tree/dev/tools/qmlls) | C++ |
 | Query | [Riley Bruins](https://github.com/ribru17) | [ts_query_ls](https://github.com/ribru17/ts_query_ls) | Rust |
 | [R](https://www.r-project.org/) | [REditorSupport](https://github.com/REditorSupport) | [R language server](https://github.com/REditorSupport/languageserver) | R |
@@ -237,6 +239,7 @@ index: 1
 | Raku | [Brian Scannell](https://github.com/bscan) | [Raku Navigator](https://github.com/bscan/RakuNavigator) | TypeScript |
 | RAML | [RAML Workgroup](http://raml.org/about/workgroup) | [raml-language-server](https://github.com/raml-org/raml-language-server) Work in Progress | |
 | [Rascal](https://www.rascal-mpl.org/) | [UseTheSource](https://github.com/UseTheSource) | [util::LanguageServer](https://github.com/usethesource/rascal-language-servers) | Java & Rascal & Typescript |
+| RAScript | [Joshua Raphael](https://github.com/joshraphael) | [rascript-language-server](https://github.com/joshraphael/rascript-language-server) | C# |
 | [RAML](https://raml.org/) | [AML](https://a.ml/) | [AML Language Server](https://github.com/aml-org/als) | ScalaJS |
 | ReasonML| [Jared Forsyth](https://github.com/jaredly) | [reason-language-server](https://github.com/jaredly/reason-language-server) | OCaml |
 | Red | [bitbegin](https://github.com/bitbegin) | [redlangserver](https://github.com/bitbegin/redlangserver) | Red |
@@ -302,7 +305,8 @@ index: 1
 | [Tailwind CSS](https://tailwindcss.com) | [Tailwind Labs](https://tailwindcss.com) | [Tailwind Intellisense](https://github.com/tailwindlabs/tailwindcss-intellisense) | TypeScript |
 | [Twig](https://twig.symfony.com/) | [Stanislav Romanov](https://github.com/kaermorchen) | [Twig Language Server](https://github.com/kaermorchen/twig-language-server/tree/master/packages/language-server) | TypeScript |
 | TypeCobol| [TypeCobol](https://github.com/TypeCobolTeam) | [TypeCobol language server](https://github.com/TypeCobolTeam/TypeCobol/tree/master/TypeCobol.LanguageServer) | C# |
-| TypeScript|[TypeFox](https://typefox.io/)| [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
+| [TypeScript](https://www.typescriptlang.org) | MS | [TypeScript](https://github.com/microsoft/typescript) | Go |
+| [TypeScript](https://www.typescriptlang.org) | [TypeFox](https://typefox.io/) | [typescript-language-server](https://github.com/theia-ide/typescript-language-server) | TypeScript |
 | [TypeScript](https://www.typescriptlang.org/) (cross-service API contracts) | [Carrick](https://carrick.tools) | [carrick](https://github.com/carrick-tools/carrick/tree/main/npm/carrick) | TypeScript |
 | [Typst](https://github.com/typst/typst/) | [Myriad-Dreamin](https://github.com/Myriad-Dreamin) | [tinymist](https://github.com/Myriad-Dreamin/tinymist) | Rust |
 | [Typst](https://github.com/typst/typst/) | [nvarner](https://github.com/nvarner/) | [typst-lsp](https://github.com/nvarner/typst-lsp) | Rust |
