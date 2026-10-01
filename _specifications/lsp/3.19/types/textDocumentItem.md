@@ -31,6 +31,7 @@ Text documents have a language identifier to identify a document on the server s
 
 Language | Identifier
 -------- | ----------
+Astro | `astro` (@since 3.19.0)
 ABAP | `abap`
 Windows Bat | `bat`
 BibTeX | `bibtex`
@@ -41,6 +42,7 @@ C++ | `cpp`
 C# | `csharp`
 CSS | `css`
 D | `d` (@since 3.18.0)
+Dotenv | `dotenv` (@since 3.19.0)
 Delphi | `pascal` (@since 3.18.0)
 Diff | `diff`
 Dart | `dart`
@@ -49,7 +51,10 @@ Elixir | `elixir`
 Erlang | `erlang`
 F# | `fsharp`
 Git | `git-commit` and `git-rebase`
+Glimmer JS | `glimmer-js` (@since 3.19.0)
+Glimmer TS | `glimmer-ts` (@since 3.19.0)
 Go | `go`
+GraphQL | `graphql` (@since 3.19.0)
 Groovy | `groovy`
 Handlebars | `handlebars`
 Haskell | `haskell`
@@ -64,6 +69,7 @@ Less | `less`
 Lua | `lua`
 Makefile | `makefile`
 Markdown | `markdown`
+MDX | `mdx` (@since 3.19.0)
 Objective-C | `objective-c`
 Objective-C++ | `objective-cpp`
 Pascal | `pascal` (@since 3.18.0)
@@ -76,6 +82,7 @@ Pug | `jade`
 Python | `python`
 R | `r`
 Razor (cshtml) | `razor`
+reStructuredText | `restructuredtext` (@since 3.19.0)
 Ruby | `ruby`
 Rust | `rust`
 SCSS | `scss` (syntax using curly brackets), `sass` (indented syntax)
@@ -83,12 +90,14 @@ Scala | `scala`
 ShaderLab | `shaderlab`
 Shell Script (Bash) | `shellscript`
 SQL | `sql`
+Svelte | `svelte` (@since 3.19.0)
 Swift | `swift`
 TypeScript | `typescript`
 TypeScript React| `typescriptreact`
 TeX | `tex`
 Text (plain) | `plaintext`
 Visual Basic | `vb`
+Vue | `vue` (@since 3.19.0)
 XML | `xml`
 XSL | `xsl`
 YAML | `yaml`
