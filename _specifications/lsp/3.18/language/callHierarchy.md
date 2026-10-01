@@ -23,6 +23,13 @@ interface CallHierarchyClientCapabilities {
 	 * capability as well.
 	 */
 	dynamicRegistration?: boolean;
+
+    /**
+     * Determines whether the client supports reference tags. If the value is missing,
+     * the server assumes that the client does not support reference tags.
+     * @since 3.18.0
+     */
+    referenceTagsSupport?: boolean;
 }
 ```
 
@@ -69,6 +76,19 @@ _Response_:
 <div class="anchorHolder"><a href="#callHierarchyItem" name="callHierarchyItem" class="linkableAnchor"></a></div>
 
 ```typescript
+export namespace ReferenceTag {
+	/**
+	 * Determines a read access to the referenced symbol.
+	 */
+	export const Read = 1;
+	/**
+	 * Determines a write access to the referenced symbol.
+	 */
+	export const Write = 2;
+}
+
+export type ReferenceTag = 1 | 2;
+
 export interface CallHierarchyItem {
 	/**
 	 * The name of this item.
@@ -84,6 +104,11 @@ export interface CallHierarchyItem {
 	 * Tags for this item.
 	 */
 	tags?: SymbolTag[];
+
+	/**
+	 * Reference tags of this item.
+	 */
+	referenceTags?: ReferenceTag[];
 
 	/**
 	 * More detail for this item, e.g. the signature of a function.
