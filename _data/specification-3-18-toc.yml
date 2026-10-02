@@ -272,6 +272,14 @@
       anchor: workspace_applyEdit
     - title: Text Document Content
       anchor: workspace_textDocumentContent
+    - title: File System Requests
+      anchor: workspace_fileSystem
+    - title: Stat
+      anchor: workspace_stat
+    - title: Read Directory
+      anchor: workspace_readDirectory
+    - title: Read File
+      anchor: workspace_readFile
   - title: Window Features
     anchor: windowFeatures
     children:
