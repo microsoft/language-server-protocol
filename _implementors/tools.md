@@ -61,6 +61,7 @@ index: 2
 | [Rider](https://www.jetbrains.com/rider) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [Ruby](https://www.jetbrains.com/ruby) | [JetBrains](https://www.jetbrains.com) | Proprietary |
 | [RJ TextEd](https://www.rj-texted.se/) | [Rickard Johansson](https://github.com/rickard67) | [lsp](https://github.com/rickard67/LSP-Pascal-Library) |
+| [SciTECO](https://sciteco.fmsbw.de/) | [Robin Haberkorn](https://git.fmsbw.de/?p=about) | [sciteco](https://git.fmsbw.de/sciteco) |
 | [Spyder](https://www.spyder-ide.org/) | [Spyder Dev Team](https://github.com/spyder-ide) | [spyder](https://github.com/spyder-ide/spyder) | 
 | [Sublime Text](https://www.sublimetext.com/) | [Raoul Wols](https://github.com/rwols) | [lsp](https://github.com/sublimelsp/LSP) |
 | [Textadept](https://orbitalquark.github.io/textadept) | [orbitalquark](https://github.com/orbitalquark) | [textadept-lsp](https://github.com/orbitalquark/textadept-lsp) |
