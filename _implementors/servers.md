@@ -184,6 +184,7 @@ index: 1
 | [NASM/GO/GAS Assembly](https://en.wikipedia.org/wiki/Assembly_language) | [Contributors](https://github.com/bergercookie/asm-lsp/graphs/contributors) | [asm-lsp](https://github.com/bergercookie/asm-lsp) | Rust |
 | Nginx | [pappasam](https://github.com/pappasam) | [nginx-language-server](https://github.com/pappasam/nginx-language-server) | Python |
 | [Nim](https://nim-lang.org/) | [Peter Munch-Ellingsen](https://github.com/PMunch) | [nimlsp](https://github.com/PMunch/nimlsp) | Nim |
+| [NLP++](https://visualtext.org/nlp/) | [VisualText](https://github.com/VisualText) | [nlpplus-language-server](https://github.com/VisualText/vscode-nlp/tree/master/language-server) | TypeScript |
 | [Nobl9 YAML](https://docs.nobl9.com/yaml-guide) | [Nobl9](https://www.nobl9.com/) | [nobl9-vscode](https://github.com/nobl9/nobl9-vscode/) | Go |
 | OCaml/Reason | [OCaml Labs](https://ocamllabs.io) | [ocamllsp](https://github.com/ocaml/ocaml-lsp) | OCaml |
 | [Odin](https://odin-lang.org) | [Daniel Gavin](https://github.com/DanielGavin/) | [ols](https://github.com/DanielGavin/ols) | Odin | 
