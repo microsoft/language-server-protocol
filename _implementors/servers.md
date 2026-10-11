@@ -314,6 +314,7 @@ index: 1
 | [Umple](https://www.umple.org) | [Umple Team](https://www.umple.org) | [umple-lsp](https://github.com/umple/umple-lsp) | Typescript |
 | [V](https://vlang.io) | [Contributors](https://github.com/v-analyzer/v-analyzer/graphs/contributors) | [v-analyzer](https://github.com/v-analyzer/v-analyzer) | V
 | Vala | [Ben Iofel](https://github.com/benwaffle), [Princeton Ferro](https://github.com/Prince781) | [vala-language-server](https://github.com/benwaffle/vala-language-server) | Vala |
+| [Varlink](https://varlink.org) | [Pascal Bachor](https://github.com/bachorp) | [varlink-language-server](https://github.com/bachorp/varlink-language-server) | Rust |
 | [vdf](https://developer.valvesoftware.com/wiki/VDF) | [cooolbros](https://github.com/cooolbros) | [vscode-vdf](https://github.com/cooolbros/vscode-vdf/tree/main/packages/server) | Typescript |
 | VDM-SL, VDM++, VDM-RT | [Nick Battle](https://github.com/nickbattle)| [VDMJ-LSP](https://github.com/nickbattle/vdmj/tree/master/lsp) | Java |
 | [Veryl](https://github.com/dalance/veryl) | [dalance](https://github.com/dalance) | [Veryl Language Server](https://github.com/dalance/veryl/tree/master/crates/languageserver) | Rust |
