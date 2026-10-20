@@ -45,6 +45,7 @@ index: 1
 | [Bicep](https://github.com/azure/bicep) | MS | [Bicep](https://github.com/azure/bicep) | C# |
 | [BitBake](https://docs.yoctoproject.org/bitbake/) | [The Yocto Project](https://github.com/yoctoproject) | [BitBake Language Server](https://github.com/yoctoproject/vscode-bitbake/tree/staging/server) | TypeScript |
 | BrightScript/BrighterScript | [RokuCommunity](https://github.com/RokuCommunity) | [brighterscript](https://github.com/rokucommunity/brighterscript) | TypeScript |
+| C# | MS | [Roslyn Language Server](https://github.com/dotnet/roslyn/tree/main/src/LanguageServer/roslyn-language-server) | C# |
 | C# | [OmniSharp](https://www.omnisharp.net/) | [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) | C# |
 | C# | [Saulius Menkevičius](https://github.com/razzmatazz) | [csharp-ls](https://github.com/razzmatazz/csharp-language-server) | F# |
 | C++ | MS |  [VS Code C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) | C++ |
