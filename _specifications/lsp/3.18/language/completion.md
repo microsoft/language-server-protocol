@@ -990,7 +990,7 @@ With tab stops, you can make the editor cursor move inside a snippet. Use `$1`, 
 
 ##### Placeholders
 
-Placeholders are tab stops with values, like `${1:foo}`. The placeholder text will be inserted and selected such that it can be easily changed. Placeholders can be nested, like `${1:another ${2:placeholder}}`.
+Placeholders are tab stops with values, like `${1:foo}`. The placeholder text will be inserted and selected such that it can be easily changed. Placeholders can be nested, like `${1:${2:placeholder}}`.
 
 ##### Choice
 
