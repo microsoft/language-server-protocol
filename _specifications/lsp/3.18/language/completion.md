@@ -1041,7 +1041,7 @@ ${TM_FILENAME/(.*)\..+$/$1/}
 Below is the grammar for snippets in EBNF ([extended Backus-Naur form, XML variant](https://www.w3.org/TR/xml/#sec-notation)). With `\` (backslash), you can escape `$`, `}` and `\`. Within choice elements, the backslash also escapes comma and pipe characters. Only the characters required to be escaped can be escaped, so `$` should not be escaped within these constructs and neither `$` nor `}` should be escaped inside choice constructs.
 
 ```
-any         ::= tabstop | placeholder | choice | variable | text
+any         ::= (tabstop | placeholder | choice | variable | text)+
 tabstop     ::= '$' int | '${' int '}'
 placeholder ::= '${' int ':' any '}'
 choice      ::= '${' int '|' choicetext (',' choicetext)* '|}'
