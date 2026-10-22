@@ -1042,15 +1042,18 @@ Below is the grammar for snippets in EBNF ([extended Backus-Naur form, XML varia
 
 ```
 any         ::= tabstop | placeholder | choice | variable | text
-tabstop     ::= '$' int | '${' int '}'
+tabstop     ::= '$' int
+                | '${' int '}'
+                | '${' int  transform '}'
 placeholder ::= '${' int ':' any '}'
 choice      ::= '${' int '|' choicetext (',' choicetext)* '|}'
 variable    ::= '$' var | '${' var }'
                 | '${' var ':' any '}'
-                | '${' var '/' regex '/' (format | formattext)* '/' options '}'
+                | '${' var transform '}'
+transform   ::= '/' regex '/' (format | formattext)* '/' options
 format      ::= '$' int | '${' int '}'
-                /* Transforms the text to be uppercase, lowercase, or capitalized, respectively. */
-                | '${' int ':' ('/upcase' | '/downcase' | '/capitalize') '}'
+                /* Transforms the text to be uppercase, lowercase, capitalized, camelcase, or pascalcase, respectively. */
+                | '${' int ':' ('/upcase' | '/downcase' | '/capitalize' | '/camelcase' | '/pascalcase') '}'
                 /* Inserts the 'ifOnly' text if the match is non-empty. */
                 | '${' int ':+' ifOnly '}'
                 /* Inserts the 'if' text if the match is non-empty,
@@ -1058,8 +1061,8 @@ format      ::= '$' int | '${' int '}'
                 | '${' int ':?' if ':' else '}'
                 /* Inserts the 'else' text if the match is empty. */
                 | '${' int ':-' else '}' | '${' int ':' else '}'
-regex       ::= Regular Expression value (ctor-string)
-options     ::= Regular Expression option (ctor-options)
+regex       ::= JavaScript Regular Expression value (ctor-string)
+options     ::= JavaScript Regular Expression option (ctor-options)
 var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
 int         ::= [0-9]+
 text        ::= ([^$}\] | '\$' | '\}' | '\\')*
