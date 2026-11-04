@@ -163,6 +163,7 @@ index: 1
 | [LaTeX](https://www.latex-project.org/)| [Eric Förster](https://github.com/efoerster) | [texlab](https://github.com/efoerster/texlab) | Rust |
 | [Lateralus](https://github.com/bad-antics/lateralus-lang) | [bad-antics](https://github.com/bad-antics) | [lateralus-lang](https://github.com/bad-antics/lateralus-lang) | Python |
 | [Lean4](https://lean-lang.org/) | [leanprover](https://github.com/leanprover) | [Language Server](https://github.com/leanprover/lean4/tree/master/src/Lean/Server) | Lean4 |
+| [Lispex](https://www.lispex.com) | [STUDIO HAZE](https://github.com/studiohaze) | [Lispex (`lispex lsp`)](https://github.com/studiohaze/lispex) | Rust |
 | [Lox](https://craftinginterpreters.com/appendix-i.html) | [Ajeet D'Souza](https://github.com/ajeetdsouza) | [loxcraft](https://github.com/ajeetdsouza/loxcraft) | Rust |
 | LPC | [John Chmura](https://github.com/jlchmura/) | [lpc-language-server](https://github.com/jlchmura/lpc-language-server) | TypeScript |
 | [Lua](https://www.lua.org/)| [Kyle McLamb](https://github.com/Alloyed) | [lua-lsp](https://github.com/Alloyed/lua-lsp) | Lua |
