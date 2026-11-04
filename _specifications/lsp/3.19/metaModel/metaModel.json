@@ -15051,6 +15051,12 @@
 					"value": "abap"
 				},
 				{
+					"name": "Astro",
+					"value": "astro",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
+				},
+				{
 					"name": "WindowsBat",
 					"value": "bat"
 				},
@@ -15087,6 +15093,12 @@
 					"value": "d",
 					"documentation": "@since 3.18.0",
 					"since": "3.18.0"
+				},
+				{
+					"name": "Dotenv",
+					"value": "dotenv",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
 				},
 				{
 					"name": "Delphi",
@@ -15127,8 +15139,26 @@
 					"value": "git-rebase"
 				},
 				{
+					"name": "Glimmer JS",
+					"value": "glimmer-js",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
+				},
+				{
+					"name": "Glimmer TS",
+					"value": "glimmer-ts",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
+				},
+				{
 					"name": "Go",
 					"value": "go"
+				},
+				{
+					"name": "GraphQL",
+					"value": "graphql",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
 				},
 				{
 					"name": "Groovy",
@@ -15187,6 +15217,12 @@
 					"value": "markdown"
 				},
 				{
+					"name": "MDX",
+					"value": "mdx",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
+				},
+				{
 					"name": "ObjectiveC",
 					"value": "objective-c"
 				},
@@ -15237,6 +15273,12 @@
 					"value": "razor"
 				},
 				{
+					"name": "reStructuredText",
+					"value": "restructuredtext",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
+				},
+				{
 					"name": "Ruby",
 					"value": "ruby"
 				},
@@ -15269,6 +15311,12 @@
 					"value": "sql"
 				},
 				{
+					"name": "Svelte",
+					"value": "svelte",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
+				},
+				{
 					"name": "Swift",
 					"value": "swift"
 				},
@@ -15287,6 +15335,12 @@
 				{
 					"name": "VisualBasic",
 					"value": "vb"
+				},
+				{
+					"name": "Vue",
+					"value": "vue",
+					"documentation": "@since 3.19.0",
+					"since": "3.19.0"
 				},
 				{
 					"name": "XML",
