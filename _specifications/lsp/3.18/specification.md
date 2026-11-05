@@ -70,7 +70,7 @@ Content-Length: ...\r\n
 ```
 ### Base Protocol JSON structures
 
-The protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](https://www.jsonrpc.org/specification). The protocol currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests.
+The protocol uses request, response, and notification objects as specified in the [JSON-RPC protocol](https://www.jsonrpc.org/specification). The protocol currently does not support JSON-RPC batch messages; protocol clients and servers must not send JSON-RPC requests in batches.
 
 The following TypeScript definitions describe the base JSON-RPC protocol:
 
