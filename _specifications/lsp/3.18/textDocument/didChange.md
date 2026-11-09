@@ -9,7 +9,7 @@ The following example shows how the client should synchronize the state when the
 | Document Version | User Input          | Client Behavior                                 | Request                   |
 | ---------------- | ------------------- | ----------------------------------------------- | ------------------------- |
 | 5                | document change one | sync document `v5` to the server                | `textDocument/didChange`  |
-| 5                | -                   | request from the server, based on document `v5` | `textDocument/completion` |
+| 5                | -                   | response from the server, based on document `v5` | `textDocument/completion` |
 | 6                | document change two | sync document `v6` to the server                | `textDocument/didChange`  |
 
 _Client Capability_:
