@@ -81,7 +81,7 @@ layout: default
                 <div id="side-sections-accordion" data-children=".item">
                     {% for toc-l2 in toc-l1.children %}
                     <div class="item">
-                        <a class="nav-link" data-toggle="collapse" data-parent="#side-sections-accordion" href="#{{ toc-l2.anchor }}-side" aria-expanded="true">
+                        <a class="nav-link" data-toggle="collapse" data-parent="#side-sections-accordion" href="#{{ toc-l2.anchor }}" aria-expanded="true">
                             {{ toc-l2.title }}
                         </a>
                         <div id="{{ toc-l2.anchor }}-side" class="collapse" role="tabpanel">
