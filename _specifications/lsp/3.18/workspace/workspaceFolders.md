@@ -8,7 +8,24 @@ The `workspace/workspaceFolders` request is sent from the server to the client t
 
 _Client Capability_:
 * property path (optional): `workspace.workspaceFolders`
-* property type: `boolean`
+* property type: `boolean | WorkspaceFoldersClientCapabilities` where `WorkspaceFoldersClientCapabilities` is defined as follows:
+
+```typescript
+export interface WorkspaceFoldersClientCapabilities {
+	/**
+	* The client has support for workspace folder change notifications.
+	*
+	* @since 3.18.0
+	*/
+	changeNotifications?: {
+		/**
+		 * Whether the client supports dynamic registration for the
+		 * `workspace/didChangeWorkspaceFolders` notification.
+		 */
+		dynamicRegistration?: boolean;
+	};
+}
+```
 
 _Server Capability_:
 * property path (optional): `workspace.workspaceFolders`
