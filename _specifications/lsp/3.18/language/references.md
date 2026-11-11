@@ -10,10 +10,18 @@ _Client Capability_:
 
 ```typescript
 export interface ReferenceClientCapabilities {
-	/**
-	 * Whether references supports dynamic registration.
-	 */
-	dynamicRegistration?: boolean;
+    /**
+     * Whether references supports dynamic registration.
+     */
+    dynamicRegistration?: boolean;
+
+    /**
+     * Determines whether the client supports and prefers Reference items instead
+     * of Location items. If this value is missing, the server assumes that the
+     * client accepts Location items as defined in earlier versions of the protocol.
+     * @since 3.18.0
+     */
+    referenceItemsSupport?: boolean;
 }
 ```
 
@@ -62,6 +70,6 @@ export interface ReferenceContext {
 }
 ```
 _Response_:
-* result: [`Location`](#location)[] \| `null`
-* partial result: [`Location`](#location)[]
+* result: [`Location`](#location)[] \| [`Reference`](#reference)[] \| `null`
+* partial result: [`Location`](#location)[] \| [`Reference`](#reference)[]
 * error: code and message set in case an exception happens during the reference request.
