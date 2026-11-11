@@ -396,7 +396,8 @@ export interface CodeActionContext {
 	 * to compute code actions is the provided range.
 	 *
 	 * Note that the client should check the `textDocument.diagnostic.markupMessageSupport`
-	 * server capability before sending diagnostics with markup messages to a server.
+	 * or `textDocument.publishDiagnostics.markupMessageSupport` client capability
+	 * before sending diagnostics with markup messages to a server.
 	 * Diagnostics with markup messages should be excluded for servers that don't support
 	 * them.
 	 */
