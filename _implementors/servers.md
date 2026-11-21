@@ -111,6 +111,7 @@ index: 1
 | [Fuzion](https://flang.dev) | [Tokiwa Software GmbH](https://tokiwa.software) | [Fuzion Language Server](https://github.com/tokiwa-software/fuzion-lsp-server) | Java, Fuzion |
 | GLSL | [Sven-Hendrik Haase (@svenstaro)](https://github.com/svenstaro) | [glsl-language-server](https://github.com/svenstaro/glsl-language-server) | C++ |
 | GLSL for Minecraft | [@strum355](https://github.com/strum355) | [mcshader-lsp](https://github.com/strum355/mcshader-lsp) | Rust |
+| [GALA](https://gala.fyi/) | [Maksim Martianov](https://github.com/martianoff) | [gala](https://github.com/martianoff/gala) | Go |
 | Gauge | [Gauge](https://github.com/getgauge) | [Gauge Language Server](https://github.com/getgauge/gauge/) | Go |
 | GDScript | [GodotEngine](https://github.com/godotengine) | [Godot](https://github.com/godotengine/godot) | C++ |
 | [Gleam](https://gleam.run/) | [Gleam](https://github.com/gleam-lang/gleam) | [gleam](https://github.com/gleam-lang/gleam) | Rust |
