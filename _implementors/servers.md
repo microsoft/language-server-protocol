@@ -262,6 +262,7 @@ index: 1
 | [Ruby](https://www.ruby-lang.org/en/) | [Kurt Werle](https://github.com/kwerle/) | [ruby_language_server](https://github.com/kwerle/ruby_language_server) | Ruby |
 | Ruby | [Shopify](https://github.com/Shopify) | [Ruby LSP](https://github.com/Shopify/ruby-lsp) | Ruby |
 | Rust | [Aleksey Kladov](https://github.com/matklad) | [Rust Analyzer](https://github.com/rust-analyzer/rust-analyzer) | Rust |
+| Rust | [Alexander Panasenko](https://github.com/alex09x) | [Rust Intelligence (`ridx lsp`)](https://github.com/alex09x/rust-intelligence) | Rust |
 | [SageMath](https://www.sagemath.org/) | [SeanDictionary](https://github.com/SeanDictionary) | [Sage LSP](https://github.com/SeanDictionary/sage-lsp) | Python |
 | Scala | [Iulian Dragos](https://github.com/dragos) | [dragos-vscode-scala](https://github.com/dragos/dragos-vscode-scala) | Scala |
 | Scala | [Scalameta](https://github.com/scalameta) | [Metals](https://github.com/scalameta/metals) | Scala |
