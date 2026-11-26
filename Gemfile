@@ -12,7 +12,6 @@ gem "github-pages", "~> 232", group: :jekyll_plugins
 group :jekyll_plugins do
    gem "jemoji"
    gem 'jekyll-redirect-from'
-   gem "jekyll-remote-theme"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
