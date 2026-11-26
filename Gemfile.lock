@@ -315,7 +315,6 @@ PLATFORMS
 DEPENDENCIES
   github-pages (~> 232)
   jekyll-redirect-from
-  jekyll-remote-theme
   jemoji
   tzinfo-data
   webrick (~> 1.8)
