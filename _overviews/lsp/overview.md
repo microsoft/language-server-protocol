@@ -92,3 +92,9 @@ To simplify the implementation of language servers and clients, there are librar
 - *Development tool SDKs* each development tool typically provides a library for integrating language servers. For example, for JavaScript/TypeScript there is the [language client npm module](https://www.npmjs.com/package/vscode-languageclient).
 
 - *Language Server SDKs* for the different implementation languages there is an SDK to implement a language server in a particular language. For example, to implement a language server using Node.js there is the [language server npm module](https://www.npmjs.com/package/vscode-languageserver).
+
+## Contributing
+
+Proposals to extend the language server protocol are welcome. To learn more about the steps for submitting a protocol extension, refer to the [contribution guidelines](https://github.com/microsoft/language-server-protocol/blob/main/contributing.md).
+
+In addition to suggesting new features, feedback for proposed extensions (which are identified by a `@proposed` tag in the specification) are encouraged before merging the proposal into the current specification.
