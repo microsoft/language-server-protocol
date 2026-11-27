@@ -500,6 +500,12 @@ export interface CodeAction {
 	 */
 	title: string;
 
+    /**
+     * A human-readable string describing the source of this code action, e.g.
+     * 'typescript' or 'super lint'.
+     */
+    source?: string;
+
 	/**
 	 * The kind of the code action.
 	 *
