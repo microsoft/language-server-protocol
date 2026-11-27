@@ -509,6 +509,15 @@ export type WorkspaceClientCapabilities = {
 	 * @since 3.18.0
 	 */
 	textDocumentContent?: TextDocumentContentClientCapabilities;
+
+	/**
+	 * Capabilities specific to the file system requests
+	 * sent from the server to the client.
+	 *
+	 * @since 3.19.0
+	 * @proposed
+	 */
+	fileSystem?: FileSystemClientCapabilities;
 }
 ```
 
