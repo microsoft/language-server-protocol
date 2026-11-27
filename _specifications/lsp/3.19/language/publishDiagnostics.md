@@ -41,6 +41,15 @@ export interface PublishDiagnosticsClientCapabilities {
 	versionSupport?: boolean;
 
 	/**
+	 * Whether the client supports `MarkupContent`
+	 * in push diagnostic messages.
+	 *
+	 * @since 3.19.0
+	 * @proposed
+	 */
+	markupMessageSupport?: boolean;
+
+	/**
 	 * Client supports a codeDescription property.
 	 *
 	 * @since 3.16.0
