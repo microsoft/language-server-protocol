@@ -212,6 +212,7 @@ index: 1
 | [IBM Enterprise **PL/I** for z/OS](https://www.ibm.com/support/knowledgecenter/SSY2V3_5.3.0/com.ibm.ent.pl1.zos.doc/single_template_nobrand.html) | IBM |  [IBM Z Open Editor VS Code extension](https://marketplace.visualstudio.com/items?itemName=IBM.zopeneditor) | Java |
 | IBM Enterprise **PL/I** for z/OS | [Broadcom](https://www.broadcom.com/) | [PL/I Language Support](https://marketplace.visualstudio.com/items?itemName=broadcomMFD.pli-language-support) | TypeScript |
 | PL/SQL | [Ivan Dubashinskii](https://github.com/EwanDubashinski) | [PL/SQL language server](https://github.com/EwanDubashinski/plsqllang-server) | Java |
+| [Plumlang](https://plum.elixpo.com) | [Elixpo](https://github.com/plumlang) | [plum lsp](https://github.com/plumlang/plumlang) | C |
 | [Polymer](https://www.polymer-project.org) | [Polymer Team](https://github.com/Polymer) | [polymer-editor-service](https://github.com/Polymer/polymer-editor-service) | TypeScript |
 | [Pony](https://www.ponylang.io) | [Pony team](https://github.com/ponylang) | [ponyc](https://github.com/ponylang/ponyc) | Pony |
 | PowerPC Assembly | [Noah Fields](https://github.com/OGoodness) | [PowerPC Support](https://github.com/OGoodness/VSCode-PowerPC-Syntax) | TypeScript |
